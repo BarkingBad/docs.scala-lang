@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP Meeting Minutes - March 13 2020 | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/minutes/2020-03-13-sip-minutes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP Meeting Minutes - March 13 2020"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP Meeting Minutes - March 13 2020"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP Meeting Minutes - March 13 2020</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary sips">
+			<div class="inner-box toc-context">
+				<h1 id="minutes">Minutes</h1>
+
+<p>The meeting took place with the following agenda:</p>
+
+<ol>
+  <li>Review <code class="language-plaintext highlighter-rouge">@main</code> functions and numeric literals</li>
+  <li>Review indentation syntax changes</li>
+  <li>Review implicit resolution changes</li>
+  <li>Review autotupling, multiversal equality, name based pattern matching and finally structural types</li>
+</ol>
+
+<h2 id="date-and-location">Date and Location</h2>
+
+<p>The meeting took place on the 13th March 2020 throughout the day on Zoom.</p>
+
+<p>The meeting wasn’t broadcast.</p>
+
+<p>Minutes were taken by Jamie Thompson.</p>
+
+<h2 id="committee-attendees">Committee Attendees</h2>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+  <li>Guillaume Martres (<a href="https://github.com/smarter">@smarter</a>), EPFL</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), Scala Center</li>
+</ul>
+
+<h2 id="sitting-in">Sitting in</h2>
+
+<ul>
+  <li>Lukas Rytz (<a href="https://twitter.com/lrytz">@lrytz</a>), Lightbend</li>
+  <li>Jamie Thompson (<a href="https://github.com/bishabosha">@bishabosha</a>), Scala Center</li>
+  <li>Nicolas Stucki (<a href="https://github.com/nicolasstucki">@nicolasstucki</a>), EPFL</li>
+  <li>Olivier Blanvillain (<a href="https://github.com/OlivierBlanvillain">@OlivierBlanvillain</a>)</li>
+  <li>Darja Jovanovic (<a href="https://github.com/darjutak">@darjutak</a>), Process Lead</li>
+</ul>
+
+<h3 id="revisiting-whitebox-inline-definitions">Revisiting Whitebox Inline Definitions</h3>
+
+<p>Martin had an idea for a potential cleanup of syntax for whitebox inline definitions:</p>
+
+<p>Currently in Dotty:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">f</span><span class="o">()</span> <span class="k">&lt;:</span> <span class="n">T</span> <span class="k">=</span> <span class="err">…</span>
+<span class="n">inline</span> <span class="n">given</span> <span class="n">C</span> <span class="n">as</span> <span class="k">_</span> <span class="k">&lt;:</span> <span class="n">T</span> <span class="k">=</span> <span class="err">…</span>
+</code></pre></div></div>
+<p>Downsides to this approach:</p>
+<ul>
+  <li>Differences between <code class="language-plaintext highlighter-rouge">def</code> and <code class="language-plaintext highlighter-rouge">given</code></li>
+  <li>Obscure syntax is bad for teaching.</li>
+  <li>Hard to Google.</li>
+</ul>
+
+<p>He suggested to use a modifier instead:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="n">flextype</span> <span class="k">def</span> <span class="nf">f</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="err">…</span>
+<span class="n">inline</span> <span class="n">flextype</span> <span class="n">given</span> <span class="n">C</span> <span class="n">as</span> <span class="n">T</span> <span class="k">=</span> <span class="err">…</span>
+</code></pre></div></div>
+<p>Benefits:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">flextype</code> is more searchable.</li>
+</ul>
+
+<p>Adrian likes the idea from <code class="language-plaintext highlighter-rouge">inline given</code> to represent the return type as a bounded existential.</p>
+
+<h4 id="other-considerations">Other considerations:</h4>
+
+<p>Nicolas:</p>
+
+<ul>
+  <li>1: <code class="language-plaintext highlighter-rouge">whitebox[T]</code>, where Martins’ response was: specialised syntax is harder to swallow, when its specific only to the whitebox and doesn’t extend to other types.</li>
+  <li>2: Maybe a new modifier to represent both inline and whitebox?</li>
+</ul>
+
+<h3 id="main-functions">@main functions</h3>
+
+<p>Martin presented <code class="language-plaintext highlighter-rouge">@main</code> functions:</p>
+
+<ul>
+  <li>Motivation is replacement for behaviour of DelayedInit:
+    <ul>
+      <li>Initialisation code in object can cause problems for thread safety.</li>
+    </ul>
+  </li>
+  <li>Because we have top level definitions, it makes perfect sense to allow program entrypoint to be method at the top level.</li>
+  <li>What should the program be called? We use the <code class="language-plaintext highlighter-rouge">@main</code> annotation to capture the method name and create a wrapper class of the same name in the package containing the method.</li>
+  <li>Also provide minimal commandline argument processing to map directly to method parameters, using the <code class="language-plaintext highlighter-rouge">FromString</code> type class.</li>
+</ul>
+
+<h4 id="concerns-with-commandline-argument-processing">Concerns with Commandline Argument Processing</h4>
+
+<p>Jamie: Should it allow named arguments?</p>
+
+<p>Sébastien:</p>
+
+<ul>
+  <li>How far should the language go to support command line parsing?
+    <ul>
+      <li>Should the language go all the way to a bespoke solution, because the potential use cases are unknown.</li>
+      <li>Or just stick to basic primitives with no pluggability.</li>
+    </ul>
+  </li>
+  <li>Problematic to avoid optional flags</li>
+</ul>
+
+<p>Guillaume: All large programs need a <code class="language-plaintext highlighter-rouge">-help</code> flag</p>
+
+<p>Addressing the above, Martin suggests that the intended use case for argument mapping is as follows:</p>
+
+<ul>
+  <li>Ideal for test programs, simple scripts
+    <ul>
+      <li>e.g. data science</li>
+    </ul>
+  </li>
+  <li>Any program needing more sophisticated processing should probably use <code class="language-plaintext highlighter-rouge">String*</code>
+    <ul>
+      <li>avoids mutable array</li>
+      <li>processing can then be delegated to a library like Scopt</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="concern-with-fromstring-type-class">Concern with FromString Type Class</h4>
+
+<p>Sébastien:</p>
+<ul>
+  <li>FromString is very general, but the usecase presented is just for CLI, falls apart too quickly due to custom formatting and expressing multi-argument structures such as ranges etc.</li>
+  <li>He would stop at <code class="language-plaintext highlighter-rouge">@main</code> methods with <code class="language-plaintext highlighter-rouge">String*</code></li>
+</ul>
+
+<p>Adriaan:</p>
+
+<ul>
+  <li>Is <code class="language-plaintext highlighter-rouge">FromString</code> too general to use for CLI processing, it could make evolution harder if people use it for other cases.</li>
+  <li>Lots of options for the problem of structuring unstructured data, such as <code class="language-plaintext highlighter-rouge">:</code> separated lists for class paths. A general type class is too basic for this situation.</li>
+  <li>However, it is easier to make a local specific <code class="language-plaintext highlighter-rouge">FromString</code> just for CLI than in haskell where you must consider global importance.</li>
+  <li>Agrees that whatever argument processing should be able to map directly to method arguments, but something more specialised than <code class="language-plaintext highlighter-rouge">FromString</code> should be used.</li>
+  <li>Alternatively the current proposal could go ahead, but removing hooks for extension in the StdLib.</li>
+</ul>
+
+<p>Martin, addressing these concerns:</p>
+
+<ul>
+  <li>Haskell uses <code class="language-plaintext highlighter-rouge">Read</code> everywhere, if we have <code class="language-plaintext highlighter-rouge">toString</code>, we should have a general <code class="language-plaintext highlighter-rouge">fromString</code> method.</li>
+  <li>Maybe <code class="language-plaintext highlighter-rouge">@main</code> methods should have a single argument with type class to parse all command line arguments into it, which is one step removal from single argument of <code class="language-plaintext highlighter-rouge">String*</code>.</li>
+  <li>We must have support for the simple case, <code class="language-plaintext highlighter-rouge">@main</code> is about boilerplate free work, if you have a need for complex args, the complexity of the program has grown too much for this concern.</li>
+</ul>
+
+<p>Adriaan suggests that maybe someone can try a new proposal for argument parsing.</p>
+
+<h4 id="concern-for-use-case">Concern for Use Case</h4>
+
+<p>Sébastien: How many programs are so trivial that they dont need argument processing?</p>
+
+<p>Martin:</p>
+
+<ul>
+  <li>99% in his estimate.</li>
+  <li>For most people, e.g. simple scripting, these just need either none or few primitive args.</li>
+</ul>
+
+<p>Guillaume: What’s the story for refactoring from the simple case to the more complex cases?</p>
+
+<p>Martin:</p>
+
+<ul>
+  <li>We should look into this</li>
+  <li>But transitioning to full cli parser is huge step, it will be complex to join the dots.</li>
+</ul>
+
+<h4 id="existing-solutions-suggested-in-the-meeting">Existing Solutions Suggested in the meeting</h4>
+
+<p><a href="https://swift.org/blog/argument-parser/">1. Swift Argument Parser</a></p>
+
+<p>Guillaume: Simple, but it allows validation</p>
+
+<p><a href="http://ammonite.io/#ScriptArguments">2. Ammonite Scripts</a>:</p>
+
+<p>Guillaume: <code class="language-plaintext highlighter-rouge">@main</code> from ammonite is more complicated (than the SIP proposal) but scales.</p>
+
+<p>Sébastien: Overloaded mains look more complicated</p>
+
+<p>Guillaume:</p>
+
+<ul>
+  <li>It generates help text if args are not correct</li>
+  <li>We should be able to document args to main, and support should be in StdLib</li>
+</ul>
+
+<h4 id="summary">Summary</h4>
+
+<p>The main concerns with the proposal are the interactions between the intended use case and the pressure it imposes on the Standard Library. If it is only intended for very simple ordered arguments then perhaps a pluggable <code class="language-plaintext highlighter-rouge">FromString</code> type class is too simple to include in the standard library. If the language should support more complicated processing, then <code class="language-plaintext highlighter-rouge">FromString</code> is too basic to be pluggable.</p>
+
+<p>In a straw poll the present members of the committee were in favour of having the <code class="language-plaintext highlighter-rouge">@main</code> annotation for program entry points, but perhaps someone could come up with a proposal for a more sophisticated processing solution.</p>
+
+<h3 id="numeric-literals">Numeric Literals</h3>
+
+<p>Sébastien presented the proposal:</p>
+
+<ul>
+  <li>Uses a type class which is very similar to <code class="language-plaintext highlighter-rouge">FromString</code>, with several sub-types for different kinds of literals.</li>
+  <li>takes string representation of literal, and converts to an expected type.</li>
+  <li>the expected type also specialises which type class instance to search for.</li>
+</ul>
+
+<h4 id="concerns-with-requiring-an-expected-type">Concerns with Requiring an Expected Type</h4>
+
+<p>Jamie:</p>
+
+<ul>
+  <li>Only works well for named constants, or passing to unambiguous method arguments.</li>
+</ul>
+
+<p>Sébastien:</p>
+
+<ul>
+  <li>In Scala we often lack a concrete expected type, e.g. the left hand side of an operation.</li>
+  <li>How well does this scale</li>
+  <li>Concerns for loss of precision, e.g. different behaviour of adding different numeric types etc.</li>
+</ul>
+
+<p>Lukas in chat, to demonstrate lack of inference on LHS of an expression:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">10</span><span class="n">_000_000_000</span>
+<span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">10000000000</span>
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">10</span><span class="n">_000_000_000</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="o">|</span><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="mi">10</span><span class="n">_000_000_000</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="o">|</span>              <span class="o">^^^^^^^^^^^^^^</span>
+  <span class="o">|</span>              <span class="n">number</span> <span class="n">too</span> <span class="n">large</span>
+</code></pre></div></div>
+
+<p>Martin in response to concerns:</p>
+<ul>
+  <li>By default, each sub expression of an expression of an expected type will have the same behaviour as without generic literals,</li>
+  <li>More specific behaviour is only activated with an expected type, making this feature perfect for named constants, (which should have an expected type if public).</li>
+</ul>
+
+<h4 id="concerns-for-aesthetics">Concerns for Aesthetics</h4>
+
+<p>Martin:</p>
+<ul>
+  <li>Using a string literal constant as a number would look embarassing to introduce to a Python programmer.</li>
+  <li>Especially the <code class="language-plaintext highlighter-rouge">BigInt</code> constructor, its really ugly.</li>
+</ul>
+
+<p>Guillaume: In Python there is no syntactic overhead for BigInt, Scala would add noise with the expected type.</p>
+
+<p>Sébastien:</p>
+<ul>
+  <li>Its already embarassing enough to explain the different numeric types.</li>
+  <li>The situation of overflow in smaller types will not be solved by generic literals, therefore you must explain the existance of <code class="language-plaintext highlighter-rouge">BigInt</code>, so may as well explain its <code class="language-plaintext highlighter-rouge">String</code> argument constructor.</li>
+</ul>
+
+<h4 id="concerns-for-use-case">Concerns for Use Case</h4>
+
+<p>Adriaan: Will this work well in specific use cases, such as</p>
+<ul>
+  <li>Data Science</li>
+  <li>REPL</li>
+</ul>
+
+<h4 id="concerns-with-behaviour">Concerns with Behaviour</h4>
+
+<p>Jamie: There is a problem with failure of conversion with <code class="language-plaintext highlighter-rouge">fromDigits</code>, if literal format doesnt match defined type class, then there is silent failure</p>
+
+<p>Nicolas: What can we do with final vals and constant types.</p>
+
+<p>Martin, in response:</p>
+<ul>
+  <li>We can take another look at the specific implementation for activating conversions, and even the type classes in the library.</li>
+  <li>Open question: should we have a user pluggable notion of constant type for generic literals.</li>
+</ul>
+
+<h4 id="alternatives">Alternatives</h4>
+
+<h4 id="1-numeric-suffixes">1. Numeric Suffixes</h4>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Suffixes may be more suited to Scala as an expected type only works well when the whole expression is a simple literal.</li>
+  <li>Precedent with prefixes for string interpolator, numeric suffixes could have similar pluggable implementation.</li>
+</ul>
+
+<p>Martin:</p>
+<ul>
+  <li>Suffix is ad-hoc and visually ugly</li>
+  <li>Not so bad if its a general pluggable solution, but we can have leaner syntax rules by using types.</li>
+  <li>In general, non trivial literals shouldn’t be used inline, we should write a named constant.</li>
+  <li>Guy Steele suggested it as a more beautiful solution.</li>
+</ul>
+
+<h4 id="2-special-case-factory-methods">2. Special case Factory Methods</h4>
+
+<p>Olivier:</p>
+<ul>
+  <li>The less inference on things, the better</li>
+  <li>Python behaviour of conversions is confusing to data scientists, so literals are not always clear to understand</li>
+</ul>
+
+<p>Sébastien:</p>
+
+<ul>
+  <li>Assume magical way to pass any literal to an apply method on a companion object of a numeric type. Works for custom types</li>
+</ul>
+
+<h4 id="scheduling-of-release-discussion">Scheduling Of Release Discussion</h4>
+
+<p>Martin suggested this was not urgent to ship in 3.0, and asks if it could be put under a flag to ensure it gets tested.</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Its tricky because it adds a lot of noise to the std lib and we must be careful what is included there.</li>
+  <li>Could we ship it in separate library?</li>
+</ul>
+
+<p>Adriaan:</p>
+<ul>
+  <li>The more we can delay from all proposals, the better.</li>
+</ul>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>There has been little testing in applications of this feature, not enough to make a judgement on its utility. With more consultation from potential users, the SIP committee can gather conclusive evidence.</p>
+
+<p>There are several concerns, relating to the scope of where this feature makes sense, due to limited type inference, and the verbosity required in inline expressions. It is suggested that this is a non-issue because by default, <code class="language-plaintext highlighter-rouge">Long</code> literals can’t be inferred on the LHS of an addition expression without an expected type, and non-trivial literals should be lifted to named constants.</p>
+
+<p>Alternatives suggested have been user-defined numeric suffixes, and specialised factory methods for user defined types.</p>
+
+<h3 id="indentation-syntax">Indentation Syntax</h3>
+
+<p>Martin presents the proposal as consisting of several parts:</p>
+
+<ul>
+  <li>New control syntax (<code class="language-plaintext highlighter-rouge">if then</code>, <code class="language-plaintext highlighter-rouge">for do</code>, drop <code class="language-plaintext highlighter-rouge">do while</code>)</li>
+  <li>Optional braces for control expressions if you indent on new line after specific token.</li>
+  <li>Optional braces are extended to named definitions:
+    <ul>
+      <li>Experience showed that without a marker, indentation of 2 spaces was no longer enough to clearly distinguish member definitions.</li>
+      <li><code class="language-plaintext highlighter-rouge">with</code> worked as a marker for a while but had some disambiguation issues.</li>
+      <li>colon marker is settled as the proposal</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="usability-anecdotes">Usability Anecdotes</h4>
+
+<p>Martin:</p>
+<ul>
+  <li>Totally sold as a productivity boost</li>
+  <li>Used widely in compiler codebase for 6 months
+    <ul>
+      <li>Does find is necessary to have vertical bars in editor for indentation</li>
+    </ul>
+  </li>
+  <li>Examples at:
+    <ul>
+      <li>https://github.com/lampepfl/dotty/blob/master/compiler/src/dotty/tools/dotc/semanticdb/ExtractSemanticDB.scala</li>
+      <li>https://github.com/lampepfl/dotty/blob/master/compiler/src/dotty/tools/dotc/typer/Nullables.scala</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">then</code> in if expression was harder to get used to</li>
+</ul>
+
+<p>Guillaume:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">then</code> feels like noise but then with multiline conditions is harder to read without it, but was fine with the original parens on condition.</li>
+  <li><code class="language-plaintext highlighter-rouge">end</code> marker, by being optional, leads to too much bikeshedding</li>
+</ul>
+
+<p>Martin:</p>
+<ul>
+  <li>we can rely on style guides to enforce consistency in a codebase.</li>
+  <li>In general, a 10 line block with any empty lines should have an end marker.</li>
+  <li>
+    <p>recommends this style for class with companion:
+```scala
+class Foo:</p>
+
+    <p>def foo = ???</p>
+  </li>
+</ul>
+
+<p>object Foo:</p>
+
+<p>def bar = ???</p>
+
+<p>end Foo</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+#### On Composability of Features
+
+Sébastien asks:
+- If the implementation of the separate features are orthogonal
+- As a consequence, who then has experience using the old control syntax with optional braces, as originally it was thought that indentation was dependent on the new control syntax.
+
+Martin:
+- The features are independent.
+- However it seems natural to transition to use them together in 1 step.
+
+Sebastien had a concern about the performance for parsing, compared to old style code, eg:
+```scala
+if (x || y)
+  &amp;&amp; (a || b) then foo()
+</code></pre></div></div>
+
+<p>Martin: Lookahead in the parser is necessary, but this is possible due to operators being accepted on new lines</p>
+
+<h4 id="on-enforcing-one-style">On Enforcing One Style</h4>
+
+<p>Adriaan:</p>
+<ul>
+  <li>Main worry with the whole proposal is too much choice, which could have negative feedback.</li>
+  <li>Dotty should enforce one syntactic style, with leniency under the Scala2 language mode</li>
+</ul>
+
+<p>Guillaume, in disagreement:</p>
+<ul>
+  <li>Today its easy to port to Dotty by copy pasting code, or just changing a version number.</li>
+  <li>e.g. StackOverflow answers wont work</li>
+</ul>
+
+<p>Sébastien:</p>
+<ul>
+  <li>We need to decide on one choice</li>
+  <li>Too many ways to do <code class="language-plaintext highlighter-rouge">if</code>.</li>
+  <li>Dotty supposed to be about simplification, but this makes one of the most basic things complex</li>
+  <li>perhaps the compiler should flag if styles are mixed</li>
+</ul>
+
+<h4 id="conclusion-1">Conclusion</h4>
+
+<p>No one present at the meeting showed outright objection to the specific new syntax changes. Comments given suggest that for users in the meeting, overall there is a boost to productivity.</p>
+
+<p>The main objection to the proposal is the amount of choice the user has in the syntax they may choose to use. And there is an open question of what should be restricted in the launch of Scala 3.</p>
+
+<h3 id="implicit-resolution-changes">Implicit Resolution changes</h3>
+
+<p>Martin outines the rules in the <a href="http://dotty.epfl.ch/docs/reference/changed-features/implicit-resolution.html">documentation</a>:</p>
+
+<h4 id="1-types-must-be-explicit-for-implicit-vals-and-results-of-defs">1) Types must be explicit for implicit vals and results of defs</h4>
+<ul>
+  <li>Exception for local block</li>
+</ul>
+
+<h4 id="2-nesting-of-implicits-is-significant">2) Nesting of implicits is significant</h4>
+<ul>
+  <li>Implicits look from inside out</li>
+  <li>Now resolution of a symbol, not a name</li>
+  <li>No more shadowing, but nesting is important</li>
+</ul>
+
+<h4 id="concerns-with-nesting-rule">Concerns with Nesting rule</h4>
+
+<p>Guillaume:</p>
+<ul>
+  <li>We should be careful with what code from Scala 2 will change under the new rules.</li>
+  <li>Concretely in the community build, compilation of Scalacheck inferred a different <code class="language-plaintext highlighter-rouge">map</code> method for <code class="language-plaintext highlighter-rouge">String</code> then the one under Scala 2.</li>
+  <li>There can be new ambiguities when mixing lexical scope with inheritance scope rules</li>
+  <li>People probably do not check that the semantics have changed if you were to change the Scala version and it compiles.</li>
+  <li>But perhaps for this meeting we should not focus on migration, just the objective quality of the changes.</li>
+</ul>
+
+<p>Sébastien, in response:</p>
+<ul>
+  <li>if this is dangerous to change, we could delay the changes beyond 3.0</li>
+  <li>Migration is important</li>
+</ul>
+
+<p>Adriaan, in response:</p>
+<ul>
+  <li>I don’t think we should be concerned about laziness to read new rules</li>
+</ul>
+
+<p>Guillaume:</p>
+<ul>
+  <li>When looking for an implicit conversion to add a method, the innermost match way not type check, should we look in the outer scope for an objectively better definition?</li>
+</ul>
+
+<p>Martin, in response:</p>
+<ul>
+  <li>This could be problematic because of performance cost of backtracking. We have caches of innermost to outermost.</li>
+  <li>Because of cost of new types such as union and intersection, we need savings elsewhere</li>
+</ul>
+
+<p>Martin, concluding:</p>
+<ul>
+  <li>In terms of standardisation, is this acceptable as is to go in?</li>
+</ul>
+
+<h4 id="3-package-prefix-no-longer-contributes-to-implicit-scope">3) package prefix no longer contributes to implicit scope</h4>
+
+<p>Martin: Motivation is that it is too easy to pollute everywhere with implicit definitions.</p>
+
+<p>Guillaume: Doesn’t appear to break much code so it seems ok so far.</p>
+
+<h4 id="4-5-clean-up-surprising-behaviour-of-divergence-or-ambiguity">4-5) clean up surprising behaviour of divergence or ambiguity</h4>
+
+<ul>
+  <li>in Scala 2 ambiguity wasnt fatal in the presence of an alternative, now it is fails immediately.</li>
+  <li>This breaks <code class="language-plaintext highlighter-rouge">Not[T]</code> encodings, which is now special cased in compiler.</li>
+</ul>
+
+<p>Sébastien:</p>
+<ul>
+  <li>Why are the new rules better?</li>
+  <li>My experience in Scala 2 is that diverging implicits are not very easy to understand</li>
+</ul>
+
+<p>Guillaume: Is the specification of Scala 2 divergence in user documentation?</p>
+
+<p>Martin: problem with fatal divergence now is that it seems underspecified, e.g. visitation order of search has an effect.</p>
+
+<h4 id="6-implicit-conversions-with-by-name-parameters-now-have-the-same-priority">6) Implicit Conversions with By-Name Parameters Now Have the Same Priority</h4>
+
+<p>Martin: In Scala 2, by-name conversions were added in a “bolt on” fashion, making spec strange for no principled reason.</p>
+
+<h4 id="7-context-parameters-lower-specificity-of-implicits">7) Context Parameters Lower Specificity of Implicits</h4>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Worst feature change as it is seems the most arbitrary</li>
+  <li>It may be better for reducing ambiguity, but is more complex.</li>
+</ul>
+
+<p>Martin believes the inheritance model is very fragile, but this version is more modular.</p>
+
+<p>Sébastien:</p>
+<ul>
+  <li>Believes the older version leads to easier evolution of a library in a binary compatible fashion.</li>
+  <li>Demonstrates Scala.js <a href="https://github.com/scala-js/scala-js/blob/master/library/src/main/scala/scala/scalajs/js/Union.scala">Union Types</a> as a way to evolve priorities with a new base type.</li>
+  <li>Asks if the new rules allow to add an implicit definition of a priority in-between two other definitions while preserving binary compatability?</li>
+</ul>
+
+<p>Martin, in response:</p>
+<ul>
+  <li>Shows a <a href="https://github.com/lampepfl/dotty/blob/master/tests/run/implied-priority.scala">demo</a> of how to insert a new implicit in between existing definitions.</li>
+  <li>The new scheme of priorities is more simple to grow than before because inheritance is fragile</li>
+</ul>
+
+<p>Sébastien is satisfied with the demo, is fine either way to add to 3.0 or later. Someone should champion it.</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Will support if library authors are behind it like Cats.</li>
+  <li>It’s hard to teach and hard to understand.</li>
+  <li>Is it really better than status quo? Yes the old system is clunky but is well understood.</li>
+  <li>So is it worth it?</li>
+</ul>
+
+<p>Martin, in response:</p>
+<ul>
+  <li>Yes, it’s better for the small number of library authors who really need it.</li>
+  <li>The old way with traits is a hack, this has principles, why should we deprive ourselves of the correct solution?</li>
+  <li>It would be a pity to remove, it took a lot of thought, and is an objectively better design.</li>
+  <li>We should have a tutorial documentation for the new rules</li>
+</ul>
+
+<h4 id="conclusion-2">Conclusion</h4>
+
+<p>There is fair skepticism for introducing the changes immediately, as the migration path from Scala 2 can be complicated if runtime behaviour changes undetected without a warning or error at compile time. Additionally there are concerns about the effort required to re-educate users with the new rules.</p>
+
+<h3 id="drop-autotupling">Drop Autotupling</h3>
+
+<p>Sébastien: The main challenge is migration, what is the ideal scenario?</p>
+
+<p>Martin: In the future, there is no autotupling, and then any parens following an infix operator is the start of a tuple and not an argument list.</p>
+
+<p>Sébastien:</p>
+<ul>
+  <li>It looks like most of the use cases for requiring the extra parens have been dropped in 2.13</li>
+  <li>What is the state of deprecation in 2.13</li>
+</ul>
+
+<p>Martin:</p>
+<ul>
+  <li>Symbolic operators with multiple arguments</li>
+  <li>We could delay beyond 3.0, and migration concerns will be less.</li>
+</ul>
+
+<p>Sébastien:</p>
+<ul>
+  <li>It sounds reasonable to delay, and definitely warn/error at definition infix ops with multiple arguments.</li>
+  <li>Coupled with ensuring the definitions of infix calls have the infix annotation.</li>
+</ul>
+
+<h4 id="conclusion-3">Conclusion</h4>
+<p>There is general favorability of the proposal from present members, the main concerns are whether or not to delay the feature to aid migration.</p>
+
+<h3 id="multiversal-equality">Multiversal Equality</h3>
+
+<p>Sébastien: has this changed since last discussion?</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li>not changed in very long time</li>
+  <li><code class="language-plaintext highlighter-rouge">strictEquality</code> probably not tested in the wild much.</li>
+</ul>
+
+<p>Martin: There has been concern about why we have two type parameters, which was resolved with the people concerned.</p>
+
+<p>Adriaan:</p>
+<ul>
+  <li>Highlights an issue with <code class="language-plaintext highlighter-rouge">strictEquality</code> and not compiling the standard library:
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span> <span class="n">dotr</span> <span class="o">-</span><span class="n">language</span><span class="k">:</span><span class="kt">strictEquality</span>
+<span class="nc">Starting</span> <span class="n">dotty</span> <span class="nc">REPL</span><span class="o">...</span>
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="mi">1</span> <span class="o">|</span><span class="nc">Some</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="o">|^^^^^^^^^^^^^^^^^^</span>
+<span class="o">|</span><span class="nc">Values</span> <span class="n">of</span> <span class="n">types</span> <span class="nc">Some</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="n">and</span> <span class="nc">Some</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">compared</span> <span class="k">with</span> <span class="o">==</span> <span class="n">or</span> <span class="o">!=</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Asks if is this crucial for 3.0</li>
+</ul>
+
+<p>Martin: Scala 2 has some checks which give a warning on comparing nonsensical types, which do not exist in dotty. So he would be uncomfortable to ship without a similar feature.</p>
+
+<p>Guillaume: one solution to the warning could be disjoint checking, like implemented for match types.</p>
+
+<p>Martin: highlights that the match type implementation doesnt work for traits.</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Eql</code> doesn’t help against comparing two values of statically disjoint subtypes of an ADT, if they have the same type parameter.</li>
+  <li>Could we combine warning on disjoint with <code class="language-plaintext highlighter-rouge">Eql</code>?</li>
+  <li>Or possibly a <code class="language-plaintext highlighter-rouge">Disjoint[A,B]</code> type class which could feed into warnings?</li>
+</ul>
+
+<p>Martin: There are far more cases where things are disjoint than not so there would be much more noise.</p>
+
+<h4 id="conclusion-4">Conclusion</h4>
+<p>There is mixed favorability for the proposal as is, with concern for precision of errors in the presence of known static divergence and the timing of release.</p>
+
+<h3 id="name-based-pattern-matching">Name based pattern matching</h3>
+
+<p>Name based pattern matching is presented as a formalisation of the rules included in Scala 2, with a few new ones. It is used as the implementation of pattern matching for case classes in Dotty.</p>
+
+<p>Sébastien: should we use <code class="language-plaintext highlighter-rouge">Product</code> as a marker trait for this?</p>
+
+<p>Olivier: We use it to reduce the noise in the LUB of case classes.</p>
+
+<p>Sébastien demonstrates how <a href="https://github.com/sjrd/scala-unboxed-option/blob/master/src/main/scala/uoption/package.scala">scala-unboxed-option</a> uses name based patten matching on a value class to achieve matching with no allocations.</p>
+
+<p>Nicolas: Can we use extension methods to do name based pattern match? (Rather than extend <code class="language-plaintext highlighter-rouge">AnyVal</code>)</p>
+
+<p>Guillaume: No because this is run at a later phase that does not resolve dotty extension methods.</p>
+
+<h4 id="on-the-concern-of-case-class-unapply">On the concern of case class unapply</h4>
+
+<p>(This concern is separate to the SIP proposal)</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Some people rely on <code class="language-plaintext highlighter-rouge">unapply</code> of case class companion to extract an <code class="language-plaintext highlighter-rouge">Option</code> of some tuple, in Dotty, the <code class="language-plaintext highlighter-rouge">unapply</code> method is the identity.</li>
+  <li>One solution is to special-case case classes in patterns, like Scala 2.</li>
+</ul>
+
+<p>Martin in response:</p>
+<ul>
+  <li>Is it worth the effort to make the compiler more complex for the sake of binary compatability?</li>
+</ul>
+
+<h4 id="conclusion-5">Conclusion</h4>
+
+<p>The main concern is the use of <code class="language-plaintext highlighter-rouge">Product</code> as a marker trait, and the current inability of Dotty extension methods to be used for name-based extractors. But overall everyone present is in favour.</p>
+
+<h3 id="structural-types">Structural Types</h3>
+
+<p>Sébastien: should <code class="language-plaintext highlighter-rouge">Selectable</code> become a marker trait rather than require specific methods?</p>
+
+<p>Guillaume:</p>
+<ul>
+  <li>Not seen any real-world usage, can some existing “Record” Style macros benefit from this.</li>
+  <li>Seems ugly and we need to prove it can be used equivalently to <code class="language-plaintext highlighter-rouge">HMap</code> in all use cases.</li>
+</ul>
+
+<p>Martin: Performance concerns with using <code class="language-plaintext highlighter-rouge">HMap</code>.</p>
+
+<p>Guillaume: Whatever we propose, it needs to be convenient for calling.</p>
+
+<p>Martin: We need something to support Chisel in Scala 3.</p>
+
+<p>Guillaume, in response:</p>
+<ul>
+  <li>This is more complicated as Dotty breaks their use case.</li>
+  <li>We really need to see it tried in a real application for its intended use case.</li>
+</ul>
+
+<p>Martin:</p>
+<ul>
+  <li>To get people to really try it out, it seems you need a full tutorial. And current docs seems lacking.</li>
+</ul>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+        <h5 class="contents" style="line-height: 1.1; margin-bottom: 18px;">Scala Improvement Proposals (SIPs)</h5>
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="/sips/all.html" class="button">View all SIPs</a>
+          </div>
+        <h5 class="contents" style="margin-bottom: 0;">SIP/SPP Meetings</h5>
+        <div id="sip-meetings">
+          <div id="upcoming-meeting">
+            <h6>Next meeting:</h6>
+            <div id="meeting-title">&nbsp;&nbsp;<span class="tag" style="background-color: #dc322f; top: 0px; margin-bottom: 6px;">Live</span></div>
+            <div id="meeting-time"></div>
+            <div id="live-on-youtube">
+              Tune in and join us, live! Ask the SIP committee questions, weigh in, or just follow along.
+              <br><a id="watch-meeting">Watch →</a>
+            </div>
+          </div>
+          <div id="meeting-minutes">
+            <ul>
+              <li><a href="/sips/minutes-list.html">Meeting Minutes</a></li>
+              <li><a href="https://www.youtube.com/channel/UCn_8OeZlf5S6sqCqntAvaIw/videos?view=2&sort=dd&shelf_id=1&live_view=502">Meeting Video Registrations (YouTube)</a></li>
+            </ul>
+          </div>
+        </div>
+        <h5 class="contents" style="margin-bottom: 0;">Writing a SIP</h5>
+        <ul>
+          <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+          <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+        </ul>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/minutes/2020-03-13-sip-minutes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+// Get next SIP meeting date/time
+$(document).ready(function() {
+  var listVidsQuery = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn_8OeZlf5S6sqCqntAvaIw&eventType=upcoming&type=video&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94";
+  var vidQuery = "https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94&id=";
+  $.getJSON(listVidsQuery, function(data) {
+
+    // if there indeed are upcoming meetings, display the next one
+    if (data.items.length > 0) {
+        // YouTube video ID for the next upcoming SIP/SPP meeting
+        var videoId = data.items[0].id.videoId;
+
+        $.getJSON(vidQuery + videoId, function(vidData) {
+          if (vidData.items.length > 0) {
+            var result = vidData.items[0].liveStreamingDetails.scheduledStartTime;
+            var startTime = moment(result).format("dddd, MMMM Do YYYY, ha");
+
+            var sipOrSpp = "SIP";
+            if (data.items[0].snippet.title.indexOf("SPP") !== -1) sipOrSpp = "SPP";
+
+            var meetingTitle = moment(result).format("MMMM YYYY") + " " + sipOrSpp + " Meeting";
+            var href = "https://www.youtube.com/watch?v=" + videoId;
+            var a = document.createElement('a');
+            $(a).attr('href', href).text(meetingTitle);
+
+            $("#meeting-title").prepend(a);
+            $("#watch-meeting").attr('href', href);
+            $("#meeting-time").text(startTime);
+          }
+        });
+
+    } else {
+      // if there are no upcoming meetings scheduled, hide the upcoming meeting section
+      $("#upcoming-meeting").hide();
+    }
+
+  });
+});
+</script>
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

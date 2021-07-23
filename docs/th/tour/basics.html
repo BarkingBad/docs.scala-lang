@@ -1,0 +1,3835 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      พื้นฐาน | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/th/tour/basics.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="พื้นฐาน"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="พื้นฐาน"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/th/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/th/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Tour of Scala</div>
+          
+          <h1>พื้นฐาน</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+                <div class="toc-context">
+                    <p>ในหน้านี้ เราจะครอบคลุมพื้นฐานของ Scala
+In this page, we will cover basics of Scala.</p>
+
+<h2 id="ทดลอง-scala-ในเว็บบราวเซอร์">ทดลอง Scala ในเว็บบราวเซอร์</h2>
+
+<p>เราสามารถรัน Scala ในเว็บเบราว์เซอร์ด้วย ScalaFiddle</p>
+
+<ol>
+  <li>ไปที่ <a href="https://scalafiddle.io">https://scalafiddle.io</a>.</li>
+  <li>วาง <code class="language-plaintext highlighter-rouge">println("Hello, world!")</code> ในด้านซ้าย.</li>
+  <li>กดที่ปุ่ม “Run” . output จะแสดงในด้านขวา</li>
+</ol>
+
+<p>ในขั้นตอนนี้ง่ายมาก ที่จะได้ประสบการณ์ของเรากับ Scala</p>
+
+<p>หลายๆ โค้ดตัวอย่างในเอกสารนี้จะฝังใน ScalaFiddle ซึ่งคุณสามารถกดที่ปุ่ม Run เพื่อดูว่าโด้นนั้นๆ จะได้ผลลัพธ์อย่างไร</p>
+
+<h2 id="expressions">Expressions</h2>
+
+<p>Expression หรือ นิพจน์ เป็นโค้ดที่ทำการคำนวนได้</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+<p>เราสามารถแสดงผลลัพธ์ของ Expression ด้วยการใช้ <code class="language-plaintext highlighter-rouge">println</code></p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">// 1</span>
+<span class="nf">println</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">// 2</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Hello!"</span><span class="o">)</span> <span class="c1">// Hello!</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Hello,"</span> <span class="o">+</span> <span class="s">" world!"</span><span class="o">)</span> <span class="c1">// Hello, world!</span>
+</code></pre></div></div>
+</div>
+
+<h3 id="values">Values</h3>
+
+<p>เราสามารถตั้งชื่อของผลลัพธ์ของ expression ด้วย keyword <code class="language-plaintext highlighter-rouge">val</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<p>ตั้งชื่อผลลัพธ์ อย่างเช่น <code class="language-plaintext highlighter-rouge">x</code> จะเรียก value การอ้างอิง value จะไม่มีการคำนวณอีกครั้ง</p>
+
+<p>Value ไม่สามารถกำหนดค่าใหม่ได้</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// ตรงนี้ไม่ compile.</span>
+</code></pre></div></div>
+
+<p>type (ชนิด) ของ value สามารถ inferred (อนุมาน) ได้ แต่เราสามารถกำหนดชนิดของ type อย่างชัดเจนได้ แบบนี้</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>สังเกตว่า การประกาศชนิดของ type <code class="language-plaintext highlighter-rouge">Int</code> จะระบุหลังจาก indentifier <code class="language-plaintext highlighter-rouge">x</code> เราจำเป็นต้องมี <code class="language-plaintext highlighter-rouge">:</code></p>
+
+<h3 id="variables">Variables</h3>
+
+<p>ตัวแปรเหมือนกับ value ยกเว้นแต่ว่าเราสามารถกำหนดค่าใหม่ได้ เราสามารถกำหนดตัวแปรด้วย keyword <code class="language-plaintext highlighter-rouge">var</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="k">=</span> <span class="mi">3</span> <span class="c1">// ตรงนี้ compile เพราะว่า "x" ถูกประกาศด้วย keyword "var"</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span> <span class="c1">// 9</span>
+</code></pre></div></div>
+
+<p>เราสามารถกำหนด type ได้ตามที่เราต้องการ:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<h2 id="blocks">Blocks</h2>
+
+<p>เราสามารถรวมหลายๆ expression ไว้ด้วยกันด้วยการครอบด้วย <code class="language-plaintext highlighter-rouge">{}</code> เรียกมันว่า block</p>
+
+<p>ผลลัพธ์ของ expression สุดท้ายใน block จะเป็นผลลัพธ์ของ block ทั้งหมดด้วย</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">({</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="o">})</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<h2 id="functions">Functions</h2>
+
+<p>function เป็น expression ที่รับ parameter ได้</p>
+
+<p>เราสามารถกำหนด anonymous function (เป็น function ที่ไม่มีชื่อ) ที่ return ค่าตัวเลขบวกหนึ่ง:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>ในด้านซ้ายของ <code class="language-plaintext highlighter-rouge">=&gt;</code> คือรายการของ parameter ในด้านขวาเป็น expression ที่นำ parameter มาใช้</p>
+
+<p>เราสามารถตั้งชื่อของ function ได้ดังนี้</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">addOne</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">addOne</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+</div>
+
+<p>function สามารถรับ parameter ได้หลายตัว</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">add</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+</div>
+
+<p>หรือ เราจะไม่รับ parameter เลยก็ได้</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">getTheAnswer</span> <span class="k">=</span> <span class="o">()</span> <span class="k">=&gt;</span> <span class="mi">42</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">getTheAnswer</span><span class="o">())</span> <span class="c1">// 42</span>
+</code></pre></div></div>
+
+<h2 id="methods">Methods</h2>
+
+<p>Method มีลักษณะเหมือนกับ function มาก แต่ว่าจะมีบางสิ่งที่แตกต่างกันระหว่าง method และ function</p>
+
+<p>Method จะประกาศได้ด้วย keyword <code class="language-plaintext highlighter-rouge">def</code> ตามด้วยชื่อของ function, รายการ parameter, return type และ body ของ function</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+</div>
+
+<p>สังเกตว่า การ return type จะประกาศ <em>หลังจาก</em> รายการ parameter และ colon <code class="language-plaintext highlighter-rouge">: Int</code></p>
+
+<p>Method ยังสามารถรับรายการ parameter ได้หลายรายการ</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">addThenMultiply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="n">multiplier</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span> <span class="o">*</span> <span class="n">multiplier</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">addThenMultiply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)(</span><span class="mi">3</span><span class="o">))</span> <span class="c1">// 9</span>
+</code></pre></div></div>
+</div>
+
+<p>หรือ ไม่มีรายการ parameter เลยก็ได้ อย่างเช่น</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">name</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">System</span><span class="o">.</span><span class="py">getProperty</span><span class="o">(</span><span class="s">"user.name"</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"!"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>และยังมีบางสิ่งที่แตกต่างกัน แต่ตอนนี้เราจะคิดว่า method มีความเหมือนกับ function</p>
+
+<p>Method สามารถมี expression ได้หลายบรรทัด</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getSquareString</span><span class="o">(</span><span class="n">input</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">square</span> <span class="k">=</span> <span class="n">input</span> <span class="o">*</span> <span class="n">input</span>
+  <span class="nv">square</span><span class="o">.</span><span class="py">toString</span>
+<span class="o">}</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">getSquareString</span><span class="o">(</span><span class="mf">2.5</span><span class="o">))</span> <span class="c1">// 6.25</span>
+</code></pre></div></div>
+</div>
+
+<p>expression สุดท้ายใน body เป็น expression ที่ return value ของ method (Scala ก็มี keyword <code class="language-plaintext highlighter-rouge">return</code> แต่ว่าไม่ค่อยได้ใช้)</p>
+
+<h2 id="classes">Classes</h2>
+
+<p>เราสามารถประกาศ class ได้ด้วย keyword <code class="language-plaintext highlighter-rouge">class</code> ตามด้วยชื่อของ class และ constructor parameters</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Greeter</span><span class="o">(</span><span class="n">prefix</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">suffix</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">greet</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+    <span class="nf">println</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="n">suffix</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>return type ของ method <code class="language-plaintext highlighter-rouge">greet</code> เป็น <code class="language-plaintext highlighter-rouge">Unit</code> ซึ่งอาจจะกล่าวได้ว่าไม่มีการ return มันใช้เหมือน <code class="language-plaintext highlighter-rouge">void</code> ใน Java และ C (ความแตกต่างคือทุกๆ expression ของ Scala จำเป็นต้องมีค่า ซึ่งเป็น singleton vlaue จริงๆ ของ Unit เขียนด้วย () ซึ่งไม่มีข้อมูลใดๆ)</p>
+
+<p>เราสามารถสร้าง instance ของ class ได้ด้วย keyword <code class="language-plaintext highlighter-rouge">new</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">greeter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Greeter</span><span class="o">(</span><span class="s">"Hello, "</span><span class="o">,</span> <span class="s">"!"</span><span class="o">)</span>
+<span class="nv">greeter</span><span class="o">.</span><span class="py">greet</span><span class="o">(</span><span class="s">"Scala developer"</span><span class="o">)</span> <span class="c1">// Hello, Scala developer!</span>
+</code></pre></div></div>
+
+<p>เราจะครอบคลุมเรื่องของ class ในเชิงลึก <a href="classes.html">ภายหลัง</a></p>
+
+<h2 id="case-classes">Case Classes</h2>
+
+<p>Scala มี type ชนิดพิเศษของ class เรียกว่า “case” class โดยเริ่มต้นแล้ว case class เป็นค่าที่เปลี่ยนแปลงไม่ได้ (immutable) และสามารถเปลียบเทียบด้วย value เราสามารถประกาศ case class ด้วย keyword <code class="language-plaintext highlighter-rouge">case class</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">Point</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>เราสามารถสร้าง instant ของ case class โดยไม่ต้องใช้ keyword <code class="language-plaintext highlighter-rouge">new</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">point</span> <span class="k">=</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">anotherPoint</span> <span class="k">=</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">yetAnotherPoint</span> <span class="k">=</span> <span class="nc">Point</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>และสามารถเปรียบเทียบค่าของ case class ได้</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if</span> <span class="o">(</span><span class="n">point</span> <span class="o">==</span> <span class="n">anotherPoint</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">point</span> <span class="o">+</span> <span class="s">" and "</span> <span class="o">+</span> <span class="n">anotherPoint</span> <span class="o">+</span> <span class="s">" are the same."</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">point</span> <span class="o">+</span> <span class="s">" and "</span> <span class="o">+</span> <span class="n">anotherPoint</span> <span class="o">+</span> <span class="s">" are different."</span><span class="o">)</span>
+<span class="o">}</span> <span class="c1">// Point(1,2) and Point(1,2) are the same.</span>
+
+<span class="nf">if</span> <span class="o">(</span><span class="n">point</span> <span class="o">==</span> <span class="n">yetAnotherPoint</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">point</span> <span class="o">+</span> <span class="s">" and "</span> <span class="o">+</span> <span class="n">yetAnotherPoint</span> <span class="o">+</span> <span class="s">" are the same."</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">point</span> <span class="o">+</span> <span class="s">" and "</span> <span class="o">+</span> <span class="n">yetAnotherPoint</span> <span class="o">+</span> <span class="s">" are different."</span><span class="o">)</span>
+<span class="o">}</span> <span class="c1">// Point(1,2) and Point(2,2) are different.</span>
+</code></pre></div></div>
+
+<p>เป็นตัวอย่างการใช้งานของ case class ที่เราอยากจะแนะนำ และอยากให้คุณตกหลุมรักมัน เราจะครอบคลุมในเชิงชึกใน <a href="case-classes.html">ภายหลัง</a></p>
+
+<h2 id="objects">Objects</h2>
+
+<p>Object เป็น instance เดี่ยวของ definition ของมัน เราสามารถคิดว่ามันเป็น singleton ของ class ที่มันเป็นเจ้าของ</p>
+
+<p>เราสามารถประกาศ object ได้ด้วย keyword <code class="language-plaintext highlighter-rouge">object</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">IdFactory</span> <span class="o">{</span>
+  <span class="k">private</span> <span class="k">var</span> <span class="n">counter</span> <span class="k">=</span> <span class="mi">0</span>
+  <span class="k">def</span> <span class="nf">create</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">counter</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>เราสามารถเข้าถึง object ด้วยการอ้างอิงถึงชื่อของมัน</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">newId</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">IdFactory</span><span class="o">.</span><span class="py">create</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">newId</span><span class="o">)</span> <span class="c1">// 1</span>
+<span class="k">val</span> <span class="nv">newerId</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">IdFactory</span><span class="o">.</span><span class="py">create</span><span class="o">()</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">newerId</span><span class="o">)</span> <span class="c1">// 2</span>
+</code></pre></div></div>
+
+<p>เราจะครอบคลุมในเชิงลึกใน <a href="singleton-objects.html">ภายหลัง</a></p>
+
+<h2 id="traits">Traits</h2>
+
+<p>Trait เป็น type ที่บรรจุ field และ method ที่แน่นอน เราสามารถรวม trait หลายๆ trait เข้าด้วยกันได้</p>
+
+<p>เราสามารถประกาศ trait ได้ด้วย keyword <code class="language-plaintext highlighter-rouge">trait</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Greeter</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">greet</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Trait สามารถมี default implementation ได้</p>
+
+<div data-scalafiddle="">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Greeter</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">greet</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"!"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>เราสามารถขยาย traint ได้ด้วย keyword <code class="language-plaintext highlighter-rouge">extents</code> และ overrid implementation ด้วย keyword <code class="language-plaintext highlighter-rouge">override</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DefaultGreeter</span> <span class="k">extends</span> <span class="nc">Greeter</span>
+
+<span class="k">class</span> <span class="nc">CustomizableGreeter</span><span class="o">(</span><span class="n">prefix</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">postfix</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Greeter</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">greet</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">println</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="n">postfix</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">val</span> <span class="nv">greeter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">DefaultGreeter</span><span class="o">()</span>
+<span class="nv">greeter</span><span class="o">.</span><span class="py">greet</span><span class="o">(</span><span class="s">"Scala developer"</span><span class="o">)</span> <span class="c1">// Hello, Scala developer!</span>
+
+<span class="k">val</span> <span class="nv">customGreeter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">CustomizableGreeter</span><span class="o">(</span><span class="s">"How are you, "</span><span class="o">,</span> <span class="s">"?"</span><span class="o">)</span>
+<span class="nv">customGreeter</span><span class="o">.</span><span class="py">greet</span><span class="o">(</span><span class="s">"Scala developer"</span><span class="o">)</span> <span class="c1">// How are you, Scala developer?</span>
+</code></pre></div></div>
+</div>
+
+<p>จากตัวอย่างนี้ <code class="language-plaintext highlighter-rouge">defaultGreeter</code> ขยายเพียง trait เดียว แต่มันสามารถขยายหลาย trait</p>
+
+<p>เราจะครอบคลุมในเชิงลึกใน <a href="traits.html">ภายหลัง</a></p>
+
+<h2 id="main-method">Main Method</h2>
+
+<p>main method เป็น entry point หรือจุดเริ่มต้นของโปรแกรม ใน ​Java Virtual Machine 
+ต้องการ main method ชื่อว่า <code class="language-plaintext highlighter-rouge">main</code> และสามารถรับ argument ที่เป็น array ของ string</p>
+
+<p>ใช้ object เราสามารถประกาศ main method ได้ดังนี้:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, Scala developer!"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+                </div>
+
+                <div class="two-columns">
+                    
+                    <a href="tour-of-scala.html">&larr; <strong>previous</strong></a>
+                    
+                    
+                    <a href="unified-types.html"><strong>next</strong> &rarr;</a>
+                    
+                </div>
+
+                <div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+            </div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+      <ul>
+        
+        
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/tour-of-scala.html">บทนำ</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a class="active" href="/th/tour/basics.html">พื้นฐาน</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/unified-types.html">ชนิดข้อมูล</a></li>
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/classes.html">คลาส</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/default-parameter-values.html">Default Parameter Values</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/named-arguments.html">Named Arguments</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/traits.html">Traits</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/tuples.html">Tuples</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/mixin-class-composition.html">Class Composition with Mixins</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/higher-order-functions.html">Higher-order Functions</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/nested-functions.html">Nested Methods</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/multiple-parameter-lists.html">Multiple Parameter Lists (Currying)</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/case-classes.html">Case Classes</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/pattern-matching.html">Pattern Matching</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/singleton-objects.html">Singleton Objects</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/regular-expression-patterns.html">Regular Expression Patterns</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/extractor-objects.html">Extractor Objects</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/for-comprehensions.html">For Comprehensions</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/generic-classes.html">Generic Classes</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/variances.html">Variance</a></li>
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/upper-type-bounds.html">Upper Type Bounds</a></li>
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/lower-type-bounds.html">Lower Type Bounds</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/inner-classes.html">Inner Classes</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+                  <li><a  href="/th/tour/abstract-type-members.html">Abstract Type Members</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/compound-types.html">Compound Types</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/self-types.html">Self-types</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/implicit-parameters.html">Implicit Parameters</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/implicit-conversions.html">Implicit Conversions</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/polymorphic-methods.html">Polymorphic Methods</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/type-inference.html">Type Inference</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/operators.html">Operators</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/by-name-parameters.html">By-name Parameters</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/annotations.html">Annotations</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/packages-and-imports.html">Packages and Imports</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+          
+            
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <li><a  href="/th/tour/package-objects.html">Package Objects</a></li>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+      </ul>
+
+      
+        
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/tour/basics.html">English</a></li>
+          
+            
+            <li><a href="/ba/tour/basics.html" class="lang">Bosanski</a></li>
+          
+            
+            <li><a href="/es/tour/basics.html" class="lang">Español</a></li>
+          
+            
+            <li><a href="/fr/tour/basics.html" class="lang">Français</a></li>
+          
+            
+            <li><a href="/ko/tour/basics.html" class="lang">한국어</a></li>
+          
+            
+            <li><a href="/pt-br/tour/basics.html" class="lang">Português (Brasil)</a></li>
+          
+            
+            <li><a href="/pl/tour/basics.html" class="lang">Polski</a></li>
+          
+            
+            <li><a href="/zh-cn/tour/basics.html" class="lang">中文 (简体)</a></li>
+          
+            
+            <li><a href="/th/tour/basics.html" class="lang">ภาษาไทย</a></li>
+          
+            
+            <li><a href="/ru/tour/basics.html" class="lang">Русский</a></li>
+          
+            
+            <li><a href="/ja/tour/basics.html" class="lang">日本語</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_th/tour/basics.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+
+<script defer src='https://embed.scalafiddle.io/integration.js'></script>
+</body>
+
+</html>
+

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-NN - Name Based XML Literals | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/name-based-xml.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-NN - Name Based XML Literals"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-NN - Name Based XML Literals"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-NN - Name Based XML Literals</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Yang, Bo</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Oct 24th 2019</td>
+      <td>Initial Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Name-based <code class="language-plaintext highlighter-rouge">for</code> comprehension has been proven success in Scala language design. A <code class="language-plaintext highlighter-rouge">for</code> / <code class="language-plaintext highlighter-rouge">yield</code> expression will be converted to higher-order function calls to <code class="language-plaintext highlighter-rouge">flatMap</code> , <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">withFilter</code> methods, no matter which type signatures they are. The <code class="language-plaintext highlighter-rouge">for</code> comprehension can be used for either <code class="language-plaintext highlighter-rouge">Option</code> or <code class="language-plaintext highlighter-rouge">List</code> , even when <code class="language-plaintext highlighter-rouge">List</code> has an additional implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> parameter. Third-party libraries like Scalaz and Cats also provides <code class="language-plaintext highlighter-rouge">Ops</code> to allow monadic data types in <code class="language-plaintext highlighter-rouge">for</code> comprehension.</p>
+
+<p><a href="https://dotty.epfl.ch/docs/reference/changed-features/pattern-matching.html">Name-based pattern matching</a> is introduced by Dotty. It is greatly simplified the implementation compared to Scala 2. In addition, specific symbols in Scala library ( <code class="language-plaintext highlighter-rouge">Option</code> , <code class="language-plaintext highlighter-rouge">Seq</code> ) are decoupled from the Scala compiler.</p>
+
+<p>Considering the success of the above name-based syntactic sugars, in order to decouple <code class="language-plaintext highlighter-rouge">scala-xml</code> library from Scala compiler, name-based XML literal is an obvious approach.</p>
+
+<h2 id="motivating-examples">Motivating Examples</h2>
+
+<h3 id="examples">Examples</h3>
+
+<p>Given an XML literal <code class="language-plaintext highlighter-rouge">&lt;div title="my-title"&gt;line1&lt;br/&gt;line2&lt;/div&gt;</code>, at the parser phase, the compiler should internally convert it to an AST equivalent to the following code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">div</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="py">title</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="n">`my-title`</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="py">line1</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">br</span><span class="o">(),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="py">line2</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>By creating or importing different implementation of <code class="language-plaintext highlighter-rouge">xml</code>, various representation of objects for the XML literal will be created. For example, to create HTML DOM in Scala.js, you can define <code class="language-plaintext highlighter-rouge">xml</code> object as following:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">org.scalajs.dom.document</span>
+<span class="k">import</span> <span class="nn">org.scalajs.dom.raw._</span>
+
+<span class="k">object</span> <span class="nc">xml</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Attribute</span><span class="o">[</span><span class="kt">-A</span> <span class="k">&lt;:</span> <span class="kt">Element</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span> <span class="k">=&gt;</span> <span class="nc">Unit</span>
+  <span class="k">object</span> <span class="nc">values</span> <span class="k">extends</span> <span class="nc">Dynamic</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">selectDynamic</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">data</span>
+  <span class="o">}</span>
+  <span class="k">object</span> <span class="nc">texts</span> <span class="k">extends</span> <span class="nc">Dynamic</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">selectDynamic</span><span class="o">(</span><span class="n">data</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">data</span>
+  <span class="o">}</span>
+  <span class="k">object</span> <span class="nc">attributes</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Attribute</span><span class="o">[</span><span class="kt">Element</span><span class="o">]</span> <span class="k">=</span> <span class="nv">_</span><span class="o">.</span><span class="py">setAttribute</span><span class="o">(</span><span class="s">"title"</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span>
+  <span class="o">}</span>
+  <span class="k">object</span> <span class="nc">elements</span> <span class="o">{</span>
+    <span class="k">class</span> <span class="nc">Builder</span><span class="o">[</span><span class="kt">+E</span> <span class="k">&lt;:</span> <span class="kt">Element</span><span class="o">](</span><span class="k">val</span> <span class="nv">element</span><span class="k">:</span> <span class="kt">E</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">attributesAndChildren</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+        <span class="nv">attributesAndChildren</span><span class="o">.</span><span class="py">foreach</span> <span class="o">{</span>
+          <span class="k">case</span> <span class="n">text</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span>
+            <span class="nv">element</span><span class="o">.</span><span class="py">appendChild</span><span class="o">(</span><span class="nv">document</span><span class="o">.</span><span class="py">createTextNode</span><span class="o">(</span><span class="n">text</span><span class="o">))</span>
+          <span class="k">case</span> <span class="n">builder</span><span class="k">:</span> <span class="kt">Builder</span><span class="o">[</span><span class="k">_</span><span class="o">]</span> <span class="k">=&gt;</span>
+            <span class="nv">element</span><span class="o">.</span><span class="py">appendChild</span><span class="o">(</span><span class="nv">builder</span><span class="o">.</span><span class="py">element</span><span class="o">)</span>
+          <span class="k">case</span> <span class="n">node</span><span class="k">:</span> <span class="kt">Node</span> <span class="o">=&gt;</span>
+            <span class="nv">element</span><span class="o">.</span><span class="py">appendChild</span><span class="o">(</span><span class="n">node</span><span class="o">)</span>
+          <span class="k">case</span> <span class="n">attribute</span><span class="k">:</span> <span class="kt">Attribute</span><span class="o">[</span><span class="kt">E</span><span class="o">]</span> <span class="k">=&gt;</span>
+            <span class="nf">attribute</span><span class="o">(</span><span class="n">element</span><span class="o">)</span>
+        <span class="o">}</span>
+        <span class="n">element</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">def</span> <span class="nf">div</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Builder</span><span class="o">(</span><span class="nv">document</span><span class="o">.</span><span class="py">createElement</span><span class="o">(</span><span class="s">"div"</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">br</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Builder</span><span class="o">(</span><span class="nv">document</span><span class="o">.</span><span class="py">createElement</span><span class="o">(</span><span class="s">"br"</span><span class="o">))</span>
+    <span class="k">def</span> <span class="nf">literal</span><span class="o">[</span><span class="kt">+E</span> <span class="k">&lt;:</span> <span class="kt">Element</span><span class="o">](</span><span class="n">builder</span><span class="k">:</span> <span class="kt">Builder</span><span class="o">[</span><span class="kt">E</span><span class="o">])</span> <span class="k">=</span> <span class="nv">builder</span><span class="o">.</span><span class="py">element</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The ability of custom implementation for XML literals enables a lot of possibilities, including React-like virtual DOM frameworks, static type checked XML schema, and reactive XHTML/FXML templating.</p>
+
+<h3 id="comparison-examples">Comparison Examples</h3>
+
+<p>XML literals in Scala 2.13 are symbol based, which means the type of an XML literal is always <code class="language-plaintext highlighter-rouge">scala.xml.Elem</code>. The code <code class="language-plaintext highlighter-rouge">&lt;div title="my-title"&gt;line1&lt;br/&gt;line2&lt;/div&gt;</code> will be parsed to an AST equivalent to the following code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="k">var</span> <span class="nc">$md</span><span class="k">:</span> <span class="kt">MetaData</span> <span class="o">=</span> <span class="nc">Null</span><span class="o">;</span>
+  <span class="nc">$md</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">UnprefixedAttribute</span><span class="o">(</span><span class="s">"title"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Text</span><span class="o">(</span><span class="s">"my-title"</span><span class="o">),</span> <span class="nc">$md</span><span class="o">);</span>
+  <span class="k">new</span> <span class="nc">Elem</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="s">"div"</span><span class="o">,</span> <span class="nc">$md</span><span class="o">,</span> <span class="nc">TopScope</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="o">({</span>
+    <span class="k">val</span> <span class="nv">$buf</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">NodeBuffer</span><span class="o">();</span>
+    <span class="nv">$buf</span><span class="o">.</span><span class="py">$amp$plus</span><span class="o">(</span><span class="k">new</span> <span class="nc">Text</span><span class="o">(</span><span class="s">"line1"</span><span class="o">));</span>
+    <span class="nv">$buf</span><span class="o">.</span><span class="py">$amp$plus</span><span class="o">({</span>
+      <span class="o">{</span>
+        <span class="k">new</span> <span class="nc">Elem</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="s">"br"</span><span class="o">,</span> <span class="nc">Null</span><span class="o">,</span> <span class="nc">TopScope</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">});</span>
+    <span class="nv">$buf</span><span class="o">.</span><span class="py">$amp$plus</span><span class="o">(</span><span class="k">new</span> <span class="nc">Text</span><span class="o">(</span><span class="s">"line2"</span><span class="o">));</span>
+    <span class="nc">$buf</span>
+  <span class="o">}</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">MetaData</code>, <code class="language-plaintext highlighter-rouge">UnprefixedAttribute</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Elem</code> and <code class="language-plaintext highlighter-rouge">TopScope</code> are types defined in <code class="language-plaintext highlighter-rouge">scala.xml</code>. Library authors cannot create their custom representation of XML literals.</p>
+
+<h3 id="counter-examples">Counter-Examples</h3>
+
+<p>With the help of this proposal, a library author can create custom XML based DSL.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;&lt;</span><span class="n">label</span> <span class="n">v</span><span class="o">-</span><span class="k">if</span><span class="o">={</span><span class="nv">math</span><span class="o">.</span><span class="py">random</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="o">}&gt;</span><span class="nc">You</span> <span class="n">might</span> <span class="n">see</span> <span class="n">me</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>It will be translated to:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">div</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">label</span><span class="o">(</span>
+      <span class="nv">xml</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`v-if`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">interpolation</span><span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">random</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="o">)),</span>
+      <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`You might see me`</span>
+    <span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>The translated <code class="language-plaintext highlighter-rouge">v-if</code> method can be supported by creating an <code class="language-plaintext highlighter-rouge">implicit class</code> for <code class="language-plaintext highlighter-rouge">xml.attributes</code> easily. However, this proposal is not intended to be used for creating a DSL as an alternative to regular Scala code. Instead, you should just use ordinary <code class="language-plaintext highlighter-rouge">if</code> expression.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;{</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">random</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">&lt;</span><span class="n">label</span><span class="o">&gt;</span><span class="nc">You</span> <span class="n">might</span> <span class="n">see</span> <span class="n">me</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="o">&lt;!--</span><span class="n">condition</span> <span class="n">not</span> <span class="n">met</span><span class="o">--&gt;</span>
+  <span class="o">}</span>
+<span class="o">}&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>and it will be translated to:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">div</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">interpolation</span> <span class="o">{</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">random</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+          <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="py">label</span><span class="o">(</span>
+            <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`You might see me`</span>
+          <span class="o">)</span>
+        <span class="o">)</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+          <span class="nv">xml</span><span class="o">.</span><span class="py">comment</span><span class="o">(</span><span class="s">"condition not met"</span><span class="o">)</span>
+        <span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Name based XML literal is best for modeling existing XML format within Scala source files. For other cases, just use ordinary Scala control flows for dynamic conditions, and use ordinary Scala case class for data structures not defined in the existing XML format.</p>
+
+<h2 id="design">Design</h2>
+
+<h3 id="goals">Goals</h3>
+
+<ul>
+  <li>Keeping source-level backward compatibility to existing symbol-based XML literals in most use cases of <code class="language-plaintext highlighter-rouge">scala-xml</code>.</li>
+  <li>Allowing schema-aware XML literals, i.e. static type varying according to tag names, similar to the current TypeScript and <a href="https://github.com/ThoughtWorksInc/Binding.scala">Binding.scala</a> behavior.</li>
+  <li>Schema-aware XML literals should be understandable by both the compiler and IDE (e.g. no white box macros involved).</li>
+  <li>Existing libraries like ScalaTags should be able to support XML literals by adding a few simple wrapper classes. No macro or meta-programming knowledge is required for library authors.</li>
+  <li>Able to implement an API to build a DOM tree with no more cost than manually written Scala code.</li>
+</ul>
+
+<h3 id="non-goals">Non-goals</h3>
+
+<ul>
+  <li>Embedding fully-featured standard XML in Scala.</li>
+  <li>Allowing arbitrary tag names and attribute names (or avoiding reserved word).</li>
+  <li>Distinguishing lexical differences, e.g. <code class="language-plaintext highlighter-rouge">&lt;a b = "&amp;#99;"&gt;&lt;/a&gt;</code> vs <code class="language-plaintext highlighter-rouge">&lt;a b="c"/&gt;</code> .</li>
+</ul>
+
+<h3 id="other-consideration">Other consideration</h3>
+<h4 id="white-space-only-text">White space only text</h4>
+
+<p>Whitespace-only is preserved by default. However, a XML library vendor is able to discard whitespace texts during constructing the object for the XML literal.</p>
+
+<h4 id="the-usage-of-varargs">The usage of varargs</h4>
+
+<p>Since an element might contain arbitrary number of child nodes, varargs are required to handle these child nodes. Unfortunately, traditional varargs are type unsafe as it erase all arguments to their common super type, inefficient as it creates a temporary <code class="language-plaintext highlighter-rouge">Seq</code> that is difficult to be eliminated by optimizer.</p>
+
+<p>Both problems can be resolved with the help of <a href="https://docs.scala-lang.org/sips/curried-varargs.html">Curried Varargs</a>, which is another SIP to address the type safety and performance issues in traditional varargs.</p>
+
+<h2 id="other-examples">Other Examples</h2>
+
+<h3 id="self-closing-tags-without-prefixes">Self-closing tags without prefixes</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name`</span><span class="o">()</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="node-list">Node list</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">prefix</span><span class="o">-</span><span class="mi">1</span><span class="k">:</span><span class="kt">tag-name</span> <span class="kt">/&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name`</span><span class="o">(),</span>
+  <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name`</span><span class="o">()</span>
+<span class="o">)</span>
+</code></pre></div></div>
+<h3 id="attributes">Attributes</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span> <span class="n">attribute</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="s">"value"</span>
+          <span class="n">attribute</span><span class="o">-</span><span class="mi">2</span><span class="o">={</span> <span class="nf">f</span><span class="o">()</span> <span class="o">}/&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name`</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="py">value</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-2`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">interpolation</span><span class="o">(</span><span class="nf">f</span><span class="o">()))</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="cdata">CDATA</h3>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;![CDATA[raw]]&gt;</code> will be translated to <code class="language-plaintext highlighter-rouge">xml.literal(xml.texts.raw)</code> if <code class="language-plaintext highlighter-rouge">-Xxml:coalescing</code> flag is on, or <code class="language-plaintext highlighter-rouge">xml.literal(xml.cdata("raw"))</code> if the flag is turned off as <code class="language-plaintext highlighter-rouge">-Xxml:-coalescing</code> .</p>
+
+<h3 id="process-instructions">Process instructions</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;?</span><span class="n">xml</span><span class="o">-</span><span class="n">stylesheet</span> <span class="n">type</span><span class="o">=</span><span class="s">"text/xsl"</span> <span class="n">href</span><span class="o">=</span><span class="s">"style.xsl"</span><span class="o">?&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">processInstructions</span><span class="o">.</span><span class="n">`xml-stylesheet`</span><span class="o">(</span><span class="s">"type=\"text/xsl\" href=\"style.xsl\""</span><span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="child-nodes">Child nodes</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span> <span class="n">attribute</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="s">"value"</span><span class="o">&gt;</span>
+  <span class="n">text</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="o">&amp;#</span><span class="n">x68</span><span class="o">;</span><span class="n">exadecimal</span> <span class="n">reference</span> <span class="o">&amp;</span><span class="nc">AMP</span><span class="o">;</span> <span class="o">&amp;#</span><span class="mi">100</span><span class="o">;</span><span class="n">ecimal</span> <span class="n">reference</span>
+  <span class="o">&lt;</span><span class="n">child</span><span class="o">-</span><span class="mi">1</span><span class="o">/&gt;</span>
+  <span class="o">&lt;!--</span> <span class="n">my</span> <span class="n">comment</span> <span class="o">--&gt;</span>
+  <span class="o">{</span> <span class="nv">math</span><span class="o">.</span><span class="py">random</span> <span class="o">}</span>
+  <span class="o">&lt;![</span><span class="kt">CDATA</span><span class="o">[</span> <span class="kt">raw</span> <span class="o">]]&gt;</span>
+<span class="o">&lt;/</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name`</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="py">value</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  text `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">entities</span><span class="o">.</span><span class="py">amp</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">` hexadecimal reference `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">entities</span><span class="o">.</span><span class="py">AMP</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">` decimal reference$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`child-1`</span><span class="o">(),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">comment</span><span class="o">(</span><span class="s">" my comment "</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">interpolation</span><span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">random</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">cdata</span><span class="o">(</span><span class="s">" raw "</span><span class="o">),</span> <span class="c1">//  or (xml.texts.` raw `), if `-Xxml:coalescing` flag is set</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Note that hexadecimal references and decimal references will be unescaped and translated to <code class="language-plaintext highlighter-rouge">xml.texts</code> automatically, while entity references are translated to fields in <code class="language-plaintext highlighter-rouge">xml.entities</code> .</p>
+
+<h3 id="prefixes-without-xmlns-bindings">Prefixes without <code class="language-plaintext highlighter-rouge">xmlns</code> bindings.</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">prefix</span><span class="o">-</span><span class="mi">1</span><span class="k">:</span><span class="kt">tag-name-</span><span class="err">1</span> <span class="kt">attribute-</span><span class="err">1</span><span class="o">=</span><span class="s">"value-1"</span> <span class="n">prefix</span><span class="o">-</span><span class="mi">2</span><span class="k">:</span><span class="kt">attribute-</span><span class="err">2</span><span class="o">=</span><span class="s">"value-2"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span><span class="n">content</span><span class="o">&lt;/</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span>
+  <span class="o">&lt;!--</span> <span class="n">my</span> <span class="n">comment</span> <span class="o">--&gt;</span>
+<span class="o">&lt;/</span><span class="n">prefix</span><span class="o">-</span><span class="mi">1</span><span class="k">:</span><span class="kt">tag-name-</span><span class="err">1</span><span class="kt">&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name-1`</span><span class="o">(</span>
+    <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-1`</span><span class="o">(</span><span class="n">`prefix-1`</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="n">`value-1`</span><span class="o">),</span>
+    <span class="n">`prefix-2`</span><span class="o">.</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-2`</span><span class="o">(</span><span class="n">`prefix-2`</span><span class="o">.</span><span class="py">values</span><span class="o">.</span><span class="n">`value-2`</span><span class="o">),</span>
+    <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name-2`</span><span class="o">(</span>
+      <span class="nv">xml</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="py">content</span>
+    <span class="o">),</span>
+    <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">comment</span><span class="o">(</span><span class="s">" my comment "</span><span class="o">),</span>
+    <span class="n">`prefix-1`</span><span class="o">.</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A`</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Note that unprefixed attribute will be treated as if it has the same prefix as its enclosing element.</p>
+
+<h3 id="xmlns-bindings"><code class="language-plaintext highlighter-rouge">xmlns</code> bindings.</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">prefix</span><span class="o">-</span><span class="mi">1</span><span class="k">:</span><span class="kt">tag-name-</span><span class="err">1</span> <span class="kt">xmlns</span><span class="o">=</span><span class="s">"http://example.com/0"</span> <span class="n">xmlns</span><span class="k">:</span><span class="kt">prefix-</span><span class="err">1</span><span class="o">=</span><span class="s">"http://example.com/1"</span> <span class="n">xmlns</span><span class="k">:</span><span class="kt">prefix-</span><span class="err">2</span><span class="o">=</span><span class="s">"http://example.com/2"</span> <span class="n">attribute</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="s">"value-1"</span> <span class="n">prefix</span><span class="o">-</span><span class="mi">2</span><span class="k">:</span><span class="kt">attribute-</span><span class="err">2</span><span class="o">=</span><span class="s">"value-2"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span><span class="n">content</span><span class="o">&lt;/</span><span class="n">tag</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span>
+  <span class="o">&lt;!--</span> <span class="n">my</span> <span class="n">comment</span> <span class="o">--&gt;</span>
+<span class="o">&lt;/</span><span class="n">prefix</span><span class="o">-</span><span class="mi">1</span><span class="k">:</span><span class="kt">tag-name-</span><span class="err">1</span><span class="kt">&gt;</span>
+</code></pre></div></div>
+
+<p>will be translated to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xml</span><span class="o">.</span><span class="py">literal</span><span class="o">(</span>
+  <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name-1`</span><span class="o">(</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">values</span><span class="o">.</span><span class="n">`value-1`</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-2`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/2`</span><span class="o">).</span><span class="py">attributes</span><span class="o">.</span><span class="n">`attribute-2`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-2`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/2`</span><span class="o">).</span><span class="py">values</span><span class="o">.</span><span class="n">`value-2`</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">noPrefix</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/0`</span><span class="o">).</span><span class="py">elements</span><span class="o">.</span><span class="n">`tag-name-2`</span><span class="o">(</span>
+      <span class="nv">xml</span><span class="o">.</span><span class="py">noPrefix</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/0`</span><span class="o">).</span><span class="py">texts</span><span class="o">.</span><span class="py">content</span>
+    <span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A  `</span><span class="o">,</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">comment</span><span class="o">(</span><span class="s">" my comment "</span><span class="o">),</span>
+    <span class="nv">xml</span><span class="o">.</span><span class="py">prefixes</span><span class="o">.</span><span class="n">`prefix-1`</span><span class="o">(</span><span class="nv">xml</span><span class="o">.</span><span class="py">uris</span><span class="o">.</span><span class="n">`http://example.com/1`</span><span class="o">).</span><span class="py">texts</span><span class="o">.</span><span class="n">`$u000A`</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The implementation of this proposal can be two parts:</p>
+
+<ol>
+  <li>Compile-time XML translator</li>
+  <li>XML library vendors</li>
+</ol>
+
+<h3 id="compile-time-xml-translator">Compile-time XML translator</h3>
+
+<p>Compile-time XML translator will translate XML literal to Scala AST before type checking. It can be implemented either in the Scala compiler or in a white box macro.  <a href="https://github.com/GlasslabGames/nameBasedXml.scala">nameBasedXml.scala</a> is an implementation of the proposal in a white box macro.</p>
+
+<h3 id="xml-library-vendors">XML library vendors</h3>
+
+<p>An XML library vendor should provide a package or object named <code class="language-plaintext highlighter-rouge">xml</code> , which contains the following methods or values:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">elements</code></li>
+  <li><code class="language-plaintext highlighter-rouge">attributes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">values</code></li>
+  <li><code class="language-plaintext highlighter-rouge">entities</code></li>
+  <li><code class="language-plaintext highlighter-rouge">processInstructions</code></li>
+  <li><code class="language-plaintext highlighter-rouge">texts</code></li>
+  <li><code class="language-plaintext highlighter-rouge">comment</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cdata</code></li>
+  <li><code class="language-plaintext highlighter-rouge">interpolation</code></li>
+  <li><code class="language-plaintext highlighter-rouge">noPrefix</code></li>
+  <li><code class="language-plaintext highlighter-rouge">prefixes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">uris</code></li>
+  <li><code class="language-plaintext highlighter-rouge">literal</code></li>
+</ul>
+
+<p>All above methods except <code class="language-plaintext highlighter-rouge">literal</code> should return a builder, and <code class="language-plaintext highlighter-rouge">literal</code> will turn one or more builders into an XML object / or an XML node list.</p>
+
+<p>An XML library user can switch different implementations by importing different <code class="language-plaintext highlighter-rouge">xml</code> packages or objects. <code class="language-plaintext highlighter-rouge">scala.xml</code> is used by default when no explicit import is present.</p>
+
+<p>In a schema-aware XML library like Binding.scala, its <code class="language-plaintext highlighter-rouge">elements</code> , <code class="language-plaintext highlighter-rouge">attributes</code> , <code class="language-plaintext highlighter-rouge">processInstructions</code> and <code class="language-plaintext highlighter-rouge">entities</code> methods should return factory objects that contain all the definitions of available tag names and attribute names. An XML library user can provide additional tag names and attribute names in user-defined implicit classes for <code class="language-plaintext highlighter-rouge">tags</code> and <code class="language-plaintext highlighter-rouge">attributes</code> .</p>
+
+<p>In a schema-less XML library like <code class="language-plaintext highlighter-rouge">scala-xml</code> , its <code class="language-plaintext highlighter-rouge">elements</code> , <code class="language-plaintext highlighter-rouge">attributes</code> , <code class="language-plaintext highlighter-rouge">processInstructions</code> and <code class="language-plaintext highlighter-rouge">entities</code> should return builders that extend <a href="https://www.scala-lang.org/api/current/scala/Dynamic.html">scala.Dynamic</a> in order to handle tag names and attribute names in <code class="language-plaintext highlighter-rouge">selectDynamic</code> or <code class="language-plaintext highlighter-rouge">applyDynamic</code> .</p>
+
+<p>Those XML libraries can be extended with the help of standard XML namespace bindings. A plug-in author can create <code class="language-plaintext highlighter-rouge">implicit class</code> for <code class="language-plaintext highlighter-rouge">xml.uris</code> to introduce foreign elements embedded in existing XML literals.</p>
+
+<p><a href="https://github.com/GlasslabGames/html.scala">html.scala</a> is an XML library vendor for creating reactive HTML templates.</p>
+
+<h2 id="drawbacks">Drawbacks</h2>
+
+<h3 id="name-clash">Name clash</h3>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;toString/&gt;</code> or <code class="language-plaintext highlighter-rouge">&lt;foo equals="bar"/&gt;</code> will not compile due to name clash to <code class="language-plaintext highlighter-rouge">Any.toString</code> and <code class="language-plaintext highlighter-rouge">Any.equals</code> .</p>
+
+<ul>
+  <li>Compilation error is the desired behavior in a schema-aware XML library as long as <code class="language-plaintext highlighter-rouge">toString</code> is not a valid name in the schema. Fortunately, unlike JSX, <code class="language-plaintext highlighter-rouge">&lt;div class="foo"&gt;&lt;/div&gt;</code> should compile because <code class="language-plaintext highlighter-rouge">class</code> is a valid method name.</li>
+  <li>A schema-less XML library user should instead explicit construct <code class="language-plaintext highlighter-rouge">&lt;toString/&gt;</code> in Scala code, e.g. <code class="language-plaintext highlighter-rouge">new Elem("toString")</code> .</li>
+</ul>
+
+<h2 id="alternative-approach">Alternative approach</h2>
+
+<p>XML initialization can be implemented in a special string interpolation as <code class="language-plaintext highlighter-rouge">xml"&lt;x/&gt;"</code>, which can be implemented in a macro library. <a href="https://github.com/densh/scala-xml-quote">scala-xml-quote</a> is an implementation in this approach. The pros and cons of these approaches are listed in the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>symbol-based XML literals in Scala 2.12</th>
+      <th>name-based XML literals in this proposal</th>
+      <th><code class="language-plaintext highlighter-rouge">xml</code> string interpolation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>XML is parsed by …</td>
+      <td>compiler</td>
+      <td>compiler</td>
+      <td>library, IDE, and other code browsers including Github, Jekyll (if syntax highlighting is wanted)</td>
+    </tr>
+    <tr>
+      <td>Is third-party schema-less XML library supported?</td>
+      <td>No, unless using white box macros</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Is third-party schema-aware XML library supported?</td>
+      <td>No, unless using white box macros</td>
+      <td>Yes</td>
+      <td>No, unless using white box macros</td>
+    </tr>
+    <tr>
+      <td>How to highlight XML syntax?</td>
+      <td>By regular highlighter grammars</td>
+      <td>By regular highlighter grammars</td>
+      <td>By special parsing rule for string content</td>
+    </tr>
+    <tr>
+      <td>Can presentation compiler perform code completion for schema-aware XML literals?</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://github.com/GlasslabGames/nameBasedXml.scala">nameBasedXml.scala</a></li>
+  <li><a href="https://javadoc.io/page/org.lrng.binding/namebasedxml_2.12/1.0.0/org/lrng/binding/nameBasedXml.html">API Documentation</a></li>
+  <li><a href="https://github.com/GlasslabGames/html.scala">html.scala</a></li>
+  <li><a href="https://contributors.scala-lang.org/t/pre-sip-name-based-xml-literals/2175">Discussion on Scala Contributors Forum</a></li>
+  <li><a href="https://docs.scala-lang.org/sips/curried-varargs.html">Curried Varargs</a></li>
+  <li><a href="https://github.com/densh/scala-xml-quote">scala-xml-quote</a></li>
+</ul>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #b58900">Pending</div>
+           <p class="vote-text" style="color: #b58900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2019-10-24-name-based-xml.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

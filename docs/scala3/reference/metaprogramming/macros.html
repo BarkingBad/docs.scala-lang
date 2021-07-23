@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Macros | 
+      Scala 3 Language Reference | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/reference/metaprogramming/macros.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Macros"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Macros"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Language Reference</div>
+          
+          <h1>Macros</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<blockquote>
+  <p>When developing macros enable <code class="language-plaintext highlighter-rouge">-Xcheck-macros</code> scalac option flag to have extra runtime checks.</p>
+</blockquote>
+
+<h2 id="macros-quotes-and-splices">Macros: Quotes and Splices</h2>
+
+<p>Macros are built on two well-known fundamental operations: quotation and splicing.
+Quotation is expressed as <code class="language-plaintext highlighter-rouge">'{...}</code> for expressions and splicing is expressed as <code class="language-plaintext highlighter-rouge">${ ... }</code>.
+Additionally, within a quote or a splice we can quote or splice identifiers directly (i.e. <code class="language-plaintext highlighter-rouge">'e</code> and <code class="language-plaintext highlighter-rouge">$e</code>).
+Readers may notice the resemblance of the two aforementioned syntactic
+schemes with the familiar string interpolation syntax.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Hello, $name, here is the result of 1 + 1 = ${1 + 1}"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In string interpolation we <em>quoted</em> a string and then we <em>spliced</em> into it, two others. The first, <code class="language-plaintext highlighter-rouge">name</code>, is a reference to a value of type <a href="https://dotty.epfl.ch/api/scala/Predef$.html#String"><code class="language-plaintext highlighter-rouge">String</code></a>, and the second is an arithmetic expression that will be <em>evaluated</em> followed by the splicing of its string representation.</p>
+
+<p>Quotes and splices in this section allow us to treat code in a similar way,
+effectively supporting macros. The entry point for macros is an inline method
+with a top-level splice. We call it a top-level because it is the only occasion
+where we encounter a splice outside a quote (consider as a quote the
+compilation-unit at the call-site). For example, the code below presents an
+<code class="language-plaintext highlighter-rouge">inline</code> method <code class="language-plaintext highlighter-rouge">assert</code> which calls at compile-time a method <code class="language-plaintext highlighter-rouge">assertImpl</code> with
+a boolean expression tree as argument. <code class="language-plaintext highlighter-rouge">assertImpl</code> evaluates the expression and
+prints it again in an error message if it evaluates to <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.quoted.</span><span class="o">*</span>
+
+<span class="n">inline</span> <span class="k">def</span> <span class="nf">assert</span><span class="o">(</span><span class="n">inline</span> <span class="n">expr</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+  <span class="n">$</span><span class="o">{</span> <span class="nf">assertImpl</span><span class="o">(</span><span class="ss">'expr</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">assertImpl</span><span class="o">(</span><span class="n">expr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span> <span class="k">=</span> <span class="o">'{</span>
+  <span class="k">if</span> <span class="o">!</span><span class="nc">$expr</span> <span class="n">then</span>
+    <span class="k">throw</span> <span class="nc">AssertionError</span><span class="o">(</span><span class="n">s</span><span class="s">"failed assertion: ${${ showExpr(expr) }}"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">showExpr</span><span class="o">(</span><span class="n">expr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">'{</span> <span class="o">[</span><span class="kt">actual</span> <span class="kt">implementation</span> <span class="kt">later</span> <span class="kt">in</span> <span class="kt">this</span> <span class="kt">document</span><span class="o">]</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">e</code> is an expression, then <code class="language-plaintext highlighter-rouge">'{e}</code> represents the typed
+abstract syntax tree representing <code class="language-plaintext highlighter-rouge">e</code>. If <code class="language-plaintext highlighter-rouge">T</code> is a type, then <code class="language-plaintext highlighter-rouge">Type.of[T]</code>
+represents the type structure representing <code class="language-plaintext highlighter-rouge">T</code>.  The precise
+definitions of “typed abstract syntax tree” or “type-structure” do not
+matter for now, the terms are used only to give some
+intuition. Conversely, <code class="language-plaintext highlighter-rouge">${e}</code> evaluates the expression <code class="language-plaintext highlighter-rouge">e</code>, which must
+yield a typed abstract syntax tree or type structure, and embeds the
+result as an expression (respectively, type) in the enclosing program.</p>
+
+<p>Quotations can have spliced parts in them; in this case the embedded
+splices are evaluated and embedded as part of the formation of the
+quotation.</p>
+
+<p>Quotes and splices can also be applied directly to identifiers. An identifier
+<code class="language-plaintext highlighter-rouge">$x</code> starting with a <code class="language-plaintext highlighter-rouge">$</code> that appears inside a quoted expression or type is treated as a
+splice <code class="language-plaintext highlighter-rouge">${x}</code>. Analogously, an quoted identifier <code class="language-plaintext highlighter-rouge">'x</code> that appears inside a splice
+is treated as a quote <code class="language-plaintext highlighter-rouge">'{x}</code>. See the Syntax section below for details.</p>
+
+<p>Quotes and splices are duals of each other.
+For arbitrary expressions <code class="language-plaintext highlighter-rouge">e</code> we have:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span><span class="o">{'{</span><span class="n">e</span><span class="o">}}</span> <span class="k">=</span> <span class="n">e</span>
+<span class="o">'{</span><span class="n">$</span><span class="o">{</span><span class="n">e</span><span class="o">}}</span> <span class="k">=</span> <span class="n">e</span>
+</code></pre></div></div>
+
+<h2 id="types-for-quotations">Types for Quotations</h2>
+
+<p>The type signatures of quotes and splices can be described using
+two fundamental types:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Expr[T]</code>: abstract syntax trees representing expressions of type <code class="language-plaintext highlighter-rouge">T</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Type[T]</code>: non erased representation of type <code class="language-plaintext highlighter-rouge">T</code>.</li>
+</ul>
+
+<p>Quoting takes expressions of type <code class="language-plaintext highlighter-rouge">T</code> to expressions of type <code class="language-plaintext highlighter-rouge">Expr[T]</code>
+and it takes types <code class="language-plaintext highlighter-rouge">T</code> to expressions of type <code class="language-plaintext highlighter-rouge">Type[T]</code>. Splicing
+takes expressions of type <code class="language-plaintext highlighter-rouge">Expr[T]</code> to expressions of type <code class="language-plaintext highlighter-rouge">T</code> and it
+takes expressions of type <code class="language-plaintext highlighter-rouge">Type[T]</code> to types <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p>The two types can be defined in package <a href="https://dotty.epfl.ch/api/scala/quoted.html"><code class="language-plaintext highlighter-rouge">scala.quoted</code></a> as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">scala.quoted</span>
+
+<span class="k">sealed</span> <span class="k">trait</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">+T</span><span class="o">]</span>
+<span class="nc">sealed</span> <span class="k">trait</span> <span class="nc">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Both <code class="language-plaintext highlighter-rouge">Expr</code> and <code class="language-plaintext highlighter-rouge">Type</code> are abstract and sealed, so all constructors for
+these types are provided by the system. One way to construct values of
+these types is by quoting, the other is by type-specific lifting
+operations that will be discussed later on.</p>
+
+<h2 id="the-phase-consistency-principle">The Phase Consistency Principle</h2>
+
+<p>A fundamental <em>phase consistency principle</em> (PCP) regulates accesses
+to free variables in quoted and spliced code:</p>
+
+<ul>
+  <li><em>For any free variable reference <code class="language-plaintext highlighter-rouge">x</code>, the number of quoted scopes and the number of spliced scopes between the reference to <code class="language-plaintext highlighter-rouge">x</code> and the definition of <code class="language-plaintext highlighter-rouge">x</code> must be equal</em>.</li>
+</ul>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">this</code>-references count as free variables. On the other
+hand, we assume that all imports are fully expanded and that <code class="language-plaintext highlighter-rouge">_root_</code> is
+not a free variable. So references to global definitions are
+allowed everywhere.</p>
+
+<p>The phase consistency principle can be motivated as follows: First,
+suppose the result of a program <code class="language-plaintext highlighter-rouge">P</code> is some quoted text <code class="language-plaintext highlighter-rouge">'{ ... x
+... }</code> that refers to a free variable <code class="language-plaintext highlighter-rouge">x</code> in <code class="language-plaintext highlighter-rouge">P</code>. This can be
+represented only by referring to the original variable <code class="language-plaintext highlighter-rouge">x</code>. Hence, the
+result of the program will need to persist the program state itself as
+one of its parts. We don’t want to do this, hence this situation
+should be made illegal. Dually, suppose a top-level part of a program
+is a spliced text <code class="language-plaintext highlighter-rouge">${ ... x ... }</code> that refers to a free variable <code class="language-plaintext highlighter-rouge">x</code>
+in <code class="language-plaintext highlighter-rouge">P</code>.  This would mean that we refer during <em>construction</em> of <code class="language-plaintext highlighter-rouge">P</code> to
+a value that is available only during <em>execution</em> of <code class="language-plaintext highlighter-rouge">P</code>. This is of
+course impossible and therefore needs to be ruled out.  Now, the
+small-step evaluation of a program will reduce quotes and splices in
+equal measure using the cancellation rules above. But it will neither
+create nor remove quotes or splices individually. So the PCP ensures
+that program elaboration will lead to neither of the two unwanted
+situations described above.</p>
+
+<p>In what concerns the range of features it covers, this form of macros introduces
+a principled metaprogramming framework that is quite close to the MetaML family of
+languages. One difference is that MetaML does not have an equivalent of the PCP -
+quoted code in MetaML <em>can</em> access variables in its immediately enclosing
+environment, with some restrictions and caveats since such accesses involve
+serialization. However, this does not constitute a fundamental gain in
+expressiveness.</p>
+
+<h2 id="from-exprs-to-functions-and-back">From <code class="language-plaintext highlighter-rouge">Expr</code>s to Functions and Back</h2>
+
+<p>It is possible to convert any <code class="language-plaintext highlighter-rouge">Expr[T =&gt; R]</code> into <code class="language-plaintext highlighter-rouge">Expr[T] =&gt; Expr[R]</code> and back.
+These conversions can be implemented as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">Type</span>, <span class="kt">R:</span> <span class="kt">Type</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">'{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">f</span><span class="o">(</span><span class="ss">'x</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">from</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">Type</span>, <span class="kt">R:</span> <span class="kt">Type</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nc">$f</span><span class="o">(</span><span class="nc">$x</span><span class="o">)</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note how the fundamental phase consistency principle works in two
+different directions here for <code class="language-plaintext highlighter-rouge">f</code> and <code class="language-plaintext highlighter-rouge">x</code>.  In the method <code class="language-plaintext highlighter-rouge">to</code>,  the reference to <code class="language-plaintext highlighter-rouge">f</code> is
+legal because it is quoted, then spliced, whereas the reference to <code class="language-plaintext highlighter-rouge">x</code>
+is legal because it is spliced, then quoted.</p>
+
+<p>They can be used as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">f1</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span> <span class="k">=&gt;</span> <span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nf">to</span><span class="o">((</span><span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nv">$x</span><span class="o">.</span><span class="py">toString</span> <span class="o">})</span> <span class="c1">// '{ (x: Int) =&gt; x.toString }</span>
+
+<span class="k">val</span> <span class="nv">f2</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nf">from</span><span class="o">('{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">toString</span> <span class="o">})</span> <span class="c1">// (x: Expr[Int]) =&gt; '{ ((x: Int) =&gt; x.toString)($x) }</span>
+<span class="nf">f2</span><span class="o">('{</span><span class="mi">2</span><span class="o">})</span> <span class="c1">// '{ ((x: Int) =&gt; x.toString)(2) }</span>
+</code></pre></div></div>
+
+<p>One limitation of <code class="language-plaintext highlighter-rouge">from</code> is that it does not β-reduce when a lambda is called immediately, as evidenced in the code <code class="language-plaintext highlighter-rouge">{ ((x: Int) =&gt; x.toString)(2) }</code>.
+In some cases we want to remove the lambda from the code, for this we provide the method <code class="language-plaintext highlighter-rouge">Expr.betaReduce</code> that turns a tree
+describing a function into a function mapping trees to trees.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Expr</span><span class="k">:</span>
+  <span class="kt">...</span>
+  <span class="kt">def</span> <span class="kt">betaReduce</span><span class="o">[</span><span class="kt">...</span><span class="o">](...)(...)</span><span class="k">:</span> <span class="kt">...</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>The definition of <code class="language-plaintext highlighter-rouge">Expr.betaReduce(f)(x)</code> is assumed to be functionally the same as
+<code class="language-plaintext highlighter-rouge">'{($f)($x)}</code>, however it should optimize this call by returning the
+result of beta-reducing <code class="language-plaintext highlighter-rouge">f(x)</code> if <code class="language-plaintext highlighter-rouge">f</code> is a known lambda expression.
+<code class="language-plaintext highlighter-rouge">Expr.betaReduce</code> distributes applications of <code class="language-plaintext highlighter-rouge">Expr</code> over function arrows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Expr</span><span class="o">.</span><span class="py">betaReduce</span><span class="o">(</span><span class="k">_</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[(</span><span class="kt">T1</span>, <span class="kt">...</span>, <span class="kt">Tn</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="o">((</span><span class="nc">Expr</span><span class="o">[</span><span class="kt">T1</span><span class="o">],</span> <span class="o">...,</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">Tn</span><span class="o">])</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span>
+</code></pre></div></div>
+
+<h2 id="lifting-types">Lifting Types</h2>
+
+<p>Types are not directly affected by the phase consistency principle.
+It is possible to use types defined at any level in any other level.
+But, if a type is used in a subsequent stage it will need to be lifted to a <code class="language-plaintext highlighter-rouge">Type</code>.
+Indeed, the definition of <code class="language-plaintext highlighter-rouge">to</code> above uses <code class="language-plaintext highlighter-rouge">T</code> in the next stage, there is a
+quote but no splice between the parameter binding of <code class="language-plaintext highlighter-rouge">T</code> and its
+usage. But the code can be rewritten by adding an explicit binding of a <code class="language-plaintext highlighter-rouge">Type[T]</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="n">t</span><span class="k">:</span> <span class="kt">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Type</span><span class="o">[</span><span class="kt">R</span><span class="o">],</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">'{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">t.Underlying</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">f</span><span class="o">(</span><span class="ss">'x</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this version of <code class="language-plaintext highlighter-rouge">to</code>, the type of <code class="language-plaintext highlighter-rouge">x</code> is now the result of
+inserting the type <code class="language-plaintext highlighter-rouge">Type[T]</code> and selecting its <code class="language-plaintext highlighter-rouge">Underlying</code>.</p>
+
+<p>To avoid clutter, the compiler converts any type reference to
+a type <code class="language-plaintext highlighter-rouge">T</code> in subsequent phases to <code class="language-plaintext highlighter-rouge">summon[Type[T]].Underlying</code>.</p>
+
+<p>And to avoid duplication it does it once per type, and creates
+an alias for that type at the start of the quote.</p>
+
+<p>For instance, the user-level definition of <code class="language-plaintext highlighter-rouge">to</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="n">t</span><span class="k">:</span> <span class="kt">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">r</span><span class="k">:</span> <span class="kt">Type</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">'{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">f</span><span class="o">(</span><span class="ss">'x</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>would be rewritten to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">to</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="n">t</span><span class="k">:</span> <span class="kt">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">r</span><span class="k">:</span> <span class="kt">Type</span><span class="o">[</span><span class="kt">R</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span> <span class="k">=&gt;</span> <span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="o">'{</span>
+    <span class="k">type</span> <span class="kt">T</span> <span class="o">=</span> <span class="nv">t</span><span class="o">.</span><span class="py">Underlying</span>
+    <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">f</span><span class="o">(</span><span class="ss">'x</span><span class="o">)</span> <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">summon</code> query succeeds because there is a given instance of
+type <code class="language-plaintext highlighter-rouge">Type[T]</code> available (namely the given parameter corresponding
+to the context bound <code class="language-plaintext highlighter-rouge">: Type</code>), and the reference to that value is
+phase-correct. If that was not the case, the phase inconsistency for
+<code class="language-plaintext highlighter-rouge">T</code> would be reported as an error.</p>
+
+<h2 id="lifting-expressions">Lifting Expressions</h2>
+
+<p>Consider the following implementation of a staged interpreter that implements
+a compiler through staging.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.quoted.</span><span class="o">*</span>
+
+<span class="n">enum</span> <span class="nc">Exp</span><span class="k">:</span>
+  <span class="kt">case</span> <span class="kt">Num</span><span class="o">(</span><span class="kt">n:</span> <span class="kt">Int</span><span class="o">)</span>
+  <span class="kt">case</span> <span class="kt">Plus</span><span class="o">(</span><span class="kt">e1:</span> <span class="kt">Exp</span><span class="o">,</span> <span class="kt">e2:</span> <span class="kt">Exp</span><span class="o">)</span>
+  <span class="k">case</span> <span class="nc">Var</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+  <span class="k">case</span> <span class="nc">Let</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Exp</span><span class="o">,</span> <span class="n">in</span><span class="k">:</span> <span class="kt">Exp</span><span class="o">)</span>
+
+<span class="k">import</span> <span class="nn">Exp.</span><span class="o">*</span>
+</code></pre></div></div>
+
+<p>The interpreted language consists of numbers <code class="language-plaintext highlighter-rouge">Num</code>, addition <code class="language-plaintext highlighter-rouge">Plus</code>, and variables
+<code class="language-plaintext highlighter-rouge">Var</code> which are bound by <code class="language-plaintext highlighter-rouge">Let</code>. Here are two sample expressions in the language:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">exp</span> <span class="k">=</span> <span class="nc">Plus</span><span class="o">(</span><span class="nc">Plus</span><span class="o">(</span><span class="nc">Num</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="nc">Var</span><span class="o">(</span><span class="s">"x"</span><span class="o">)),</span> <span class="nc">Num</span><span class="o">(</span><span class="mi">4</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">letExp</span> <span class="k">=</span> <span class="nc">Let</span><span class="o">(</span><span class="s">"x"</span><span class="o">,</span> <span class="nc">Num</span><span class="o">(</span><span class="mi">3</span><span class="o">),</span> <span class="n">exp</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Here’s a compiler that maps an expression given in the interpreted
+language to quoted Scala code of type <code class="language-plaintext highlighter-rouge">Expr[Int]</code>.
+The compiler takes an environment that maps variable names to Scala <code class="language-plaintext highlighter-rouge">Expr</code>s.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.quoted.</span><span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">compile</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Exp</span><span class="o">,</span> <span class="n">env</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="n">e</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Num</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nc">Expr</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">Plus</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="o">'{</span> <span class="n">$</span><span class="o">{</span> <span class="nf">compile</span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span> <span class="o">}</span> <span class="o">+</span> <span class="n">$</span><span class="o">{</span> <span class="nf">compile</span><span class="o">(</span><span class="n">e2</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="nc">Var</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nf">env</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">Let</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">body</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="o">'{</span> <span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">compile</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="n">env</span><span class="o">)</span> <span class="o">};</span> <span class="n">$</span><span class="o">{</span> <span class="nf">compile</span><span class="o">(</span><span class="n">body</span><span class="o">,</span> <span class="n">env</span> <span class="o">+</span> <span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="ss">'y</span><span class="o">))</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">compile(letExp, Map())</code> would yield the following Scala code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">'{</span> <span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="mi">3</span><span class="o">;</span> <span class="o">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>The body of the first clause, <code class="language-plaintext highlighter-rouge">case Num(n) =&gt; Expr(n)</code>, looks suspicious. <code class="language-plaintext highlighter-rouge">n</code>
+is declared as an <code class="language-plaintext highlighter-rouge">Int</code>, yet it is converted to an <code class="language-plaintext highlighter-rouge">Expr[Int]</code> with <code class="language-plaintext highlighter-rouge">Expr()</code>.
+Shouldn’t <code class="language-plaintext highlighter-rouge">n</code> be quoted? In fact this would not
+work since replacing <code class="language-plaintext highlighter-rouge">n</code> by <code class="language-plaintext highlighter-rouge">'n</code> in the clause would not be phase
+correct.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Expr.apply</code> method is defined in package <code class="language-plaintext highlighter-rouge">quoted</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">quoted</span>
+
+<span class="k">object</span> <span class="nc">Expr</span><span class="k">:</span>
+  <span class="kt">...</span>
+  <span class="kt">def</span> <span class="kt">apply</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ToExpr</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">summon</span><span class="o">[</span><span class="kt">ToExpr</span><span class="o">[</span><span class="kt">T</span><span class="o">]].</span><span class="py">toExpr</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This method says that values of types implementing the <code class="language-plaintext highlighter-rouge">ToExpr</code> type class can be
+converted to <code class="language-plaintext highlighter-rouge">Expr</code> values using <code class="language-plaintext highlighter-rouge">Expr.apply</code>.</p>
+
+<p>Scala 3 comes with given instances of <code class="language-plaintext highlighter-rouge">ToExpr</code> for
+several types including <code class="language-plaintext highlighter-rouge">Boolean</code>, <code class="language-plaintext highlighter-rouge">String</code>, and all primitive number
+types. For example, <code class="language-plaintext highlighter-rouge">Int</code> values can be converted to <code class="language-plaintext highlighter-rouge">Expr[Int]</code>
+values by wrapping the value in a <code class="language-plaintext highlighter-rouge">Literal</code> tree node. This makes use
+of the underlying tree representation in the compiler for
+efficiency. But the <code class="language-plaintext highlighter-rouge">ToExpr</code> instances are nevertheless not <em>magic</em>
+in the sense that they could all be defined in a user program without
+knowing anything about the representation of <code class="language-plaintext highlighter-rouge">Expr</code> trees. For
+instance, here is a possible instance of <code class="language-plaintext highlighter-rouge">ToExpr[Boolean]</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="nc">ToExpr</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">with</span>
+  <span class="k">def</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">b</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span> <span class="k">=</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="n">then</span> <span class="o">'{</span> <span class="kc">true</span> <span class="o">}</span> <span class="k">else</span> <span class="o">'{</span> <span class="kc">false</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Once we can lift bits, we can work our way up. For instance, here is a
+possible implementation of <code class="language-plaintext highlighter-rouge">ToExpr[Int]</code> that does not use the underlying
+tree machinery:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="nc">ToExpr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">with</span>
+  <span class="k">def</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">n</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MinValue</span>    <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MinValue</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>      <span class="k">=&gt;</span> <span class="o">'{</span> <span class="o">-</span> <span class="n">$</span><span class="o">{</span> <span class="nf">toExpr</span><span class="o">(-</span><span class="n">n</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="mi">0</span>               <span class="k">=&gt;</span> <span class="o">'{</span> <span class="mi">0</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="n">$</span><span class="o">{</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="k">_</span>               <span class="k">=&gt;</span> <span class="o">'{</span> <span class="n">$</span><span class="o">{</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Since <code class="language-plaintext highlighter-rouge">ToExpr</code> is a type class, its instances can be conditional. For example,
+a <code class="language-plaintext highlighter-rouge">List</code> is liftable if its element type is:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="o">[</span><span class="kt">T:</span> <span class="kt">ToExpr</span> <span class="kt">:</span> <span class="kt">Type</span><span class="o">]</span><span class="k">:</span> <span class="kt">ToExpr</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">with</span>
+  <span class="k">def</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="n">$</span><span class="o">{</span> <span class="nc">Expr</span><span class="o">(</span><span class="n">head</span><span class="o">)</span> <span class="o">}</span> <span class="o">::</span> <span class="n">$</span><span class="o">{</span> <span class="nf">toExpr</span><span class="o">(</span><span class="n">tail</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="nc">Nil</span>          <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nc">Nil</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>In the end, <code class="language-plaintext highlighter-rouge">ToExpr</code> resembles very much a serialization
+framework. Like the latter it can be derived systematically for all
+collections, case classes and enums. Note also that the synthesis
+of <em>type-tag</em> values of type <code class="language-plaintext highlighter-rouge">Type[T]</code> is essentially the type-level
+analogue of lifting.</p>
+
+<p>Using lifting, we can now give the missing definition of <code class="language-plaintext highlighter-rouge">showExpr</code> in the introductory example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">showExpr</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">expr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">code</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">expr</span><span class="o">.</span><span class="py">show</span>
+  <span class="nc">Expr</span><span class="o">(</span><span class="n">code</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That is, the <code class="language-plaintext highlighter-rouge">showExpr</code> method converts its <code class="language-plaintext highlighter-rouge">Expr</code> argument to a string (<code class="language-plaintext highlighter-rouge">code</code>), and lifts
+the result back to an <code class="language-plaintext highlighter-rouge">Expr[String]</code> using <code class="language-plaintext highlighter-rouge">Expr.apply</code>.</p>
+
+<h2 id="lifting-types-1">Lifting Types</h2>
+
+<p>The previous section has shown that the metaprogramming framework has
+to be able to take a type <code class="language-plaintext highlighter-rouge">T</code> and convert it to a type tree of type
+<code class="language-plaintext highlighter-rouge">Type[T]</code> that can be reified. This means that all free variables of
+the type tree refer to types and values defined in the current stage.</p>
+
+<p>For a reference to a global class, this is easy: Just issue the fully
+qualified name of the class. Members of reifiable types are handled by
+just reifying the containing type together with the member name. But
+what to do for references to type parameters or local type definitions
+that are not defined in the current stage? Here, we cannot construct
+the <code class="language-plaintext highlighter-rouge">Type[T]</code> tree directly, so we need to get it from a recursive
+implicit search. For instance, to implement</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summon</span><span class="o">[</span><span class="kt">Type</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]]</span>
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">T</code> is not defined in the current stage, we construct the type constructor
+of <code class="language-plaintext highlighter-rouge">List</code> applied to the splice of the result of searching for a given instance for <code class="language-plaintext highlighter-rouge">Type[T]</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Type</span><span class="o">.</span><span class="py">of</span><span class="o">[</span> <span class="kt">List</span><span class="o">[</span> <span class="kt">summon</span><span class="o">[</span><span class="kt">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span><span class="kt">.Underlying</span> <span class="o">]</span> <span class="o">]</span>
+</code></pre></div></div>
+
+<p>This is exactly the algorithm that Scala 2 uses to search for type tags.
+In fact Scala 2’s type tag feature can be understood as a more ad-hoc version of
+<code class="language-plaintext highlighter-rouge">quoted.Type</code>. As was the case for type tags, the implicit search for a <code class="language-plaintext highlighter-rouge">quoted.Type</code>
+is handled by the compiler, using the algorithm sketched above.</p>
+
+<h2 id="relationship-with-inline">Relationship with <code class="language-plaintext highlighter-rouge">inline</code></h2>
+
+<p>Seen by itself, principled metaprogramming looks more like a framework for
+runtime metaprogramming than one for compile-time metaprogramming with macros.
+But combined with Scala 3’s <code class="language-plaintext highlighter-rouge">inline</code> feature it can be turned into a compile-time
+system. The idea is that macro elaboration can be understood as a combination of
+a macro library and a quoted program. For instance, here’s the <code class="language-plaintext highlighter-rouge">assert</code> macro
+again together with a program that calls <code class="language-plaintext highlighter-rouge">assert</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Macros</span><span class="k">:</span>
+
+  <span class="kt">inline</span> <span class="kt">def</span> <span class="kt">assert</span><span class="o">(</span><span class="kt">inline</span> <span class="kt">expr:</span> <span class="kt">Boolean</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+    <span class="n">$</span><span class="o">{</span> <span class="nf">assertImpl</span><span class="o">(</span><span class="ss">'expr</span><span class="o">)</span> <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">assertImpl</span><span class="o">(</span><span class="n">expr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span> <span class="k">=</span>
+    <span class="k">val</span> <span class="nv">failMsg</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Expr</span><span class="o">(</span><span class="s">"failed assertion: "</span> <span class="o">+</span> <span class="nv">expr</span><span class="o">.</span><span class="py">show</span><span class="o">)</span>
+    <span class="o">'{</span> <span class="k">if</span> <span class="o">!(</span><span class="nc">$expr</span><span class="o">)</span> <span class="n">then</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">AssertionError</span><span class="o">(</span><span class="nc">$failMsg</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="nd">@main</span> <span class="k">def</span> <span class="nf">program</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="nv">Macros</span><span class="o">.</span><span class="py">assert</span><span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Inlining the <code class="language-plaintext highlighter-rouge">assert</code> function would give the following program:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">program</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="n">$</span><span class="o">{</span> <span class="nv">Macros</span><span class="o">.</span><span class="py">assertImpl</span><span class="o">('{</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">})</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>The example is only phase correct because <code class="language-plaintext highlighter-rouge">Macros</code> is a global value and
+as such not subject to phase consistency checking. Conceptually that’s
+a bit unsatisfactory. If the PCP is so fundamental, it should be
+applicable without the global value exception. But in the example as
+given this does not hold since both <code class="language-plaintext highlighter-rouge">assert</code> and <code class="language-plaintext highlighter-rouge">program</code> call
+<code class="language-plaintext highlighter-rouge">assertImpl</code> with a splice but no quote.</p>
+
+<p>However, one could argue that the example is really missing
+an important aspect: The macro library has to be compiled in a phase
+prior to the program using it, but in the code above, macro
+and program are defined together. A more accurate view of
+macros would be to have the user program be in a phase after the macro
+definitions, reflecting the fact that macros have to be defined and
+compiled before they are used. Hence, conceptually the program part
+should be treated by the compiler as if it was quoted:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">program</span> <span class="k">=</span> <span class="o">'{</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">1</span>
+  <span class="n">$</span><span class="o">{</span> <span class="nv">Macros</span><span class="o">.</span><span class="py">assertImpl</span><span class="o">('{</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">})</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">program</code> is treated as a quoted expression, the call to
+<code class="language-plaintext highlighter-rouge">Macro.assertImpl</code> becomes phase correct even if macro library and
+program are conceptualized as local definitions.</p>
+
+<p>But what about the call from <code class="language-plaintext highlighter-rouge">assert</code> to <code class="language-plaintext highlighter-rouge">assertImpl</code>? Here, we need a
+tweak of the typing rules. An inline function such as <code class="language-plaintext highlighter-rouge">assert</code> that
+contains a splice operation outside an enclosing quote is called a
+<em>macro</em>. Macros are supposed to be expanded in a subsequent phase,
+i.e. in a quoted context. Therefore, they are also type checked as if
+they were in a quoted context. For instance, the definition of
+<code class="language-plaintext highlighter-rouge">assert</code> is typechecked as if it appeared inside quotes.  This makes
+the call from <code class="language-plaintext highlighter-rouge">assert</code> to <code class="language-plaintext highlighter-rouge">assertImpl</code> phase-correct, even if we
+assume that both definitions are local.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">inline</code> modifier is used to declare a <code class="language-plaintext highlighter-rouge">val</code> that is
+either a constant or is a parameter that will be a constant when instantiated. This
+aspect is also important for macro expansion.</p>
+
+<p>To get values out of expressions containing constants <code class="language-plaintext highlighter-rouge">Expr</code> provides the method
+<code class="language-plaintext highlighter-rouge">value</code> (or <code class="language-plaintext highlighter-rouge">valueOrError</code>). This will convert the <code class="language-plaintext highlighter-rouge">Expr[T]</code> into a <code class="language-plaintext highlighter-rouge">Some[T]</code> (or <code class="language-plaintext highlighter-rouge">T</code>) when the
+expression contains value. Otherwise it will return <code class="language-plaintext highlighter-rouge">None</code> (or emit an error).
+To avoid having incidental val bindings generated by the inlining of the <code class="language-plaintext highlighter-rouge">def</code>
+it is recommended to use an inline parameter. To illustrate this, consider an
+implementation of the <code class="language-plaintext highlighter-rouge">power</code> function that makes use of a statically known exponent:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">inline</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">powerCode</span><span class="o">(</span><span class="ss">'x</span><span class="o">,</span> <span class="ss">'n</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">private</span> <span class="k">def</span> <span class="nf">powerCode</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">n</span><span class="o">.</span><span class="py">value</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">powerCode</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nv">Math</span><span class="o">.</span><span class="py">pow</span><span class="o">(</span><span class="nc">$x</span><span class="o">,</span> <span class="nv">$n</span><span class="o">.</span><span class="py">toDouble</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">private</span> <span class="k">def</span> <span class="nf">powerCode</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="o">'{</span> <span class="mf">1.0</span> <span class="o">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="n">then</span> <span class="n">x</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="n">then</span> <span class="o">'{</span> <span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="nc">$x</span> <span class="o">*</span> <span class="nc">$x</span><span class="o">;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">powerCode</span><span class="o">(</span><span class="ss">'y</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+  <span class="k">else</span> <span class="o">'{</span> <span class="nc">$x</span> <span class="o">*</span> <span class="n">$</span><span class="o">{</span> <span class="nf">powerCode</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="scope-extrusion">Scope Extrusion</h2>
+
+<p>Quotes and splices are duals as far as the PCP is concerned. But there is an
+additional restriction that needs to be imposed on splices to guarantee
+soundness: code in splices must be free of side effects. The restriction
+prevents code like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<span class="o">'{</span> <span class="o">(</span><span class="n">y</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="n">x</span> <span class="k">=</span> <span class="ss">'y</span><span class="o">;</span> <span class="mi">1</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>This code, if it was accepted, would <em>extrude</em> a reference to a quoted variable
+<code class="language-plaintext highlighter-rouge">y</code> from its scope. This would subsequently allow access to a variable outside the
+scope where it is defined, which is likely problematic. The code is clearly
+phase consistent, so we cannot use PCP to rule it out. Instead, we postulate a
+future effect system that can guarantee that splices are pure. In the absence of
+such a system we simply demand that spliced expressions are pure by convention,
+and allow for undefined compiler behavior if they are not. This is analogous to
+the status of pattern guards in Scala, which are also required, but not
+verified, to be pure.</p>
+
+<p><a href="./staging.html">Multi-Stage Programming</a> introduces one additional method where
+you can expand code at runtime with a method <code class="language-plaintext highlighter-rouge">run</code>. There is also a problem with
+that invocation of <code class="language-plaintext highlighter-rouge">run</code> in splices. Consider the following expression:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">'{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="nf">run</span><span class="o">(</span><span class="ss">'x</span><span class="o">);</span> <span class="mi">1</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is again phase correct, but will lead us into trouble. Indeed, evaluating
+the splice will reduce the expression <code class="language-plaintext highlighter-rouge">run('x)</code> to <code class="language-plaintext highlighter-rouge">x</code>. But then the result</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">'{</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">$</span><span class="o">{</span> <span class="n">x</span><span class="o">;</span> <span class="mi">1</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>is no longer phase correct. To prevent this soundness hole it seems easiest to
+classify <code class="language-plaintext highlighter-rouge">run</code> as a side-effecting operation. It would thus be prevented from
+appearing in splices. In a base language with side effects we would have to do this
+anyway: Since <code class="language-plaintext highlighter-rouge">run</code> runs arbitrary code it can always produce a side effect if
+the code it runs produces one.</p>
+
+<h2 id="example-expansion">Example Expansion</h2>
+
+<p>Assume we have two methods, one <code class="language-plaintext highlighter-rouge">map</code> that takes an <code class="language-plaintext highlighter-rouge">Expr[Array[T]]</code> and a
+function <code class="language-plaintext highlighter-rouge">f</code> and one <code class="language-plaintext highlighter-rouge">sum</code> that performs a sum by delegating to <code class="language-plaintext highlighter-rouge">map</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Macros</span><span class="k">:</span>
+
+  <span class="kt">def</span> <span class="kt">map</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">arr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">T</span><span class="o">]],</span> <span class="n">f</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">[</span><span class="kt">Unit</span><span class="o">])</span>
+            <span class="o">(</span><span class="n">using</span> <span class="nc">Type</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="k">=</span> <span class="o">'{</span>
+    <span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="o">(</span><span class="nc">$arr</span><span class="o">).</span><span class="py">length</span> <span class="k">do</span>
+      <span class="k">val</span> <span class="nv">element</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="o">(</span><span class="nc">$arr</span><span class="o">)(</span><span class="n">i</span><span class="o">)</span>
+      <span class="n">$</span><span class="o">{</span><span class="nf">f</span><span class="o">(</span><span class="ss">'element</span><span class="o">)}</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">sum</span><span class="o">(</span><span class="n">arr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">'{</span>
+    <span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="n">$</span><span class="o">{</span> <span class="nf">map</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="n">sum</span> <span class="o">+=</span> <span class="nc">$x</span><span class="o">})</span> <span class="o">}</span>
+    <span class="n">sum</span>
+  <span class="o">}</span>
+
+  <span class="n">inline</span> <span class="k">def</span> <span class="nf">sum_m</span><span class="o">(</span><span class="n">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">$</span><span class="o">{</span><span class="nf">sum</span><span class="o">(</span><span class="ss">'arr</span><span class="o">)}</span>
+
+<span class="n">end</span> <span class="nc">Macros</span>
+</code></pre></div></div>
+
+<p>A call to <code class="language-plaintext highlighter-rouge">sum_m(Array(1,2,3))</code> will first inline <code class="language-plaintext highlighter-rouge">sum_m</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">[</span><span class="err">2</span>,<span class="err">3</span> <span class="kt">:</span> <span class="kt">Int</span><span class="o">]</span><span class="k">:</span><span class="kt">Int*</span><span class="o">)</span>
+<span class="n">$</span><span class="o">{</span><span class="nv">_root_</span><span class="o">.</span><span class="py">Macros</span><span class="o">.</span><span class="py">sum</span><span class="o">(</span><span class="ss">'arr</span><span class="o">)}</span>
+</code></pre></div></div>
+
+<p>then it will splice <code class="language-plaintext highlighter-rouge">sum</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">[</span><span class="err">2</span>,<span class="err">3</span> <span class="kt">:</span> <span class="kt">Int</span><span class="o">]</span><span class="k">:</span><span class="kt">Int*</span><span class="o">)</span>
+
+<span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="n">$</span><span class="o">{</span> <span class="nf">map</span><span class="o">(</span><span class="ss">'arr</span><span class="o">,</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="n">sum</span> <span class="o">+=</span> <span class="nc">$x</span><span class="o">})</span> <span class="o">}</span>
+<span class="n">sum</span>
+</code></pre></div></div>
+
+<p>then it will inline <code class="language-plaintext highlighter-rouge">map</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">[</span><span class="err">2</span>,<span class="err">3</span> <span class="kt">:</span> <span class="kt">Int</span><span class="o">]</span><span class="k">:</span><span class="kt">Int*</span><span class="o">)</span>
+
+<span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="n">sum</span> <span class="o">+=</span> <span class="nc">$x</span><span class="o">}</span>
+<span class="n">$</span><span class="o">{</span> <span class="nv">_root_</span><span class="o">.</span><span class="py">Macros</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="ss">'arr</span><span class="o">,</span> <span class="ss">'f</span><span class="o">)(</span><span class="nv">Type</span><span class="o">.</span><span class="py">of</span><span class="o">[</span><span class="kt">Int</span><span class="o">])}</span>
+<span class="n">sum</span>
+</code></pre></div></div>
+
+<p>then it will expand and splice inside quotes <code class="language-plaintext highlighter-rouge">map</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">[</span><span class="err">2</span>,<span class="err">3</span> <span class="kt">:</span> <span class="kt">Int</span><span class="o">]</span><span class="k">:</span><span class="kt">Int*</span><span class="o">)</span>
+
+<span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="n">sum</span> <span class="o">+=</span> <span class="nc">$x</span><span class="o">}</span>
+<span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nv">arr</span><span class="o">.</span><span class="py">length</span> <span class="k">do</span>
+  <span class="k">val</span> <span class="nv">element</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">(</span><span class="n">arr</span><span class="o">)(</span><span class="n">i</span><span class="o">)</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">element</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">sum</span>
+</code></pre></div></div>
+
+<p>Finally cleanups and dead code elimination:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">arr</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">apply</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">[</span><span class="err">2</span>,<span class="err">3</span> <span class="kt">:</span> <span class="kt">Int</span><span class="o">]</span><span class="k">:</span><span class="kt">Int*</span><span class="o">)</span>
+<span class="k">var</span> <span class="n">sum</span> <span class="k">=</span> <span class="mi">0</span>
+<span class="k">var</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nv">arr</span><span class="o">.</span><span class="py">length</span> <span class="k">do</span>
+  <span class="k">val</span> <span class="nv">element</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nf">arr</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">element</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">sum</span>
+</code></pre></div></div>
+
+<h2 id="find-implicits-within-a-macro">Find implicits within a macro</h2>
+
+<p>Similarly to the <code class="language-plaintext highlighter-rouge">summonFrom</code> construct, it is possible to make implicit search available
+in a quote context. For this we simply provide <code class="language-plaintext highlighter-rouge">scala.quoted.Expr.summon</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection.immutable.</span><span class="o">{</span> <span class="nc">TreeSet</span><span class="o">,</span> <span class="nc">HashSet</span> <span class="o">}</span>
+<span class="n">inline</span> <span class="k">def</span> <span class="nf">setFor</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">$</span><span class="o">{</span> <span class="n">setForExpr</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">setForExpr</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">Type</span><span class="o">](</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Set</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">=</span>
+  <span class="nv">Expr</span><span class="o">.</span><span class="py">summon</span><span class="o">[</span><span class="kt">Ordering</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">ord</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="k">new</span> <span class="nc">TreeSet</span><span class="o">[</span><span class="kt">T</span><span class="o">]()(</span><span class="nc">$ord</span><span class="o">)</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="relationship-with-transparent-inline">Relationship with Transparent Inline</h2>
+
+<p><a href="./inline.html">Inline</a> documents inlining. The code below introduces a transparent
+inline method that can calculate either a value of type <code class="language-plaintext highlighter-rouge">Int</code> or a value of type
+<code class="language-plaintext highlighter-rouge">String</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transparent</span> <span class="n">inline</span> <span class="k">def</span> <span class="nf">defaultOf</span><span class="o">(</span><span class="n">inline</span> <span class="n">str</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span>
+  <span class="n">$</span><span class="o">{</span> <span class="nf">defaultOfImpl</span><span class="o">(</span><span class="ss">'str</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">defaultOfImpl</span><span class="o">(</span><span class="n">strExpr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">strExpr</span><span class="o">.</span><span class="py">valueOrError</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="s">"int"</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="mi">1</span><span class="o">}</span>
+    <span class="k">case</span> <span class="s">"string"</span> <span class="k">=&gt;</span> <span class="o">'{</span><span class="s">"a"</span><span class="o">}</span>
+
+<span class="c1">// in a separate file</span>
+<span class="k">val</span> <span class="nv">a</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nf">defaultOf</span><span class="o">(</span><span class="s">"int"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">b</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">defaultOf</span><span class="o">(</span><span class="s">"string"</span><span class="o">)</span>
+
+</code></pre></div></div>
+
+<h2 id="defining-a-macro-and-using-it-in-a-single-project">Defining a macro and using it in a single project</h2>
+
+<p>It is possible to define macros and use them in the same project as long as the implementation
+of the macros does not have run-time dependencies on code in the file where it is used.
+It might still have compile-time dependencies on types and quoted code that refers to the use-site file.</p>
+
+<p>To provide this functionality Scala 3 provides a transparent compilation mode where files that
+try to expand a macro but fail because the macro has not been compiled yet are suspended.
+If there are any suspended files when the compilation ends, the compiler will automatically restart
+compilation of the suspended files using the output of the previous (partial) compilation as macro classpath.
+In case all files are suspended due to cyclic dependencies the compilation will fail with an error.</p>
+
+<h2 id="pattern-matching-on-quoted-expressions">Pattern matching on quoted expressions</h2>
+
+<p>It is possible to deconstruct or extract values out of <code class="language-plaintext highlighter-rouge">Expr</code> using pattern matching.</p>
+
+<p><code class="language-plaintext highlighter-rouge">scala.quoted</code> contains objects that can help extracting values from <code class="language-plaintext highlighter-rouge">Expr</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scala.quoted.Expr</code>/<code class="language-plaintext highlighter-rouge">scala.quoted.Exprs</code>: matches an expression of a value (or list of values) and returns the value (or list of values).</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.quoted.Const</code>/<code class="language-plaintext highlighter-rouge">scala.quoted.Consts</code>: Same as <code class="language-plaintext highlighter-rouge">Expr</code>/<code class="language-plaintext highlighter-rouge">Exprs</code> but only works on primitive values.</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.quoted.Varargs</code>: matches an explicit sequence of expressions and returns them. These sequences are useful to get individual <code class="language-plaintext highlighter-rouge">Expr[T]</code> out of a varargs expression of type <code class="language-plaintext highlighter-rouge">Expr[Seq[T]]</code>.</li>
+</ul>
+
+<p>These could be used in the following way to optimize any call to <code class="language-plaintext highlighter-rouge">sum</code> that has statically known values.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">sum</span><span class="o">(</span><span class="n">inline</span> <span class="n">args</span><span class="k">:</span> <span class="kt">Int*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">sumExpr</span><span class="o">(</span><span class="ss">'args</span><span class="o">)</span> <span class="o">}</span>
+<span class="k">private</span> <span class="k">def</span> <span class="nf">sumExpr</span><span class="o">(</span><span class="n">argsExpr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="n">argsExpr</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Varargs</span><span class="o">(</span><span class="n">args</span> <span class="k">@</span> <span class="nc">Exprs</span><span class="o">(</span><span class="n">argValues</span><span class="o">))</span> <span class="k">=&gt;</span>
+      <span class="c1">// args is of type Seq[Expr[Int]]</span>
+      <span class="c1">// argValues is of type Seq[Int]</span>
+      <span class="nc">Expr</span><span class="o">(</span><span class="nv">argValues</span><span class="o">.</span><span class="py">sum</span><span class="o">)</span> <span class="c1">// precompute result of sum</span>
+    <span class="k">case</span> <span class="nc">Varargs</span><span class="o">(</span><span class="n">argExprs</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="c1">// argExprs is of type Seq[Expr[Int]]</span>
+      <span class="k">val</span> <span class="nv">staticSum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">argExprs</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)).</span><span class="py">sum</span>
+      <span class="k">val</span> <span class="nv">dynamicSum</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">argExprs</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span>
+      <span class="nv">dynamicSum</span><span class="o">.</span><span class="py">foldLeft</span><span class="o">(</span><span class="nc">Expr</span><span class="o">(</span><span class="n">staticSum</span><span class="o">))((</span><span class="n">acc</span><span class="o">,</span> <span class="n">arg</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nc">$acc</span> <span class="o">+</span> <span class="nc">$arg</span> <span class="o">})</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+      <span class="o">'{</span> <span class="nv">$argsExpr</span><span class="o">.</span><span class="py">sum</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="quoted-patterns">Quoted patterns</h3>
+
+<p>Quoted pattens allow deconstructing complex code that contains a precise structure, types or methods.
+Patterns <code class="language-plaintext highlighter-rouge">'{ ... }</code> can be placed in any location where Scala expects a pattern.</p>
+
+<p>For example</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">optimize</span> <span class="o">{</span>
+   <span class="nf">sum</span><span class="o">(</span><span class="nf">sum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="mi">3</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
+<span class="o">}</span> <span class="c1">// should be optimized to 6 + a + b</span>
+</code></pre></div></div>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sum</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Int*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">args</span><span class="o">.</span><span class="py">sum</span>
+<span class="n">inline</span> <span class="k">def</span> <span class="nf">optimize</span><span class="o">(</span><span class="n">inline</span> <span class="n">arg</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">optimizeExpr</span><span class="o">(</span><span class="ss">'arg</span><span class="o">)</span> <span class="o">}</span>
+<span class="k">private</span> <span class="k">def</span> <span class="nf">optimizeExpr</span><span class="o">(</span><span class="n">body</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="n">body</span> <span class="k">match</span>
+    <span class="c1">// Match a call to sum without any arguments</span>
+    <span class="k">case</span> <span class="o">'{</span> <span class="nf">sum</span><span class="o">()</span> <span class="o">}</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+    <span class="c1">// Match a call to sum with an argument $n of type Int.</span>
+    <span class="c1">// n will be the Expr[Int] representing the argument.</span>
+    <span class="k">case</span> <span class="o">'{</span> <span class="nf">sum</span><span class="o">(</span><span class="nc">$n</span><span class="o">)</span> <span class="o">}</span> <span class="k">=&gt;</span> <span class="n">n</span>
+    <span class="c1">// Match a call to sum and extracts all its args in an `Expr[Seq[Int]]`</span>
+    <span class="k">case</span> <span class="o">'{</span> <span class="nf">sum</span><span class="o">(</span><span class="n">$</span><span class="o">{</span><span class="nc">Varargs</span><span class="o">(</span><span class="n">args</span><span class="o">)}</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span> <span class="k">=&gt;</span> <span class="nf">sumExpr</span><span class="o">(</span><span class="n">args</span><span class="o">)</span>
+    <span class="k">case</span> <span class="n">body</span> <span class="k">=&gt;</span> <span class="n">body</span>
+
+<span class="k">private</span> <span class="k">def</span> <span class="nf">sumExpr</span><span class="o">(</span><span class="n">args1</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">def</span> <span class="nf">flatSumArgs</span><span class="o">(</span><span class="n">arg</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="n">arg</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="o">'{</span> <span class="nf">sum</span><span class="o">(</span><span class="n">$</span><span class="o">{</span><span class="nc">Varargs</span><span class="o">(</span><span class="n">subArgs</span><span class="o">)}</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span> <span class="k">=&gt;</span> <span class="nv">subArgs</span><span class="o">.</span><span class="py">flatMap</span><span class="o">(</span><span class="n">flatSumArgs</span><span class="o">)</span>
+    <span class="k">case</span> <span class="n">arg</span> <span class="k">=&gt;</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">args2</span> <span class="k">=</span> <span class="nv">args1</span><span class="o">.</span><span class="py">flatMap</span><span class="o">(</span><span class="n">flatSumArgs</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">staticSum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">args2</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">getOrElse</span><span class="o">(</span><span class="mi">0</span><span class="o">)).</span><span class="py">sum</span>
+  <span class="k">val</span> <span class="nv">dynamicSum</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">args2</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span>
+  <span class="nv">dynamicSum</span><span class="o">.</span><span class="py">foldLeft</span><span class="o">(</span><span class="nc">Expr</span><span class="o">(</span><span class="n">staticSum</span><span class="o">))((</span><span class="n">acc</span><span class="o">,</span> <span class="n">arg</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">'{</span> <span class="nc">$acc</span> <span class="o">+</span> <span class="nc">$arg</span> <span class="o">})</span>
+</code></pre></div></div>
+
+<h3 id="recovering-precise-types-using-patterns">Recovering precise types using patterns</h3>
+
+<p>Sometimes it is necessary to get a more precise type for an expression. This can be achieved using the following pattern match.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">expr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Any</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span> <span class="k">=</span> <span class="n">expr</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="o">'{</span> <span class="nc">$x</span><span class="k">:</span> <span class="kt">t</span> <span class="o">}</span> <span class="k">=&gt;</span>
+    <span class="c1">// If the pattern match succeeds, then there is</span>
+    <span class="c1">// some type `t` such that</span>
+    <span class="c1">// - `x` is bound to a variable of type `Expr[t]`</span>
+    <span class="c1">// - `t` is bound to a new type `t` and a given</span>
+    <span class="c1">//   instance `Type[t]` is provided for it</span>
+    <span class="c1">// That is, we have `x: Expr[t]` and `given Type[t]`,</span>
+    <span class="c1">// for some (unknown) type `t`.</span>
+</code></pre></div></div>
+
+<p>This might be used to then perform an implicit search as in:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extension</span> <span class="o">(</span><span class="n">inline</span> <span class="n">sc</span><span class="k">:</span> <span class="kt">StringContext</span><span class="o">)</span>
+  <span class="n">inline</span> <span class="k">def</span> <span class="nf">showMe</span><span class="o">(</span><span class="n">inline</span> <span class="n">args</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">showMeExpr</span><span class="o">(</span><span class="ss">'sc</span><span class="o">,</span> <span class="ss">'args</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">private</span> <span class="k">def</span> <span class="nf">showMeExpr</span><span class="o">(</span><span class="n">sc</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">StringContext</span><span class="o">],</span> <span class="n">argsExpr</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">Any</span><span class="o">]])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">import</span> <span class="nn">quotes.reflect.report</span>
+  <span class="n">argsExpr</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">Varargs</span><span class="o">(</span><span class="n">argExprs</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="k">val</span> <span class="nv">argShowedExprs</span> <span class="k">=</span> <span class="nv">argExprs</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="o">'{</span> <span class="nc">$arg</span><span class="k">:</span> <span class="kt">tp</span> <span class="o">}</span> <span class="k">=&gt;</span>
+          <span class="nv">Expr</span><span class="o">.</span><span class="py">summon</span><span class="o">[</span><span class="kt">Show</span><span class="o">[</span><span class="kt">tp</span><span class="o">]]</span> <span class="k">match</span>
+            <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">showExpr</span><span class="o">)</span> <span class="k">=&gt;</span>
+              <span class="o">'{</span> <span class="nv">$showExpr</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nc">$arg</span><span class="o">)</span> <span class="o">}</span>
+            <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span>
+              <span class="nv">report</span><span class="o">.</span><span class="py">error</span><span class="o">(</span><span class="n">s</span><span class="s">"could not find implicit for ${Type.show[Show[tp]]}"</span><span class="o">,</span> <span class="n">arg</span><span class="o">);</span> <span class="o">'{???}</span>
+      <span class="o">}</span>
+      <span class="k">val</span> <span class="nv">newArgsExpr</span> <span class="k">=</span> <span class="nc">Varargs</span><span class="o">(</span><span class="n">argShowedExprs</span><span class="o">)</span>
+      <span class="o">'{</span> <span class="nv">$sc</span><span class="o">.</span><span class="py">s</span><span class="o">(</span><span class="nc">$newArgsExpr</span><span class="k">:</span> <span class="k">_</span><span class="kt">*</span><span class="o">)</span> <span class="o">}</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+      <span class="c1">// `new StringContext(...).showMeExpr(args: _*)` not an explicit `showMeExpr"..."`</span>
+      <span class="nv">report</span><span class="o">.</span><span class="py">error</span><span class="o">(</span><span class="n">s</span><span class="s">"Args must be explicit"</span><span class="o">,</span> <span class="n">argsExpr</span><span class="o">)</span>
+      <span class="o">'{???}</span>
+
+<span class="k">trait</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">-T</span><span class="o">]</span><span class="nc">:</span>
+  <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+
+<span class="c1">// in a different file</span>
+<span class="n">given</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">with</span>
+  <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">b</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span> <span class="k">=</span> <span class="s">"boolean!"</span>
+
+<span class="nf">println</span><span class="o">(</span><span class="n">showMe</span><span class="s">"${true}"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="open-code-patterns">Open code patterns</h3>
+
+<p>Quoted pattern matching also provides higher-order patterns to match open terms. If a quoted term contains a definition,
+then the rest of the quote can refer to this definition.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">'{</span>
+  <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To match such a term we need to match the definition and the rest of the code, but we need to explicitly state that the rest of the code may refer to this definition.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="o">'{</span> <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">$x</span><span class="o">;</span> <span class="nc">$body</span><span class="o">(</span><span class="n">y</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">}</span> <span class="k">=&gt;</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">$x</code> will match any closed expression while <code class="language-plaintext highlighter-rouge">$body(y)</code> will match an expression that is closed under <code class="language-plaintext highlighter-rouge">y</code>. Then
+the subexpression of type <code class="language-plaintext highlighter-rouge">Expr[Int]</code> is bound to <code class="language-plaintext highlighter-rouge">body</code> as an <code class="language-plaintext highlighter-rouge">Expr[Int =&gt; Int]</code>. The extra argument represents the references to <code class="language-plaintext highlighter-rouge">y</code>. Usually this expression is used in combination with <code class="language-plaintext highlighter-rouge">Expr.betaReduce</code> to replace the extra argument.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">eval</span><span class="o">(</span><span class="n">inline</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">$</span><span class="o">{</span> <span class="nf">evalExpr</span><span class="o">(</span><span class="ss">'e</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">private</span> <span class="k">def</span> <span class="nf">evalExpr</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">e</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="o">'{</span> <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">$x</span><span class="o">;</span> <span class="nc">$body</span><span class="o">(</span><span class="n">y</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">}</span> <span class="k">=&gt;</span>
+    <span class="c1">// body: Expr[Int =&gt; Int] where the argument represents</span>
+    <span class="c1">// references to y</span>
+    <span class="nf">evalExpr</span><span class="o">(</span><span class="nv">Expr</span><span class="o">.</span><span class="py">betaReduce</span><span class="o">('{</span><span class="nc">$body</span><span class="o">(</span><span class="n">$</span><span class="o">{</span><span class="nf">evalExpr</span><span class="o">(</span><span class="n">x</span><span class="o">)})}))</span>
+  <span class="k">case</span> <span class="o">'{</span> <span class="o">(</span><span class="nc">$x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="nc">$y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">}</span> <span class="k">=&gt;</span>
+    <span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">value</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">value</span><span class="o">)</span> <span class="k">match</span>
+      <span class="nf">case</span> <span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="n">a</span><span class="o">),</span> <span class="nc">Some</span><span class="o">(</span><span class="n">b</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="nc">Expr</span><span class="o">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">)</span>
+      <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">e</span>
+  <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="n">e</span>
+</code></pre></div></div>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eval</span> <span class="o">{</span> <span class="c1">// expands to the code: (16: Int)</span>
+  <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We can also close over several bindings using <code class="language-plaintext highlighter-rouge">$b(a1, a2, ..., an)</code>.
+To match an actual application we can use braces on the function part <code class="language-plaintext highlighter-rouge">${b}(a1, a2, ..., an)</code>.</p>
+
+<h2 id="more-details">More details</h2>
+
+<p><a href="./macros-spec.html">More details</a></p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="/scala3/reference/metaprogramming/compiletime-ops.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="/scala3/reference/metaprogramming/staging.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/new-types.html">New Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/intersection-types.html">Intersection Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/union-types.html">Union Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/type-lambdas.html">Type Lambdas</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/match-types.html">Match Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/dependent-function-types.html">Dependent Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/polymorphic-function-types.html">Polymorphic Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/enums.html">Enums</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/enums.html">Enumerations</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/adts.html">Algebraic Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/desugarEnums.html">Translation of Enums and ADTs</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/contextual.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/givens.html">Given Instances</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/using-clauses.html">Using Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-bounds.html">Context Bounds</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/given-imports.html">Importing Givens</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/extension-methods.html">Extension Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/type-classes.html">Implementing Type classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/derivation.html">Type Class Derivation</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/multiversal-equality.html">Multiversal Equality</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-functions.html">Context Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/conversions.html">Implicit Conversions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/by-name-context-parameters.html">By-Name Context Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/relationship-implicits.html">Relationship with Scala 2 Implicits</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/metaprogramming.html">Metaprogramming</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/inline.html">Inline</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/compiletime-ops.html">Compile-time operations</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/reference/metaprogramming/macros.html">Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/staging.html">Runtime Multi-Stage Programming</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/reflection.html">Reflection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/tasty-inspect.html">TASTy Inspection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/other-new-features.html">Other New Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/trait-parameters.html">Trait Parameters</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/transparent-traits.html">Transparent Traits</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/creator-applications.html">Universal Apply Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/export.html">Export Clauses</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/opaques.html">Opaque Type Aliases</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/open-classes.html">Open Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/parameter-untupling.html">Parameter Untupling</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/matchable.html">The Matchable Trait</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/threadUnsafe-annotation.html">The @threadUnsafe annotation</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/targetName.html">The @targetName annotation</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/control-syntax.html">New Control Syntax</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/indentation.html">Optional Braces</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/explicit-nulls.html">Explicit Nulls</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/safe-initialization.html">Safe Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/type-test.html">TypeTest</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/changed-features.html">Other Changed Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/numeric-literals.html">Numeric Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/structural-types.html">Programmatic Structural Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/operators.html">Rules for Operators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/wildcards.html">Wildcard Arguments in Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/imports.html">Imports</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-checking.html">Changes in Type Checking</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-inference.html">Changes in Type Inference</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-resolution.html">Changes in Implicit Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-conversions.html">Implicit Conversions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/overload-resolution.html">Changes in Overload Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/match-syntax.html">Match Expressions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/vararg-splices.html">Vararg Splices</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-bindings.html">Pattern Bindings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-matching.html">Option-less pattern matching</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/eta-expansion.html">Automatic Eta Expansion</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/compiler-plugins.html">Changes in Compiler Plugins</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/lazy-vals-init.html">Lazy Vals Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/main-functions.html">Main Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/dropped-features.html">Dropped Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/delayed-init.html">Dropped: Delayedinit</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/macros.html">Dropped: Scala 2 Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/existential-types.html">Dropped: Existential Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/type-projection.html">Dropped: General Type Projection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/do-while.html">Dropped: Do-While</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/procedure-syntax.html">Dropped: Procedure Syntax</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/package-objects.html">Dropped: Package Objects</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/early-initializers.html">Dropped: Early Initializers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/class-shadowing.html">Dropped: Class Shadowing</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/limit22.html">Dropped: Limit 22</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/xml.html">Dropped: XML Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/symlits.html">Dropped: Symbol Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/auto-apply.html">Dropped: Auto-Application</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/weak-conformance.html">Dropped: Weak Conformance</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/this-qualifier.html">Dropped: private[this] and protected[this]</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/wildcard-init.html">Dropped: Wildcard Initializer</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/syntax.html">Scala 3 Syntax Summary</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/language-versions.html">Language Versions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_scala3-reference/metaprogramming/macros.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

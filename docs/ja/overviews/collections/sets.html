@@ -1,0 +1,4964 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      集合 | 
+      Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ja/overviews/collections/sets.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="集合"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="集合"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ja/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections</div>
+          
+          <h1>集合</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>集合 (<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/Set.html"><code class="language-plaintext highlighter-rouge">Set</code></a>) は要素の重複の無い <code class="language-plaintext highlighter-rouge">Iterable</code> だ。集合一般に定義される演算は次の表にまとめてあり、可変集合に関してはその次の表も見てほしい。これらの演算は以下のカテゴリーに分類される:</p>
+
+<ul>
+  <li><strong>条件演算</strong>である <code class="language-plaintext highlighter-rouge">contains</code>、<code class="language-plaintext highlighter-rouge">apply</code>、<code class="language-plaintext highlighter-rouge">subsetOf</code>。<code class="language-plaintext highlighter-rouge">contains</code> メソッドは集合が任意の要素を含むかを調べる。集合での <code class="language-plaintext highlighter-rouge">apply</code> メソッドは <code class="language-plaintext highlighter-rouge">contains</code> と同じであるため、<code class="language-plaintext highlighter-rouge">set(elem)</code> は <code class="language-plaintext highlighter-rouge">set contains elem</code> と同じだ。これは集合が要素を含んでいれば <code class="language-plaintext highlighter-rouge">true</code> を返す関数として使えることを意味する。</li>
+</ul>
+
+<p>例えば、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val fruit = Set("apple", "orange", "peach", "banana")
+fruit: scala.collection.immutable.Set[java.lang.String] =
+Set(apple, orange, peach, banana)
+scala&gt; fruit("peach")
+res0: Boolean = true
+scala&gt; fruit("potato")
+res1: Boolean = false
+</code></pre></div></div>
+
+<ul>
+  <li><strong>加算</strong>である <code class="language-plaintext highlighter-rouge">+</code> と <code class="language-plaintext highlighter-rouge">++</code> は、単一もしくは複数の要素を集合に追加し、新たな集合を返す。</li>
+  <li><strong>減算</strong>である <code class="language-plaintext highlighter-rouge">-</code> と <code class="language-plaintext highlighter-rouge">--</code> は、単一もしくは複数の要素を集合から削除し、新たな集合を返す。</li>
+  <li><strong>集合演算</strong>である和集合、積集合、および差集合。これらの演算には文字形とシンボル形の二つの形がある。文字バージョンは <code class="language-plaintext highlighter-rouge">intersect</code>、<code class="language-plaintext highlighter-rouge">union</code>、および <code class="language-plaintext highlighter-rouge">diff</code> で、シンボルバージョンは <code class="language-plaintext highlighter-rouge">&amp;</code>、<code class="language-plaintext highlighter-rouge">|</code>、と <code class="language-plaintext highlighter-rouge">&amp;~</code> だ。<code class="language-plaintext highlighter-rouge">Set</code> が <code class="language-plaintext highlighter-rouge">Traversable</code> から継承する <code class="language-plaintext highlighter-rouge">++</code> は <code class="language-plaintext highlighter-rouge">union</code> と <code class="language-plaintext highlighter-rouge">|</code> の更なる別名だと考えることができるが、<code class="language-plaintext highlighter-rouge">++</code> は <code class="language-plaintext highlighter-rouge">Traversable</code> の引数を取るが、<code class="language-plaintext highlighter-rouge">union</code> と <code class="language-plaintext highlighter-rouge">|</code> は集合を取る。</li>
+</ul>
+
+<h3 id="set-トレイトの演算">Set トレイトの演算</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>使用例</th>
+      <th>振る舞い</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>条件演算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs contains x</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> が <code class="language-plaintext highlighter-rouge">x</code> を含むかを調べる。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(x)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs contains x</code> に同じ。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs subsetOf ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> が <code class="language-plaintext highlighter-rouge">ys</code> の部分集合であるかを調べる。</td>
+    </tr>
+    <tr>
+      <td><strong>加算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs + x</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素および <code class="language-plaintext highlighter-rouge">x</code> を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs + (x, y, z)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素および渡された要素を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs ++ ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素と <code class="language-plaintext highlighter-rouge">ys</code>内の全ての要素を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><strong>減算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs - x</code></td>
+      <td><code class="language-plaintext highlighter-rouge">x</code> を除き、<code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs - (x, y, z)</code></td>
+      <td>渡された要素を除き、<code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs -- ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ys</code>内の要素を除き、<code class="language-plaintext highlighter-rouge">xs</code>内の全ての要素を含んだ集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.empty</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> と同じクラスの空集合。</td>
+    </tr>
+    <tr>
+      <td><strong>集合演算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs &amp; ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> と <code class="language-plaintext highlighter-rouge">ys</code> の積集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs intersect ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs &amp; ys</code> に同じ</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs | ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> と <code class="language-plaintext highlighter-rouge">ys</code> の和集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs union ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs | ys</code> に同じ</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs &amp;~ ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> と <code class="language-plaintext highlighter-rouge">ys</code> の差集合。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs diff ys</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs &amp;~ ys</code> に同じ</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>可変集合は、この表にまとめてあるとおり、加算、減算、更新演算などの新たなメソッドを追加する。</p>
+
+<h3 id="mutableset-トレイトの演算">mutable.Set トレイトの演算</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>使用例</th>
+      <th>振る舞い</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>加算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs += x</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> に副作用として要素 <code class="language-plaintext highlighter-rouge">x</code> を加え、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs += (x, y, z)</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> に副作用として渡された要素を加え、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs ++= ys</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> に副作用として <code class="language-plaintext highlighter-rouge">ys</code>内の全ての要素を加え、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs add x</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> に要素 <code class="language-plaintext highlighter-rouge">x</code> を加え、以前に集合に含まれていなければ <code class="language-plaintext highlighter-rouge">true</code> を返し、既に含まれていれば <code class="language-plaintext highlighter-rouge">false</code> を返す。</td>
+    </tr>
+    <tr>
+      <td><strong>減算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs -= x</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> から副作用として要素 <code class="language-plaintext highlighter-rouge">x</code> を削除して、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs -= (x, y, z)</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> から副作用として渡された要素を削除して、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs --= ys</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> から副作用として <code class="language-plaintext highlighter-rouge">ys</code>内の全ての要素を削除して、<code class="language-plaintext highlighter-rouge">xs</code>自身を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs remove x</code></td>
+      <td>集合 <code class="language-plaintext highlighter-rouge">xs</code> から要素 <code class="language-plaintext highlighter-rouge">x</code> を削除、以前に集合に含まれていれば <code class="language-plaintext highlighter-rouge">true</code> を返し、含まれていなければ <code class="language-plaintext highlighter-rouge">false</code> を返す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs retain p</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code>内の要素で条件関数 <code class="language-plaintext highlighter-rouge">p</code> を満たすものだけを残す。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.clear()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> から全ての要素を削除する。</td>
+    </tr>
+    <tr>
+      <td><strong>更新演算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(x) = b</code></td>
+      <td>(展開した場合、<code class="language-plaintext highlighter-rouge">xs.update(x, b)</code>)。ブーリアン値の引数 <code class="language-plaintext highlighter-rouge">b</code> が <code class="language-plaintext highlighter-rouge">true</code> ならば <code class="language-plaintext highlighter-rouge">xs</code> に <code class="language-plaintext highlighter-rouge">x</code> を加え、それ以外なら <code class="language-plaintext highlighter-rouge">xs</code> から <code class="language-plaintext highlighter-rouge">x</code> を削除する。</td>
+    </tr>
+    <tr>
+      <td><strong>クローン演算:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.clone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xs</code> と同じ要素を持つ新しい可変集合。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>不変集合と同様に、可変集合も要素追加のための <code class="language-plaintext highlighter-rouge">+</code> と <code class="language-plaintext highlighter-rouge">++</code> 演算、および要素削除のための <code class="language-plaintext highlighter-rouge">-</code> と <code class="language-plaintext highlighter-rouge">--</code> 演算を提供する。しかし、これらは集合をコピーする必要があるため可変集合ではあまり使われることがない。可変集合はより効率的な <code class="language-plaintext highlighter-rouge">+=</code> と <code class="language-plaintext highlighter-rouge">-=</code> という更新方法を提供する。<code class="language-plaintext highlighter-rouge">s += elem</code> という演算は、集合 <code class="language-plaintext highlighter-rouge">s</code> に副作用として <code class="language-plaintext highlighter-rouge">elem</code> を集合に加え、変化した集合そのものを戻り値として返す。同様に、<code class="language-plaintext highlighter-rouge">s -= elem</code> は集合から <code class="language-plaintext highlighter-rouge">elem</code> を削除して、変化した集合を戻り値として返す。<code class="language-plaintext highlighter-rouge">+=</code> と <code class="language-plaintext highlighter-rouge">-=</code> の他にも、traversable やイテレータの全ての要素を追加または削除する一括演算である <code class="language-plaintext highlighter-rouge">++=</code> と <code class="language-plaintext highlighter-rouge">--=</code> がある。</p>
+
+<p>メソッド名として <code class="language-plaintext highlighter-rouge">+=</code> や <code class="language-plaintext highlighter-rouge">-=</code> が選ばれていることによって、非常に似たコードが可変集合と不変集合のどちらでも動くことを意味する。不変集合 <code class="language-plaintext highlighter-rouge">s</code> を使った次の REPL のやりとりを見てほしい:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; var s = Set(1, 2, 3)
+s: scala.collection.immutable.Set[Int] = Set(1, 2, 3)
+scala&gt; s += 4
+scala&gt; s -= 2
+scala&gt; s
+res2: scala.collection.immutable.Set[Int] = Set(1, 3, 4)
+</code></pre></div></div>
+
+<p>ここでは <code class="language-plaintext highlighter-rouge">immutable.Set</code>型の <code class="language-plaintext highlighter-rouge">var</code> に対して <code class="language-plaintext highlighter-rouge">+=</code> と <code class="language-plaintext highlighter-rouge">-=</code> を使った。<code class="language-plaintext highlighter-rouge">s += 4</code> のようなステートメントは、<code class="language-plaintext highlighter-rouge">s = s + 4</code> の略だ。つまり、これは集合 <code class="language-plaintext highlighter-rouge">s</code> に対して追加メソッドの <code class="language-plaintext highlighter-rouge">+</code> を呼び出して、結果を変数<code class="language-plaintext highlighter-rouge">s</code> に代入しなおしている。次に、可変集合でのやりとりを見てほしい。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val s = collection.mutable.Set(1, 2, 3)
+s: scala.collection.mutable.Set[Int] = Set(1, 2, 3)
+scala&gt; s += 4
+res3: s.type = Set(1, 4, 2, 3)
+scala&gt; s -= 2
+res4: s.type = Set(1, 4, 3)
+</code></pre></div></div>
+
+<p>結果は前回のやりとりと非常に似通ったものになった: <code class="language-plaintext highlighter-rouge">Set(1, 2, 3)</code> から始めて、最後に <code class="language-plaintext highlighter-rouge">Set(1, 3, 4)</code>
+を得た。ステートメントは前回と同じに見えるが、実際には違うことを行っている。<code class="language-plaintext highlighter-rouge">s</code> <code class="language-plaintext highlighter-rouge">+=</code> <code class="language-plaintext highlighter-rouge">4</code> は今度は可変集合 <code class="language-plaintext highlighter-rouge">s</code> の <code class="language-plaintext highlighter-rouge">+=</code> メソッドを呼び出し、その場で集合を上書きしているのだ。同様に、<code class="language-plaintext highlighter-rouge">s -= 2</code> は同じ集合の <code class="language-plaintext highlighter-rouge">-=</code> メソッドを呼び出している。</p>
+
+<p>この2つのやりとりの比較から重要な原則を導き出せる。<code class="language-plaintext highlighter-rouge">val</code> に格納された可変コレクションと、<code class="language-plaintext highlighter-rouge">var</code> に格納された不変コレクションは、大抵の場合にお互いを置換できるということだ。これはコレクションに対して上書きで更新されたのか新たなコレクションが作成されたのかを第三者が観測できるような別名の参照がない限り成り立つ原則だ。</p>
+
+<p>可変集合は <code class="language-plaintext highlighter-rouge">+=</code> と <code class="language-plaintext highlighter-rouge">-=</code> の別形として <code class="language-plaintext highlighter-rouge">add</code> と <code class="language-plaintext highlighter-rouge">remove</code> を提供する。違いは <code class="language-plaintext highlighter-rouge">add</code> と <code class="language-plaintext highlighter-rouge">remove</code> は集合に対して演算の効果があったかどうかを示す <code class="language-plaintext highlighter-rouge">Boolean</code> の戻り値を返すことだ。</p>
+
+<p>現在の可変集合のデフォルトの実装では要素を格納するのにハッシュテーブルを使っている。不変集合のデフォルトの実装は集合の要素数に応じて方法を変えている。空集合はシングルトンで表される。サイズが4つまでの集合は全要素をフィールドとして持つオブジェクトとして表される。それを超えたサイズの不変集合は<a href="">ハッシュトライ</a>として表される。</p>
+
+<p>このような設計方針のため、(例えば 4以下の) 小さいサイズの集合を使う場合は、通常の場合、可変集合に比べて不変集合の方が、よりコンパクトで効率的だ。集合のサイズが小さいと思われる場合は、不変集合を試してみてはいかがだろうか。</p>
+
+<p>集合のサブトレイトとして <code class="language-plaintext highlighter-rouge">SortedSet</code> と <code class="language-plaintext highlighter-rouge">BitSet</code> の2つがある。</p>
+
+<h3 id="整列済み集合">整列済み集合</h3>
+
+<p>整列済み集合は (<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/SortedSet.html"><code class="language-plaintext highlighter-rouge">SortedSet</code></a>)
+は (集合の作成時に指定された) 任意の順序で要素を (<code class="language-plaintext highlighter-rouge">iterator</code> や <code class="language-plaintext highlighter-rouge">foreach</code> を使って) 返す事ができる集合だ。<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/SortedSet.html"><code class="language-plaintext highlighter-rouge">SortedSet</code></a> クラスのデフォルトの表現は、左の子ツリー内の全ての要素が右の子ツリーの全ての要素よりも小さいという恒常条件を満たす順序付けされた二分木だ。これにより、通りがけ順 (in-order) で探索するだけで、木の全ての要素を昇順に返すことができる。Scala の<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/immutable/TreeSet.html"><code class="language-plaintext highlighter-rouge">immutable.TreeSet</code></a> クラスは <strong>赤黒木</strong> を使ってこの恒常条件を実装している。また、この木構造は、<strong>平衡木</strong>であり、ルートから全て葉のまでの長さの違いは最大で1要素しかない。</p>
+
+<p>空の <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/immutable/TreeSet.html"><code class="language-plaintext highlighter-rouge">TreeSet</code></a> を作成するには、まず順序付けを指定する:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val myOrdering = Ordering.fromLessThan[String](_ &gt; _)
+myOrdering: scala.math.Ordering[String] = ...
+</code></pre></div></div>
+
+<p>次に、その順序付けの空の木集合を作成するには:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; TreeSet.empty(myOrdering)
+res1: scala.collection.immutable.TreeSet[String] = TreeSet()
+</code></pre></div></div>
+
+<p>順序付けの引数を省略して、空集合の要素型を指定することもできる。その場合は、要素型のデフォルトの順序付けが使われる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; TreeSet.empty[String]
+res2: scala.collection.immutable.TreeSet[String] = TreeSet()
+</code></pre></div></div>
+
+<p>(例えば連結やフィルターによって) 新たな木集合を作成した場合、それは元の集合と同じ順序付けを保つ。たとえば、</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; res2 + ("one", "two", "three", "four")
+res3: scala.collection.immutable.TreeSet[String] = TreeSet(four, one, three, two)
+</code></pre></div></div>
+
+<p>整列済み集合は要素の範囲もサポートする。例えば、<code class="language-plaintext highlighter-rouge">range</code> メソッドは開始要素以上、終了要素未満の全ての要素を返す。また、<code class="language-plaintext highlighter-rouge">from</code> メソッドは開始要素以上の全ての要素を、集合の順序付けで返す。両方のメソッドの戻り値もまた整列済み集合だ。用例:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; res3 range ("one", "two")
+res4: scala.collection.immutable.TreeSet[String] = TreeSet(one, three)
+scala&gt; res3 from "three"
+res5: scala.collection.immutable.TreeSet[String] = TreeSet(three, two)
+</code></pre></div></div>
+
+<h3 id="ビット集合">ビット集合</h3>
+
+<p>ビット集合 (<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/BitSet.html"><code class="language-plaintext highlighter-rouge">BitSet</code></a>) は非負整数の要素の集合で、何ワードかのパックされたビットにより実装されている。<a href="https://www.scala-lang.org/api/2.13.6/scala/collection/BitSet.html"><code class="language-plaintext highlighter-rouge">BitSet</code></a> クラスは、内部で <code class="language-plaintext highlighter-rouge">Long</code> の配列を用いている。最初の <code class="language-plaintext highlighter-rouge">Long</code> は第0 〜 63 の要素を受け持ち、次のは第64 〜 127 の要素という具合だ。全ての <code class="language-plaintext highlighter-rouge">Long</code> の、それぞれの 64ビットは、対応する要素が集合に含まれる場合は 1 にセットされ、含まれない場合は 0 になる。このため、ビット集合のサイズは格納されている整数の最大値に依存する。<code class="language-plaintext highlighter-rouge">N</code> がその最大の整数値の場合、集合のサイズは <code class="language-plaintext highlighter-rouge">N/64</code> <code class="language-plaintext highlighter-rouge">Long</code> ワード、または <code class="language-plaintext highlighter-rouge">N/8</code> バイト、にステータス情報のためのバイトを追加したものだ。</p>
+
+<p>このため、たくさんの小さい要素を含む場合、ビット集合は他の集合に比べてコンパクトである。ビット集合のもう一つの利点は <code class="language-plaintext highlighter-rouge">contains</code> を使った所属判定や、<code class="language-plaintext highlighter-rouge">+=</code> や <code class="language-plaintext highlighter-rouge">-=</code> を使った要素の追加や削除が非常に効率的であることだ。</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections/sets.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/collections/sets.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-cn/overviews/collections/sets.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ja/overviews/collections/sets.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

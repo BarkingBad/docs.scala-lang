@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-34 - Improving binary compatibility with @stableABI | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/binary-compatibility.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-34 - Improving binary compatibility with @stableABI"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-34 - Improving binary compatibility with @stableABI"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-34 - Improving binary compatibility with @stableABI</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>Dmitry Petrashko</strong></p>
+
+<p><strong>first submitted 13 January 2017</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Scala is a language which evolves fast and thus made a decision to only promise binary compatibility across minor releases[<a href="https://docs.scala-lang.org/overviews/core/binary-compatibility-of-scala-releases.html" title="Binary compatibility of Scala releases">3</a>].
+At the same time, there is a demand to develop APIs that live longer than a major release cycle of Scala.
+This SIP introduces an annotation <code class="language-plaintext highlighter-rouge">@stableABI</code> that checks that <code class="language-plaintext highlighter-rouge">what you write is what you get</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">@stableABI</code> is a linter, that does not change binary output, but will fail compilation if Public API of a class uses features
+of Scala that are desugared by compiler and may be binary incompatible across major releases.</p>
+
+<p>As long as declarations in source have not changed, <code class="language-plaintext highlighter-rouge">@stableABI</code> annotated classes will be compatible across major versions of Scala.
+It complements MiMa[<a href="https://github.com/typesafehub/migration-manager" title="MiMa">2</a>] in indicating if a class will remain binary compatible across major Scala releases.</p>
+
+<h2 id="term-definitions">Term definitions</h2>
+
+<ul>
+  <li>
+    <h5 id="binary-descriptors">Binary descriptors</h5>
+  </li>
+</ul>
+
+<p>As defined by the JVM spec[<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3" title="Descriptor definition in JVM Specification">4</a>]:</p>
+
+<blockquote>
+  <p>A descriptor is a string representing the type of a field or method. Descriptors are represented in the class file format using modified UTF-8 strings (§4.4.7)
+ and thus may be drawn, where not further constrained, from the entire Unicode codespace.</p>
+
+  <p>A method descriptor contains zero or more parameter descriptors, representing the types of parameters that the method takes, and a return descriptor, representing the type of the value (if any) that the method returns.</p>
+</blockquote>
+
+<p>Binary descriptors are used in the bytecode to indicate what fields and methods are accessed or invoked.
+  If a method or field has its descriptor changed, previously compiled classes that used different descriptor will fail in
+  runtime as they no longer link to the changed field.</p>
+
+<p>In this document we use the term <code class="language-plaintext highlighter-rouge">binary descriptor</code> to refer to both method and field descriptors used by the JVM.</p>
+
+<ul>
+  <li>
+    <h5 id="public-api">Public API</h5>
+
+    <p>Methods and fields marked with <code class="language-plaintext highlighter-rouge">ACC_PUBLIC</code>[<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6-200-A.1" title="JVM access flags">5</a>] may be accessed from any class and package.
+This loosely corresponds to absence of AccessModifier[<a href="https://www.scala-lang.org/files/archive/spec/2.11/05-classes-and-objects.html#modifiers" title="Scala AccessModifiers">6</a>] in Scala source.
+Changing a binary descriptor of a method or a field marked with <code class="language-plaintext highlighter-rouge">ACC_PUBLIC</code> is a binary incompatible change
+which may affect all classes in all packages leading to a runtime linkage failure.</p>
+
+    <p>Methods and fields marked with <code class="language-plaintext highlighter-rouge">ACC_PROTECTED</code>[<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6-200-A.1" title="JVM access flags">5</a>] may be accessed within subclasses.
+This loosely corresponds to presence of <code class="language-plaintext highlighter-rouge">protected</code> AccessModifier[<a href="https://www.scala-lang.org/files/archive/spec/2.11/05-classes-and-objects.html#modifiers" title="Scala AccessModifiers">6</a>] in Scala source.
+Changing a binary descriptor of a method or a field marked with <code class="language-plaintext highlighter-rouge">ACC_PROTECTED</code> is a binary incompatible change
+which may affect all subclasses of this class leading to a runtime linkage failure.</p>
+
+    <p>In this document we use the term <code class="language-plaintext highlighter-rouge">Public API</code> to refer both to methods and fields defined as <code class="language-plaintext highlighter-rouge">ACC_PUBLIC</code> and <code class="language-plaintext highlighter-rouge">ACC_PROTECTED</code>.
+Changes do binary descriptors of Public API may lead to runtime linkage failures.</p>
+  </li>
+  <li>
+    <h5 id="binary-compatibility">Binary compatibility</h5>
+
+    <p>Two versions of the same class are called binary compatible if there are no changes to the Public API of this class,
+meaning that those two classes can be substituted in runtime without linkage errors.</p>
+  </li>
+</ul>
+
+<h2 id="use-cases">Use cases</h2>
+
+<ol>
+  <li>Publishing a library that would work across major Scala versions, such as 2.12 &amp; 2.13 and Dotty.</li>
+  <li>Defining a class which is supposed to be used from other JVM languages such as Java\Kotlin.
+<code class="language-plaintext highlighter-rouge">@stableABI</code> will ensure both binary compatibility and that there are no unexpected methods
+ that would show up in members of a class or an interface.</li>
+  <li>Library authors can take advantage of language features introduced in new major versions of Scala
+ while still serving users on older language versions by defining their Public API as <code class="language-plaintext highlighter-rouge">@stableABI</code>.</li>
+</ol>
+
+<p>The important use-case envisioned here by the authors is migration to Dotty.
+We envision that there might be code-bases that for some reason don’t compile either with Dotty or with Scalac.
+This can be either because they rely on union types, only present in Dotty,
+or because they need early initializers, which are only supported by Scalac.</p>
+
+<p>At the same time, by marking either those classes themselves or their parents as <code class="language-plaintext highlighter-rouge">@stableABI</code>,
+the compiled artifacts could be used in both Dotty-compiled and Scalac-compiled projects.</p>
+
+<h2 id="current-status">Current Status</h2>
+<p>In case there’s a need to develop an API that will be used by clients compiled using different major versions of Scala,
+the current approach is to either develop them in Java or to use best guess to restrict what Scala features should be used.</p>
+
+<p>There’s also a different approach which is used by sbt: instead of publishing a binary <code class="language-plaintext highlighter-rouge">compiler-interface</code>, sources are published instead that would be locally compiled.</p>
+
+<p>Examples:</p>
+
+<ol>
+  <li>
+    <p>Zinc[<a href="https://github.com/sbt/zinc/tree/v1.0.0/internal/compiler-interface/src/main/java/xsbti" title="zinc interfaces">8</a>] is writing their interfaces in Java because the interface has to be Scala version agnostic, as it is shipped in every sbt release, independently of Scala version that was used to compile zinc or will be used in to compile the project.
+sbt additionally compiles on demand the compiler bridge, which implements this Java interface.</p>
+  </li>
+  <li>
+    <p>Dotty[<a href="https://github.com/lampepfl/dotty/tree/master/interfaces/src/dotty/tools/dotc/interfaces" title="Dotty interfaces">7</a>] currently uses java defined interfaces as public API for IntelliJ in order to ensure binary compatibility.
+These interfaces can be replaced by <code class="language-plaintext highlighter-rouge">@stableABI</code> annotated traits to reach the same goal.</p>
+  </li>
+</ol>
+
+<h2 id="design-guidelines">Design Guidelines</h2>
+<p><code class="language-plaintext highlighter-rouge">@stableABI</code> is a feature which is supposed to be used by a small subset of the ecosystem to be binary compatible across major versions of Scala.
+Thus this is designed as an advanced feature that is used rarely and thus is intentionally verbose.
+It’s designed to provide strong guarantees, in some cases sacrificing ease of use and to be used in combination with MiMa[<a href="https://github.com/typesafehub/migration-manager" title="MiMa">2</a>]</p>
+
+<p>The limitations enforced by <code class="language-plaintext highlighter-rouge">@stableABI</code> are designed to be an overapproximation:
+instead of permitting a list of features known to be compatible, <code class="language-plaintext highlighter-rouge">@stableABI</code> enforces a stronger
+check which is sufficient to promise binary compatibility.</p>
+
+<p>This SIP intentionally follows a very conservative approach.
+This is because we will be able to allow more features later, but we won’t have an opportunity to remove them.</p>
+
+<h2 id="overview">Overview</h2>
+<p>In order for a class, trait or an object to succeed compilation with the <code class="language-plaintext highlighter-rouge">@stableABI</code> annotation it has to be:</p>
+
+<ul>
+  <li>defined on the top level;</li>
+  <li>if a class or an object has a companion annotated with <code class="language-plaintext highlighter-rouge">@stableABI</code>, than annotation applies to both of them;</li>
+  <li>use a subset of Scala that during compilation does not require changes to public API of the class, including
+    <ul>
+      <li>synthesizing new members, either concrete or abstract;</li>
+      <li>changing binary descriptors of existing members, either concrete or abstract;</li>
+    </ul>
+  </li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@stableABI</code> does not change the compilation scheme of a class:
+ compiling a class previously annotated with the <code class="language-plaintext highlighter-rouge">@stableABI</code>, will produce the same bytecode with or without <code class="language-plaintext highlighter-rouge">@stableABI</code> annotation.</p>
+
+<p>Below are several examples of classes and traits that succeed compilation with <code class="language-plaintext highlighter-rouge">@stableABI</code></p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nd">@stableABI</span>
+<span class="k">trait</span> <span class="nc">AbstractFile</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">name</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span>
+
+  <span class="k">def</span> <span class="nf">path</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span>
+
+  <span class="k">def</span> <span class="nf">jfile</span><span class="o">()</span><span class="k">:</span> <span class="kt">Optional</span><span class="o">[</span><span class="kt">File</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="nd">@stableABI</span>
+<span class="k">trait</span> <span class="nc">SourceFile</span> <span class="k">extends</span> <span class="nc">AbstractFile</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">content</span><span class="o">()</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Char</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="nd">@stableABI</span>
+<span class="k">trait</span> <span class="nc">Diagnostic</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">message</span><span class="o">()</span><span class="k">:</span> <span class="kt">String</span>
+
+  <span class="k">def</span> <span class="nf">level</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span>
+
+  <span class="k">def</span> <span class="nf">position</span><span class="o">()</span><span class="k">:</span> <span class="kt">Optional</span><span class="o">[</span><span class="kt">SourcePosition</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="nd">@stableABI</span>
+<span class="k">object</span> <span class="nc">Diagnostic</span> <span class="o">{</span>
+  <span class="nd">@static</span> <span class="k">final</span> <span class="k">val</span> <span class="nv">ERROR</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nd">@static</span> <span class="k">final</span> <span class="k">val</span> <span class="nv">WARNING</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="nd">@static</span> <span class="k">final</span> <span class="k">val</span> <span class="nv">INFO</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">}</span>
+
+<span class="nd">@stableABI</span>
+<span class="k">class</span> <span class="nc">FeaturesInBodies</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apiMethod</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="c1">// as body of the method isn't part of the public interface, one can use all features of Scala here.</span>
+    <span class="k">lazy</span> <span class="k">val</span> <span class="nv">result</span> <span class="k">=</span> <span class="mi">0</span> <span class="c1">// while lazy vals are prohibited in the class, they are allowed in the bodies of methods</span>
+    <span class="n">result</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="features-that-will-fail-compilation-with-stableabi">Features that will fail compilation with <code class="language-plaintext highlighter-rouge">@stableABI</code></h2>
+<p>The features listed below have complex encodings that may change in future versions. We prefer not to compromise on them.
+Most of those features can be simulated in a binary compatible way by writing a verbose re-implementation
+which won’t rely on desugaring performed inside compiler.
+Note that while those features are prohibited in the public API, they can be safely used inside bodies of the methods.</p>
+
+<ul>
+  <li>public fields. Can be simulated by explicitly defining public getters and setters that access a private field;</li>
+  <li>lazy vals. Can be simulated by explicitly writing an implementation in source;</li>
+  <li>case classes. Can be simulated by explicitly defining getters and other members synthesized for a case class(<code class="language-plaintext highlighter-rouge">copy</code>, <code class="language-plaintext highlighter-rouge">productArity</code>, <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">unapply</code>, etc).</li>
+</ul>
+
+<p>The features listed below cannot be easily re-implemented in a class or trait annotated with <code class="language-plaintext highlighter-rouge">@stableABI</code>.</p>
+
+<ul>
+  <li>default arguments;</li>
+  <li>default methods. See Addendum;</li>
+  <li>constant types(both explicit and inferred);</li>
+  <li>inline.</li>
+</ul>
+
+<h2 id="binary-compatibility-and-transitivity">Binary compatibility and transitivity</h2>
+<p>Consider a class, that is binary compatible but takes a non-binary compatible argument:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nd">@stableABI</span>
+<span class="k">class</span> <span class="nc">Example</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">foo</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">a</span><span class="k">:</span> <span class="kt">MyOption</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="nv">a</span><span class="o">.</span><span class="py">get</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">MyOption</span><span class="o">[</span><span class="kt">T</span><span class="o">]{</span>
+  <span class="k">lazy</span> <span class="k">val</span> <span class="nv">get</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="o">???</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Consider a situation when we re-compile <code class="language-plaintext highlighter-rouge">MyOption</code> using a different major compiler version than the one used to compile <code class="language-plaintext highlighter-rouge">Example</code>.
+Let’s assume the new major version of compile has changing binary descriptor of method <code class="language-plaintext highlighter-rouge">get</code>.</p>
+
+<p>While the code in runtime would still successfully invoke the method <code class="language-plaintext highlighter-rouge">Example.foo</code>, this method will fail in execution,
+as it will itself call a <code class="language-plaintext highlighter-rouge">MyOption.get</code> using an outdated descriptor.</p>
+
+<p>While in perfect world it would be nice to require all <code class="language-plaintext highlighter-rouge">@stableABI</code> classes and traits to only take <code class="language-plaintext highlighter-rouge">@stableABI</code> arguments
+and only return <code class="language-plaintext highlighter-rouge">@stableABI</code> values, we believe that all-or-nothing system will be a lot harder to adopt and migrate to.</p>
+
+<p>Because of this we propose to emmit warnings in those cases:</p>
+
+<ul>
+  <li>non-<code class="language-plaintext highlighter-rouge">@stableABI</code> value is returned from a method or field defined inside a <code class="language-plaintext highlighter-rouge">@stableABI</code> class or trait;</li>
+  <li>an invocation to a method not-defined inside a <code class="language-plaintext highlighter-rouge">@stableABI</code> class is used in
+  implementation of a method or a field initializer inside a <code class="language-plaintext highlighter-rouge">@stableABI</code> class or trait.</li>
+</ul>
+
+<p>Those warnings can be suppressed using an <code class="language-plaintext highlighter-rouge">@unchecked</code> annotations or made fatal using <code class="language-plaintext highlighter-rouge">+Xfatal-warnings</code>.</p>
+
+<h2 id="the-case-of-the-standard-library">The case of the standard library</h2>
+<p>The Standard library defines types commonly used as arguments or return types such as <code class="language-plaintext highlighter-rouge">Option</code> and <code class="language-plaintext highlighter-rouge">List</code>,
+as well as methods and implicit conversions imported from <code class="language-plaintext highlighter-rouge">scala</code> and <code class="language-plaintext highlighter-rouge">Predef</code>.</p>
+
+<p>As such Standard library is expected to be the biggest source of warnings defined in previous section.</p>
+
+<p>We propose to consider either making some classes in standard library use <code class="language-plaintext highlighter-rouge">@stableABI</code> or define new <code class="language-plaintext highlighter-rouge">@stableABI</code>
+super-interfaces for them that should be used in <code class="language-plaintext highlighter-rouge">@stableABI</code> classes.
+This would also allow to consume Scala classes from other JVM languages such as Kotlin and Java.</p>
+<h2 id="stableabi-and-scalajs"><code class="language-plaintext highlighter-rouge">@stableABI</code> and Scala.js</h2>
+
+<p>Allowing to write API-defining classes in Scala instead of Java will allow them to compile with Scala.js,
+which would have benefit of sharing the same source for two ecosystems.</p>
+
+<p>Scala.js currently is binary compatible as long as original bytecode compiled by Scala JVM is binary compatible.
+Providing stronger binary compatibility guarantees for JVM will automatically provide stronger guarantees for Scala.js.</p>
+
+<h2 id="comparison-with-mima">Comparison with MiMa</h2>
+<p>The Migration Manager for Scala (MiMa in short) is a tool for diagnosing binary incompatibilities for Scala libraries.
+MiMa allows to compare binary APIs of two already compiled classfiles and reports errors if APIs do not match perfectly.</p>
+
+<p>MiMa and <code class="language-plaintext highlighter-rouge">@stableABI</code> complement each other, as <code class="language-plaintext highlighter-rouge">@stableABI</code> helps to develop APIs that stay compatible
+across major versions, while MiMa checks that previously published artifacts indeed have the same API.</p>
+
+<p><code class="language-plaintext highlighter-rouge">@stableABI</code> does not compare the currently compiled class or trait against previous version,
+so introduction of new members won’t be prohibited. This is a use-case for MiMa.</p>
+
+<p>MiMa does not indicate how hard, if possible, would it be to maintain compatibility of a class across future versions of Scala.
+Multiple features of Scala, most notably lazy vals and traits, have been compiled differently by different Scala versions
+making porting existing compiled bytecode across versions very hard.
+MiMa will complain retroactively that the new version is incompatible with the old one.
+<code class="language-plaintext highlighter-rouge">@stableABI</code> will instead indicate at compile time that the old version used features whose encoding is prone to change.
+This provides early guidance and warning when designing long-living APIs before they are publicly released.</p>
+
+<h2 id="compilation-scheme">Compilation scheme</h2>
+<p>No modification of typer or any existing phase is planned. The current proposed scheme introduces a late phase that runs before the very bytecode emission that checks that:</p>
+
+<ul>
+  <li>classes, traits and objects annotated as  <code class="language-plaintext highlighter-rouge">@stableABI</code> are on the top level;</li>
+  <li>compiler did not introduce new Public API methods or fields inside  <code class="language-plaintext highlighter-rouge">@stableABI</code> classes, traits and objects;</li>
+  <li>compiler did not change descriptors of existing Public API methods or fields inside <code class="language-plaintext highlighter-rouge">@stableABI</code> classes, traits and objects.</li>
+</ul>
+
+<p>This phase additionally warns if Public API method or field takes an argument or returns a value that isn’t marked as <code class="language-plaintext highlighter-rouge">@stableABI</code>.
+This warning can be suppressed by annotating with <code class="language-plaintext highlighter-rouge">@unchecked</code>.</p>
+
+<p>The current prototype is implemented for Dotty and supports everything described in this SIP, except warnings.
+The implementation is simple with less than 50 lines of non-boilerplate code.
+The current implementation has a scope for improvement of error messages that will report domain specific details for disallowed features,
+but it already prohibits them.</p>
+
+<h2 id="addendum-default-methods">Addendum: Default methods</h2>
+<p>By <code class="language-plaintext highlighter-rouge">default methods</code> we mean non-abstract methods defined and implemented by a trait.</p>
+
+<p>The way how those methods are implemented by compiler has changed substantially over years.
+At the same time, <code class="language-plaintext highlighter-rouge">invokeinterface</code> has always been a reliable way to invoke such a method,
+independently from how it was implemented under the hood.</p>
+
+<p>One might reason that, as there has been a reliable way to call methods on the binary level,
+it should be allowed to use them in binary compatible APIs.</p>
+
+<p>At the same time, the mixin composition protocol that is followed when a class inherits those traits has also
+changed substantially.
+The classes which have been correctly inheriting those traits compiled by previous versions of Scala
+may need recompilation if trait has been recompiled with a new major version of Scala.</p>
+
+<p>Thus, the authors of this SIP has decided not to allow default methods in the
+<code class="language-plaintext highlighter-rouge">@stableABI</code> traits.</p>
+
+<h2 id="see-also">See Also</h2>
+
+<ol>
+  <li><a href="https://github.com/lampepfl/dotty/pull/1900" title="an implementation for Dotty">dotty#1900</a></li>
+  <li><a href="https://github.com/typesafehub/migration-manager" title="MiMa">MiMa</a></li>
+  <li><a href="https://docs.scala-lang.org/overviews/core/binary-compatibility-of-scala-releases.html" title="Binary compatibility of Scala releases">releases-compatibility</a></li>
+  <li><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3" title="Descriptor definition in JVM Specification">Descriptor definition in JVM Specification</a></li>
+  <li><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6-200-A.1" title="JVM access flags">JVM access flags</a></li>
+  <li><a href="https://www.scala-lang.org/files/archive/spec/2.11/05-classes-and-objects.html#modifiers" title="Scala AccessModifiers">Scala AccessModifiers</a></li>
+  <li><a href="https://github.com/lampepfl/dotty/tree/master/interfaces/src/dotty/tools/dotc/interfaces" title="Dotty interfaces">Dotty interfaces</a></li>
+  <li><a href="https://github.com/sbt/zinc/tree/v1.0.0/internal/compiler-interface/src/main/java/xsbti" title="zinc interfaces">Zinc interfaces</a></li>
+</ol>
+
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #839496">Dormant</div>
+           <p class="vote-text" style="color: #839496">
+             When the author of this proposal figures out which features should be binary compatible and has more information on the future implementation, the SIP Committee will start the review period.
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2017-01-13-binary-compatibility.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

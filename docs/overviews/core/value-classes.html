@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Value Classes and Universal Traits | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/value-classes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Value Classes and Universal Traits"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Value Classes and Universal Traits"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Value Classes and Universal Traits</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Mark Harrah</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>First proposed in <a href="https://docs.scala-lang.org/sips/pending/value-classes.html">SIP-15</a> and introduced in Scala 2.10.0, value classes are a mechanism in Scala to avoid allocating runtime objects. This is accomplished through the definition of new <code class="language-plaintext highlighter-rouge">AnyVal</code> subclasses.</p>
+
+<p>The following shows a very minimal value class definition:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Wrapper(val underlying: Int) extends AnyVal
+</code></pre></div></div>
+
+<p>It has a single, public <code class="language-plaintext highlighter-rouge">val</code> parameter that is the underlying runtime representation.
+The type at compile time is <code class="language-plaintext highlighter-rouge">Wrapper</code>, but at runtime, the representation is an <code class="language-plaintext highlighter-rouge">Int</code>.
+A value class can define <code class="language-plaintext highlighter-rouge">def</code>s, but no <code class="language-plaintext highlighter-rouge">val</code>s, <code class="language-plaintext highlighter-rouge">var</code>s, or nested <code class="language-plaintext highlighter-rouge">trait</code>s, <code class="language-plaintext highlighter-rouge">class</code>es or <code class="language-plaintext highlighter-rouge">object</code>s:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Wrapper(val underlying: Int) extends AnyVal {
+  def foo: Wrapper = new Wrapper(underlying * 19)
+}
+</code></pre></div></div>
+
+<p>A value class can only extend <em>universal traits</em> and cannot be extended itself.
+A <em>universal trait</em> is a trait that extends <code class="language-plaintext highlighter-rouge">Any</code>, only has <code class="language-plaintext highlighter-rouge">def</code>s as members, and does no initialization.
+Universal traits allow basic inheritance of methods for value classes, but they <em>incur the overhead of allocation</em>.
+For example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Printable extends Any {
+  def print(): Unit = println(this)
+}
+class Wrapper(val underlying: Int) extends AnyVal with Printable
+
+val w = new Wrapper(3)
+w.print() // actually requires instantiating a Wrapper instance
+</code></pre></div></div>
+
+<p>The remaining sections of this documentation show use cases, details on when allocations do and do not occur, and concrete examples of limitations of value classes.</p>
+
+<h2 id="extension-methods">Extension methods</h2>
+
+<p>One use case for value classes is to combine them with implicit classes (<a href="https://docs.scala-lang.org/sips/pending/implicit-classes.html">SIP-13</a>) for allocation-free extension methods.  Using an implicit class provides a more convenient syntax for defining extension methods, while value classes remove the runtime overhead. A good example is the <code class="language-plaintext highlighter-rouge">RichInt</code> class in the standard library.  <code class="language-plaintext highlighter-rouge">RichInt</code> extends the <code class="language-plaintext highlighter-rouge">Int</code> type with several methods.  Because it is a value class, an instance of <code class="language-plaintext highlighter-rouge">RichInt</code> doesn’t need to be created when using <code class="language-plaintext highlighter-rouge">RichInt</code> methods.</p>
+
+<p>The following fragment of <code class="language-plaintext highlighter-rouge">RichInt</code> shows how it extends <code class="language-plaintext highlighter-rouge">Int</code> to allow the expression <code class="language-plaintext highlighter-rouge">3.toHexString</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit class RichInt(val self: Int) extends AnyVal {
+  def toHexString: String = java.lang.Integer.toHexString(self)
+}
+</code></pre></div></div>
+
+<p>At runtime, this expression <code class="language-plaintext highlighter-rouge">3.toHexString</code> is optimised to the equivalent of a method call on a static object
+(<code class="language-plaintext highlighter-rouge">RichInt$.MODULE$.extension$toHexString(3)</code>), rather than a method call on a newly instantiated object.</p>
+
+<h2 id="correctness">Correctness</h2>
+
+<p>Another use case for value classes is to get the type safety of a data type without the runtime allocation overhead.
+For example, a fragment of a data type that represents a distance might look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Meter(val value: Double) extends AnyVal {
+  def +(m: Meter): Meter = new Meter(value + m.value)
+}
+</code></pre></div></div>
+
+<p>Code that adds two distances, such as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val x = new Meter(3.4)
+val y = new Meter(4.3)
+val z = x + y
+</code></pre></div></div>
+
+<p>will not actually allocate any <code class="language-plaintext highlighter-rouge">Meter</code> instances, but will only use primitive doubles at runtime.</p>
+
+<p><em>Note: You can use case classes and/or extension methods for cleaner syntax in practice.</em></p>
+
+<h2 id="when-allocation-is-necessary">When Allocation Is Necessary</h2>
+
+<p>Because the JVM does not support value classes, Scala sometimes needs to actually instantiate a value class.
+Full details may be found in <a href="https://docs.scala-lang.org/sips/pending/value-classes.html">SIP-15</a>.</p>
+
+<h3 id="allocation-summary">Allocation Summary</h3>
+
+<p>A value class is actually instantiated when:</p>
+
+<ol>
+  <li>a value class is treated as another type.</li>
+  <li>a value class is assigned to an array.</li>
+  <li>doing runtime type tests, such as pattern matching.</li>
+</ol>
+
+<h3 id="allocation-details">Allocation Details</h3>
+
+<p>Whenever a value class is treated as another type, including a universal trait, an instance of the actual value class must be instantiated.
+As an example, consider the <code class="language-plaintext highlighter-rouge">Meter</code> value class:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Distance extends Any
+case class Meter(val value: Double) extends AnyVal with Distance
+</code></pre></div></div>
+
+<p>A method that accepts a value of type <code class="language-plaintext highlighter-rouge">Distance</code> will require an actual <code class="language-plaintext highlighter-rouge">Meter</code> instance.
+In the following example, the <code class="language-plaintext highlighter-rouge">Meter</code> classes are actually instantiated:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def add(a: Distance, b: Distance): Distance = ...
+add(Meter(3.4), Meter(4.3))
+</code></pre></div></div>
+
+<p>If the signature of <code class="language-plaintext highlighter-rouge">add</code> were instead:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def add(a: Meter, b: Meter): Meter = ...
+</code></pre></div></div>
+
+<p>then allocations would not be necessary.
+Another instance of this rule is when a value class is used as a type argument.
+For example, the actual Meter instance must be created for even a call to identity:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def identity[T](t: T): T = t
+identity(Meter(5.0))
+</code></pre></div></div>
+
+<p>Another situation where an allocation is necessary is when assigning to an array, even if it is an array of that value class.
+For example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val m = Meter(5.0)
+val array = Array[Meter](m)
+</code></pre></div></div>
+
+<p>The array here contains actual <code class="language-plaintext highlighter-rouge">Meter</code> instances and not just the underlying double primitives.</p>
+
+<p>Lastly, type tests such as those done in pattern matching or <code class="language-plaintext highlighter-rouge">asInstanceOf</code> require actual value class instances:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case class P(val i: Int) extends AnyVal
+
+val p = new P(3)
+p match { // new P instantiated here
+  case P(3) =&gt; println("Matched 3")
+  case P(x) =&gt; println("Not 3")
+}
+</code></pre></div></div>
+
+<h2 id="limitations">Limitations</h2>
+
+<p>Value classes currently have several limitations, in part because the JVM does not natively support the concept of value classes.
+Full details on the implementation of value classes and their limitations may be found in <a href="https://docs.scala-lang.org/sips/pending/value-classes.html">SIP-15</a>.</p>
+
+<h3 id="summary-of-limitations">Summary of Limitations</h3>
+
+<p>A value class …</p>
+
+<ol>
+  <li>… must have only a primary constructor with exactly one public, val parameter whose type is not a user-defined value class. (From Scala 2.11.0, the parameter may be non-public.)</li>
+  <li>… may not have <code class="language-plaintext highlighter-rouge">@specialized</code> type parameters.</li>
+  <li>… may not have nested or local classes, traits, or objects</li>
+  <li>… may not define concrete <code class="language-plaintext highlighter-rouge">equals</code> or <code class="language-plaintext highlighter-rouge">hashCode</code> methods.</li>
+  <li>… must be a top-level class or a member of a statically accessible object</li>
+  <li>… can only have defs as members.  In particular, it cannot have lazy vals, vars, or vals as members.</li>
+  <li>… cannot be extended by another class.</li>
+</ol>
+
+<h3 id="examples-of-limitations">Examples of Limitations</h3>
+
+<p>This section provides many concrete consequences of these limitations not already described in the necessary allocations section.</p>
+
+<p>Multiple constructor parameters are not allowed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Complex(val real: Double, val imag: Double) extends AnyVal
+</code></pre></div></div>
+
+<p>and the Scala compiler will generate the following error message:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Complex.scala:1: error: value class needs to have exactly one public val parameter
+class Complex(val real: Double, val imag: Double) extends AnyVal
+      ^
+</code></pre></div></div>
+
+<p>Because the constructor parameter must be a <code class="language-plaintext highlighter-rouge">val</code>, it cannot be a by-name parameter:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NoByName.scala:1: error: `val' parameters may not be call-by-name
+class NoByName(val x: =&gt; Int) extends AnyVal
+                      ^
+</code></pre></div></div>
+
+<p>Scala doesn’t allow lazy val constructor parameters, so that isn’t allowed either.
+Multiple constructors are not allowed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Secondary(val x: Int) extends AnyVal {
+  def this(y: Double) = this(y.toInt)
+}
+
+Secondary.scala:2: error: value class may not have secondary constructors
+  def this(y: Double) = this(y.toInt)
+      ^
+</code></pre></div></div>
+
+<p>A value class cannot have lazy vals or vals as members and cannot have nested classes, traits, or objects:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class NoLazyMember(val evaluate: () =&gt; Double) extends AnyVal {
+  val member: Int = 3
+  lazy val x: Double = evaluate()
+  object NestedObject
+  class NestedClass
+}
+
+Invalid.scala:2: error: this statement is not allowed in value class: private[this] val member: Int = 3
+  val member: Int = 3
+      ^
+Invalid.scala:3: error: this statement is not allowed in value class: lazy private[this] var x: Double = NoLazyMember.this.evaluate.apply()
+  lazy val x: Double = evaluate()
+           ^
+Invalid.scala:4: error: value class may not have nested module definitions
+  object NestedObject
+         ^
+Invalid.scala:5: error: value class may not have nested class definitions
+  class NestedClass
+        ^
+</code></pre></div></div>
+
+<p>Note that local classes, traits, and objects are not allowed either, as in the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class NoLocalTemplates(val x: Int) extends AnyVal {
+  def aMethod = {
+    class Local
+    ...
+  }
+}
+</code></pre></div></div>
+
+<p>A current implementation restriction is that value classes cannot be nested:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Outer(val inner: Inner) extends AnyVal
+class Inner(val value: Int) extends AnyVal
+
+Nested.scala:1: error: value class may not wrap another user-defined value class
+class Outer(val inner: Inner) extends AnyVal
+                ^
+</code></pre></div></div>
+
+<p>Additionally, structural types cannot use value classes in method parameter or return types:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Value(val x: Int) extends AnyVal
+object Usage {
+  def anyValue(v: { def value: Value }): Value =
+    v.value
+}
+
+Struct.scala:3: error: Result type in structural refinement may not refer to a user-defined value class
+  def anyValue(v: { def value: Value }): Value =
+                               ^
+</code></pre></div></div>
+
+<p>A value class may not extend a non-universal trait and a value class may not itself be extended:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait NotUniversal
+class Value(val x: Int) extends AnyVal with NotUniversal
+class Extend(x: Int) extends Value(x)
+
+Extend.scala:2: error: illegal inheritance; superclass AnyVal
+ is not a subclass of the superclass Object
+ of the mixin trait NotUniversal
+class Value(val x: Int) extends AnyVal with NotUniversal
+                                            ^
+Extend.scala:3: error: illegal inheritance from final class Value
+class Extend(x: Int) extends Value(x)
+                             ^
+</code></pre></div></div>
+
+<p>The second error messages shows that although the <code class="language-plaintext highlighter-rouge">final</code> modifier is not explicitly specified for a value class, it is assumed.</p>
+
+<p>Another limitation that is a result of supporting only one parameter to a class is that a value class must be top-level or a member of a statically accessible object.
+This is because a nested value class would require a second parameter that references the enclosing class.
+So, this is not allowed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Outer {
+  class Inner(val x: Int) extends AnyVal
+}
+
+Outer.scala:2: error: value class may not be a member of another class
+class Inner(val x: Int) extends AnyVal
+      ^
+</code></pre></div></div>
+
+<p>but this is allowed because the enclosing object is top-level:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Outer {
+  class Inner(val x: Int) extends AnyVal
+}
+</code></pre></div></div>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/value-classes.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/core/value-classes.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/core/value-classes.html" class="lang">中文 (简体)</a></li>
+          
+      </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/value-classes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

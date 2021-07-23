@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Maps | 
+      Collections (Scala 2.8 - 2.12) | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/collections/maps.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Maps"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Maps"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+<a class="new-version-notice" href="/overviews/collections-2.13/maps.html">This page has a new version.</a>
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections (Scala 2.8 - 2.12)</div>
+          
+          <h1>Maps</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>A <a href="https://www.scala-lang.org/api/current/scala/collection/Map.html">Map</a> is an <a href="https://www.scala-lang.org/api/current/scala/collection/Iterable.html">Iterable</a> consisting of pairs of keys and values (also named <em>mappings</em> or <em>associations</em>). Scala’s <a href="https://www.scala-lang.org/api/current/scala/Predef$.html">Predef</a> object offers an implicit conversion that lets you write <code class="language-plaintext highlighter-rouge">key -&gt; value</code> as an alternate syntax for the pair <code class="language-plaintext highlighter-rouge">(key, value)</code>. For instance <code class="language-plaintext highlighter-rouge">Map("x" -&gt; 24, "y" -&gt; 25, "z" -&gt; 26)</code> means exactly the same as <code class="language-plaintext highlighter-rouge">Map(("x", 24), ("y", 25), ("z", 26))</code>, but reads better.</p>
+
+<p>The fundamental operations on maps are similar to those on sets. They are summarized in the following table and fall into the following categories:</p>
+
+<ul>
+  <li><strong>Lookup</strong> operations <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">get</code>, <code class="language-plaintext highlighter-rouge">getOrElse</code>, <code class="language-plaintext highlighter-rouge">contains</code>, and <code class="language-plaintext highlighter-rouge">isDefinedAt</code>. These turn maps into partial functions from keys to values. The fundamental lookup method for a map is: <code class="language-plaintext highlighter-rouge">def get(key): Option[Value]</code>. The operation “<code class="language-plaintext highlighter-rouge">m get key</code>” tests whether the map contains an association for the given <code class="language-plaintext highlighter-rouge">key</code>. If so, it returns the associated value in a <code class="language-plaintext highlighter-rouge">Some</code>. If no key is defined in the map, <code class="language-plaintext highlighter-rouge">get</code> returns <code class="language-plaintext highlighter-rouge">None</code>. Maps also define an <code class="language-plaintext highlighter-rouge">apply</code> method that returns the value associated with a given key directly, without wrapping it in an <code class="language-plaintext highlighter-rouge">Option</code>. If the key is not defined in the map, an exception is raised.</li>
+  <li><strong>Additions and updates</strong> <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">++</code>, <code class="language-plaintext highlighter-rouge">updated</code>, which let you add new bindings to a map or change existing bindings.</li>
+  <li><strong>Removals</strong> <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">--</code>, which remove bindings from a map.</li>
+  <li><strong>Subcollection producers</strong> <code class="language-plaintext highlighter-rouge">keys</code>, <code class="language-plaintext highlighter-rouge">keySet</code>, <code class="language-plaintext highlighter-rouge">keysIterator</code>, <code class="language-plaintext highlighter-rouge">values</code>, <code class="language-plaintext highlighter-rouge">valuesIterator</code>, which return a map’s keys and values separately in various forms.</li>
+  <li><strong>Transformations</strong> <code class="language-plaintext highlighter-rouge">filterKeys</code> and <code class="language-plaintext highlighter-rouge">mapValues</code>, which produce a new map by filtering and transforming bindings of an existing map.</li>
+</ul>
+
+<h3 id="operations-in-class-map">Operations in Class Map</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Lookups:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms get k</code></td>
+      <td>The value associated with key <code class="language-plaintext highlighter-rouge">k</code> in map <code class="language-plaintext highlighter-rouge">ms</code> as an option, <code class="language-plaintext highlighter-rouge">None</code> if not found.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms(k)</code></td>
+      <td>(or, written out, <code class="language-plaintext highlighter-rouge">ms apply k</code>) The value associated with key <code class="language-plaintext highlighter-rouge">k</code> in map <code class="language-plaintext highlighter-rouge">ms</code>, or exception if not found.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms getOrElse (k, d)</code></td>
+      <td>The value associated with key <code class="language-plaintext highlighter-rouge">k</code> in map <code class="language-plaintext highlighter-rouge">ms</code>, or the default value <code class="language-plaintext highlighter-rouge">d</code> if not found.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms contains k</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">ms</code> contains a mapping for key <code class="language-plaintext highlighter-rouge">k</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms isDefinedAt k</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">contains</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Additions and Updates:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms + (k -&gt; v)</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> as well as the mapping <code class="language-plaintext highlighter-rouge">k -&gt; v</code> from key <code class="language-plaintext highlighter-rouge">k</code> to value <code class="language-plaintext highlighter-rouge">v</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms + (k -&gt; v, l -&gt; w)</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> as well as the given key/value pairs.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms ++ kvs</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> as well as all key/value pairs of <code class="language-plaintext highlighter-rouge">kvs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms updated (k, v)</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">ms + (k -&gt; v)</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Removals:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms - k</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> except for any mapping of key <code class="language-plaintext highlighter-rouge">k</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms - (k, l, m)</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> except for any mapping with the given keys.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms -- ks</code></td>
+      <td>The map containing all mappings of <code class="language-plaintext highlighter-rouge">ms</code> except for any mapping with a key in <code class="language-plaintext highlighter-rouge">ks</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Subcollections:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.keys</code></td>
+      <td>An iterable containing each key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.keySet</code></td>
+      <td>A set containing each key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.keysIterator</code></td>
+      <td>An iterator yielding each key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.values</code></td>
+      <td>An iterable containing each value associated with a key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.valuesIterator</code></td>
+      <td>An iterator yielding each value associated with a key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Transformation:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms filterKeys p</code></td>
+      <td>A map view containing only those mappings in <code class="language-plaintext highlighter-rouge">ms</code> where the key satisfies predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms mapValues f</code></td>
+      <td>A map view resulting from applying function <code class="language-plaintext highlighter-rouge">f</code> to each value associated with a key in <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Mutable maps support in addition the operations summarized in the following table.</p>
+
+<h3 id="operations-in-class-mutablemap">Operations in Class mutable.Map</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Additions and Updates:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms(k) = v</code></td>
+      <td>(Or, written out, <code class="language-plaintext highlighter-rouge">ms.update(x, v)</code>). Adds mapping from key <code class="language-plaintext highlighter-rouge">k</code> to value <code class="language-plaintext highlighter-rouge">v</code> to map ms as a side effect, overwriting any previous mapping of <code class="language-plaintext highlighter-rouge">k</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms += (k -&gt; v)</code></td>
+      <td>Adds mapping from key <code class="language-plaintext highlighter-rouge">k</code> to value <code class="language-plaintext highlighter-rouge">v</code> to map <code class="language-plaintext highlighter-rouge">ms</code> as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms += (k -&gt; v, l -&gt; w)</code></td>
+      <td>Adds the given mappings to <code class="language-plaintext highlighter-rouge">ms</code> as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms ++= kvs</code></td>
+      <td>Adds all mappings in <code class="language-plaintext highlighter-rouge">kvs</code> to <code class="language-plaintext highlighter-rouge">ms</code> as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms put (k, v)</code></td>
+      <td>Adds mapping from key <code class="language-plaintext highlighter-rouge">k</code> to value <code class="language-plaintext highlighter-rouge">v</code> to <code class="language-plaintext highlighter-rouge">ms</code> and returns any value previously associated with <code class="language-plaintext highlighter-rouge">k</code> as an option.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms getOrElseUpdate (k, d)</code></td>
+      <td>If key <code class="language-plaintext highlighter-rouge">k</code> is defined in map <code class="language-plaintext highlighter-rouge">ms</code>, return its associated value. Otherwise, update <code class="language-plaintext highlighter-rouge">ms</code> with the mapping <code class="language-plaintext highlighter-rouge">k -&gt; d</code> and return <code class="language-plaintext highlighter-rouge">d</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Removals:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms -= k</code></td>
+      <td>Removes mapping with key <code class="language-plaintext highlighter-rouge">k</code> from ms as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms -= (k, l, m)</code></td>
+      <td>Removes mappings with the given keys from <code class="language-plaintext highlighter-rouge">ms</code> as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms --= ks</code></td>
+      <td>Removes all keys in <code class="language-plaintext highlighter-rouge">ks</code> from <code class="language-plaintext highlighter-rouge">ms</code> as a side effect and returns <code class="language-plaintext highlighter-rouge">ms</code> itself.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms remove k</code></td>
+      <td>Removes any mapping with key <code class="language-plaintext highlighter-rouge">k</code> from <code class="language-plaintext highlighter-rouge">ms</code> and returns any value previously associated with <code class="language-plaintext highlighter-rouge">k</code> as an option.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms retain p</code></td>
+      <td>Keeps only those mappings in <code class="language-plaintext highlighter-rouge">ms</code> that have a key satisfying predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.clear()</code></td>
+      <td>Removes all mappings from <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Transformation:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms transform f</code></td>
+      <td>Transforms all associated values in map <code class="language-plaintext highlighter-rouge">ms</code> with function <code class="language-plaintext highlighter-rouge">f</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Cloning:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ms.clone</code></td>
+      <td>Returns a new mutable map with the same mappings as <code class="language-plaintext highlighter-rouge">ms</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The addition and removal operations for maps mirror those for sets. Like sets, mutable maps also support the non-destructive addition operations <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, and <code class="language-plaintext highlighter-rouge">updated</code>, but they are used less frequently because they involve a copying of the mutable map. Instead, a mutable map <code class="language-plaintext highlighter-rouge">m</code> is usually updated “in place”, using the two variants <code class="language-plaintext highlighter-rouge">m(key) = value</code> or <code class="language-plaintext highlighter-rouge">m += (key -&gt; value)</code>. There is also the variant <code class="language-plaintext highlighter-rouge">m put (key, value)</code>, which returns an <code class="language-plaintext highlighter-rouge">Option</code> value that contains the value previously associated with <code class="language-plaintext highlighter-rouge">key</code>, or <code class="language-plaintext highlighter-rouge">None</code> if the <code class="language-plaintext highlighter-rouge">key</code> did not exist in the map before.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">getOrElseUpdate</code> is useful for accessing maps that act as caches. Say you have an expensive computation triggered by invoking a function <code class="language-plaintext highlighter-rouge">f</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def f(x: String) = {
+       println("taking my time."); sleep(100)
+       x.reverse }
+f: (x: String)String
+</code></pre></div></div>
+
+<p>Assume further that <code class="language-plaintext highlighter-rouge">f</code> has no side-effects, so invoking it again with the same argument will always yield the same result. In that case you could save time by storing previously computed bindings of argument and results of <code class="language-plaintext highlighter-rouge">f</code> in a map and only computing the result of <code class="language-plaintext highlighter-rouge">f</code> if a result of an argument was not found there. One could say the map is a <em>cache</em> for the computations of the function <code class="language-plaintext highlighter-rouge">f</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val cache = collection.mutable.Map[String, String]()
+cache: scala.collection.mutable.Map[String,String] = Map()
+</code></pre></div></div>
+
+<p>You can now create a more efficient caching version of the <code class="language-plaintext highlighter-rouge">f</code> function:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def cachedF(s: String) = cache.getOrElseUpdate(s, f(s))
+cachedF: (s: String)String
+scala&gt; cachedF("abc")
+taking my time.
+res3: String = cba
+scala&gt; cachedF("abc")
+res4: String = cba
+</code></pre></div></div>
+
+<p>Note that the second argument to <code class="language-plaintext highlighter-rouge">getOrElseUpdate</code> is “by-name”, so the computation of <code class="language-plaintext highlighter-rouge">f("abc")</code> above is only performed if <code class="language-plaintext highlighter-rouge">getOrElseUpdate</code> requires the value of its second argument, which is precisely if its first argument is not found in the <code class="language-plaintext highlighter-rouge">cache</code> map. You could also have implemented <code class="language-plaintext highlighter-rouge">cachedF</code> directly, using just basic map operations, but it would take more code to do so:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def cachedF(arg: String) = cache get arg match {
+  case Some(result) =&gt; result
+  case None =&gt;
+    val result = f(x)
+    cache(arg) = result
+    result
+}
+</code></pre></div></div>
+
+<h3 id="synchronized-sets-and-maps">Synchronized Sets and Maps</h3>
+
+<p>To get a thread-safe mutable map, you can mix the <code class="language-plaintext highlighter-rouge">SynchronizedMap</code> trait into whatever particular map implementation you desire. For example, you can mix <code class="language-plaintext highlighter-rouge">SynchronizedMap</code> into <code class="language-plaintext highlighter-rouge">HashMap</code>, as shown in the code below. This example begins with an import of two traits, <code class="language-plaintext highlighter-rouge">Map</code> and <code class="language-plaintext highlighter-rouge">SynchronizedMap</code>, and one class, <code class="language-plaintext highlighter-rouge">HashMap</code>, from package <code class="language-plaintext highlighter-rouge">scala.collection.mutable</code>. The rest of the example is the definition of singleton object <code class="language-plaintext highlighter-rouge">MapMaker</code>, which declares one method, <code class="language-plaintext highlighter-rouge">makeMap</code>. The <code class="language-plaintext highlighter-rouge">makeMap</code> method declares its result type to be a mutable map of string keys to string values.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  import scala.collection.mutable.{Map,
+      SynchronizedMap, HashMap}
+  object MapMaker {
+    def makeMap: Map[String, String] = {
+        new HashMap[String, String] with
+            SynchronizedMap[String, String] {
+          override def default(key: String) =
+            "Why do you want to know?"
+        }
+    }
+  }
+</code></pre></div></div>
+
+<center>Mixing in the `SynchronizedMap` trait.</center>
+
+<p>The first statement inside the body of <code class="language-plaintext highlighter-rouge">makeMap</code> constructs a new mutable <code class="language-plaintext highlighter-rouge">HashMap</code> that mixes in the <code class="language-plaintext highlighter-rouge">SynchronizedMap</code> trait:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new HashMap[String, String] with
+  SynchronizedMap[String, String]
+</code></pre></div></div>
+
+<p>Given this code, the Scala compiler will generate a synthetic subclass of <code class="language-plaintext highlighter-rouge">HashMap</code> that mixes in <code class="language-plaintext highlighter-rouge">SynchronizedMap</code>, and create (and return) an instance of it. This synthetic class will also override a method named <code class="language-plaintext highlighter-rouge">default</code>, because of this code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>override def default(key: String) =
+  "Why do you want to know?"
+</code></pre></div></div>
+
+<p>If you ask a map to give you the value for a particular key, but it doesn’t have a mapping for that key, you’ll by default get a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>. If you define a new map class and override the <code class="language-plaintext highlighter-rouge">default</code> method, however, your new map will return the value returned by <code class="language-plaintext highlighter-rouge">default</code> when queried with a non-existent key. Thus, the synthetic <code class="language-plaintext highlighter-rouge">HashMap</code> subclass generated by the compiler from the code in the synchronized map code will return the somewhat curt response string, <code class="language-plaintext highlighter-rouge">"Why do you want to know?"</code>, when queried with a non-existent key.</p>
+
+<p>Because the mutable map returned by the <code class="language-plaintext highlighter-rouge">makeMap</code> method mixes in the <code class="language-plaintext highlighter-rouge">SynchronizedMap</code> trait, it can be used by multiple threads at once. Each access to the map will be synchronized. Here’s an example of the map being used, by one thread, in the interpreter:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val capital = MapMaker.makeMap  
+capital: scala.collection.mutable.Map[String,String] = Map()
+scala&gt; capital ++ List("US" -&gt; "Washington",
+        "France" -&gt; "Paris", "Japan" -&gt; "Tokyo")
+res0: scala.collection.mutable.Map[String,String] =
+  Map(France -&gt; Paris, US -&gt; Washington, Japan -&gt; Tokyo)
+scala&gt; capital("Japan")
+res1: String = Tokyo
+scala&gt; capital("New Zealand")
+res2: String = Why do you want to know?
+scala&gt; capital += ("New Zealand" -&gt; "Wellington")
+scala&gt; capital("New Zealand")                    
+res3: String = Wellington
+</code></pre></div></div>
+
+<p>You can create synchronized sets similarly to the way you create synchronized maps. For example, you could create a synchronized <code class="language-plaintext highlighter-rouge">HashSet</code> by mixing in the <code class="language-plaintext highlighter-rouge">SynchronizedSet</code> trait, like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.collection.mutable
+val synchroSet =
+  new mutable.HashSet[Int] with
+      mutable.SynchronizedSet[Int]
+</code></pre></div></div>
+
+<p>Finally, if you are thinking of using synchronized collections, you may also wish to consider the concurrent collections of <code class="language-plaintext highlighter-rouge">java.util.concurrent</code> instead.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/overview.html">Mutable and Immutable Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/trait-traversable.html">Trait Traversable</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/trait-iterable.html">Trait Iterable</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/seqs.html">The sequence traits Seq, IndexedSeq, and LinearSeq</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/sets.html">Sets</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/collections/maps.html">Maps</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-immutable-collection-classes.html">Concrete Immutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-mutable-collection-classes.html">Concrete Mutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/arrays.html">Arrays</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/strings.html">Strings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/performance-characteristics.html">Performance Characteristics</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/equality.html">Equality</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/views.html">Views</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/iterators.html">Iterators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/creating-collections-from-scratch.html">Creating Collections From Scratch</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/conversions-between-java-and-scala-collections.html">Conversions Between Java and Scala Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/migrating-from-scala-27.html">Migrating from Scala 2.7</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections/maps.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/collections/maps.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/collections/maps.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/collections/maps.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

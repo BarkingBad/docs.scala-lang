@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Parameter Untupling - More Details | 
+      Scala 3 Language Reference | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/reference/other-new-features/parameter-untupling-spec.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Parameter Untupling - More Details"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Parameter Untupling - More Details"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Language Reference</div>
+          
+          <h1>Parameter Untupling - More Details</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<h2 id="motivation">Motivation</h2>
+
+<p>Say you have a list of pairs</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">)]</span>
+</code></pre></div></div>
+
+<p>and you want to map <code class="language-plaintext highlighter-rouge">xs</code> to a list of <code class="language-plaintext highlighter-rouge">Int</code>s so that each pair of numbers is mapped to their sum.
+Previously, the best way to do this was with a pattern-matching decomposition:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xs</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span>
+  <span class="nf">case</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>While correct, this is inconvenient. Instead, we propose to write it the following way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xs</span><span class="o">.</span><span class="py">map</span> <span class="o">{</span>
+  <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>or, equivalently:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">xs</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Generally, a function value with <code class="language-plaintext highlighter-rouge">n &gt; 1</code> parameters can be converted to a function with tupled arguments if the expected type is a unary function type of the form <code class="language-plaintext highlighter-rouge">((T_1, ..., T_n)) =&gt; U</code>.</p>
+
+<h2 id="type-checking">Type Checking</h2>
+
+<p>The type checking happens in two steps:</p>
+
+<ol>
+  <li>Check whether parameter untupling is feasible</li>
+  <li>Adapt the function and type check it</li>
+</ol>
+
+<h3 id="feasibility-check">Feasibility Check</h3>
+
+<p>Suppose a function <code class="language-plaintext highlighter-rouge">f</code> of the form <code class="language-plaintext highlighter-rouge">(p1, ..., pn) =&gt; e</code> (where <code class="language-plaintext highlighter-rouge">n &gt; 1</code>), with <code class="language-plaintext highlighter-rouge">p1, ..., pn</code> as parameters and <code class="language-plaintext highlighter-rouge">e</code> as function body.</p>
+
+<p>If the expected type for checking <code class="language-plaintext highlighter-rouge">f</code> is a fully defined function type of the form <code class="language-plaintext highlighter-rouge">TupleN[T1, ..., Tn] =&gt; R</code> (or an equivalent SAM-type), where each type <code class="language-plaintext highlighter-rouge">Ti</code> fits the corresponding parameter <code class="language-plaintext highlighter-rouge">pi</code>. Then <code class="language-plaintext highlighter-rouge">f</code> is feasible for parameter untupling with the expected type <code class="language-plaintext highlighter-rouge">TupleN[T1, ..., Tn] =&gt; R</code>.</p>
+
+<p>A type <code class="language-plaintext highlighter-rouge">Ti</code> fits a parameter <code class="language-plaintext highlighter-rouge">pi</code> if one of the following two cases is <code class="language-plaintext highlighter-rouge">true</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pi</code> comes without a type, i.e. it is a simple identifier or <code class="language-plaintext highlighter-rouge">_</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">pi</code> is of the form <code class="language-plaintext highlighter-rouge">x: Ui</code> or <code class="language-plaintext highlighter-rouge">_: Ui</code> and <code class="language-plaintext highlighter-rouge">Ti &lt;: Ui</code>.</li>
+</ul>
+
+<p>Parameter untupling composes with eta-expansion. That is, an n-ary function generated by eta-expansion can in turn be adapted to the expected type with parameter untupling.</p>
+
+<h3 id="term-adaptation">Term adaptation</h3>
+
+<p>If the function</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">p1</span><span class="o">,</span> <span class="o">...,</span> <span class="n">pn</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">e</span>
+</code></pre></div></div>
+
+<p>is feasible for parameter untupling with the expected type <code class="language-plaintext highlighter-rouge">TupleN[T1, ..., Tn] =&gt; Te</code>, then continue to type check the following adapted function</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">TupleN</span><span class="o">[</span><span class="kt">T1</span>, <span class="kt">...</span>, <span class="kt">Tn</span><span class="o">])</span> <span class="k">=&gt;</span>
+  <span class="k">def</span> <span class="nf">p1</span><span class="k">:</span> <span class="kt">T1</span> <span class="o">=</span> <span class="nv">x</span><span class="o">.</span><span class="py">_1</span>
+  <span class="o">...</span>
+  <span class="k">def</span> <span class="nf">pn</span><span class="k">:</span> <span class="kt">Tn</span> <span class="o">=</span> <span class="nv">x</span><span class="o">.</span><span class="py">_n</span>
+  <span class="n">e</span>
+</code></pre></div></div>
+
+<p>with the same expected type.</p>
+<h2 id="migration">Migration</h2>
+
+<p>Code like this could not be written before, hence the new notation would not be ambiguous after adoption.</p>
+
+<p>Though it is possible that someone has written an implicit conversion form <code class="language-plaintext highlighter-rouge">(T1, ..., Tn) =&gt; R</code> to <code class="language-plaintext highlighter-rouge">TupleN[T1, ..., Tn] =&gt; R</code>
+for some <code class="language-plaintext highlighter-rouge">n</code>. This change could be detected and fixed by <a href="https://scalacenter.github.io/scalafix/"><code class="language-plaintext highlighter-rouge">Scalafix</code></a>. Furthermore, such conversion would probably
+be doing the same translation (semantically) but in a less efficient way.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>For more information, see <a href="https://github.com/lampepfl/dotty/issues/897">Issue #897</a>.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_scala3-reference/other-new-features/parameter-untupling-spec.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

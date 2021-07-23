@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Building and Testing Scala Projects with sbt | 
+      Scala 3 — Book | 
+      Scala Documentation
+    </title>
+    
+    <meta name="description" content="This section looks at a commonly-used build tool, sbt, and a testing library, ScalaTest." />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/book/tools-sbt.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Building and Testing Scala Projects with sbt"/>
+    <meta property="og:description" content="This section looks at a commonly-used build tool, sbt, and a testing library, ScalaTest."/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Building and Testing Scala Projects with sbt"/>
+    <meta name="twitter:description" content="This section looks at a commonly-used build tool, sbt, and a testing library, ScalaTest."/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 — Book</div>
+          
+          <h1>Building and Testing Scala Projects with sbt</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>In this section you’ll see two tools that are commonly used in Scala projects:</p>
+
+<ul>
+  <li>The <a href="https://www.scala-sbt.org">sbt</a> build tool</li>
+  <li><a href="https://www.scalatest.org">ScalaTest</a>, a source code testing framework</li>
+</ul>
+
+<p>We’ll start by showing how to use sbt to build your Scala projects, and then we’ll show how to use sbt and ScalaTest together to test your Scala projects.</p>
+
+<blockquote>
+  <p>If you want to learn about tools to help you migrate your Scala 2 code to Scala 3, see our <a href="/scala3/guides/migration/compatibility-intro.html">Scala 3 Migration Guide</a>.</p>
+</blockquote>
+
+<h2 id="building-scala-projects-with-sbt">Building Scala projects with sbt</h2>
+
+<p>You can use several different tools to build your Scala projects, including Ant, Maven, Gradle, Mill, and more.
+But a tool named <em>sbt</em> was the first build tool that was specifically created for Scala.</p>
+
+<blockquote>
+  <p>To install sbt, see <a href="https://www.scala-sbt.org/download.html">its download page</a> or our <a href="/scala3/getting-started.html">Getting Started</a> page.</p>
+</blockquote>
+
+<h3 id="creating-a-hello-world-project">Creating a “Hello, world” project</h3>
+
+<p>You can create an sbt “Hello, world” project in just a few steps.
+First, create a directory to work in, and move into that directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>hello
+<span class="nv">$ </span><span class="nb">cd </span>hello
+</code></pre></div></div>
+
+<p>In the directory <code class="language-plaintext highlighter-rouge">hello</code>, create a subdirectory <code class="language-plaintext highlighter-rouge">project</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>project
+</code></pre></div></div>
+
+<p>Create a file named <em>build.properties</em> in the directory <code class="language-plaintext highlighter-rouge">project</code>, with
+the following content:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt.version=1.5.4
+</code></pre></div></div>
+
+<p>Then create a file named <em>build.sbt</em> in the project root directory that contains this line:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scalaVersion</span> <span class="o">:=</span> <span class="s">"3.0.0"</span>
+</code></pre></div></div>
+
+<p>Now create a file named something like <em>Hello.scala</em>—the first part of the name doesn’t matter—with this line:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">helloWorld</span> <span class="k">=</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, world"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That’s all you have to do.</p>
+
+<p>You should have a project structure like the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>tree
+<span class="nb">.</span>
+├── build.sbt
+├── Hello.scala
+└── project
+    └── build.properties
+</code></pre></div></div>
+
+<p>Now run the project with this <code class="language-plaintext highlighter-rouge">sbt</code> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt run
+</code></pre></div></div>
+
+<p>You should see output that looks like this, including the <code class="language-plaintext highlighter-rouge">"Hello, world"</code> from your program:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt run
+<span class="o">[</span>info] welcome to sbt 1.5.4 <span class="o">(</span>AdoptOpenJDK Java 11.x<span class="o">)</span>
+<span class="o">[</span>info] loading project definition from project ...
+<span class="o">[</span>info] loading settings <span class="k">for </span>project from build.sbt ...
+<span class="o">[</span>info] compiling 1 Scala <span class="nb">source </span>to target/scala-3.0.0/classes ...
+<span class="o">[</span>info] running helloWorld
+Hello, world
+<span class="o">[</span>success] Total <span class="nb">time</span>: 2 s
+</code></pre></div></div>
+
+<p>The sbt launcher—the <code class="language-plaintext highlighter-rouge">sbt</code> command-line tool—loads the version of sbt set in the file <em>project/build.properties</em>, which loads the version of the Scala compiler set in the file <em>build.sbt</em>, compiles the code in the file <em>Hello.scala</em>, and runs the resulting bytecode.</p>
+
+<p>When you look at your directory, you’ll see that sbt has a directory named <em>target</em>.
+These are working directories that sbt uses.</p>
+
+<p>As you can see, creating and running a little Scala project with sbt takes just a few simple steps.</p>
+
+<blockquote>
+  <p>For sbt version &lt; 1.5.0, it is required to have the following line in a <em>project/plugins.sbt</em> file: <code class="language-plaintext highlighter-rouge">addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.1")</code></p>
+</blockquote>
+
+<h3 id="using-sbt-with-larger-projects">Using sbt with larger projects</h3>
+
+<p>For a little project, that’s all that sbt requires to run.
+For larger projects that require many source code files, dependencies, or sbt plugins, you’ll want to create an organized directory structure.
+The rest of this section demonstrates the structure that sbt uses.</p>
+
+<h3 id="the-sbt-directory-structure">The sbt directory structure</h3>
+
+<p>Like Maven, sbt uses a standard project directory structure.
+A nice benefit of that is that once you’re comfortable with its structure, it makes it easy to work on other Scala/sbt projects.</p>
+
+<p>The first thing to know is that underneath the root directory of your project, sbt expects a directory structure that looks like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── build.sbt
+├── project/
+│   └── build.properties
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   ├── resources/
+│   │   └── scala/
+│   └── test/
+│       ├── java/
+│       ├── resources/
+│       └── scala/
+└── target/
+</code></pre></div></div>
+
+<p>You can also add a <em>lib</em> directory under the root directory if you want to add unmanaged dependencies—JAR files—to your project.</p>
+
+<p>If you’re going to create a project that has Scala source code files and tests, but won’t be using any Java source code files, and doesn’t need any “resources”—such as embedded images, configuration files, etc.—this is all you really need under the <em>src</em> directory:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+└── src/
+    ├── main/
+    │   └── scala/
+    └── test/
+        └── scala/
+</code></pre></div></div>
+
+<h3 id="hello-world-with-an-sbt-directory-structure">“Hello, world” with an sbt directory structure</h3>
+
+<p>Creating this directory structure is simple.
+There are tools to do this for you, but assuming that you’re using a Unix/Linux system, you can use these commands to create your first sbt project directory structure:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>HelloWorld
+<span class="nv">$ </span><span class="nb">cd </span>HelloWorld
+<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> src/<span class="o">{</span>main,test<span class="o">}</span>/scala
+<span class="nv">$ </span><span class="nb">mkdir </span>project target
+</code></pre></div></div>
+
+<p>When you run a <code class="language-plaintext highlighter-rouge">find .</code> command after running those commands, you should see this result:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>find <span class="nb">.</span>
+<span class="nb">.</span>
+./project
+./src
+./src/main
+./src/main/scala
+./src/test
+./src/test/scala
+./target
+</code></pre></div></div>
+
+<p>If you see that, you’re in great shape for the next step.</p>
+
+<blockquote>
+  <p>There are other ways to create the files and directories for an sbt project.
+One way is to use the <code class="language-plaintext highlighter-rouge">sbt new</code> command, <a href="https://www.scala-sbt.org/1.x/docs/Hello.html">which is documented here on scala-sbt.org</a>.
+That approach isn’t shown here because some of the files it creates are more complicated than necessary for an introduction like this.</p>
+</blockquote>
+
+<h3 id="creating-a-first-buildsbt-file">Creating a first build.sbt file</h3>
+
+<p>At this point you only need two more things to run a “Hello, world” project:</p>
+
+<ul>
+  <li>A <em>build.sbt</em> file</li>
+  <li>A <em>Hello.scala</em> file</li>
+</ul>
+
+<p>For a little project like this, the <em>build.sbt</em> file only needs a <code class="language-plaintext highlighter-rouge">scalaVersion</code> entry, but we’ll add three lines that you commonly see:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">:=</span> <span class="s">"HelloWorld"</span>
+<span class="n">version</span> <span class="o">:=</span> <span class="s">"0.1"</span>
+<span class="n">scalaVersion</span> <span class="o">:=</span> <span class="s">"3.0.0"</span>
+</code></pre></div></div>
+
+<p>Because sbt projects use a standard directory structure, sbt can find everything else it needs.</p>
+
+<p>Now you just need to add a little “Hello, world” program.</p>
+
+<h3 id="a-hello-world-program">A “Hello, world” program</h3>
+
+<p>In large projects, all of your Scala source code files will go under the <em>src/main/scala</em> and <em>src/test/scala</em> directories, but for a little sample project like this, you can put your source code file in the root directory of your project.
+Therefore, create a file named <em>HelloWorld.scala</em> in the root directory with these contents:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">helloWorld</span> <span class="k">=</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, world"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That code defines a Scala 3 “main” method that prints the <code class="language-plaintext highlighter-rouge">"Hello, world"</code> when it’s run.</p>
+
+<p>Now, use the <code class="language-plaintext highlighter-rouge">sbt run</code> command to compile and run your project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt run
+
+<span class="o">[</span>info] welcome to sbt
+<span class="o">[</span>info] loading settings <span class="k">for </span>project ...
+<span class="o">[</span>info] loading project definition
+<span class="o">[</span>info] loading settings <span class="k">for </span>project root from build.sbt ...
+<span class="o">[</span>info] Compiling 1 Scala <span class="nb">source</span> ...
+<span class="o">[</span>info] running helloWorld 
+Hello, world
+<span class="o">[</span>success] Total <span class="nb">time</span>: 4 s
+</code></pre></div></div>
+
+<p>The first time you run <code class="language-plaintext highlighter-rouge">sbt</code> it downloads everything it needs, and that can take a few moments to run, but after that it gets much faster.</p>
+
+<p>Also, once you get this first step working, you’ll find that it’s much faster to run sbt interactively.
+To do that, first run the <code class="language-plaintext highlighter-rouge">sbt</code> command by itself:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt
+
+<span class="o">[</span>info] welcome to sbt
+<span class="o">[</span>info] loading settings <span class="k">for </span>project ...
+<span class="o">[</span>info] loading project definition ...
+<span class="o">[</span>info] loading settings <span class="k">for </span>project root from build.sbt ...
+<span class="o">[</span>info] sbt server started at
+       <span class="nb">local</span>:///<span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.sbt/1.0/server/7d26bae822c36a31071c/sock
+sbt:hello-world&gt; _
+</code></pre></div></div>
+
+<p>Then inside this sbt shell, execute its <code class="language-plaintext highlighter-rouge">run</code> command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:hello-world&gt; run
+
+[info] running helloWorld 
+Hello, world
+[success] Total time: 0 s
+</code></pre></div></div>
+
+<p>There, that’s much faster.</p>
+
+<p>If you type <code class="language-plaintext highlighter-rouge">help</code> at the sbt command prompt you’ll see a list of other commands you can run.
+But for now, just type <code class="language-plaintext highlighter-rouge">exit</code> (or press <code class="language-plaintext highlighter-rouge">CTRL-D</code>) to leave the sbt shell.</p>
+
+<h3 id="using-project-templates">Using project templates</h3>
+
+<p>Manually creating the project structure can be tedious. Thankfully, sbt can create it for you,
+based on a template.</p>
+
+<p>To create a Scala 3 project from a template, run the following command in a shell:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sbt new scala/scala3.g8
+</code></pre></div></div>
+
+<p>Sbt will load the template, ask some questions, and create the project files in a subdirectory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tree scala-3-project-template 
+scala-3-project-template
+├── build.sbt
+├── project
+│   └── build.properties
+├── README.md
+└── src
+    ├── main
+    │   └── scala
+    │       └── Main.scala
+    └── test
+        └── scala
+            └── Test1.scala
+</code></pre></div></div>
+
+<blockquote>
+  <p>If you want to create a Scala 3 project that cross-compiles with Scala 2, use the template <code class="language-plaintext highlighter-rouge">scala/scala3-cross.g8</code>:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sbt new scala/scala3-cross.g8
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Learn more about <code class="language-plaintext highlighter-rouge">sbt new</code> and project templates in the <a href="https://www.scala-sbt.org/1.x/docs/sbt-new-and-Templates.html#sbt+new+and+Templates">documentation of sbt</a>.</p>
+
+<h3 id="other-build-tools-for-scala">Other build tools for Scala</h3>
+
+<p>While sbt is widely used, there are other tools you can use to build Scala projects:</p>
+
+<ul>
+  <li><a href="https://ant.apache.org/">Ant</a></li>
+  <li><a href="https://gradle.org/">Gradle</a></li>
+  <li><a href="https://maven.apache.org/">Maven</a></li>
+  <li><a href="https://com-lihaoyi.github.io/mill/">Mill</a></li>
+</ul>
+
+<h4 id="coursier">Coursier</h4>
+
+<p>In a related note, <a href="https://get-coursier.io/docs/overview">Coursier</a> is a “dependency resolver,” similar to Maven and Ivy in function.
+It’s written from scratch in Scala, “embraces functional programming principles,” and downloads artifacts in parallel for rapid downloads.
+sbt uses it to handle most dependency resolutions, and as a command-line tool, it can be used to easily install tools like sbt, Java, and Scala on your system, as shown in our <a href="/scala3/getting-started.html">Getting Started</a> page.</p>
+
+<p>This example from the <code class="language-plaintext highlighter-rouge">launch</code> web page shows that the <code class="language-plaintext highlighter-rouge">cs launch</code> command can be used to launch applications from dependencies:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">$</span> <span class="n">cs</span> <span class="n">launch</span> <span class="nv">org</span><span class="o">.</span><span class="py">scalameta</span><span class="o">::</span><span class="n">scalafmt</span><span class="o">-</span><span class="n">cli</span><span class="k">:</span><span class="err">2</span><span class="kt">.</span><span class="err">4</span><span class="kt">.</span><span class="err">2</span> <span class="kt">--</span> <span class="kt">--help</span>
+<span class="n">scalafmt</span> <span class="mf">2.4</span><span class="o">.</span><span class="mi">2</span>
+<span class="nc">Usage</span><span class="k">:</span> <span class="kt">scalafmt</span> <span class="o">[</span><span class="kt">options</span><span class="o">]</span> <span class="o">[</span><span class="kt">&lt;file&gt;...</span><span class="o">]</span>
+
+  <span class="o">-</span><span class="n">h</span><span class="o">,</span> <span class="o">--</span><span class="n">help</span>               <span class="n">prints</span> <span class="k">this</span> <span class="n">usage</span> <span class="n">text</span>
+  <span class="o">-</span><span class="n">v</span><span class="o">,</span> <span class="o">--</span><span class="n">version</span>            <span class="n">print</span> <span class="n">version</span>
+  <span class="n">more</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>See Coursier’s <a href="https://get-coursier.io/docs/cli-launch">launch page</a> for more details.</p>
+
+<h2 id="using-sbt-with-scalatest">Using sbt with ScalaTest</h2>
+
+<p><a href="https://www.scalatest.org">ScalaTest</a> is one of the main testing libraries for Scala projects, and in this section you’ll see how to create a Scala/sbt project that uses ScalaTest.</p>
+
+<h3 id="creating-the-project-directory-structure">Creating the project directory structure</h3>
+
+<p>As with the previous lesson, create an sbt project directory structure for a project named <em>HelloScalaTest</em> with the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>HelloScalaTest
+<span class="nv">$ </span><span class="nb">cd </span>HelloScalaTest
+<span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> src/<span class="o">{</span>main,test<span class="o">}</span>/scala
+<span class="nv">$ </span><span class="nb">mkdir </span>project
+</code></pre></div></div>
+
+<h3 id="creating-the-buildproperties-and-buildsbt-files">Creating the build.properties and build.sbt files</h3>
+
+<p>Next, create a <em>build.properties</em> file in the <em>project/</em> subdirectory of your project
+with this line:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt.version=1.5.4
+</code></pre></div></div>
+
+<p>Next, create a <em>build.sbt</em> file in the root directory of your project with these contents:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">:=</span> <span class="s">"HelloScalaTest"</span>
+<span class="n">version</span> <span class="o">:=</span> <span class="s">"0.1"</span>
+<span class="n">scalaVersion</span> <span class="o">:=</span> <span class="s">"3.0.0"</span>
+
+<span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="s">"org.scalatest"</span> <span class="o">%%</span> <span class="s">"scalatest"</span> <span class="o">%</span> <span class="s">"3.2.9"</span> <span class="o">%</span> <span class="nc">Test</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>The first three lines of this file are essentially the same as the first example.
+The <code class="language-plaintext highlighter-rouge">libraryDependencies</code> lines tell sbt to include the dependencies (JAR files) that are needed to include ScalaTest.</p>
+
+<blockquote>
+  <p>The ScalaTest documentation has always been good, and you can always find the up to date information on what those lines should look like on the <a href="https://www.scalatest.org/install">Installing ScalaTest</a> page.</p>
+</blockquote>
+
+<h3 id="create-a-scala-source-code-file">Create a Scala source code file</h3>
+
+<p>Next, create a Scala program that you can use to demonstrate ScalaTest.
+First, create a directory under <em>src/main/scala</em> named <em>math</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>src/main/scala/math
+            <span class="nt">----</span>
+</code></pre></div></div>
+
+<p>Then, inside that directory, create a file named <em>MathUtils.scala</em> with these contents:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">math</span>
+
+<span class="k">object</span> <span class="nc">MathUtils</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">double</span><span class="o">(</span><span class="kt">i:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>That method provides a simple way to demonstrate ScalaTest.</p>
+
+<h3 id="your-first-scalatest-tests">Your first ScalaTest tests</h3>
+
+<p>ScalaTest is very flexible, and offers several different ways to write tests.
+A simple way to get started is to write tests using the ScalaTest <code class="language-plaintext highlighter-rouge">AnyFunSuite</code>.
+To get started, create a directory named <em>math</em> under the <em>src/test/scala</em> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>src/test/scala/math
+            <span class="nt">----</span>
+</code></pre></div></div>
+
+<p>Next, create a file named <em>MathUtilsTests.scala</em> in that directory with the following contents:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">math</span>
+  
+<span class="k">import</span> <span class="nn">org.scalatest.funsuite.AnyFunSuite</span>
+
+<span class="k">class</span> <span class="nc">MathUtilsTests</span> <span class="k">extends</span> <span class="nc">AnyFunSuite</span><span class="k">:</span>
+
+  <span class="c1">// test 1</span>
+  <span class="nf">test</span><span class="o">(</span><span class="s">"'double' should handle 0"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">result</span> <span class="k">=</span> <span class="nv">MathUtils</span><span class="o">.</span><span class="py">double</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+    <span class="nf">assert</span><span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="c1">// test 2</span>
+  <span class="nf">test</span><span class="o">(</span><span class="s">"'double' should handle 1"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">result</span> <span class="k">=</span> <span class="nv">MathUtils</span><span class="o">.</span><span class="py">double</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+    <span class="nf">assert</span><span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span>
+  <span class="o">}</span>
+ 
+  <span class="nf">test</span><span class="o">(</span><span class="s">"test with Int.MaxValue"</span><span class="o">)</span> <span class="o">(</span><span class="n">pending</span><span class="o">)</span>
+
+<span class="n">end</span> <span class="nc">MathUtilsTests</span>
+</code></pre></div></div>
+
+<p>This code demonstrates the ScalaTest <code class="language-plaintext highlighter-rouge">AnyFunSuite</code> approach.
+A few important points:</p>
+
+<ul>
+  <li>Your test class should extend <code class="language-plaintext highlighter-rouge">AnyFunSuite</code></li>
+  <li>You create tests as shown, by giving each <code class="language-plaintext highlighter-rouge">test</code> a unique name</li>
+  <li>At the end of each test you should call <code class="language-plaintext highlighter-rouge">assert</code> to test that a condition has been satisfied</li>
+  <li>When you know you want to write a test, but you don’t want to write it right now, create the test as “pending,” with the syntax shown</li>
+</ul>
+
+<p>Using ScalaTest like this is similar to JUnit, so if you’re coming to Scala from Java, hopefully this looks similar.</p>
+
+<p>Now you can run these tests with the <code class="language-plaintext highlighter-rouge">sbt test</code> command.
+Skipping the first few lines of output, the result looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:HelloScalaTest&gt; test
+
+[info] Compiling 1 Scala source ...
+[info] MathUtilsTests:
+[info] - 'double' should handle 0
+[info] - 'double' should handle 1
+[info] - test with Int.MaxValue (pending)
+[info] Total number of tests run: 2
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 1
+[info] All tests passed.
+[success] Total time: 1 s
+</code></pre></div></div>
+
+<p>If everything works well, you’ll see output that looks like that.
+Welcome to the world of testing Scala applications with sbt and ScalaTest.</p>
+
+<h3 id="support-for-many-types-of-tests">Support for many types of tests</h3>
+
+<p>This example demonstrates a style of testing that’s similar to xUnit <em>Test-Driven Development</em> (TDD) style testing, with a few benefits of the <em>Behavior-Driven Development</em> (BDD) style.</p>
+
+<p>As mentioned, ScalaTest is flexible and you can also write tests using other styles, such as a style similar to Ruby’s RSpec.
+You can also use mock objects, property-based testing, and use ScalaTest to test Scala.js code.</p>
+
+<p>See the User Guide on the <a href="https://www.scalatest.org">ScalaTest website</a> for more details on the different testing styles that are available.</p>
+
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+
+<p>For more information about sbt and ScalaTest, see the following resources:</p>
+
+<ul>
+  <li><a href="https://www.scala-sbt.org/1.x/docs/">The sbt documentation</a></li>
+  <li><a href="https://www.scalatest.org/">The ScalaTest website</a></li>
+</ul>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="scala-tools.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="tools-worksheets.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-features.html">Scala 3 Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/why-scala-3.html">Why Scala 3?</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/taste-intro.html">A Taste of Scala</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-hello-world.html">Hello, World!</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-repl.html">The REPL</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-vars-data-types.html">Variables and Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-modeling.html">Domain Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-methods.html">Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-functions.html">First-Class Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-objects.html">Singleton Objects</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-collections.html">Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-contextual-abstractions.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-toplevel-definitions.html">Toplevel Definitions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/first-look-at-types.html">A First Look at Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/domain-modeling-intro.html">Domain Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-tools.html">Tools</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-oop.html">OOP Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-fp.html">FP Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/methods-intro.html">Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-most.html">Method Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-main-methods.html">main Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/fun-intro.html">Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-anonymous-functions.html">Anonymous Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-function-variables.html">Function Variables</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-eta-expansion.html">Eta Expansion</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-hofs.html">Higher-Order Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-write-map-function.html">Write Your Own map Method</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-write-method-returns-function.html">Creating a Method That Returns a Function</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/packaging-imports.html">Packaging and Imports</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/collections-intro.html">Scala Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-classes.html">Collections Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-methods.html">Collections Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/fp-intro.html">Functional Programming</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-what-is-fp.html">What is Functional Programming?</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-immutable-values.html">Immutable Values</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-pure-functions.html">Pure Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-functions-are-values.html">Functions Are Values</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-functional-error-handling.html">Functional Error Handling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/types-introduction.html">Types and the Type System</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-inferred.html">Inferred Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-generics.html">Generics</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-intersection.html">Intersection Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-union.html">Union Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-adts-gadts.html">Algebraic Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-variance.html">Variance</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-opaque-types.html">Opaque Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-structural.html">Structural Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-dependent-function.html">Dependent Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-others.html">Other Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/ca-contextual-abstractions-intro.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-given-using-clauses.html">Given Instances and Using Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-type-classes.html">Type Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-context-bounds.html">Context Bounds</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-given-imports.html">Given Imports</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-extension-methods.html">Extension Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-type-classes.html">Implementing Type Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-multiversal-equality.html">Multiversal Equality</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-implicit-conversions.html">Implicit Conversions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/concurrency.html">Concurrency</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-tools.html">Scala Tools</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/book/tools-sbt.html">Building and Testing Scala Projects with sbt</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/tools-worksheets.html">Worksheets</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/interacting-with-java.html">Interacting with Java</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-java-devs.html">Scala for Java Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-javascript-devs.html">Scala for JavaScript Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-python-devs.html">Scala for Python Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala3-book/tools-sbt.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

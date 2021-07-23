@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Multiversal Equality | 
+      Scala 3 — Book | 
+      Scala Documentation
+    </title>
+    
+    <meta name="description" content="This page demonstrates how to implement Multiversal Equality in Scala 3." />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/book/ca-multiversal-equality.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Multiversal Equality"/>
+    <meta property="og:description" content="This page demonstrates how to implement Multiversal Equality in Scala 3."/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Multiversal Equality"/>
+    <meta name="twitter:description" content="This page demonstrates how to implement Multiversal Equality in Scala 3."/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 — Book</div>
+          
+          <h1>Multiversal Equality</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Previously, Scala had <em>universal equality</em>: Two values of any types could be compared with each other using <code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code>.
+This came from the fact that <code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code> are implemented in terms of Java’s <code class="language-plaintext highlighter-rouge">equals</code> method, which can also compare values of any two reference types.</p>
+
+<p>Universal equality is convenient, but it’s also dangerous since it undermines type safety.
+For instance, let’s assume that after some refactoring, you’re left with an erroneous program where a value <code class="language-plaintext highlighter-rouge">y</code> has type <code class="language-plaintext highlighter-rouge">S</code> instead of the correct type <code class="language-plaintext highlighter-rouge">T</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">...</span>   <span class="c1">// of type T</span>
+<span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="o">...</span>   <span class="c1">// of type S, but should be T</span>
+<span class="n">x</span> <span class="o">==</span> <span class="n">y</span>        <span class="c1">// typechecks, will always yield false</span>
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">y</code> gets compared to other values of type <code class="language-plaintext highlighter-rouge">T</code>, the program will still typecheck, since values of all types can be compared with each other.
+But it will probably give unexpected results and fail at runtime.</p>
+
+<p>A type-safe programming language can do better, and multiversal equality is an opt-in way to make universal equality safer.
+It uses the binary type class <code class="language-plaintext highlighter-rouge">CanEqual</code> to indicate that values of two given types can be compared with each other.</p>
+
+<h2 id="allowing-the-comparison-of-class-instances">Allowing the comparison of class instances</h2>
+
+<p>By default, in Scala 3 you can still create an equality comparison like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">Cat</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Dog</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">d</span> <span class="k">=</span> <span class="nc">Dog</span><span class="o">(</span><span class="s">"Fido"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">c</span> <span class="k">=</span> <span class="nc">Cat</span><span class="o">(</span><span class="s">"Morris"</span><span class="o">)</span>
+
+<span class="n">d</span> <span class="o">==</span> <span class="n">c</span>  <span class="c1">// false, but it compiles</span>
+</code></pre></div></div>
+
+<p>But with Scala 3 you can disable such comparisons.
+By (a) importing <code class="language-plaintext highlighter-rouge">scala.language.strictEquality</code> or (b) using the <code class="language-plaintext highlighter-rouge">-language:strictEquality</code> compiler flag, this comparison no longer compiles:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.language.strictEquality</span>
+
+<span class="k">val</span> <span class="nv">rover</span> <span class="k">=</span> <span class="nc">Dog</span><span class="o">(</span><span class="s">"Rover"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">fido</span> <span class="k">=</span> <span class="nc">Dog</span><span class="o">(</span><span class="s">"Fido"</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">rover</span> <span class="o">==</span> <span class="n">fido</span><span class="o">)</span>   <span class="c1">// compiler error</span>
+
+<span class="c1">// compiler error message:</span>
+<span class="c1">// Values of types Dog and Dog cannot be compared with == or !=</span>
+</code></pre></div></div>
+
+<h2 id="enabling-comparisons">Enabling comparisons</h2>
+
+<p>There are two ways to enable this comparison using the Scala 3 <code class="language-plaintext highlighter-rouge">CanEqual</code> type class.
+For simple cases like this, your class can <em>derive</em> the <code class="language-plaintext highlighter-rouge">CanEqual</code> class:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Option 1</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Dog</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="n">derives</span> <span class="nc">CanEqual</span>
+</code></pre></div></div>
+
+<p>As you’ll see in a few moments, when you need more flexibility you can also use this syntax:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Option 2</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Dog</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="n">given</span> <span class="nc">CanEqual</span><span class="o">[</span><span class="kt">Dog</span>, <span class="kt">Dog</span><span class="o">]</span> <span class="k">=</span> <span class="nv">CanEqual</span><span class="o">.</span><span class="py">derived</span>
+</code></pre></div></div>
+
+<p>Either of those two approaches now let <code class="language-plaintext highlighter-rouge">Dog</code> instances to be compared to each other.</p>
+
+<h2 id="a-more-real-world-example">A more real-world example</h2>
+
+<p>In a more real-world example, imagine you have an online bookstore and want to allow or disallow the comparison of physical, printed books, and audiobooks.
+With Scala 3 you start by enabling multiversal equality as shown in the previous example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [1] add this import, or this command line flag: -language:strictEquality</span>
+<span class="k">import</span> <span class="nn">scala.language.strictEquality</span>
+</code></pre></div></div>
+
+<p>Then create your domain objects as usual:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [2] create your class hierarchy</span>
+<span class="k">trait</span> <span class="nc">Book</span><span class="k">:</span>
+    <span class="kt">def</span> <span class="kt">author:</span> <span class="kt">String</span>
+    <span class="k">def</span> <span class="nf">title</span><span class="k">:</span> <span class="kt">String</span>
+    <span class="k">def</span> <span class="nf">year</span><span class="k">:</span> <span class="kt">Int</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">PrintedBook</span><span class="o">(</span>
+    <span class="n">author</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">title</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">year</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+    <span class="n">pages</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">)</span> <span class="k">extends</span> <span class="nc">Book</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">AudioBook</span><span class="o">(</span>
+    <span class="n">author</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">title</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">year</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+    <span class="n">lengthInMinutes</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">)</span> <span class="k">extends</span> <span class="nc">Book</span>
+</code></pre></div></div>
+
+<p>Finally, use <code class="language-plaintext highlighter-rouge">CanEqual</code> to define which comparisons you want to allow:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// [3] create type class instances to define the allowed comparisons.</span>
+<span class="c1">//     allow `PrintedBook == PrintedBook`</span>
+<span class="c1">//     allow `AudioBook == AudioBook`</span>
+<span class="n">given</span> <span class="nc">CanEqual</span><span class="o">[</span><span class="kt">PrintedBook</span>, <span class="kt">PrintedBook</span><span class="o">]</span> <span class="k">=</span> <span class="nv">CanEqual</span><span class="o">.</span><span class="py">derived</span>
+<span class="n">given</span> <span class="nc">CanEqual</span><span class="o">[</span><span class="kt">AudioBook</span>, <span class="kt">AudioBook</span><span class="o">]</span> <span class="k">=</span> <span class="nv">CanEqual</span><span class="o">.</span><span class="py">derived</span>
+
+<span class="c1">// [4a] comparing two printed books works as desired</span>
+<span class="k">val</span> <span class="nv">p1</span> <span class="k">=</span> <span class="nc">PrintedBook</span><span class="o">(</span><span class="s">"1984"</span><span class="o">,</span> <span class="s">"George Orwell"</span><span class="o">,</span> <span class="mi">1961</span><span class="o">,</span> <span class="mi">328</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">p2</span> <span class="k">=</span> <span class="nc">PrintedBook</span><span class="o">(</span><span class="s">"1984"</span><span class="o">,</span> <span class="s">"George Orwell"</span><span class="o">,</span> <span class="mi">1961</span><span class="o">,</span> <span class="mi">328</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="o">)</span>         <span class="c1">// true</span>
+
+<span class="c1">// [4b] you can’t compare a printed book and an audiobook</span>
+<span class="k">val</span> <span class="nv">pBook</span> <span class="k">=</span> <span class="nc">PrintedBook</span><span class="o">(</span><span class="s">"1984"</span><span class="o">,</span> <span class="s">"George Orwell"</span><span class="o">,</span> <span class="mi">1961</span><span class="o">,</span> <span class="mi">328</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">aBook</span> <span class="k">=</span> <span class="nc">AudioBook</span><span class="o">(</span><span class="s">"1984"</span><span class="o">,</span> <span class="s">"George Orwell"</span><span class="o">,</span> <span class="mi">2006</span><span class="o">,</span> <span class="mi">682</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">pBook</span> <span class="o">==</span> <span class="n">aBook</span><span class="o">)</span>   <span class="c1">// compiler error</span>
+</code></pre></div></div>
+
+<p>The last line of code results in this compiler error message:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Values of types PrintedBook and AudioBook cannot be compared with == or !=
+</code></pre></div></div>
+
+<p>This is how multiversal equality catches illegal type comparisons at compile time.</p>
+
+<h3 id="enabling-printedbook--audiobook">Enabling “PrintedBook == AudioBook”</h3>
+
+<p>That works as desired, but in some situations you may want to allow the comparison of physical books to audiobooks.
+When you want this, create these two additional equality comparisons:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// allow `PrintedBook == AudioBook`, and `AudioBook == PrintedBook`</span>
+<span class="n">given</span> <span class="nc">CanEqual</span><span class="o">[</span><span class="kt">PrintedBook</span>, <span class="kt">AudioBook</span><span class="o">]</span> <span class="k">=</span> <span class="nv">CanEqual</span><span class="o">.</span><span class="py">derived</span>
+<span class="n">given</span> <span class="nc">CanEqual</span><span class="o">[</span><span class="kt">AudioBook</span>, <span class="kt">PrintedBook</span><span class="o">]</span> <span class="k">=</span> <span class="nv">CanEqual</span><span class="o">.</span><span class="py">derived</span>
+</code></pre></div></div>
+
+<p>Now you can compare physical books to audiobooks without a compiler error:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="n">pBook</span> <span class="o">==</span> <span class="n">aBook</span><span class="o">)</span>   <span class="c1">// false</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">aBook</span> <span class="o">==</span> <span class="n">pBook</span><span class="o">)</span>   <span class="c1">// false</span>
+</code></pre></div></div>
+
+<h4 id="implement-equals-to-make-them-really-work">Implement “equals” to make them really work</h4>
+
+<p>While these comparisons are now allowed, they will always be <code class="language-plaintext highlighter-rouge">false</code> because their <code class="language-plaintext highlighter-rouge">equals</code> methods don’t know how to make these comparisons.
+Therefore, the solution is to override the <code class="language-plaintext highlighter-rouge">equals</code> methods for each class.
+For instance, when you override the <code class="language-plaintext highlighter-rouge">equals</code> method for <code class="language-plaintext highlighter-rouge">AudioBook</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">AudioBook</span><span class="o">(</span>
+    <span class="n">author</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">title</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+    <span class="n">year</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+    <span class="n">lengthInMinutes</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">)</span> <span class="k">extends</span> <span class="nc">Book</span><span class="k">:</span>
+    <span class="c1">// override to allow AudioBook to be compared to PrintedBook</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="nf">equals</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">that</span> <span class="k">match</span>
+        <span class="k">case</span> <span class="n">a</span><span class="k">:</span> <span class="kt">AudioBook</span> <span class="o">=&gt;</span>
+            <span class="k">if</span> <span class="k">this</span><span class="o">.</span><span class="py">author</span> <span class="o">==</span> <span class="nv">a</span><span class="o">.</span><span class="py">author</span>
+            <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="py">title</span> <span class="o">==</span> <span class="nv">a</span><span class="o">.</span><span class="py">title</span>
+            <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="py">year</span> <span class="o">==</span> <span class="nv">a</span><span class="o">.</span><span class="py">year</span>
+            <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="py">lengthInMinutes</span> <span class="o">==</span> <span class="nv">a</span><span class="o">.</span><span class="py">lengthInMinutes</span>
+                <span class="n">then</span> <span class="kc">true</span> <span class="k">else</span> <span class="kc">false</span>
+        <span class="k">case</span> <span class="n">p</span><span class="k">:</span> <span class="kt">PrintedBook</span> <span class="o">=&gt;</span>
+            <span class="k">if</span> <span class="k">this</span><span class="o">.</span><span class="py">author</span> <span class="o">==</span> <span class="nv">p</span><span class="o">.</span><span class="py">author</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="py">title</span> <span class="o">==</span> <span class="nv">p</span><span class="o">.</span><span class="py">title</span>
+                <span class="n">then</span> <span class="kc">true</span> <span class="k">else</span> <span class="kc">false</span>
+        <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+            <span class="kc">false</span>
+</code></pre></div></div>
+
+<p>You can now compare an <code class="language-plaintext highlighter-rouge">AudioBook</code> to a <code class="language-plaintext highlighter-rouge">PrintedBook</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="o">(</span><span class="n">aBook</span> <span class="o">==</span> <span class="n">pBook</span><span class="o">)</span>   <span class="c1">// true (works because of `equals` in `AudioBook`)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">pBook</span> <span class="o">==</span> <span class="n">aBook</span><span class="o">)</span>   <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>Currently the <code class="language-plaintext highlighter-rouge">PrintedBook</code> book doesn’t have an <code class="language-plaintext highlighter-rouge">equals</code> method, so the second comparison returns <code class="language-plaintext highlighter-rouge">false</code>.
+To enable that comparison, just override the <code class="language-plaintext highlighter-rouge">equals</code> method in <code class="language-plaintext highlighter-rouge">PrintedBook</code>.</p>
+
+<p>You can find additional information on <a href="/scala3/reference/contextual/multiversal-equality.html">multiversal equality</a> in the reference documentation.</p>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="ca-type-classes.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="ca-implicit-conversions.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-features.html">Scala 3 Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/why-scala-3.html">Why Scala 3?</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/taste-intro.html">A Taste of Scala</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-hello-world.html">Hello, World!</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-repl.html">The REPL</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-vars-data-types.html">Variables and Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-modeling.html">Domain Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-methods.html">Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-functions.html">First-Class Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-objects.html">Singleton Objects</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-collections.html">Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-contextual-abstractions.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-toplevel-definitions.html">Toplevel Definitions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/taste-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/first-look-at-types.html">A First Look at Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/domain-modeling-intro.html">Domain Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-tools.html">Tools</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-oop.html">OOP Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/domain-modeling-fp.html">FP Modeling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/methods-intro.html">Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-most.html">Method Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-main-methods.html">main Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/methods-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/fun-intro.html">Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-anonymous-functions.html">Anonymous Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-function-variables.html">Function Variables</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-eta-expansion.html">Eta Expansion</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-hofs.html">Higher-Order Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-write-map-function.html">Write Your Own map Method</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-write-method-returns-function.html">Creating a Method That Returns a Function</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fun-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/packaging-imports.html">Packaging and Imports</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/collections-intro.html">Scala Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-classes.html">Collections Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-methods.html">Collections Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/collections-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/fp-intro.html">Functional Programming</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-what-is-fp.html">What is Functional Programming?</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-immutable-values.html">Immutable Values</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-pure-functions.html">Pure Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-functions-are-values.html">Functions Are Values</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-functional-error-handling.html">Functional Error Handling</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/fp-summary.html">Summary</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/types-introduction.html">Types and the Type System</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-inferred.html">Inferred Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-generics.html">Generics</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-intersection.html">Intersection Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-union.html">Union Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-adts-gadts.html">Algebraic Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-variance.html">Variance</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-opaque-types.html">Opaque Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-structural.html">Structural Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-dependent-function.html">Dependent Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-others.html">Other Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/ca-contextual-abstractions-intro.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-given-using-clauses.html">Given Instances and Using Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/types-type-classes.html">Type Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-context-bounds.html">Context Bounds</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-given-imports.html">Given Imports</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-extension-methods.html">Extension Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-type-classes.html">Implementing Type Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/book/ca-multiversal-equality.html">Multiversal Equality</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-implicit-conversions.html">Implicit Conversions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/ca-summary.html">Summary</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/concurrency.html">Concurrency</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-tools.html">Scala Tools</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/tools-sbt.html">Building and Testing Scala Projects with sbt</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/book/tools-worksheets.html">Worksheets</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/interacting-with-java.html">Interacting with Java</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-java-devs.html">Scala for Java Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-javascript-devs.html">Scala for JavaScript Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/book/scala-for-python-devs.html">Scala for Python Developers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala3-book/ca-multiversal-equality.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

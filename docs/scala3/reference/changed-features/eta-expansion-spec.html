@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Automatic Eta Expansion - More Details | 
+      Scala 3 Language Reference | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/reference/changed-features/eta-expansion-spec.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Automatic Eta Expansion - More Details"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Automatic Eta Expansion - More Details"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Language Reference</div>
+          
+          <h1>Automatic Eta Expansion - More Details</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<h2 id="motivation">Motivation</h2>
+
+<p>Scala maintains a convenient distinction between <em>methods</em> and <em>functions</em>.
+Methods are part of the definition of a class that can be invoked in objects while functions are complete objects themselves, making them first-class entities. For example, they can be assigned to variables.
+These two mechanisms are bridged in Scala by a mechanism called
+<a href="https://www.scala-lang.org/files/archive/spec/2.13/06-expressions.html#eta-expansion-section"><em>eta-expansion</em></a>
+(also called eta-abstraction), which converts a reference to a method into a function. Intuitively, a method <code class="language-plaintext highlighter-rouge">m</code> can be passed around by turning it into an object: the function <code class="language-plaintext highlighter-rouge">x =&gt; m(x)</code>.</p>
+
+<p>In this snippet which assigns a method to a <code class="language-plaintext highlighter-rouge">val</code>, the compiler will perform <em>automatic eta-expansion</em>, as shown in the comment:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">m</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="n">m</span> <span class="c1">// becomes: val f = (x: Int, y: String) =&gt; m(x, y)</span>
+</code></pre></div></div>
+
+<p>In Scala 2, a method reference <code class="language-plaintext highlighter-rouge">m</code> is converted to a function value only if the expected type is a function type, which means the conversion in the example above would not have been triggered, because <code class="language-plaintext highlighter-rouge">val f</code> does not have a type ascription. To still get eta-expansion, a shortcut <code class="language-plaintext highlighter-rouge">m _</code> would force the conversion.</p>
+
+<p>For methods with one or more parameters like in the example above, this restriction has now been dropped. The syntax <code class="language-plaintext highlighter-rouge">m _</code> is no longer needed and will be deprecated in the future.</p>
+
+<h2 id="automatic-eta-expansion-and-partial-application">Automatic eta-expansion and partial application</h2>
+<p>In the following example <code class="language-plaintext highlighter-rouge">m</code> can be partially applied to the first two parameters.
+Assigning <code class="language-plaintext highlighter-rouge">m</code> to <code class="language-plaintext highlighter-rouge">f1</code> will automatically eta-expand.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">m</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">String</span><span class="o">)(</span><span class="n">z</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span>
+<span class="k">val</span> <span class="nv">f1</span> <span class="k">=</span> <span class="n">m</span>
+<span class="k">val</span> <span class="nv">f2</span> <span class="k">=</span> <span class="nf">m</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="s">"abc"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This creates two function values:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f1</span><span class="k">:</span> <span class="o">(</span><span class="kt">Boolean</span><span class="o">,</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span> <span class="k">=&gt;</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span>
+<span class="n">f2</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span>
+</code></pre></div></div>
+
+<h2 id="automatic-eta-expansion-and-implicit-parameter-lists">Automatic eta-expansion and implicit parameter lists</h2>
+
+<p>Methods with implicit parameter lists will always get applied to implicit arguments.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">p</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">bla</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="k">val</span> <span class="nv">bar</span> <span class="k">=</span> <span class="n">foo</span> <span class="c1">// val bar: Int =&gt; Float = ...</span>
+</code></pre></div></div>
+
+<h2 id="automatic-eta-expansion-and-query-types">Automatic Eta-Expansion and query types</h2>
+
+<p>A method with context parameters can be expanded to a value of a context type by writing the expected context type explicitly.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="n">using</span> <span class="n">p</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">bar</span><span class="k">:</span> <span class="kt">Double</span> <span class="kt">?=&gt;</span> <span class="kt">Float</span> <span class="o">=</span> <span class="nf">foo</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="rules">Rules</h2>
+
+<ul>
+  <li>If <code class="language-plaintext highlighter-rouge">m</code> has an argument list with one or more parameters, we always eta-expand</li>
+  <li>If <code class="language-plaintext highlighter-rouge">m</code> is has an empty argument list (i.e. has type <code class="language-plaintext highlighter-rouge">()R</code>):
+    <ol>
+      <li>If the expected type is of the form <code class="language-plaintext highlighter-rouge">() =&gt; T</code>, we eta expand.</li>
+      <li>If m is defined by Java, or overrides a Java defined method, we insert <code class="language-plaintext highlighter-rouge">()</code>.</li>
+      <li>Otherwise we issue an error of the form:</li>
+    </ol>
+  </li>
+</ul>
+
+<p>Thus, an unapplied method with an empty argument list is only converted to a function when a function type is expected. It is considered best practice to either explicitly apply the method to <code class="language-plaintext highlighter-rouge">()</code>, or convert it to a function with <code class="language-plaintext highlighter-rouge">() =&gt; m()</code>.</p>
+
+<p>The method value syntax <code class="language-plaintext highlighter-rouge">m _</code> is deprecated.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>For more information, see <a href="https://github.com/lampepfl/dotty/pull/2701">PR #2701</a>.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_scala3-reference/changed-features/eta-expansion-spec.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

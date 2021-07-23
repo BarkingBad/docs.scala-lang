@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Common Sequence Methods | 
+      Scala Book | 
+      Scala Documentation
+    </title>
+    
+    <meta name="description" content="This page shows examples of the most common methods that are available on the Scala sequences (collections classes)." />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/scala-book/collections-methods.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Common Sequence Methods"/>
+    <meta property="og:description" content="This page shows examples of the most common methods that are available on the Scala sequences (collections classes)."/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Common Sequence Methods"/>
+    <meta name="twitter:description" content="This page shows examples of the most common methods that are available on the Scala sequences (collections classes)."/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala Book</div>
+          
+          <h1>Common Sequence Methods</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>A great strength of the Scala collections classes is that they come with dozens of pre-built methods. The benefit of this is that you no longer need to write custom <code class="language-plaintext highlighter-rouge">for</code> loops every time you need to work on a collection. (If that’s not enough of a benefit, it also means that you no longer have to read custom <code class="language-plaintext highlighter-rouge">for</code> loops written by other developers.)</p>
+
+<p>Because there are so many methods available to you, they won’t all be shown here. Instead, just some of the most commonly-used methods will be shown, including:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">filter</code></li>
+  <li><code class="language-plaintext highlighter-rouge">foreach</code></li>
+  <li><code class="language-plaintext highlighter-rouge">head</code></li>
+  <li><code class="language-plaintext highlighter-rouge">tail</code></li>
+  <li><code class="language-plaintext highlighter-rouge">take</code>, <code class="language-plaintext highlighter-rouge">takeWhile</code></li>
+  <li><code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">dropWhile</code></li>
+  <li><code class="language-plaintext highlighter-rouge">reduce</code></li>
+</ul>
+
+<p>The following methods will work on all of the collections “sequence” classes, including <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">ArrayBuffer</code>, <code class="language-plaintext highlighter-rouge">List</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, etc., but these examples will use a <code class="language-plaintext highlighter-rouge">List</code> unless otherwise specified.</p>
+
+<h2 id="note-the-methods-dont-mutate-the-collection">Note: The methods don’t mutate the collection</h2>
+
+<p>As a very important note, none of these methods mutate the collection that they’re called on. They all work in a functional style, so they return a new collection with the modified results.</p>
+
+<h2 id="sample-lists">Sample lists</h2>
+
+<p>The following examples will use these lists:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">nums</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">).</span><span class="py">toList</span>
+<span class="k">val</span> <span class="nv">names</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">"joel"</span><span class="o">,</span> <span class="s">"ed"</span><span class="o">,</span> <span class="s">"chris"</span><span class="o">,</span> <span class="s">"maurice"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This is what those lists look like in the REPL:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">nums</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">).</span><span class="py">toList</span>
+<span class="n">nums</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">names</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">"joel"</span><span class="o">,</span> <span class="s">"ed"</span><span class="o">,</span> <span class="s">"chris"</span><span class="o">,</span> <span class="s">"maurice"</span><span class="o">)</span>
+<span class="n">names</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">joel</span><span class="o">,</span> <span class="n">ed</span><span class="o">,</span> <span class="n">chris</span><span class="o">,</span> <span class="n">maurice</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="map"><code class="language-plaintext highlighter-rouge">map</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">map</code> method steps through each element in the existing list, applying the algorithm you supply to each element, one at a time; it then returns a new list with all of the modified elements.</p>
+
+<p>Here’s an example of the <code class="language-plaintext highlighter-rouge">map</code> method being applied to the <code class="language-plaintext highlighter-rouge">nums</code> list:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">doubles</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+<span class="n">doubles</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>As we showed in the lesson on anonymous functions, you can also write the anonymous function like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">doubles</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+<span class="n">doubles</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>However, in this lesson we’ll always use the first, shorter form.</p>
+
+<p>With that background, here’s an example of the <code class="language-plaintext highlighter-rouge">map</code> method being applied to the <code class="language-plaintext highlighter-rouge">nums</code> and <code class="language-plaintext highlighter-rouge">names</code> lists:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">capNames</span> <span class="k">=</span> <span class="nv">names</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">capitalize</span><span class="o">)</span>
+<span class="n">capNames</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">Joel</span><span class="o">,</span> <span class="nc">Ed</span><span class="o">,</span> <span class="nc">Chris</span><span class="o">,</span> <span class="nc">Maurice</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">doubles</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+<span class="n">doubles</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">lessThanFive</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="n">lessThanFive</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>As that last example shows, it’s perfectly legal (and very common) to use map to return a list with a different type (<code class="language-plaintext highlighter-rouge">List[Boolean]</code>) from the original type (<code class="language-plaintext highlighter-rouge">List[Int]</code>).</p>
+
+<h2 id="filter"><code class="language-plaintext highlighter-rouge">filter</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">filter</code> method creates a new, filtered list from the given list. Here are a few examples:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">lessThanFive</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="n">lessThanFive</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">evens</span> <span class="k">=</span> <span class="nv">nums</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+<span class="n">evens</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">shortNames</span> <span class="k">=</span> <span class="nv">names</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">length</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="o">)</span>
+<span class="n">shortNames</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">joel</span><span class="o">,</span> <span class="n">ed</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="foreach"><code class="language-plaintext highlighter-rouge">foreach</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">foreach</code> method is used to loop over all elements in a collection. As we mentioned in a previous lesson, <code class="language-plaintext highlighter-rouge">foreach</code> is used for side-effects, such as printing information. Here’s an example with the <code class="language-plaintext highlighter-rouge">names</code> list:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">)</span>
+<span class="n">joel</span>
+<span class="n">ed</span>
+<span class="n">chris</span>
+<span class="n">maurice</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">nums</code> list is a little long, so you may not want to print out all of those elements. But a great thing about Scala’s approach is that you can chain methods together to solve problems like this. For example, this is one way to print the first three elements from <code class="language-plaintext highlighter-rouge">nums</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">nums</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">).</span><span class="py">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The REPL shows the result:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">).</span><span class="py">foreach</span><span class="o">(</span><span class="n">println</span><span class="o">)</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+</code></pre></div></div>
+
+<h2 id="head"><code class="language-plaintext highlighter-rouge">head</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">head</code> method comes from Lisp and functional programming languages. It’s used to print the first element (the head element) of a list:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">head</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">head</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">joel</span>
+</code></pre></div></div>
+
+<p>Because a <code class="language-plaintext highlighter-rouge">String</code> is a sequence of characters, you can also treat it like a list. This is how <code class="language-plaintext highlighter-rouge">head</code> works on these strings:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"foo"</span><span class="o">.</span><span class="py">head</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="n">f</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="s">"bar"</span><span class="o">.</span><span class="py">head</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">head</code> is a great method to work with, but as a word of caution it can also throw an exception when called on an empty collection:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">emptyList</span> <span class="k">=</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">emptyList</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">()</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">emptyList</span><span class="o">.</span><span class="py">head</span>
+<span class="nv">java</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">NoSuchElementException</span><span class="k">:</span> <span class="kt">head</span> <span class="kt">of</span> <span class="kt">empty</span> <span class="kt">list</span>
+</code></pre></div></div>
+
+<h2 id="tail"><code class="language-plaintext highlighter-rouge">tail</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">tail</code> method also comes from Lisp and functional programming languages. It’s used to print every element in a list after the head element. A few examples:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">tail</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">tail</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">ed</span><span class="o">,</span> <span class="n">chris</span><span class="o">,</span> <span class="n">maurice</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Just like <code class="language-plaintext highlighter-rouge">head</code>, <code class="language-plaintext highlighter-rouge">tail</code> also works on strings:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="s">"foo"</span><span class="o">.</span><span class="py">tail</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">oo</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="s">"bar"</span><span class="o">.</span><span class="py">tail</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">ar</span>
+</code></pre></div></div>
+
+<p>Note that like <code class="language-plaintext highlighter-rouge">head</code>, <code class="language-plaintext highlighter-rouge">tail</code> will also throw an exception when called on an empty collection:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">emptyList</span><span class="o">.</span><span class="py">tail</span>
+<span class="nv">java</span><span class="o">.</span><span class="py">lang</span><span class="o">.</span><span class="py">UnsupportedOperationException</span><span class="k">:</span> <span class="kt">tail</span> <span class="kt">of</span> <span class="kt">empty</span> <span class="kt">list</span>
+</code></pre></div></div>
+
+<h2 id="take-takewhile"><code class="language-plaintext highlighter-rouge">take</code>, <code class="language-plaintext highlighter-rouge">takeWhile</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">take</code> and <code class="language-plaintext highlighter-rouge">takeWhile</code> methods give you a nice way of taking the elements out of a list that you want to create a new list. This is <code class="language-plaintext highlighter-rouge">take</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">joel</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">joel</span><span class="o">,</span> <span class="n">ed</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And this is <code class="language-plaintext highlighter-rouge">takeWhile</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">takeWhile</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="n">res4</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">takeWhile</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">length</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="n">res5</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">joel</span><span class="o">,</span> <span class="n">ed</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="drop-dropwhile"><code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">dropWhile</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">drop</code> and <code class="language-plaintext highlighter-rouge">dropWhile</code> are essentially the opposite of <code class="language-plaintext highlighter-rouge">take</code> and <code class="language-plaintext highlighter-rouge">takeWhile</code>. This is <code class="language-plaintext highlighter-rouge">drop</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">ed</span><span class="o">,</span> <span class="n">chris</span><span class="o">,</span> <span class="n">maurice</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">drop</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">chris</span><span class="o">,</span> <span class="n">maurice</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And this is <code class="language-plaintext highlighter-rouge">dropWhile</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">nums</span><span class="o">.</span><span class="py">dropWhile</span><span class="o">(</span><span class="k">_</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="n">res4</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">names</span><span class="o">.</span><span class="py">dropWhile</span><span class="o">(</span><span class="k">_</span> <span class="o">!=</span> <span class="s">"chris"</span><span class="o">)</span>
+<span class="n">res5</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">chris</span><span class="o">,</span> <span class="n">maurice</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="reduce"><code class="language-plaintext highlighter-rouge">reduce</code></h2>
+
+<p>When you hear the term, “map reduce,” the “reduce” part refers to methods like <code class="language-plaintext highlighter-rouge">reduce</code>. It takes a function (or anonymous function) and applies that function to successive elements in the list.</p>
+
+<p>The best way to explain <code class="language-plaintext highlighter-rouge">reduce</code> is to create a little helper method you can pass into it. For example, this is an <code class="language-plaintext highlighter-rouge">add</code> method that adds two integers together, and also gives us some nice debug output:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">theSum</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"received $x and $y, their sum is $theSum"</span><span class="o">)</span>
+    <span class="n">theSum</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Now, given that method and this list:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">a</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>this is what happens when you pass the <code class="language-plaintext highlighter-rouge">add</code> method into <code class="language-plaintext highlighter-rouge">reduce</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">a</span><span class="o">.</span><span class="py">reduce</span><span class="o">(</span><span class="n">add</span><span class="o">)</span>
+<span class="n">received</span> <span class="mi">1</span> <span class="n">and</span> <span class="mi">2</span><span class="o">,</span> <span class="n">their</span> <span class="n">sum</span> <span class="n">is</span> <span class="mi">3</span>
+<span class="n">received</span> <span class="mi">3</span> <span class="n">and</span> <span class="mi">3</span><span class="o">,</span> <span class="n">their</span> <span class="n">sum</span> <span class="n">is</span> <span class="mi">6</span>
+<span class="n">received</span> <span class="mi">6</span> <span class="n">and</span> <span class="mi">4</span><span class="o">,</span> <span class="n">their</span> <span class="n">sum</span> <span class="n">is</span> <span class="mi">10</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>As that result shows, <code class="language-plaintext highlighter-rouge">reduce</code> uses <code class="language-plaintext highlighter-rouge">add</code> to reduce the list <code class="language-plaintext highlighter-rouge">a</code> into a single value, in this case, the sum of the integers in the list.</p>
+
+<p>Once you get used to <code class="language-plaintext highlighter-rouge">reduce</code>, you’ll write a “sum” algorithm like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">a</span><span class="o">.</span><span class="py">reduce</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="k">_</span><span class="o">)</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<p>Similarly, this is what a “product” algorithm looks like:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="nv">a</span><span class="o">.</span><span class="py">reduce</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="k">_</span><span class="o">)</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">24</span>
+</code></pre></div></div>
+
+<p>That might be a little mind-blowing if you’ve never seen it before, but after a while you’ll get used to it.</p>
+
+<blockquote>
+  <p>Before moving on, an important part to know about <code class="language-plaintext highlighter-rouge">reduce</code> is that — as its name implies — it’s used to <em>reduce</em> a collection down to a single value.</p>
+</blockquote>
+
+<h2 id="even-more">Even more!</h2>
+
+<p>There are literally dozens of additional methods on the Scala sequence classes that will keep you from ever needing to write another <code class="language-plaintext highlighter-rouge">for</code> loop. However, because this is a simple introduction book they won’t all be covered here. For more information, see <a href="/overviews/collections-2.13/seqs.html">the collections overview of sequence traits</a>.</p>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="anonymous-functions.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="collections-maps.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/prelude-taste-of-scala.html">Prelude꞉ A Taste of Scala</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/preliminaries.html">Preliminaries</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-features.html">Scala Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/hello-world-1.html">Hello, World</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/hello-world-2.html">Hello, World - Version 2</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-repl.html">The Scala REPL</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/two-types-variables.html">Two Types of Variables</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/type-is-optional.html">The Type is Optional</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/built-in-types.html">A Few Built-In Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/two-notes-about-strings.html">Two Notes About Strings</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/command-line-io.html">Command-Line I/O</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/if-then-else-construct.html">The if/then/else Construct</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/for-loops.html">for Loops</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/for-expressions.html">for Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/match-expressions.html">match Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/try-catch-finally.html">try/catch/finally Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/classes.html">Scala Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/classes-aux-constructors.html">Auxiliary Class Constructors</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/constructors-default-values.html">Supplying Default Values for Constructor Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/methods-first-look.html">A First Look at Scala Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/enumerations-pizza-class.html">Enumerations (and a Complete Pizza Class)</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/traits-intro.html">Scala Traits and Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/traits-interfaces.html">Using Scala Traits as Interfaces</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/traits-abstract-mixins.html">Using Scala Traits Like Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/abstract-classes.html">Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/collections-101.html">Scala Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/arraybuffer-examples.html">The ArrayBuffer Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/list-class.html">The List Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/vector-class.html">The Vector Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/map-class.html">The Map Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/set-class.html">The Set Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/anonymous-functions.html">Anonymous Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/overviews/scala-book/collections-methods.html">Common Sequence Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/collections-maps.html">Common Map Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/misc.html">A Few Miscellaneous Items</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/tuples.html">Tuples</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/oop-pizza-example.html">An OOP Example</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/sbt-scalatest-intro.html">sbt and ScalaTest</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-build-tool-sbt.html">The most used scala build tool (sbt)</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/sbt-scalatest-tdd.html">Using ScalaTest with sbt</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/sbt-scalatest-bdd.html">Writing BDD Style Tests with ScalaTest and sbt</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/functional-programming.html">Functional Programming</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/pure-functions.html">Pure Functions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/passing-functions-around.html">Passing Functions Around</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/no-null-values.html">No Null Values</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/companion-objects.html">Companion Objects</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/case-classes.html">Case Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/case-objects.html">Case Objects</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/functional-error-handling.html">Functional Error Handling in Scala</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/concurrency-signpost.html">Concurrency</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/futures.html">Scala Futures</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/where-next.html">Where To Go Next</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala-book/collections-methods.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

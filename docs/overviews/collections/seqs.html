@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      The sequence traits Seq, IndexedSeq, and LinearSeq | 
+      Collections (Scala 2.8 - 2.12) | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/collections/seqs.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="The sequence traits Seq, IndexedSeq, and LinearSeq"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="The sequence traits Seq, IndexedSeq, and LinearSeq"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+<a class="new-version-notice" href="/overviews/collections-2.13/seqs.html">This page has a new version.</a>
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections (Scala 2.8 - 2.12)</div>
+          
+          <h1>The sequence traits Seq, IndexedSeq, and LinearSeq</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>The <a href="https://www.scala-lang.org/api/current/scala/collection/Seq.html">Seq</a> trait represents sequences. A sequence is a kind of iterable that has a <code class="language-plaintext highlighter-rouge">length</code> and whose elements have fixed index positions, starting from <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<p>The operations on sequences, summarized in the table below, fall into the following categories:</p>
+
+<ul>
+  <li><strong>Indexing and length</strong> operations <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">isDefinedAt</code>, <code class="language-plaintext highlighter-rouge">length</code>, <code class="language-plaintext highlighter-rouge">indices</code>, and <code class="language-plaintext highlighter-rouge">lengthCompare</code>. For a <code class="language-plaintext highlighter-rouge">Seq</code>, the <code class="language-plaintext highlighter-rouge">apply</code> operation means indexing; hence a sequence of type <code class="language-plaintext highlighter-rouge">Seq[T]</code> is a partial function that takes an <code class="language-plaintext highlighter-rouge">Int</code> argument (an index) and which yields a sequence element of type <code class="language-plaintext highlighter-rouge">T</code>. In other words <code class="language-plaintext highlighter-rouge">Seq[T]</code> extends <code class="language-plaintext highlighter-rouge">PartialFunction[Int, T]</code>. The elements of a sequence are indexed from zero up to the <code class="language-plaintext highlighter-rouge">length</code> of the sequence minus one. The <code class="language-plaintext highlighter-rouge">length</code> method on sequences is an alias of the <code class="language-plaintext highlighter-rouge">size</code> method of general collections. The <code class="language-plaintext highlighter-rouge">lengthCompare</code> method allows you to compare the lengths of a sequences with an Int even if the sequences has infinite length.</li>
+  <li><strong>Index search operations</strong> <code class="language-plaintext highlighter-rouge">indexOf</code>, <code class="language-plaintext highlighter-rouge">lastIndexOf</code>, <code class="language-plaintext highlighter-rouge">indexOfSlice</code>, <code class="language-plaintext highlighter-rouge">lastIndexOfSlice</code>, <code class="language-plaintext highlighter-rouge">indexWhere</code>, <code class="language-plaintext highlighter-rouge">lastIndexWhere</code>, <code class="language-plaintext highlighter-rouge">segmentLength</code>, <code class="language-plaintext highlighter-rouge">prefixLength</code>, which return the index of an element equal to a given value or matching some predicate.</li>
+  <li><strong>Addition operations</strong> <code class="language-plaintext highlighter-rouge">+:</code>, <code class="language-plaintext highlighter-rouge">:+</code>, <code class="language-plaintext highlighter-rouge">padTo</code>, which return new sequences obtained by adding elements at the front or the end of a sequence.</li>
+  <li><strong>Update operations</strong> <code class="language-plaintext highlighter-rouge">updated</code>, <code class="language-plaintext highlighter-rouge">patch</code>, which return a new sequence obtained by replacing some elements of the original sequence.</li>
+  <li><strong>Sorting operations</strong> <code class="language-plaintext highlighter-rouge">sorted</code>, <code class="language-plaintext highlighter-rouge">sortWith</code>, <code class="language-plaintext highlighter-rouge">sortBy</code>, which sort sequence elements according to various criteria.</li>
+  <li><strong>Reversal operations</strong> <code class="language-plaintext highlighter-rouge">reverse</code>, <code class="language-plaintext highlighter-rouge">reverseIterator</code>, <code class="language-plaintext highlighter-rouge">reverseMap</code>, which yield or process sequence elements in reverse order.</li>
+  <li><strong>Comparisons</strong> <code class="language-plaintext highlighter-rouge">startsWith</code>, <code class="language-plaintext highlighter-rouge">endsWith</code>, <code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">containsSlice</code>, <code class="language-plaintext highlighter-rouge">corresponds</code>, which relate two sequences or search an element in a sequence.</li>
+  <li><strong>Multiset</strong> operations <code class="language-plaintext highlighter-rouge">intersect</code>, <code class="language-plaintext highlighter-rouge">diff</code>, <code class="language-plaintext highlighter-rouge">union</code>, <code class="language-plaintext highlighter-rouge">distinct</code>, which perform set-like operations on the elements of two sequences or remove duplicates.</li>
+</ul>
+
+<p>If a sequence is mutable, it offers in addition a side-effecting <code class="language-plaintext highlighter-rouge">update</code> method, which lets sequence elements be updated. As always in Scala, syntax like <code class="language-plaintext highlighter-rouge">seq(idx) = elem</code> is just a shorthand for <code class="language-plaintext highlighter-rouge">seq.update(idx, elem)</code>, so <code class="language-plaintext highlighter-rouge">update</code> gives convenient assignment syntax for free. Note the difference between <code class="language-plaintext highlighter-rouge">update</code> and <code class="language-plaintext highlighter-rouge">updated</code>. <code class="language-plaintext highlighter-rouge">update</code> changes a sequence element in place, and is only available for mutable sequences. <code class="language-plaintext highlighter-rouge">updated</code> is available for all sequences and always returns a new sequence instead of modifying the original.</p>
+
+<h3 id="operations-in-class-seq">Operations in Class Seq</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Indexing and Length:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(i)</code></td>
+      <td>(or, written out, <code class="language-plaintext highlighter-rouge">xs apply i</code>). The element of <code class="language-plaintext highlighter-rouge">xs</code> at index <code class="language-plaintext highlighter-rouge">i</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs isDefinedAt i</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">i</code> is contained in <code class="language-plaintext highlighter-rouge">xs.indices</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.length</code></td>
+      <td>The length of the sequence (same as <code class="language-plaintext highlighter-rouge">size</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lengthCompare n</code></td>
+      <td>Returns <code class="language-plaintext highlighter-rouge">-1</code> if <code class="language-plaintext highlighter-rouge">xs</code> is shorter than <code class="language-plaintext highlighter-rouge">n</code>, <code class="language-plaintext highlighter-rouge">+1</code> if it is longer, and <code class="language-plaintext highlighter-rouge">0</code> if it is of length <code class="language-plaintext highlighter-rouge">n</code>. Works even if the sequence is infinite, for example <code class="language-plaintext highlighter-rouge">Stream.from(1) lengthCompare 42</code> equals <code class="language-plaintext highlighter-rouge">+1</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.indices</code></td>
+      <td>The index range of <code class="language-plaintext highlighter-rouge">xs</code>, extending from <code class="language-plaintext highlighter-rouge">0</code> to <code class="language-plaintext highlighter-rouge">xs.length - 1</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Index Search:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexOf x</code></td>
+      <td>The index of the first element in <code class="language-plaintext highlighter-rouge">xs</code> equal to <code class="language-plaintext highlighter-rouge">x</code> (several variants exist).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lastIndexOf x</code></td>
+      <td>The index of the last element in <code class="language-plaintext highlighter-rouge">xs</code> equal to <code class="language-plaintext highlighter-rouge">x</code> (several variants exist).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexOfSlice ys</code></td>
+      <td>The first index of <code class="language-plaintext highlighter-rouge">xs</code> such that successive elements starting from that index form the sequence <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lastIndexOfSlice ys</code></td>
+      <td>The last index of <code class="language-plaintext highlighter-rouge">xs</code> such that successive elements starting from that index form the sequence <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexWhere p</code></td>
+      <td>The index of the first element in xs that satisfies <code class="language-plaintext highlighter-rouge">p</code> (several variants exist).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs segmentLength (p, i)</code></td>
+      <td>The length of the longest uninterrupted segment of elements in <code class="language-plaintext highlighter-rouge">xs</code>, starting with <code class="language-plaintext highlighter-rouge">xs(i)</code>, that all satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs prefixLength p</code></td>
+      <td>The length of the longest prefix of elements in <code class="language-plaintext highlighter-rouge">xs</code> that all satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Additions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x +: xs</code></td>
+      <td>A new sequence that consists of <code class="language-plaintext highlighter-rouge">x</code> prepended to <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs :+ x</code></td>
+      <td>A new sequence that consists of <code class="language-plaintext highlighter-rouge">x</code> appended to <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs padTo (len, x)</code></td>
+      <td>The sequence resulting from appending the value <code class="language-plaintext highlighter-rouge">x</code> to <code class="language-plaintext highlighter-rouge">xs</code> until length <code class="language-plaintext highlighter-rouge">len</code> is reached.</td>
+    </tr>
+    <tr>
+      <td><strong>Updates:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs patch (i, ys, r)</code></td>
+      <td>The sequence resulting from replacing <code class="language-plaintext highlighter-rouge">r</code> elements of <code class="language-plaintext highlighter-rouge">xs</code> starting with <code class="language-plaintext highlighter-rouge">i</code> by the patch <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs updated (i, x)</code></td>
+      <td>A copy of <code class="language-plaintext highlighter-rouge">xs</code> with the element at index <code class="language-plaintext highlighter-rouge">i</code> replaced by <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(i) = x</code></td>
+      <td>(or, written out, <code class="language-plaintext highlighter-rouge">xs.update(i, x)</code>, only available for <code class="language-plaintext highlighter-rouge">mutable.Seq</code>s). Changes the element of <code class="language-plaintext highlighter-rouge">xs</code> at index <code class="language-plaintext highlighter-rouge">i</code> to <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Sorting:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sorted</code></td>
+      <td>A new sequence obtained by sorting the elements of <code class="language-plaintext highlighter-rouge">xs</code> using the standard ordering of the element type of <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs sortWith lt</code></td>
+      <td>A new sequence obtained by sorting the elements of <code class="language-plaintext highlighter-rouge">xs</code> using <code class="language-plaintext highlighter-rouge">lt</code> as comparison operation.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs sortBy f</code></td>
+      <td>A new sequence obtained by sorting the elements of <code class="language-plaintext highlighter-rouge">xs</code>. Comparison between two elements proceeds by mapping the function <code class="language-plaintext highlighter-rouge">f</code> over both and comparing the results.</td>
+    </tr>
+    <tr>
+      <td><strong>Reversals:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.reverse</code></td>
+      <td>A sequence with the elements of <code class="language-plaintext highlighter-rouge">xs</code> in reverse order.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.reverseIterator</code></td>
+      <td>An iterator yielding all the elements of <code class="language-plaintext highlighter-rouge">xs</code> in reverse order.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs reverseMap f</code></td>
+      <td>A sequence obtained by mapping <code class="language-plaintext highlighter-rouge">f</code> over the elements of <code class="language-plaintext highlighter-rouge">xs</code> in reverse order.</td>
+    </tr>
+    <tr>
+      <td><strong>Comparisons:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs startsWith ys</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">xs</code> starts with sequence <code class="language-plaintext highlighter-rouge">ys</code> (several variants exist).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs endsWith ys</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">xs</code> ends with sequence <code class="language-plaintext highlighter-rouge">ys</code> (several variants exist).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs contains x</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">xs</code> has an element equal to <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs containsSlice ys</code></td>
+      <td>Tests whether <code class="language-plaintext highlighter-rouge">xs</code> has a contiguous subsequence equal to <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(xs corresponds ys)(p)</code></td>
+      <td>Tests whether corresponding elements of <code class="language-plaintext highlighter-rouge">xs</code> and <code class="language-plaintext highlighter-rouge">ys</code> satisfy the binary predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Multiset Operations:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs intersect ys</code></td>
+      <td>The multi-set intersection of sequences <code class="language-plaintext highlighter-rouge">xs</code> and <code class="language-plaintext highlighter-rouge">ys</code> that preserves the order of elements in <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs diff ys</code></td>
+      <td>The multi-set difference of sequences <code class="language-plaintext highlighter-rouge">xs</code> and <code class="language-plaintext highlighter-rouge">ys</code> that preserves the order of elements in <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs union ys</code></td>
+      <td>Multiset union; same as <code class="language-plaintext highlighter-rouge">xs ++ ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.distinct</code></td>
+      <td>A subsequence of <code class="language-plaintext highlighter-rouge">xs</code> that contains no duplicated element.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Trait <a href="https://www.scala-lang.org/api/current/scala/collection/Seq.html">Seq</a> has two subtraits <a href="https://www.scala-lang.org/api/current/scala/collection/LinearSeq.html">LinearSeq</a>, and <a href="https://www.scala-lang.org/api/current/scala/collection/IndexedSeq.html">IndexedSeq</a>. These do not add any new operations, but each offers different performance characteristics: A linear sequence has efficient <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code> operations, whereas an indexed sequence has efficient <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">length</code>, and (if mutable) <code class="language-plaintext highlighter-rouge">update</code> operations. Frequently used linear sequences are <code class="language-plaintext highlighter-rouge">scala.collection.immutable.List</code> and <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Stream</code>. Frequently used indexed sequences are <code class="language-plaintext highlighter-rouge">scala.Array</code> and <code class="language-plaintext highlighter-rouge">scala.collection.mutable.ArrayBuffer</code>. The <code class="language-plaintext highlighter-rouge">Vector</code> class provides an interesting compromise between indexed and linear access. It has both effectively constant time indexing overhead and constant time linear access overhead. Because of this, vectors are a good foundation for mixed access patterns where both indexed and linear accesses are used. You’ll learn more on vectors <a href="concrete-immutable-collection-classes.html">later</a>.</p>
+
+<h3 id="buffers">Buffers</h3>
+
+<p>An important sub-category of mutable sequences is <code class="language-plaintext highlighter-rouge">Buffer</code>s. They allow not only updates of existing elements but also element insertions, element removals, and efficient additions of new elements at the end of the buffer. The principal new methods supported by a buffer are <code class="language-plaintext highlighter-rouge">+=</code> and <code class="language-plaintext highlighter-rouge">++=</code> for element addition at the end, <code class="language-plaintext highlighter-rouge">+=:</code> and <code class="language-plaintext highlighter-rouge">++=:</code> for addition at the front, <code class="language-plaintext highlighter-rouge">insert</code> and <code class="language-plaintext highlighter-rouge">insertAll</code> for element insertions, as well as <code class="language-plaintext highlighter-rouge">remove</code> and <code class="language-plaintext highlighter-rouge">-=</code> for element removal. These operations are summarized in the following table.</p>
+
+<p>Two often used implementations of buffers are <code class="language-plaintext highlighter-rouge">ListBuffer</code> and <code class="language-plaintext highlighter-rouge">ArrayBuffer</code>.  As the name implies, a <code class="language-plaintext highlighter-rouge">ListBuffer</code> is backed by a <code class="language-plaintext highlighter-rouge">List</code>, and supports efficient conversion of its elements to a <code class="language-plaintext highlighter-rouge">List</code>, whereas an <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> is backed by an array, and can be quickly converted into one.</p>
+
+<h4 id="operations-in-class-buffer">Operations in Class Buffer</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Additions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf += x</code></td>
+      <td>Appends element <code class="language-plaintext highlighter-rouge">x</code> to buffer, and returns <code class="language-plaintext highlighter-rouge">buf</code> itself as result.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf += (x, y, z)</code></td>
+      <td>Appends given elements to buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf ++= xs</code></td>
+      <td>Appends all elements in <code class="language-plaintext highlighter-rouge">xs</code> to buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x +=: buf</code></td>
+      <td>Prepends element <code class="language-plaintext highlighter-rouge">x</code> to buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs ++=: buf</code></td>
+      <td>Prepends all elements in <code class="language-plaintext highlighter-rouge">xs</code> to buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf insert (i, x)</code></td>
+      <td>Inserts element <code class="language-plaintext highlighter-rouge">x</code> at index <code class="language-plaintext highlighter-rouge">i</code> in buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf insertAll (i, xs)</code></td>
+      <td>Inserts all elements in <code class="language-plaintext highlighter-rouge">xs</code> at index <code class="language-plaintext highlighter-rouge">i</code> in buffer.</td>
+    </tr>
+    <tr>
+      <td><strong>Removals:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf -= x</code></td>
+      <td>Removes element <code class="language-plaintext highlighter-rouge">x</code> from buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf remove i</code></td>
+      <td>Removes element at index <code class="language-plaintext highlighter-rouge">i</code> from buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf remove (i, n)</code></td>
+      <td>Removes <code class="language-plaintext highlighter-rouge">n</code> elements starting at index <code class="language-plaintext highlighter-rouge">i</code> from buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf trimStart n</code></td>
+      <td>Removes first <code class="language-plaintext highlighter-rouge">n</code> elements from buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf trimEnd n</code></td>
+      <td>Removes last <code class="language-plaintext highlighter-rouge">n</code> elements from buffer.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.clear()</code></td>
+      <td>Removes all elements from buffer.</td>
+    </tr>
+    <tr>
+      <td><strong>Cloning:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.clone</code></td>
+      <td>A new buffer with the same elements as <code class="language-plaintext highlighter-rouge">buf</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/overview.html">Mutable and Immutable Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/trait-traversable.html">Trait Traversable</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/trait-iterable.html">Trait Iterable</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/collections/seqs.html">The sequence traits Seq, IndexedSeq, and LinearSeq</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/sets.html">Sets</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/maps.html">Maps</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-immutable-collection-classes.html">Concrete Immutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-mutable-collection-classes.html">Concrete Mutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/arrays.html">Arrays</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/strings.html">Strings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/performance-characteristics.html">Performance Characteristics</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/equality.html">Equality</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/views.html">Views</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/iterators.html">Iterators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/creating-collections-from-scratch.html">Creating Collections From Scratch</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/conversions-between-java-and-scala-collections.html">Conversions Between Java and Scala Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/migrating-from-scala-27.html">Migrating from Scala 2.7</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections/seqs.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/collections/seqs.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/collections/seqs.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/collections/seqs.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

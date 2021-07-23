@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Implementing Custom Collections (Scala 2.13) | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/custom-collections.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Implementing Custom Collections (Scala 2.13)"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Implementing Custom Collections (Scala 2.13)"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Implementing Custom Collections (Scala 2.13)</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Martin Odersky, Lex Spoon and Julien Richard-Foy</strong></p>
+
+<p>This article shows how to implement custom collection types on top of
+the collections framework. It is recommended to first read the article
+about the <a href="/overviews/core/architecture-of-scala-213-collections.html">architecture of the collections</a>.</p>
+
+<p>What needs to be done if you want to integrate a new collection class,
+so that it can profit from all predefined operations with the right
+types? In the next few sections you’ll be walked through three examples
+that do this, namely capped sequences, sequences of RNA
+bases and prefix maps implemented with Patricia tries.</p>
+
+<h2 id="capped-sequence">Capped sequence</h2>
+
+<p>Say you want to create an immutable collection containing <em>at most</em> <code class="language-plaintext highlighter-rouge">n</code> elements:
+if more elements are added then the first elements are removed.</p>
+
+<p>The first task is to find the supertype of our collection: is it
+<code class="language-plaintext highlighter-rouge">Seq</code>, <code class="language-plaintext highlighter-rouge">Set</code>, <code class="language-plaintext highlighter-rouge">Map</code> or just <code class="language-plaintext highlighter-rouge">Iterable</code>? In our case, it is tempting
+to choose <code class="language-plaintext highlighter-rouge">Seq</code> because our collection can contain duplicates and
+iteration order is determined by insertion order. However, some
+<a href="/overviews/collections/seqs.html">properties of <code class="language-plaintext highlighter-rouge">Seq</code></a> are not satisfied:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">xs</span> <span class="o">++</span> <span class="n">ys</span><span class="o">).</span><span class="py">size</span> <span class="o">==</span> <span class="nv">xs</span><span class="o">.</span><span class="py">size</span> <span class="o">+</span> <span class="nv">ys</span><span class="o">.</span><span class="py">size</span>
+</code></pre></div></div>
+
+<p>Consequently, the only sensible choice as a base collection type
+is <code class="language-plaintext highlighter-rouge">collection.immutable.Iterable</code>.</p>
+
+<h3 id="first-version-of-capped-class">First version of <code class="language-plaintext highlighter-rouge">Capped</code> class</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection._</span>
+
+<span class="k">class</span> <span class="nc">Capped1</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">private</span> <span class="o">(</span><span class="k">val</span> <span class="nv">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">length</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">offset</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">elems</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span>
+  <span class="k">extends</span> <span class="nv">immutable</span><span class="o">.</span><span class="py">Iterable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span> <span class="n">self</span> <span class="k">=&gt;</span>
+
+  <span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span>
+    <span class="nf">this</span><span class="o">(</span><span class="n">capacity</span><span class="o">,</span> <span class="n">length</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">offset</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">elems</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">(</span><span class="n">capacity</span><span class="o">))</span>
+
+  <span class="k">def</span> <span class="nf">appended</span><span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped1</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">newElems</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Any</span><span class="o">](</span><span class="n">capacity</span><span class="o">)</span>
+    <span class="nv">Array</span><span class="o">.</span><span class="py">copy</span><span class="o">(</span><span class="n">elems</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">newElems</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">capacity</span><span class="o">)</span>
+    <span class="nf">val</span> <span class="o">(</span><span class="n">newOffset</span><span class="o">,</span> <span class="n">newLength</span><span class="o">)</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">length</span> <span class="o">==</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">newElems</span><span class="o">(</span><span class="n">offset</span><span class="o">)</span> <span class="k">=</span> <span class="nf">elem</span>
+        <span class="o">((</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="o">,</span> <span class="n">length</span><span class="o">)</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="nf">newElems</span><span class="o">(</span><span class="n">length</span><span class="o">)</span> <span class="k">=</span> <span class="nf">elem</span>
+        <span class="o">(</span><span class="n">offset</span><span class="o">,</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="o">}</span>
+    <span class="k">new</span> <span class="nc">Capped1</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">capacity</span><span class="o">,</span> <span class="n">newLength</span><span class="o">,</span> <span class="n">newOffset</span><span class="o">,</span> <span class="n">newElems</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="o">@`</span><span class="n">inline</span><span class="o">`</span> <span class="k">def</span> <span class="nf">:+</span> <span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped1</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="nf">appended</span><span class="o">(</span><span class="n">elem</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="nf">elems</span><span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="o">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="o">).</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+
+  <span class="k">def</span> <span class="nf">iterator</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AbstractIterator</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="n">current</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">hasNext</span> <span class="k">=</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="nv">self</span><span class="o">.</span><span class="py">length</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">elem</span> <span class="k">=</span> <span class="nf">self</span><span class="o">(</span><span class="n">current</span><span class="o">)</span>
+      <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">elem</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">className</span> <span class="k">=</span> <span class="s">"Capped1"</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The above listing presents the first version of our capped collection
+implementation. It will be refined later. The class <code class="language-plaintext highlighter-rouge">Capped1</code> has a
+private constructor that takes the collection capacity, length,
+offset (first element index) and the underlying array as parameters.
+The public constructor takes only the capacity of the collection. It
+sets the length and offset to 0, and uses an empty array of elements.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">appended</code> method defines how elements can be appended to a given
+<code class="language-plaintext highlighter-rouge">Capped1</code> collection: it creates a new underlying array of elements,
+copies the current elements and adds the new element. As long as the
+number of elements does not exceed the <code class="language-plaintext highlighter-rouge">capacity</code>, the new element
+is appended after the previous elements. However, as soon as the
+maximal capacity has been reached, the new element replaces the first
+element of the collection (at <code class="language-plaintext highlighter-rouge">offset</code> index).</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">apply</code> method implements indexed access: it translates the given
+index into its corresponding index in the underlying array by adding
+the <code class="language-plaintext highlighter-rouge">offset</code>.</p>
+
+<p>These two methods, <code class="language-plaintext highlighter-rouge">appended</code> and <code class="language-plaintext highlighter-rouge">apply</code>, implement the specific
+behavior of the <code class="language-plaintext highlighter-rouge">Capped1</code> collection type. In addition to them, we have
+to implement <code class="language-plaintext highlighter-rouge">iterator</code> to make the generic collection operations
+(such as <code class="language-plaintext highlighter-rouge">foldLeft</code>, <code class="language-plaintext highlighter-rouge">count</code>, etc.) work on <code class="language-plaintext highlighter-rouge">Capped</code> collections.
+Here we implement it by using indexed access.</p>
+
+<p>Last, we override <code class="language-plaintext highlighter-rouge">className</code> to return the name of the collection,
+“Capped1”. This name is used by the <code class="language-plaintext highlighter-rouge">toString</code> operation.</p>
+
+<p>Here are some interactions with the <code class="language-plaintext highlighter-rouge">Capped1</code> collection:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">new</span> <span class="nc">Capped1</span><span class="o">(</span><span class="n">capacity</span> <span class="k">=</span> <span class="mi">4</span><span class="o">)</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">Capped1</span><span class="o">[</span><span class="kt">Nothing</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped1</span><span class="o">()</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="n">res0</span> <span class="o">:+</span> <span class="mi">1</span> <span class="o">:+</span> <span class="mi">2</span> <span class="o">:+</span> <span class="mi">3</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">Capped1</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped1</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res1</span><span class="o">.</span><span class="py">length</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res1</span><span class="o">.</span><span class="py">lastOption</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="n">res1</span> <span class="o">:+</span> <span class="mi">4</span> <span class="o">:+</span> <span class="mi">5</span> <span class="o">:+</span> <span class="mi">6</span>
+<span class="n">res4</span><span class="k">:</span> <span class="kt">Capped1</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped1</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res4</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+<span class="n">res5</span><span class="k">:</span> <span class="kt">collection.immutable.Iterable</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>You can see that if we try to grow the collection with more than four
+elements, the first elements are dropped (see <code class="language-plaintext highlighter-rouge">res4</code>). The operations
+behave as expected except for the last one: after calling <code class="language-plaintext highlighter-rouge">take</code> we
+get back a <code class="language-plaintext highlighter-rouge">List</code> instead of the expected <code class="language-plaintext highlighter-rouge">Capped1</code> collection. This
+is because all that was done in <a href="#first-version-of-capped-class">class
+<code class="language-plaintext highlighter-rouge">Capped1</code></a> was making <code class="language-plaintext highlighter-rouge">Capped1</code> extend
+<code class="language-plaintext highlighter-rouge">immutable.Iterable</code>. This class has a <code class="language-plaintext highlighter-rouge">take</code> method
+that returns an <code class="language-plaintext highlighter-rouge">immutable.Iterable</code>, and that’s implemented in terms of
+<code class="language-plaintext highlighter-rouge">immutable.Iterable</code>’s default implementation, <code class="language-plaintext highlighter-rouge">List</code>. So, that’s what
+you were seeing on the last line of the previous interaction.</p>
+
+<p>Now that you understand why things are the way they are, the next
+question should be what needs to be done to change them? One way to do
+this would be to override the <code class="language-plaintext highlighter-rouge">take</code> method in class <code class="language-plaintext highlighter-rouge">Capped1</code>, maybe like
+this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def take(count: Int): Capped1 = …
+</code></pre></div></div>
+
+<p>This would do the job for <code class="language-plaintext highlighter-rouge">take</code>. But what about <code class="language-plaintext highlighter-rouge">drop</code>, or <code class="language-plaintext highlighter-rouge">filter</code>, or
+<code class="language-plaintext highlighter-rouge">init</code>? In fact there are over fifty methods on collections that return
+again a collection. For consistency, all of these would have to be
+overridden. This looks less and less like an attractive
+option. Fortunately, there is a much easier way to achieve the same
+effect, as shown in the next section.</p>
+
+<h3 id="second-version-of-capped-class">Second version of <code class="language-plaintext highlighter-rouge">Capped</code> class</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection._</span>
+
+<span class="k">class</span> <span class="nc">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">private</span> <span class="o">(</span><span class="k">val</span> <span class="nv">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">length</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">offset</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">elems</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span>
+  <span class="k">extends</span> <span class="nv">immutable</span><span class="o">.</span><span class="py">Iterable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped2</span>, <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span> <span class="n">self</span> <span class="k">=&gt;</span>
+
+  <span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="c1">// as before</span>
+
+  <span class="k">def</span> <span class="nf">appended</span><span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// as before</span>
+  <span class="o">@`</span><span class="n">inline</span><span class="o">`</span> <span class="k">def</span> <span class="nf">:+</span> <span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// as before</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="c1">// as before</span>
+
+  <span class="k">def</span> <span class="nf">iterator</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// as before</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">className</span> <span class="k">=</span> <span class="s">"Capped2"</span>
+  <span class="k">override</span> <span class="k">val</span> <span class="nv">iterableFactory</span><span class="k">:</span> <span class="kt">IterableFactory</span><span class="o">[</span><span class="kt">Capped2</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Capped2Factory</span><span class="o">(</span><span class="n">capacity</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">fromSpecific</span><span class="o">(</span><span class="n">coll</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">iterableFactory</span><span class="o">.</span><span class="py">from</span><span class="o">(</span><span class="n">coll</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">newSpecificBuilder</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">iterableFactory</span><span class="o">.</span><span class="py">newBuilder</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">empty</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">iterableFactory</span><span class="o">.</span><span class="py">empty</span>
+
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">Capped2Factory</span><span class="o">(</span><span class="n">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IterableFactory</span><span class="o">[</span><span class="kt">Capped2</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">def</span> <span class="nf">from</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">source</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="o">(</span><span class="n">newBuilder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">++=</span> <span class="n">source</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+
+  <span class="k">def</span> <span class="nf">empty</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">capacity</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">newBuilder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nv">mutable</span><span class="o">.</span><span class="py">ImmutableBuilder</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped2</span><span class="o">[</span><span class="kt">A</span><span class="o">]](</span><span class="n">empty</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">addOne</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span> <span class="n">elems</span> <span class="k">=</span> <span class="n">elems</span> <span class="o">:+</span> <span class="n">elem</span><span class="o">;</span> <span class="k">this</span> <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The Capped class needs to inherit not only from <code class="language-plaintext highlighter-rouge">Iterable</code>, but also
+from its implementation trait <code class="language-plaintext highlighter-rouge">IterableOps</code>. This is shown in the
+above listing of class <code class="language-plaintext highlighter-rouge">Capped2</code>. The new implementation differs
+from the previous one in only two aspects. First, class <code class="language-plaintext highlighter-rouge">Capped2</code>
+now also extends <code class="language-plaintext highlighter-rouge">IterableOps[A, Capped2, Capped2[A]]</code>. Second,
+its <code class="language-plaintext highlighter-rouge">iterableFactory</code> member is overridden to return an
+<code class="language-plaintext highlighter-rouge">IterableFactory[Capped2]</code>. As explained in the
+previous sections, the <code class="language-plaintext highlighter-rouge">IterableOps</code> trait implements all concrete
+methods of <code class="language-plaintext highlighter-rouge">Iterable</code> in a generic way. For instance, the
+return type of methods like <code class="language-plaintext highlighter-rouge">take</code>, <code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">filter</code> or <code class="language-plaintext highlighter-rouge">init</code>
+is the third type parameter passed to class <code class="language-plaintext highlighter-rouge">IterableOps</code>, i.e.,
+in class <code class="language-plaintext highlighter-rouge">Capped2</code>, it is <code class="language-plaintext highlighter-rouge">Capped2[A]</code>. Similarly, the return
+type of methods like <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code> or <code class="language-plaintext highlighter-rouge">concat</code> is defined
+by the second type parameter passed to class <code class="language-plaintext highlighter-rouge">IterableOps</code>,
+i.e., in class <code class="language-plaintext highlighter-rouge">Capped2</code>, it is <code class="language-plaintext highlighter-rouge">Capped2</code> itself.</p>
+
+<p>Operations returning <code class="language-plaintext highlighter-rouge">Capped2[A]</code> collections are implemented in <code class="language-plaintext highlighter-rouge">IterableOps</code>
+in terms of the <code class="language-plaintext highlighter-rouge">fromSpecific</code> and <code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> operations. The
+<code class="language-plaintext highlighter-rouge">immutable.Iterable[A]</code> parent class implements the <code class="language-plaintext highlighter-rouge">fromSpecific</code> and
+<code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> such that they only return <code class="language-plaintext highlighter-rouge">immutable.Iterable[A]</code>
+collections instead of the expected <code class="language-plaintext highlighter-rouge">Capped2[A]</code> collections. Consequently,
+we override the <code class="language-plaintext highlighter-rouge">fromSpecific</code> and <code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> operations to
+make them return a <code class="language-plaintext highlighter-rouge">Capped2[A]</code> collection. Another inherited operation
+returning a too general type is <code class="language-plaintext highlighter-rouge">empty</code>. We override it to return a
+<code class="language-plaintext highlighter-rouge">Capped2[A]</code> collection too. All these overrides simply forward to the
+collection factory referred to by the <code class="language-plaintext highlighter-rouge">iterableFactory</code> member, whose value
+is an instance of class <code class="language-plaintext highlighter-rouge">Capped2Factory</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Capped2Factory</code> class provides convenient factory methods to build
+collections. Eventually, these methods delegate to the <code class="language-plaintext highlighter-rouge">empty</code> operation,
+which builds an empty <code class="language-plaintext highlighter-rouge">Capped2</code> instance, and <code class="language-plaintext highlighter-rouge">newBuilder</code>, which uses the
+<code class="language-plaintext highlighter-rouge">appended</code> operation to grow a <code class="language-plaintext highlighter-rouge">Capped2</code> collection.</p>
+
+<p>With the refined implementation of the <a href="#second-version-of-capped-class"><code class="language-plaintext highlighter-rouge">Capped2</code> class</a>,
+the transformation operations work now as expected, and the
+<code class="language-plaintext highlighter-rouge">Capped2Factory</code> class provides seamless conversions from other collections:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">object</span> <span class="nc">Capped</span> <span class="k">extends</span> <span class="nc">Capped2Factory</span><span class="o">(</span><span class="n">capacity</span> <span class="k">=</span> <span class="mi">4</span><span class="o">)</span>
+<span class="n">defined</span> <span class="k">object</span> <span class="nc">Capped</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nc">Capped</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+<span class="n">res0</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res0</span><span class="o">.</span><span class="py">take</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res0</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
+<span class="n">res2</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nv">res0</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span>
+<span class="n">res3</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">9</span><span class="o">)</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span><span class="py">to</span><span class="o">(</span><span class="nc">Capped</span><span class="o">)</span>
+<span class="n">res4</span><span class="k">:</span> <span class="kt">Capped2</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Capped2</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This implementation now behaves correctly, but we can still improve
+a few things:</p>
+
+<ul>
+  <li>since our collection is strict, we can take advantage
+of the better performance offered by 
+strict implementations of transformation operations,</li>
+  <li>since our <code class="language-plaintext highlighter-rouge">fromSpecific</code>, <code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> and <code class="language-plaintext highlighter-rouge">empty</code>
+operation just forward to the <code class="language-plaintext highlighter-rouge">iterableFactory</code> member,
+we can use the <code class="language-plaintext highlighter-rouge">IterableFactoryDefaults</code> trait that provides
+such implementations.</li>
+</ul>
+
+<h3 id="final-version-of-capped-class">Final version of <code class="language-plaintext highlighter-rouge">Capped</code> class</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection._</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">private</span> <span class="o">(</span><span class="k">val</span> <span class="nv">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">length</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">offset</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">elems</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span>
+  <span class="k">extends</span> <span class="nv">immutable</span><span class="o">.</span><span class="py">Iterable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped</span>, <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+    <span class="k">with</span> <span class="nc">IterableFactoryDefaults</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nc">StrictOptimizedIterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped</span>, <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span> <span class="n">self</span> <span class="k">=&gt;</span>
+
+  <span class="k">def</span> <span class="nf">this</span><span class="o">(</span><span class="n">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span>
+    <span class="nf">this</span><span class="o">(</span><span class="n">capacity</span><span class="o">,</span> <span class="n">length</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">offset</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">elems</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">(</span><span class="n">capacity</span><span class="o">))</span>
+
+  <span class="k">def</span> <span class="nf">appended</span><span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">newElems</span> <span class="k">=</span> <span class="nv">Array</span><span class="o">.</span><span class="py">ofDim</span><span class="o">[</span><span class="kt">Any</span><span class="o">](</span><span class="n">capacity</span><span class="o">)</span>
+    <span class="nv">Array</span><span class="o">.</span><span class="py">copy</span><span class="o">(</span><span class="n">elems</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">newElems</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">capacity</span><span class="o">)</span>
+    <span class="nf">val</span> <span class="o">(</span><span class="n">newOffset</span><span class="o">,</span> <span class="n">newLength</span><span class="o">)</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">length</span> <span class="o">==</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nf">newElems</span><span class="o">(</span><span class="n">offset</span><span class="o">)</span> <span class="k">=</span> <span class="nf">elem</span>
+        <span class="o">((</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="o">,</span> <span class="n">length</span><span class="o">)</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="nf">newElems</span><span class="o">(</span><span class="n">length</span><span class="o">)</span> <span class="k">=</span> <span class="nf">elem</span>
+        <span class="o">(</span><span class="n">offset</span><span class="o">,</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="o">}</span>
+    <span class="k">new</span> <span class="nc">Capped</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">capacity</span><span class="o">,</span> <span class="n">newLength</span><span class="o">,</span> <span class="n">newOffset</span><span class="o">,</span> <span class="n">newElems</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="o">@`</span><span class="n">inline</span><span class="o">`</span> <span class="k">def</span> <span class="nf">:+</span> <span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Capped</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="nf">appended</span><span class="o">(</span><span class="n">elem</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="nf">elems</span><span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="o">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="o">).</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+
+  <span class="k">def</span> <span class="nf">iterator</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">view</span><span class="o">.</span><span class="py">iterator</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">view</span><span class="k">:</span> <span class="kt">IndexedSeqView</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">IndexedSeqView</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">length</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">length</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="nf">self</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">knownSize</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">length</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">className</span> <span class="k">=</span> <span class="s">"Capped"</span>
+
+  <span class="k">override</span> <span class="k">val</span> <span class="nv">iterableFactory</span><span class="k">:</span> <span class="kt">IterableFactory</span><span class="o">[</span><span class="kt">Capped</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">CappedFactory</span><span class="o">(</span><span class="n">capacity</span><span class="o">)</span>
+
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">CappedFactory</span><span class="o">(</span><span class="n">capacity</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IterableFactory</span><span class="o">[</span><span class="kt">Capped</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">def</span> <span class="nf">from</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">source</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">source</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="n">capped</span><span class="k">:</span> <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">if</span> <span class="nv">capped</span><span class="o">.</span><span class="py">capacity</span> <span class="o">==</span> <span class="n">capacity</span> <span class="k">=&gt;</span> <span class="n">capped</span>
+      <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">newBuilder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">++=</span> <span class="n">source</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+    <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">empty</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">capacity</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">newBuilder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nv">mutable</span><span class="o">.</span><span class="py">ImmutableBuilder</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Capped</span><span class="o">[</span><span class="kt">A</span><span class="o">]](</span><span class="n">empty</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">addOne</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span> <span class="n">elems</span> <span class="k">=</span> <span class="n">elems</span> <span class="o">:+</span> <span class="n">elem</span><span class="o">;</span> <span class="k">this</span> <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>That is it. The final <a href="#final-version-of-capped-class"><code class="language-plaintext highlighter-rouge">Capped</code> class</a>:</p>
+
+<ul>
+  <li>extends the <code class="language-plaintext highlighter-rouge">StrictOptimizedIterableOps</code> trait, which overrides all
+transformation operations to take advantage of strict builders,</li>
+  <li>extends the <code class="language-plaintext highlighter-rouge">IterableFactoryDefaults</code> trait, which overrides the
+<code class="language-plaintext highlighter-rouge">fromSpecific</code>, <code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> and <code class="language-plaintext highlighter-rouge">empty</code> operations to forward
+to the <code class="language-plaintext highlighter-rouge">iterableFactory</code>,</li>
+  <li>overrides a few operations for performance: the <code class="language-plaintext highlighter-rouge">view</code> now uses
+indexed access, and the <code class="language-plaintext highlighter-rouge">iterator</code> delegates to the view. The
+<code class="language-plaintext highlighter-rouge">knownSize</code> operation is also overridden because the size is always
+known.</li>
+</ul>
+
+<p>Its implementation requires a little bit of protocol. In essence, you
+have to inherit from the <code class="language-plaintext highlighter-rouge">Ops</code> template trait in addition to just
+inheriting from a collection type, override the <code class="language-plaintext highlighter-rouge">iterableFactory</code>
+member to return a more specific factory, and finally implement abstract
+methods (such as <code class="language-plaintext highlighter-rouge">iterator</code> in our case), if any.</p>
+
+<h2 id="rna-sequences">RNA sequences</h2>
+
+<p>To start with the second example, we define the four RNA Bases:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Base
+case object A extends Base
+case object U extends Base
+case object G extends Base
+case object C extends Base
+
+object Base {
+  val fromInt: Int =&gt; Base = Array(A, U, G, C)
+  val toInt: Base =&gt; Int = Map(A -&gt; 0, U -&gt; 1, G -&gt; 2, C -&gt; 3)
+}
+</code></pre></div></div>
+
+<p>Say you want to create a new immutable sequence type for RNA strands, which are
+sequences of bases A (adenine), U (uracil), G (guanine), and C
+(cytosine). The definitions for bases are easily set up as shown in the
+listing of RNA bases above.</p>
+
+<p>Every base is defined as a case object that inherits from a common
+abstract class <code class="language-plaintext highlighter-rouge">Base</code>. The <code class="language-plaintext highlighter-rouge">Base</code> class has a companion object that
+defines two functions that map between bases and the integers 0 to 3.
+You can see in the examples two different ways to use collections
+to implement these functions. The <code class="language-plaintext highlighter-rouge">toInt</code> function is implemented as a
+<code class="language-plaintext highlighter-rouge">Map</code> from <code class="language-plaintext highlighter-rouge">Base</code> values to integers. The reverse function, <code class="language-plaintext highlighter-rouge">fromInt</code>, is
+implemented as an array. This makes use of the fact that both maps and
+arrays <em>are</em> functions because they inherit from the <code class="language-plaintext highlighter-rouge">Function1</code> trait.</p>
+
+<p>The next task is to define a class for strands of RNA. Conceptually, a
+strand of RNA is simply a <code class="language-plaintext highlighter-rouge">Seq[Base]</code>. However, RNA strands can get
+quite long, so it makes sense to invest some work in a compact
+representation. Because there are only four bases, a base can be
+identified with two bits, and you can therefore store sixteen bases as
+two-bit values in an integer. The idea, then, is to construct a
+specialized subclass of <code class="language-plaintext highlighter-rouge">Seq[Base]</code>, which uses this packed
+representation.</p>
+
+<h3 id="first-version-of-rna-strands-class">First version of RNA strands class</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection.mutable
+import collection.immutable.{ IndexedSeq, IndexedSeqOps }
+
+final class RNA1 private (
+  val groups: Array[Int],
+  val length: Int
+) extends IndexedSeq[Base]
+  with IndexedSeqOps[Base, IndexedSeq, RNA1] {
+
+  import RNA1._
+
+  def apply(idx: Int): Base = {
+    if (idx &lt; 0 || length &lt;= idx)
+      throw new IndexOutOfBoundsException
+    Base.fromInt(groups(idx / N) &gt;&gt; (idx % N * S) &amp; M)
+  }
+
+  override protected def fromSpecific(coll: IterableOnce[Base]): RNA1 =
+    fromSeq(coll.iterator.toSeq)
+  override protected def newSpecificBuilder: mutable.Builder[Base, RNA1] =
+    iterableFactory.newBuilder[Base].mapResult(fromSeq)
+  override def empty: RNA1 = fromSeq(Seq.empty)
+  override def className = "RNA1"
+}
+
+object RNA1 {
+
+  // Number of bits necessary to represent group
+  private val S = 2            
+
+  // Number of groups that fit in an Int
+  private val N = 32 / S       
+
+  // Bitmask to isolate a group
+  private val M = (1 &lt;&lt; S) - 1
+
+  def fromSeq(buf: collection.Seq[Base]): RNA1 = {
+    val groups = new Array[Int]((buf.length + N - 1) / N)
+    for (i &lt;- 0 until buf.length)
+      groups(i / N) |= Base.toInt(buf(i)) &lt;&lt; (i % N * S)
+    new RNA1(groups, buf.length)
+  }
+
+  def apply(bases: Base*) = fromSeq(bases)
+}
+</code></pre></div></div>
+
+<p>The <a href="#first-version-of-rna-strands-class">RNA strands class listing</a> above
+presents the first version of this
+class. The class <code class="language-plaintext highlighter-rouge">RNA1</code> has a constructor that
+takes an array of <code class="language-plaintext highlighter-rouge">Int</code>s as its first argument. This array contains the
+packed RNA data, with sixteen bases in each element, except for the
+last array element, which might be partially filled. The second
+argument, <code class="language-plaintext highlighter-rouge">length</code>, specifies the total number of bases on the array
+(and in the sequence). Class <code class="language-plaintext highlighter-rouge">RNA1</code> extends <code class="language-plaintext highlighter-rouge">IndexedSeq[Base]</code> and
+<code class="language-plaintext highlighter-rouge">IndexedSeqOps[Base, IndexedSeq, RNA1]</code>. These traits define the following
+abstract methods:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">length</code>, automatically implemented by defining a parametric field of
+the same name,</li>
+  <li><code class="language-plaintext highlighter-rouge">apply</code> (indexing method), implemented by first extracting an integer value
+from the <code class="language-plaintext highlighter-rouge">groups</code> array, then extracting the correct two-bit number from that
+integer using right shift (<code class="language-plaintext highlighter-rouge">&gt;&gt;</code>) and mask (<code class="language-plaintext highlighter-rouge">&amp;</code>). The private constants <code class="language-plaintext highlighter-rouge">S</code>,
+<code class="language-plaintext highlighter-rouge">N</code>, and <code class="language-plaintext highlighter-rouge">M</code> come from the <code class="language-plaintext highlighter-rouge">RNA1</code> companion object. <code class="language-plaintext highlighter-rouge">S</code> specifies the size of
+each packet (i.e., two); <code class="language-plaintext highlighter-rouge">N</code> specifies the number of two-bit packets per
+integer; and <code class="language-plaintext highlighter-rouge">M</code> is a bit mask that isolates the lowest <code class="language-plaintext highlighter-rouge">S</code> bits in a
+word.</li>
+</ul>
+
+<p>We also override the following members used by transformation operations
+such as <code class="language-plaintext highlighter-rouge">filter</code> and <code class="language-plaintext highlighter-rouge">take</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fromSpecific</code>, implemented by the <code class="language-plaintext highlighter-rouge">fromSeq</code> method of the <code class="language-plaintext highlighter-rouge">RNA1</code>
+companion object,</li>
+  <li><code class="language-plaintext highlighter-rouge">newSpecificBuilder</code>, implemented by using the default <code class="language-plaintext highlighter-rouge">IndexedSeq</code> builder
+and transforming its result into an <code class="language-plaintext highlighter-rouge">RNA1</code> with the <code class="language-plaintext highlighter-rouge">mapResult</code> method.</li>
+</ul>
+
+<p>Note that the constructor of class <code class="language-plaintext highlighter-rouge">RNA1</code> is <code class="language-plaintext highlighter-rouge">private</code>. This means that
+clients cannot create <code class="language-plaintext highlighter-rouge">RNA1</code> sequences by calling <code class="language-plaintext highlighter-rouge">new</code>, which makes
+sense, because it hides the representation of <code class="language-plaintext highlighter-rouge">RNA1</code> sequences in terms
+of packed arrays from the user. If clients cannot see what the
+representation details of RNA sequences are, it becomes possible to
+change these representation details at any point in the future without
+affecting client code. In other words, this design achieves a good
+decoupling of the interface of RNA sequences and its
+implementation. However, if constructing an RNA sequence with <code class="language-plaintext highlighter-rouge">new</code> is
+impossible, there must be some other way to create new RNA sequences,
+else the whole class would be rather useless. In fact there are two
+alternatives for RNA sequence creation, both provided by the <code class="language-plaintext highlighter-rouge">RNA1</code>
+companion object. The first way is method <code class="language-plaintext highlighter-rouge">fromSeq</code>, which converts a
+given sequence of bases (i.e., a value of type <code class="language-plaintext highlighter-rouge">Seq[Base]</code>) into an
+instance of class <code class="language-plaintext highlighter-rouge">RNA1</code>. The <code class="language-plaintext highlighter-rouge">fromSeq</code> method does this by packing all
+the bases contained in its argument sequence into an array, then
+calling <code class="language-plaintext highlighter-rouge">RNA1</code>’s private constructor with that array and the length of
+the original sequence as arguments. This makes use of the fact that a
+private constructor of a class is visible in the class’s companion
+object.</p>
+
+<p>The second way to create an <code class="language-plaintext highlighter-rouge">RNA1</code> value is provided by the <code class="language-plaintext highlighter-rouge">apply</code> method
+in the <code class="language-plaintext highlighter-rouge">RNA1</code> object. It takes a variable number of <code class="language-plaintext highlighter-rouge">Base</code> arguments and
+simply forwards them as a sequence to <code class="language-plaintext highlighter-rouge">fromSeq</code>. Here are the two
+creation schemes in action:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val xs = List(A, G, U, A)
+xs: List[Base] = List(A, G, U, A)
+
+scala&gt; RNA1.fromSeq(xs)
+res1: RNA1 = RNA1(A, G, U, A)
+
+scala&gt; val rna1 = RNA1(A, U, G, G, C)
+rna1: RNA1 = RNA1(A, U, G, G, C)
+</code></pre></div></div>
+
+<p>Also note that the type parameters of the <code class="language-plaintext highlighter-rouge">IndexedSeqOps</code> trait that
+we inherit from are: <code class="language-plaintext highlighter-rouge">Base</code>, <code class="language-plaintext highlighter-rouge">IndexedSeq</code> and <code class="language-plaintext highlighter-rouge">RNA1</code>. The first one
+stands for the type of elements, the second one stands for the
+type constructor used by transformation operations that return
+a collection with a different type of elements, and the third one
+stands for the type used by transformation operations that return
+a collection with the same type of elements. In our case, it is
+worth noting that the second one is <code class="language-plaintext highlighter-rouge">IndexedSeq</code> whereas the
+third one is <code class="language-plaintext highlighter-rouge">RNA1</code>. This means that operations like <code class="language-plaintext highlighter-rouge">map</code> or
+<code class="language-plaintext highlighter-rouge">flatMap</code> return an <code class="language-plaintext highlighter-rouge">IndexedSeq</code>, whereas operations like <code class="language-plaintext highlighter-rouge">take</code> or
+<code class="language-plaintext highlighter-rouge">filter</code> return an <code class="language-plaintext highlighter-rouge">RNA1</code>.</p>
+
+<p>Here is an example showing the usage of <code class="language-plaintext highlighter-rouge">take</code> and <code class="language-plaintext highlighter-rouge">filter</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; rna1.take(3)
+res5: RNA1 = RNA1(A, U, G)
+
+scala&gt; rna1.filter(_ != U)
+res6: RNA1 = RNA1(A, G, G, C)
+</code></pre></div></div>
+
+<h3 id="dealing-with-map-and-friends">Dealing with map and friends</h3>
+
+<p>However, transformation operations that return a collection with a
+different element type always return an <code class="language-plaintext highlighter-rouge">IndexedSeq</code>.</p>
+
+<p>How should these
+methods be adapted to RNA strands? The desired behavior would be to get
+back an RNA strand when mapping bases to bases or appending two RNA strands
+with <code class="language-plaintext highlighter-rouge">++</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val rna = RNA(A, U, G, G, C)
+rna: RNA = RNA(A, U, G, G, C)
+
+scala&gt; rna map { case A =&gt; U case b =&gt; b }
+res7: RNA = RNA(U, U, G, G, C)
+
+scala&gt; rna ++ rna
+res8: RNA = RNA(A, U, G, G, C, A, U, G, G, C)
+</code></pre></div></div>
+
+<p>On the other hand, mapping bases to some other type over an RNA strand
+cannot yield another RNA strand because the new elements have the
+wrong type. It has to yield a sequence instead. In the same vein
+appending elements that are not of type <code class="language-plaintext highlighter-rouge">Base</code> to an RNA strand can
+yield a general sequence, but it cannot yield another RNA strand.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; rna map Base.toInt
+res2: IndexedSeq[Int] = Vector(0, 1, 2, 2, 3)
+
+scala&gt; rna ++ List("missing", "data")
+res3: IndexedSeq[java.lang.Object] =
+  Vector(A, U, G, G, C, missing, data)
+</code></pre></div></div>
+
+<p>This is what you’d expect in the ideal case. But this is not what the
+<a href="#first-version-of-rna-strands-class"><code class="language-plaintext highlighter-rouge">RNA1</code> class</a> provides. In fact, all
+examples will return instances of <code class="language-plaintext highlighter-rouge">Vector</code>, not just the last two. If you run
+the first three commands above with instances of this class you obtain:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val rna1 = RNA1(A, U, G, G, C)
+rna1: RNA1 = RNA1(A, U, G, G, C)
+
+scala&gt; rna1 map { case A =&gt; U case b =&gt; b }
+res0: IndexedSeq[Base] = Vector(U, U, G, G, C)
+
+scala&gt; rna1 ++ rna1
+res1: IndexedSeq[Base] = Vector(A, U, G, G, C, A, U, G, G, C)
+</code></pre></div></div>
+
+<p>So the result of <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">++</code> is never an RNA strand, even if the
+element type of the generated collection is <code class="language-plaintext highlighter-rouge">Base</code>. To see how to do
+better, it pays to have a close look at the signature of the <code class="language-plaintext highlighter-rouge">map</code>
+method (or of <code class="language-plaintext highlighter-rouge">++</code>, which has a similar signature). The <code class="language-plaintext highlighter-rouge">map</code> method is
+originally defined in class <code class="language-plaintext highlighter-rouge">scala.collection.IterableOps</code> with the
+following signature:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def map[B](f: A =&gt; B): CC[B]
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">A</code> is the type of elements of the collection, and <code class="language-plaintext highlighter-rouge">CC</code> is the type
+constructor passed as a second parameter to the <code class="language-plaintext highlighter-rouge">IterableOps</code> trait.</p>
+
+<p>In our <code class="language-plaintext highlighter-rouge">RNA1</code> implementation, this <code class="language-plaintext highlighter-rouge">CC</code> type constructor is <code class="language-plaintext highlighter-rouge">IndexedSeq</code>,
+this is why we always get a <code class="language-plaintext highlighter-rouge">Vector</code> as a result.</p>
+
+<h3 id="second-version-of-rna-strands-class">Second version of RNA strands class</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.collection.{ View, mutable }
+import scala.collection.immutable.{ IndexedSeq, IndexedSeqOps }
+
+final class RNA2 private (val groups: Array[Int], val length: Int)
+  extends IndexedSeq[Base] with IndexedSeqOps[Base, IndexedSeq, RNA2] {
+
+  import RNA2._
+
+  def apply(idx: Int): Base = // as before
+  override protected def fromSpecific(coll: IterableOnce[Base]): RNA2 = // as before
+  override protected def newSpecificBuilder: mutable.Builder[Base, RNA2] = // as before
+  
+  // Overloading of `appended`, `prepended`, `appendedAll`,
+  // `prependedAll`, `map`, `flatMap` and `concat` to return an `RNA2`
+  // when possible
+  def concat(suffix: IterableOnce[Base]): RNA2 =
+    fromSpecific(iterator ++ suffix.iterator)
+  // symbolic alias for `concat`
+  @inline final def ++ (suffix: IterableOnce[Base]): RNA2 = concat(suffix)
+  def appended(base: Base): RNA2 =
+    fromSpecific(new View.Appended(this, base))
+  def appendedAll(suffix: IterableOnce[Base]): RNA2 =
+    concat(suffix)
+  def prepended(base: Base): RNA2 = 
+    fromSpecific(new View.Prepended(base, this))
+  def prependedAll(prefix: IterableOnce[Base]): RNA2 =
+    fromSpecific(prefix.iterator ++ iterator)
+  def map(f: Base =&gt; Base): RNA2 =
+    fromSpecific(new View.Map(this, f))
+  def flatMap(f: Base =&gt; IterableOnce[Base]): RNA2 =
+    fromSpecific(new View.FlatMap(this, f))
+}
+</code></pre></div></div>
+
+<p>To address this shortcoming, you need to overload the methods that
+return an <code class="language-plaintext highlighter-rouge">IndexedSeq[B]</code> for the case where <code class="language-plaintext highlighter-rouge">B</code> is known to be <code class="language-plaintext highlighter-rouge">Base</code>,
+to return an <code class="language-plaintext highlighter-rouge">RNA2</code> instead.</p>
+
+<p>Compared to <a href="#first-version-of-rna-strands-class">class <code class="language-plaintext highlighter-rouge">RNA1</code></a>
+we added overloads for methods <code class="language-plaintext highlighter-rouge">concat</code>, <code class="language-plaintext highlighter-rouge">appended</code>, <code class="language-plaintext highlighter-rouge">appendedAll</code>, <code class="language-plaintext highlighter-rouge">prepended</code>,
+<code class="language-plaintext highlighter-rouge">prependedAll</code>, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">flatMap</code>.</p>
+
+<p>This implementation now behaves correctly, but we can still improve a few things. Since our
+collection is strict, we could take advantage of the better performance offered by strict builders
+in transformation operations.
+Also, if we try to convert an <code class="language-plaintext highlighter-rouge">Iterable[Base]</code> into an <code class="language-plaintext highlighter-rouge">RNA2</code> it fails:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val bases: Iterable[Base] = List(A, U, C, C)
+bases: Iterable[Base] = List(A, U, C, C)
+
+scala&gt; bases.to(RNA2)
+                ^
+       error: type mismatch;
+        found   : RNA2.type
+        required: scala.collection.Factory[Base,?]
+</code></pre></div></div>
+
+<h3 id="final-version-of-rna-strands-class">Final version of RNA strands class</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection.</span><span class="o">{</span> <span class="nc">AbstractIterator</span><span class="o">,</span> <span class="nc">SpecificIterableFactory</span><span class="o">,</span> <span class="nc">StrictOptimizedSeqOps</span><span class="o">,</span> <span class="nc">View</span><span class="o">,</span> <span class="n">mutable</span> <span class="o">}</span>
+<span class="k">import</span> <span class="nn">scala.collection.immutable.</span><span class="o">{</span> <span class="nc">IndexedSeq</span><span class="o">,</span> <span class="nc">IndexedSeqOps</span> <span class="o">}</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">RNA</span> <span class="nf">private</span> <span class="o">(</span>
+  <span class="k">val</span> <span class="nv">groups</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span>
+  <span class="k">val</span> <span class="nv">length</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">)</span> <span class="k">extends</span> <span class="nc">IndexedSeq</span><span class="o">[</span><span class="kt">Base</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nc">IndexedSeqOps</span><span class="o">[</span><span class="kt">Base</span>, <span class="kt">IndexedSeq</span>, <span class="kt">RNA</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nc">StrictOptimizedSeqOps</span><span class="o">[</span><span class="kt">Base</span>, <span class="kt">IndexedSeq</span>, <span class="kt">RNA</span><span class="o">]</span> <span class="o">{</span> <span class="n">rna</span> <span class="k">=&gt;</span>
+
+  <span class="k">import</span> <span class="nn">RNA._</span>
+
+  <span class="c1">// Mandatory implementation of `apply` in `IndexedSeqOps`</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">idx</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Base</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="n">idx</span><span class="o">)</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nc">IndexOutOfBoundsException</span>
+    <span class="nv">Base</span><span class="o">.</span><span class="py">fromInt</span><span class="o">(</span><span class="nf">groups</span><span class="o">(</span><span class="n">idx</span> <span class="o">/</span> <span class="n">N</span><span class="o">)</span> <span class="o">&gt;&gt;</span> <span class="o">(</span><span class="n">idx</span> <span class="o">%</span> <span class="n">N</span> <span class="o">*</span> <span class="n">S</span><span class="o">)</span> <span class="o">&amp;</span> <span class="n">M</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="c1">// Mandatory overrides of `fromSpecific`, `newSpecificBuilder`,</span>
+  <span class="c1">// and `empty`, from `IterableOps`</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">fromSpecific</span><span class="o">(</span><span class="n">coll</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="nv">RNA</span><span class="o">.</span><span class="py">fromSpecific</span><span class="o">(</span><span class="n">coll</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">newSpecificBuilder</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[</span><span class="kt">Base</span>, <span class="kt">RNA</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">RNA</span><span class="o">.</span><span class="py">newBuilder</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">empty</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span> <span class="nv">RNA</span><span class="o">.</span><span class="py">empty</span>
+
+  <span class="c1">// Overloading of `appended`, `prepended`, `appendedAll`, `prependedAll`,</span>
+  <span class="c1">// `map`, `flatMap` and `concat` to return an `RNA` when possible</span>
+  <span class="k">def</span> <span class="nf">concat</span><span class="o">(</span><span class="n">suffix</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="nf">strictOptimizedConcat</span><span class="o">(</span><span class="n">suffix</span><span class="o">,</span> <span class="n">newSpecificBuilder</span><span class="o">)</span>
+  <span class="nd">@inline</span> <span class="k">final</span> <span class="k">def</span> <span class="nf">++</span> <span class="o">(</span><span class="n">suffix</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span> <span class="nf">concat</span><span class="o">(</span><span class="n">suffix</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">appended</span><span class="o">(</span><span class="n">base</span><span class="k">:</span> <span class="kt">Base</span><span class="o">)</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="o">(</span><span class="n">newSpecificBuilder</span> <span class="o">++=</span> <span class="k">this</span> <span class="o">+=</span> <span class="n">base</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+  <span class="k">def</span> <span class="nf">appendedAll</span><span class="o">(</span><span class="n">suffix</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="nf">strictOptimizedConcat</span><span class="o">(</span><span class="n">suffix</span><span class="o">,</span> <span class="n">newSpecificBuilder</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">prepended</span><span class="o">(</span><span class="n">base</span><span class="k">:</span> <span class="kt">Base</span><span class="o">)</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="o">(</span><span class="n">newSpecificBuilder</span> <span class="o">+=</span> <span class="n">base</span> <span class="o">++=</span> <span class="k">this</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+  <span class="k">def</span> <span class="nf">prependedAll</span><span class="o">(</span><span class="n">prefix</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="o">(</span><span class="n">newSpecificBuilder</span> <span class="o">++=</span> <span class="n">prefix</span> <span class="o">++=</span> <span class="k">this</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Base</span> <span class="o">=&gt;</span> <span class="nc">Base</span><span class="o">)</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="nf">strictOptimizedMap</span><span class="o">(</span><span class="n">newSpecificBuilder</span><span class="o">,</span> <span class="n">f</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">flatMap</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Base</span> <span class="o">=&gt;</span> <span class="nc">IterableOnce</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span>
+    <span class="nf">strictOptimizedFlatMap</span><span class="o">(</span><span class="n">newSpecificBuilder</span><span class="o">,</span> <span class="n">f</span><span class="o">)</span>
+
+  <span class="c1">// Optional re-implementation of iterator,</span>
+  <span class="c1">// to make it more efficient.</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">iterator</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[</span><span class="kt">Base</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AbstractIterator</span><span class="o">[</span><span class="kt">Base</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="n">i</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">private</span> <span class="k">var</span> <span class="n">b</span> <span class="k">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">hasNext</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nv">rna</span><span class="o">.</span><span class="py">length</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="o">()</span><span class="k">:</span> <span class="kt">Base</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="n">b</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nf">groups</span><span class="o">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">N</span><span class="o">)</span> <span class="k">else</span> <span class="n">b</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">S</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nv">Base</span><span class="o">.</span><span class="py">fromInt</span><span class="o">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="n">M</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">className</span> <span class="k">=</span> <span class="s">"RNA"</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">RNA</span> <span class="k">extends</span> <span class="nc">SpecificIterableFactory</span><span class="o">[</span><span class="kt">Base</span>, <span class="kt">RNA</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">S</span> <span class="k">=</span> <span class="mi">2</span>            <span class="c1">// number of bits in group</span>
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">M</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">S</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1">// bitmask to isolate a group</span>
+  <span class="k">private</span> <span class="k">val</span> <span class="nv">N</span> <span class="k">=</span> <span class="mi">32</span> <span class="o">/</span> <span class="n">S</span>       <span class="c1">// number of groups in an Int</span>
+
+  <span class="k">def</span> <span class="nf">fromSeq</span><span class="o">(</span><span class="n">buf</span><span class="k">:</span> <span class="kt">collection.Seq</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">groups</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]((</span><span class="nv">buf</span><span class="o">.</span><span class="py">length</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">N</span><span class="o">)</span>
+    <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="nv">buf</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+      <span class="nf">groups</span><span class="o">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">N</span><span class="o">)</span> <span class="o">|=</span> <span class="nv">Base</span><span class="o">.</span><span class="py">toInt</span><span class="o">(</span><span class="nf">buf</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">N</span> <span class="o">*</span> <span class="n">S</span><span class="o">)</span>
+    <span class="k">new</span> <span class="nc">RNA</span><span class="o">(</span><span class="n">groups</span><span class="o">,</span> <span class="nv">buf</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="c1">// Mandatory factory methods: `empty`, `newBuilder`</span>
+  <span class="c1">// and `fromSpecific`</span>
+  <span class="k">def</span> <span class="nf">empty</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span> <span class="nf">fromSeq</span><span class="o">(</span><span class="nv">Seq</span><span class="o">.</span><span class="py">empty</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">newBuilder</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[</span><span class="kt">Base</span>, <span class="kt">RNA</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">mutable</span><span class="o">.</span><span class="py">ArrayBuffer</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">[</span><span class="kt">Base</span><span class="o">].</span><span class="py">mapResult</span><span class="o">(</span><span class="n">fromSeq</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">fromSpecific</span><span class="o">(</span><span class="n">it</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[</span><span class="kt">Base</span><span class="o">])</span><span class="k">:</span> <span class="kt">RNA</span> <span class="o">=</span> <span class="n">it</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">seq</span><span class="k">:</span> <span class="kt">collection.Seq</span><span class="o">[</span><span class="kt">Base</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nf">fromSeq</span><span class="o">(</span><span class="n">seq</span><span class="o">)</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="nf">fromSeq</span><span class="o">(</span><span class="nv">mutable</span><span class="o">.</span><span class="py">ArrayBuffer</span><span class="o">.</span><span class="py">from</span><span class="o">(</span><span class="n">it</span><span class="o">))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The final <a href="#final-version-of-rna-strands-class"><code class="language-plaintext highlighter-rouge">RNA</code> class</a>:</p>
+
+<ul>
+  <li>extends the <code class="language-plaintext highlighter-rouge">StrictOptimizedSeqOps</code> trait, which overrides all transformation
+operations to take advantage of strict builders,</li>
+  <li>uses utility operations provided by the <code class="language-plaintext highlighter-rouge">StrictOptimizedSeqOps</code> trait such as
+<code class="language-plaintext highlighter-rouge">strictOptimizedConcat</code> to implement overload of transformation operations that
+return an <code class="language-plaintext highlighter-rouge">RNA</code> collection,</li>
+  <li>has a companion object that extends <code class="language-plaintext highlighter-rouge">SpecificIterableFactory[Base, RNA]</code>, which makes
+it possible to use it as a parameter of a <code class="language-plaintext highlighter-rouge">to</code> call (to convert any collection
+of bases to an <code class="language-plaintext highlighter-rouge">RNA</code>, e.g. <code class="language-plaintext highlighter-rouge">List(U, A, G, C).to(RNA)</code>),</li>
+  <li>moves the <code class="language-plaintext highlighter-rouge">newSpecificBuilder</code> and <code class="language-plaintext highlighter-rouge">fromSpecific</code> implementations
+to the companion object.</li>
+</ul>
+
+<p>The discussion so far centered on the minimal amount of definitions
+needed to define new sequences with methods that obey certain
+types. But in practice you might also want to add new functionality to
+your sequences or to override existing methods for better
+efficiency. An example of this is the overridden <code class="language-plaintext highlighter-rouge">iterator</code> method in
+class <code class="language-plaintext highlighter-rouge">RNA</code>. <code class="language-plaintext highlighter-rouge">iterator</code> is an important method in its own right because it
+implements loops over collections. Furthermore, many other collection
+methods are implemented in terms of <code class="language-plaintext highlighter-rouge">iterator</code>. So it makes sense to
+invest some effort optimizing the method’s implementation. The
+standard implementation of <code class="language-plaintext highlighter-rouge">iterator</code> in <code class="language-plaintext highlighter-rouge">IndexedSeq</code> will simply select
+every <code class="language-plaintext highlighter-rouge">i</code>‘th element of the collection using <code class="language-plaintext highlighter-rouge">apply</code>, where <code class="language-plaintext highlighter-rouge">i</code> ranges from
+0 to the collection’s length minus one. So this standard
+implementation selects an array element and unpacks a base from it
+once for every element in an RNA strand. The overriding <code class="language-plaintext highlighter-rouge">iterator</code> in
+class <code class="language-plaintext highlighter-rouge">RNA</code> is smarter than that. For every selected array element it
+immediately applies the given function to all bases contained in
+it. So the effort for array selection and bit unpacking is much
+reduced.</p>
+
+<h2 id="prefix-map">Prefix map</h2>
+
+<p>As a third example you’ll learn how to integrate a new kind of mutable map
+into the collection framework. The idea is to implement a mutable map
+with <code class="language-plaintext highlighter-rouge">String</code> as the type of keys by a “Patricia trie”. The term
+<em>Patricia</em> is in fact an abbreviation for “Practical Algorithm to
+Retrieve Information Coded in Alphanumeric” and <em>trie</em> comes from
+re<em>trie</em>val (a trie is also called a radix tree or prefix tree).
+The idea is to store a set or a map as a tree where subsequent
+characters in a search key
+uniquely determine a path through the tree. For instance a Patricia trie
+storing the strings “abc”, “abd”, “al”, “all” and “xy” would look
+like this:</p>
+
+<p>A sample patricia trie:
+<img src="/resources/images/patricia.png" width="550" /></p>
+
+<p>To find the node corresponding to the string “abc” in this trie,
+simply follow the subtree labeled “a”, proceed from there to the
+subtree labelled “b”, to finally reach its subtree labelled “c”. If
+the Patricia trie is used as a map, the value that’s associated with a
+key is stored in the nodes that can be reached by the key. If it is a
+set, you simply store a marker saying that the node is present in the
+set.</p>
+
+<p>Patricia tries support very efficient lookups and updates. Another
+nice feature is that they support selecting a subcollection by giving
+a prefix. For instance, in the patricia tree above you can obtain the
+sub-collection of all keys that start with an “a” simply by following
+the “a” link from the root of the tree.</p>
+
+<p>Based on these ideas we will now walk you through the implementation
+of a map that’s implemented as a Patricia trie. We call the map a
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>, which means that it provides a method <code class="language-plaintext highlighter-rouge">withPrefix</code> that
+selects a submap of all keys starting with a given prefix. We’ll first
+define a prefix map with the keys shown in the running example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val m = PrefixMap("abc" -&gt; 0, "abd" -&gt; 1, "al" -&gt; 2,
+  "all" -&gt; 3, "xy" -&gt; 4)
+m: PrefixMap[Int] = PrefixMap((abc,0), (abd,1), (al,2), (all,3), (xy,4))
+</code></pre></div></div>
+
+<p>Then calling <code class="language-plaintext highlighter-rouge">withPrefix</code> on <code class="language-plaintext highlighter-rouge">m</code> will yield another prefix map:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; m withPrefix "a"
+res14: PrefixMap[Int] = PrefixMap((bc,0), (bd,1), (l,2), (ll,3))
+</code></pre></div></div>
+
+<h3 id="patricia-trie-implementation">Patricia trie implementation</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection._</span>
+<span class="k">import</span> <span class="nn">scala.collection.mutable.</span><span class="o">{</span> <span class="nc">GrowableBuilder</span><span class="o">,</span> <span class="nc">Builder</span> <span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+  <span class="nc">extends</span> <span class="nv">mutable</span><span class="o">.</span><span class="py">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">]</span>
+    <span class="k">with</span> <span class="nv">mutable</span><span class="o">.</span><span class="py">MapOps</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">A</span>, <span class="kt">mutable.Map</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+    <span class="k">with</span> <span class="nc">StrictOptimizedIterableOps</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">mutable.Iterable</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span>
+
+  <span class="k">private</span> <span class="k">var</span> <span class="n">suffixes</span><span class="k">:</span> <span class="kt">immutable.Map</span><span class="o">[</span><span class="kt">Char</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">immutable</span><span class="o">.</span><span class="py">Map</span><span class="o">.</span><span class="py">empty</span>
+  <span class="k">private</span> <span class="k">var</span> <span class="n">value</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span>
+
+  <span class="k">def</span> <span class="nf">get</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="nv">s</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span> <span class="n">value</span>
+    <span class="k">else</span> <span class="n">suffixes</span> <span class="nf">get</span> <span class="o">(</span><span class="nf">s</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span> <span class="nf">flatMap</span> <span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="n">s</span> <span class="n">substring</span> <span class="mi">1</span><span class="o">))</span>
+
+  <span class="k">def</span> <span class="nf">withPrefix</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="nv">s</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span> <span class="k">this</span>
+    <span class="k">else</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">leading</span> <span class="k">=</span> <span class="nf">s</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+      <span class="n">suffixes</span> <span class="n">get</span> <span class="n">leading</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span>
+          <span class="n">suffixes</span> <span class="k">=</span> <span class="n">suffixes</span> <span class="o">+</span> <span class="o">(</span><span class="n">leading</span> <span class="o">-&gt;</span> <span class="n">empty</span><span class="o">)</span>
+        <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+      <span class="o">}</span>
+      <span class="nf">suffixes</span><span class="o">(</span><span class="n">leading</span><span class="o">)</span> <span class="nf">withPrefix</span> <span class="o">(</span><span class="n">s</span> <span class="n">substring</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">iterator</span><span class="k">:</span> <span class="kt">Iterator</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)]</span> <span class="k">=</span>
+    <span class="o">(</span><span class="nf">for</span> <span class="o">(</span><span class="n">v</span> <span class="k">&lt;-</span> <span class="nv">value</span><span class="o">.</span><span class="py">iterator</span><span class="o">)</span> <span class="nf">yield</span> <span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">v</span><span class="o">))</span> <span class="o">++</span>
+      <span class="o">(</span><span class="nf">for</span> <span class="o">((</span><span class="n">chr</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="k">&lt;-</span> <span class="nv">suffixes</span><span class="o">.</span><span class="py">iterator</span><span class="o">;</span>
+            <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="k">&lt;-</span> <span class="nv">m</span><span class="o">.</span><span class="py">iterator</span><span class="o">)</span> <span class="nf">yield</span> <span class="o">(</span><span class="n">chr</span> <span class="o">+:</span> <span class="n">s</span><span class="o">,</span> <span class="n">v</span><span class="o">))</span>
+
+  <span class="k">def</span> <span class="nf">addOne</span><span class="o">(</span><span class="n">kv</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">A</span><span class="o">))</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">withPrefix</span><span class="o">(</span><span class="nv">kv</span><span class="o">.</span><span class="py">_1</span><span class="o">).</span><span class="py">value</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="nv">kv</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+    <span class="k">this</span>
+  <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">subtractOne</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span>  <span class="o">=</span> <span class="o">{</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="nv">s</span><span class="o">.</span><span class="py">isEmpty</span><span class="o">)</span> <span class="o">{</span> <span class="k">val</span> <span class="nv">prev</span> <span class="k">=</span> <span class="n">value</span><span class="o">;</span> <span class="n">value</span> <span class="k">=</span> <span class="nc">None</span><span class="o">;</span> <span class="n">prev</span> <span class="o">}</span>
+    <span class="k">else</span> <span class="n">suffixes</span> <span class="nf">get</span> <span class="o">(</span><span class="nf">s</span><span class="o">(</span><span class="mi">0</span><span class="o">))</span> <span class="nf">flatMap</span> <span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">remove</span><span class="o">(</span><span class="n">s</span> <span class="n">substring</span> <span class="mi">1</span><span class="o">))</span>
+    <span class="k">this</span>
+  <span class="o">}</span>
+
+  <span class="c1">// Overloading of transformation methods that should return a PrefixMap</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="o">((</span><span class="kt">String</span><span class="o">,</span> <span class="kt">A</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="nc">String</span><span class="o">,</span> <span class="n">B</span><span class="o">))</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">strictOptimizedMap</span><span class="o">(</span><span class="nv">PrefixMap</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">,</span> <span class="n">f</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">flatMap</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="o">((</span><span class="kt">String</span><span class="o">,</span> <span class="kt">A</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="nc">IterableOnce</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">B</span><span class="o">)])</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">strictOptimizedFlatMap</span><span class="o">(</span><span class="nv">PrefixMap</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">,</span> <span class="n">f</span><span class="o">)</span>
+
+  <span class="c1">// Override `concat` and `empty` methods to refine their return type</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">concat</span><span class="o">[</span><span class="kt">B</span> <span class="k">&gt;:</span> <span class="kt">A</span><span class="o">](</span><span class="n">suffix</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">B</span><span class="o">)])</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">strictOptimizedConcat</span><span class="o">(</span><span class="n">suffix</span><span class="o">,</span> <span class="nv">PrefixMap</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">empty</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrefixMap</span>
+
+  <span class="c1">// Members declared in scala.collection.mutable.Clearable</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">clear</span><span class="o">()</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="n">suffixes</span> <span class="k">=</span> <span class="nv">immutable</span><span class="o">.</span><span class="py">Map</span><span class="o">.</span><span class="py">empty</span>
+  <span class="c1">// Members declared in scala.collection.IterableOps</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">fromSpecific</span><span class="o">(</span><span class="n">coll</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)])</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">PrefixMap</span><span class="o">.</span><span class="py">from</span><span class="o">(</span><span class="n">coll</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="nf">newSpecificBuilder</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">PrefixMap</span><span class="o">.</span><span class="py">newBuilder</span>
+  
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">className</span> <span class="k">=</span> <span class="s">"PrefixMap"</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">PrefixMap</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">empty</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+
+  <span class="k">def</span> <span class="nf">from</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">source</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)])</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="n">source</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="n">pm</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="n">pm</span>
+      <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">newBuilder</span> <span class="o">++=</span> <span class="n">source</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+    <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">kvs</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">A</span><span class="o">)*)</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nf">from</span><span class="o">(</span><span class="n">kvs</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="nf">newBuilder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nv">mutable</span><span class="o">.</span><span class="py">GrowableBuilder</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]](</span><span class="n">empty</span><span class="o">)</span>
+
+  <span class="k">import</span> <span class="nn">scala.language.implicitConversions</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">toFactory</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">self</span><span class="k">:</span> <span class="kt">this.</span><span class="k">type</span><span class="o">)</span><span class="k">:</span> <span class="kt">Factory</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">Factory</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">fromSpecific</span><span class="o">(</span><span class="n">it</span><span class="k">:</span> <span class="kt">IterableOnce</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)])</span><span class="k">:</span> <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">from</span><span class="o">(</span><span class="n">it</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">newBuilder</span><span class="k">:</span> <span class="kt">mutable.Builder</span><span class="o">[(</span><span class="kt">String</span>, <span class="kt">A</span><span class="o">)</span>, <span class="kt">PrefixMap</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">newBuilder</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The previous listing shows the definition of <code class="language-plaintext highlighter-rouge">PrefixMap</code>. The map has
+keys of type <code class="language-plaintext highlighter-rouge">String</code> and the values are of parametric type <code class="language-plaintext highlighter-rouge">A</code>. It extends
+<code class="language-plaintext highlighter-rouge">mutable.Map[String, A]</code> and <code class="language-plaintext highlighter-rouge">mutable.MapOps[String, A, mutable.Map, PrefixMap[A]]</code>.
+You have seen this pattern already for sequences in the
+RNA strand example; then as now inheriting an implementation class
+such as <code class="language-plaintext highlighter-rouge">MapOps</code> serves to get the right result type for
+transformations such as <code class="language-plaintext highlighter-rouge">filter</code>.</p>
+
+<p>A prefix map node has two mutable fields: <code class="language-plaintext highlighter-rouge">suffixes</code> and <code class="language-plaintext highlighter-rouge">value</code>. The
+<code class="language-plaintext highlighter-rouge">value</code> field contains an optional value that’s associated with the
+node. It is initialized to <code class="language-plaintext highlighter-rouge">None</code>. The <code class="language-plaintext highlighter-rouge">suffixes</code> field contains a map
+from characters to <code class="language-plaintext highlighter-rouge">PrefixMap</code> values. It is initialized to the empty
+map.</p>
+
+<p>You might ask why we picked an immutable map as the implementation
+type for <code class="language-plaintext highlighter-rouge">suffixes</code>? Would not a mutable map have been more standard,
+since <code class="language-plaintext highlighter-rouge">PrefixMap</code> as a whole is also mutable? The answer is that
+immutable maps that contain only a few elements are very efficient in
+both space and execution time. For instance, maps that contain fewer
+than 5 elements are represented as a single object. By contrast, the
+standard mutable map is a <code class="language-plaintext highlighter-rouge">HashMap</code>, which typically occupies around 80
+bytes, even if it is empty. So if small collections are common, it’s
+better to pick immutable over mutable. In the case of Patricia tries,
+we’d expect that most nodes except the ones at the very top of the
+tree would contain only a few successors. So storing these successors
+in an immutable map is likely to be more efficient.</p>
+
+<p>Now have a look at the first method that needs to be implemented for a
+map: <code class="language-plaintext highlighter-rouge">get</code>. The algorithm is as follows: To get the value associated
+with the empty string in a prefix map, simply select the optional
+<code class="language-plaintext highlighter-rouge">value</code> stored in the root of the tree (the current map).
+Otherwise, if the key string is
+not empty, try to select the submap corresponding to the first
+character of the string. If that yields a map, follow up by looking up
+the remainder of the key string after its first character in that
+map. If the selection fails, the key is not stored in the map, so
+return with <code class="language-plaintext highlighter-rouge">None</code>. The combined selection over an option value <code class="language-plaintext highlighter-rouge">opt</code> is
+elegantly expressed using <code class="language-plaintext highlighter-rouge">opt.flatMap(x =&gt; f(x))</code>. When applied to an
+optional value that is <code class="language-plaintext highlighter-rouge">None</code>, it returns <code class="language-plaintext highlighter-rouge">None</code>. Otherwise <code class="language-plaintext highlighter-rouge">opt</code> is
+<code class="language-plaintext highlighter-rouge">Some(x)</code> and the function <code class="language-plaintext highlighter-rouge">f</code> is applied to the encapsulated value <code class="language-plaintext highlighter-rouge">x</code>,
+yielding a new option, which is returned by the flatmap.</p>
+
+<p>The next two methods to implement for a mutable map are <code class="language-plaintext highlighter-rouge">addOne</code> and <code class="language-plaintext highlighter-rouge">subtractOne</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">subtractOne</code> method is very similar to <code class="language-plaintext highlighter-rouge">get</code>, except that before returning
+any associated value, the field containing that value is set to
+<code class="language-plaintext highlighter-rouge">None</code>. The <code class="language-plaintext highlighter-rouge">addOne</code> method first calls <code class="language-plaintext highlighter-rouge">withPrefix</code> to navigate to the tree
+node that needs to be updated, then sets the <code class="language-plaintext highlighter-rouge">value</code> field of that node
+to the given value. The <code class="language-plaintext highlighter-rouge">withPrefix</code> method navigates through the tree,
+creating sub-maps as necessary if some prefix of characters is not yet
+contained as a path in the tree.</p>
+
+<p>The last abstract method to implement for a mutable map is
+<code class="language-plaintext highlighter-rouge">iterator</code>. This method needs to produce an iterator that yields all
+key/value pairs stored in the map. For any given prefix map this
+iterator is composed of the following parts: First, if the map
+contains a defined value, <code class="language-plaintext highlighter-rouge">Some(x)</code>, in the <code class="language-plaintext highlighter-rouge">value</code> field at its root,
+then <code class="language-plaintext highlighter-rouge">("", x)</code> is the first element returned from the
+iterator. Furthermore, the iterator needs to traverse the iterators of
+all submaps stored in the <code class="language-plaintext highlighter-rouge">suffixes</code> field, but it needs to add a
+character in front of every key string returned by those
+iterators. More precisely, if <code class="language-plaintext highlighter-rouge">m</code> is the submap reached from the root
+through a character <code class="language-plaintext highlighter-rouge">chr</code>, and <code class="language-plaintext highlighter-rouge">(s, v)</code> is an element returned from
+<code class="language-plaintext highlighter-rouge">m.iterator</code>, then the root’s iterator will return <code class="language-plaintext highlighter-rouge">(chr +: s, v)</code>
+instead. This logic is implemented quite concisely as a concatenation
+of two <code class="language-plaintext highlighter-rouge">for</code> expressions in the implementation of the <code class="language-plaintext highlighter-rouge">iterator</code> method in
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>. The first <code class="language-plaintext highlighter-rouge">for</code> expression iterates over <code class="language-plaintext highlighter-rouge">value.iterator</code>. This
+makes use of the fact that <code class="language-plaintext highlighter-rouge">Option</code> values define an iterator method
+that returns either no element, if the option value is <code class="language-plaintext highlighter-rouge">None</code>, or
+exactly one element <code class="language-plaintext highlighter-rouge">x</code>, if the option value is <code class="language-plaintext highlighter-rouge">Some(x)</code>.</p>
+
+<p>However, in all these cases, to build the right kind of collection
+you need to start with an empty collection of that kind. This is
+provided by the <code class="language-plaintext highlighter-rouge">empty</code> method, which simply returns a fresh <code class="language-plaintext highlighter-rouge">PrefixMap</code>.</p>
+
+<p>We’ll now turn to the companion object <code class="language-plaintext highlighter-rouge">PrefixMap</code>. In fact it is not
+strictly necessary to define this companion object, as class <code class="language-plaintext highlighter-rouge">PrefixMap</code>
+can stand well on its own. The main purpose of object <code class="language-plaintext highlighter-rouge">PrefixMap</code> is to
+define some convenience factory methods. It also defines an implicit
+conversion to <code class="language-plaintext highlighter-rouge">Factory</code> for a better interoperability with other
+collections. This conversion is triggered when one writes, for instance,
+<code class="language-plaintext highlighter-rouge">List("foo" -&gt; 3).to(PrefixMap)</code>. The <code class="language-plaintext highlighter-rouge">to</code> operation takes a <code class="language-plaintext highlighter-rouge">Factory</code>
+as parameter but the <code class="language-plaintext highlighter-rouge">PrefixMap</code> companion object does not extend <code class="language-plaintext highlighter-rouge">Factory</code> (and it
+can not because a <code class="language-plaintext highlighter-rouge">Factory</code> fixes the type of collection elements,
+whereas <code class="language-plaintext highlighter-rouge">PrefixMap</code> has a polymorphic type of values).</p>
+
+<p>The two convenience methods are <code class="language-plaintext highlighter-rouge">empty</code> and <code class="language-plaintext highlighter-rouge">apply</code>. The same methods are
+present for all other collections in Scala’s collection framework so
+it makes sense to define them here, too. With the two methods, you can
+write <code class="language-plaintext highlighter-rouge">PrefixMap</code> literals like you do for any other collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; PrefixMap("hello" -&gt; 5, "hi" -&gt; 2)
+res0: PrefixMap[Int] = PrefixMap(hello -&gt; 5, hi -&gt; 2)
+
+scala&gt; res0 += "foo" -&gt; 3
+res1: res0.type = PrefixMap(hello -&gt; 5, hi -&gt; 2, foo -&gt; 3)
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>To summarize, if you want to fully integrate a new collection class
+into the framework you need to pay attention to the following points:</p>
+
+<ol>
+  <li>Decide whether the collection should be mutable or immutable.</li>
+  <li>Pick the right base traits for the collection.</li>
+  <li>Inherit from the right implementation trait to implement most
+collection operations.</li>
+  <li>Overload desired operations that do not return, by default, a
+collection as specific as they could. A complete list of such
+operations is given as an appendix.</li>
+</ol>
+
+<p>You have now seen how Scala’s collections are built and how you can
+add new kinds of collections. Because of Scala’s rich support for
+abstraction, each new collection type has a large number of
+methods without having to reimplement them all over again.</p>
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This page contains material adapted from the book
+<a href="https://www.artima.com/shop/programming_in_scala">Programming in Scala</a> by
+Odersky, Spoon and Venners. We thank Artima for graciously agreeing to its
+publication.</p>
+
+<h2 id="appendix-methods-to-overload-to-support-the-same-result-type-principle">Appendix: Methods to overload to support the “same result type” principle</h2>
+
+<p>You want to add overloads to specialize transformation operations such that they return a more specific result type. Examples are:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">map</code>, on <code class="language-plaintext highlighter-rouge">StringOps</code>, when the mapping function returns a <code class="language-plaintext highlighter-rouge">Char</code>, should return a <code class="language-plaintext highlighter-rouge">String</code> (instead of an <code class="language-plaintext highlighter-rouge">IndexedSeq</code>),</li>
+  <li><code class="language-plaintext highlighter-rouge">map</code>, on <code class="language-plaintext highlighter-rouge">Map</code>, when the mapping function returns a pair, should return a <code class="language-plaintext highlighter-rouge">Map</code> (instead of an <code class="language-plaintext highlighter-rouge">Iterable</code>),</li>
+  <li><code class="language-plaintext highlighter-rouge">map</code>, on <code class="language-plaintext highlighter-rouge">SortedSet</code>, when an implicit <code class="language-plaintext highlighter-rouge">Ordering</code> is available for the resulting element type, should return a
+<code class="language-plaintext highlighter-rouge">SortedSet</code> (instead of a <code class="language-plaintext highlighter-rouge">Set</code>).</li>
+</ul>
+
+<p>Typically, this happens when the collection fixes some type parameter of its template trait. For instance in
+the case of the <code class="language-plaintext highlighter-rouge">RNA</code> collection type, we fix the element type to <code class="language-plaintext highlighter-rouge">Base</code>, and in the case of the <code class="language-plaintext highlighter-rouge">PrefixMap[A]</code>
+collection type, we fix the type of keys to <code class="language-plaintext highlighter-rouge">String</code>.</p>
+
+<p>The following table lists transformation operations that might return an undesirably wide type. You might want to overload
+these operations to return a more specific type.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Collection</th>
+      <th>Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Iterable</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">scanLeft</code>, <code class="language-plaintext highlighter-rouge">scanRight</code>, <code class="language-plaintext highlighter-rouge">groupMap</code>, <code class="language-plaintext highlighter-rouge">concat</code>, <code class="language-plaintext highlighter-rouge">zip</code>, <code class="language-plaintext highlighter-rouge">zipAll</code>, <code class="language-plaintext highlighter-rouge">unzip</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Seq</code></td>
+      <td><code class="language-plaintext highlighter-rouge">prepended</code>, <code class="language-plaintext highlighter-rouge">appended</code>, <code class="language-plaintext highlighter-rouge">prependedAll</code>, <code class="language-plaintext highlighter-rouge">appendedAll</code>, <code class="language-plaintext highlighter-rouge">padTo</code>, <code class="language-plaintext highlighter-rouge">patch</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">immutable.Seq</code></td>
+      <td><code class="language-plaintext highlighter-rouge">updated</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SortedSet</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">zip</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Map</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">concat</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">immutable.Map</code></td>
+      <td><code class="language-plaintext highlighter-rouge">updated</code>, <code class="language-plaintext highlighter-rouge">transform</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SortedMap</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">concat</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">immutable.SortedMap</code></td>
+      <td><code class="language-plaintext highlighter-rouge">updated</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="appendix-cross-building-custom-collections">Appendix: Cross-building custom collections</h2>
+
+<p>Since the new internal API of the Scala 2.13 collections is very different from the previous
+collections API, authors of custom collection types should use separate source directories
+(per Scala version) to define them.</p>
+
+<p>With sbt you can achieve this by adding the following setting to your project:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Adds a `src/main/scala-2.13+` source directory for Scala 2.13 and newer</span>
+<span class="c1">// and a `src/main/scala-2.13-` source directory for Scala version older than 2.13</span>
+<span class="n">unmanagedSourceDirectories</span> <span class="n">in</span> <span class="nc">Compile</span> <span class="o">+=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">sourceDir</span> <span class="k">=</span> <span class="o">(</span><span class="n">sourceDirectory</span> <span class="n">in</span> <span class="nc">Compile</span><span class="o">).</span><span class="py">value</span>
+  <span class="nv">CrossVersion</span><span class="o">.</span><span class="py">partialVersion</span><span class="o">(</span><span class="nv">scalaVersion</span><span class="o">.</span><span class="py">value</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">((</span><span class="mi">2</span><span class="o">,</span> <span class="n">n</span><span class="o">))</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="k">=&gt;</span> <span class="n">sourceDir</span> <span class="o">/</span> <span class="s">"scala-2.13+"</span>
+    <span class="k">case</span> <span class="k">_</span>                       <span class="k">=&gt;</span> <span class="n">sourceDir</span> <span class="o">/</span> <span class="s">"scala-2.13-"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And then you can define a Scala 2.13 compatible implementation of your collection
+in the <code class="language-plaintext highlighter-rouge">src/main/scala-2.13+</code> source directory, and an implementation for the
+previous Scala versions in the <code class="language-plaintext highlighter-rouge">src/main/scala-2.13-</code> source directory.</p>
+
+<p>You can see how this has been put in practice in
+<a href="https://github.com/rickynils/scalacheck/pull/411">scalacheck</a> and
+<a href="https://github.com/scalaz/scalaz/pull/1730">scalaz</a>.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/custom-collections.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

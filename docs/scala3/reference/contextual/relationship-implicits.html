@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Relationship with Scala 2 Implicits | 
+      Scala 3 Language Reference | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/reference/contextual/relationship-implicits.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Relationship with Scala 2 Implicits"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Relationship with Scala 2 Implicits"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Language Reference</div>
+          
+          <h1>Relationship with Scala 2 Implicits</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Many, but not all, of the new contextual abstraction features in Scala 3 can be mapped to Scala 2’s implicits. This page gives a rundown on the relationships between new and old features.</p>
+
+<h2 id="simulating-scala-3-contextual-abstraction-concepts-with-scala-2-implicits">Simulating Scala 3 Contextual Abstraction Concepts with Scala 2 Implicits</h2>
+
+<h3 id="given-instances">Given Instances</h3>
+
+<p>Given instances can be mapped to combinations of implicit objects, classes and implicit methods.</p>
+
+<ol>
+  <li>
+    <p>Given instances without parameters are mapped to implicit objects. For instance,</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">intOrd</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">with</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>maps to</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">object</span> <span class="nc">intOrd</span> <span class="k">extends</span> <span class="nc">Ord</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Parameterized givens are mapped to combinations of classes and implicit methods. For instance,</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">listOrd</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">using</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">with</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>maps to</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">listOrd</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">Ord</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="k">final</span> <span class="k">implicit</span> <span class="k">def</span> <span class="nf">listOrd</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">listOrd</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+ <span class="k">new</span> <span class="n">listOrd</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Alias givens map to implicit methods or implicit lazy vals. If an alias has neither type nor context parameters,
+it is treated as a lazy val, unless the right-hand side is a simple reference, in which case we can use a forwarder to
+that reference without caching it.</p>
+  </li>
+</ol>
+
+<p>Examples:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">global</span><span class="k">:</span> <span class="kt">ExecutionContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ForkJoinContext</span><span class="o">()</span>
+
+<span class="k">val</span> <span class="nv">ctx</span><span class="k">:</span> <span class="kt">Context</span>
+<span class="n">given</span> <span class="nc">Context</span> <span class="k">=</span> <span class="n">ctx</span>
+</code></pre></div></div>
+
+<p>would map to</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="k">implicit</span> <span class="k">lazy</span> <span class="k">val</span> <span class="nv">global</span><span class="k">:</span> <span class="kt">ExecutionContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ForkJoinContext</span><span class="o">()</span>
+<span class="k">final</span> <span class="k">implicit</span> <span class="k">def</span> <span class="nf">given_Context</span> <span class="k">=</span> <span class="n">ctx</span>
+</code></pre></div></div>
+
+<h3 id="anonymous-given-instances">Anonymous Given Instances</h3>
+
+<p>Anonymous given instances get compiler synthesized names, which are generated in a reproducible way from the implemented type(s). For example, if the names of the <code class="language-plaintext highlighter-rouge">IntOrd</code> and <code class="language-plaintext highlighter-rouge">ListOrd</code> givens above were left out, the following names would be synthesized instead:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">given_Ord_Int</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">with</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="n">given</span> <span class="n">given_Ord_List_T</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">using</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]]</span> <span class="k">with</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>The synthesized type names are formed from</p>
+
+<ol>
+  <li>the prefix <code class="language-plaintext highlighter-rouge">given_</code>,</li>
+  <li>the simple name(s) of the implemented type(s), leaving out any prefixes,</li>
+  <li>the simple name(s) of the top-level argument type constructors to these types.</li>
+</ol>
+
+<p>Tuples are treated as transparent, i.e. a type <code class="language-plaintext highlighter-rouge">F[(X, Y)]</code> would get the synthesized name
+<code class="language-plaintext highlighter-rouge">F_X_Y</code>. Directly implemented function types <code class="language-plaintext highlighter-rouge">A =&gt; B</code> are represented as <code class="language-plaintext highlighter-rouge">A_to_B</code>. Function types used as arguments to other type constructors are represented as <code class="language-plaintext highlighter-rouge">Function</code>.</p>
+
+<h3 id="using-clauses">Using Clauses</h3>
+
+<p>Using clauses correspond largely to Scala 2’s implicit parameter clauses. E.g.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">max</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">T</span><span class="o">)(</span><span class="n">using</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">T</span>
+</code></pre></div></div>
+
+<p>would be written</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">max</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">T</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">ord</span><span class="k">:</span> <span class="kt">Ord</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">T</span>
+</code></pre></div></div>
+
+<p>in Scala 2. The main difference concerns applications of such parameters.
+Explicit arguments to parameters of using clauses <em>must</em> be written using <code class="language-plaintext highlighter-rouge">(using ...)</code>,
+mirroring the definition syntax. E.g, <code class="language-plaintext highlighter-rouge">max(2, 3)(using IntOrd)</code>.
+Scala 2 uses normal applications <code class="language-plaintext highlighter-rouge">max(2, 3)(IntOrd)</code> instead. The Scala 2 syntax has some inherent ambiguities and restrictions which are overcome by the new syntax. For instance, multiple implicit parameter lists are not available in the old syntax, even though they can be simulated using auxiliary objects in the “Aux” pattern.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">summon</code> method corresponds to <code class="language-plaintext highlighter-rouge">implicitly</code> in Scala 2.
+It is precisely the same as the <code class="language-plaintext highlighter-rouge">the</code> method in <a href="https://github.com/milessabin/shapeless">Shapeless</a>.
+The difference between <code class="language-plaintext highlighter-rouge">summon</code> (or <code class="language-plaintext highlighter-rouge">the</code>) and <code class="language-plaintext highlighter-rouge">implicitly</code> is
+that <code class="language-plaintext highlighter-rouge">summon</code> can return a more precise type than the type that was
+asked for.</p>
+
+<h3 id="context-bounds">Context Bounds</h3>
+
+<p>Context bounds are the same in both language versions. They expand to the respective forms of implicit parameters.</p>
+
+<p><strong>Note:</strong> To ease migration, context bounds in Scala 3 map for a limited time to old-style implicit parameters for which arguments can be passed either in a using clause or
+in a normal argument list. Once old-style implicits are deprecated, context bounds
+will map to using clauses instead.</p>
+
+<h3 id="extension-methods">Extension Methods</h3>
+
+<p>Extension methods have no direct counterpart in Scala 2, but they can be simulated with implicit classes. For instance, the extension method</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extension</span> <span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">Circle</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">circumference</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="nv">c</span><span class="o">.</span><span class="py">radius</span> <span class="o">*</span> <span class="nv">math</span><span class="o">.</span><span class="py">Pi</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>could be simulated to some degree by</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">class</span> <span class="nc">CircleDecorator</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">Circle</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">circumference</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="nv">c</span><span class="o">.</span><span class="py">radius</span> <span class="o">*</span> <span class="nv">math</span><span class="o">.</span><span class="py">Pi</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Abstract extension methods in traits that are implemented in given instances have no direct counterpart in Scala 2. The only way to simulate these is to make implicit classes available through imports. The Simulacrum macro library can automate this process in some cases.</p>
+
+<h3 id="type-class-derivation">Type Class Derivation</h3>
+
+<p>Type class derivation has no direct counterpart in the Scala 2 language. Comparable functionality can be achieved by macro-based libraries such as <a href="https://github.com/milessabin/shapeless">Shapeless</a>, <a href="https://propensive.com/opensource/magnolia">Magnolia</a>, or <a href="https://github.com/scalaz/scalaz-deriving">scalaz-deriving</a>.</p>
+
+<h3 id="context-function-types">Context Function Types</h3>
+
+<p>Context function types have no analogue in Scala 2.</p>
+
+<h3 id="implicit-by-name-parameters">Implicit By-Name Parameters</h3>
+
+<p>Implicit by-name parameters are not supported in Scala 2, but can be emulated to some degree by the <code class="language-plaintext highlighter-rouge">Lazy</code> type in Shapeless.</p>
+
+<h2 id="simulating-scala-2-implicits-in-scala-3">Simulating Scala 2 Implicits in Scala 3</h2>
+
+<h3 id="implicit-conversions">Implicit Conversions</h3>
+
+<p>Implicit conversion methods in Scala 2 can be expressed as given instances of the <code class="language-plaintext highlighter-rouge">scala.Conversion</code> class in Scala 3. For instance, instead of</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">stringToToken</span><span class="o">(</span><span class="n">str</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Token</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Keyword</span><span class="o">(</span><span class="n">str</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>one can write</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">stringToToken</span><span class="k">:</span> <span class="kt">Conversion</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Token</span><span class="o">]</span> <span class="k">with</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">str</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Token</span> <span class="o">=</span> <span class="nc">KeyWord</span><span class="o">(</span><span class="n">str</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="n">stringToToken</span><span class="k">:</span> <span class="kt">Conversion</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Token</span><span class="o">]</span> <span class="k">=</span> <span class="nc">KeyWord</span><span class="o">(</span><span class="k">_</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="implicit-classes">Implicit Classes</h3>
+
+<p>Implicit classes in Scala 2 are often used to define extension methods, which are directly supported in Scala 3. Other uses of implicit classes can be simulated by a pair of a regular class and a given <code class="language-plaintext highlighter-rouge">Conversion</code> instance.</p>
+
+<h3 id="implicit-values">Implicit Values</h3>
+
+<p>Implicit <code class="language-plaintext highlighter-rouge">val</code> definitions in Scala 2 can be expressed in Scala 3 using a regular <code class="language-plaintext highlighter-rouge">val</code> definition and an alias given.
+For instance, Scala 2’s</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lazy</span> <span class="k">implicit</span> <span class="k">val</span> <span class="nv">pos</span><span class="k">:</span> <span class="kt">Position</span> <span class="o">=</span> <span class="nv">tree</span><span class="o">.</span><span class="py">sourcePos</span>
+</code></pre></div></div>
+
+<p>can be expressed in Scala 3 as</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lazy</span> <span class="k">val</span> <span class="nv">pos</span><span class="k">:</span> <span class="kt">Position</span> <span class="o">=</span> <span class="nv">tree</span><span class="o">.</span><span class="py">sourcePos</span>
+<span class="n">given</span> <span class="nc">Position</span> <span class="k">=</span> <span class="n">pos</span>
+</code></pre></div></div>
+
+<h3 id="abstract-implicits">Abstract Implicits</h3>
+
+<p>An abstract implicit <code class="language-plaintext highlighter-rouge">val</code> or <code class="language-plaintext highlighter-rouge">def</code> in Scala 2 can be expressed in Scala 3 using a regular abstract definition and an alias given. For instance, Scala 2’s</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">symDecorator</span><span class="k">:</span> <span class="kt">SymDecorator</span>
+</code></pre></div></div>
+
+<p>can be expressed in Scala 3 as</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">symDecorator</span><span class="k">:</span> <span class="kt">SymDecorator</span>
+<span class="n">given</span> <span class="nc">SymDecorator</span> <span class="k">=</span> <span class="n">symDecorator</span>
+</code></pre></div></div>
+
+<h2 id="implementation-status-and-timeline">Implementation Status and Timeline</h2>
+
+<p>The Scala 3 implementation implements both Scala 2’s implicits and the new abstractions. In fact, support for Scala 2’s implicits is an essential part of the common language subset between 2.13 and Scala 3.
+Migration to the new abstractions will be supported by making automatic rewritings available.</p>
+
+<p>Depending on adoption patterns, old style implicits might start to be deprecated in a version following Scala 3.0.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="/scala3/reference/contextual/by-name-context-parameters.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="/scala3/reference/metaprogramming.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/new-types.html">New Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/intersection-types.html">Intersection Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/union-types.html">Union Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/type-lambdas.html">Type Lambdas</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/match-types.html">Match Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/dependent-function-types.html">Dependent Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/polymorphic-function-types.html">Polymorphic Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/enums.html">Enums</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/enums.html">Enumerations</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/adts.html">Algebraic Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/desugarEnums.html">Translation of Enums and ADTs</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/contextual.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/givens.html">Given Instances</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/using-clauses.html">Using Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-bounds.html">Context Bounds</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/given-imports.html">Importing Givens</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/extension-methods.html">Extension Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/type-classes.html">Implementing Type classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/derivation.html">Type Class Derivation</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/multiversal-equality.html">Multiversal Equality</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-functions.html">Context Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/conversions.html">Implicit Conversions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/by-name-context-parameters.html">By-Name Context Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/reference/contextual/relationship-implicits.html">Relationship with Scala 2 Implicits</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/metaprogramming.html">Metaprogramming</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/inline.html">Inline</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/compiletime-ops.html">Compile-time operations</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/macros.html">Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/staging.html">Runtime Multi-Stage Programming</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/reflection.html">Reflection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/tasty-inspect.html">TASTy Inspection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/other-new-features.html">Other New Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/trait-parameters.html">Trait Parameters</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/transparent-traits.html">Transparent Traits</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/creator-applications.html">Universal Apply Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/export.html">Export Clauses</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/opaques.html">Opaque Type Aliases</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/open-classes.html">Open Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/parameter-untupling.html">Parameter Untupling</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/matchable.html">The Matchable Trait</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/threadUnsafe-annotation.html">The @threadUnsafe annotation</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/targetName.html">The @targetName annotation</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/control-syntax.html">New Control Syntax</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/indentation.html">Optional Braces</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/explicit-nulls.html">Explicit Nulls</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/safe-initialization.html">Safe Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/type-test.html">TypeTest</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/changed-features.html">Other Changed Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/numeric-literals.html">Numeric Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/structural-types.html">Programmatic Structural Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/operators.html">Rules for Operators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/wildcards.html">Wildcard Arguments in Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/imports.html">Imports</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-checking.html">Changes in Type Checking</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-inference.html">Changes in Type Inference</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-resolution.html">Changes in Implicit Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-conversions.html">Implicit Conversions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/overload-resolution.html">Changes in Overload Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/match-syntax.html">Match Expressions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/vararg-splices.html">Vararg Splices</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-bindings.html">Pattern Bindings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-matching.html">Option-less pattern matching</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/eta-expansion.html">Automatic Eta Expansion</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/compiler-plugins.html">Changes in Compiler Plugins</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/lazy-vals-init.html">Lazy Vals Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/main-functions.html">Main Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/dropped-features.html">Dropped Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/delayed-init.html">Dropped: Delayedinit</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/macros.html">Dropped: Scala 2 Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/existential-types.html">Dropped: Existential Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/type-projection.html">Dropped: General Type Projection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/do-while.html">Dropped: Do-While</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/procedure-syntax.html">Dropped: Procedure Syntax</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/package-objects.html">Dropped: Package Objects</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/early-initializers.html">Dropped: Early Initializers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/class-shadowing.html">Dropped: Class Shadowing</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/limit22.html">Dropped: Limit 22</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/xml.html">Dropped: XML Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/symlits.html">Dropped: Symbol Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/auto-apply.html">Dropped: Auto-Application</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/weak-conformance.html">Dropped: Weak Conformance</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/this-qualifier.html">Dropped: private[this] and protected[this]</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/wildcard-init.html">Dropped: Wildcard Initializer</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/syntax.html">Scala 3 Syntax Summary</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/language-versions.html">Language Versions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_scala3-reference/contextual/relationship-implicits.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

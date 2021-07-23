@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Trait Traversable | 
+      Collections (Scala 2.8 - 2.12) | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/collections/trait-traversable.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Trait Traversable"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Trait Traversable"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections (Scala 2.8 - 2.12)</div>
+          
+          <h1>Trait Traversable</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>At the top of the collection hierarchy is trait <code class="language-plaintext highlighter-rouge">Traversable</code>. Its only abstract operation is <code class="language-plaintext highlighter-rouge">foreach</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def foreach[U](f: Elem =&gt; U)
+</code></pre></div></div>
+
+<p>Collection classes that implement <code class="language-plaintext highlighter-rouge">Traversable</code> just need to define this method; all other methods can be inherited from <code class="language-plaintext highlighter-rouge">Traversable</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">foreach</code> method is meant to traverse all elements of the collection, and apply the given operation, f, to each element. The type of the operation is <code class="language-plaintext highlighter-rouge">Elem =&gt; U</code>, where <code class="language-plaintext highlighter-rouge">Elem</code> is the type of the collection’s elements and <code class="language-plaintext highlighter-rouge">U</code> is an arbitrary result type. The invocation of <code class="language-plaintext highlighter-rouge">f</code> is done for its side effect only; in fact any function result of f is discarded by <code class="language-plaintext highlighter-rouge">foreach</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Traversable</code> also defines many concrete methods, which are all listed in the following table. These methods fall into the following categories:</p>
+
+<ul>
+  <li><strong>Addition</strong>, <code class="language-plaintext highlighter-rouge">++</code>, which appends two traversables together, or appends all elements of an iterator to a traversable.</li>
+  <li><strong>Map</strong> operations <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, and <code class="language-plaintext highlighter-rouge">collect</code>, which produce a new collection by applying some function to collection elements.</li>
+  <li><strong>Conversions</strong> <code class="language-plaintext highlighter-rouge">toArray</code>, <code class="language-plaintext highlighter-rouge">toList</code>, <code class="language-plaintext highlighter-rouge">toIterable</code>, <code class="language-plaintext highlighter-rouge">toSeq</code>, <code class="language-plaintext highlighter-rouge">toIndexedSeq</code>, <code class="language-plaintext highlighter-rouge">toStream</code>, <code class="language-plaintext highlighter-rouge">toSet</code>, <code class="language-plaintext highlighter-rouge">toMap</code>, which turn a <code class="language-plaintext highlighter-rouge">Traversable</code> collection into something more specific. All these conversions return their receiver argument unchanged if the run-time type of the collection already matches the demanded collection type. For instance, applying <code class="language-plaintext highlighter-rouge">toList</code> to a list will yield the list itself.</li>
+  <li><strong>Copying operations</strong> <code class="language-plaintext highlighter-rouge">copyToBuffer</code> and <code class="language-plaintext highlighter-rouge">copyToArray</code>. As their names imply, these copy collection elements to a buffer or array, respectively.</li>
+  <li><strong>Size info</strong> operations <code class="language-plaintext highlighter-rouge">isEmpty</code>, <code class="language-plaintext highlighter-rouge">nonEmpty</code>, <code class="language-plaintext highlighter-rouge">size</code>, and <code class="language-plaintext highlighter-rouge">hasDefiniteSize</code>: Traversable collections can be finite or infinite. An example of an infinite traversable collection is the stream of natural numbers <code class="language-plaintext highlighter-rouge">Stream.from(0)</code>. The method <code class="language-plaintext highlighter-rouge">hasDefiniteSize</code> indicates whether a collection is possibly infinite. If <code class="language-plaintext highlighter-rouge">hasDefiniteSize</code> returns true, the collection is certainly finite. If it returns false, the collection has not been fully elaborated yet, so it might be infinite or finite.</li>
+  <li><strong>Element retrieval</strong> operations <code class="language-plaintext highlighter-rouge">head</code>, <code class="language-plaintext highlighter-rouge">last</code>, <code class="language-plaintext highlighter-rouge">headOption</code>, <code class="language-plaintext highlighter-rouge">lastOption</code>, and <code class="language-plaintext highlighter-rouge">find</code>. These select the first or last element of a collection, or else the first element matching a condition. Note, however, that not all collections have a well-defined meaning of what “first” and “last” means. For instance, a hash set might store elements according to their hash keys, which might change from run to run. In that case, the “first” element of a hash set could also be different for every run of a program. A collection is <em>ordered</em> if it always yields its elements in the same order. Most collections are ordered, but some (<em>e.g.</em> hash sets) are not– dropping the ordering gives a little bit of extra efficiency. Ordering is often essential to give reproducible tests and to help in debugging. That’s why Scala collections give ordered alternatives for all collection types. For instance, the ordered alternative for <code class="language-plaintext highlighter-rouge">HashSet</code> is <code class="language-plaintext highlighter-rouge">LinkedHashSet</code>.</li>
+  <li><strong>Sub-collection retrieval operations</strong> <code class="language-plaintext highlighter-rouge">tail</code>, <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">slice</code>, <code class="language-plaintext highlighter-rouge">take</code>, <code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">takeWhile</code>, <code class="language-plaintext highlighter-rouge">dropWhile</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">filterNot</code>, <code class="language-plaintext highlighter-rouge">withFilter</code>. These all return some sub-collection identified by an index range or some predicate.</li>
+  <li><strong>Subdivision operations</strong> <code class="language-plaintext highlighter-rouge">splitAt</code>, <code class="language-plaintext highlighter-rouge">span</code>, <code class="language-plaintext highlighter-rouge">partition</code>, <code class="language-plaintext highlighter-rouge">groupBy</code>, which split the elements of this collection into several sub-collections.</li>
+  <li><strong>Element tests</strong> <code class="language-plaintext highlighter-rouge">exists</code>, <code class="language-plaintext highlighter-rouge">forall</code>, <code class="language-plaintext highlighter-rouge">count</code> which test collection elements with a given predicate.</li>
+  <li><strong>Folds</strong> <code class="language-plaintext highlighter-rouge">foldLeft</code>, <code class="language-plaintext highlighter-rouge">foldRight</code>, <code class="language-plaintext highlighter-rouge">/:</code>, <code class="language-plaintext highlighter-rouge">:\</code>, <code class="language-plaintext highlighter-rouge">reduceLeft</code>, <code class="language-plaintext highlighter-rouge">reduceRight</code> which apply a binary operation to successive elements.</li>
+  <li><strong>Specific folds</strong> <code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">product</code>, <code class="language-plaintext highlighter-rouge">min</code>, <code class="language-plaintext highlighter-rouge">max</code>, which work on collections of specific types (numeric or comparable).</li>
+  <li><strong>String</strong> operations <code class="language-plaintext highlighter-rouge">mkString</code>, <code class="language-plaintext highlighter-rouge">addString</code>, <code class="language-plaintext highlighter-rouge">stringPrefix</code>, which give alternative ways of converting a collection to a string.</li>
+  <li><strong>View</strong> operations, consisting of two overloaded variants of the <code class="language-plaintext highlighter-rouge">view</code> method. A view is a collection that’s evaluated lazily. You’ll learn more about views in <a href="views.html">later</a>.</li>
+</ul>
+
+<h3 id="operations-in-class-traversable">Operations in Class Traversable</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Abstract Method:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs foreach f</code></td>
+      <td>Executes function <code class="language-plaintext highlighter-rouge">f</code> for every element of <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Addition:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs ++ ys</code></td>
+      <td>A collection consisting of the elements of both <code class="language-plaintext highlighter-rouge">xs</code> and <code class="language-plaintext highlighter-rouge">ys</code>. <code class="language-plaintext highlighter-rouge">ys</code> is a <a href="https://www.scala-lang.org/api/2.12.14/scala/collection/TraversableOnce.html">TraversableOnce</a> collection, i.e., either a <a href="https://www.scala-lang.org/api/2.12.14/scala/collection/Traversable.html">Traversable</a> or an <a href="https://www.scala-lang.org/api/2.12.14/scala/collection/Iterator.html">Iterator</a>.</td>
+    </tr>
+    <tr>
+      <td><strong>Maps:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs map f</code></td>
+      <td>The collection obtained from applying the function f to every element in <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs flatMap f</code></td>
+      <td>The collection obtained from applying the collection-valued function <code class="language-plaintext highlighter-rouge">f</code> to every element in <code class="language-plaintext highlighter-rouge">xs</code> and concatenating the results.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs collect f</code></td>
+      <td>The collection obtained from applying the partial function <code class="language-plaintext highlighter-rouge">f</code> to every element in <code class="language-plaintext highlighter-rouge">xs</code> for which it is defined and collecting the results.</td>
+    </tr>
+    <tr>
+      <td><strong>Conversions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toArray</code></td>
+      <td>Converts the collection to an array.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toList</code></td>
+      <td>Converts the collection to a list.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toIterable</code></td>
+      <td>Converts the collection to an iterable.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toSeq</code></td>
+      <td>Converts the collection to a sequence.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toIndexedSeq</code></td>
+      <td>Converts the collection to an indexed sequence.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toStream</code></td>
+      <td>Converts the collection to a lazily computed stream.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toSet</code></td>
+      <td>Converts the collection to a set.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.toMap</code></td>
+      <td>Converts the collection of key/value pairs to a map. If the collection does not have pairs as elements, calling this operation results in a static type error.</td>
+    </tr>
+    <tr>
+      <td><strong>Copying:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs copyToBuffer buf</code></td>
+      <td>Copies all elements of the collection to buffer <code class="language-plaintext highlighter-rouge">buf</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs copyToArray(arr, s, n)</code></td>
+      <td>Copies at most <code class="language-plaintext highlighter-rouge">n</code> elements of the collection to array <code class="language-plaintext highlighter-rouge">arr</code> starting at index <code class="language-plaintext highlighter-rouge">s</code>. The last two arguments are optional.</td>
+    </tr>
+    <tr>
+      <td><strong>Size info:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.isEmpty</code></td>
+      <td>Tests whether the collection is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.nonEmpty</code></td>
+      <td>Tests whether the collection contains elements.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.size</code></td>
+      <td>The number of elements in the collection.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.hasDefiniteSize</code></td>
+      <td>True if <code class="language-plaintext highlighter-rouge">xs</code> is known to have finite size.</td>
+    </tr>
+    <tr>
+      <td><strong>Element Retrieval:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.head</code></td>
+      <td>The first element of the collection (or, some element, if no order is defined).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.headOption</code></td>
+      <td>The first element of <code class="language-plaintext highlighter-rouge">xs</code> in an option value, or None if <code class="language-plaintext highlighter-rouge">xs</code> is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.last</code></td>
+      <td>The last element of the collection (or, some element, if no order is defined).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.lastOption</code></td>
+      <td>The last element of <code class="language-plaintext highlighter-rouge">xs</code> in an option value, or None if <code class="language-plaintext highlighter-rouge">xs</code> is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs find p</code></td>
+      <td>An option containing the first element in <code class="language-plaintext highlighter-rouge">xs</code> that satisfies <code class="language-plaintext highlighter-rouge">p</code>, or <code class="language-plaintext highlighter-rouge">None</code> if no element qualifies.</td>
+    </tr>
+    <tr>
+      <td><strong>Subcollections:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.tail</code></td>
+      <td>The rest of the collection except <code class="language-plaintext highlighter-rouge">xs.head</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.init</code></td>
+      <td>The rest of the collection except <code class="language-plaintext highlighter-rouge">xs.last</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs slice (from, to)</code></td>
+      <td>A collection consisting of elements in some index range of <code class="language-plaintext highlighter-rouge">xs</code> (from <code class="language-plaintext highlighter-rouge">from</code> up to, and excluding <code class="language-plaintext highlighter-rouge">to</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs take n</code></td>
+      <td>A collection consisting of the first <code class="language-plaintext highlighter-rouge">n</code> elements of <code class="language-plaintext highlighter-rouge">xs</code> (or, some arbitrary <code class="language-plaintext highlighter-rouge">n</code> elements, if no order is defined).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs drop n</code></td>
+      <td>The rest of the collection except <code class="language-plaintext highlighter-rouge">xs take n</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs takeWhile p</code></td>
+      <td>The longest prefix of elements in the collection that all satisfy <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs dropWhile p</code></td>
+      <td>The collection without the longest prefix of elements that all satisfy <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs filter p</code></td>
+      <td>The collection consisting of those elements of xs that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs withFilter p</code></td>
+      <td>A non-strict filter of this collection. Subsequent calls to <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">foreach</code>, and <code class="language-plaintext highlighter-rouge">withFilter</code> will only apply to those elements of <code class="language-plaintext highlighter-rouge">xs</code> for which the condition <code class="language-plaintext highlighter-rouge">p</code> is true.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs filterNot p</code></td>
+      <td>The collection consisting of those elements of <code class="language-plaintext highlighter-rouge">xs</code> that do not satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Subdivisions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs splitAt n</code></td>
+      <td>Split <code class="language-plaintext highlighter-rouge">xs</code> at a position, giving the pair of collections <code class="language-plaintext highlighter-rouge">(xs take n, xs drop n)</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs span p</code></td>
+      <td>Split <code class="language-plaintext highlighter-rouge">xs</code> according to a predicate, giving the pair of collections <code class="language-plaintext highlighter-rouge">(xs takeWhile p, xs.dropWhile p)</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs partition p</code></td>
+      <td>Split <code class="language-plaintext highlighter-rouge">xs</code> into a pair of collections; one with elements that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>, the other with elements that do not, giving the pair of collections <code class="language-plaintext highlighter-rouge">(xs filter p, xs.filterNot p)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs groupBy f</code></td>
+      <td>Partition <code class="language-plaintext highlighter-rouge">xs</code> into a map of collections according to a discriminator function <code class="language-plaintext highlighter-rouge">f</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Element Conditions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs forall p</code></td>
+      <td>A boolean indicating whether the predicate <code class="language-plaintext highlighter-rouge">p</code> holds for all elements of <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs exists p</code></td>
+      <td>A boolean indicating whether the predicate <code class="language-plaintext highlighter-rouge">p</code> holds for some element in <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs count p</code></td>
+      <td>The number of elements in <code class="language-plaintext highlighter-rouge">xs</code> that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Folds:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(z /: xs)(op)</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements of <code class="language-plaintext highlighter-rouge">xs</code>, going left to right and starting with <code class="language-plaintext highlighter-rouge">z</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(xs :\ z)(op)</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements of <code class="language-plaintext highlighter-rouge">xs</code>, going right to left and starting with <code class="language-plaintext highlighter-rouge">z</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.foldLeft(z)(op)</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">(z /: xs)(op)</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.foldRight(z)(op)</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">(xs :\ z)(op)</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs reduceLeft op</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements of non-empty collection <code class="language-plaintext highlighter-rouge">xs</code>, going left to right.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs reduceRight op</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements of non-empty collection <code class="language-plaintext highlighter-rouge">xs</code>, going right to left.</td>
+    </tr>
+    <tr>
+      <td><strong>Specific Folds:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sum</code></td>
+      <td>The sum of the numeric element values of collection <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.product</code></td>
+      <td>The product of the numeric element values of collection <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.min</code></td>
+      <td>The minimum of the ordered element values of collection <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.max</code></td>
+      <td>The maximum of the ordered element values of collection <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Strings:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs addString (b, start, sep, end)</code></td>
+      <td>Adds a string to <code class="language-plaintext highlighter-rouge">StringBuilder</code> <code class="language-plaintext highlighter-rouge">b</code> that shows all elements of <code class="language-plaintext highlighter-rouge">xs</code> between separators <code class="language-plaintext highlighter-rouge">sep</code> enclosed in strings <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">end</code>. <code class="language-plaintext highlighter-rouge">start</code>, <code class="language-plaintext highlighter-rouge">sep</code>, <code class="language-plaintext highlighter-rouge">end</code> are all optional.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs mkString (start, sep, end)</code></td>
+      <td>Converts the collection to a string that shows all elements of <code class="language-plaintext highlighter-rouge">xs</code> between separators <code class="language-plaintext highlighter-rouge">sep</code> enclosed in strings <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">end</code>. <code class="language-plaintext highlighter-rouge">start</code>, <code class="language-plaintext highlighter-rouge">sep</code>, <code class="language-plaintext highlighter-rouge">end</code> are all optional.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.stringPrefix</code></td>
+      <td>The collection name at the beginning of the string returned from <code class="language-plaintext highlighter-rouge">xs.toString</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Views:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.view</code></td>
+      <td>Produces a view over <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs view (from, to)</code></td>
+      <td>Produces a view that represents the elements in some index range of <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/overview.html">Mutable and Immutable Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/collections/trait-traversable.html">Trait Traversable</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/trait-iterable.html">Trait Iterable</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/seqs.html">The sequence traits Seq, IndexedSeq, and LinearSeq</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/sets.html">Sets</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/maps.html">Maps</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-immutable-collection-classes.html">Concrete Immutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/concrete-mutable-collection-classes.html">Concrete Mutable Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/arrays.html">Arrays</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/strings.html">Strings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/performance-characteristics.html">Performance Characteristics</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/equality.html">Equality</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/views.html">Views</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/iterators.html">Iterators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/creating-collections-from-scratch.html">Creating Collections From Scratch</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/conversions-between-java-and-scala-collections.html">Conversions Between Java and Scala Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections/migrating-from-scala-27.html">Migrating from Scala 2.7</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections/trait-traversable.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/collections/trait-traversable.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/collections/trait-traversable.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/collections/trait-traversable.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

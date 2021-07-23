@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-32 - Allow referring to other arguments in default parameters | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/refer-other-arguments-in-args.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-32 - Allow referring to other arguments in default parameters"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-32 - Allow referring to other arguments in default parameters"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-32 - Allow referring to other arguments in default parameters</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Pathikrit Bhowmick</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jan 11th 2017</td>
+      <td>Initial Draft</td>
+    </tr>
+    <tr>
+      <td>Jan 12th 2017</td>
+      <td>Initial Feedback</td>
+    </tr>
+    <tr>
+      <td>Jan 16th 2017</td>
+      <td>Minor Changes</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+<p>Currently there is no way to refer to other arguments in the default parameters list:</p>
+
+<p>Does not compile:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+</code></pre></div></div>
+
+<p>The workaround to achieve this is by using a curried-function:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)(</span><span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+</code></pre></div></div>
+
+<p>However, the above workaround is not always suitable in all situations since you may not want a curried function.</p>
+
+<p>The other more verbose alternative is by overloading:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+  <span class="k">=</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">start</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+<span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+</code></pre></div></div>
+
+<p>The above is quite verbose as it required 1 extra function definition per argument that refers other args.</p>
+
+<h3 id="proposal">Proposal</h3>
+<p>Allow to refer to <strong><em>any</em></strong> parameters in the same (or left) curried parameter list:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>   <span class="c1">// Legal</span>
+<span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">,</span> <span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>   <span class="c1">// Legal !!!</span>
+<span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)(</span><span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>   <span class="c1">// Legal (works currently)</span>
+<span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>   <span class="c1">// Illegal</span>
+</code></pre></div></div>
+
+<p>The same applies for class arguments:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>   <span class="c1">// Legal</span>
+<span class="k">class</span> <span class="nc">Substring</span><span class="o">(</span><span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">,</span> <span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>   <span class="c1">// Legal</span>
+<span class="k">class</span> <span class="nc">Substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)(</span><span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>   <span class="c1">// Legal</span>
+<span class="k">class</span> <span class="nc">Substring</span><span class="o">(</span><span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>   <span class="c1">// Illegal</span>
+</code></pre></div></div>
+
+<p>We should also be able to refer to <strong><em>multiple</em></strong> parameters:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="n">start</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">middle</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="o">)/</span><span class="mi">2</span><span class="o">)</span>  <span class="c1">// Legal</span>
+</code></pre></div></div>
+
+<h1 id="motivating-examples">Motivating examples:</h1>
+
+<p>TBD</p>
+
+<h2 id="interactions-with-other-syntax">Interactions with other syntax</h2>
+
+<h4 id="partially-applied-functions">Partially Applied Functions:</h4>
+<p>Works as expected:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">substring</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">start</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+
+<span class="nf">substring</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">start</span> <span class="k">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">end</span> <span class="k">=</span> <span class="mi">5</span><span class="o">)</span>      <span class="c1">// Legal</span>
+<span class="nf">substring</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">end</span> <span class="k">=</span> <span class="mi">5</span><span class="o">)</span>                 <span class="c1">// Legal (start = 0)</span>
+<span class="nf">substring</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">start</span> <span class="k">=</span> <span class="mi">5</span><span class="o">)</span>               <span class="c1">// Legal (same as s =&gt; substring(s, start = 5, end = s.length)</span>
+</code></pre></div></div>
+
+<h4 id="multiple-implicit-parameters">Multiple Implicit Parameters</h4>
+<p><a href="https://github.com/scala/docs.scala-lang/pull/520">Multiple implicit parameters</a> should also be allowed to refer to one another (left to right):</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">codec</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">data</span><span class="k">:</span> <span class="kt">A</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">encoder</span><span class="k">:</span> <span class="kt">Encoder</span><span class="o">[</span><span class="kt">A</span><span class="o">])(</span><span class="k">implicit</span> <span class="n">decoder</span><span class="k">:</span> <span class="kt">Decoder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">encoder</span><span class="o">.</span><span class="py">reverse</span><span class="o">)</span> <span class="c1">// Legal</span>
+</code></pre></div></div>
+
+<h4 id="referring-to-type-members">Referring to type members:</h4>
+<p>The default parameters should be able to refer to type members of other arguments e.g.:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Codec</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Input</span>
+  <span class="k">type</span> <span class="kt">Output</span>
+<span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">codec</span><span class="o">(</span><span class="n">codec</span><span class="k">:</span> <span class="kt">Codec</span><span class="o">,</span> <span class="n">in</span><span class="k">:</span> <span class="kt">codec.Input</span><span class="o">,</span> <span class="n">out</span><span class="k">:</span> <span class="kt">codec.Output</span><span class="o">)</span> <span class="c1">// Legal !!!</span>
+</code></pre></div></div>
+
+<h3 id="other-languages">Other languages</h3>
+<p>The following languages allow referring to previously declared arguments in the function signature:</p>
+<ul>
+  <li><a href="https://coffeescript.org/">CoffeeScript</a></li>
+  <li><a href="https://kotlinlang.org">Kotlin</a></li>
+  <li><a href="https://www.typescriptlang.org/">TypeScript</a></li>
+</ul>
+
+<p>AFAIK, there are no major languages where referring to parameters declared to the <strong><em>right</em></strong> is allowed.</p>
+
+<h3 id="discussions">Discussions</h3>
+<p><a href="https://contributors.scala-lang.org/t/refer-to-previous-argument-in-default-argument-list/215/6">Scala Lang Forum</a></p>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #b58900">Pending</div>
+           <p class="vote-text" style="color: #b58900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2017-01-11-refer-other-arguments-in-args.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

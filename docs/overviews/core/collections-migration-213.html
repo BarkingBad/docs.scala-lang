@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Migrating a Project to Scala 2.13's Collections | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/collections-migration-213.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Migrating a Project to Scala 2.13's Collections"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Migrating a Project to Scala 2.13's Collections"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Migrating a Project to Scala 2.13's Collections</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>This document describes the main changes for collection users that migrate to Scala 2.13 and shows
+how to cross-build projects with Scala 2.11 / 2.12 and 2.13.</p>
+
+<p>For an in-depth overview of the Scala 2.13 collections library, see the <a href="/overviews/collections-2.13/introduction.html">collections guide</a>. The implementation details of the 2.13 collections are explained in the document <a href="/overviews/core/architecture-of-scala-213-collections.html">the architecture of Scala collections</a>.</p>
+
+<p>The most important changes in the Scala 2.13 collections library are:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scala.Seq[+A]</code> is now an alias for <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Seq[A]</code> (instead of <code class="language-plaintext highlighter-rouge">scala.collection.Seq[A]</code>). Note that this also changes the type of Scala varargs methods.</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.IndexedSeq[+A]</code> is now an alias for <code class="language-plaintext highlighter-rouge">scala.collection.immutable.IndexedSeq[A]</code> (instead of <code class="language-plaintext highlighter-rouge">scala.collection.IndexedSeq[A]</code>).</li>
+  <li>Transformation methods no longer have an implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> parameter. This makes the library easier to understand (in source code, Scaladoc, and IDE code completion). It also makes compiling user code more efficient.</li>
+  <li>The type hierarchy is simplified. <code class="language-plaintext highlighter-rouge">Traversable</code> no longer exists, only <code class="language-plaintext highlighter-rouge">Iterable</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">to[Collection]</code> method was replaced by the <code class="language-plaintext highlighter-rouge">to(Collection)</code> method.</li>
+  <li>Views have been vastly simplified and work reliably now. They no longer extend their corresponding collection type, for example, an <code class="language-plaintext highlighter-rouge">IndexedSeqView</code> no longer extends <code class="language-plaintext highlighter-rouge">IndexedSeq</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">collection.breakOut</code> no longer exists, use <code class="language-plaintext highlighter-rouge">.view</code> and <code class="language-plaintext highlighter-rouge">.to(Collection)</code> instead.</li>
+  <li>Immutable hash sets and hash maps have a new implementation (<code class="language-plaintext highlighter-rouge">ChampHashSet</code> and <code class="language-plaintext highlighter-rouge">ChampHashMap</code>, based on the <a href="https://michael.steindorfer.name/publications/oopsla15.pdf">“CHAMP” encoding</a>).</li>
+  <li>New collection types:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">immutable.ArraySeq</code> is an effectively immutable sequence that wraps an array</li>
+      <li><code class="language-plaintext highlighter-rouge">immutable.LazyList</code> is a linked list that is lazy in its state, i.e., whether it’s empty or non-empty. This allows creating a <code class="language-plaintext highlighter-rouge">LazyList</code> without evaluating the <code class="language-plaintext highlighter-rouge">head</code> element. <code class="language-plaintext highlighter-rouge">immutable.Stream</code>, which has a strict <code class="language-plaintext highlighter-rouge">head</code> and a lazy <code class="language-plaintext highlighter-rouge">tail</code>, is deprecated.</li>
+    </ul>
+  </li>
+  <li>Deprecated collections were removed (<code class="language-plaintext highlighter-rouge">MutableList</code>, <code class="language-plaintext highlighter-rouge">immutable.Stack</code>, others)</li>
+  <li>Parallel collections are now in a separate hierarchy in a <a href="https://github.com/scala/scala-parallel-collections">separate module</a>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">scala.jdk.StreamConverters</code> object provides extension methods to create (sequential or parallel) Java 8 streams for Scala collections.</li>
+</ul>
+
+<h2 id="tools-for-migrating-and-cross-building">Tools for migrating and cross-building</h2>
+
+<p>The <a href="https://github.com/scala/scala-collection-compat">scala-collection-compat</a> is a library released for 2.11, 2.12 and 2.13 that provides some of the new APIs from Scala 2.13 for the older versions. This simplifies cross-building projects.</p>
+
+<p>The module also provides <a href="https://github.com/scala/scala-collection-compat#migration-tool">migration rules</a> for <a href="https://scalacenter.github.io/scalafix/docs/users/installation.html">scalafix</a> that can update a project’s source code to work with the 2.13 collections library.</p>
+
+<h2 id="scalaseq-varargs-and-scalaindexedseq-migration">scala.Seq, varargs and scala.IndexedSeq migration</h2>
+
+<p>In Scala 2.13 <code class="language-plaintext highlighter-rouge">scala.Seq[+A]</code> is an alias for <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Seq[A]</code>, instead of <code class="language-plaintext highlighter-rouge">scala.collection.Seq[A]</code>, and <code class="language-plaintext highlighter-rouge">scala.IndexedSeq[+A]</code> is an alias for <code class="language-plaintext highlighter-rouge">scala.collection.immutable.IndexedSeq[A]</code>. These changes require some planning depending on how your code is going to be used.</p>
+
+<p>The change in definition of <code class="language-plaintext highlighter-rouge">scala.Seq</code> also has the effect of making the type of varargs parameters immutable sequences, due to <a href="https://www.scala-lang.org/files/archive/spec/2.12/06-expressions.html#function-applications">SLS 6.6</a>, so in
+a method such as <code class="language-plaintext highlighter-rouge">orderFood(xs: _*)</code> the varargs parameter <code class="language-plaintext highlighter-rouge">xs</code> must be an immutable sequence.</p>
+
+<p>Therefore any method signature in Scala 2.13 which includes <code class="language-plaintext highlighter-rouge">scala.Seq</code>, varargs, or <code class="language-plaintext highlighter-rouge">scala.IndexedSeq</code> is going
+to have a breaking change in API semantics (as the immutable sequence types require more — immutability — than the
+not-immutable types).  For example, users of a method like <code class="language-plaintext highlighter-rouge">def orderFood(order: Seq[Order]): Seq[Food]</code> would
+previously have been able to pass in an <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> of <code class="language-plaintext highlighter-rouge">Order</code>, but cannot in 2.13.</p>
+
+<h3 id="migrating-varargs">Migrating varargs</h3>
+
+<p>The change for varargs is unavoidable, as you cannot change the type used at definition site.  The options
+available for migrating the usage sites are the following:</p>
+
+<ul>
+  <li>change the value to already be an immutable sequence, which allows for direct varargs usage: <code class="language-plaintext highlighter-rouge">xs: _*</code>,</li>
+  <li>change the value to be an immutable sequence on the fly by calling <code class="language-plaintext highlighter-rouge">.toSeq</code>: <code class="language-plaintext highlighter-rouge">xs.toSeq: _*</code>, which will only
+  copy data if the sequence wasn’t already immutable</li>
+  <li>use <code class="language-plaintext highlighter-rouge">scala.collection.immutable.ArraySeq.unsafeWrapArray</code> to wrap your array and avoid copying, but see its
+scaladoc</li>
+</ul>
+
+<h3 id="option-1-migrate-back-to-scalacollectionseq">Option 1: migrate back to scala.collection.Seq</h3>
+
+<p>The first, in some ways simplest, migration strategy for all non-varargs usages of <code class="language-plaintext highlighter-rouge">scala.Seq</code> is to replace
+them with <code class="language-plaintext highlighter-rouge">scala.collection.Seq</code> (and require users to call <code class="language-plaintext highlighter-rouge">.toSeq</code> or <code class="language-plaintext highlighter-rouge">unsafeWrapArray</code> when passing such
+sequences to varargs methods).</p>
+
+<p>We recommend using <code class="language-plaintext highlighter-rouge">import scala.collection</code>/<code class="language-plaintext highlighter-rouge">import scala.collection.immutable</code> and
+<code class="language-plaintext highlighter-rouge">collection.Seq</code>/<code class="language-plaintext highlighter-rouge">immutable.Seq</code>.</p>
+
+<p>We recommend against using <code class="language-plaintext highlighter-rouge">import scala.collection.Seq</code>, which shadows the automatically imported <code class="language-plaintext highlighter-rouge">scala.Seq</code>,
+because even if it’s a oneline change it causes name confusion.  For code generation or macros the safest option
+is using the fully-qualified <code class="language-plaintext highlighter-rouge">_root_.scala.collection.Seq</code>.</p>
+
+<p>As an example, the migration would look something like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection</span>
+
+<span class="k">object</span> <span class="nc">FoodToGo</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">orderFood</span><span class="o">(</span><span class="n">order</span><span class="k">:</span> <span class="kt">collection.Seq</span><span class="o">[</span><span class="kt">Order</span><span class="o">])</span><span class="k">:</span> <span class="kt">collection.Seq</span><span class="o">[</span><span class="kt">Food</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>However users of this code in Scala 2.13 would also have to migrate, as the result type is source-incompatible
+with any <code class="language-plaintext highlighter-rouge">scala.Seq</code> (or just <code class="language-plaintext highlighter-rouge">Seq</code>) usage in their code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">food</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Food</span><span class="o">]</span> <span class="k">=</span> <span class="nv">FoodToGo</span><span class="o">.</span><span class="py">orderFood</span><span class="o">(</span><span class="n">order</span><span class="o">)</span> <span class="c1">// won't compile</span>
+</code></pre></div></div>
+
+<p>The simplest workaround is to ask your users to call <code class="language-plaintext highlighter-rouge">.toSeq</code> on the result which will return an immutable Seq,
+and only copy data if the sequence wasn’t immutable:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">food</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Food</span><span class="o">]</span> <span class="k">=</span> <span class="nv">FoodToGo</span><span class="o">.</span><span class="py">orderFood</span><span class="o">(</span><span class="n">order</span><span class="o">).</span><span class="py">toSeq</span> <span class="c1">// add .toSeq</span>
+</code></pre></div></div>
+
+<h3 id="option-2-use-scalacollectionseq-for-parameters-and-scalacollectionimmutableseq-for-result-types">Option 2: use scala.collection.Seq for parameters and scala.collection.immutable.Seq for result types</h3>
+
+<p>The second, intermediate, migration strategy would be to change all methods to accept not-immutable Seq but
+return immutable Seq, following the <a href="https://en.wikipedia.org/wiki/Robustness_principle">robustness principle</a> (also known as “Postel’s law”):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection</span>
+<span class="k">import</span> <span class="nn">scala.collection.immutable</span>
+
+<span class="k">object</span> <span class="nc">FoodToGo</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">orderFood</span><span class="o">(</span><span class="n">order</span><span class="k">:</span> <span class="kt">collection.Seq</span><span class="o">[</span><span class="kt">Order</span><span class="o">])</span><span class="k">:</span> <span class="kt">immutable.Seq</span><span class="o">[</span><span class="kt">Food</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="option-3-use-immutable-sequences">Option 3: use immutable sequences</h3>
+
+<p>The third migration strategy is to change your API to use immutable sequences for both parameter and result
+types.  When cross-building your library for Scala 2.12 and 2.13 this could either mean:</p>
+
+<ul>
+  <li>continuing to use <code class="language-plaintext highlighter-rouge">scala.Seq</code> which means it stays source and binary-compatible in 2.12, but would have to
+  have immutable sequence semantics (but that might already be the case).</li>
+  <li>switch to explicitly using immutable Seq in both Scala 2.12 and 2.13, which means breaking source, binary and
+  (possibly) semantic compatibility in 2.12:</li>
+</ul>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.collection.immutable</span>
+
+<span class="k">object</span> <span class="nc">FoodToGo</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">orderFood</span><span class="o">(</span><span class="n">order</span><span class="k">:</span> <span class="kt">immutable.Seq</span><span class="o">[</span><span class="kt">Order</span><span class="o">])</span><span class="k">:</span> <span class="kt">immutable.Seq</span><span class="o">[</span><span class="kt">Food</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="shadowing-scalaseq-and-scalaindexedseq">Shadowing scala.Seq and scala.IndexedSeq</h3>
+
+<p>You maybe be interested in entirely banning plain <code class="language-plaintext highlighter-rouge">Seq</code> usage.  You can use the compiler to do so by declaring
+your own package-level (and package private) <code class="language-plaintext highlighter-rouge">Seq</code> type which will mask <code class="language-plaintext highlighter-rouge">scala.Seq</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">example</span>
+
+<span class="k">import</span> <span class="nn">scala.annotation.compileTimeOnly</span>
+
+<span class="cm">/**
+  * In Scala 2.13, `scala.Seq` changed from aliasing `scala.collection.Seq` to aliasing
+  * `scala.collection.immutable.Seq`.  In this code base usage of unqualified `Seq` is banned: use
+  * `immutable.Seq` or `collection.Seq` instead.
+  *
+  * import scala.collection
+  * import scala.collection.immutable
+  *
+  * This `Seq` trait is a dummy type to prevent the use of `Seq`.
+  */</span>
+<span class="nd">@compileTimeOnly</span><span class="o">(</span><span class="s">"Use immutable.Seq or collection.Seq"</span><span class="o">)</span>
+<span class="k">private</span><span class="o">[</span><span class="kt">example</span><span class="o">]</span> <span class="k">trait</span> <span class="nc">Seq</span><span class="o">[</span><span class="kt">A1</span><span class="o">]</span>
+
+<span class="nc">/**</span>
+  <span class="o">*</span> <span class="nc">In</span> <span class="nc">Scala</span> <span class="mf">2.13</span><span class="o">,</span> <span class="n">`scala.IndexedSeq`</span> <span class="n">changed</span> <span class="n">from</span> <span class="n">aliasing</span> <span class="n">`scala.collection.IndexedSeq`</span> <span class="n">to</span> <span class="n">aliasing</span>
+  <span class="o">*</span> <span class="n">`scala.collection.immutable.IndexedSeq`</span><span class="o">.</span>  <span class="nc">In</span> <span class="k">this</span> <span class="n">code</span> <span class="n">base</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">unqualified</span> <span class="n">`IndexedSeq`</span> <span class="n">is</span>
+  <span class="o">*</span> <span class="n">banned</span><span class="k">:</span> <span class="kt">use</span> <span class="kt">`immutable.IndexedSeq`</span> <span class="kt">or</span> <span class="kt">`collection.IndexedSeq`.</span>
+  <span class="kt">*</span>
+  <span class="kt">*</span> <span class="kt">import</span> <span class="kt">scala.collection</span>
+  <span class="o">*</span> <span class="k">import</span> <span class="nn">scala.collection.immutable</span>
+  <span class="o">*</span>
+  <span class="o">*</span> <span class="nc">This</span> <span class="n">`IndexedSeq`</span> <span class="k">trait</span> <span class="nc">is</span> <span class="n">a</span> <span class="n">dummy</span> <span class="k">type</span> <span class="kt">to</span> <span class="kt">prevent</span> <span class="kt">the</span> <span class="kt">use</span> <span class="kt">of</span> <span class="kt">`IndexedSeq`.</span>
+  <span class="kt">*/</span>
+<span class="kt">@compileTimeOnly</span><span class="o">(</span><span class="err">"</span><span class="kt">Use</span> <span class="kt">immutable.IndexedSeq</span> <span class="kt">or</span> <span class="kt">collection.IndexedSeq</span><span class="err">"</span><span class="o">)</span>
+<span class="kt">private</span><span class="o">[</span><span class="kt">example</span><span class="o">]</span> <span class="k">trait</span> <span class="nc">IndexedSeq</span><span class="o">[</span><span class="kt">A1</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>This might be useful during the migration to catch usages of unqualified <code class="language-plaintext highlighter-rouge">Seq</code> and <code class="language-plaintext highlighter-rouge">IndexedSeq</code>.</p>
+
+<h2 id="what-are-the-breaking-changes">What are the breaking changes?</h2>
+
+<p>The following table summarizes the breaking changes. The “Automatic Migration Rule” column gives the name of the migration rule that can be used to automatically update old code to the new expected form.</p>
+
+<div style="overflow:auto;">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Old Code</th>
+        <th>New Code</th>
+        <th>Automatic Migration Rule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Method <code class="language-plaintext highlighter-rouge">to[C[_]]</code> has been removed (it might be reintroduced but deprecated, though)</td>
+        <td><code class="language-plaintext highlighter-rouge">xs.to[List]</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.to(List)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">mapValues</code> and <code class="language-plaintext highlighter-rouge">filterKeys</code> now return a <code class="language-plaintext highlighter-rouge">MapView</code> instead of a <code class="language-plaintext highlighter-rouge">Map</code></td>
+        <td><code class="language-plaintext highlighter-rouge">kvs.mapValues(f)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">kvs.mapValues(f).toMap</code></td>
+        <td><code class="language-plaintext highlighter-rouge">RoughlyMapValues</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">Iterable</code> no longer has a <code class="language-plaintext highlighter-rouge">sameElements</code> operation</td>
+        <td><code class="language-plaintext highlighter-rouge">xs1.sameElements(xs2)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs1.iterator.sameElements(xs2)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">collection.breakOut</code> no longer exists</td>
+        <td><code class="language-plaintext highlighter-rouge">val xs: List[Int] = ys.map(f)(collection.breakOut)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">val xs = ys.iterator.map(f).to(List)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">zip</code> on <code class="language-plaintext highlighter-rouge">Map[K, V]</code> now returns an <code class="language-plaintext highlighter-rouge">Iterable</code></td>
+        <td><code class="language-plaintext highlighter-rouge">map.zip(iterable)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">map.zip(iterable).toMap</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Experimental</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">ArrayBuilder.make</code> does not accept parens anymore</td>
+        <td><code class="language-plaintext highlighter-rouge">ArrayBuilder.make[Int]()</code></td>
+        <td><code class="language-plaintext highlighter-rouge">ArrayBuilder.make[Int]</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Some classes have been removed, made private or have no equivalent in the new design:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ArrayStack</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.FlatHashTable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.HashTable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">History</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Immutable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IndexedSeqOptimized</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LazyBuilder</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.LinearSeq</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LinkedEntry</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MapBuilder</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Mutable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MutableList</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Publisher</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ResizableArray</code></li>
+  <li><code class="language-plaintext highlighter-rouge">RevertibleHistory</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SeqForwarder</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SetBuilder</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Sizing</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SliceInterval</code></li>
+  <li><code class="language-plaintext highlighter-rouge">StackBuilder</code></li>
+  <li><code class="language-plaintext highlighter-rouge">StreamView</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Subscriber</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Undoable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">WrappedArrayBuilder</code></li>
+</ul>
+
+<p>Other notable changes are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Iterable.partition</code> invokes <code class="language-plaintext highlighter-rouge">iterator</code> twice on non-strict collections and assumes it gets two iterators over the same elements. Strict subclasses override <code class="language-plaintext highlighter-rouge">partition</code> do perform only a single traversal</li>
+  <li>Equality between collections is not anymore defined at the level of <code class="language-plaintext highlighter-rouge">Iterable</code>. It is defined separately in the <code class="language-plaintext highlighter-rouge">Set</code>, <code class="language-plaintext highlighter-rouge">Seq</code> and <code class="language-plaintext highlighter-rouge">Map</code> branches. Another consequence is that <code class="language-plaintext highlighter-rouge">Iterable</code> does not anymore have a <code class="language-plaintext highlighter-rouge">canEqual</code> method.</li>
+  <li>
+    <p>The new collections makes more use of overloading. You can find more information about the motivation
+behind this choice <a href="https://scala-lang.org/blog/2017/05/30/tribulations-canbuildfrom.html">here</a>. For instance, <code class="language-plaintext highlighter-rouge">Map.map</code> is overloaded:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; Map(1 -&gt; "a").map
+  def map[B](f: ((Int, String)) =&gt; B): scala.collection.immutable.Iterable[B]
+  def map[K2, V2](f: ((Int, String)) =&gt; (K2, V2)): scala.collection.immutable.Map[K2,V2]
+</code></pre></div>    </div>
+
+    <p>Type inference has been improved so that <code class="language-plaintext highlighter-rouge">Map(1 -&gt; "a").map(x =&gt; (x._1 + 1, x._2))</code> works, the compiler can infer the parameter type for the function literal. However, using a method reference in 2.13.0-M4 (improvement are on the way for 2.13.0) does not work, and an explicit eta-expansion is necessary:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def f(t: (Int, String)) = (t._1 + 1, t._2)
+scala&gt; Map(1 -&gt; "a").map(f)
+                        ^
+      error: missing argument list for method f
+      Unapplied methods are only converted to functions when a function type is expected.
+      You can make this conversion explicit by writing `f _` or `f(_)` instead of `f`.
+scala&gt; Map(1 -&gt; "a").map(f _)
+res10: scala.collection.immutable.Map[Int,String] = ChampHashMap(2 -&gt; a)
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">View</code>s have been completely redesigned and we expect their usage to have a more predictable evaluation model.
+You can read more about the new design <a href="https://scala-lang.org/blog/2017/11/28/view-based-collections.html">here</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.ArraySeq</code> (which wraps an <code class="language-plaintext highlighter-rouge">Array[AnyRef]</code> in 2.12, meaning that primitives were boxed in the array) can now wrap boxed and unboxed arrays. <code class="language-plaintext highlighter-rouge">mutable.ArraySeq</code> in 2.13 is in fact equivalent to <code class="language-plaintext highlighter-rouge">WrappedArray</code> in 2.12, there are specialized subclasses for primitive arrays. Note that a <code class="language-plaintext highlighter-rouge">mutable.ArraySeq</code> can be used either way for primitive arrays (TODO: document how). <code class="language-plaintext highlighter-rouge">WrappedArray</code> is deprecated.</li>
+  <li>There is no “default” <code class="language-plaintext highlighter-rouge">Factory</code> (previously known as <code class="language-plaintext highlighter-rouge">[A, C] =&gt; CanBuildFrom[Nothing, A, C]</code>): use <code class="language-plaintext highlighter-rouge">Factory[A, Vector[A]]</code> explicitly instead.</li>
+  <li><code class="language-plaintext highlighter-rouge">Array.deep</code> has been removed.</li>
+</ul>
+
+<h2 id="breaking-changes-with-old-syntax-still-supported">Breaking changes with old syntax still supported</h2>
+
+<p>The following table lists the changes that continue to work with a deprecation warning.</p>
+
+<div style="overflow:auto;">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Old Code</th>
+        <th>New Code</th>
+        <th>Automatic Migration Rule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">collection.Set/Map</code> no longer have <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> operations</td>
+        <td><code class="language-plaintext highlighter-rouge">xs + 1 - 2</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs ++ Set(1) -- Set(2)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Experimental</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">collection.Map</code> no longer have <code class="language-plaintext highlighter-rouge">--</code> operation</td>
+        <td><code class="language-plaintext highlighter-rouge">map -- keys</code></td>
+        <td><code class="language-plaintext highlighter-rouge">map.to(immutable.Map) -- keys</code></td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">immutable.Set/Map</code>: the <code class="language-plaintext highlighter-rouge">+</code> operation no longer has an overload accepting multiple values</td>
+        <td><code class="language-plaintext highlighter-rouge">Set(1) + (2, 3)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Set(1) + 2 + 3</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Map</code> no longer have an <code class="language-plaintext highlighter-rouge">updated</code> method</td>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Map(1 -&gt; 2).updated(1, 3)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Map(1 -&gt; 2).clone() += 1 -&gt; 3</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Set/Map</code> no longer have a <code class="language-plaintext highlighter-rouge">+</code> operation</td>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Set(1) + 2</code></td>
+        <td><code class="language-plaintext highlighter-rouge">mutable.Set(1).clone() += 2</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">SortedSet</code>: the <code class="language-plaintext highlighter-rouge">to</code>, <code class="language-plaintext highlighter-rouge">until</code> and <code class="language-plaintext highlighter-rouge">from</code> methods are now called <code class="language-plaintext highlighter-rouge">rangeTo</code>, <code class="language-plaintext highlighter-rouge">rangeUntil</code> and <code class="language-plaintext highlighter-rouge">rangeFrom</code>, respectively</td>
+        <td><code class="language-plaintext highlighter-rouge">xs.until(42)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.rangeUntil(42)</code></td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">Traversable</code> and <code class="language-plaintext highlighter-rouge">TraversableOnce</code> are replaced with <code class="language-plaintext highlighter-rouge">Iterable</code> and <code class="language-plaintext highlighter-rouge">IterableOnce</code>, respectively</td>
+        <td><code class="language-plaintext highlighter-rouge">def f(xs: Traversable[Int]): Unit</code></td>
+        <td><code class="language-plaintext highlighter-rouge">def f(xs: Iterable[Int]): Unit</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">Stream</code> is replaced with <code class="language-plaintext highlighter-rouge">LazyList</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Stream.from(1)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">LazyList.from(1)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Roughly</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">Seq#union</code> is replaced with <code class="language-plaintext highlighter-rouge">concat</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.union(ys)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.concat(ys)</code></td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">Stream#append</code> is replaced with <code class="language-plaintext highlighter-rouge">lazyAppendAll</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.append(ys)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.lazyAppendedAll(ys)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">IterableOnce#toIterator</code> is replaced with <code class="language-plaintext highlighter-rouge">IterableOnce#iterator</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.toIterator</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.iterator</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">copyToBuffer</code> has been deprecated</td>
+        <td><code class="language-plaintext highlighter-rouge">xs.copyToBuffer(buffer)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">buffer ++= xs</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">TupleNZipped</code> has been replaced with <code class="language-plaintext highlighter-rouge">LazyZipN</code></td>
+        <td><code class="language-plaintext highlighter-rouge">(xs, ys).zipped</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.lazyZip(ys)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">retain</code> has been renamed to <code class="language-plaintext highlighter-rouge">filterInPlace</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.retain(f)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.filterInPlace(f.tupled)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">:/</code> and <code class="language-plaintext highlighter-rouge">/:</code> operators have been deprecated</td>
+        <td><code class="language-plaintext highlighter-rouge">(xs :\ y)(f)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.foldRight(y)(f)</code></td>
+        <td><code class="language-plaintext highlighter-rouge">Collection213Upgrade</code>, <code class="language-plaintext highlighter-rouge">Collections213CrossCompat</code></td>
+      </tr>
+      <tr>
+        <td><code class="language-plaintext highlighter-rouge">companion</code> operation has been renamed to <code class="language-plaintext highlighter-rouge">iterableFactory</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.companion</code></td>
+        <td><code class="language-plaintext highlighter-rouge">xs.iterableFactory</code></td>
+        <td> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<h2 id="deprecated-things-in-212-that-have-been-removed-in-213">Deprecated things in 2.12 that have been removed in 2.13</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">collection.JavaConversions</code>. Use <code class="language-plaintext highlighter-rouge">scala.jdk.CollectionConverters</code> instead. Previous advice was to use <code class="language-plaintext highlighter-rouge">collection.JavaConverters</code> which is now deprecated ;</li>
+  <li><code class="language-plaintext highlighter-rouge">collection.mutable.MutableList</code> (was not deprecated in 2.12 but was considered to be an implementation detail for implementing other collections). Use an <code class="language-plaintext highlighter-rouge">ArrayDeque</code> or <code class="language-plaintext highlighter-rouge">mutable.ListBuffer</code> instead, or a <code class="language-plaintext highlighter-rouge">List</code> and a <code class="language-plaintext highlighter-rouge">var</code> ;</li>
+  <li><code class="language-plaintext highlighter-rouge">collection.immutable.Stack</code>. Use a <code class="language-plaintext highlighter-rouge">List</code> instead ;</li>
+  <li><code class="language-plaintext highlighter-rouge">StackProxy</code>, <code class="language-plaintext highlighter-rouge">MapProxy</code>, <code class="language-plaintext highlighter-rouge">SetProxy</code>, <code class="language-plaintext highlighter-rouge">SeqProxy</code>, etc. No replacement ;</li>
+  <li><code class="language-plaintext highlighter-rouge">SynchronizedMap</code>, <code class="language-plaintext highlighter-rouge">SynchronizedBuffer</code>, etc. Use <code class="language-plaintext highlighter-rouge">java.util.concurrent</code> instead ;</li>
+</ul>
+
+<h2 id="are-there-new-collection-types">Are there new collection types?</h2>
+
+<p><code class="language-plaintext highlighter-rouge">scala.collection.immutable.ArraySeq</code> is an immutable sequence backed by an array. It is used to pass varargs parameters.</p>
+
+<p>The <a href="https://github.com/scala/scala-collection-contrib"><code class="language-plaintext highlighter-rouge">scala-collection-contrib</code></a> module provides decorators enriching the collections with new operations. You can
+think of this artifact as an incubator: if we get evidence that these operations should be part of the core,
+we might eventually move them.</p>
+
+<p>The following collections are provided:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MultiSet</code> (both mutable and immutable)</li>
+  <li><code class="language-plaintext highlighter-rouge">SortedMultiSet</code> (both mutable and immutable)</li>
+  <li><code class="language-plaintext highlighter-rouge">MultiDict</code> (both mutable and immutable)</li>
+  <li><code class="language-plaintext highlighter-rouge">SortedMultiDict</code> (both mutable and immutable)</li>
+</ul>
+
+<h2 id="are-there-new-operations-on-collections">Are there new operations on collections?</h2>
+
+<p>The following new partitioning operations are available:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">groupMap</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">B</span><span class="o">](</span><span class="n">key</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">K</span><span class="o">)(</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]]</span> <span class="c1">// (Where `CC` can be `List`, for instance)</span>
+<span class="k">def</span> <span class="nf">groupMapReduce</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">B</span><span class="o">](</span><span class="n">key</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">K</span><span class="o">)(</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)(</span><span class="n">g</span><span class="k">:</span> <span class="o">(</span><span class="kt">B</span><span class="o">,</span> <span class="kt">B</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">B</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">groupMap</code> is equivalent to <code class="language-plaintext highlighter-rouge">groupBy(key).mapValues(_.map(f))</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">groupMapReduce</code> is equivalent to <code class="language-plaintext highlighter-rouge">groupBy(key).mapValues(_.map(f).reduce(g))</code>.</p>
+
+<p>Mutable collections now have transformation operations that modify the collection in place:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mapInPlace</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.type</span>
+<span class="k">def</span> <span class="nf">flatMapInPlace</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">IterableOnce</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">this.type</span>
+<span class="k">def</span> <span class="nf">filterInPlace</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.type</span>
+<span class="k">def</span> <span class="nf">patchInPlace</span><span class="o">(</span><span class="n">from</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">patch</span><span class="k">:</span> <span class="kt">scala.collection.Seq</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">replaced</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">this.type</span>
+</code></pre></div></div>
+
+<p>Other new operations are <code class="language-plaintext highlighter-rouge">distinctBy</code> and <code class="language-plaintext highlighter-rouge">partitionMap</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">distinctBy</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">C</span> <span class="c1">// `C` can be `List[Int]`, for instance</span>
+<span class="k">def</span> <span class="nf">partitionMap</span><span class="o">[</span><span class="kt">A1</span>, <span class="kt">A2</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Either</span><span class="o">[</span><span class="kt">A1</span>, <span class="kt">A2</span><span class="o">])</span><span class="k">:</span> <span class="o">(</span><span class="kt">CC</span><span class="o">[</span><span class="kt">A1</span><span class="o">],</span> <span class="nc">CC</span><span class="o">[</span><span class="kt">A2</span><span class="o">])</span> <span class="c1">// `CC` can be `List`, for instance</span>
+</code></pre></div></div>
+
+<p>Last, additional operations are provided by the <code class="language-plaintext highlighter-rouge">scala-collection-contrib</code> module. You can
+think of this artifact as an incubator: if we get evidence that these operations should be part of the core,
+we might eventually move them.</p>
+
+<p>The new operations are provided via an implicit enrichment. You need to add the following import to make them
+available:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">strawman.collection.decorators._</span>
+</code></pre></div></div>
+
+<p>The following operations are provided:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Seq</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">intersperse</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Map</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">zipByKey</code> / <code class="language-plaintext highlighter-rouge">join</code> / <code class="language-plaintext highlighter-rouge">zipByKeyWith</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mergeByKey</code> / <code class="language-plaintext highlighter-rouge">fullOuterJoin</code> / <code class="language-plaintext highlighter-rouge">mergeByKeyWith</code> / <code class="language-plaintext highlighter-rouge">leftOuterJoin</code> / <code class="language-plaintext highlighter-rouge">rightOuterJoin</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="are-there-new-implementations-of-existing-collection-types-changes-in-performance-characteristics">Are there new implementations of existing collection types (changes in performance characteristics)?</h2>
+
+<p>The default <code class="language-plaintext highlighter-rouge">Set</code> and <code class="language-plaintext highlighter-rouge">Map</code> are backed by a <code class="language-plaintext highlighter-rouge">ChampHashSet</code> and a <code class="language-plaintext highlighter-rouge">ChampHashMap</code>, respectively. The performance characteristics are the same but the
+operation implementations are faster. These data structures also have a lower memory footprint.</p>
+
+<p><code class="language-plaintext highlighter-rouge">mutable.Queue</code> and <code class="language-plaintext highlighter-rouge">mutable.Stack</code> now use <code class="language-plaintext highlighter-rouge">mutable.ArrayDeque</code>. This data structure supports constant time index access, and amortized constant time
+insert and remove operations.</p>
+
+<h2 id="how-do-i-cross-build-my-project-against-scala-212-and-scala-213">How do I cross-build my project against Scala 2.12 and Scala 2.13?</h2>
+
+<p>Most usages of collections are compatible and can cross-compile 2.12 and 2.13 (at the cost of some warnings, sometimes).</p>
+
+<p>If you cannot get your code to cross-compile, there are various solutions:</p>
+<ul>
+  <li>You can use the <a href="https://github.com/scala/scala-collection-compat"><code class="language-plaintext highlighter-rouge">scala-collection-compat</code></a> library, which makes some of 2.13’s APIs available to 2.11 and 2.12. This solution does not always work, for example if your library implements custom collection types.</li>
+  <li>You can maintain a separate branch with the changes for 2.13 and publish releases for 2.13 from this branch.</li>
+  <li>
+    <p>You can put source files that don’t cross-compile in separate directories and configure sbt to assemble the sources according to the Scala version (see also the examples below):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Adds a `src/main/scala-2.13+` source directory for Scala 2.13 and newer
+// and a `src/main/scala-2.13-` source directory for Scala version older than 2.13
+unmanagedSourceDirectories in Compile += {
+  val sourceDir = (sourceDirectory in Compile).value
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, n)) if n &gt;= 13 =&gt; sourceDir / "scala-2.13+"
+    case _                       =&gt; sourceDir / "scala-2.13-"
+  }
+}
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Examples of libraries that cross-compile with separate source directories:</p>
+<ul>
+  <li>https://github.com/scala/scala-parser-combinators/pull/152</li>
+  <li>https://github.com/scala/scala-xml/pull/222</li>
+  <li>Some other examples are listed here: https://github.com/scala/community-builds/issues/710</li>
+</ul>
+
+<h1 id="collection-implementers">Collection Implementers</h1>
+
+<p>To learn about differences when implementing custom collection types or operations, see the following documents:</p>
+<ul>
+  <li><a href="/overviews/core/architecture-of-scala-213-collections.html">The architecture of Scala collections</a></li>
+  <li><a href="/overviews/core/custom-collections.html">Implementing custom collections</a></li>
+  <li><a href="/overviews/core/custom-collection-operations.html">Adding custom collection operations</a></li>
+</ul>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/collections-migration-213.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

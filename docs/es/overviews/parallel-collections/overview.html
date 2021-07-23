@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Overview | 
+      Parallel Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/es/overviews/parallel-collections/overview.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Overview"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Overview"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/es/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/es/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Parallel Collections</div>
+          
+          <h1>Overview</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Autores originales: Aleksandar Prokopec, Heather Miller</strong></p>
+
+<p><strong>Traducción y arreglos: Santiago Basulto</strong></p>
+
+<h2 id="motivación">Motivación</h2>
+
+<p>En el medio del cambio en los recientes años de los fabricantes de procesadores de arquitecturas simples a arquitecturas multi-nucleo, tanto el ámbito académico, como el industrial coinciden que la <em>Programación Paralela</em> sigue siendo un gran desafío.</p>
+
+<p>Las Colecciones Paralelizadas (Parallel collections, en inglés) fueron incluidas en la librería del lenguaje Scala en un esfuerzo de facilitar la programación paralela al abstraer a los usuarios de detalles de paralelización de bajo nivel, mientras se provee con una abstracción de alto nivel, simple y familiar. La esperanza era, y sigue siendo, que el paralelismo implícito detrás de una abstracción de colecciones (como lo es el actual framework de colecciones del lenguaje) acercara la ejecución paralela confiable, un poco más al trabajo diario de los desarrolladores.</p>
+
+<p>La idea es simple: las colecciones son abstracciones de programación ficientemente entendidas y a su vez son frecuentemente usadas. Dada su regularidad, es posible que sean paralelizadas eficiente y transparentemente. Al permitirle al usuario intercambiar colecciones secuenciales por aquellas que son operadas en paralelo, las colecciones paralelizadas de Scala dan un gran paso hacia la posibilidad de que el paralelismo sea introducido cada vez más frecuentemente en nuestro código.</p>
+
+<p>Veamos el siguiente ejemplo secuencial, donde realizamos una operación monádica en una colección lo suficientemente grande.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val list = (1 to 10000).toList
+list.map(_ + 42)
+</code></pre></div></div>
+
+<p>Para realizar la misma operación en paralelo, lo único que devemos incluir, es la invocación al método <code class="language-plaintext highlighter-rouge">par</code> en la colección secuencial <code class="language-plaintext highlighter-rouge">list</code>. Después de eso, es posible utilizar la misma colección paralelizada de la misma manera que normalmente la usariamos si fuera una colección secuencial. El ejemplo superior puede ser paralelizado al hacer simplemente lo siguiente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.par.map(_ + 42)
+</code></pre></div></div>
+
+<p>El diseño de la librería de colecciones paralelizadas de Scala está inspirada y fuertemente integrada con la librería estandar de colecciones (secuenciales) del lenguaje (introducida en la versión 2.8). Se provee te una contraparte paralelizada a un número importante de estructuras de datos de la librería de colecciones (secuenciales) de Scala, incluyendo:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ParArray</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParVector</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.ParHashMap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.ParHashSet</code></li>
+  <li><code class="language-plaintext highlighter-rouge">immutable.ParHashMap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">immutable.ParHashSet</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParRange</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParTrieMap</code> (<code class="language-plaintext highlighter-rouge">collection.concurrent.TrieMap</code>s are new in 2.10)</li>
+</ul>
+
+<p>Además de una arquitectura común, la librería de colecciones paralelizadas de Scala también comparte la <em>extensibilidad</em> con la librería de colecciones secuenciales. Es decir, de la misma manera que los usuarios pueden integrar sus propios tipos de tipos de colecciones de la librería normal de colecciones secuenciales, pueden realizarlo con la librería de colecciones paralelizadas, heredando automáticamente todas las operaciones paralelas disponibles en las demás colecciones paralelizadas de la librería estandar.</p>
+
+<h2 id="algunos-ejemplos">Algunos Ejemplos</h2>
+
+<p>To attempt to illustrate the generality and utility of parallel collections,
+we provide a handful of simple example usages, all of which are transparently
+executed in parallel.</p>
+
+<p>De forma de ilustrar la generalidad y utilidad de las colecciones paralelizadas, proveemos un conjunto de ejemplos de uso útiles, todos ellos siendo ejecutados en paralelo de forma totalmente transparente al usuario.</p>
+
+<p><em>Nota:</em> Algunos de los siguientes ejemplos operan en colecciones pequeñas, lo cual no es recomendado. Son provistos como ejemplo para ilustrar solamente el propósito. Como una regla heurística general, los incrementos en velocidad de ejecución comienzan a ser notados cuando el tamaño de la colección es lo suficientemente grande, tipicamente algunos cuantos miles de elementos. (Para más información en la relación entre tamaño de una coleccion paralelizada y su performance, por favor véase <a href="/es/overviews/parallel-collections/performance.html">appropriate subsection</a> en la sección <a href="/es/overviews/parallel-collections/performance.html">performance</a> (en inglés).</p>
+
+<h4 id="map">map</h4>
+
+<p>Usando un <code class="language-plaintext highlighter-rouge">map</code> paralelizado para transformar una colección de elementos tipo <code class="language-plaintext highlighter-rouge">String</code> a todos caracteres en mayúscula:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val apellidos = List("Smith","Jones","Frankenstein","Bach","Jackson","Rodin").par
+apellidos: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Frankenstein, Bach, Jackson, Rodin)
+
+scala&gt; apellidos.map(_.toUpperCase)
+res0: scala.collection.parallel.immutable.ParSeq[String] = ParVector(SMITH, JONES, FRANKENSTEIN, BACH, JACKSON, RODIN)
+</code></pre></div></div>
+
+<h4 id="fold">fold</h4>
+
+<p>Sumatoria mediante <code class="language-plaintext highlighter-rouge">fold</code> en un <code class="language-plaintext highlighter-rouge">ParArray</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val parArray = (1 to 10000).toArray.par
+parArray: scala.collection.parallel.mutable.ParArray[Int] = ParArray(1, 2, 3, ...
+
+scala&gt; parArray.fold(0)(_ + _)
+res0: Int = 50005000
+</code></pre></div></div>
+
+<h4 id="filtrando">filtrando</h4>
+
+<p>Usando un filtrado mediante <code class="language-plaintext highlighter-rouge">filter</code> paralelizado para seleccionar los apellidos que alfabéticamente preceden la letra “K”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val apellidos = List("Smith","Jones","Frankenstein","Bach","Jackson","Rodin").par
+apellidos: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Frankenstein, Bach, Jackson, Rodin)
+
+scala&gt; apellidos.filter(_.head &gt;= 'J')
+res0: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Jackson, Rodin)
+</code></pre></div></div>
+
+<h2 id="creación-de-colecciones-paralelizadas">Creación de colecciones paralelizadas</h2>
+
+<p>Las colecciones paralelizadas están pensadas para ser usadas exactamente de la misma manera que las colecciones secuenciales –la única diferencia notoria es cómo <em>obtener</em> una colección paralelizada.</p>
+
+<p>Generalmente se tienen dos opciones para la creación de colecciones paralelizadas:</p>
+
+<p>Primero al utilizar la palabra clave <code class="language-plaintext highlighter-rouge">new</code> y una sentencia de importación apropiada:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.collection.parallel.immutable.ParVector
+val pv = new ParVector[Int]
+</code></pre></div></div>
+
+<p>Segundo, al <em>convertir</em> desde una colección secuencial:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val pv = Vector(1,2,3,4,5,6,7,8,9).par
+</code></pre></div></div>
+
+<p>Lo que es importante desarrollar aquí son estos métodos para la conversión de colecciones. Las colecciones secuenciales pueden ser convertiadas a colecciones paralelizadas mediante la invocación del método <code class="language-plaintext highlighter-rouge">par</code>, y de la misma manera, las colecciones paralelizadas pueden ser convertidas a colecciones secuenciales mediante el método <code class="language-plaintext highlighter-rouge">seq</code>.</p>
+
+<p><em>Nota:</em> Las colecciones que son inherentemente secuenciales (en el sentido que sus elementos deben ser accedidos uno a uno), como las listas, colas y streams (a veces llamados flujos), son convertidos a sus contrapartes paralelizadas al copiar los todos sus elementos. Un ejemplo es la clase <code class="language-plaintext highlighter-rouge">List</code> –es convertida a una secuencia paralelizada inmutable común, que es un <code class="language-plaintext highlighter-rouge">ParVector</code>. Por supuesto, el tener que copiar los elementos para estas colecciones involucran una carga más de trabajo que no se sufre con otros tipos como: <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, <code class="language-plaintext highlighter-rouge">HashMap</code>, etc.</p>
+
+<p>For more information on conversions on parallel collections, see the
+<a href="/overviews/parallel-collections/conversions.html">conversions</a>
+and <a href="/overviews/parallel-collections/concrete-parallel-collections.html">concrete parallel collection classes</a>
+sections of thise guide.</p>
+
+<p>Para más información sobre la conversión de colecciones paralelizadas, véase los artículos sobre <a href="/es/overviews/parallel-collections/conversions.html">conversiones</a> y <a href="/es/overviews/parallel-collections/concrete-parallel-collections.html">clases concretas de colecciones paralelizadas</a> de esta misma serie.</p>
+
+<h2 id="entendiendo-las-colecciones-paralelizadas">Entendiendo las colecciones paralelizadas</h2>
+
+<p>A pesar de que las abstracciones de las colecciones paralelizadas se parecen mucho a las colecciones secuenciales normales, es importante notar que su semántica difiere, especialmente con relación a efectos secundarios (o colaterales, según algunas traducciones) y operaciones no asociativas.</p>
+
+<p>Para entender un poco más esto, primero analizaremos <em>cómo</em> son realizadas las operaciones paralelas. Conceptualmente, el framework de colecciones paralelizadas de Scala paraleliza una operación al “dividir” recursivamente una colección dada, aplicando una operación en cada partición de la colección en paralelo y recombinando todos los resultados que fueron completados en paralelo.</p>
+
+<p>Esta ejecución concurrente y fuera de orden de las colecciones paralelizadas llevan a dos implicancias que es importante notar:</p>
+
+<ol>
+  <li><strong>Las operaciones con efectos secundarios pueden llegar a resultados no deterministas</strong></li>
+  <li><strong>Operaciones no asociativas generan resultados no deterministas</strong></li>
+</ol>
+
+<h3 id="operaciones-con-efectos-secundarios">Operaciones con efectos secundarios</h3>
+
+<p>Given the <em>concurrent</em> execution semantics of the parallel collections
+framework, operations performed on a collection which cause side-effects
+should generally be avoided, in order to maintain determinism. A simple
+example is by using an accessor method, like <code class="language-plaintext highlighter-rouge">foreach</code> to increment a <code class="language-plaintext highlighter-rouge">var</code>
+declared outside of the closure which is passed to <code class="language-plaintext highlighter-rouge">foreach</code>.</p>
+
+<p>Dada la ejecución <em>concurrente</em> del framework de colecciones paralelizadas, las operaciones que generen efectos secundarios generalmente deben ser evitadas, de manera de mantener el “determinismo”.</p>
+
+<p>Veamos un ejemplo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; val list = (1 to 1000).toList.par
+list: scala.collection.parallel.immutable.ParSeq[Int] = ParVector(1, 2, 3,…
+
+scala&gt; list.foreach(sum += _); sum
+res01: Int = 467766
+
+scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; list.foreach(sum += _); sum
+res02: Int = 457073
+
+scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; list.foreach(sum += _); sum
+res03: Int = 468520
+</code></pre></div></div>
+
+<p>Acá podemos ver que cada vez que <code class="language-plaintext highlighter-rouge">sum</code> es reinicializado a 0, e invocamos el método <code class="language-plaintext highlighter-rouge">foreach</code> en nuestro objeto <code class="language-plaintext highlighter-rouge">list</code>, el valor de <code class="language-plaintext highlighter-rouge">sum</code> resulta ser distinto. La razón de este no-determinismo es una <em>condición de carrera</em> – lecturas/escrituras concurrentes a la misma variable mutable.</p>
+
+<p>En el ejemplo anterior, es posible para dos hilos leer el <em>mismo</em> valor de <code class="language-plaintext highlighter-rouge">sum</code>, demorarse un tiempo realizando la operación que tienen que hacer sobre <code class="language-plaintext highlighter-rouge">sum</code>, y después volver a escribir ese nuevo valor a <code class="language-plaintext highlighter-rouge">sum</code>, lo que probablemente resulte en una sobreescritura (y por lo tanto pérdida) de un valor anterior que generó otro hilo. Veamos otro ejemplo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HiloA: lee el valor en sum, sum = 0                                        valor de sum: 0
+HiloB: lee el valor en sum, sum = 0                                        valor de sum: 0
+HiloA: incrementa el  valor de sum a 760, graba sum = 760                  valor de sum: 760
+HiloA: incrementa el  valor de sum a 12, graba sum = 12                    valor de sum: 12
+</code></pre></div></div>
+
+<p>Este ejemplo ilustra un escenario donde dos hilos leen el mismo valor, <code class="language-plaintext highlighter-rouge">0</code>, antes que el otro pueda sumar su parte de la ejecución sobre la colección paralela. En este caso el <code class="language-plaintext highlighter-rouge">HiloA</code> lee <code class="language-plaintext highlighter-rouge">0</code> y le suma el valor de su cómputo, <code class="language-plaintext highlighter-rouge">0+760</code>, y en el caso del <code class="language-plaintext highlighter-rouge">HiloB</code>, le suma al valor leido <code class="language-plaintext highlighter-rouge">0</code> su resultado, quedando <code class="language-plaintext highlighter-rouge">0+12</code>. Después de computar sus respectivas sumas, ambos escriben el valor en <code class="language-plaintext highlighter-rouge">sum</code>. Ya que el <code class="language-plaintext highlighter-rouge">HiloA</code> llega a escribir antes que el <code class="language-plaintext highlighter-rouge">HiloB</code> (por nada en particular, solamente coincidencia que en este caso llegue primero el <code class="language-plaintext highlighter-rouge">HiloA</code>), su valor se pierde, porque seguidamente llega a escribir el <code class="language-plaintext highlighter-rouge">HiloB</code> y borra el valor previamente guardado. Esto se llama <em>condición de carrera</em> porque el valor termina resultando una cuestión de suerte, o aleatoria, de quién llega antes o después a escribir el valor final.</p>
+
+<h3 id="operaciones-no-asociativas">Operaciones no asociativas</h3>
+
+<p>Dado este funcionamiento “fuera de orden”, también se debe ser cuidadoso de realizar solo operaciones asociativas para evitar comportamientos no esperados. Es decir, dada una colección paralelizada <code class="language-plaintext highlighter-rouge">par_col</code>, uno debe saber que cuando invoca una función de orden superior sobre <code class="language-plaintext highlighter-rouge">par_col</code>, tal como <code class="language-plaintext highlighter-rouge">par_col.reduce(func)</code>, el orden en que la función <code class="language-plaintext highlighter-rouge">func</code> es invocada sobre los elementos de <code class="language-plaintext highlighter-rouge">par_col</code> puede ser arbitrario (de hecho, es el caso más probable). Un ejemplo simple y pero no tan obvio de una operación no asociativa es es una substracción:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val list = (1 to 1000).toList.par
+list: scala.collection.parallel.immutable.ParSeq[Int] = ParVector(1, 2, 3,…
+
+scala&gt; list.reduce(_-_)
+res01: Int = -228888
+
+scala&gt; list.reduce(_-_)
+res02: Int = -61000
+
+scala&gt; list.reduce(_-_)
+res03: Int = -331818
+</code></pre></div></div>
+
+<p>En el ejemplo anterior invocamos reduce sobre un <code class="language-plaintext highlighter-rouge">ParVector[Int]</code> pasándole <code class="language-plaintext highlighter-rouge">_-_</code>. Lo que hace esto es simplemente tomar dos elementos y resta el primero al segundo. Dado que el framework de colecciones paralelizadas crea varios hilos que realizan <code class="language-plaintext highlighter-rouge">reduce(_-_)</code> independientemente en varias secciones de la colección, el resultado de correr dos veces el método <code class="language-plaintext highlighter-rouge">reduce(_-_)</code> en la misma colección puede no ser el mismo.</p>
+
+<p><em>Nota:</em> Generalmente se piensa que, al igual que las operaciones no asociativas, las operaciones no conmutativas pasadas a un función de orden superior también generan resultados extraños (no deterministas). En realidad esto no es así, un simple ejemplo es la concatenación de Strings (cadenas de caracteres). – una operación asociativa, pero no conmutativa:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val strings = List("abc","def","ghi","jk","lmnop","qrs","tuv","wx","yz").par
+strings: scala.collection.parallel.immutable.ParSeq[java.lang.String] = ParVector(abc, def, ghi, jk, lmnop, qrs, tuv, wx, yz)
+
+scala&gt; val alfabeto = strings.reduce(_++_)
+alfabeto: java.lang.String = abcdefghijklmnopqrstuvwxyz
+</code></pre></div></div>
+
+<p>Lo que implica el “fuera de orden” en las colecciones paralelizadas es solamente que la operación será ejecutada fuera de orden (en un sentido <em>temporal</em>, es decir no secuencial, no significa que el resultado va a ser re-“<em>combinado</em>” fuera de orden (en un sentido de <em>espacio</em>). Al contrario, en general los resultados siempre serán reensamblados en roden, es decir una colección paralelizada que se divide en las siguientes particiones A, B, C, en ese orden, será reensamblada nuevamente en el orden A, B, C. No en otro orden arbitrario como B, C, A.</p>
+
+<p>Para más información de cómo se dividen y se combinan los diferentes tipos de colecciones paralelizadas véase el artículo sobre <a href="/es/overviews/parallel-collections/architecture.html">Arquitectura</a> de esta misma serie.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/parallel-collections/overview.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/parallel-collections/overview.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-cn/overviews/parallel-collections/overview.html" class="lang">中文 (简体)</a></li>
+          
+            
+            <li><a href="/es/overviews/parallel-collections/overview.html" class="lang">Español</a></li>
+          
+            
+            <li><a href="/ru/overviews/parallel-collections/overview.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_es/overviews/parallel-collections/overview.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

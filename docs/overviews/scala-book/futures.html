@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Scala Futures | 
+      Scala Book | 
+      Scala Documentation
+    </title>
+    
+    <meta name="description" content="This page provides an introduction to Futures in Scala, including Future callback methods." />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/scala-book/futures.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Scala Futures"/>
+    <meta property="og:description" content="This page provides an introduction to Futures in Scala, including Future callback methods."/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Scala Futures"/>
+    <meta name="twitter:description" content="This page provides an introduction to Futures in Scala, including Future callback methods."/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala Book</div>
+          
+          <h1>Scala Futures</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>When you want to write parallel and concurrent applications in Scala, you <em>could</em> still use the native Java <code class="language-plaintext highlighter-rouge">Thread</code> — but the Scala <a href="https://www.scala-lang.org/api/current/scala/concurrent/Future$.html">Future</a> makes parallel/concurrent programming much simpler, and it’s preferred.</p>
+
+<p>Here’s a description of <code class="language-plaintext highlighter-rouge">Future</code> from its Scaladoc:</p>
+
+<blockquote>
+  <p>“A Future represents a value which may or may not <em>currently</em> be available, but will be available at some point, or an exception if that value could not be made available.”</p>
+</blockquote>
+
+<h3 id="thinking-in-futures">Thinking in futures</h3>
+
+<p>To help demonstrate this, in single-threaded programming you bind the result of a function call to a variable like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">aShortRunningTask</span><span class="o">()</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="n">aShortRunningTask</span>
+</code></pre></div></div>
+
+<p>With code like that, the value <code class="language-plaintext highlighter-rouge">42</code> is bound to the variable <code class="language-plaintext highlighter-rouge">x</code> immediately.</p>
+
+<p>When you’re working with a <code class="language-plaintext highlighter-rouge">Future</code>, the assignment process looks similar:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">aLongRunningTask</span><span class="o">()</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="n">aLongRunningTask</span>
+</code></pre></div></div>
+
+<p>But because <code class="language-plaintext highlighter-rouge">aLongRunningTask</code> takes an indeterminate amount of time to return, the value in <code class="language-plaintext highlighter-rouge">x</code> may or may not be <em>currently</em> available, but it will be available at some point (in the future).</p>
+
+<p>Another important point to know about futures is that they’re intended as a one-shot, “Handle this relatively slow computation on some other thread, and call me back with a result when you’re done” construct. (As a point of comparison, <a href="https://akka.io">Akka</a> actors are intended to run for a long time and respond to many requests during their lifetime, but each future you create is intended to be run only once.)</p>
+
+<p>In this lesson you’ll see how to use futures, including how to run multiple futures in parallel and combine their results in a for-expression, along with other methods that are used to handle the value in a future once it returns.</p>
+
+<blockquote>
+  <p>Tip: If you’re just starting to work with futures and find the name <code class="language-plaintext highlighter-rouge">Future</code> to be confusing in the following examples, replace it with the name <code class="language-plaintext highlighter-rouge">ConcurrentResult</code>, which might be easier to understand initially.</p>
+</blockquote>
+
+<h2 id="source-code">Source code</h2>
+
+<p>You can find the source code for this lesson at this URL:</p>
+
+<ul>
+  <li><a href="https://github.com/alvinj/HelloScalaFutures">github.com/alvinj/HelloScalaFutures</a></li>
+</ul>
+
+<h2 id="an-example-in-the-repl">An example in the REPL</h2>
+
+<p>A Scala <code class="language-plaintext highlighter-rouge">Future</code> is used to create a temporary pocket of concurrency that you use for one-shot needs. You typically use it when you need to call an algorithm that runs an indeterminate amount of time — such as calling a web service or executing a long-running algorithm — so you therefore want to run it off of the main thread.</p>
+
+<p>To demonstrate how this works, let’s start with an example of a <code class="language-plaintext highlighter-rouge">Future</code> in the Scala REPL. First, paste in these <code class="language-plaintext highlighter-rouge">import</code> statements:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.concurrent.Future</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+<span class="k">import</span> <span class="nn">scala.util.</span><span class="o">{</span><span class="nc">Failure</span><span class="o">,</span> <span class="nc">Success</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>Now, you’re ready to create a future. For example, here’s a future that sleeps for ten seconds and then returns the value <code class="language-plaintext highlighter-rouge">42</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">a</span> <span class="k">=</span> <span class="nc">Future</span> <span class="o">{</span> <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">*</span><span class="mi">1000</span><span class="o">);</span> <span class="mi">42</span> <span class="o">}</span>
+<span class="n">a</span><span class="k">:</span> <span class="kt">scala.concurrent.Future</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(&lt;</span><span class="n">not</span> <span class="n">completed</span><span class="o">&gt;)</span>
+</code></pre></div></div>
+
+<p>While that’s a simple example, it shows the basic approach: Just construct a new <code class="language-plaintext highlighter-rouge">Future</code> with your long-running algorithm.</p>
+
+<p>Because a <code class="language-plaintext highlighter-rouge">Future</code> has a <code class="language-plaintext highlighter-rouge">map</code> function, you use it as usual:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="k">val</span> <span class="nv">b</span> <span class="k">=</span> <span class="nv">a</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+<span class="n">b</span><span class="k">:</span> <span class="kt">scala.concurrent.Future</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(&lt;</span><span class="n">not</span> <span class="n">completed</span><span class="o">&gt;)</span>
+</code></pre></div></div>
+
+<p>Initially this shows <code class="language-plaintext highlighter-rouge">Future(&lt;not completed&gt;)</code>, but if you check <code class="language-plaintext highlighter-rouge">b</code>’s value you’ll see that it eventually contains the expected result of <code class="language-plaintext highlighter-rouge">84</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">&gt;</span> <span class="n">b</span>
+<span class="n">res1</span><span class="k">:</span> <span class="kt">scala.concurrent.Future</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(</span><span class="nc">Success</span><span class="o">(</span><span class="mi">84</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>Notice that the <code class="language-plaintext highlighter-rouge">84</code> you expected is wrapped in a <code class="language-plaintext highlighter-rouge">Success</code>, which is further wrapped in a <code class="language-plaintext highlighter-rouge">Future</code>. This is a key point to know: The value in a <code class="language-plaintext highlighter-rouge">Future</code> is always an instance of one of the <code class="language-plaintext highlighter-rouge">Try</code> types: <code class="language-plaintext highlighter-rouge">Success</code> or <code class="language-plaintext highlighter-rouge">Failure</code>. Therefore, when working with the result of a future, use the usual <code class="language-plaintext highlighter-rouge">Try</code>-handling techniques, or one of the other <code class="language-plaintext highlighter-rouge">Future</code> callback methods.</p>
+
+<p>One commonly used callback method is <code class="language-plaintext highlighter-rouge">onComplete</code>, which takes a <a href="https://alvinalexander.com/scala/how-to-define-use-partial-functions-in-scala-syntax-examples">partial function</a> in which you should handle the <code class="language-plaintext highlighter-rouge">Success</code> and <code class="language-plaintext highlighter-rouge">Failure</code> cases, like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">a</span><span class="o">.</span><span class="py">onComplete</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">value</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Got the callback, value = $value"</span><span class="o">)</span>
+    <span class="k">case</span> <span class="nc">Failure</span><span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">e</span><span class="o">.</span><span class="py">printStackTrace</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When you paste that code in the REPL you’ll see the result:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Got</span> <span class="n">the</span> <span class="n">callback</span><span class="o">,</span> <span class="n">value</span> <span class="k">=</span> <span class="mi">42</span>
+</code></pre></div></div>
+
+<p>There are other ways to process the results from futures, and the most common methods are listed later in this lesson.</p>
+
+<h2 id="an-example-application">An example application</h2>
+
+<p>The following application (<code class="language-plaintext highlighter-rouge">App</code>) provides an introduction to using multiple futures. It shows several key points about how to work with futures:</p>
+
+<ul>
+  <li>How to create futures</li>
+  <li>How to combine multiple futures in a <code class="language-plaintext highlighter-rouge">for</code> expression to obtain a single result</li>
+  <li>How to work with that result once you have it</li>
+</ul>
+
+<h3 id="a-potentially-slow-running-method">A potentially slow-running method</h3>
+
+<p>First, imagine you have a method that accesses a web service to get the current price of a stock. Because it’s a web service it can be slow to return, and even fail. As a result, you create a method to run as a <code class="language-plaintext highlighter-rouge">Future</code>. It takes a stock symbol as an input parameter and returns the stock price as a <code class="language-plaintext highlighter-rouge">Double</code> inside a <code class="language-plaintext highlighter-rouge">Future</code>, so its signature looks like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="n">stockSymbol</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+</code></pre></div></div>
+
+<p>To keep this tutorial simple we won’t access a real web service, so we’ll mock up a method that has a random run time before returning a result:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="n">stockSymbol</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">r</span> <span class="k">=</span> <span class="nv">scala</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">Random</span>
+    <span class="k">val</span> <span class="nv">randomSleepTime</span> <span class="k">=</span> <span class="nv">r</span><span class="o">.</span><span class="py">nextInt</span><span class="o">(</span><span class="mi">3000</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">randomPrice</span> <span class="k">=</span> <span class="nv">r</span><span class="o">.</span><span class="py">nextDouble</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="nf">sleep</span><span class="o">(</span><span class="n">randomSleepTime</span><span class="o">)</span>
+    <span class="n">randomPrice</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>That method sleeps a random time up to 3000 ms, and also returns a random stock price. Notice how simple it is to create a method that runs as a <code class="language-plaintext highlighter-rouge">Future</code>: Just pass a block of code into the <code class="language-plaintext highlighter-rouge">Future</code> constructor to create the method body.</p>
+
+<p>Next, imagine that you’re instructed to get three stock prices in parallel, and return their results once all three return. To do so, you write code like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">futures</span>
+
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.Future</span>
+<span class="k">import</span> <span class="nn">scala.util.</span><span class="o">{</span><span class="nc">Failure</span><span class="o">,</span> <span class="nc">Success</span><span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">MultipleFutures</span> <span class="k">extends</span> <span class="nc">App</span> <span class="o">{</span>
+
+    <span class="c1">// use this to determine the “delta time” below</span>
+    <span class="k">val</span> <span class="nv">startTime</span> <span class="k">=</span> <span class="n">currentTime</span>
+
+    <span class="c1">// (a) create three futures</span>
+    <span class="k">val</span> <span class="nv">aaplFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"AAPL"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">amznFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"AMZN"</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">googFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"GOOG"</span><span class="o">)</span>
+
+    <span class="c1">// (b) get a combined result in a for-expression</span>
+    <span class="k">val</span> <span class="nv">result</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
+        <span class="n">aapl</span> <span class="k">&lt;-</span> <span class="n">aaplFuture</span>
+        <span class="n">amzn</span> <span class="k">&lt;-</span> <span class="n">amznFuture</span>
+        <span class="n">goog</span> <span class="k">&lt;-</span> <span class="n">googFuture</span>
+    <span class="o">}</span> <span class="nf">yield</span> <span class="o">(</span><span class="n">aapl</span><span class="o">,</span> <span class="n">amzn</span><span class="o">,</span> <span class="n">goog</span><span class="o">)</span>
+
+    <span class="c1">// (c) do whatever you need to do with the results</span>
+    <span class="nv">result</span><span class="o">.</span><span class="py">onComplete</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+            <span class="k">val</span> <span class="nv">totalTime</span> <span class="k">=</span> <span class="nf">deltaTime</span><span class="o">(</span><span class="n">startTime</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"In Success case, time delta: ${totalTime}"</span><span class="o">)</span>
+            <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"The stock prices are: $x"</span><span class="o">)</span>
+        <span class="o">}</span>
+        <span class="k">case</span> <span class="nc">Failure</span><span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">e</span><span class="o">.</span><span class="py">printStackTrace</span>
+    <span class="o">}</span>
+
+    <span class="c1">// important for a short parallel demo: you need to keep</span>
+    <span class="c1">// the jvm’s main thread alive</span>
+    <span class="nf">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">)</span>
+
+    <span class="k">def</span> <span class="nf">sleep</span><span class="o">(</span><span class="n">time</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nv">Thread</span><span class="o">.</span><span class="py">sleep</span><span class="o">(</span><span class="n">time</span><span class="o">)</span>
+
+    <span class="c1">// a simulated web service</span>
+    <span class="k">def</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="n">stockSymbol</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">r</span> <span class="k">=</span> <span class="nv">scala</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">Random</span>
+        <span class="k">val</span> <span class="nv">randomSleepTime</span> <span class="k">=</span> <span class="nv">r</span><span class="o">.</span><span class="py">nextInt</span><span class="o">(</span><span class="mi">3000</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"For $stockSymbol, sleep time is $randomSleepTime"</span><span class="o">)</span>
+        <span class="k">val</span> <span class="nv">randomPrice</span> <span class="k">=</span> <span class="nv">r</span><span class="o">.</span><span class="py">nextDouble</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="nf">sleep</span><span class="o">(</span><span class="n">randomSleepTime</span><span class="o">)</span>
+        <span class="n">randomPrice</span>
+    <span class="o">}</span>
+
+    <span class="k">def</span> <span class="nf">currentTime</span> <span class="k">=</span> <span class="nv">System</span><span class="o">.</span><span class="py">currentTimeMillis</span><span class="o">()</span>
+    <span class="k">def</span> <span class="nf">deltaTime</span><span class="o">(</span><span class="n">t0</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span> <span class="k">=</span> <span class="n">currentTime</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Question: If everything truly runs in parallel, can you guess what the maximum value of the <code class="language-plaintext highlighter-rouge">totalTime</code> will be?</p>
+
+<p>Answer: Because the three simulated web service calls do run in parallel, the total time should never be much longer than three seconds (3000ms). If they were run in series, the algorithm might run up to nine seconds.</p>
+
+<p>This can be a fun little application to experiment with, so you’re encouraged to clone the Github project and run it before continuing this lesson. When you do so, first run it to make sure it works as expected, then change it as desired. If you run into problems, add <code class="language-plaintext highlighter-rouge">println</code> statements to the code so you can completely understand how it works.</p>
+
+<blockquote>
+  <p>Tip: The Github repository for this lesson also contains a class named <code class="language-plaintext highlighter-rouge">MultipleFuturesWithDebugOutput</code> that contains the same code with a lot of debug <code class="language-plaintext highlighter-rouge">println</code> statements.</p>
+</blockquote>
+
+<h3 id="creating-the-futures">Creating the futures</h3>
+
+<p>Let’s walk through that code to see how it works. First, we create three futures with these lines of code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">aaplFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"AAPL"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">amznFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"AMZN"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">googFuture</span> <span class="k">=</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="s">"GOOG"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>As you saw, <code class="language-plaintext highlighter-rouge">getStockPrice</code> is defined like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getStockPrice</span><span class="o">(</span><span class="n">stockSymbol</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Future</span> <span class="o">{</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>If you remember the lesson on companion objects, the way the body of that method works is that the code in between the curly braces is passed into the <code class="language-plaintext highlighter-rouge">apply</code> method of <code class="language-plaintext highlighter-rouge">Future</code>’s companion object, so the compiler translates that code to something like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">getStockPrice</span> <span class="o">...</span> <span class="k">=</span> <span class="nv">Future</span><span class="o">.</span><span class="py">apply</span> <span class="o">{</span> <span class="n">method</span> <span class="n">body</span> <span class="n">here</span> <span class="o">}</span>
+                               <span class="o">-----</span>
+</code></pre></div></div>
+
+<p>An important thing to know about <code class="language-plaintext highlighter-rouge">Future</code> is that it <em>immediately</em> begins running the block of code inside the curly braces — it isn’t like the Java <code class="language-plaintext highlighter-rouge">Thread</code>, where you create an instance and later call its <code class="language-plaintext highlighter-rouge">start</code> method. You can see this very clearly in the debug output of the <code class="language-plaintext highlighter-rouge">MultipleFuturesWithDebugOutput</code> example, where the debug output in <code class="language-plaintext highlighter-rouge">getStockPrice</code> prints three times when the AAPL, AMZN, and GOOG futures are created, almost immediately after the application is started.</p>
+
+<p>The three method calls eventually return the simulated stock prices. In fact, people often use the word <em>eventually</em> with futures because you typically use them when the return time of the algorithm is indeterminate: You don’t know when you’ll get a result back, you just hope to get a successful result back “eventually” (though you may also get an unsuccessful result).</p>
+
+<h3 id="the-for-expression">The <code class="language-plaintext highlighter-rouge">for</code> expression</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">for</code> expression in the application looks like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">result</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[(</span><span class="kt">Double</span>, <span class="kt">Double</span>, <span class="kt">Double</span><span class="o">)]</span> <span class="k">=</span> <span class="k">for</span> <span class="o">{</span>
+    <span class="n">aapl</span> <span class="k">&lt;-</span> <span class="n">aaplFuture</span>
+    <span class="n">amzn</span> <span class="k">&lt;-</span> <span class="n">amznFuture</span>
+    <span class="n">goog</span> <span class="k">&lt;-</span> <span class="n">googFuture</span>
+<span class="o">}</span> <span class="nf">yield</span> <span class="o">(</span><span class="n">aapl</span><span class="o">,</span> <span class="n">amzn</span><span class="o">,</span> <span class="n">goog</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>You can read this as, “Whenever <code class="language-plaintext highlighter-rouge">aapl</code>, <code class="language-plaintext highlighter-rouge">amzn</code>, and <code class="language-plaintext highlighter-rouge">goog</code> all return with their values, combine them in a tuple, and assign that value to the variable <code class="language-plaintext highlighter-rouge">result</code>.” As shown, <code class="language-plaintext highlighter-rouge">result</code> has the type <code class="language-plaintext highlighter-rouge">Future[(Double, Double, Double)]</code>, which is a tuple that contains three <code class="language-plaintext highlighter-rouge">Double</code> values, wrapped in a <code class="language-plaintext highlighter-rouge">Future</code> container.</p>
+
+<p>It’s important to know that the application’s main thread doesn’t stop when <code class="language-plaintext highlighter-rouge">getStockPrice</code> is called, and it doesn’t stop at this for-expression either. In fact, if you print the result from <code class="language-plaintext highlighter-rouge">System.currentTimeMillis()</code> before and after the for-expression, you probably won’t see a difference of more than a few milliseconds. You can see that for yourself in the <code class="language-plaintext highlighter-rouge">MultipleFuturesWithDebugOutput</code> example.</p>
+
+<h2 id="oncomplete">onComplete</h2>
+
+<p>The final part of the application looks like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">result</span><span class="o">.</span><span class="py">onComplete</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="nv">totalTime</span> <span class="k">=</span> <span class="nf">deltaTime</span><span class="o">(</span><span class="n">startTime</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"In Success case, time delta: ${totalTime}"</span><span class="o">)</span>
+        <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"The stock prices are: $x"</span><span class="o">)</span>
+    <span class="o">}</span>
+    <span class="k">case</span> <span class="nc">Failure</span><span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">e</span><span class="o">.</span><span class="py">printStackTrace</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">onComplete</code> is a method that’s available on a <code class="language-plaintext highlighter-rouge">Future</code>, and you use it to process the future’s result as a side effect. In the same way that the <code class="language-plaintext highlighter-rouge">foreach</code> method on collections classes returns <code class="language-plaintext highlighter-rouge">Unit</code> and is only used for side effects, <code class="language-plaintext highlighter-rouge">onComplete</code> returns <code class="language-plaintext highlighter-rouge">Unit</code> and you only use it for side effects like printing the results, updating a GUI, updating a database, etc.</p>
+
+<p>You can read that code as, “Whenever <code class="language-plaintext highlighter-rouge">result</code> has a final value — i.e., after all of the futures return in the for-expression — come here. If everything returned successfully, run the <code class="language-plaintext highlighter-rouge">println</code> statement shown in the <code class="language-plaintext highlighter-rouge">Success</code> case. Otherwise, if an exception was thrown, go to the <code class="language-plaintext highlighter-rouge">Failure</code> case and print the exception’s stack trace.”</p>
+
+<p>As that code implies, it’s completely possible that a <code class="language-plaintext highlighter-rouge">Future</code> may fail. For example, imagine that you call a web service, but the web service is down. That <code class="language-plaintext highlighter-rouge">Future</code> instance will contain an exception, so when you call <code class="language-plaintext highlighter-rouge">result.onComplete</code> like this, control will flow to the <code class="language-plaintext highlighter-rouge">Failure</code> case.</p>
+
+<p>It’s important to note that just as the JVM’s main thread didn’t stop at the for-expression, it doesn’t block here, either. The code inside <code class="language-plaintext highlighter-rouge">onComplete</code> doesn’t execute until after the for-expression assigns a value to <code class="language-plaintext highlighter-rouge">result</code>.</p>
+
+<h3 id="about-that-sleep-call">About that <code class="language-plaintext highlighter-rouge">sleep</code> call</h3>
+
+<p>A final point to note about small examples like this is that you need to have a <code class="language-plaintext highlighter-rouge">sleep</code> call at the end of your <code class="language-plaintext highlighter-rouge">App</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That call keeps the main thread of the JVM alive for five seconds. If you don’t include a call like this, the JVM’s main thread will exit before you get a result from the three futures, which are running on other threads. This isn’t usually a problem in the real world, but it’s needed for little demos like this.</p>
+
+<h3 id="the-other-code">The other code</h3>
+
+<p>There are a few <code class="language-plaintext highlighter-rouge">println</code> statements in the code that use these methods:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">currentTime</span> <span class="k">=</span> <span class="nv">System</span><span class="o">.</span><span class="py">currentTimeMillis</span><span class="o">()</span>
+<span class="k">def</span> <span class="nf">deltaTime</span><span class="o">(</span><span class="n">t0</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span> <span class="k">=</span> <span class="nv">System</span><span class="o">.</span><span class="py">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">t0</span>
+</code></pre></div></div>
+
+<p>There are only a few <code class="language-plaintext highlighter-rouge">println</code> statements in this code, so you can focus on how the main parts of the application works. However, as you’ll see in the Github code, there are many more <code class="language-plaintext highlighter-rouge">println</code> statements in the <code class="language-plaintext highlighter-rouge">MultipleFuturesWithDebugOutput</code> example so you can see exactly how futures work.</p>
+
+<h2 id="other-future-methods">Other Future methods</h2>
+
+<p>Futures have other methods that you can use. Common callback methods are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">onComplete</code></li>
+  <li><code class="language-plaintext highlighter-rouge">onSuccess</code></li>
+  <li><code class="language-plaintext highlighter-rouge">onFailure</code></li>
+</ul>
+
+<p>In addition to those methods, futures have methods that you’ll find on Scala collections classes, including:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">filter</code></li>
+  <li><code class="language-plaintext highlighter-rouge">foreach</code></li>
+  <li><code class="language-plaintext highlighter-rouge">map</code></li>
+</ul>
+
+<p>Other useful and well-named methods include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">andThen</code></li>
+  <li><code class="language-plaintext highlighter-rouge">fallbackTo</code></li>
+  <li><code class="language-plaintext highlighter-rouge">recoverWith</code></li>
+</ul>
+
+<p>These methods and many more details are discussed on the <a href="/overviews/core/futures.html">“Futures and Promises” page</a>.</p>
+
+<h2 id="key-points">Key points</h2>
+
+<p>While this was a short introduction, hopefully those examples give you an idea of how Scala futures work. A few key points about futures are:</p>
+
+<ul>
+  <li>You construct futures to run tasks off of the main thread</li>
+  <li>Futures are intended for one-shot, potentially long-running concurrent tasks that <em>eventually</em> return a value</li>
+  <li>A future starts running as soon as you construct it</li>
+  <li>A benefit of futures over threads is that they come with a variety of callback methods that simplify the process of working with concurrent threads,
+including the handling of exceptions and thread management</li>
+  <li>Handle the result of a future with methods like <code class="language-plaintext highlighter-rouge">onComplete</code>, or combinator methods like <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">andThen</code>, etc.</li>
+  <li>The value in a <code class="language-plaintext highlighter-rouge">Future</code> is always an instance of one of the <code class="language-plaintext highlighter-rouge">Try</code> types: <code class="language-plaintext highlighter-rouge">Success</code> or <code class="language-plaintext highlighter-rouge">Failure</code></li>
+  <li>If you’re using multiple futures to yield a single result, you’ll often want to combine them in a for-expression</li>
+</ul>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+  <li>A small demo GUI application named <em>Future Board</em> was written to accompany this lesson. It works a little like <a href="https://flipboard.com">Flipboard</a>, updating a group of news sources simultaneously. You can find the source code for Future Board in <a href="https://github.com/alvinj/FPFutures">this Github repository</a>.</li>
+  <li>While futures are intended for one-short, relatively short-lived concurrent processes, <a href="https://akka.io">Akka</a> is an “actor model” library for Scala, and provides a terrific way to implement long-running parallel processes. (If this term is new to you, an <em>actor</em> is a long-running process that runs in parallel to the main application thread, and responds to messages that are sent to it.)</li>
+</ul>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="concurrency-signpost.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="where-next.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/prelude-taste-of-scala.html">Prelude꞉ A Taste of Scala</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/preliminaries.html">Preliminaries</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-features.html">Scala Features</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/hello-world-1.html">Hello, World</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/hello-world-2.html">Hello, World - Version 2</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-repl.html">The Scala REPL</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/two-types-variables.html">Two Types of Variables</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/type-is-optional.html">The Type is Optional</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/built-in-types.html">A Few Built-In Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/two-notes-about-strings.html">Two Notes About Strings</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/command-line-io.html">Command-Line I/O</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/control-structures.html">Control Structures</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/if-then-else-construct.html">The if/then/else Construct</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/for-loops.html">for Loops</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/for-expressions.html">for Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/match-expressions.html">match Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/try-catch-finally.html">try/catch/finally Expressions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/classes.html">Scala Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/classes-aux-constructors.html">Auxiliary Class Constructors</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/constructors-default-values.html">Supplying Default Values for Constructor Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/methods-first-look.html">A First Look at Scala Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/enumerations-pizza-class.html">Enumerations (and a Complete Pizza Class)</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/traits-intro.html">Scala Traits and Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/traits-interfaces.html">Using Scala Traits as Interfaces</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/traits-abstract-mixins.html">Using Scala Traits Like Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/abstract-classes.html">Abstract Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/collections-101.html">Scala Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/arraybuffer-examples.html">The ArrayBuffer Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/list-class.html">The List Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/vector-class.html">The Vector Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/map-class.html">The Map Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/set-class.html">The Set Class</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/anonymous-functions.html">Anonymous Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/collections-methods.html">Common Sequence Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/collections-maps.html">Common Map Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/misc.html">A Few Miscellaneous Items</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/tuples.html">Tuples</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/oop-pizza-example.html">An OOP Example</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/sbt-scalatest-intro.html">sbt and ScalaTest</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/scala-build-tool-sbt.html">The most used scala build tool (sbt)</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/sbt-scalatest-tdd.html">Using ScalaTest with sbt</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/sbt-scalatest-bdd.html">Writing BDD Style Tests with ScalaTest and sbt</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/functional-programming.html">Functional Programming</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/pure-functions.html">Pure Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/passing-functions-around.html">Passing Functions Around</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/no-null-values.html">No Null Values</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/companion-objects.html">Companion Objects</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/case-classes.html">Case Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/case-objects.html">Case Objects</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/overviews/scala-book/functional-error-handling.html">Functional Error Handling in Scala</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/concurrency-signpost.html">Concurrency</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/overviews/scala-book/futures.html">Scala Futures</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/overviews/scala-book/where-next.html">Where To Go Next</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala-book/futures.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-NN - Byname implicit arguments | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/byname-implicits.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-NN - Byname implicit arguments"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-NN - Byname implicit arguments"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-NN - Byname implicit arguments</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>Author: Miles Sabin</strong></p>
+
+<p><strong>Supervisor and advisor: Martin Odersky</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nov 20th 2017</td>
+      <td>Initial SIP</td>
+    </tr>
+    <tr>
+      <td>Mar 8th  2018</td>
+      <td>Simplified covering-set based algorithm</td>
+    </tr>
+    <tr>
+      <td>Apr 17th 2018</td>
+      <td>Updated termination proof, non-lazy desugaring, incorporated</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>feedback on covering-set criterion from Martin</td>
+    </tr>
+    <tr>
+      <td>Apr 18th 2018</td>
+      <td>Updated link to induction heuristics PR</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This SIP proposes extending the support for byname method arguments from just explicit arguments to
+both explicit and <em>implicit</em> arguments.</p>
+
+<p>The aim is to support similar use cases to shapeless’s <code class="language-plaintext highlighter-rouge">Lazy</code> type, but without having to rely on a
+third party library or fragile and non-portable macros.</p>
+
+<p>The primary use case for shapeless’s <code class="language-plaintext highlighter-rouge">Lazy</code>, and the byname implicit arguments described below, is to
+enable the implicit construction of recursive values. This has proven to be a vital capability for
+type class derivation, where a type class instance for a recursive data type must typically itself be
+recursive. For such a value to be constructible via implicit resolution it must be possible to “tie
+the knot” implicitly.</p>
+
+<h3 id="implementation-status">Implementation status</h3>
+
+<p>Byname implicits have been implemented in <a href="https://github.com/lampepfl/dotty/issues/1998">Dotty</a>
+with an earlier iteration of the divergence checking algorithm described below. A full
+implementation of this proposal exists as a <a href="https://github.com/scala/scala/pull/6050">pull request</a>
+relative to the 2.13.x branch of the Lightbend Scala compiler and it is scheduled to be included in
+the next <a href="https://github.com/typelevel/scala">Typelevel Scala</a> release. As of <a href="https://github.com/scala/scala/pull/6050#issuecomment-347814587">this
+comment</a> the Scala and Dotty
+implementations compile their test cases equivalently.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<h3 id="proposal-summary">Proposal summary</h3>
+
+<p>This SIP proposes allowing implicit arguments to be marked as byname. At call sites recursive uses of
+implicit values are permitted if they occur in an implicit byname argument.</p>
+
+<p>Consider the following example,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">next</span><span class="k">:</span> <span class="kt">Foo</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="k">implicit</span> <span class="n">rec</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">)</span><span class="k">:</span> <span class="kt">Foo</span> <span class="o">=</span>
+    <span class="k">new</span> <span class="nc">Foo</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">next</span> <span class="k">=</span> <span class="n">rec</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">val</span> <span class="nv">foo</span> <span class="k">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">]</span>
+<span class="nf">assert</span><span class="o">(</span><span class="n">foo</span> <span class="n">eq</span> <span class="nv">foo</span><span class="o">.</span><span class="py">next</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This diverges due to the recursive implicit argument <code class="language-plaintext highlighter-rouge">rec</code> of method <code class="language-plaintext highlighter-rouge">foo</code>. This SIP allows us to
+mark the recursive implicit parameter as byname,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">next</span><span class="k">:</span> <span class="kt">Foo</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="k">implicit</span> <span class="n">rec</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Foo</span><span class="o">)</span><span class="k">:</span> <span class="kt">Foo</span> <span class="o">=</span>
+    <span class="k">new</span> <span class="nc">Foo</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">next</span> <span class="k">=</span> <span class="n">rec</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">val</span> <span class="nv">foo</span> <span class="k">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">]</span>
+<span class="nf">assert</span><span class="o">(</span><span class="n">foo</span> <span class="n">eq</span> <span class="nv">foo</span><span class="o">.</span><span class="py">next</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>When compiled, recursive byname implicit arguments of this sort are extracted out as <code class="language-plaintext highlighter-rouge">val</code>
+members of a local synthetic object at call sites as follows,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">foo</span><span class="k">:</span> <span class="kt">Foo</span> <span class="o">=</span> <span class="nv">scala</span><span class="o">.</span><span class="py">Predef</span><span class="o">.</span><span class="py">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">](</span>
+  <span class="o">{</span>
+    <span class="k">object</span> <span class="nc">LazyDefns$1</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">rec$1</span><span class="k">:</span> <span class="kt">Foo</span> <span class="o">=</span> <span class="nv">Foo</span><span class="o">.</span><span class="py">foo</span><span class="o">(</span><span class="n">rec$1</span><span class="o">)</span>
+                       <span class="c1">//      ^^^^^</span>
+                       <span class="c1">// recursive knot tied here</span>
+    <span class="o">}</span>
+    <span class="nv">LazyDefns$1</span><span class="o">.</span><span class="py">rec$1</span>
+  <span class="o">}</span>
+<span class="o">)</span>
+<span class="nf">assert</span><span class="o">(</span><span class="n">foo</span> <span class="n">eq</span> <span class="nv">foo</span><span class="o">.</span><span class="py">next</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>and the example compiles with the assertion successful. Note that the recursive use of <code class="language-plaintext highlighter-rouge">rec$1</code> occurs
+within the byname argument of <code class="language-plaintext highlighter-rouge">foo</code> and is consequently deferred. The desugaring matches what a
+programmer would do to construct such a recursive value <em>explicitly</em>.</p>
+
+<p>This general pattern is essential to the derivation of type class instances for recursive data
+types, one of shapeless’s most common applications.</p>
+
+<p>Byname implicits have a number of benefits over the macro implementation of <code class="language-plaintext highlighter-rouge">Lazy</code> in shapeless,</p>
+
+<ul>
+  <li>
+    <p>the implementation of <code class="language-plaintext highlighter-rouge">Lazy</code> in shapeless is extremely delicate, relying on non-portable compiler
+internals. As a language feature, byname implicits are more easily portable to other
+compilers.</p>
+  </li>
+  <li>
+    <p>the shapeless implementation is unable to modify divergence checking, so to solve recursive
+instances it effectively disables divergence checking altogether. This means that incautious use
+of <code class="language-plaintext highlighter-rouge">Lazy</code> can cause the typechecker to loop indefinitely. A byname implicits implementation is
+able to both solve recursive occurrences <em>and</em> check for divergence.</p>
+  </li>
+  <li>
+    <p>the implementation of <code class="language-plaintext highlighter-rouge">Lazy</code> interferes with the heuristics for solving inductive implicits in
+this <a href="https://github.com/scala/scala/pull/6481">Scala PR</a> because the latter depends on being able
+to verify that induction steps strictly reduce the size of the types being solved for; the
+additional <code class="language-plaintext highlighter-rouge">Lazy</code> type constructors make types appear be non-decreasing in size. Whilst this
+could be special-cased, doing so would require some knowledge of shapeless to be incorporated into
+the compiler. Being a language-level feature, byname implicits can be accommodated directly in the
+induction heuristics.</p>
+  </li>
+  <li>
+    <p>in common cases more implicit arguments would have to be marked as <code class="language-plaintext highlighter-rouge">Lazy</code> than would have to be
+marked as byname, due to limitations of macros and their interaction with divergence checking. Given
+that there is a runtime cost associated with capturing the thunks required for both <code class="language-plaintext highlighter-rouge">Lazy</code> and
+byname arguments, any reduction in the number is beneficial.</p>
+  </li>
+</ul>
+
+<h3 id="motivating-examples">Motivating examples</h3>
+
+<p>Type class derivation is a technique for inferring instances of type classes for ADTs from a set of
+primitive instances, and rules for combining them which are driven by the structure of the ADT.  For
+example, <code class="language-plaintext highlighter-rouge">Semigroup</code> is a type class which expresses that a type has an associative binary operation,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If we have instances for basic types,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Semigroup</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">intSemigroup</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">stringSemigroup</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">unitSemigroup</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Unit</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Unit</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>then we can manually write instances for, for example, tuples of types which have <code class="language-plaintext highlighter-rouge">Semigroup</code>
+instances,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">tuple2Semigroup</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">]</span>
+  <span class="o">(</span><span class="k">implicit</span>
+    <span class="n">sa</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span>
+    <span class="n">sb</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">B</span><span class="o">])</span><span class="k">:</span>
+        <span class="kt">Semigroup</span><span class="o">[(</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">)]</span> <span class="k">=</span>
+  <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[(</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">)]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">),</span> <span class="n">y</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">))</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">)</span> <span class="k">=</span>
+      <span class="o">(</span><span class="nv">sa</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_1</span><span class="o">),</span>
+       <span class="nv">sb</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_2</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_2</span><span class="o">))</span>
+  <span class="o">}</span>
+
+<span class="k">implicit</span> <span class="k">def</span> <span class="nf">tuple3Semigroup</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span>, <span class="kt">C</span><span class="o">]</span>
+  <span class="o">(</span><span class="k">implicit</span>
+    <span class="n">sa</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span>
+    <span class="n">sb</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">B</span><span class="o">],</span>
+    <span class="n">sc</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">C</span><span class="o">])</span><span class="k">:</span>
+        <span class="kt">Semigroup</span><span class="o">[(</span><span class="kt">A</span>, <span class="kt">B</span>, <span class="kt">C</span><span class="o">)]</span> <span class="k">=</span>
+  <span class="n">nee</span> <span class="nc">Semigroup</span><span class="o">[(</span><span class="kt">A</span>, <span class="kt">B</span>, <span class="kt">C</span><span class="o">)]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">,</span> <span class="n">C</span><span class="o">),</span> <span class="n">y</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">,</span> <span class="n">C</span><span class="o">))</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">B</span><span class="o">,</span> <span class="n">C</span><span class="o">)</span> <span class="k">=</span>
+      <span class="o">(</span><span class="nv">sa</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_1</span><span class="o">),</span>
+       <span class="nv">sb</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_2</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_2</span><span class="o">),</span>
+       <span class="nv">sc</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">_3</span><span class="o">,</span> <span class="nv">y</span><span class="o">.</span><span class="py">_3</span><span class="o">))</span>
+  <span class="o">}</span>
+
+<span class="c1">// etc. ...</span>
+</code></pre></div></div>
+
+<p>And we could round this out for all case classes, which have the same product-like structure. Of
+course doing this manually requires huge amounts of repetitive boilerplate.</p>
+
+<p>Type class derivation is a mechanism for eliminating this boilerplate. The approach taken in
+shapeless is to map ADTs to a sum of products representation (essentially a nested <code class="language-plaintext highlighter-rouge">Either</code> of
+nested pairs), and define type class instances in terms of the representation type.</p>
+
+<p>shapeless provides a a type class <code class="language-plaintext highlighter-rouge">Generic</code> (see <a href="#appendix-1--shapeless-excerpts">Appendix 1</a> for
+its signature) and instances taking product types to nested pairs and sealed traits to nested
+<code class="language-plaintext highlighter-rouge">Eithers</code> (while shapeless provides instances of this type class via a macro, that is independent
+from this SIP, and any similar mechanism might be used) which we can use to provide instances for
+arbitrary type classes without needing boilerplate for specific ADTs.</p>
+
+<p>For type classes like <code class="language-plaintext highlighter-rouge">Semigroup</code> which are meaningful for types which only have a product structure
+this is straightforward,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">genericSemigroup</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span>
+  <span class="o">(</span><span class="k">implicit</span>
+    <span class="n">gen</span><span class="k">:</span> <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span>
+    <span class="n">sr</span><span class="k">:</span>  <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span><span class="k">:</span>
+         <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span>
+      <span class="nv">gen</span><span class="o">.</span><span class="py">from</span><span class="o">(</span><span class="nv">sr</span><span class="o">.</span><span class="py">combine</span><span class="o">(</span><span class="nv">gen</span><span class="o">.</span><span class="py">to</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="nv">gen</span><span class="o">.</span><span class="py">to</span><span class="o">(</span><span class="n">y</span><span class="o">)))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// A case class with a Generic instance</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Foo</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Foo</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>A <code class="language-plaintext highlighter-rouge">Semigroup</code> instance for <code class="language-plaintext highlighter-rouge">Foo</code> is constructed by implicit resolution as follows,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">genericSemigroup</span><span class="o">(</span>
+  <span class="n">generic</span><span class="o">[</span><span class="kt">Foo</span><span class="o">],</span> <span class="c1">// type R inferred as (Int, (String, Unit))</span>
+  <span class="nf">tuple2Semigroup</span><span class="o">(</span>
+    <span class="n">intSemigroup</span><span class="o">,</span>
+    <span class="nf">tuple2Semigroup</span><span class="o">(</span>
+      <span class="n">stringSemigroup</span><span class="o">,</span>
+      <span class="n">unitSemigroup</span>
+    <span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Intuitively we are confident that the nested implicit resolutions will not diverge because once we
+have mapped into the tuple representation type <code class="language-plaintext highlighter-rouge">(Int, (String, Unit))</code> each nested step of the
+implicit resolution reduces the size of the required type.</p>
+
+<p>The need for shapeless’s <code class="language-plaintext highlighter-rouge">Lazy</code> or byname implicit arguments becomes apparent when we want to derive
+type class instances for recursive ADTs. These come into play when we consider types which are sums of
+products rather than just simple products. We can use a basic cons-list as an example,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">+T</span><span class="o">]</span>
+<span class="nc">case</span> <span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">hd</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="n">tl</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="k">case</span> <span class="k">object</span> <span class="nc">Nil</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Nothing</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Here our data type, <code class="language-plaintext highlighter-rouge">List</code>, is the sum of two product types, <code class="language-plaintext highlighter-rouge">Cons</code> and <code class="language-plaintext highlighter-rouge">Nil</code>. The <code class="language-plaintext highlighter-rouge">Cons</code> constructor
+contains a recursive occurrence of <code class="language-plaintext highlighter-rouge">List</code> as its tail. Working through a simple type class
+derivation will illustrate a new issue to be solved.</p>
+
+<p>Let’s attempt to derive a <code class="language-plaintext highlighter-rouge">Show</code> type class instance for <code class="language-plaintext highlighter-rouge">List</code> similarly to the way we derived
+<code class="language-plaintext highlighter-rouge">Semigroup</code> above. In this case <code class="language-plaintext highlighter-rouge">Generic</code> will map <code class="language-plaintext highlighter-rouge">List</code> and its constructors as follows,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>  <span class="o">-&gt;</span> <span class="nc">Either</span><span class="o">[</span><span class="kt">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>, <span class="kt">Unit</span><span class="o">]</span>
+<span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>  <span class="o">-&gt;</span> <span class="o">(</span><span class="n">T</span><span class="o">,</span> <span class="o">(</span><span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="nc">Unit</span><span class="o">))</span>
+<span class="nc">Nil</span>      <span class="o">-&gt;</span> <span class="nc">Unit</span>
+</code></pre></div></div>
+
+<p>We define instances for the basic types, pairs, <code class="language-plaintext highlighter-rouge">Either</code> and types with a <code class="language-plaintext highlighter-rouge">Generic</code> instance like
+so,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Show</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">st</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">st</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">showInt</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">x</span><span class="o">.</span><span class="py">toString</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">showString</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">showUnit</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Unit</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">showPair</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span>
+      <span class="n">st</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span>
+      <span class="n">su</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">U</span><span class="o">])</span><span class="k">:</span>
+          <span class="kt">Show</span><span class="o">[(</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">)]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[(</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">)]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="o">(</span><span class="kt">T</span><span class="o">,</span> <span class="kt">U</span><span class="o">))</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">fst</span> <span class="k">=</span> <span class="nv">st</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nv">t</span><span class="o">.</span><span class="py">_1</span><span class="o">)</span>
+      <span class="k">val</span> <span class="nv">snd</span> <span class="k">=</span> <span class="nv">su</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nv">t</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+      <span class="nf">if</span><span class="o">(</span><span class="n">snd</span> <span class="o">==</span> <span class="s">""</span><span class="o">)</span> <span class="n">fst</span> <span class="k">else</span> <span class="n">s</span><span class="s">"$fst, $snd"</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">showEither</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span>
+      <span class="n">st</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span>
+      <span class="n">su</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">U</span><span class="o">])</span><span class="k">:</span>
+          <span class="kt">Show</span><span class="o">[</span><span class="kt">Either</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">]]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">Either</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">]]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Either</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">])</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Left</span><span class="o">(</span><span class="n">t</span><span class="o">)</span>  <span class="k">=&gt;</span> <span class="nv">st</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="n">t</span><span class="o">)</span>
+      <span class="k">case</span> <span class="nc">Right</span><span class="o">(</span><span class="n">u</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">su</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="n">u</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">showGeneric</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span>
+      <span class="n">gen</span><span class="k">:</span> <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">],</span>
+      <span class="n">sr</span><span class="k">:</span>  <span class="kt">Show</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span><span class="k">:</span>
+           <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">sr</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nv">gen</span><span class="o">.</span><span class="py">to</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">val</span> <span class="nv">sl</span> <span class="k">=</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="c1">// diverges</span>
+<span class="nf">assert</span><span class="o">(</span>
+  <span class="nv">sl</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">))))</span> <span class="o">==</span> <span class="s">"1, 2, 3"</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>with the aim of having the inferred instance for <code class="language-plaintext highlighter-rouge">List</code> render as asserted.</p>
+
+<p>However the right hand side of the definition of <code class="language-plaintext highlighter-rouge">sl</code> does not compile because the implicit
+resolution involved is seen as divergent by the compiler. To see why this is the case, observe that
+the chain of implicits required to produce a value of type <code class="language-plaintext highlighter-rouge">Show[List[Int]]</code> develops as follows,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       Show[List[Int]]
+
+              V
+
+Show[Either[Cons[Int], Unit]]
+
+              V
+
+      Show[Cons[Int]]
+
+              V
+
+   Show[(Int, List[Int])]
+
+              V
+
+       Show[List[Int]]
+</code></pre></div></div>
+
+<p>This chain of implicit expansions repeats, and would do so indefinitely if the compiler didn’t detect
+and reject expansions of this sort. Indeed, this is what we should expect because the value we are
+attempting to construct is itself recursive, and there is no mechanism here to allow us to tie the
+knot.</p>
+
+<p>If we were to try to construct a value of this sort by hand we would make use of byname arguments,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">showListInt</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span>
+  <span class="nf">showGeneric</span><span class="o">(</span>
+    <span class="n">generic</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]],</span>
+    <span class="nf">showEither</span><span class="o">(</span>
+      <span class="nf">showGeneric</span><span class="o">(</span>
+        <span class="n">generic</span><span class="o">[</span><span class="kt">Cons</span><span class="o">[</span><span class="kt">Int</span><span class="o">]],</span>
+        <span class="nf">showPair</span><span class="o">(</span>
+          <span class="n">showInt</span><span class="o">,</span>
+          <span class="nf">showPair</span><span class="o">(</span>
+            <span class="n">showListInt</span><span class="o">,</span>
+            <span class="n">showUnit</span>
+          <span class="o">)</span>
+        <span class="o">)</span>
+      <span class="o">),</span>
+      <span class="n">showUnit</span>
+    <span class="o">)</span>
+  <span class="o">)</span>
+</code></pre></div></div>
+
+<p>where at least one argument position between the val definition and the recursive occurrence of
+<code class="language-plaintext highlighter-rouge">showListInt</code> is byname.</p>
+
+<p>This SIP proposes automating the above manual process by,</p>
+
+<ul>
+  <li>
+    <p>allowing implicit arguments to be byname.</p>
+  </li>
+  <li>
+    <p>constucting a dictionary at call sites where recursive references within byname arguments can be
+defined as vals.</p>
+  </li>
+</ul>
+
+<p>To allow the above example to work as intended we modify the <code class="language-plaintext highlighter-rouge">Show</code> instance definition as follows,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Show</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">st</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">st</span>
+
+  <span class="c1">// other definitions unchanged ...</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">showGeneric</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span>
+      <span class="n">gen</span><span class="k">:</span>    <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">],</span>
+      <span class="n">sr</span><span class="k">:</span>  <span class="o">=&gt;</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span><span class="k">:</span>
+              <span class="kt">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">sr</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nv">gen</span><span class="o">.</span><span class="py">to</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">val</span> <span class="nv">sl</span> <span class="k">=</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="c1">// compiles</span>
+<span class="nf">assert</span><span class="o">(</span>
+  <span class="nv">sl</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">))))</span> <span class="o">==</span> <span class="s">"1, 2, 3"</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<p>and now the definition of <code class="language-plaintext highlighter-rouge">sl</code> compiles successfully as,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">sl</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">Show</span><span class="o">.</span><span class="py">apply</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]](</span>
+  <span class="o">{</span>
+    <span class="k">object</span> <span class="nc">LazyDefns$1</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">rec$1</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span>
+        <span class="nf">showGeneric</span><span class="o">(</span>
+          <span class="n">generic</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]],</span>
+          <span class="nf">showEither</span><span class="o">(</span>
+            <span class="nf">showGeneric</span><span class="o">(</span>
+              <span class="n">generic</span><span class="o">[</span><span class="kt">Cons</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span>
+              <span class="nf">showCons</span><span class="o">(</span>
+                <span class="n">showInt</span><span class="o">,</span>
+                <span class="nf">showCons</span><span class="o">(</span>
+                  <span class="n">rec$1</span><span class="o">,</span>
+                  <span class="n">showUnit</span>
+                <span class="o">)</span>
+              <span class="o">)</span>
+            <span class="o">),</span>
+            <span class="n">showUnit</span>
+          <span class="o">)</span>
+        <span class="o">)</span>
+    <span class="o">}</span>
+    <span class="nv">LazyDefns$1</span><span class="o">.</span><span class="py">rec$1</span>
+  <span class="o">}</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="proposal-details">Proposal details</h3>
+
+<h4 id="divergence-checking-algorithm">Divergence checking algorithm</h4>
+
+<p>We want to ensure that the typechecking of implicit argument expansions terminates, which entails
+that all valid implicit expansions must be finite and that all potentially infinite (henceforth
+<em>divergent</em>) implicit expansions must be detected and rejected in finite time.</p>
+
+<p>The Scala Language Specification describes a divergence checking algorithm in <a href="https://www.scala-lang.org/files/archive/spec/2.11/07-implicits.html#implicit-parameters">7.2
+Implicit
+Parameters</a>.
+We summarize it here.</p>
+
+<p>In the expansion of an implicit argument, implicit resolution identifies a corresponding implicit
+definition (the mechanism for selecting one definition where there are alternatives is not relevant
+to the discussion of divergence) which might in turn have implicit arguments. This gives rise to a
+tree of implicit expansions. If all paths from the root terminate with an implicit definition which
+does not itself have further implicit arguments then we say that it <em>converges</em>. If it does not then
+it <em>diverges</em>.</p>
+
+<p>To prevent divergent expansions the specification requires the Scala compiler to maintain a stack of
+“open” implicit types and conservatively check that the <em>core</em> type of new types to be added to the
+end of that stack are not part of a divergent sequence (the core type of <em>T</em> is <em>T</em> with aliases
+expanded, top-level type annotations and refinements removed, and occurrences of top-level
+existentially bound variables replaced by their upper bounds). When an implicit argument is fully
+resolved it is removed from the end of the stack. The stack represents the current path from the
+root of the implicit expansion being explored, in effect it is the state corresponding to a depth
+first traversal of the tree of implicit expanions.</p>
+
+<p>The criteria for detecting divergence are that the newly added core type must not <em>dominate</em> any of
+the types already on the stack, where a core type <em>T</em> dominates a type <em>U</em> if <em>T</em> is equivalent to
+<em>U</em>, or if the top-level type constructors of <em>T</em> and <em>U</em> have a common element and <em>T</em> is more
+<em>complex</em> than <em>U</em>.  The precise definition of the complexity of a type is not relevant here but
+roughly corresponds to the size of the AST representing it: intuitively, if we represent types as a
+tree with type constructors as internal nodes and types of kind * as leaf nodes then a type <em>T</em> is
+more complex than a type <em>U</em> if the tree representing <em>T</em> has more nodes than the tree representing
+<em>U</em>. Note in particular that given these definitions the domination relation is partial: there might
+be pairs of distinct types with a common top-level type constructor and the same complexity, in
+which case neither dominates the other.</p>
+
+<p>A sequence of types <em>T<sub>n</sub></em> is called <em>non dominating</em> if no <em>T<sub>i</sub></em> is dominated by
+any <em>T<sub>j</sub></em>, where <em>i</em> &lt; <em>j</em>.</p>
+
+<h4 id="divergence-checking-in-the-scala-language-specification">Divergence checking in the Scala Language Specification</h4>
+
+<p>The essence of the algorithm described in the Scala Language Specification is as follows,</p>
+
+<blockquote>
+  <p>Call the sequence of open implicit types <em>O</em>. This is initially empty.</p>
+
+  <p>To resolve an implicit of type <em>T</em> given stack of open implicits <em>O</em>,</p>
+
+  <ul>
+    <li>
+      <p>Identify the definition <em>d</em> which satisfies <em>T</em>.</p>
+    </li>
+    <li>
+      <p>If the core type of <em>T</em> dominates any element of <em>O</em> then we have observed divergence and we’re
+done.</p>
+    </li>
+    <li>
+      <p>If <em>d</em> has no implicit arguments then the result is the value yielded by <em>d</em>.</p>
+    </li>
+    <li>
+      <p>Otherwise for each implicit argument <em>a</em> of <em>d</em>, resolve <em>a</em> against <em>O+T</em>, and the result is the
+value yielded by <em>d</em> applied to its resolved arguments.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>This procedure yields a tree of implicit expansions where the nodes are labelled with pairs <em>&lt;d, T&gt;</em>,
+<em>T</em> being the core of the type for which a value is being resolved implicitly and <em>d</em> being the
+implicit definition used to supply that value. The children (if any) of <em>&lt;d, T&gt;</em> correspond to the
+implicit arguments of <em>d</em>, and the tree is rooted at the outermost implicit argument, ie. an implicit
+argument of an explicit method call. By construction all paths from the root of the tree are non
+dominating.</p>
+
+<p>The following is an informal proof that given this procedure all implicit expansions either converge
+or are detected as divergent. This claim is equivalent to the claim that the tree of implicit
+expansions is finite.</p>
+
+<p>We make the following assumptions: in any given program there is,</p>
+
+<p><strong>P1</strong>. a finite number of distinct types with complexity less than or equal to any given complexity <em>c</em>.</p>
+
+<p><strong>P2</strong>. a finite upper bound on the number of implicit arguments of any definition.</p>
+
+<p>First we observe that in any given program all non dominiating sequence of types <em>T<sub>n</sub></em> are
+finite. The type <em>T<sub>0</sub></em> has some complexity <em>c</em> and <strong>P1</strong> asserts that there are a finite
+number of types with complexity less than or equal to <em>c</em>, so a standard pigeonhole argument tells us
+that eventually the sequence must terminate or visit a type that has a complexity greater than <em>c</em> ∎.</p>
+
+<p>We can show that the tree of implicit expansions is finite by showing that (a) all paths from the root
+to a leaf are finite, and then that (b) there is a finite number of paths. (a) follows from the fact
+that all paths from the root are non-dominating and the lemma above which shows that all such paths
+are finite.  (b) follows from <strong>P2</strong> above and (a): each node has a finite number of children, so can
+only introduce a finite number of subpaths and given that all paths are finite we know they can branch
+only finitely often ∎.</p>
+
+<h4 id="divergence-checking-in-the-scala-compiler">Divergence checking in the Scala compiler</h4>
+
+<p>The current Scala compiler implements this algorithm with one variation, which safely admits more
+programs as convergent. When checking for divergence the Scala compiler only compares types for
+dominance if they correspond to the same implicit definition. In effect this “stripes” the
+divergence check across the set of relevant implicit definitions.</p>
+
+<p>This gives us the following,</p>
+
+<blockquote>
+  <p>To resolve an implicit of type <em>T</em> given stack of open implicits <em>O</em>,</p>
+
+  <ul>
+    <li>
+      <p>Identify the definition <em>d</em> which satisfies <em>T</em>.</p>
+    </li>
+    <li>
+      <p>If the core type of <em>T</em> dominates the type <em>U</em> of some element <em>&lt;d, U&gt;</em> of <em>O</em> then we have
+observed divergence and we’re done.</p>
+    </li>
+    <li>
+      <p>If <em>d</em> has no implicit arguments then the result is the value yielded by <em>d</em>.</p>
+    </li>
+    <li>
+      <p>Otherwise for each implicit argument <em>a</em> of <em>d</em>, resolve <em>a</em> against <em>O+&lt;d, T&gt;</em>, and the result is
+the value yielded by <em>d</em> applied to its resolved arguments.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Once again this procedure yields a tree of implicit expansions where the nodes are labelled with pairs
+<em>&lt;d, T&gt;</em>. Given a path from the root of the tree, we call the sequence of nodes which are labelled
+with a given definition <em>d</em>, in path order, the <em>definitional subpath</em> with respect to <em>d</em>. By
+construction all definitional subpaths are non-dominating.</p>
+
+<p>We can adapt the previous informal proof to the Scala compiler implementation by showing that (a)
+still holds with the additional assumption that in any given program there is,</p>
+
+<p><strong>P3</strong>. a finite set of implicit definitions <em>D</em>.</p>
+
+<p>Each path in the tree consists of nodes labelled with some element of <em>D</em> and so can be
+decomposed into an interleaving of definitional subpaths with respect to each of those definitions.
+These definitional subpaths are non-dominating and hence, by the earlier lemma, finite. <strong>P3</strong> asserts
+that there are only a finite number of these finite paths, so we know that their interleaving must
+also be finite ∎.</p>
+
+<p>The practical difference between these two algorithms is illustrated by the following,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">requiresPair</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">tt</span><span class="k">:</span> <span class="o">(</span><span class="kt">T</span><span class="o">,</span> <span class="kt">T</span><span class="o">))</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nc">List</span><span class="o">(</span><span class="nv">tt</span><span class="o">.</span><span class="py">_1</span><span class="o">,</span> <span class="nv">tt</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+
+<span class="k">implicit</span> <span class="k">def</span> <span class="nf">providesPair</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">t</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="o">(</span><span class="kt">T</span><span class="o">,</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">t</span><span class="o">)</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">singleInt</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">23</span>
+
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>The tree of implicit expansions is in this case a single path,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">requiresPair</span><span class="o">,</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]&gt;</span>
+
+           <span class="n">V</span>
+
+<span class="o">&lt;</span><span class="n">providesPair</span><span class="o">,</span> <span class="o">(</span><span class="nc">Int</span><span class="o">,</span> <span class="nc">Int</span><span class="o">)&gt;</span>
+
+           <span class="n">V</span>
+
+   <span class="o">&lt;</span><span class="n">singleInt</span><span class="o">,</span> <span class="nc">Int</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Here, the complexity of <code class="language-plaintext highlighter-rouge">(T, T)</code> is greater than the complexity of <code class="language-plaintext highlighter-rouge">List[Int]</code> and so, without the
+striping by definition, the more conservative algorithm given in the specification would report
+divergence. Thanks to the striping the Scala compiler accepts this program.</p>
+
+<h4 id="divergence-checking-proposed-in-this-sip">Divergence checking proposed in this SIP</h4>
+
+<p>This SIP changes the above algorithm to accomodate byname cycles. It also revises the definition of
+domination to allow an additional class of non-cyclic programs to be safely admitted as convergent
+— whilst non-cyclic, these programs commonly arise in the same sort of type class derivation
+scenarios as the cyclic cases we have already seen. See the <a href="#motivating-example-for-the-covering-set-based-divergence-critera">further motivating example below</a> for more details.</p>
+
+<p>Call the set of types and type constructors which are mentioned in a type its <em>covering set</em>. For
+example, given the following types,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="kt">A</span> <span class="o">=</span> <span class="nc">List</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">)]</span>
+<span class="k">type</span> <span class="kt">B</span> <span class="o">=</span> <span class="nc">List</span><span class="o">[(</span><span class="kt">Int</span>, <span class="o">(</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">))]</span>
+<span class="k">type</span> <span class="kt">C</span> <span class="o">=</span> <span class="nc">List</span><span class="o">[(</span><span class="kt">Int</span>, <span class="kt">String</span><span class="o">)]</span>
+</code></pre></div></div>
+
+<p>the corresponding covering sets are,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A: List, Tuple2, Int
+B: List, Tuple2, Int
+C: List, Tuple2, Int, String
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">B</code> have the same covering set, which is distinct from the covering set of <code class="language-plaintext highlighter-rouge">C</code>. Note that
+by the definition given earlier, <code class="language-plaintext highlighter-rouge">A</code> is not more complex than <code class="language-plaintext highlighter-rouge">B</code> or <code class="language-plaintext highlighter-rouge">C</code>, and <code class="language-plaintext highlighter-rouge">B</code> is more complex than
+both <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">C</code>.</p>
+
+<p>We revise the definition of domination as follows: a core type <em>T</em> dominates a type <em>U</em> if <em>T</em> is
+equivalent to <em>U</em>, or if the top-level type constructors of <em>T</em> and <em>U</em> have a common element and <em>T</em>
+is more <em>complex</em> than <em>U</em>, and <em>U</em> and <em>T</em> have the same covering set. For intuition, observe that if
+<em>T</em> is more complex than <em>U</em>, and <em>U</em> and <em>T</em> have the same covering set then <em>T</em> is structurally
+larger than <em>U</em> despite using only elements that are present in <em>U</em>.</p>
+
+<p>This gives us the following,</p>
+
+<blockquote>
+  <p>To resolve an implicit of type <em>T</em> given stack of open implicits <em>O</em>,</p>
+
+  <ul>
+    <li>
+      <p>Identify the definition <em>d</em> which satisfies <em>T</em>.</p>
+    </li>
+    <li>
+      <p>if there is an element <em>e</em> of <em>O</em> of the form <em>&lt;d, T&gt;</em> such that at least one element between <em>e</em>
+and the top of the stack is of the form <em>&lt;d’, =&gt; U&gt;</em> then we have observed an admissable cycle
+and we’re done.</p>
+    </li>
+    <li>
+      <p>If the core type of <em>T</em> dominates the type <em>U</em> of some element <em>&lt;d, U&gt;</em> of <em>O</em> then we have
+observed divergence and we’re done.</p>
+    </li>
+    <li>
+      <p>If <em>d</em> has no implicit arguments then the result is the value yielded by <em>d</em>.</p>
+    </li>
+    <li>
+      <p>Otherwise for each implicit argument <em>a</em> of <em>d</em>, resolve <em>a</em> against <em>O+&lt;d, T&gt;</em>, and the result is
+the value yielded by <em>d</em> applied to its resolved arguments.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>An informal proof that this this procedure will either converge or are detect divergence is similar
+the two given earlier.</p>
+
+<p>First we show that with the revised definition of domination all non dominating sequences of types are
+finite, using the additional assumption that in any given program there is,</p>
+
+<p><strong>P4</strong>. a finite number of type definitions.</p>
+
+<p>And we observe as a consequence that the powerset of the set of type definitions must also be finite,
+hence that in any given program there can only be a finite number of distinct covering sets.</p>
+
+<p>Call the complexity of type <em>T</em>, <em>c(T)</em>, the covering set of <em>T</em>, <em>cs(T)</em>, the set of all type
+definitions in the program <em>S</em> and the powerset of the latter <em>P(S)</em>.</p>
+
+<p>From <strong>P1</strong> we know that the number of types with complexity less than or equal to <em>c(T<sub>0</sub>)</em>
+is finite, so eventually the sequence must reach a type <em>T<sub>p</sub></em> with a complexity greater than
+<em>c(T<sub>0</sub>)</em>. For this to be non dominating its covering set <em>cs(T<sub>p</sub>)</em> must differ
+from <em>cs(T<sub>0</sub>)</em>. Again from <strong>P1</strong> we know that the number of types with complexity less that
+<em>c(T<sub>p</sub>)</em> is finite, so eventually the sequence must reach a type <em>T<sub>q</sub></em> with a
+complexity greater than <em>c(T<sub>p</sub>)</em> and so to continue <em>T<sub>q</sub></em> must have a covering set
+<em>cs(T<sub>q</sub>)</em> which is distinct from both <em>cs(T<sub>0</sub>)</em> and <em>cs(T<sub>p</sub>)</em>.
+Continuing in this way the sequence can increase in complexity while running through distinct covering
+sets <em>cs(T<sub>0</sub>)</em>, <em>cs(T<sub>p</sub>)</em>, <em>cs(T<sub>q</sub>)</em>, <em>cs(T<sub>r</sub>)</em> … which from
+<strong>P4</strong> we know must eventually exhaust <em>P(S)</em>.</p>
+
+<p>Call the type at which this happens <em>T<sub>ps</sub></em>. Once again from <strong>P1</strong> we know that the number
+of types with complexity less than or equal to <em>c(T<sub>ps</sub>)</em> is finite and so will eventually be
+exhausted. This time, however, the sequence cannot be extended, because there are no more distinct
+covering sets available to be introduced to avoid dominating an earlier element of the sequence ∎.</p>
+
+<p>Finally, as in the previous proof each path in the tree consists of nodes labelled with some element
+of <em>D</em> and so can be decomposed into an interleaving of definitional subpaths with respect to each of
+those definitions.  These definitional subpaths are non-dominating and hence, by the earlier lemma,
+finite. <strong>P3</strong> asserts that there are only a finite number of these finite paths, so we know that
+their interleaving must also be finite ∎.</p>
+
+<h4 id="motivating-example-for-the-covering-set-based-divergence-critera">Motivating example for the covering set based divergence critera</h4>
+
+<p>We follow with a motivating example for the introduction of the covering condition in new divergence
+checking model. In current Scala, consider the following set of instances for a type class <code class="language-plaintext highlighter-rouge">Foo</code>, as
+might arise in a type class derivation for simple product types,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Generic</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Repr</span>
+<span class="o">}</span>
+<span class="k">object</span> <span class="nc">Generic</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Aux</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Generic</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span> <span class="k">type</span> <span class="kt">Repr</span> <span class="o">=</span> <span class="n">R</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">Foo</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="nc">object</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">fooUnit</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">Unit</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">fooInt</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">fooString</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">fooBoolean</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">fooPair</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span> <span class="n">fooT</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">T</span><span class="o">],</span> <span class="n">fooU</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">U</span><span class="o">])</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[(</span><span class="kt">T</span>, <span class="kt">U</span><span class="o">)]</span> <span class="k">=</span> <span class="o">???</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">fooGen</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">]</span>
+    <span class="o">(</span><span class="k">implicit</span> <span class="n">gen</span><span class="k">:</span> <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">R</span><span class="o">],</span> <span class="n">fr</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">A</span><span class="o">(</span><span class="n">b</span><span class="k">:</span> <span class="kt">B</span><span class="o">,</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">A</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">genA</span><span class="k">:</span> <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">A</span>, <span class="o">(</span><span class="kt">B</span>, <span class="o">(</span><span class="kt">Int</span>, <span class="kt">Unit</span><span class="o">))]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">B</span><span class="o">(</span><span class="n">c</span><span class="k">:</span> <span class="kt">C</span><span class="o">,</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">B</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">genB</span><span class="k">:</span>
+    <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">B</span>, <span class="o">(</span><span class="kt">C</span>, <span class="o">(</span><span class="kt">Int</span>, <span class="o">(</span><span class="kt">Boolean</span>, <span class="kt">Unit</span><span class="o">)))]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">C</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">C</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">genC</span><span class="k">:</span>
+    <span class="kt">Generic.Aux</span><span class="o">[</span><span class="kt">C</span>, <span class="o">(</span><span class="kt">Int</span>, <span class="o">(</span><span class="kt">String</span>, <span class="o">(</span><span class="kt">Boolean</span>, <span class="kt">Unit</span><span class="o">)))]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="o">}</span>
+
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">[</span><span class="kt">C</span><span class="o">]]</span> <span class="c1">// OK</span>
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">[</span><span class="kt">B</span><span class="o">]]</span> <span class="c1">// Diverges</span>
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Foo</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="c1">// Diverges</span>
+</code></pre></div></div>
+
+<p>Here we have simple product types <code class="language-plaintext highlighter-rouge">A</code>, <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> which are nested, but none of which are recursive.
+We can see that there is a simple terminating unfolding of their elements into nested pairs, like so,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C -&gt;   (Int, (String, (Boolean, Unit)))
+
+B -&gt;  ((Int, (String, (Boolean, Unit))),
+       (Int, (Boolean, Unit)))
+
+A -&gt; (((Int, (String, (Boolean, Unit))),
+       (Int, (Boolean, Unit))),
+       (Int,  Unit))
+</code></pre></div></div>
+
+<p>and yet this diverges, why?</p>
+
+<p>The answer is clear if we follow the expansion of <code class="language-plaintext highlighter-rouge">Foo[A]</code> through from the beginning,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>               Foo[A]
+
+                 V
+
+       Foo[(B, (Int, Unit))]
+
+                 V
+
+               Foo[B]
+
+                 V
+
+  Foo[(C, (Int, (Boolean, Unit)))]
+
+                 V
+
+               Foo[C]
+
+                 V
+
+Foo[(Int, (String, (Boolean, Unit)))]
+</code></pre></div></div>
+
+<p>Here we can see immediately that, on the current critera, divergence will be detected on the fourth
+step because we have a more complex type (<code class="language-plaintext highlighter-rouge">Foo[(C, (Int, (Boolean, Unit)))]</code> vs. <code class="language-plaintext highlighter-rouge">Foo[(B, (Int,
+Unit))]</code>) being resolved in the same context (<code class="language-plaintext highlighter-rouge">fooGen</code>).</p>
+
+<p>Unsurprisingly examples of this sort arose very early in the developement of shapeless-based type
+class derivation, first being documented in a <a href="https://stackoverflow.com/questions/25923974">StackOverflow question from Travis
+Brown</a>, even in advance of attempts to derive type
+class instances for recursive ADTs.</p>
+
+<p>The new divergence checking algorithm proposed in this SIP permits the example above because the
+covering condition is not met. If we look at the covering sets and complexities of the sequence,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Complexity      Covering set
+
+  2               Foo, A
+* 6               Foo, B, Int, Unit
+  2               Foo, B
+* 8               Foo, C, Int, Boolean, Unit
+  2               Foo, C
+* 8               Foo, Int, String, Boolean, Unit
+</code></pre></div></div>
+
+<p>(the <code class="language-plaintext highlighter-rouge">*</code> prefix indicates steps which are generated via <code class="language-plaintext highlighter-rouge">fooGen</code> and are hence subject to divergence
+checking within the same definitional stripe) we can see that at the 2nd, 4th and 6th steps, although
+the size of the types is growing, the covering sets differ.</p>
+
+<h2 id="follow-on-work-from-this-sip">Follow on work from this SIP</h2>
+
+<p>Byname implicits significantly advance the state of the art, however they are not a complete
+replacement for shapeless’s <code class="language-plaintext highlighter-rouge">Lazy</code> pseudo type.  Byname parameters don’t generate stable paths for
+dependent types. This means that the following shapeless idiom,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Out</span>
+  <span class="k">def</span> <span class="nf">out</span><span class="k">:</span> <span class="kt">Out</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">bar</span><span class="o">(</span><span class="k">implicit</span> <span class="n">foo</span><span class="k">:</span> <span class="kt">Lazy</span><span class="o">[</span><span class="kt">Foo</span><span class="o">])</span><span class="k">:</span> <span class="kt">foo.value.Out</span> <span class="o">=</span>
+    <span class="nv">foo</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">out</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>cannot be directly translated as,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Out</span>
+  <span class="k">def</span> <span class="nf">out</span><span class="k">:</span> <span class="kt">Out</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">bar</span><span class="o">(</span><span class="k">implicit</span> <span class="n">foo</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Foo</span><span class="o">)</span><span class="k">:</span> <span class="kt">foo.Out</span> <span class="o">=</span> <span class="nv">foo</span><span class="o">.</span><span class="py">out</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>because the path <code class="language-plaintext highlighter-rouge">foo</code> in <code class="language-plaintext highlighter-rouge">foo.Out</code> is not stable. Full parity with shapeless’s <code class="language-plaintext highlighter-rouge">Lazy</code> would require
+lazy (rather than byname) implicit parameters (see <a href="https://github.com/lampepfl/dotty/issues/3005">this Dotty
+ticket</a> for further discussion) and is orthogonal to
+this SIP in that they would drop out of support for lazy parameters more generally, as described in
+<a href="https://github.com/scala/bug/issues/240">this Scala ticket</a>.</p>
+
+<p>In the meantime we can work around this limitation using the Aux pattern,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Out</span>
+  <span class="k">def</span> <span class="nf">out</span><span class="k">:</span> <span class="kt">Out</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Aux</span><span class="o">[</span><span class="kt">Out0</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Foo</span> <span class="o">{</span> <span class="k">type</span> <span class="kt">Out</span> <span class="o">=</span> <span class="nc">Out0</span> <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Test</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">bar</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">foo</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nv">Foo</span><span class="o">.</span><span class="py">Aux</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="nv">foo</span><span class="o">.</span><span class="py">out</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>shapeless also provides a <code class="language-plaintext highlighter-rouge">Cached</code> type which has similar characteristics to <code class="language-plaintext highlighter-rouge">Lazy</code> and which also
+shares resolved values between call sites. Future work might address instance sharing generally,
+although it would be desirable for this to be an implementation level optimization rather than a
+user visible language feature.</p>
+
+<h2 id="appendix-1--shapeless-excerpts">Appendix 1 – shapeless excerpts</h2>
+
+<p>Extracts from shapeless relevant to the motivating examples for this SIP,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Lazy</span><span class="o">[</span><span class="kt">+T</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">Serializable</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">value</span><span class="k">:</span> <span class="kt">T</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Lazy</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">t</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Lazy</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">Lazy</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">lazy</span> <span class="k">val</span> <span class="nv">value</span> <span class="k">=</span> <span class="n">t</span>
+    <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">mkLazy</span><span class="o">[</span><span class="kt">I</span><span class="o">]</span><span class="k">:</span> <span class="kt">Lazy</span><span class="o">[</span><span class="kt">I</span><span class="o">]</span> <span class="k">=</span> <span class="n">macro</span> <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">Generic</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">type</span> <span class="kt">Repr</span>
+  <span class="k">def</span> <span class="nf">to</span><span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Repr</span>
+  <span class="k">def</span> <span class="nf">from</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Repr</span><span class="o">)</span><span class="k">:</span> <span class="kt">T</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #b58900">Pending</div>
+           <p class="vote-text" style="color: #b58900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2017-11-20-byname-implicits.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

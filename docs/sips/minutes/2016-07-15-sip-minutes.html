@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP Meeting Minutes - 13th July 2016 | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/minutes/2016-07-15-sip-minutes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP Meeting Minutes - 13th July 2016"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP Meeting Minutes - 13th July 2016"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP Meeting Minutes - 13th July 2016</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary sips">
+			<div class="inner-box toc-context">
+				<h1 id="minutes">Minutes</h1>
+
+<p>The following agenda was distributed to attendees:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Reviewer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://docs.scala-lang.org/sips/sip-submission.html">Discussion of the new SIP process</a></td>
+      <td>Jorge Vicente Cantero</td>
+    </tr>
+    <tr>
+      <td><a href="https://docs.scala-lang.org/sips/trait-parameters.html">SIP 25 - Trait parameters</a></td>
+      <td>Adriaan Moors</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/slip/pull/30">SIP 26 - Unsigned Integer Data Types</a></td>
+      <td>Martin Odersky</td>
+    </tr>
+    <tr>
+      <td><a href="https://docs.scala-lang.org/sips/async.html">SIP 22 - Async</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+    <tr>
+      <td><a href="https://docs.scala-lang.org/sips/improved-lazy-val-initialization.html">SIP 20 - Improved lazy val initialization</a></td>
+      <td>Sébastien Doeraene</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/scala/docs.scala-lang/pull/533">Trailing commas SIP</a></td>
+      <td>Eugene Burmako</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Quick iteration through all the SLIPs:</p>
+
+<ul>
+  <li><a href="https://github.com/scala/slip/pull/28">Adding standard JSON AST</a></li>
+  <li><a href="https://github.com/scala/slip/issues/7">Extensions of Futures and Promises </a></li>
+  <li><a href="https://github.com/scala/slip/pull/20">Implicit enrichment of Either to support Monadic bias</a></li>
+  <li><a href="https://github.com/scala/slip/pull/2">Adding scala.io.Target</a></li>
+  <li>SLIP 27 - Redesigning collection views</li>
+</ul>
+
+<p>Jorge Vicente Cantero was the Process Lead and acting secretary of the meeting.</p>
+
+<p>The following proposals were numbered:</p>
+
+<ul>
+  <li>SIP-26: Unsigned Integer Data Types</li>
+  <li>SIP-27: Trailing commas</li>
+</ul>
+
+<p>(When a SIP is numbered, it can be thought of as a first-round of acceptance.
+That is, the committee has voted in favor of the changed being accepted into
+Scala in theory, so long as all potential design and implementation flaws are
+eventually addressed and worked through. Typically, the committee will raise a
+number of important concerns about the SIP that must be addressed, as next
+steps, ideally before the next meeting of the SIP committee.)</p>
+
+<p>The following other proposals were discussed:</p>
+
+<ul>
+  <li>SIP-22: Async (postponed)</li>
+  <li>SIP-20: Improved lazy val initialization</li>
+  <li>SIP-25: Trait Parameters</li>
+</ul>
+
+<p>Some other library proposals were evaluated and the committee gave feedback to
+the authors.</p>
+
+<h2 id="date-time-and-location">Date, Time and Location</h2>
+
+<p>The meeting took place at 5:00pm Central European Time / 8:00am Pacific Daylight
+Time on Wednesday, July 13th, 2016 via Google Hangouts.</p>
+
+<p>Minutes were taken by Jorge Vicente Cantero, acting secretary.</p>
+
+<h2 id="attendees">Attendees</h2>
+
+<p>Attendees Present:</p>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+  <li>Heather Miller (<a href="https://github.com/heathermiller">@heathermiller</a>), Scala Center</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), EPFL</li>
+  <li>Eugene Burmako (<a href="https://github.com/xeno-by">@xeno-by</a>), EPFL</li>
+  <li>Andrew Marki (<a href="https://github.com/som-snytt">@som-snytt</a>), independent</li>
+  <li>Josh Suereth (<a href="https://github.com/jsuereth">@jsuereth</a>), Google</li>
+  <li>Dmitry Petrashko (<a href="https://github.com/DarkDimius">@DarkDimius</a>), as a guest</li>
+  <li>Jorge Vicente Cantero (<a href="https://github.com/jvican">@jvican</a>), Process Lead</li>
+</ul>
+
+<h2 id="guests">Guests</h2>
+
+<ul>
+  <li>Dmitry Petrashko (<a href="https://github.com/DarkDimius">@DarkDimius</a>), EPFL (guest)</li>
+</ul>
+
+<h2 id="proceedings">Proceedings</h2>
+
+<h3 id="opening-remarks">Opening Remarks</h3>
+
+<p>As acting Process Lead, Jorge Vicente Cantero conducted the meeting, made the
+opening remarks, and introduced the guest Dmitry, who was present to help
+discuss the proposal for an improved lazy val initialization (SIP-20).</p>
+
+<h3 id="scala-improvement-proposals">Scala Improvement Proposals</h3>
+
+<h4 id="proposal-sip-25-trait-parameters-proposed-by-martin-odersky">Proposal SIP-25: Trait Parameters proposed by Martin Odersky</h4>
+
+<p>Adriaan Moors, as the assigned reviewer of this SIP, quickly introduced the
+proposal. The proposal helps to abstract over traits by introducing type
+parameters, a feature that was only possible in classes.</p>
+
+<p>Adriaan points out that it needs a little bit more of work. He generally advises
+to give more details about how the proposed changes interact with other
+features. In concrete, he’d like to know what the modifiers mean, and what would
+happen if there’s an implicit modifier. On a side note, he thinks that there
+should be some guidelines on how the proposal impacts programmers and what
+technical issues are addressed. He thinks that it would be great to see an
+implementation, as the one in Dotty. He considers this proposal is a good
+candidate for 2.13.</p>
+
+<p>Martin and Heather also discuss what the role of a reviewer is. Jorge clarifies
+that technical discussions should take place in the meeting.</p>
+
+<p><strong>Outcome</strong>: The board agreed to schedule the next iteration of the evaluation
+process in 6 months, since there’s no implementation yet and the authors need
+time to produce one.</p>
+
+<h4 id="proposal-sip-26-unsigned-integer-data-types-by-denys-shabalin-and-sébastien-doeraene">Proposal SIP-26: Unsigned Integer Data Types by Denys Shabalin and Sébastien Doeraene</h4>
+
+<p>Martin is the reviewer of this SIP. He’s on the fence of accepting this
+proposal, he would prefer to see it in the platform as a library, since putting
+it in the core would require too much work and he’s unsure if that would be a
+priority.</p>
+
+<p>Sébastien, one of the authors, points out that placing it as a library defeats
+the purpose of the SIP (because cooperative equality would not exist), which is
+to allow the native platforms to benefit from it (Scala.js and Scala Native). He
+explains that, in order to make it a library, he would need at least two SIPs to
+make it interact correctly with Scala.js (the value classes formalization is not
+suitable for what he wants to address).</p>
+
+<p>Dmitry, Martin and Sébastien start to discuss about the performance of other
+alternatives that would need to change the representation of scala number.
+Adriaan and Josh agree that the proposal would be better as a library.</p>
+
+<p><strong>Outcome</strong>: The board voted; all were in favor of giving it a number. Jorge asks
+the authors to make a PR to the SIP website repo. The next iteration would be in
+September because Sébastien is on vacation in August. He needs to prepare its
+evaluation in September by tweaking the changes in BoxesRunTime.scala so that
+the performance of existing codebases does not suffer any degradation, and so
+that the performance of non-unsigned integer comparisons is not affected (or
+very little) by the unrelated addition of unsigned integers in the codebase.</p>
+
+<h4 id="proposal-sip-22-async-proposed-by-philipp-haller-and-jason-zaugg">Proposal SIP-22: Async proposed by Philipp Haller and Jason Zaugg</h4>
+<p>Eugene Burmako does a thorough description of the SIP and describes its
+historical background. He roughly talks about the implementation, which uses
+macros, and he’s impressed of its quality in the design and implementation.</p>
+
+<p>Other languages like F#, C# and JS have something similar. There’s a restriction
+that the functionality cannot be used inside a try catch. Eugene reveals that
+the authors have asked for a timeout to improve the implementation and the
+design. He recommends them to add more documentation as in C# and suggests to
+close it and wait until the authors resubmit it.</p>
+
+<p>Jorge and Heather discuss about what are the differences between postponing and
+marking a SIP as dormant. The idea is that SIPs marked as dormant are the ones
+that have been evaluated, but there hasn’t been any activity in two months.
+Postponing a SIP is done when we know beforehand that some constraints need to
+be resolved before resuming its evaluation.</p>
+
+<p><strong>Outcome</strong>: The Process Lead postpones it until the authors want to decide to
+revisit the support of async/await in try/catch blocks. When that’s considered,
+this SIP should be reopened and it should see another round of discussion.</p>
+
+<h4 id="proposal-sip-20-improved-lazy-val-initialization-presented">Proposal SIP-20: Improved lazy val initialization presented</h4>
+<p>Sébastien reviews the SIP and asks Dmitry, present in the meeting, to correct
+him if he’s wrong. He agrees that the SIP is desirable but he’s unsure about the
+benchmarks and which of the proposals is faster. Dmitry explains that the
+benchmarks are in the repository. Sébastien also points out that there’s an
+implementation missing for scalac, and recommends the author to include more
+documentation..</p>
+
+<p><strong>Outcome</strong>: For the next iteration, the reviewer suggests that the SIP should
+have an updated specification, implementation and benchmarks. The Process Lead
+schedules the next iteration by October 2016.</p>
+
+<h4 id="proposal-sip-27-trailing-commas">Proposal SIP-27: Trailing Commas</h4>
+<p>Eugene Burmako, who also reviewed this recently submitted SIP, explains what the
+proposal addresses. The proposal seeks to introduce changes in the syntax of the
+language that will not error when commas are placed in concrete valid places. He
+makes the point that it has several benefits; for instance, diffs in github will
+only show one changed line when a new element is added in a list whose elements
+are placed in independent lines.</p>
+
+<p>He also discusses that there are some issues with the interaction of Tuple1 and
+pretty printing. The proposal is minor but addresses day-to-day annoyances.
+Martin fears that this proposal would interfere with another important future
+SIP that will integrate generic programming with Scala. Adriaan doesn’t like the
+idea. Josh proposes to unify tuples with other features of the language, like
+parameters lists and the apply methods.</p>
+
+<p>Adriaan wants to wait for the proposal of how to do generics over tuples, and
+integrating hlists with Scala, which he thinks it’s the really important
+proposal.</p>
+
+<p><strong>Outcome</strong>: 2 people abstain, 3 people vote in favor of it. Josh’s connectivity
+drops out, and he’s not able to vote. The Process Lead decides to give it a
+number. Authors are asked to prepare for the first iteration of the evaluation
+process in August. This involves exploring interactions with other language
+features by exhaustively enumerating the locations in the grammar where trailing
+commas may be used.</p>
+
+<h3 id="slips">SLIPs</h3>
+<p>Jorge asks the SIP committee to provide  feedback to the authors to speed up the
+SLIP process in the future.</p>
+
+<ul>
+  <li>JSON AST: No news from the last discussion in the slip repo. It’s been
+integrated into Play and sbt server 1.0. The committee considers that it’s a
+prime candidate for the platform.</li>
+  <li>Extensions of Futures and Promises: the committee calls for an implementation.
+This SLIP will be addressed by the next SLIP committee.</li>
+  <li>Either monadic bias: it was merged one day before by the Lightbend team. Therefore, this SIP is both accepted and merged.</li>
+  <li>scala.io.Target: Martin proposes to delay it until the SLIP committee decides
+how the platform would look like. Then, they will take care of it.</li>
+  <li>Redesigning collections views: Jorge explains what Josh, who is author of the
+SLIP, proposes for its design:
+    <ul>
+      <li>Iterator-based API (supports join and efficient deferred operation with one time parse)</li>
+      <li>Transducer-based API (supports non-iterable collections and efficient deferred operations, but doesn’t support co-iteration, i.e. efficient join).
+  Martin and Dmitry discuss that iterators are more powerful, and are looking forward to an implementation. Therefore, authors are asked to provide one for the first iteration in the SLIP meeting.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="other-business">Other business</h2>
+<p>Jorge confirms that there will be a new SLIP process proposed for the middle of
+August.</p>
+
+<h2 id="closing-remarks">Closing remarks</h2>
+<p>See you next time!</p>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+        <h5 class="contents" style="line-height: 1.1; margin-bottom: 18px;">Scala Improvement Proposals (SIPs)</h5>
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="/sips/all.html" class="button">View all SIPs</a>
+          </div>
+        <h5 class="contents" style="margin-bottom: 0;">SIP/SPP Meetings</h5>
+        <div id="sip-meetings">
+          <div id="upcoming-meeting">
+            <h6>Next meeting:</h6>
+            <div id="meeting-title">&nbsp;&nbsp;<span class="tag" style="background-color: #dc322f; top: 0px; margin-bottom: 6px;">Live</span></div>
+            <div id="meeting-time"></div>
+            <div id="live-on-youtube">
+              Tune in and join us, live! Ask the SIP committee questions, weigh in, or just follow along.
+              <br><a id="watch-meeting">Watch →</a>
+            </div>
+          </div>
+          <div id="meeting-minutes">
+            <ul>
+              <li><a href="/sips/minutes-list.html">Meeting Minutes</a></li>
+              <li><a href="https://www.youtube.com/channel/UCn_8OeZlf5S6sqCqntAvaIw/videos?view=2&sort=dd&shelf_id=1&live_view=502">Meeting Video Registrations (YouTube)</a></li>
+            </ul>
+          </div>
+        </div>
+        <h5 class="contents" style="margin-bottom: 0;">Writing a SIP</h5>
+        <ul>
+          <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+          <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+        </ul>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/minutes/2016-07-15-sip-minutes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+// Get next SIP meeting date/time
+$(document).ready(function() {
+  var listVidsQuery = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn_8OeZlf5S6sqCqntAvaIw&eventType=upcoming&type=video&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94";
+  var vidQuery = "https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94&id=";
+  $.getJSON(listVidsQuery, function(data) {
+
+    // if there indeed are upcoming meetings, display the next one
+    if (data.items.length > 0) {
+        // YouTube video ID for the next upcoming SIP/SPP meeting
+        var videoId = data.items[0].id.videoId;
+
+        $.getJSON(vidQuery + videoId, function(vidData) {
+          if (vidData.items.length > 0) {
+            var result = vidData.items[0].liveStreamingDetails.scheduledStartTime;
+            var startTime = moment(result).format("dddd, MMMM Do YYYY, ha");
+
+            var sipOrSpp = "SIP";
+            if (data.items[0].snippet.title.indexOf("SPP") !== -1) sipOrSpp = "SPP";
+
+            var meetingTitle = moment(result).format("MMMM YYYY") + " " + sipOrSpp + " Meeting";
+            var href = "https://www.youtube.com/watch?v=" + videoId;
+            var a = document.createElement('a');
+            $(a).attr('href', href).text(meetingTitle);
+
+            $("#meeting-title").prepend(a);
+            $("#watch-meeting").attr('href', href);
+            $("#meeting-time").text(startTime);
+          }
+        });
+
+    } else {
+      // if there are no upcoming meetings scheduled, hide the upcoming meeting section
+      $("#upcoming-meeting").hide();
+    }
+
+  });
+});
+</script>
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-20 - Improved Lazy Vals Initialization | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/improved-lazy-val-initialization.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-20 - Improved Lazy Vals Initialization"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-20 - Improved Lazy Vals Initialization"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-20 - Improved Lazy Vals Initialization</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Aleksandar Prokopec, Dmitry Petrashko, Miguel Garcia, Jason Zaugg, Hubert Plociniczak, Viktor Klang, Martin Odersky</strong></p>
+
+<h2 id="abstract">Abstract</h2>
+
+<p>This SIP describes the changes in the lazy vals initialization mechanism that address some of the unnecessary deadlock scenarios. The newly proposed lazy val initialization mechanism aims to eliminate the acquisition of resources during the execution of the lazy val initializer block, thus reducing the possibility of a deadlock. The concrete deadlock scenarios that the new lazy val initialization scheme eliminates are summarized below.</p>
+
+<p>The changes in this SIP have previously been discussed in depth on the mailing lists [<a href="https://groups.google.com/forum/#!topic/scala-internals/cCgBMp5k8R8" title="scala-internals">1</a>] [<a href="https://cs.oswego.edu/pipermail/concurrency-interest/2013-May/011354.html" title="concurrency-interest">2</a>] [<a href="https://groups.google.com/forum/#!msg/scala-internals/4sjw8pcKysg/GlXYDDzCgI0J" title="scala-internals">9</a>] [<a href="https://groups.google.com/forum/#!topic/dotty-internals/soWIWr3bRk8" title="dotty-internals">10</a>].</p>
+
+<h2 id="description">Description</h2>
+
+<p>The current lazy val initialization scheme uses double-checked locking to initialize the lazy val only once. A separate volatile bitmap field is used to store the state of the lazy val - a single bit in this bitmap denotes whether the lazy val is initialized or not.
+Assume we have the following declaration.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class LazyCell {
+  lazy val value = &lt;RHS&gt;
+}
+</code></pre></div></div>
+
+<p>Here is an example of a manually written implementation equivalent to what the compiler currently does:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class LazyCell {
+  @volatile var bitmap_0: Boolean = false
+  var value_0: Int = _
+  private def value_lzycompute(): Int = {
+    this.synchronized {
+      if (!bitmap_0) {
+        value_0 = &lt;RHS&gt;
+        bitmap_0 = true
+      }
+    }
+    value_0
+  }
+  def value = if (bitmap_0) value_0 else value_lzycompute()
+}
+</code></pre></div></div>
+
+<p>We now describe several deadlock scenarios in an attempt to classify deadlocks related to the current lazy val initialization implementation.</p>
+
+<h3 id="no-circular-dependencies">No circular dependencies</h3>
+
+<p>Assume there are two objects A and B with lazy vals <code class="language-plaintext highlighter-rouge">a0</code> and <code class="language-plaintext highlighter-rouge">a1</code>, and <code class="language-plaintext highlighter-rouge">b</code>, respectively:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object A {
+  lazy val a0 = B.b
+  lazy val a1 = 17
+}
+
+object B {
+  lazy val b = A.a1
+}
+</code></pre></div></div>
+
+<p>The initialization block of <code class="language-plaintext highlighter-rouge">a0</code> above refers to <code class="language-plaintext highlighter-rouge">b</code> in B, and the initialization of <code class="language-plaintext highlighter-rouge">B.b</code> refers to <code class="language-plaintext highlighter-rouge">A.a1</code>. While a circular dependency exists between these two objects, there is no circular dependency <strong>between specific lazy vals</strong> <code class="language-plaintext highlighter-rouge">a0</code>, <code class="language-plaintext highlighter-rouge">a1</code> and <code class="language-plaintext highlighter-rouge">b</code>.</p>
+
+<p>In the scheme, there exists a possibility of a deadlock if thread Ta attempts to initialize <code class="language-plaintext highlighter-rouge">A.a0</code> and thread Tb attempts to initialize <code class="language-plaintext highlighter-rouge">B.b</code>. Assume that both Ta and Tb start their synchronized blocks simultaneously. A deadlock can occur due to each thread trying to grab the lock of the other object, while holding their own lock until the initialization completes.</p>
+
+<p>This SIP attempts to address this issue.</p>
+
+<h3 id="circular-dependencies">Circular dependencies</h3>
+
+<p>Assume there are two objects A and B with lazy vals <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> respectively, where <code class="language-plaintext highlighter-rouge">a</code> needs <code class="language-plaintext highlighter-rouge">b</code> for initialization and vice versa. The current implementation scheme can cause a deadlock in this situation. Furthermore: in a single threaded scenario, circular dependencies between lazy vals lead to stack overflows with the current implementation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; object Test {
+  |   object A { lazy val a: Int = B.b }
+  |   object B { lazy val b: Int = A.a }
+  | }
+defined object Test
+
+scala&gt; Test
+res0: Test.type = Test$@6fd1046d
+
+scala&gt; Test.A.a
+java.lang.StackOverflowError
+</code></pre></div></div>
+
+<p>This is considered erroneous code, and this SIP does not attempt to address this.</p>
+
+<h3 id="no-circular-dependencies-with-other-synchronization-constructs">No circular dependencies with other synchronization constructs</h3>
+
+<p>Consider the declaration of the following lazy val:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A { self =&gt;
+  lazy val x: Int = {
+    val t = new Thread() {
+      override def run() { self.synchronized {} }
+    }
+    t.start()
+    t.join()
+    1
+  }
+}
+</code></pre></div></div>
+
+<p>In the source there appears to be no circular dependency between the lazy val initialization block and the other synchronization construct, so there should be no reason for deadlock. As long as thread <code class="language-plaintext highlighter-rouge">t</code> completes a condition that the caller depends on and eventually lets go of the current object <code class="language-plaintext highlighter-rouge">self</code>, the lazy val should be able to initialize itself.</p>
+
+<p>With the current initialization scheme, however, initializing <code class="language-plaintext highlighter-rouge">x</code> causes a deadlock. The calling thread initializing <code class="language-plaintext highlighter-rouge">x</code>, holds the monitor of the current object <code class="language-plaintext highlighter-rouge">self</code>. The same monitor is needed by thread <code class="language-plaintext highlighter-rouge">t</code>, since it also synchronizes on <code class="language-plaintext highlighter-rouge">self</code>, thus causing a deadlock.</p>
+
+<p>This SIP attempts to address this issue.</p>
+
+<p>The thread that fulfills the condition that the lazy val initializer block suspends on could on the other hand permanently grab a hold of the monitor of the <code class="language-plaintext highlighter-rouge">self</code> object. Although this is not strictly speaking a deadlock, it is worth mentioning that the current lazy val initialization implementation might not complete in the following scenario case.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A { self =&gt;
+  val latch = new java.util.concurrent.CountDownLatch(1)
+  val t = new Thread() {
+    override def run() {
+      latch.countDown()
+      self.synchronized { while (true) {} }
+    }
+  }
+  t.start()
+  lazy val x: Int = {
+    latch.await()
+    1
+  }
+  x
+}
+</code></pre></div></div>
+
+<p>This SIP does not attempt to solve this issue - lazy val initialization semantics assume that the <code class="language-plaintext highlighter-rouge">self</code> object monitor is available or can be made available throughout the lazy val initialization.</p>
+
+<h3 id="circular-dependencies-with-other-synchronization-constructs">Circular dependencies with other synchronization constructs</h3>
+
+<p>Consider the declaration of the following lazy val:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lazy val x: Int = {
+  val t = new Thread() {
+    override def run() { println(x) }
+  }
+  t.start()
+  t.join()
+  1
+}
+</code></pre></div></div>
+
+<p>In this code, the lazy val initialization block suspends until a condition is fulfilled. This condition can only be fulfilled by reading the value of lazy val <code class="language-plaintext highlighter-rouge">x</code> - another thread that is supposed to complete this condition cannot do so. Thus, a circular dependency is formed, and the lazy val cannot be initialized. Similar problems can arise with Scala singleton object initialization [<a href="https://stackoverflow.com/questions/15176199/scala-parallel-collection-in-object-initializer-causes-a-program-to-hang" title="pc-object-hang">3</a>] when creating threads from the singleton object constructor and waiting for their completion, and with static initializer blocks in Java [<a href="https://stackoverflow.com/questions/7517964/program-hangs-if-thread-is-created-in-static-initializer-block" title="static-init-hang">4</a>] [<a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.2" title="jls-spec">5</a>].</p>
+
+<p>Note that this problem can also happen if two separate threads try to initialize two singleton objects that refer to each other, which is somewhat more severe. The rule of the thumb for programmers should be - singleton objects should not refer to each other during initialization.</p>
+
+<p>This is considered an anti-pattern, and this SIP does not attempt to address these issues.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The solution to the problems that this SIP attempts to address is based on avoiding the acquisition of the current object monitor during the time that the lazy val initializer block executes. Instead of executing the initializer block from within a synchronized block, the synchronized block is run twice, once at the beginning to publicize the information that the initializer block is being run and once after the initializer block to publicize the information that the lazy val field has been computed and assigned. The new scheme will require maintaining 2 bits per lazy field instead of 1, as in the current implementation.
+We will refer to the existing, current lazy val initialization implementation as V1.</p>
+
+<h3 id="version-v2">Version V2</h3>
+
+<p>Here is an example of manually written implementation for the <code class="language-plaintext highlighter-rouge">LazyCell</code> class from the previous section:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCell {
+  @volatile var bitmap_0: Int = 0
+  var value_0: Int = _
+  private def value_lzycompute(): Int = {
+    this.synchronized {
+      if (bitmap_0 == 0) {
+        bitmap_0 = 1
+      } else {
+        while (bitmap_0 == 1) {
+          this.wait()
+        }
+        return value_0
+      }
+    }
+    val result = &lt;RHS&gt;
+    this.synchronized {
+      value_0 = result
+      bitmap_0 = 3
+      this.notifyAll()
+    }
+    value_0
+  }
+  def value = if (bitmap_0 == 3) value_0 else value_lzycompute()
+}
+</code></pre></div></div>
+
+<p>The state of the lazy val is represented with 3 values: 0, 1 and 3. Note that only 2 bits are sufficient to represent them but we use an entire integer here for purposes of clarity. The state 0 represents a non-initialized lazy val. The state 1 represents the lazy val that is currently being initialized by some thread. The state 3 represents the lazy val that has been initialized.</p>
+
+<p>The first-arriving thread sets the state 1 from the synchronized block, leaves the synchronized block and proceeds by executing the initializer block. Subsequently arriving threads enter the synchronized block, see state 1 and <code class="language-plaintext highlighter-rouge">wait</code> until they are notified that the lazy val has been assigned. The first-arriving thread sets the state to 3 and notifies them after it computes the result and enters the second synchronized block.</p>
+
+<h3 id="version-v3---the-notifyall-improvement">Version V3 - the <code class="language-plaintext highlighter-rouge">notifyAll</code> improvement</h3>
+
+<p>As noted in the previous discussions [<a href="https://groups.google.com/forum/#!topic/scala-internals/cCgBMp5k8R8" title="scala-internals">1</a>] [<a href="https://cs.oswego.edu/pipermail/concurrency-interest/2013-May/011354.html" title="concurrency-interest">2</a>] [<a href="https://github.com/DarkDimius/lazy-val-bench/blob/CallSites/src/test/scala/example/package.scala" title="lazy-val-bench-code">6</a>] [<a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%220%22%2C%221%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%2C%2210%22%2C%2212%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D" title="lazy-val-bench-report">7</a>], the <code class="language-plaintext highlighter-rouge">notifyAll</code> call in the proposed implementation bears a significant cost - in the uncontended case it slows down the initialization by a factor of at least 4x measured on a  3.4 GHz i7-2600 and JDK 7 update 4.</p>
+
+<p>Therefore, we propose the following implementation that avoids calling <code class="language-plaintext highlighter-rouge">notifyAll</code> unless the first-arriving thread knows that there are concurrent readers of the lazy val. We introduce the fourth state corresponding to the bitmap value 2, that denotes that there are concurrent readers of the lazy val. The first-arriving thread only calls the <code class="language-plaintext highlighter-rouge">notifyAll</code> if it finds state 2 in the second synchronized block.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCell {
+  @volatile var bitmap_0 = 0
+  var value_0: Int = _
+  private def value_lzycompute(): Int = {
+    this.synchronized {
+      (bitmap_0: @annotation.switch) match {
+        case 0 =&gt;
+          bitmap_0 = 1
+        case 1 =&gt;
+          bitmap_0 = 2
+          do this.wait() while (bitmap_0 == 2.toByte)
+          return value_0
+        case 2 =&gt;
+          do this.wait() while (bitmap_0 == 2.toByte)
+          return value_0
+        case 3 =&gt;
+          return value_0
+      }
+    }
+    val result = &lt;RHS&gt;
+    this.synchronized {
+      val oldstate = bitmap_0
+      value_0 = result
+      bitmap_0 = 3
+      if (oldstate == 2) this.notifyAll()
+    }
+    value_0
+  }
+  def value = if (bitmap_0 == 3) value_0 else value_lzycompute()
+}
+</code></pre></div></div>
+
+<p>Measured on the same machine, this change seems to be 50% slower than the current lazy val implementation for the uncontended case.</p>
+
+<h3 id="version-v4---the-cas-improvement">Version V4 - the CAS improvement</h3>
+
+<p>Each exit or entrance to a synchronized block in principle requires one atomic instruction, amounting to roughly 4 atomic instructions per lazy val initialization. This can be reduced by using the CAS instruction to switch between lazy val states.
+Here is an example of a simple implementation obtained by extending the <code class="language-plaintext highlighter-rouge">AtomicInteger</code> class:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCell
+extends java.util.concurrent.atomic.AtomicInteger {
+  var value_0: Int = _
+  @tailrec final def value(): Int = (get: @switch) match {
+    case 0 =&gt;
+      if (compareAndSet(0, 1)) {
+        val result = &lt;RHS&gt;
+        value_0 = result
+        if (getAndSet(3) != 1) synchronized { notify() }
+        result
+      } else value()
+    case 1 =&gt;
+      compareAndSet(1, 2)
+      synchronized {
+        while (get != 3) wait()
+        notify()
+      }
+      value_0
+    case 2 =&gt;
+      synchronized {
+        while (get != 3) wait()
+        notify()
+      }
+      value_0
+    case 3 =&gt; value_0
+  }
+}
+</code></pre></div></div>
+
+<p>This implementation has the following advantages:</p>
+<ul>
+  <li>it seems to have the same initialization performance as the current implementation, in the uncontended case</li>
+  <li>it relies less on synchronized blocks, needing them only in case of contention, thus being less prone to deadlocks</li>
+</ul>
+
+<p>Some disadvantages:</p>
+<ul>
+  <li>we cannot always extend <code class="language-plaintext highlighter-rouge">AtomicInteger</code>, some classes already inherit something else</li>
+  <li>in the contended worst-case, this scheme is equally prone to deadlocks, because it needs to acquire the synchronized block</li>
+</ul>
+
+<p>However, in the more general setting where there are two or more lazy val fields in an object:</p>
+<ul>
+  <li>the overall memory footprint could possibly increase - we would spend a minimum of 4 bytes per bitmap on first lazy val, where this was previously 1 byte</li>
+  <li>in a setting with multiple bitmaps or an existing base class, we cannot extend <code class="language-plaintext highlighter-rouge">AtomicInteger</code> (which internally uses <code class="language-plaintext highlighter-rouge">Unsafe</code> directly), and instead need to use <code class="language-plaintext highlighter-rouge">AtomicIntegerFieldUpdater</code>s that are slower due to extra checks</li>
+  <li>in a setting with multiple lazy val fields, we can no longer use <code class="language-plaintext highlighter-rouge">getAndSet</code> in the initialization (concurrent accesses to other lazy fields may modify the bitmap - we have to read and recompute the expected bitmap state) - we need a <code class="language-plaintext highlighter-rouge">compareAndSet</code> and have some retry-logic (see the <code class="language-plaintext highlighter-rouge">complete</code> method below), which is slower</li>
+  <li>due to the restrictions on the <code class="language-plaintext highlighter-rouge">AtomicIntegerFieldUpdater</code>s, we would need to make the <code class="language-plaintext highlighter-rouge">bitmap_0</code> field publicly visible on the byte-code level, which might be an issue for Java code interfacing with Scala code</li>
+  <li>it is much more complicated than the 2 synchronized blocks implementation</li>
+</ul>
+
+<p>Here is a more general implementation(V4-general), that is slower in the uncontended case than both the current implementation (V1) and the proposed implementation with synchronized blocks (V3). This implementation is, however, in the contended case twice as fast than the current implementation (V1).
+See the evaluation section for more information.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCellBase { // in a Java file - we need a public bitmap_0
+  public static AtomicIntegerFieldUpdater&lt;LazyCellBase&gt; arfu_0 =
+    AtomicIntegerFieldUpdater.newUpdater(LazyCellBase.class, "bitmap_0");
+  public volatile int bitmap_0 = 0;
+}
+
+final class LazyCell extends LazyCellBase {
+  import LazyCellBase._
+  var value_0: Int = _
+  @tailrec final def value(): Int = (arfu_0.get(this): @switch) match {
+    case 0 =&gt;
+      if (arfu_0.compareAndSet(this, 0, 1)) {
+        val result = &lt;RHS&gt;
+        value_0 = result
+
+        @tailrec def complete(): Unit = (arfu_0.get(this): @switch) match {
+          case 1 =&gt;
+            if (!arfu_0.compareAndSet(this, 1, 3)) complete()
+          case 2 =&gt;
+            if (arfu_0.compareAndSet(this, 2, 3)) {
+              synchronized { notifyAll() }
+            } else complete()
+        }
+
+        complete()
+        result
+      } else value()
+    case 1 =&gt;
+      arfu_0.compareAndSet(this, 1, 2)
+      synchronized {
+        while (arfu_0.get(this) != 3) wait()
+      }
+      value_0
+    case 2 =&gt;
+      synchronized {
+        while (arfu_0.get(this) != 3) wait()
+      }
+      value_0
+    case 3 =&gt; value_0
+  }
+}
+</code></pre></div></div>
+
+<h3 id="version-5---retry-in-case-of-failure">Version 5 - retry in case of failure</h3>
+
+<p>The current Scala semantics demand retrying the initialization in case of failure.
+The four versions presented above provide good performance characteristics in benchmarks, but may leave threads waiting forever due to failed initializations, thus leaking threads. Consider this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCell {
+  private var counter = -1
+  lazy val value = {
+      counter = counter + 1
+      if(counter &lt; 42)
+        throw null
+      else 0
+    }
+}
+</code></pre></div></div>
+
+<p>In this case, the first attempt to initialize the cell would fail. In version 4 this will leave the bitmap with a value still indicating that there’s a thread currently computing the value. All the threads trying to access the value would wait for this (non-existent) thread to finish computation, causing the application to leak threads.</p>
+
+<p>In order to maintain current Scala semantics, we need to correctly handle failed initializations. Version 5 presented below, does this correctly:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyCellBase { // in a Java file - we need a public bitmap_0
+  public static AtomicIntegerFieldUpdater&lt;LazyCellBase&gt; arfu_0 =
+    AtomicIntegerFieldUpdater.newUpdater(LazyCellBase.class, "bitmap_0");
+  public volatile int bitmap_0 = 0;
+}
+
+final class LazyCell extends LazyCellBase {
+  import LazyCellBase._
+  var value_0: Int = _
+  @tailrec final def value(): Int = (arfu_0.get(this): @switch) match {
+    case 0 =&gt;
+      if (arfu_0.compareAndSet(this, 0, 1)) {
+        val result =
+          try {&lt;RHS&gt;} catch {
+            case x: Throwable =&gt;
+              complete(0);
+              throw x
+          }
+        value_0 = result
+
+        @tailrec def complete(newState: Int): Unit = (arfu_0.get(this): @switch) match {
+          case 1 =&gt;
+            if (!arfu_0.compareAndSet(this, 1, newState)) complete()
+          case 2 =&gt;
+            if (arfu_0.compareAndSet(this, 2, newState)) {
+              synchronized { notifyAll() }
+            } else complete()
+        }
+
+        complete(3)
+        result
+      } else value()
+    case 1 =&gt;
+      arfu_0.compareAndSet(this, 1, 2)
+      synchronized {
+        while (arfu_0.get(this) != 3) wait()
+      }
+      value_0
+    case 2 =&gt;
+      synchronized {
+        while (arfu_0.get(this) != 3) wait()
+      }
+      value_0
+    case 3 =&gt; value_0
+  }
+}
+</code></pre></div></div>
+
+<p>This version is basically the same as Version 4, but it handles retries in accordance with current Scala specification.
+Unfortunately, this comes with a slight performance slowdown. See the evaluation section for more information.</p>
+
+<h3 id="version-6---no-synchronization-on-this-and-concurrent-initialization-of-fields">Version 6 - No synchronization on <code class="language-plaintext highlighter-rouge">this</code> and concurrent initialization of fields</h3>
+
+<p>Note that the current lazy val initialization implementation is robust against the following scenario, in which the initialization block starts an asynchronous computation attempting to indefinitely grab the monitor of the current object.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A { self =&gt;
+  lazy val x: Int = {
+    (new Thread() {
+      override def run() = self.synchronized { while (true) {} }
+    }).start()
+    1
+  }
+}
+</code></pre></div></div>
+
+<p>In the current implementation, the monitor is held throughout the lazy val initialization and released once the initialization block completes.
+All versions proposed above, release the monitor during the initialization block execution and re-acquire it back, so the code above could stall indefinitely.</p>
+
+<p>Additionally, usage of <code class="language-plaintext highlighter-rouge">this</code> as synchronization point may disallow concurrent initialization of different lazy vals in the same object. Consider the example below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class TwoLazies {
+  lazy val slow = { Thread.sleep(100000); 0}
+  lazy val fast = 1
+  lazy val bad: Int = {
+    (new Thread() {
+      override def run() = self.synchronized { while (true) {} }
+    }).start()
+    1
+  }
+}
+</code></pre></div></div>
+
+<p>Although the two <code class="language-plaintext highlighter-rouge">slow</code> and <code class="language-plaintext highlighter-rouge">fast</code> vals are independent, <code class="language-plaintext highlighter-rouge">fast</code> is required to
+wait for <code class="language-plaintext highlighter-rouge">slow</code> to be computed. This is due to the fact that they both
+synchronize on <code class="language-plaintext highlighter-rouge">this</code> for the entire initialization in the current
+implementation.</p>
+
+<p>In the versions presented above, a single call to <code class="language-plaintext highlighter-rouge">bad</code> may lead to the monitor
+for <code class="language-plaintext highlighter-rouge">this</code> being held forever, making calls to <code class="language-plaintext highlighter-rouge">slow</code> and <code class="language-plaintext highlighter-rouge">fast</code> also block
+forever.</p>
+
+<p>Note that these interactions are very surprising to users as they leak the
+internal limitations of the lazy val implementation.</p>
+
+<p>To overcome these limitations we propose a version that does not synchronize on
+<code class="language-plaintext highlighter-rouge">this</code> and instead uses external monitor-objects that are used solely for
+synchronization.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class LazyCell {
+  import dotty.runtime.LazyVals
+  var value_0: Int = _
+  private var bitmap = 0
+  @static private bitmap_offset = LazyVals.getOffset(classOf[LazyCell], "bitmap")
+  def value(): Int = {
+    var result: Int = 0
+    var retry: Boolean = true
+    val fieldId: Int = 0 // id of lazy val
+    var flag: Long = 0L
+    while retry do {
+      flag = LazyVals.get(this, bitmap_offset)
+      LazyVals.STATE(flag, 0) match {
+        case 0 =&gt;
+          if LazyVals.CAS(this, bitmap_offset, flag, 1) {
+            try {result = &lt;RHS&gt;} catch {
+              case x: Throwable =&gt;
+                LazyVals.setFlag(this, bitmap_offset, 0, fieldId)
+                throw x
+            }
+            value_0 = result
+            LazyVals.setFlag(this, bitmap_offset, 3, fieldId)
+            retry = false
+            }
+        case 1 =&gt;
+          LazyVals.wait4Notification(this, bitmap_offset, flag, fieldId)
+        case 2 =&gt;
+          LazyVals.wait4Notification(this, bitmap_offset, flag, fieldId)
+        case 3 =&gt;
+          retry = false
+          result = $target
+        }
+      }
+    result
+  }
+}
+</code></pre></div></div>
+
+<p>This implementation relies on the helper functions provided in [<a href="https://github.com/lampepfl/dotty/blob/5cbd2fbc8409b446f8751792b006693e1d091055/src/dotty/runtime/LazyVals.scala">11</a>]
+module. The most important of these functions, <code class="language-plaintext highlighter-rouge">wait4Notification</code> and
+<code class="language-plaintext highlighter-rouge">setFlag</code>, are presented below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def setFlag(t: Object, offset: Long, v: Int, fieldId: Int) = {
+   var retry = true
+   while (retry) {
+     val cur = get(t, offset)
+     if (STATE(cur) == 1) retry = CAS(t, offset, cur, v)
+     else {
+       // cur == 2, somebody is waiting on monitor
+       if (CAS(t, offset, cur, v)) {
+         val monitor = getMonitor(t, fieldId)
+         monitor.synchronized {
+           monitor.notifyAll()
+         }
+         retry = false
+       }
+     }
+   }
+ }
+
+def wait4Notification(t: Object, offset: Long, cur: Long, fieldId: Int) = {
+  var retry = true
+  while (retry) {
+    val cur = get(t, offset)
+    val state = STATE(cur)
+    if (state == 1) CAS(t, offset, cur, 2)
+    else if (state == 2) {
+      val monitor = getMonitor(t, fieldId)
+      monitor.synchronized {
+        monitor.wait()
+      }
+    }
+    else retry = false
+  }
+}
+
+val processors: Int = java.lang.Runtime.getRuntime.availableProcessors()
+val base: Int = 8 * processors * processors
+val monitors: Array[Object] = (0 to base).map {
+  x =&gt; new Object()
+}.toArray
+
+def getMonitor(obj: Object, fieldId: Int = 0) = {
+  var id = (java.lang.System.identityHashCode(obj) + fieldId) % base
+  if (id &lt; 0) id += base
+  monitors(id)
+}
+</code></pre></div></div>
+
+<p>This implementation has the following advantages compared to previous version:</p>
+<ul>
+  <li>it allows concurrent initialization of independent fields</li>
+  <li>it does not interact with user-written code that synchronizes on <code class="language-plaintext highlighter-rouge">this</code></li>
+  <li>it does not require expanding monitor on the object to support <code class="language-plaintext highlighter-rouge">notifyAll</code></li>
+</ul>
+
+<p>Some disadvantages:</p>
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">Unsafe</code> class, used internally has a disadvantage that it can be disallowed with a custom <code class="language-plaintext highlighter-rouge">SecurityManager</code>.
+Note that this class is extracted from other place in standard library that uses it: scala.concurrent.util.Unsafe.instance</li>
+  <li>it requires usage of <code class="language-plaintext highlighter-rouge">identityHashCode</code> that is stored for every object inside object header.</li>
+  <li>as global arrays are used to store monitors, seemingly unrelated things may create contention. This is addressed in detail in evaluation section.</li>
+</ul>
+
+<p>Both absence of monitor expansion and usage of <code class="language-plaintext highlighter-rouge">identityHashCode</code> interact with
+each other, as both of them operate on the object header. [<a href="https://wiki.openjdk.java.net/display/HotSpot/Synchronization">12</a>] presents
+the complete graph of transitions between possible states of the object header.
+What can be seen from this transition graph is that in the contended case,
+versions V2-V5 were promoting object into the worst case, the <code class="language-plaintext highlighter-rouge">heavyweight
+monitor</code> object, while the new scheme only disables biasing.</p>
+
+<p>Note that under the schemes presented here, V2-V5, this change only happens in
+the event of contention and happens per-object.</p>
+
+<h3 id="non-thread-safe-lazy-vals">Non-thread-safe lazy vals</h3>
+<p>While the new versions introduce speedups in the contended case, they do
+generate complex byte-code and this may lead to the new scheme being less
+appropriate for lazy vals that are not used in concurrent setting. In order to
+perfectly fit this use-case we propose to introduce an encoding for
+single-threaded lazy vals that is very simple and efficient:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class LazyCell {
+  var value_0 = 0
+  var flag = false
+  def value =
+    if (flag) value_0
+    else {
+      value_0 = &lt;RHS&gt;;
+      flag = true;
+    }
+}
+</code></pre></div></div>
+
+<p>This version is faster than all other versions on benchmarks but does not correctly handle safe publication in the case of multiple threads. It can be used in applications that utilize multiple threads if some other means of safe publication is used instead.</p>
+
+<h3 id="elegant-local-lazy-vals">Elegant Local lazy vals</h3>
+<p>Aside from lazy vals that are fields of objects, scala supports local lazy vals, defined inside methods:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def method = {
+  lazy val s = &lt;RHS&gt;
+  s
+}
+</code></pre></div></div>
+
+<p>Currently, they use such encoding(we will call it L1):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def method = {
+  var @volatile flag: Byte = 0.toByte
+  var s_0 = 0
+  def s = {
+    if(flag == 0){
+      this.synchronized{
+        if (flag == 0) {
+          s_0 = &lt;RHS&gt;
+          flag = 1
+        }
+      }
+    s_0
+    }
+  s
+}
+</code></pre></div></div>
+
+<p>Which is later translated by subsequent phases to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private def method$s(flag: VolatileByteRef, s_0: IntRef) = {
+    if(flag.value == 0){
+      this.synchronized{
+        if (flag.value == 0) {
+          s_0.value = &lt;RHS&gt;
+          flag.value = 1
+        }
+      }
+    s_0.value
+    }
+
+def method = {
+  var flag = new VolatileByteRef(0)
+  var s_0 = new IntRef(0)
+  method$s(flag, s_0)
+}
+</code></pre></div></div>
+
+<p>The current implementation has several shortcomings:</p>
+<ul>
+  <li>it allocates two boxes</li>
+  <li>it synchronizes on <code class="language-plaintext highlighter-rouge">this</code>. This is most severe in case of lambdas, as lambdas do not introduce a new <code class="language-plaintext highlighter-rouge">this</code>.</li>
+</ul>
+
+<p>We propose a new scheme, that is both simpler in implementation and is more efficient and slightly more compact.
+The scheme introduces new helper classes to the standard library: such as <code class="language-plaintext highlighter-rouge">dotty.runtime.LazyInt</code>[<a href="https://github.com/lampepfl/dotty/blob/f92f278ab686ab218e841082dcb026c6c8ef89b7/library/src/dotty/runtime/LazyHolders.scala">17</a>] and uses them to implement the local lazy val behavior.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class LazyInt {
+  var value: Int = _
+  @volatile var initialized: Boolean = false
+}
+
+private def method$s(holder: LazyInt) = {
+    if(!holder.initialized){
+      holder.synchronized{
+        if (!holder.initialized) {
+          holder.value = &lt;RHS&gt;
+          holder.initialized = true
+        }
+      }
+    holder.value
+    }
+
+def method = {
+  var holder = new LazyInt()
+  method$s(holder)
+}
+</code></pre></div></div>
+
+<p>This  solves the problem with deadlocks introduced by using java8 lambdas.[<a href="https://github.com/scala/scala-dev/issues/133">14</a>]</p>
+
+<h3 id="language-change">Language change</h3>
+<p>To address the fact that we now have both thread safe and single-threaded lazy vals,
+we propose to bring lazy vals in sync with normal vals with regards to usage of <code class="language-plaintext highlighter-rouge">@volatile</code> annotation.</p>
+
+<p>In order to simplify migration, Scalafix the migration tool that will be used to migrate between versions of Scala, including Dotty, supports a <code class="language-plaintext highlighter-rouge">VolatileLazyVal</code> rewrite that adds <code class="language-plaintext highlighter-rouge">@volatile</code> to all <code class="language-plaintext highlighter-rouge">lazy vals</code> present in the codebase.</p>
+
+<h2 id="evaluation">Evaluation</h2>
+
+<p>We focus on the memory footprint increase, the performance comparison and byte-code size. Note that the fast path (i.e. the cost of accessing a lazy val after it has been initialized) stays the same as in the current implementation. Thus, the focus of our measurements is on the overheads in the lazy val initialization in both the uncontended and the contended case.
+The micro-benchmarks used for evaluation are available in a GitHub repo [<a href="https://github.com/DarkDimius/lazy-val-bench/blob/CallSites/src/test/scala/example/package.scala" title="lazy-val-bench-code">6</a>] and the graphs of the evaluation results are available online [<a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%220%22%2C%221%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%2C%2210%22%2C%2212%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D" title="lazy-val-bench-report">7</a>], [<a href="https://d-d.me/tnc/30/lazy-mem/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%22-1%22%2C%220%22%2C%221%22%2C%222%22%2C%223%22%2C%224%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%221000000%22%2C%222000000%22%2C%223000000%22%2C%224000000%22%2C%225000000%22%5D%2C%5B%221477396691000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">18</a>], [<a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%2216%22%2C%2217%22%2C%2218%22%2C%2219%22%2C%2221%22%2C%2222%22%2C%2223%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">19</a>] . We used the ScalaMeter tool for measurements [<a href="https://groups.google.com/forum/#!msg/scala-internals/4sjw8pcKysg/GlXYDDzCgI0J" title="scala-internals">9</a>].</p>
+
+<h3 id="memory-usage-footprint">Memory usage footprint</h3>
+
+<p>We expect that the proposed changes will not change the memory footprint for most objects that contain lazy vals. Each lazy val currently requires 4 or 8 bytes for the field, and an additional bit in the bitmap. As soon as the first bit is introduced into the bitmap, 1 additional byte is allocated for the object.</p>
+
+<p>Since we now use 2 bits per lazy val field instead of 1, for classes having 4 or less lazy val field declarations the memory footprint per instance will thus not grow. For classes having more lazy val field declarations the memory footprint per instance will in most cases not grow since the objects have to be aligned to an 8 byte boundary anyway.</p>
+
+<p>We measured the memory footprint of an array of objects with single lazy val fields. The memory footprint did not change with respect to the current version [<a href="https://github.com/DarkDimius/lazy-val-bench/blob/CallSites/src/test/scala/example/package.scala" title="lazy-val-bench-code">6</a>] [<a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%220%22%2C%221%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%2C%2210%22%2C%2212%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D" title="lazy-val-bench-report">7</a>].
+The detailed experimental measurements  graphs of memory footprint can be seen in graphs.[<a href="https://d-d.me/tnc/30/lazy-mem/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%22-1%22%2C%220%22%2C%221%22%2C%222%22%2C%223%22%2C%224%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%221000000%22%2C%222000000%22%2C%223000000%22%2C%224000000%22%2C%225000000%22%5D%2C%5B%221477396691000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">18</a>]</p>
+
+<h3 id="performance">Performance</h3>
+
+<p>We measured performance in both the uncontended and the contended case. We measured on an i7-2600, a 64-bit Oracle JVM, version 1.7 update 4.</p>
+
+<p>For the uncontended case, we measure the cost of creating N objects and initializing their lazy val fields. The measurement includes both the object creation times and their initialization, where the initialization is the dominant factor.</p>
+
+<p>For the contended case, we measure the cost of initializing the lazy fields of N objects, previously created and stored in an array, by 4 different threads that linearly try to read the lazy field of an object before proceeding to the next one. The goal of this test is to asses the effect of entering the synchronized block and notifying the waiting threads - since the slow path is slower, the threads that “lag” behind should quickly reach the first object with an uninitialized lazy val, causing contention.</p>
+
+<p>The current lazy val implementation (V1) seems to incur initialization costs that are at least 6 times greater compared to referencing a regular val. The handwritten implementation produces identical byte-code, with the difference that the calls are virtual instead of just querying the field value; this is probably the reason as to why it is up to 50% slower. The 2 synchronized blocks design with an eager notify (V2) is 3-4 times slower than the current implementation - just adding the <code class="language-plaintext highlighter-rouge">notifyAll</code> call changes things considerably. The 4 state/2 synchronized blocks approach (V3) is only 33-50% slower than the current implementation (V1). The CAS-based approach where <code class="language-plaintext highlighter-rouge">AtomicInteger</code>s are extended is as fast as the current lazy val initialization (V1), but when generalized and replaced with <code class="language-plaintext highlighter-rouge">AtomicReferenceFieldUpdater</code>s as discussed before, it is almost 50% slower than the current implementation (V1). The final version, V6 uses <code class="language-plaintext highlighter-rouge">Unsafe</code> to bring back performance and is as around twice as fast as current implementation (V1) while maintaining correct semantics.</p>
+
+<p>The CAS-based approaches (V4, V5 and V6) appear to offer the best performance here, being twice as fast than the current implementation (V1).</p>
+
+<p>The proposed solution with (V6) is 50% faster[<a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%2216%22%2C%2217%22%2C%2218%22%2C%2219%22%2C%2221%22%2C%2222%22%2C%2223%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">19</a>] than the current lazy val implementation in the contended case. This comes at a price of synchronizing on a global array of monitors, which may create contention between seemingly unrelated things. The more monitors that are created, the less is the probability of such contention. There’s also a positive effect though, the reuse of global objects for synchronization allows the monitors on the instances containing lazy vals to not be expanded, saving on non-local memory allocation. The current implementation uses <code class="language-plaintext highlighter-rouge">8 * processorCount * processorCount</code> monitors and the benchmarks and by-hand study with “Vtune Amplifier XE” demonstrate that the positive effect dominates, introducing a 2% speedup[<a href="https://groups.google.com/d/msg/scala-internals/4sjw8pcKysg/gD0au4dmTAsJ">13</a>]. It’s worth mentioning that this is not a typical use-case that reflects a practical application, but rather a synthetic edge case designed to show the worst-case comparison demonstrating cache contention.</p>
+
+<p>The local lazy vals implementation is around 6x faster than the current version, as it eliminates the need for boxing and reduces the number of allocations from 2 to 1.</p>
+
+<p>The concrete micro-benchmark code is available as a GitHub repo [<a href="https://github.com/DarkDimius/lazy-val-bench/blob/CallSites/src/test/scala/example/package.scala" title="lazy-val-bench-code">6</a>]. It additionally benchmarks many other implementations that are not covered in the text of this SIP, in particular it tests versions based on MethodHandles and runtime code generation as well as versions that use additional spinning before synchronizing on the monitor.
+For those wishing to reproduce the results, the benchmarking suite takes 90 minutes to run on contemporary CPUs. Enabling all the disabled benchmarks, in particular those that evaluate the <code class="language-plaintext highlighter-rouge">invokeDynamic</code> based implementation, will make the benchmarks take around 5 hours.</p>
+
+<p>The final result of those benchmarks is that amount proposed versions, the two that worth considering are (V4-general) and (V6).
+They both perform better than the current implementation in all the contended case.
+Specifically, in the contended case, V6 is 2 times faster than V1, while V4-general is 4 times faster.
+Unfortunately V4-general is 30% slower in the uncontended case than current implementation(V1), while V6 is in the same ballpark, being up to 5% slower or faster depending on the setup of the benchmark.</p>
+
+<p>Based on this, we propose V6 to be used as default in future versions of Scala.</p>
+
+<h3 id="code-size">Code size</h3>
+<p>The versions presented in V2-V6 have a lot more complex implementation and this shows up the size of the byte-code. In the worst-case scenario, when the <code class="language-plaintext highlighter-rouge">&lt;RHS&gt;</code> value is a constant, the current scheme (V1) creates an initializer method that has a size of 34 bytes, while dotty creates a version that is 184 bytes long. Local optimizations present in dotty linker[<a href="https://github.com/scala/scala-dev/issues/133">14</a>] are able to reduce this size down to 160 bytes, but this is still substantially more than the current version.</p>
+
+<p>On the other hand, the single-threaded version does not need separate initializer method and is around twice smaller than the current scheme (V1).</p>
+
+<p>The proposed local lazy val transformation scheme also creates less byte-code, introducing 34 bytes instead of 42 bytes, mostly due to reduction in constant table size.</p>
+
+<h2 id="current-status">Current status</h2>
+<p>Version V6 is implemented and used in Dotty, together with language change that makes lazy vals thread-unsafe if <code class="language-plaintext highlighter-rouge">@volatile</code> annotation is not specified.
+Dotty implementation internally uses <code class="language-plaintext highlighter-rouge">@static</code> proposed in [<a href="https://github.com/scala/docs.scala-lang/pull/491">16</a>].</p>
+
+<p>Both Dotty and released Scala 2.12 already implement “Elegant Local lazy vals”. This was incorporated in the 2.12 release before this SIP was considered, as it was fixing a bug that blocked release[<a href="https://github.com/scala/scala-dev/issues/133">14</a>].</p>
+
+<h3 id="unsafe">Unsafe</h3>
+<p>The proposed version, V6 relies on <code class="language-plaintext highlighter-rouge">sun.misc.Unsafe</code> in order to implement it’s behaviour.
+While <code class="language-plaintext highlighter-rouge">sun.misc.Unsafe</code> will remain available in Java9 there’s an intention to deprecate it and replace it with VarHandles.[<a href="https://openjdk.java.net/jeps/193">20</a>].
+The proposed version V6 can be implemented with using functionality present in Var Handles.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>We would like to thank Peter Levart and the other members of the concurrency-interest mailing list for their suggestions, as well as the members of the scala-internals mailing list for the useful discussions and input.</p>
+
+<h2 id="references">References</h2>
+<ol>
+  <li><a href="https://groups.google.com/forum/#!topic/scala-internals/cCgBMp5k8R8" title="scala-internals">Summary of lazy vals discussions, Scala Internals Mailing list, May 2013</a></li>
+  <li><a href="https://cs.oswego.edu/pipermail/concurrency-interest/2013-May/011354.html" title="concurrency-interest">The cost of <code class="language-plaintext highlighter-rouge">notifyAll</code>, Concurrency Interest Mailing List, May 2013</a></li>
+  <li><a href="https://stackoverflow.com/questions/15176199/scala-parallel-collection-in-object-initializer-causes-a-program-to-hang" title="pc-object-hang">Scala Parallel Collection in Object Initializer Causes a Program to Hang</a></li>
+  <li><a href="https://stackoverflow.com/questions/7517964/program-hangs-if-thread-is-created-in-static-initializer-block" title="static-init-hang">Program Hangs If Thread Is Created In Static Initializer Block</a></li>
+  <li><a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.2" title="jls-spec">Java Language Specification, 12.4.2</a></li>
+  <li><a href="https://github.com/DarkDimius/lazy-val-bench/blob/CallSites/src/test/scala/example/package.scala" title="lazy-val-bench-code">GitHub Repo with Microbenchmarks</a></li>
+  <li><a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%220%22%2C%221%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%2C%2210%22%2C%2212%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D" title="lazy-val-bench-report">Uncontended Performance Evaluation Results</a></li>
+  <li><a href="https://axel22.github.io/scalameter/" title="scalameter-code">ScalaMeter GitHub Repo</a></li>
+  <li><a href="https://groups.google.com/forum/#!msg/scala-internals/4sjw8pcKysg/GlXYDDzCgI0J" title="scala-internals">Lazy Vals in Dotty, Scala Internals Mailing list, February 2014</a></li>
+  <li><a href="https://groups.google.com/forum/#!topic/dotty-internals/soWIWr3bRk8" title="dotty-internals">Lazy Vals in Dotty, Dotty Internals Mailing list, February 2014</a></li>
+  <li><a href="https://github.com/lampepfl/dotty/blob/5cbd2fbc8409b446f8751792b006693e1d091055/src/dotty/runtime/LazyVals.scala">LazyVals runtime module, Dotty sourcecode, February 2014</a></li>
+  <li><a href="https://wiki.openjdk.java.net/display/HotSpot/Synchronization">Synchronization, HotSpot internals wiki, April 2008</a></li>
+  <li><a href="https://groups.google.com/d/msg/scala-internals/4sjw8pcKysg/gD0au4dmTAsJ">Lazy Vals in Dotty, cache contention discussion, February 2014</a></li>
+  <li><a href="https://github.com/scala/scala-dev/issues/133">SI-9824 SI-9814 proper locking scope for lazy vals in lambdas, April 2016</a></li>
+  <li><a href="https://scala-lang.org/blog/2016/10/24/scalafix.html">Introducing Scalafix: a migration tool for Scalac to Dotty, October 2016</a></li>
+  <li><a href="https://github.com/scala/docs.scala-lang/pull/491">@static sip, January 2016</a></li>
+  <li><a href="https://github.com/lampepfl/dotty/blob/f92f278ab686ab218e841082dcb026c6c8ef89b7/library/src/dotty/runtime/LazyHolders.scala">LazyVal Holders in Dotty</a></li>
+  <li><a href="https://d-d.me/tnc/30/lazy-mem/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%22-1%22%2C%220%22%2C%221%22%2C%222%22%2C%223%22%2C%224%22%2C%225%22%2C%226%22%2C%227%22%2C%228%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%221000000%22%2C%222000000%22%2C%223000000%22%2C%224000000%22%2C%225000000%22%5D%2C%5B%221477396691000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">Memory Footprint Evaluation Results</a></li>
+  <li><a href="https://d-d.me/tnc/30/lazy-sip-perf/report/#config=%7B%22filterConfig%22%3A%7B%22curves%22%3A%5B%2216%22%2C%2217%22%2C%2218%22%2C%2219%22%2C%2221%22%2C%2222%22%2C%2223%22%5D%2C%22order%22%3A%5B%22param-size%22%2C%22date%22%5D%2C%22filters%22%3A%5B%5B%22100000%22%2C%22300000%22%2C%22500000%22%2C%221000000%22%2C%223000000%22%2C%225000000%22%5D%2C%5B%221477397877000%22%5D%5D%7D%2C%22chartConfig%22%3A%7B%22type%22%3A0%2C%22showCI%22%3Afalse%7D%7D">Contended Performance Evaluation Results</a></li>
+  <li><a href="https://openjdk.java.net/jeps/193">JEP 193: Variable Handles</a></li>
+</ol>
+
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #839496">Dormant</div>
+           <p class="vote-text" style="color: #839496">
+             This proposal lacks an implementation for Scalac and is looking for a new owner.
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2013-05-31-improved-lazy-val-initialization.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

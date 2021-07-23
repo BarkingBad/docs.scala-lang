@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      给 Java 工程师的 Scala 入门教学 | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/zh-cn/tutorials/scala-for-java-programmers.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="给 Java 工程师的 Scala 入门教学"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="给 Java 工程师的 Scala 入门教学"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/zh-cn">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/zh-cn/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/zh-cn/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>给 Java 工程师的 Scala 入门教学</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Michel Schinz 与 Philipp Haller 著
+Lightsing 译</p>
+
+<h2 id="介绍">介绍</h2>
+
+<p>此教学将对 Scala 语言以及编译器做一个简易介绍。面向的读者为具有编程经验，并且想简单了解 Scala 的人。本文假设读者有着基本的、最好是 Java 上的面向对象知识。</p>
+
+<h2 id="第一个例子">第一个例子</h2>
+
+<p>这里用标准的 <em>Hello world</em> 程序作为第一个例子。虽然它很无趣，但让我们可以用少量语言特质来演示 Scala 工具。程序如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object HelloWorld {
+  def main(args: Array[String]) {
+    println("Hello, world!")
+  }
+}
+</code></pre></div></div>
+
+<p>Java 程序员应该对这个程序结构感到熟悉：这有一个<code class="language-plaintext highlighter-rouge">main</code> 函数，该函数接受一个字符串数组作为参数，即命令行参数；函数内容为调用已定义好的函数<code class="language-plaintext highlighter-rouge">println </code> 并用Hello world 字符串当参数。 <code class="language-plaintext highlighter-rouge">main</code> 函数没有返回值 (它是一个过程方法)。因此并不需要声明返回值类型。</p>
+
+<p>Java 程序员不太熟悉的是包着 <code class="language-plaintext highlighter-rouge">main</code> 函数的 <code class="language-plaintext highlighter-rouge">object</code> 声明。这种声明引入我们一般称之 <em>Singleton</em> 的东西，也就是只有一个实例的类。所以上面的代码同时声明了一个 <code class="language-plaintext highlighter-rouge">HelloWorld</code> 类和一个该类的实例，也叫做 <code class="language-plaintext highlighter-rouge">HelloWorld</code>。该实例会在第一次被使用到的时候即时产生。</p>
+
+<p>眼尖的读者可能已经注意到这边 <code class="language-plaintext highlighter-rouge">main</code> 函数的声明没有带着 <code class="language-plaintext highlighter-rouge">static</code>。这是因为 Scala 没有静态成员 (函数或属性)。 Scala 程序员将这成员声明在单实例对象中，而不是定义静态成员。</p>
+
+<h3 id="编译这个例子">编译这个例子</h3>
+
+<p>我们用 Scala 编译器 <code class="language-plaintext highlighter-rouge">scalac</code>来编译这个例子。 <code class="language-plaintext highlighter-rouge">scalac</code> 就像大多数编译器一样，它接受源代码文件当对象，并接受额外的选项，然后产生一个或多个对象文件。它产出的对象文件为标准 Java class 文件。</p>
+
+<p>如果我们将上面的程序存为文件 <code class="language-plaintext highlighter-rouge">HelloWorld.scala</code>，编译指令为( <code class="language-plaintext highlighter-rouge">&gt;</code> 是提示字符，不用打)：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; scalac HelloWorld.scala
+</code></pre></div></div>
+
+<p>这会在当前目录产生一些 class 文件。其中一个会叫做 <code class="language-plaintext highlighter-rouge">HelloWorld.class</code>，里面包含着可被 <code class="language-plaintext highlighter-rouge">scala</code> 直接执行的类。</p>
+
+<h3 id="执行示例">执行示例</h3>
+
+<p>一旦编译过后，Scala 程序可以用 <code class="language-plaintext highlighter-rouge">scala</code> 指令执行。其使用方式非常像执行 Java 程序的 <code class="language-plaintext highlighter-rouge">java</code> 指令，并且接受同样选项。上面的示例可以用以下指令来执行并得到我们预期的输出：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; scala -classpath . HelloWorld
+
+Hello, world!
+</code></pre></div></div>
+
+<h2 id="与-java-互动">与 Java 互动</h2>
+
+<p>Scala 的优点之一是它非常容易跟 Java 代码沟通。Scala 会默认 import <code class="language-plaintext highlighter-rouge">java.lang</code> 底下之类，其他类则需要明确导入。</p>
+
+<p>让我们看个展示这点的示例。取得当下日期并根据某个特定国家调整成该国格式，如法国。</p>
+
+<p>Java 的标准函数库定义了一些有用的工具类，如 <code class="language-plaintext highlighter-rouge">Date</code> 跟 <code class="language-plaintext highlighter-rouge">DateFormat</code>。因为 Scala 可以无缝的跟 Java 互动，这边不需要以 Scala 实作同样类－我们只需要导入对应的 Java 包：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.{Date, Locale}
+import java.text.DateFormat
+import java.text.DateFormat._
+
+object FrenchDate {
+  def main(args: Array[String]) {
+    val now = new Date
+    val df = getDateInstance(LONG, Locale.FRANCE)
+    println(df format now)
+  }
+}
+</code></pre></div></div>
+
+<p>Scala 的导入表达式跟 Java 非常像，但更为强大。如第一行，同一个 package 下的多个类可以用大括号括起来一起导入。另外一个差别是，当要导入套件或类下所有名称时，用下标 (<code class="language-plaintext highlighter-rouge">_</code>) 而不是星号 (<code class="language-plaintext highlighter-rouge">*</code>)。这是因为星号在 Scala 是一个合法的标识符 (如函数名称)。</p>
+
+<p>所以第三行的表达式导入所有 <code class="language-plaintext highlighter-rouge">DateFormat</code> 类的成员。这让静态方法 <code class="language-plaintext highlighter-rouge">getDateInstance</code> 跟静态属性 <code class="language-plaintext highlighter-rouge">LONG</code> 可直接被使用。</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">main</code> 函数中我们先创造一个 Java 的 <code class="language-plaintext highlighter-rouge">Date</code> 类实例，该实例默认拥有现在的日期。接下来用 <code class="language-plaintext highlighter-rouge">getDateInstance</code> 函数定义日期格式。最后根据地区化的 <code class="language-plaintext highlighter-rouge">DateFormat</code> 实例对现在日期设定格式并印出。最后一行展现了一个 Scala 有趣特点。只需要一个对象的函数可以用中缀语法调用。就是说，这个表达式</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df format now
+</code></pre></div></div>
+
+<p>是这个表达式的简略版本</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.format(now)
+</code></pre></div></div>
+
+<p>它看起来也许只是语法上的小细节，但却有着重要的影响，其中一个影响将会在下一节做介绍。</p>
+
+<p>最后值得一提的是，Scala 可以直接继承 Java 类或者实现 Java 接口。</p>
+
+<h2 id="一切都是对象">一切都是对象</h2>
+
+<p>Scala 是一个纯粹的面向对象语言，意即包括数字、函数在内的<em>一切</em>都是对象。这跟 Java 不同，因为 Java 的基本类型 (如 <code class="language-plaintext highlighter-rouge">boolean</code> 与 <code class="language-plaintext highlighter-rouge">int</code> ) 和引用类型是有区别的。</p>
+
+<h3 id="数字是对象">数字是对象</h3>
+
+<p>因为数字是对象，他们也有函数。事实上，一个像底下的算数表达式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 + 2 * 3 / x
+</code></pre></div></div>
+
+<p>只有使用函数调用，因为像前一节一样，该式等价于</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.+(2.*(3)./(x))
+</code></pre></div></div>
+
+<p>这也表示着 <code class="language-plaintext highlighter-rouge">+</code>、<code class="language-plaintext highlighter-rouge">*</code> 之类的在 Scala 里是合法的标识符。</p>
+
+<h3 id="函数是对象">函数是对象</h3>
+
+<p>Scala 中的函数也是对象，所以将函数当做对象传递、把它们存入变量、从其他函数返回函数都是可能的。能够像操作变量一样的操作函数这点是<em>函数式编程</em>这一非常有趣的程序设计思想的基石之一。</p>
+
+<p>为何把函数当做变量一样的操作会很有用呢，让我们考虑一个定时函数，功能是每秒执行一些动作。我们要怎么将这动作传给它？最直接的便是将这动作视为函数传入。应该有不少程序员对这种简单传递函数的行为很熟悉：通常在用户界面相关的程序上，用来注册一些当事件发生时被调用的回调函数。</p>
+
+<p>在接下来的程序中，定时函数叫做 <code class="language-plaintext highlighter-rouge">oncePerSecond</code> ，它接受一个回调函数做参数。该函数的类型被写作 <code class="language-plaintext highlighter-rouge">() =&gt; Unit</code> ，这个类型便是所有无对象且无返回值函数的类型( <code class="language-plaintext highlighter-rouge">Unit</code> 这个类型就像是 C/C++ 的 <code class="language-plaintext highlighter-rouge">void</code> )。此程序的主函数只是调用定时函数并带入回呼函数，回呼函数输出一句话到终端上。也就是说这个程序会不断的每秒输出一次 “time flies like an arrow”。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Timer {
+  def oncePerSecond(callback: () =&gt; Unit) {
+    while (true) { callback(); Thread sleep 1000 }
+  }
+  def timeFlies() {
+    println("time flies like an arrow...")
+  }
+  def main(args: Array[String]) {
+    oncePerSecond(timeFlies)
+  }
+}
+</code></pre></div></div>
+
+<p>值得注意的是，在打印字符串时，我们使用的是 Scala 预定义的方法 <code class="language-plaintext highlighter-rouge">println</code>，而不是 <code class="language-plaintext highlighter-rouge">System.out</code> 中的。</p>
+
+<h4 id="匿名函数">匿名函数</h4>
+
+<p>这程序还有改进空间。第一点，函数 <code class="language-plaintext highlighter-rouge">timeFlies</code> 只是为了能够被传递进 <code class="language-plaintext highlighter-rouge">oncePerSecond</code> 而定义的。赋予一个只被使用一次的函数名字似乎是没有必要的，最好能够在传入 <code class="language-plaintext highlighter-rouge">oncePerSecond</code> 时构造出这个函数。Scala 可以借由<em>匿名函数</em>来达到这点。利用匿名函数的改进版本程序如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object TimerAnonymous {
+  def oncePerSecond(callback: () =&gt; Unit) {
+    while (true) { callback(); Thread sleep 1000 }
+  }
+  def main(args: Array[String]) {
+    oncePerSecond(() =&gt;
+      println("time flies like an arrow..."))
+  }
+}
+</code></pre></div></div>
+
+<p>这例子中的右箭头 <code class="language-plaintext highlighter-rouge">=&gt;</code> 告诉我们有一个匿名函数，右箭头将函数对象跟函数内容分开。这个例子中，在箭头左边那组空的括号告诉我们对象列是空的。函数内容则是跟先前的 <code class="language-plaintext highlighter-rouge">timeFlies</code> 里一样。</p>
+
+<h2 id="类">类</h2>
+
+<p>之前已讲过，Scala 是一个面向对象语言，因此它有着类的概念 (更精确的说，的确有一些面向对象语言没有类的概念，但是 Scala 不是其中之一）。Scala 声明类的语法跟 Java 很接近。一个重要的差别是，Scala 的类可以有参数。如下面展示的复数的定义：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Complex(real: Double, imaginary: Double) {
+  def re() = real
+  def im() = imaginary
+}
+</code></pre></div></div>
+
+<p>这个复数类接受两个参数，分别为实跟虚部。在创造 <code class="language-plaintext highlighter-rouge">Complex</code> 的实例时，必须传入这些参数： <code class="language-plaintext highlighter-rouge">new Complex(1.5, 2.3)</code>。这个类有两个函数分别叫做 <code class="language-plaintext highlighter-rouge">re</code> 跟 <code class="language-plaintext highlighter-rouge">im</code> 让我们取得这两个部分。</p>
+
+<p>值得注意的是，这两个函数的回传值并没有被明确给定。编译器将会自动的推断，它会查看这些函数的右侧并推导出这两个函数都会回传类型为 <code class="language-plaintext highlighter-rouge">Double</code> 的值。</p>
+
+<p>编译器并不一定每次都能够推断出类型，而且很不幸的是我们并没有简单规则以分辨哪种情况能推断，哪种情况不能。实践上这通常不是问题，因为当编译器无法推断未明确给定的类型时，它会报错。Scala 初学者在遇到那些看起来很简单就能推导出类型的情况时，应该尝试着忽略类型声明并看看编译器是不是也觉得可以推断。多尝试几次之后程序员应该能够体会到何时忽略类型、何时该明确指定。</p>
+
+<h3 id="无对象函数">无对象函数</h3>
+
+<p>函数 <code class="language-plaintext highlighter-rouge">re</code>、<code class="language-plaintext highlighter-rouge">im</code> 有个小问题，为了调用函数，我们必须在函数名称后面加上一对空括号，如这个例子：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object ComplexNumbers {
+  def main(args: Array[String]) {
+    val c = new Complex(1.2, 3.4)
+    println("imaginary part: " + c.im())
+  }
+}
+</code></pre></div></div>
+
+<p>最好能够在不需要加括号的情况下取得实虚部，这样便像是在取得属性。Scala完全可以做到这件事，需要的只是在定义函数的时候<em>不要定义参数</em>。这种函数跟零参数函数是不一样的，不论是定义或是调用，它们都没有括号跟在名字后面。我们的 <code class="language-plaintext highlighter-rouge">Complex</code> 可以改写成：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Complex(real: Double, imaginary: Double) {
+  def re = real
+  def im = imaginary
+}
+</code></pre></div></div>
+
+<h3 id="继承与重写">继承与重写</h3>
+
+<p>Scala 中所有的类都继承自一个父类。像前一节的 <code class="language-plaintext highlighter-rouge">Complex</code> 这种没有指定的例子，Scala 会默认使用 <code class="language-plaintext highlighter-rouge">scala.AnyRef</code>。</p>
+
+<p>Scala 中可以重写继承自父类的函数。但是为了避免意外重写，必须加上 <code class="language-plaintext highlighter-rouge">override</code> 修饰字来明确表示要重写函数。我们以重写 <code class="language-plaintext highlighter-rouge">Complex</code> 类中来自 <code class="language-plaintext highlighter-rouge">Object</code> 的  <code class="language-plaintext highlighter-rouge">toString</code> 作为示例。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Complex(real: Double, imaginary: Double) {
+  def re = real
+  def im = imaginary
+  override def toString() =
+    "" + re + (if (im &lt; 0) "" else "+") + im + "i"
+}
+</code></pre></div></div>
+
+<h2 id="case-class-跟模式匹配pattern-matching">Case Class 跟模式匹配(pattern matching)</h2>
+
+<p>树是常见的数据结构。如：解译器跟编译器内部常见的表示程序方式便是树；XML文件是树；还有一些容器基于树，如红黑树。</p>
+
+<p>接下来我们会通过一个小型计算程序来看看 Scala 是如何表示并操作树。这个程序将足以操作仅含有整数常数、整数变量跟加法的简单算术式。<code class="language-plaintext highlighter-rouge">1+2</code> 跟 <code class="language-plaintext highlighter-rouge">(x+x)+(7+y)</code> 为两个例子。</p>
+
+<p>我们得先决定这种表达式的表示法。最自然表示法便是树，其中节点是操作、叶节点是值。</p>
+
+<p>Java 中我们会将这个树用一个抽象父类表示，然后每种节点跟叶节点分别有各自的实际类。在函数编程里会用代数数据类型。Scala 则是提供了介于两者之间的 <em>case class</em>。这是用其定义这样数据类型的示例：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Tree
+case class Sum(l: Tree, r: Tree) extends Tree
+case class Var(n: String) extends Tree
+case class Const(v: Int) extends Tree
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Sum</code>、<code class="language-plaintext highlighter-rouge">Var</code>、<code class="language-plaintext highlighter-rouge">Const</code> 类定义成 case class 代表着它们跟一般类有所差别：</p>
+
+<ul>
+  <li>在创建类实例时不需要用 <code class="language-plaintext highlighter-rouge">new</code> (也就是说我们可以写 <code class="language-plaintext highlighter-rouge">Const(5)</code>，而不是 <code class="language-plaintext highlighter-rouge">new Const(5)</code>)。</li>
+  <li>对应所有构造参数，Scala 会自动定义对应的取值函数 (即，对于 <code class="language-plaintext highlighter-rouge">Const</code> 类的实例，我们可以直接用 <code class="language-plaintext highlighter-rouge">c.v</code> 来取得建构式中的 <code class="language-plaintext highlighter-rouge">v</code> 参数)。</li>
+  <li><code class="language-plaintext highlighter-rouge">equals</code> 跟 <code class="language-plaintext highlighter-rouge">hashCode</code> 会有预设定义。该定义会根据实例的<em>结构</em>而不是个别实例的识别来运作。</li>
+  <li><code class="language-plaintext highlighter-rouge">toString</code> 会有预设定义。会印出”原始型态” (即，<code class="language-plaintext highlighter-rouge">x+1</code> 的树会被印成<code class="language-plaintext highlighter-rouge">Sum(Var(x),Const(1))</code>)。</li>
+  <li>这些类的实例可以借由<em>模式匹配</em>来拆解。</li>
+</ul>
+
+<p>现在我们有了算术表达式的数据类型，可以开始定义各种运算。我们将从一个可以在<em>环境</em>内对运算式求值的函数起头。环境的用处是赋值给变量。举例来说，运算式 <code class="language-plaintext highlighter-rouge">x+1</code> 在一个将 <code class="language-plaintext highlighter-rouge">x</code> 赋与 <code class="language-plaintext highlighter-rouge">5</code> 的环境 (写作 <code class="language-plaintext highlighter-rouge">{ x -&gt; 5 }</code> ) 下求值会得到 <code class="language-plaintext highlighter-rouge">6</code>。</p>
+
+<p>因此我们需要一个表示环境的方法。当然我们可以用一些像是哈希表的关连性数据结构，但是我们也可以直接用函数！环境就只是一个将值对应到 (变量) 名称的函数。之前提到的环境 <code class="language-plaintext highlighter-rouge">{ x -&gt; 5 }</code> 在 Scala 中可以简单的写作：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ case "x" =&gt; 5 }
+</code></pre></div></div>
+
+<p>这个标记定义了一个当输入是字符串 <code class="language-plaintext highlighter-rouge">"x"</code> 时回传整数 <code class="language-plaintext highlighter-rouge">5</code>，其他输入则是用例外表示失败的函数。</p>
+
+<p>开始之前，让我们先给环境类型一个名字。当然，我们可以直接用 <code class="language-plaintext highlighter-rouge">String =&gt; Int</code>，但是给这类型名字可以让我们简化程序，而且在未来要改动时较为简便。在 Scala 中我们这样做：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Environment = String =&gt; Int
+</code></pre></div></div>
+
+<p>于是类型 <code class="language-plaintext highlighter-rouge">Environment</code> 便可以当做输入 <code class="language-plaintext highlighter-rouge">String</code> 回传 <code class="language-plaintext highlighter-rouge">Int</code> 函数的类型之代名。</p>
+
+<p>现在我们可以给出求值函数的定义。概念上非常简单：两个表达式和的值是两个表达式值的和；变量的值直接从环境取值；常数的值就是常数本身。表示这些在 Scala 里并不困难：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def eval(t: Tree, env: Environment): Int = t match {
+  case Sum(l, r) =&gt; eval(l, env) + eval(r, env)
+  case Var(n)    =&gt; env(n)
+  case Const(v)  =&gt; v
+}
+</code></pre></div></div>
+
+<p>这个求值函数借由对树 <code class="language-plaintext highlighter-rouge">t</code> 做<em>模式匹配</em>来求值。上述实作的意思应该从直观上便很明确：</p>
+
+<ol>
+  <li>首先检查树 <code class="language-plaintext highlighter-rouge">t</code> 是否为 <code class="language-plaintext highlighter-rouge">Sum</code>，如果是的话将左跟右侧子树绑定到新变量 <code class="language-plaintext highlighter-rouge">l</code>跟 <code class="language-plaintext highlighter-rouge">r</code>，然后再对箭头后方的表达式求值；这一个表达式可以使用(而且这边也用到)根据箭头左侧模式所绑定的变量，也就是 <code class="language-plaintext highlighter-rouge">l</code> 跟 <code class="language-plaintext highlighter-rouge">r</code>，</li>
+  <li>如果第一个检查失败，也就是说树不是 <code class="language-plaintext highlighter-rouge">Sum</code>，接下来检查 <code class="language-plaintext highlighter-rouge">t</code> 是否为 <code class="language-plaintext highlighter-rouge">Var</code>，如果是的话将 <code class="language-plaintext highlighter-rouge">Var</code> 所带的名称绑定到变量 <code class="language-plaintext highlighter-rouge">n</code> 并求值右侧表达式，</li>
+  <li>如果第二个检查也失败，表示树不是 <code class="language-plaintext highlighter-rouge">Sum</code> 也不是 <code class="language-plaintext highlighter-rouge">Var</code>，那便检查是不是 <code class="language-plaintext highlighter-rouge">Const</code>，如果是的话将 <code class="language-plaintext highlighter-rouge">Const</code> 所带的名称绑定到变量 <code class="language-plaintext highlighter-rouge">v</code>  并求值右侧表达式，</li>
+  <li>最后，如果全部检查都失败，会抛出异常表示匹配失败；这只会在有更多 <code class="language-plaintext highlighter-rouge">Tree</code> 的子类时发生。</li>
+</ol>
+
+<p>如上，模式匹配基本上就是尝试将一个值对一系列模式做匹配，并在一个模式成功匹配时抽取并命名该值的各部分，最后对一些代码求值，而这些代码通常会利用被命名到的部分。</p>
+
+<p>一个经验丰富的面向对象程序员也许会疑惑为何我们不将 <code class="language-plaintext highlighter-rouge">eval</code> 定义成 <code class="language-plaintext highlighter-rouge">Tree</code> 类跟子类的<em>方法</em>。由于 Scala 允许在 case class 中跟一般类一样定义函数，事实上我们可以这样做。要用模式匹配或是函数只是品味的问题，但是这会对扩充性有重要影响。</p>
+
+<ul>
+  <li>当使用函数时，增加新的节点类型是相当容易的，只要定义新的 <code class="language-plaintext highlighter-rouge">Tree</code> 子类即可。不过另一方面，为树增加新操作很麻烦，因为它需要修改 <code class="language-plaintext highlighter-rouge">Tree</code> 的所有子类。</li>
+  <li>当使用模式匹配时情况则反过来：增加新节点需要修改所有对树做模式匹配的函数将新节点纳入考虑；增加新操作则很简单，定义新函数就好。</li>
+</ul>
+
+<p>让我们定义新操作以更进一步的探讨模式匹配：对符号求导数。读者们可能还记得这个操作的规则：</p>
+
+<ol>
+  <li>和的导数是导数的和</li>
+  <li>如果是对变量 <code class="language-plaintext highlighter-rouge">v</code> 取导数，变量 <code class="language-plaintext highlighter-rouge">v</code> 的导数是1，不然就是0</li>
+  <li>常数的导数是0</li>
+</ol>
+
+<p>这些规则几乎可以从字面上直接翻成 Scala 代码：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def derive(t: Tree, v: String): Tree = t match {
+  case Sum(l, r) =&gt; Sum(derive(l, v), derive(r, v))
+  case Var(n) if (v == n) =&gt; Const(1)
+  case _ =&gt; Const(0)
+}
+</code></pre></div></div>
+
+<p>这个函数引入两个关于模式匹配的新观念。首先，变量的 <code class="language-plaintext highlighter-rouge">case</code> 运算式有一个<em>看守</em>，也就是 <code class="language-plaintext highlighter-rouge">if</code> 关键字之后的表达式。除非表达式求值为真，不然这个看守会让匹配直接失败。在这边是用来确定我们只在取导数变量跟被取导数变量名称相同时才回传常数 <code class="language-plaintext highlighter-rouge">1</code>。第二个新特征是可以匹配任何值的<em>万用字符</em> <code class="language-plaintext highlighter-rouge">_</code>。</p>
+
+<p>我们还没有探讨完模式匹配的全部功能，不过为了让这份文件保持简短，先就此打住。我们还是希望能看到这两个函数在真正的示例如何作用。因此让我们写一个简单的 <code class="language-plaintext highlighter-rouge">main</code> 函数，对表达式 <code class="language-plaintext highlighter-rouge">(x+x)+(7+y)</code> 做一些操作：先在环境 <code class="language-plaintext highlighter-rouge">{ x -&gt; 5, y -&gt; 7 }</code> 下计算结果，然后在对 <code class="language-plaintext highlighter-rouge">x</code> 接着对 <code class="language-plaintext highlighter-rouge">y</code> 取导数。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def main(args: Array[String]) {
+  val exp: Tree = Sum(Sum(Var("x"),Var("x")),Sum(Const(7),Var("y")))
+  val env: Environment = { case "x" =&gt; 5 case "y" =&gt; 7 }
+  println("Expression: " + exp)
+  println("Evaluation with x=5, y=7: " + eval(exp, env))
+  println("Derivative relative to x:\n " + derive(exp, "x"))
+  println("Derivative relative to y:\n " + derive(exp, "y"))
+}
+</code></pre></div></div>
+
+<p>执行这程序，得到预期的输出：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Expression: Sum(Sum(Var(x),Var(x)),Sum(Const(7),Var(y)))
+Evaluation with x=5, y=7: 24
+Derivative relative to x:
+ Sum(Sum(Const(1),Const(1)),Sum(Const(0),Const(0)))
+Derivative relative to y:
+ Sum(Sum(Const(0),Const(0)),Sum(Const(0),Const(1)))
+</code></pre></div></div>
+
+<p>研究这输出我们可以发现，取导数的结果应该在输出前更进一步化简。用模式匹配实现一个基本化简函数是一个很有趣 (但是意外的棘手) 的问题，在这边留给读者当练习。</p>
+
+<h2 id="特质-traits">特质 (Traits)</h2>
+
+<p>除了由父类继承行为以外，Scala 类还可以从一或多个<em>特质</em>导入行为。</p>
+
+<p>对一个 Java 程序员最简单去理解特质的方式应该是视它们为带有实例的接口。在 Scala 里，当一个类继承特质时，它实现了该特质的接口并继承所有特质带有的功能。</p>
+
+<p>为了理解特质的用处，让我们看一个经典示例：有序对象。大部分情况下，一个类所产生出来的对象之间可以互相比较大小是很有用的，如排序它们。在Java里可比较大小的对象实作 <code class="language-plaintext highlighter-rouge">Comparable</code> 介面。在Scala中借由定义等价于 <code class="language-plaintext highlighter-rouge">Comparable</code> 的特质 <code class="language-plaintext highlighter-rouge">Ord</code>，我们可以做的比Java稍微好一点。</p>
+
+<p>当在比较对象的大小时，有六个有用且不同的谓词 (predicate)：小于、小于等于、等于、不等于、大于等于、大于。但是把六个全部都实现很烦，尤其是当其中有四个可以用剩下两个表示的时候。也就是说，(举例来说) 只要有等于跟小于谓词，我们就可以表示其他四个。在 Scala 中这些观察可以很漂亮的用下面的特质声明呈现：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Ord {
+  def &lt; (that: Any): Boolean
+  def &lt;=(that: Any): Boolean =  (this &lt; that) || (this == that)
+  def &gt; (that: Any): Boolean = !(this &lt;= that)
+  def &gt;=(that: Any): Boolean = !(this &lt; that)
+}
+</code></pre></div></div>
+
+<p>这份定义同时创造了一个叫做 <code class="language-plaintext highlighter-rouge">Ord</code> 的新类型，跟 Java 的 <code class="language-plaintext highlighter-rouge">Comparable</code> 接口有着同样定位，且给了一份以第一个抽象谓词表示剩下三个谓词的预设实作。因为所有对象预设都有一份等于跟不等于的谓词，这边便没有定义。</p>
+
+<p>上面使用了一个 <code class="language-plaintext highlighter-rouge">Any</code> 类型，在 Scala 中这个类型是所有其他类型的父类型。因为它同时也是基本类型如 <code class="language-plaintext highlighter-rouge">Int</code>、<code class="language-plaintext highlighter-rouge">Float</code> 的父类型，可以将其视为更为一般化的 Java <code class="language-plaintext highlighter-rouge">Object</code> 类型。</p>
+
+<p>因此只要定义测试相等性跟小于的谓词，并且加入 <code class="language-plaintext highlighter-rouge">Ord</code>，就可以让一个类的对象们互相比较大小。让我们实作一个表示阳历日期的 <code class="language-plaintext highlighter-rouge">Date</code> 类来做为例子。这种日期是由日、月、年组成，我们将用整数来表示这三个资料。因此我们可以定义 <code class="language-plaintext highlighter-rouge">Date</code> 类为：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Date(y: Int, m: Int, d: Int) extends Ord {
+  def year = y
+  def month = m
+  def day = d
+  override def toString(): String = year + "-" + month + "-" + day
+</code></pre></div></div>
+
+<p>这边要注意的是声明在类名称跟参数之后的 <code class="language-plaintext highlighter-rouge">extends Ord</code>。这个语法声明了 <code class="language-plaintext highlighter-rouge">Date</code> 继承 <code class="language-plaintext highlighter-rouge">Ord</code> 特质。</p>
+
+<p>然后我们重新定义继承自 <code class="language-plaintext highlighter-rouge">Object</code> 的 <code class="language-plaintext highlighter-rouge">equals</code> 函数好让这个类可以正确的根据每个属性来比较日期。因为在 Java 中 <code class="language-plaintext highlighter-rouge">equals</code> 直接比较实际对象本身，并不能在这边用。于是我们有下面的例子：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>override def equals(that: Any): Boolean =
+  that.isInstanceOf[Date] &amp;&amp; {
+    val o = that.asInstanceOf[Date]
+    o.day == day &amp;&amp; o.month == month &amp;&amp; o.year == year
+  }
+</code></pre></div></div>
+
+<p>这个函数使用了预定义函数 <code class="language-plaintext highlighter-rouge">isInstanceOf</code> 跟 <code class="language-plaintext highlighter-rouge">asInstanceOf</code>。<code class="language-plaintext highlighter-rouge">isInstanceOf</code> 对应到 Java 的 <code class="language-plaintext highlighter-rouge">instanceof</code> 运算子，只在当使用它的对象之类型跟给定类型一样时传回真。 <code class="language-plaintext highlighter-rouge">asInstanceOf</code> 对应到 Java 的转型运算子，如果对象是给定类型的实例，该对象就会被视为给定类型，不然就会丢出 <code class="language-plaintext highlighter-rouge">ClassCastException</code> 。</p>
+
+<p>最后我们需要定义测试小于的谓词如下。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def &lt;(that: Any): Boolean = {
+  if (!that.isInstanceOf[Date])
+    error("cannot compare " + that + " and a Date")
+
+  val o = that.asInstanceOf[Date]
+  (year &lt; o.year) ||
+  (year == o.year &amp;&amp; (month &lt; o.month ||
+                     (month == o.month &amp;&amp; day &lt; o.day)))
+}
+</code></pre></div></div>
+
+<p>这边使用了另外一个预定义函数 <code class="language-plaintext highlighter-rouge">error</code>，它会丢出带着给定错误信息的例外。这便完成了 <code class="language-plaintext highlighter-rouge">Date</code> 类。这个类的实例可被视为日期或是可比较对象。而且它们通通都定义了之前所提到的六个比较谓词： <code class="language-plaintext highlighter-rouge">equals</code> 跟 <code class="language-plaintext highlighter-rouge">&lt;</code> 直接出现在类定义当中，其他则是继承自 <code class="language-plaintext highlighter-rouge">Ord</code> 特质。</p>
+
+<p>特质在其他场合也有用，不过详细探讨它们的用途并不在本文件目标内。</p>
+
+<h2 id="泛型">泛型</h2>
+
+<p>在这份教学里，我们最后要探讨的 Scala 特性是泛型。Java 程序员应该相当清楚在 Java 1.5 之前缺乏泛型所导致的问题。</p>
+
+<p>泛型指的是能够将类型也作为程序参数。举例来说，当程序员在为链表写函数库时，它必须决定列表的元素类型为何。由于这列表是要在许多不同场合使用，不可能决定列表的元素类型为如 <code class="language-plaintext highlighter-rouge">Int</code> 一类。这样限制太多。</p>
+
+<p>Java 程序员采用所有对象的父类 <code class="language-plaintext highlighter-rouge">Object</code>。这个解决办法并不理想，一方面这并不能用在基础类型 (<code class="language-plaintext highlighter-rouge">int</code>、<code class="language-plaintext highlighter-rouge">long</code>、<code class="language-plaintext highlighter-rouge">float</code> 之类)，再来这表示必须靠程序员手动加入大量的动态转型。</p>
+
+<p>Scala 借由可定义泛型类 (跟函数) 来解决这问题。让我们借由最简单的类容器来观察这点：引用，它可以是空的或者指向某类型的对象。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Reference[T] {
+  private var contents: T = _
+  def set(value: T) { contents = value }
+  def get: T = contents
+}
+</code></pre></div></div>
+
+<p>类 <code class="language-plaintext highlighter-rouge">Reference</code> 带有一个类型参数 <code class="language-plaintext highlighter-rouge">T</code>，这个参数会是容器内元素的类型。此类型被用做 <code class="language-plaintext highlighter-rouge">contents</code> 变量的类型、 <code class="language-plaintext highlighter-rouge">set</code> 函数的对象类型、 <code class="language-plaintext highlighter-rouge">get</code> 函数的回传类型。</p>
+
+<p>上面代码使用的 Scala 变量语法应该不需要过多的解释。值得注意的是赋与该变量的初始值是 <code class="language-plaintext highlighter-rouge">_</code>，该语法表示预设值。数值类型预设值是0，<code class="language-plaintext highlighter-rouge">Boolean</code> 类型是 <code class="language-plaintext highlighter-rouge">false</code>， <code class="language-plaintext highlighter-rouge">Unit</code> 类型是 <code class="language-plaintext highlighter-rouge">()</code> ，所有的对象类型是 <code class="language-plaintext highlighter-rouge">null</code>。</p>
+
+<p>为了使用 <code class="language-plaintext highlighter-rouge">Reference</code> 类型，我们必须指定 <code class="language-plaintext highlighter-rouge">T</code>，也就是这容器所包容的元素类型。举例来说，创造并使用该容器来容纳整数，我们可以这样写：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object IntegerReference {
+  def main(args: Array[String]) {
+    val cell = new Reference[Int]
+    cell.set(13)
+    println("Reference contains the half of " + (cell.get * 2))
+  }
+}
+</code></pre></div></div>
+
+<p>如例子中所展现，并不需要先将 <code class="language-plaintext highlighter-rouge">get</code> 函数所回传的值转型便能当做整数使用。同时因为被声明为储存整数，也不可能存除了整数以外的东西到这一个容器中。</p>
+
+<h2 id="结语">结语</h2>
+
+<p>本文件对Scala语言做了快速的概览并呈现一些基本的例子。对 Scala 有更多兴趣的读者可以阅读有更多进阶示例的 <em>Scala By Example</em>，并在需要的时候参阅 <em>Scala Language Specification</em> 。</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/tutorials/scala-for-java-programmers.html">English</a></li>
+          
+            
+            <li><a href="/es/tutorials/scala-for-java-programmers.html" class="lang">Español</a></li>
+          
+            
+            <li><a href="/ko/tutorials/scala-for-java-programmers.html" class="lang">한국어</a></li>
+          
+            
+            <li><a href="/de/tutorials/scala-for-java-programmers.html" class="lang">Deutsch</a></li>
+          
+            
+            <li><a href="/it/tutorials/scala-for-java-programmers.html" class="lang">Italiano</a></li>
+          
+            
+            <li><a href="/ja/tutorials/scala-for-java-programmers.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-tw/tutorials/scala-for-java-programmers.html" class="lang">中文 (繁體)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_zh-cn/tutorials/scala-for-java-programmers.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

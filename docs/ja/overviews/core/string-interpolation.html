@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      文字列の補間 | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ja/overviews/core/string-interpolation.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="文字列の補間"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="文字列の補間"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ja/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>文字列の補間</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Josh Suereth 著</strong><br />
+<strong>Eugene Yokota 訳</strong></p>
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>Scala 2.10.0 より、Scala は文字列の補間 (string interpolation) というデータから文字列を作成する機構を提供する。
+文字列の補間を使ってユーザは<b>加工文字列リテラル</b> (processed string literal) 内に直接変数の参照を埋め込むことができる。具体例で説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val name = "James"
+println(s"Hello, $name")  // Hello, James
+</code></pre></div></div>
+
+<p>上の例において、リテラル <code class="language-plaintext highlighter-rouge">s"Hello, $name"</code> は加工文字列リテラルだ。これはコンパイラがこのリテラルに対して何らかの追加処理を実行するということだ。加工文字リテラルは <code class="language-plaintext highlighter-rouge">"</code> の前にいくつかの文字を書くことで表記される。文字列の補間は <a href="https://docs.scala-lang.org/sips/pending/string-interpolation.html">SIP-11</a> によって導入され、実装の詳細もそこに書かれている。</p>
+
+<h2 id="用例">用例</h2>
+
+<p>Scala は <code class="language-plaintext highlighter-rouge">s</code>、<code class="language-plaintext highlighter-rouge">f</code>、そして <code class="language-plaintext highlighter-rouge">raw</code> という 3つの補間子 (interpolator) をあらかじめ提供する。</p>
+
+<h3 id="s-補間子"><code class="language-plaintext highlighter-rouge">s</code> 補間子</h3>
+
+<p>文字列リテラルの先頭に <code class="language-plaintext highlighter-rouge">s</code> を追加することで文字列の中で直接変数が使えるようになる。先ほどの例で既にみた機能だ:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val name = "James"
+println(s"Hello, $name")  // Hello, James
+</code></pre></div></div>
+
+<p>この例では、 <code class="language-plaintext highlighter-rouge">s</code> で加工される文字列の中に <code class="language-plaintext highlighter-rouge">$name</code> が入れ子になっている。<code class="language-plaintext highlighter-rouge">s</code> 補間子は <code class="language-plaintext highlighter-rouge">name</code> 変数の値をこの位置に挿入しなければいけないと知っているため、結果として <code class="language-plaintext highlighter-rouge">Hello, James</code> という文字列となる。<code class="language-plaintext highlighter-rouge">s</code> 補間子を使って、スコープ内にあるどの名前でも文字列の中に埋め込むことができる。</p>
+
+<p>文字列の補間は任意の式を受け取る事もできる。具体例でみると</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>println(s"1 + 1 = ${1 + 1}")
+</code></pre></div></div>
+
+<p>は文字列 <code class="language-plaintext highlighter-rouge">1 + 1 = 2</code> と表示する。<code class="language-plaintext highlighter-rouge">${}</code> を使って任意の式を埋め込むことができる。</p>
+
+<h3 id="f-補間子"><code class="language-plaintext highlighter-rouge">f</code> 補間子</h3>
+
+<p>文字列リテラルの先頭に <code class="language-plaintext highlighter-rouge">f</code> を追加することで、他の言語での <code class="language-plaintext highlighter-rouge">printf</code> のような簡単な書式付き文字列を作ることができる。<code class="language-plaintext highlighter-rouge">f</code> 補間子を使った場合は、全ての変数参照は <code class="language-plaintext highlighter-rouge">%d</code> のように <code class="language-plaintext highlighter-rouge">printf</code> 形式の書式を指定する必要がある。具体例で説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val height = 1.9d
+val name = "James"
+println(f"$name%s is $height%2.2f meters tall")  // James is 1.90 meters tall
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">f</code> 補間子は型安全だ。整数のみで動作する書式に <code class="language-plaintext highlighter-rouge">Double</code> を渡すとコンパイラはエラーを表示する。例えば:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val height: Double = 1.9d
+
+scala&gt; f"$height%4d"
+&lt;console&gt;:9: error: type mismatch;
+ found   : Double
+ required: Int
+           f"$height%4d"
+              ^
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">f</code> 補間子は Java にある文字列の書式付き出力ユーティリティを利用している。<code class="language-plaintext highlighter-rouge">%</code> 文字の後に書くことが許されている書式は <a href="https://docs.oracle.com/javase/jp/1.5.0/api/java/util/Formatter.html#detail">Formatter の javadoc</a> に説明されている。変数の後に <code class="language-plaintext highlighter-rouge">%</code> 文字が無い場合は、<code class="language-plaintext highlighter-rouge">%s</code> 書式 (<code class="language-plaintext highlighter-rouge">String</code>) だと仮定される。</p>
+
+<h3 id="raw-補間子"><code class="language-plaintext highlighter-rouge">raw</code> 補間子</h3>
+
+<p><code class="language-plaintext highlighter-rouge">raw</code> 補間子は <code class="language-plaintext highlighter-rouge">s</code> 補間子に似ているが、違いは文字列リテラル内でエスケープを実行しないことだ。以下の加工文字列をみてみよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; s"a\nb"
+res0: String =
+a
+b
+</code></pre></div></div>
+
+<p>ここで、<code class="language-plaintext highlighter-rouge">s</code> 補間子は <code class="language-plaintext highlighter-rouge">\n</code> を改行文字に置換した。<code class="language-plaintext highlighter-rouge">raw</code> 補間子はそれを行わない。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; raw"a\nb"
+res1: String = a\nb
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">raw</code> 補間子は <code class="language-plaintext highlighter-rouge">\n</code> のような式が改行になることを回避したい場合に便利だ。</p>
+
+<p>3つのデフォルトの補間子の他にユーザは独自の補間子を定義することもできる。</p>
+
+<h2 id="カスタム補間子">カスタム補間子</h2>
+
+<p>Scala では、全ての加工文字列リテラルは簡単なコード変換だ。コンパイラが以下のような形式の文字列リテラルを見つけると</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id"string content"
+</code></pre></div></div>
+
+<p>これは <a href="https://www.scala-lang.org/api/current/index.html#scala.StringContext"><code class="language-plaintext highlighter-rouge">StringContext</code></a> のインスタンスへのメソッドの呼び出し (<code class="language-plaintext highlighter-rouge">id</code>) へと変換される。このメソッドは implicit スコープ内で提供することもできる。独自の文字列の補間を定義するには、<code class="language-plaintext highlighter-rouge">StringContext</code> に新しいメソッドを追加する implicit クラスを作るだけでいい。以下に具体例で説明する:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 注意: 実行時のインスタンス化を避けるために AnyVal を継承する。
+// これに関しては値クラスのガイドを参照。
+implicit class JsonHelper(val sc: StringContext) extends AnyVal {
+  def json(args: Any*): JSONObject = sys.error("TODO - IMPLEMENT")
+}
+
+def giveMeSomeJson(x: JSONObject): Unit = ...
+
+giveMeSomeJson(json"{ name: $name, id: $id }")
+</code></pre></div></div>
+
+<p>この例では、文字列の補間を使って JSON リテラル構文に挑戦している。この構文を使うには implicit クラスの <code class="language-plaintext highlighter-rouge">JsonHelper</code> がスコープにある必要があり、また <code class="language-plaintext highlighter-rouge">json</code> メソッドを実装する必要がある。注意して欲しいのは書式文字列リテラルが文字列ではなく、<code class="language-plaintext highlighter-rouge">JSONObject</code> を返す点だ。</p>
+
+<p>コンパイラが <code class="language-plaintext highlighter-rouge">json"{ name: $name, id: $id }"</code> を見つけると、以下の式に書き換える:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new StringContext("{ name: ", ", id: ", " }").json(name, id)
+</code></pre></div></div>
+
+<p>さらに、implicit クラスは以下のように書き換える:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new JsonHelper(new StringContext("{ name: ", ", id: ", " }")).json(name, id)
+</code></pre></div></div>
+
+<p>そのため、<code class="language-plaintext highlighter-rouge">json</code> メソッドは生の String 部分と渡される式の値をみることができる。シンプルな (だけどバギーな) 実装を以下に示す:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit class JsonHelper(val sc: StringContext) extends AnyVal {
+  def json(args: Any*): JSONObject = {
+    val strings = sc.parts.iterator
+    val expressions = args.iterator
+    var buf = new StringBuilder(strings.next())
+    while(strings.hasNext) {
+      buf.append(expressions.next())
+      buf.append(strings.next())
+    }
+    parseJson(buf)
+  }
+}
+</code></pre></div></div>
+
+<p>加工文字列の文字列部分は <code class="language-plaintext highlighter-rouge">StringContext</code> の <code class="language-plaintext highlighter-rouge">parts</code> メンバーとして提供される。
+式の値は <code class="language-plaintext highlighter-rouge">json</code> メソッドに <code class="language-plaintext highlighter-rouge">args</code> パラメータとして渡される。<code class="language-plaintext highlighter-rouge">json</code> メソッドは、それを受け取って大きな文字列を生成した後 JSON へとパースする。より洗練された実装は文字列を生成せずに生の文字列と式の値から直接 JSON を構築するだろう。</p>
+
+<h2 id="制約">制約</h2>
+
+<p>文字列の補間は現在パターンマッチング文の中では動作しない。この機能は Scala 2.11 リリースを予定している。</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/string-interpolation.html">English</a></li>
+          
+            
+            <li><a href="/es/overviews/core/string-interpolation.html" class="lang">Español</a></li>
+          
+            
+            <li><a href="/ja/overviews/core/string-interpolation.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-cn/overviews/core/string-interpolation.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ja/overviews/core/string-interpolation.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

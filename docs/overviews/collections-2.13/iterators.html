@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Iterators | 
+      Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/collections-2.13/iterators.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Iterators"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Iterators"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections</div>
+          
+          <h1>Iterators</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>An iterator is not a collection, but rather a way to access the elements of a collection one by one. The two basic operations on an iterator <code class="language-plaintext highlighter-rouge">it</code> are <code class="language-plaintext highlighter-rouge">next</code> and <code class="language-plaintext highlighter-rouge">hasNext</code>. A call to <code class="language-plaintext highlighter-rouge">it.next()</code> will return the next element of the iterator and advance the state of the iterator. Calling <code class="language-plaintext highlighter-rouge">next</code> again on the same iterator will then yield the element one beyond the one returned previously. If there are no more elements to return, a call to <code class="language-plaintext highlighter-rouge">next</code> will throw a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>. You can find out whether there are more elements to return using <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/Iterator.html">Iterator</a>’s <code class="language-plaintext highlighter-rouge">hasNext</code> method.</p>
+
+<p>The most straightforward way to “step through” all the elements returned by an iterator <code class="language-plaintext highlighter-rouge">it</code> uses a while-loop:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while (it.hasNext)
+  println(it.next())
+</code></pre></div></div>
+
+<p>Iterators in Scala also provide analogues of most of the methods that you find in the <code class="language-plaintext highlighter-rouge">Traversable</code>, <code class="language-plaintext highlighter-rouge">Iterable</code> and <code class="language-plaintext highlighter-rouge">Seq</code> classes. For instance, they provide a <code class="language-plaintext highlighter-rouge">foreach</code> method which executes a given procedure on each element returned by an iterator. Using <code class="language-plaintext highlighter-rouge">foreach</code>, the loop above could be abbreviated to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>it foreach println
+</code></pre></div></div>
+
+<p>As always, for-expressions can be used as an alternate syntax for expressions involving <code class="language-plaintext highlighter-rouge">foreach</code>, <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">withFilter</code>, and <code class="language-plaintext highlighter-rouge">flatMap</code>, so yet another way to print all elements returned by an iterator would be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (elem &lt;- it) println(elem)
+</code></pre></div></div>
+
+<p>There’s an important difference between the foreach method on iterators and the same method on traversable collections: When called on an iterator, <code class="language-plaintext highlighter-rouge">foreach</code> will leave the iterator at its end when it is done. So calling <code class="language-plaintext highlighter-rouge">next</code> again on the same iterator will fail with a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>. By contrast, when called on a collection, <code class="language-plaintext highlighter-rouge">foreach</code> leaves the number of elements in the collection unchanged (unless the passed function adds or removes elements, but this is discouraged, because it may lead to surprising results).</p>
+
+<p>The other operations that <code class="language-plaintext highlighter-rouge">Iterator</code> has in common with <code class="language-plaintext highlighter-rouge">Iterable</code> have the same property. For instance, iterators provide a <code class="language-plaintext highlighter-rouge">map</code> method, which returns a new iterator:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val it = Iterator("a", "number", "of", "words")
+it: Iterator[java.lang.String] = &lt;iterator&gt;
+scala&gt; it.map(_.length)
+res1: Iterator[Int] = &lt;iterator&gt;
+scala&gt; it.hasNext
+res2: Boolean = true
+scala&gt; res1 foreach println
+1
+6
+2
+5
+scala&gt; it.hasNext
+res4: Boolean = false
+</code></pre></div></div>
+
+<p>As you can see, after the call to <code class="language-plaintext highlighter-rouge">it.map</code>, the <code class="language-plaintext highlighter-rouge">it</code> iterator hasn’t advanced to its end, but traversing the iterator
+resulting from the call to <code class="language-plaintext highlighter-rouge">res1.foreach</code> also traverses <code class="language-plaintext highlighter-rouge">it</code> and advances it to its end.</p>
+
+<p>Another example is the <code class="language-plaintext highlighter-rouge">dropWhile</code> method, which can be used to find the first elements of an iterator that has a certain property. For instance, to find the first word in the iterator above that has at least two characters you could write:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val it = Iterator("a", "number", "of", "words")
+it: Iterator[java.lang.String] = &lt;iterator&gt;
+scala&gt; it dropWhile (_.length &lt; 2)
+res4: Iterator[java.lang.String] = &lt;iterator&gt;
+scala&gt; res4.next()
+res5: java.lang.String = number
+</code></pre></div></div>
+
+<p>Note again that <code class="language-plaintext highlighter-rouge">it</code> was changed by the call to <code class="language-plaintext highlighter-rouge">dropWhile</code>: it now points to the second word “number” in the list.
+In fact, <code class="language-plaintext highlighter-rouge">it</code> and the result <code class="language-plaintext highlighter-rouge">res4</code> returned by <code class="language-plaintext highlighter-rouge">dropWhile</code> will return exactly the same sequence of elements.</p>
+
+<p>One way to circumvent this behavior is to <code class="language-plaintext highlighter-rouge">duplicate</code> the underlying iterator instead of calling methods on it directly.
+The <em>two</em> iterators that result will each return exactly the same elements as the underlying iterator <code class="language-plaintext highlighter-rouge">it</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val (words, ns) = Iterator("a", "number", "of", "words").duplicate
+words: Iterator[String] = &lt;iterator&gt;
+ns: Iterator[String] = &lt;iterator&gt;
+
+scala&gt; val shorts = words.filter(_.length &lt; 3).toList
+shorts: List[String] = List(a, of)
+
+scala&gt; val count = ns.map(_.length).sum
+count: Int = 14
+</code></pre></div></div>
+
+<p>The two iterators work independently: advancing one does not affect the other, so that each can be
+destructively modified by invoking arbitrary methods. This creates the illusion of iterating over
+the elements twice, but the effect is achieved through internal buffering.
+As usual, the underlying iterator <code class="language-plaintext highlighter-rouge">it</code> cannot be used directly and must be discarded.</p>
+
+<p>In summary, iterators behave like collections <em>if one never accesses an iterator again after invoking a method on it</em>. The Scala collection libraries make this explicit with an abstraction <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/IterableOnce.html">IterableOnce</a>, which is a common superclass of <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/Iterable.html">Iterable</a> and <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/Iterator.html">Iterator</a>. <code class="language-plaintext highlighter-rouge">IterableOnce[A]</code> only has two methods: <code class="language-plaintext highlighter-rouge">iterator: Iterator[A]</code> and <code class="language-plaintext highlighter-rouge">knownSize: Int</code>. If an <code class="language-plaintext highlighter-rouge">IterableOnce</code> object is in fact an <code class="language-plaintext highlighter-rouge">Iterator</code>, its <code class="language-plaintext highlighter-rouge">iterator</code> operation always returns itself, in its current state, but if it is an <code class="language-plaintext highlighter-rouge">Iterable</code>, its <code class="language-plaintext highlighter-rouge">iterator</code> operation always return a new <code class="language-plaintext highlighter-rouge">Iterator</code>. A common use case of <code class="language-plaintext highlighter-rouge">IterableOnce</code> is as an argument type for methods that can take either an iterator or a collection as argument. An example is the appending method <code class="language-plaintext highlighter-rouge">concat</code> in class <code class="language-plaintext highlighter-rouge">Iterable</code>. It takes an <code class="language-plaintext highlighter-rouge">IterableOnce</code> parameter, so you can append elements coming from either an iterator or a collection.</p>
+
+<p>All operations on iterators are summarized below.</p>
+
+<h3 id="operations-in-class-iterator">Operations in class Iterator</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>WHAT IT IS</th>
+      <th>WHAT IT DOES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Abstract Methods:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.next()</code></td>
+      <td>Returns next element on iterator and advances past it.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.hasNext</code></td>
+      <td>Returns <code class="language-plaintext highlighter-rouge">true</code> if <code class="language-plaintext highlighter-rouge">it</code> can return another element.</td>
+    </tr>
+    <tr>
+      <td><strong>Variations:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.buffered</code></td>
+      <td>A buffered iterator returning all elements of <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it grouped size</code></td>
+      <td>An iterator that yields the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in fixed-sized sequence “chunks”.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it sliding size</code></td>
+      <td>An iterator that yields the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in sequences representing a sliding fixed-sized window.</td>
+    </tr>
+    <tr>
+      <td><strong>Duplication:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.duplicate</code></td>
+      <td>A pair of iterators that each independently return all elements of <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Additions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it concat jt</code><br />or <code class="language-plaintext highlighter-rouge">it ++ jt</code></td>
+      <td>An iterator returning all elements returned by iterator <code class="language-plaintext highlighter-rouge">it</code>, followed by all elements returned by iterator <code class="language-plaintext highlighter-rouge">jt</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.padTo(len, x)</code></td>
+      <td>The iterator that first returns all elements of <code class="language-plaintext highlighter-rouge">it</code> and then follows that by copies of <code class="language-plaintext highlighter-rouge">x</code> until length <code class="language-plaintext highlighter-rouge">len</code> elements are returned overall.</td>
+    </tr>
+    <tr>
+      <td><strong>Maps:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it map f</code></td>
+      <td>The iterator obtained from applying the function <code class="language-plaintext highlighter-rouge">f</code> to every element returned from <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it flatMap f</code></td>
+      <td>The iterator obtained from applying the iterator-valued function <code class="language-plaintext highlighter-rouge">f</code> to every element in <code class="language-plaintext highlighter-rouge">it</code> and appending the results.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it collect f</code></td>
+      <td>The iterator obtained from applying the partial function <code class="language-plaintext highlighter-rouge">f</code> to every element in <code class="language-plaintext highlighter-rouge">it</code> for which it is defined and collecting the results.</td>
+    </tr>
+    <tr>
+      <td><strong>Conversions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toArray</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in an array.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toList</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in a list.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toIterable</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in an iterable.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toSeq</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in a sequence.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toIndexedSeq</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in an indexed sequence.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toLazyList</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in a lazy list.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toSet</code></td>
+      <td>Collects the elements returned by <code class="language-plaintext highlighter-rouge">it</code> in a set.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.toMap</code></td>
+      <td>Collects the key/value pairs returned by <code class="language-plaintext highlighter-rouge">it</code> in a map.</td>
+    </tr>
+    <tr>
+      <td><strong>Copying:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.copyToArray(arr, s, n)</code></td>
+      <td>Copies at most <code class="language-plaintext highlighter-rouge">n</code> elements returned by <code class="language-plaintext highlighter-rouge">it</code> to array <code class="language-plaintext highlighter-rouge">arr</code> starting at index <code class="language-plaintext highlighter-rouge">s</code>. The last two arguments are optional.</td>
+    </tr>
+    <tr>
+      <td><strong>Size Info:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.isEmpty</code></td>
+      <td>Test whether the iterator is empty (opposite of <code class="language-plaintext highlighter-rouge">hasNext</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.nonEmpty</code></td>
+      <td>Test whether the collection contains elements (alias of <code class="language-plaintext highlighter-rouge">hasNext</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.size</code></td>
+      <td>The number of elements returned by <code class="language-plaintext highlighter-rouge">it</code>. Note: <code class="language-plaintext highlighter-rouge">it</code> will be at its end after this operation!</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.length</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">it.size</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.knownSize</code></td>
+      <td>The number of elements, if this one is known without modifying the iterator’s state, otherwise <code class="language-plaintext highlighter-rouge">-1</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Element Retrieval Index Search:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it find p</code></td>
+      <td>An option containing the first element returned by <code class="language-plaintext highlighter-rouge">it</code> that satisfies <code class="language-plaintext highlighter-rouge">p</code>, or <code class="language-plaintext highlighter-rouge">None</code> is no element qualifies. Note: The iterator advances to after the element, or, if none is found, to the end.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it indexOf x</code></td>
+      <td>The index of the first element returned by <code class="language-plaintext highlighter-rouge">it</code> that equals <code class="language-plaintext highlighter-rouge">x</code>. Note: The iterator advances past the position of this element.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it indexWhere p</code></td>
+      <td>The index of the first element returned by <code class="language-plaintext highlighter-rouge">it</code> that satisfies <code class="language-plaintext highlighter-rouge">p</code>. Note: The iterator advances past the position of this element.</td>
+    </tr>
+    <tr>
+      <td><strong>Subiterators:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it take n</code></td>
+      <td>An iterator returning of the first <code class="language-plaintext highlighter-rouge">n</code> elements of <code class="language-plaintext highlighter-rouge">it</code>. Note: it will advance to the position after the <code class="language-plaintext highlighter-rouge">n</code>‘th element, or to its end, if it contains less than <code class="language-plaintext highlighter-rouge">n</code> elements.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it drop n</code></td>
+      <td>The iterator that starts with the <code class="language-plaintext highlighter-rouge">(n+1)</code>‘th element of <code class="language-plaintext highlighter-rouge">it</code>. Note: <code class="language-plaintext highlighter-rouge">it</code> will advance to the same position.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.slice(m,n)</code></td>
+      <td>The iterator that returns a slice of the elements returned from it, starting with the <code class="language-plaintext highlighter-rouge">m</code>‘th element and ending before the <code class="language-plaintext highlighter-rouge">n</code>‘th element.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it takeWhile p</code></td>
+      <td>An iterator returning elements from <code class="language-plaintext highlighter-rouge">it</code> as long as condition <code class="language-plaintext highlighter-rouge">p</code> is true.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it dropWhile p</code></td>
+      <td>An iterator skipping elements from <code class="language-plaintext highlighter-rouge">it</code> as long as condition <code class="language-plaintext highlighter-rouge">p</code> is <code class="language-plaintext highlighter-rouge">true</code>, and returning the remainder.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it filter p</code></td>
+      <td>An iterator returning all elements from <code class="language-plaintext highlighter-rouge">it</code> that satisfy the condition <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it withFilter p</code></td>
+      <td>Same as <code class="language-plaintext highlighter-rouge">it</code> filter <code class="language-plaintext highlighter-rouge">p</code>. Needed so that iterators can be used in for-expressions.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it filterNot p</code></td>
+      <td>An iterator returning all elements from <code class="language-plaintext highlighter-rouge">it</code> that do not satisfy the condition <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.distinct</code></td>
+      <td>An iterator returning the elements from <code class="language-plaintext highlighter-rouge">it</code> without duplicates.</td>
+    </tr>
+    <tr>
+      <td><strong>Subdivisions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it partition p</code></td>
+      <td>Splits <code class="language-plaintext highlighter-rouge">it</code> into a pair of two iterators: one returning all elements from <code class="language-plaintext highlighter-rouge">it</code> that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>, the other returning all elements from <code class="language-plaintext highlighter-rouge">it</code> that do not.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it span p</code></td>
+      <td>Splits <code class="language-plaintext highlighter-rouge">it</code> into a pair of two iterators: one returning all elements of the prefix of <code class="language-plaintext highlighter-rouge">it</code> that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>, the other returning all remaining elements of <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Element Conditions:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it forall p</code></td>
+      <td>A boolean indicating whether the predicate p holds for all elements returned by <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it exists p</code></td>
+      <td>A boolean indicating whether the predicate p holds for some element in <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it count p</code></td>
+      <td>The number of elements in <code class="language-plaintext highlighter-rouge">it</code> that satisfy the predicate <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Folds:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.foldLeft(z)(op)</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements returned by <code class="language-plaintext highlighter-rouge">it</code>, going left to right and starting with <code class="language-plaintext highlighter-rouge">z</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.foldRight(z)(op)</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements returned by <code class="language-plaintext highlighter-rouge">it</code>, going right to left and starting with <code class="language-plaintext highlighter-rouge">z</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it reduceLeft op</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements returned by non-empty iterator <code class="language-plaintext highlighter-rouge">it</code>, going left to right.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it reduceRight op</code></td>
+      <td>Apply binary operation <code class="language-plaintext highlighter-rouge">op</code> between successive elements returned by non-empty iterator <code class="language-plaintext highlighter-rouge">it</code>, going right to left.</td>
+    </tr>
+    <tr>
+      <td><strong>Specific Folds:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.sum</code></td>
+      <td>The sum of the numeric element values returned by iterator <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.product</code></td>
+      <td>The product of the numeric element values returned by iterator <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.min</code></td>
+      <td>The minimum of the ordered element values returned by iterator <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.max</code></td>
+      <td>The maximum of the ordered element values returned by iterator <code class="language-plaintext highlighter-rouge">it</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Zippers:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it zip jt</code></td>
+      <td>An iterator of pairs of corresponding elements returned from iterators <code class="language-plaintext highlighter-rouge">it</code> and <code class="language-plaintext highlighter-rouge">jt</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.zipAll(jt, x, y)</code></td>
+      <td>An iterator of pairs of corresponding elements returned from iterators <code class="language-plaintext highlighter-rouge">it</code> and <code class="language-plaintext highlighter-rouge">jt</code>, where the shorter iterator is extended to match the longer one by appending elements <code class="language-plaintext highlighter-rouge">x</code> or <code class="language-plaintext highlighter-rouge">y</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.zipWithIndex</code></td>
+      <td>An iterator of pairs of elements returned from <code class="language-plaintext highlighter-rouge">it</code> with their indices.</td>
+    </tr>
+    <tr>
+      <td><strong>Update:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.patch(i, jt, r)</code></td>
+      <td>The iterator resulting from <code class="language-plaintext highlighter-rouge">it</code> by replacing <code class="language-plaintext highlighter-rouge">r</code> elements starting with <code class="language-plaintext highlighter-rouge">i</code> by the patch iterator <code class="language-plaintext highlighter-rouge">jt</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Comparison:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it sameElements jt</code></td>
+      <td>A test whether iterators <code class="language-plaintext highlighter-rouge">it</code> and <code class="language-plaintext highlighter-rouge">jt</code> return the same elements in the same order. Note: Using the iterators after this operation is undefined and subject to change.</td>
+    </tr>
+    <tr>
+      <td><strong>Strings:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.addString(b, start, sep, end)</code></td>
+      <td>Adds a string to <code class="language-plaintext highlighter-rouge">StringBuilder</code> <code class="language-plaintext highlighter-rouge">b</code> which shows all elements returned by <code class="language-plaintext highlighter-rouge">it</code> between separators <code class="language-plaintext highlighter-rouge">sep</code> enclosed in strings <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">end</code>. <code class="language-plaintext highlighter-rouge">start</code>, <code class="language-plaintext highlighter-rouge">sep</code>, <code class="language-plaintext highlighter-rouge">end</code> are all optional.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">it.mkString(start, sep, end)</code></td>
+      <td>Converts the collection to a string which shows all elements returned by <code class="language-plaintext highlighter-rouge">it</code> between separators <code class="language-plaintext highlighter-rouge">sep</code> enclosed in strings <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">end</code>. <code class="language-plaintext highlighter-rouge">start</code>, <code class="language-plaintext highlighter-rouge">sep</code>, <code class="language-plaintext highlighter-rouge">end</code> are all optional.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="laziness">Laziness</h3>
+
+<p>Unlike operations directly on a concrete collection like <code class="language-plaintext highlighter-rouge">List</code>, operations on <code class="language-plaintext highlighter-rouge">Iterator</code> are lazy.</p>
+
+<p>A lazy operation does not immediately compute all of its results. Instead, it computes the results as they are individually requested.</p>
+
+<p>So the expression <code class="language-plaintext highlighter-rouge">(1 to 10).iterator.map(println)</code> would not print anything to the screen. The <code class="language-plaintext highlighter-rouge">map</code> method in this case doesn’t apply its argument function to the values in the range, it returns a new <code class="language-plaintext highlighter-rouge">Iterator</code> that will do this as each one is requested. Adding <code class="language-plaintext highlighter-rouge">.toList</code> to the end of that expression will actually print the elements.</p>
+
+<p>A consequence of this is that a method like <code class="language-plaintext highlighter-rouge">map</code> or <code class="language-plaintext highlighter-rouge">filter</code> won’t necessarily apply its argument function to all of the input elements. The expression <code class="language-plaintext highlighter-rouge">(1 to 10).iterator.map(println).take(5).toList</code> would only print the values <code class="language-plaintext highlighter-rouge">1</code> to <code class="language-plaintext highlighter-rouge">5</code>, for instance, since those are only ones that will be requested from the <code class="language-plaintext highlighter-rouge">Iterator</code> returned by <code class="language-plaintext highlighter-rouge">map</code>.</p>
+
+<p>This is one of the reasons why it’s important to only use pure functions as arguments to <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">fold</code> and similar methods. Remember, a pure function has no side-effects, so one would not normally use <code class="language-plaintext highlighter-rouge">println</code> in a <code class="language-plaintext highlighter-rouge">map</code>. <code class="language-plaintext highlighter-rouge">println</code> is used to demonstrate laziness as it’s not normally visible with pure functions.</p>
+
+<p>Laziness is still valuable, despite often not being visible, as it can prevent unneeded computations from happening, and can allow for working with infinite sequences, like so:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def zipWithIndex[A](i: Iterator[A]): Iterator[(Int, A)] =
+  Iterator.from(0).zip(i)
+</code></pre></div></div>
+
+<h3 id="buffered-iterators">Buffered iterators</h3>
+
+<p>Sometimes you want an iterator that can “look ahead”, so that you can inspect the next element to be returned without advancing past that element. Consider for instance, the task to skip leading empty strings from an iterator that returns a sequence of strings. You might be tempted to write the following</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def skipEmptyWordsNOT(it: Iterator[String]) =
+  while (it.next().isEmpty) {}
+</code></pre></div></div>
+
+<p>But looking at this code more closely, it’s clear that this is wrong: The code will indeed skip leading empty strings, but it will also advance <code class="language-plaintext highlighter-rouge">it</code> past the first non-empty string!</p>
+
+<p>The solution to this problem is to use a buffered iterator. Class <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/BufferedIterator.html">BufferedIterator</a> is a subclass of <a href="https://www.scala-lang.org/api/2.13.6/scala/collection/Iterator.html">Iterator</a>, which provides one extra method, <code class="language-plaintext highlighter-rouge">head</code>. Calling <code class="language-plaintext highlighter-rouge">head</code> on a buffered iterator will return its first element but will not advance the iterator. Using a buffered iterator, skipping empty words can be written as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def skipEmptyWords(it: BufferedIterator[String]) =
+  while (it.head.isEmpty) { it.next() }
+</code></pre></div></div>
+
+<p>Every iterator can be converted to a buffered iterator by calling its <code class="language-plaintext highlighter-rouge">buffered</code> method. Here’s an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val it = Iterator(1, 2, 3, 4)
+it: Iterator[Int] = &lt;iterator&gt;
+scala&gt; val bit = it.buffered
+bit: scala.collection.BufferedIterator[Int] = &lt;iterator&gt;
+scala&gt; bit.head
+res10: Int = 1
+scala&gt; bit.next()
+res11: Int = 1
+scala&gt; bit.next()
+res12: Int = 2
+scala&gt; bit.headOption
+res13: Option[Int] = Some(3)
+</code></pre></div></div>
+
+<p>Note that calling <code class="language-plaintext highlighter-rouge">head</code> on the buffered iterator <code class="language-plaintext highlighter-rouge">bit</code> does not advance it. Therefore, the subsequent call <code class="language-plaintext highlighter-rouge">bit.next()</code> returns the same value as <code class="language-plaintext highlighter-rouge">bit.head</code>.</p>
+
+<p>As usual, the underlying iterator must not be used directly and must be discarded.</p>
+
+<p>The buffered iterator only buffers the next element when <code class="language-plaintext highlighter-rouge">head</code> is invoked. Other derived iterators,
+such as those produced by <code class="language-plaintext highlighter-rouge">duplicate</code> and <code class="language-plaintext highlighter-rouge">partition</code>, may buffer arbitrary subsequences of the
+underlying iterator. But iterators can be efficiently joined by adding them together with <code class="language-plaintext highlighter-rouge">++</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def collapse(it: Iterator[Int]) = if (!it.hasNext) Iterator.empty else {
+     | var head = it.next
+     | val rest = if (head == 0) it.dropWhile(_ == 0) else it
+     | Iterator.single(head) ++ rest
+     | }
+collapse: (it: Iterator[Int])Iterator[Int]
+
+scala&gt; def collapse(it: Iterator[Int]) = {
+     | val (zeros, rest) = it.span(_ == 0)
+     | zeros.take(1) ++ rest
+     | }
+collapse: (it: Iterator[Int])Iterator[Int]
+
+scala&gt; collapse(Iterator(0, 0, 0, 1, 2, 3, 4)).toList
+res14: List[Int] = List(0, 1, 2, 3, 4)
+</code></pre></div></div>
+
+<p>In the second version of <code class="language-plaintext highlighter-rouge">collapse</code>, the unconsumed zeros are buffered internally.
+In the first version, any leading zeros are dropped and the desired result constructed
+as a concatenated iterator, which simply calls its two constituent iterators in turn.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="views.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="creating-collections-from-scratch.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/introduction.html">Introduction</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/overview.html">Mutable and Immutable Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/trait-iterable.html">Trait Iterable</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/seqs.html">The sequence traits Seq, IndexedSeq, and LinearSeq</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/sets.html">Sets</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/maps.html">Maps</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/concrete-immutable-collection-classes.html">Concrete Immutable Collection Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/concrete-mutable-collection-classes.html">Concrete Mutable Collection Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/arrays.html">Arrays</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/strings.html">Strings</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/performance-characteristics.html">Performance Characteristics</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/equality.html">Equality</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/views.html">Views</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/collections-2.13/iterators.html">Iterators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/creating-collections-from-scratch.html">Creating Collections From Scratch</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/conversions-between-java-and-scala-collections.html">Conversions Between Java and Scala Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/collections-2.13/conversion-between-option-and-the-collections.html">Conversion Between Option and the Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections-2.13/iterators.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ru/overviews/collections-2.13/iterators.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/collections-2.13/iterators.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

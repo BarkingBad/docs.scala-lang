@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Scala Compiler Plugins | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/plugins/index.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Scala Compiler Plugins"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Scala Compiler Plugins"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Scala Compiler Plugins</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Lex Spoon (2008)</strong><br />
+<strong>Seth Tisue (2018)</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>A compiler plugin is a compiler component that lives in a separate JAR
+file from the main compiler. The compiler can then load that plugin and
+gain extra functionality.</p>
+
+<p>This tutorial briefly walks you through writing a plugin for the Scala
+compiler. It does not go into depth on how to make your plugin
+actually do something useful, but just shows the basics needed to
+write a plugin and hook it into the Scala compiler.</p>
+
+<h2 id="you-can-read-but-you-can-also-watch-tv">You can read, but you can also watch TV</h2>
+
+<p>The contents of this guide overlaps substantially with Seth Tisue’s
+talk “Scala Compiler Plugins 101” (<a href="https://www.youtube.com/watch?v=h5NZjuxS5Qo">32 minute video</a>).
+Although the talk is from April 2018, nearly all of the information
+in it still applies (as of November 2020).</p>
+
+<h2 id="when-to-write-a-plugin">When to write a plugin</h2>
+
+<p>Plugins let you modify the behavior of the Scala compiler without
+changing the main Scala distribution.  If you write a compiler
+plugin that contains your compiler modification, then anyone you
+distribute the plugin to will be able to use your modification.</p>
+
+<p>You should not actually need to modify the Scala compiler very
+frequently, because Scala’s light, flexible syntax will frequently
+allow you to provide a better solution using a clever library.</p>
+
+<p>There are some times, though, where a compiler modification is the
+best choice even for Scala.  Popular compiler plugins (as of 2018)
+include:</p>
+
+<ul>
+  <li>Alternate compiler back ends such as <a href="https://www.scala-js.org">Scala.js</a>, <a href="http://scala-native.org">Scala Native</a>, and
+<a href="https://developer.lightbend.com/docs/fortify/current/">Fortify SCA for Scala</a>.</li>
+  <li>Linters such as <a href="https://www.wartremover.org">Wartremover</a> and <a href="https://github.com/sksamuel/scapegoat">Scapegoat</a>.</li>
+  <li>Plugins that alter Scala’s syntax, such as <a href="https://github.com/typelevel/kind-projector">kind-projector</a>.</li>
+  <li>Plugins that alter Scala’s behavior around errors and warnings,
+such as <a href="https://github.com/ghik/silencer">silencer</a>, <a href="https://github.com/tek/splain">splain</a> and <a href="https://scala-clippy.org/">clippy</a>.</li>
+  <li>Plugins that analyze the structure of source code, such as
+<a href="https://github.com/lightbend/scala-sculpt">Sculpt</a>, <a href="https://github.com/lihaoyi/acyclic">acyclic</a> and <a href="https://github.com/VirtusLab/graphbuddy">graph-buddy</a>.</li>
+  <li>Plugins that instrument user code to collect information,
+such as the code coverage tool <a href="https://github.com/scoverage/scalac-scoverage-plugin">scoverage</a>.</li>
+  <li>Plugins that enable tooling. One such plugin is <a href="https://scalameta.org/docs/semanticdb/guide.html">semanticdb</a>, which enables <a href="https://scalacenter.github.io/scalafix/">scalafix</a> (a well-known refactoring and linting tool) to do its work. Another one is <a href="https://github.com/scalamacros/paradise">Macro Paradise</a> (only needed for Scala 2.12).</li>
+  <li>Plugins that modify existing Scala constructs in user code,
+such as <a href="https://github.com/oleg-py/better-monadic-for">better-monadic-for</a> and <a href="https://github.com/polyvariant/better-tostring">better-tostring</a>.</li>
+  <li>Plugins that add entirely new constructs to Scala by
+restructuring user code, such as <a href="https://github.com/scala/scala-continuations">scala-continuations</a>.</li>
+</ul>
+
+<p>Some tasks that required a compiler plugin in very early Scala
+versions can now be done using macros instead; see <a href="/overviews/macros/overview.html">Macros</a>.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>A compiler plugin consists of:</p>
+
+<ul>
+  <li>Some code that implements an additional compiler phase.</li>
+  <li>Some code that uses the compiler plugin API to specify
+when exactly this new phase should run.</li>
+  <li>Additional code that specifies what options the plugin
+accepts.</li>
+  <li>An XML file containing metadata about the plugin</li>
+</ul>
+
+<p>All of this is then packaged in a JAR file.</p>
+
+<p>To use the plugin, a user adds the JAR file to their compile-time
+classpath and enables it by invoking <code class="language-plaintext highlighter-rouge">scalac</code> with <code class="language-plaintext highlighter-rouge">-Xplugin:...</code>.
+(Some build tools provide shortcuts for this; see below.)</p>
+
+<p>All of this will be described in more detail below.</p>
+
+<h2 id="a-simple-plugin-beginning-to-end">A simple plugin, beginning to end</h2>
+
+<p>This section walks through writing a simple plugin.</p>
+
+<p>Suppose you want to write a plugin that detects division by zero in
+obvious cases. For example, suppose someone compiles a silly program
+like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Test {
+  val five = 5
+  val amount = five / 0
+  def main(args: Array[String]): Unit = {
+    println(amount)
+  }
+}
+</code></pre></div></div>
+
+<p>Our plugin will generate an error like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Test.scala:3: error: definitely division by zero
+  val amount = five / 0
+                    ^
+</code></pre></div></div>
+
+<p>There are several steps to making the plugin. First you need to write
+and compile the source of the plugin itself. Here is the source code for
+it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package localhost
+
+import scala.tools.nsc
+import nsc.Global
+import nsc.Phase
+import nsc.plugins.Plugin
+import nsc.plugins.PluginComponent
+
+class DivByZero(val global: Global) extends Plugin {
+  import global._
+
+  val name = "divbyzero"
+  val description = "checks for division by zero"
+  val components = List[PluginComponent](Component)
+
+  private object Component extends PluginComponent {
+    val global: DivByZero.this.global.type = DivByZero.this.global
+    val runsAfter = List[String]("refchecks")
+    val phaseName = DivByZero.this.name
+    def newPhase(_prev: Phase) = new DivByZeroPhase(_prev)
+    class DivByZeroPhase(prev: Phase) extends StdPhase(prev) {
+      override def name = DivByZero.this.name
+      def apply(unit: CompilationUnit): Unit = {
+        for ( tree @ Apply(Select(rcvr, nme.DIV), List(Literal(Constant(0)))) &lt;- unit.body
+             if rcvr.tpe &lt;:&lt; definitions.IntClass.tpe)
+          {
+            global.reporter.error(tree.pos, "definitely division by zero")
+          }
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>There is a lot going on even with this simple plugin. Here are a few
+aspects of note.</p>
+
+<ul>
+  <li>The plugin is described by a top-level class that inherits from
+<code class="language-plaintext highlighter-rouge">Plugin</code>, takes a <code class="language-plaintext highlighter-rouge">Global</code> as a constructor parameter, and exports
+that parameter as a <code class="language-plaintext highlighter-rouge">val</code> named <code class="language-plaintext highlighter-rouge">global</code>.</li>
+  <li>The plugin must define one or more component objects that inherits
+from <code class="language-plaintext highlighter-rouge">PluginComponent</code>. In this case the sole component is the
+nested <code class="language-plaintext highlighter-rouge">Component</code> object. The components of a plugin are listed in
+the <code class="language-plaintext highlighter-rouge">components</code> field.</li>
+  <li>Each component must define <code class="language-plaintext highlighter-rouge">newPhase</code> method that creates the
+component’s sole compiler phase. That phase will be inserted just
+after the specified compiler phase, in this case <code class="language-plaintext highlighter-rouge">refchecks</code>.</li>
+  <li>Each phase must define a method <code class="language-plaintext highlighter-rouge">apply</code> that does whatever you
+desire on the given compilation unit. Usually this involves
+examining the trees within the unit and doing some transformation on
+the tree.</li>
+  <li>The pattern match inside the body of <code class="language-plaintext highlighter-rouge">apply</code> shows one way of
+detecting certain tree shapes in user code.
+(Quasiquotes are another way.)  <code class="language-plaintext highlighter-rouge">Apply</code> denotes a method call,
+and <code class="language-plaintext highlighter-rouge">Select</code> denotes the “selection” of a member, such as <code class="language-plaintext highlighter-rouge">a.b</code>.
+The details of tree processing are out of scope for this document,
+but see “Going further”, below, for links to further documentation.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">runsAfter</code> method gives the plugin author control over when the
+phase is executed. As seen above, it is expected to return a list of
+phase names. This makes it possible to specify multiple phase names to
+precede the plugin. It is also possible, but optional, to specify a
+<code class="language-plaintext highlighter-rouge">runsBefore</code> constraint of phase names that this phase should
+precede. And it is also possible, but again optional, to specify a
+<code class="language-plaintext highlighter-rouge">runsRightAfter</code> constraint to run immediately after a specific
+phase.</p>
+
+<p>More information on how phase ordering is controlled can be
+found in the <a href="https://www.scala-lang.org/old/sid/2">Compiler Phase and Plug-in Initialization
+SID</a>.  (This document was last
+updated in 2009, so may be outdated in some details.)</p>
+
+<p>The simplest way to specify an order is to implement <code class="language-plaintext highlighter-rouge">runsRightAfter</code>.</p>
+
+<p>That’s the plugin itself. The next thing you need to do is write a
+plugin descriptor for it. A plugin descriptor is a small XML file giving
+the name and the entry point for the plugin. In this case it should look
+as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plugin&gt;
+  &lt;name&gt;divbyzero&lt;/name&gt;
+  &lt;classname&gt;localhost.DivByZero&lt;/classname&gt;
+&lt;/plugin&gt;
+</code></pre></div></div>
+
+<p>The name of the plugin should match what is specified in your <code class="language-plaintext highlighter-rouge">Plugin</code>
+subclass, and the <code class="language-plaintext highlighter-rouge">classname</code> of the plugin is the name of the <code class="language-plaintext highlighter-rouge">Plugin</code>
+subclass. All other information about your plugin is in the <code class="language-plaintext highlighter-rouge">Plugin</code>
+subclass.</p>
+
+<p>Put this XML in a file named <code class="language-plaintext highlighter-rouge">scalac-plugin.xml</code> and then create a jar
+with that file plus your compiled code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir classes
+scalac -d classes ExPlugin.scala
+cp scalac-plugin.xml classes
+(cd classes; jar cf ../divbyzero.jar .)
+</code></pre></div></div>
+
+<p>That’s how it works with no build tool. If you are using sbt to build
+your plugin, then the XML file goes in <code class="language-plaintext highlighter-rouge">src/main/resources</code>.</p>
+
+<h2 id="using-a-plugin-with-scalac">Using a plugin with scalac</h2>
+
+<p>Now you can use your plugin with <code class="language-plaintext highlighter-rouge">scalac</code> by adding the <code class="language-plaintext highlighter-rouge">-Xplugin:</code>
+option:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ scalac -Xplugin:divbyzero.jar Test.scala
+Test.scala:3: error: definitely division by zero
+  val amount = five / 0
+                    ^
+one error found
+</code></pre></div></div>
+
+<h2 id="publishing-your-plugin">Publishing your plugin</h2>
+
+<p>When you are happy with how the plugin behaves, you may wish to
+publish the JAR to a Maven or Ivy repository where it can be resolved
+by a build tool.  (For testing purposes, you can also publish it to
+your local machine only. In sbt, this is accomplished with
+<code class="language-plaintext highlighter-rouge">publishLocal</code>.)</p>
+
+<p>In most respects, compiler plugins are ordinary Scala libraries,
+so publishing a plugin is like publishing any library.
+See the <a href="/overviews/contributors/index.html">Library Author Guide</a>
+and/or your build tool’s documentation on publishing.</p>
+
+<h2 id="using-a-plugin-from-sbt">Using a plugin from sbt</h2>
+
+<p>To make it convenient for end users to use your plugin once it has
+been published, sbt provides an <code class="language-plaintext highlighter-rouge">addCompilerPlugin</code> method you can
+call in your build definition, e.g.:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>addCompilerPlugin("org.divbyzero" %% "divbyzero" % "1.0")
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">addCompilerPlugin</code> performs multiple actions. It adds the JAR to the
+classpath (the compilation classpath only, not the runtime classpath)
+via <code class="language-plaintext highlighter-rouge">libraryDependencies</code>, and it also customizes <code class="language-plaintext highlighter-rouge">scalacOptions</code> to
+enable the plugin using <code class="language-plaintext highlighter-rouge">-Xplugin</code>.</p>
+
+<p>For more details, see <a href="https://www.scala-sbt.org/1.x/docs/Compiler-Plugins.html">Compiler Plugin
+Support</a> in
+the sbt manual.</p>
+
+<h2 id="developing-compiler-plugins-with-an-ide">Developing compiler plugins with an IDE</h2>
+
+<p>Internally, the use of path-dependent types in the Scala compiler
+may confuse some IDEs such as IntelliJ.  Correct plugin code may
+sometimes be highlighted as erroneous.  The IDE is usually still
+useful under these circumstances, but remember to take its feedback
+with a grain of salt.  If the error highlighting is distracting,
+the IDE may have a setting where you can disable it.</p>
+
+<h2 id="useful-compiler-options">Useful compiler options</h2>
+
+<p>The previous section walked you through the basics of writing, using,
+and installing a compiler plugin. There are several compiler options
+related to plugins that you should know about.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-Xshow-phases</code>—show a list of all compiler phases, including ones
+that come from plugins.</li>
+  <li><code class="language-plaintext highlighter-rouge">-Xplugin-list</code>—show a list of all loaded plugins.</li>
+  <li><code class="language-plaintext highlighter-rouge">-Xplugin-disable:...</code>—disable a plugin. Whenever the compiler
+encounters a plugin descriptor for the named plugin, it will skip
+over it and not even load the associated <code class="language-plaintext highlighter-rouge">Plugin</code> subclass.</li>
+  <li><code class="language-plaintext highlighter-rouge">-Xplugin-require:...</code>—require that a plugin is loaded or else abort.
+This is mostly useful in build scripts.</li>
+  <li><code class="language-plaintext highlighter-rouge">-Xpluginsdir</code>—specify the directory the compiler will scan to
+load plugins. Again, this is mostly useful for build scripts.</li>
+</ul>
+
+<p>The following options are not specific to writing plugins, but are
+frequently used by plugin writers:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-Xprint:</code>—print out the compiler trees immediately after the
+specified phase runs.</li>
+  <li><code class="language-plaintext highlighter-rouge">-Ybrowse:</code>—like <code class="language-plaintext highlighter-rouge">-Xprint:</code>, but instead of printing the trees,
+opens a Swing-based GUI for browsing the trees.</li>
+</ul>
+
+<h2 id="adding-your-own-options">Adding your own options</h2>
+
+<p>A compiler plugin can provide command-line options to the user. All such
+option start with <code class="language-plaintext highlighter-rouge">-P:</code> followed by the name of the plugin. For example,
+<code class="language-plaintext highlighter-rouge">-P:foo:bar</code> will pass option <code class="language-plaintext highlighter-rouge">bar</code> to plugin <code class="language-plaintext highlighter-rouge">foo</code>.</p>
+
+<p>To add options to your own plugin, you must do two things. First, add a
+<code class="language-plaintext highlighter-rouge">processOptions</code> method to your <code class="language-plaintext highlighter-rouge">Plugin</code> subclass with the following
+type signature:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>override def processOptions(
+    options: List[String],
+    error: String =&gt; Unit)
+</code></pre></div></div>
+
+<p>The compiler will invoke this method with all options the users
+specifies for your plugin. For convenience, the common prefix of <code class="language-plaintext highlighter-rouge">-P:</code>
+followed by your plugin name will already be stripped from all of the
+options passed in.</p>
+
+<p>The second thing you should do is add a help message for your plugins
+options. All you need to do is override the <code class="language-plaintext highlighter-rouge">val</code> named <code class="language-plaintext highlighter-rouge">optionsHelp</code>.
+The string you specify will be printed out as part of the compiler’s
+<code class="language-plaintext highlighter-rouge">-help</code> output. By convention, each option is printed on one line. The
+option itself is printed starting in column 3, and the description of
+the option is printed starting in column 31. Type <code class="language-plaintext highlighter-rouge">scalac -help</code> to make
+sure you got the help string looking right.</p>
+
+<p>Here is a complete plugin that has an option. This plugin has no
+behavior other than to print out its option.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package localhost
+
+import scala.tools.nsc
+import nsc.Global
+import nsc.Phase
+import nsc.plugins.Plugin
+import nsc.plugins.PluginComponent
+
+class Silly(val global: Global) extends Plugin {
+  import global._
+
+  val name = "silly"
+  val description = "goose"
+  val components = List[PluginComponent](Component)
+
+  var level = 1000000
+
+  override def processOptions(options: List[String], error: String =&gt; Unit): Unit = {
+    for (option &lt;- options) {
+      if (option.startsWith("level:")) {
+        level = option.substring("level:".length).toInt
+      } else {
+        error("Option not understood: "+option)
+      }
+    }
+  }
+
+  override val optionsHelp: Option[String] = Some(
+    "  -P:silly:level:n             set the silliness to level n")
+
+  private object Component extends PluginComponent {
+    val global: Silly.this.global.type = Silly.this.global
+    val runsAfter = List[String]("refchecks");
+    val phaseName = Silly.this.name
+    def newPhase(_prev: Phase) = new SillyPhase(_prev)
+
+    class SillyPhase(prev: Phase) extends StdPhase(prev) {
+      override def name = Silly.this.name
+      def apply(unit: CompilationUnit): Unit = {
+        println("Silliness level: " + level)
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<h2 id="going-further">Going further</h2>
+
+<p>For the details on how to make your plugin accomplish some task, you
+must consult other documentation on compiler internals. Relevant
+documents include:</p>
+
+<ul>
+  <li><a href="/overviews/reflection/symbols-trees-types.html">Symbols, Trees, and Types</a> is the single most important reference about the data structures used inside the compiler.</li>
+  <li><a href="/overviews/quasiquotes/intro.html">Quasiquotes</a> are useful for pattern matching on ASTs.
+    <ul>
+      <li>The <a href="/overviews/quasiquotes/syntax-summary.html">syntax summary</a> in the quasiquotes guide is a useful concordance between user-level syntax and AST node types.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>It’s also useful to look at other plugins and to study existing phases
+within the compiler source code.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/plugins/index.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

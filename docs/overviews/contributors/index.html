@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Library Author Guide | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/contributors/index.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Library Author Guide"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Library Author Guide"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Library Author Guide</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>This document targets developers who want to publish their work as a library that other programs can depend on.
+The document steps through the main questions that should be answered before publishing an open source library,
+and shows how a typical development environment looks like.</p>
+
+<p>An example of library that follows the recommendations given here is available at
+<a href="https://github.com/scalacenter/library-example">https://github.com/scalacenter/library-example</a>. For the sake
+of conciseness, this example uses commonly chosen technologies like GitHub, Travis CI, and sbt, but alternative
+technologies will be mentioned and adapting the contents of this document for them should be straightforward.</p>
+
+<h2 id="choose-an-open-source-license">Choose an Open Source License</h2>
+
+<p>The first step consists in choosing an open source license specifying under which conditions the library
+can be reused by other people. You can browse the already existing open source licenses on the
+<a href="https://opensource.org/licenses">opensource.org</a> website. If you don’t know which one to pick, we suggest
+using the <a href="https://opensource.org/licenses/Apache-2.0">Apache License 2.0</a>, which allows users to use (including
+commercial use), share, modify and redistribute (including under different terms) your work under the condition
+that the license and copyright notices are preserved. For the record, Scala itself is licensed with Apache 2.0.</p>
+
+<p>Once you have chosen a license, <em>apply</em> it to your project by creating a <code class="language-plaintext highlighter-rouge">LICENSE</code> file in the root directory
+of your project with the license contents or a link to it. This file usually indicates who owns the copyright.
+In our example of <a href="https://github.com/scalacenter/library-example/blob/master/LICENSE">LICENSE file</a>, we have
+written that all the contributors (as per the Git log) own the copyright.</p>
+
+<h2 id="host-the-source-code">Host the Source Code</h2>
+
+<p>We recommend sharing the source code of your library by hosting it on a public <a href="https://git-scm.com/">Git</a>
+hosting site such as <a href="https://github.com">GitHub</a>, <a href="https://bitbucket.org">Bitbucket</a> or <a href="https://gitlab.com">GitLab</a>.
+In our example, we use GitHub.</p>
+
+<p>Your project should include a <a href="https://github.com/scalacenter/library-example/blob/master/README.md">README</a> file
+including a description of what the library does and some documentation (or links to the documentation).</p>
+
+<p>You should take care of putting only source files under version control. For instance, artifacts generated by the
+build system should <em>not</em> be versioned. You can instruct Git to ignore such files by adding them to a
+<a href="https://github.com/scalacenter/library-example/blob/master/.gitignore">.gitignore</a> file.</p>
+
+<p>In case you are using sbt, make sure your repository has a
+<a href="https://github.com/scalacenter/library-example/blob/master/project/build.properties">project/build.properties</a>
+file indicating the sbt version to use, so that people (or tools) working on your repository will automatically
+use the correct sbt version.</p>
+
+<h2 id="setup-continuous-integration">Setup Continuous Integration</h2>
+
+<p>The first reason for setting up a continuous integration (CI) server is to systematically run tests on pull requests.
+Examples of CI servers that are free for open source projects are <a href="https://github.com/features/actions">GitHub Actions</a>,
+<a href="https://travis-ci.com">Travis CI</a>, <a href="https://drone.io">Drone</a> or <a href="https://appveyor.com">AppVeyor</a>.</p>
+
+<p>Our example uses Github Actions. This feature is enabled by default on GitHub repositories. You can verify if that is
+the case in the <em>Actions</em> section of the <em>Settings</em> tab of the repository.
+If <em>Disable all actions</em> is checked, then Actions are not enabled and you can activate them
+by selecting <em>Allow all actions</em>, <em>Allow local actions only</em> or <em>Allow select actions</em>.</p>
+
+<p>With Actions enabled, you can create a <em>workflow definition file</em>. A <strong>workflow</strong> is an automated procedure,
+composed of one or more jobs. A <strong>job</strong> is a set of sequential steps that are executed on the same runner.
+A <strong>step</strong> is an individual task that can run commands; a step can be either an <em>action</em> or a shell command.
+An <strong>action</strong> is the smallest building block of a workflow, it is possible to reuse community actions or to
+define new ones.</p>
+
+<p>To create a workflow, create a <em>yaml</em> file in the directory <code class="language-plaintext highlighter-rouge">.github/workflows/</code> in the repository, for example
+<code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code> with the following content:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Continuous integration</span>
+<span class="na">on</span><span class="pi">:</span> <span class="s">push</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">ci</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span> <span class="c1"># Retrieve the content of the repository</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">olafurpg/setup-scala@v12</span> <span class="c1"># Set up a jdk and sbt</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">unit tests</span> <span class="c1"># Custom action consisting of a shell command</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">sbt +test</span>
+</code></pre></div></div>
+
+<p>This workflow is called <em>Continuous integration</em> and it will run every time one
+or more commits are pushed to the repository. It contains only one job called
+<em>ci</em>, which will run on an Ubuntu runner and that is composed of three
+actions.  The action <code class="language-plaintext highlighter-rouge">setup-scala</code> installs the sbt launcher in the runner. Then
+the job runs <code class="language-plaintext highlighter-rouge">sbt +test</code>, which loads the sbt version specified in
+<code class="language-plaintext highlighter-rouge">project/build.properties</code>, and runs the project tests using the Scala version
+defined in the file <code class="language-plaintext highlighter-rouge">build.sbt</code>.</p>
+
+<p>The workflow above will run at any push to any branch of the repository. You
+can specify the branch or add more triggers such as pull requests, releases,
+tags or schedules. More information about workflow triggers is available
+<a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows">here</a>.
+while the <code class="language-plaintext highlighter-rouge">setup-scala</code> action is hosted <a href="https://github.com/olafurpg/setup-scala">in this
+repository</a>.</p>
+
+<p>For reference, here is our complete <a href="https://github.com/scalacenter/library-example/blob/master/.github/.workflows/ci.yml">workflow example
+file</a>.</p>
+
+<h2 id="publish-a-release">Publish a Release</h2>
+
+<p>Most build tools resolve third-party dependencies by looking them up on public repositories such as
+<a href="https://search.maven.org/">Maven Central</a>. These repositories host
+the library binaries as well as additional information such as the library authors, the open source
+license, and the dependencies of the library itself. Each release of a library is identified by
+a <code class="language-plaintext highlighter-rouge">groupId</code>, an <code class="language-plaintext highlighter-rouge">artifactId</code>, and a <code class="language-plaintext highlighter-rouge">version</code> number. For instance, consider the following dependency
+(written in sbt’s syntax):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"org.slf4j"</span> <span class="o">%</span> <span class="s">"slf4j-simple"</span> <span class="o">%</span> <span class="s">"1.7.25"</span>
+</code></pre></div></div>
+
+<p>Its <code class="language-plaintext highlighter-rouge">groupId</code> is <code class="language-plaintext highlighter-rouge">org.slf4j</code>, its <code class="language-plaintext highlighter-rouge">artifactId</code> is <code class="language-plaintext highlighter-rouge">slf4j-simple</code>, and its <code class="language-plaintext highlighter-rouge">version</code> is <code class="language-plaintext highlighter-rouge">1.7.25</code>.</p>
+
+<p>In this document, we show how to publish the Maven Central repository.
+This process requires having a <a href="https://central.sonatype.org/">Sonatype</a> account and a PGP key pair to
+sign the binaries.</p>
+
+<h3 id="create-a-sonatype-account-and-project">Create a Sonatype Account and Project</h3>
+
+<p>Follow the instructions given on the <a href="https://central.sonatype.org/pages/ossrh-guide.html#initial-setup">OSSRH Guide</a>
+to create a new Sonatype account (unless you already have one) and to
+<a href="https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&amp;pid=10134">create a new project ticket</a>. This latter
+step is where you define the <code class="language-plaintext highlighter-rouge">groupId</code> that you will release to. You can use a domain name that you already own,
+otherwise a common practice is to use <code class="language-plaintext highlighter-rouge">io.github.(username)</code> (where <code class="language-plaintext highlighter-rouge">(username)</code> is replaced with your GitHub
+username).</p>
+
+<p>This step has to be performed only once per <code class="language-plaintext highlighter-rouge">groupId</code> you want to have.</p>
+
+<h3 id="create-a-pgp-key-pair">Create a PGP Key Pair</h3>
+
+<p>Sonatype <a href="https://central.sonatype.org/publish/requirements">requires</a> that you sign the published files
+with PGP. Follow the instructions <a href="https://central.sonatype.org/publish/requirements/gpg">here</a>
+to generate a key pair and to distribute your public key to a key server.</p>
+
+<p>This step has to be performed only once per person.</p>
+
+<h3 id="setup-your-project">Setup Your Project</h3>
+
+<p>In case you use sbt, we recommend using the <a href="https://github.com/xerial/sbt-sonatype">sbt-sonatype</a>
+and <a href="https://www.scala-sbt.org/sbt-pgp/">sbt-pgp</a> plugins to publish your artifacts. Add the following
+dependencies to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.xerial.sbt"</span> <span class="o">%</span> <span class="s">"sbt-sonatype"</span> <span class="o">%</span> <span class="s">"3.9.7"</span><span class="o">)</span>
+<span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.jsuereth"</span> <span class="o">%</span> <span class="s">"sbt-pgp"</span> <span class="o">%</span> <span class="s">"2.1.1"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And make sure your build fulfills the <a href="https://central.sonatype.org/publish/requirements">Sonatype requirements</a>
+by defining the following settings:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// used as `artifactId`</span>
+<span class="n">name</span> <span class="o">:=</span> <span class="s">"library-example"</span>
+
+<span class="c1">// used as `groupId`</span>
+<span class="n">organization</span> <span class="o">:=</span> <span class="s">"ch.epfl.scala"</span>
+
+<span class="c1">// open source licenses that apply to the project</span>
+<span class="n">licenses</span> <span class="o">:=</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">"APL2"</span> <span class="o">-&gt;</span> <span class="nf">url</span><span class="o">(</span><span class="s">"https://www.apache.org/licenses/LICENSE-2.0.txt"</span><span class="o">))</span>
+
+<span class="n">description</span> <span class="o">:=</span> <span class="s">"A library that does nothing useful"</span>
+
+<span class="k">import</span> <span class="nn">xerial.sbt.Sonatype._</span>
+<span class="n">sonatypeProjectHosting</span> <span class="o">:=</span> <span class="nc">Some</span><span class="o">(</span><span class="nc">GitHubHosting</span><span class="o">(</span><span class="s">"scalacenter"</span><span class="o">,</span> <span class="s">"library-example"</span><span class="o">,</span> <span class="s">"julien.richard-foy@epfl.ch"</span><span class="o">))</span>
+
+<span class="c1">// publish to the sonatype repository</span>
+<span class="n">publishTo</span> <span class="o">:=</span> <span class="nv">sonatypePublishToBundle</span><span class="o">.</span><span class="py">value</span>
+</code></pre></div></div>
+
+<p>Put your Sonatype credentials in a <code class="language-plaintext highlighter-rouge">$HOME/.sbt/1.0/sonatype.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">credentials</span> <span class="o">+=</span> <span class="nc">Credentials</span><span class="o">(</span><span class="s">"Sonatype Nexus Repository Manager"</span><span class="o">,</span>
+        <span class="s">"oss.sonatype.org"</span><span class="o">,</span>
+        <span class="s">"(Sonatype user name)"</span><span class="o">,</span>
+        <span class="s">"(Sonatype password)"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>(Put your actual user name and password in place of <code class="language-plaintext highlighter-rouge">(Sonatype user name)</code> and <code class="language-plaintext highlighter-rouge">(Sonatype password)</code>)</p>
+
+<p><strong>Never</strong> check this file into version control.</p>
+
+<p>Last, we recommend using the <a href="https://github.com/dwijnand/sbt-dynver">sbt-dynver</a> plugin to set the version number
+of your releases. Add the following dependency to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.dwijnand"</span> <span class="o">%</span> <span class="s">"sbt-dynver"</span> <span class="o">%</span> <span class="s">"4.1.1"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And make sure your build does <strong>not</strong> define the <code class="language-plaintext highlighter-rouge">version</code> setting.</p>
+
+<h3 id="cut-a-release">Cut a Release</h3>
+
+<p>With this setup, the process for cutting a release is the following.</p>
+
+<p>Create a Git tag whose name begins with a lowercase <code class="language-plaintext highlighter-rouge">v</code> followed by the version number:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag v0.1.0
+</code></pre></div></div>
+
+<p>This tag is used by <code class="language-plaintext highlighter-rouge">sbt-dynver</code> to compute the version of the release (<code class="language-plaintext highlighter-rouge">0.1.0</code>, in this example).</p>
+
+<p>Deploy your artifact to the Central repository with the <code class="language-plaintext highlighter-rouge">publishSigned</code> sbt task:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt publishSigned
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sbt-sonatype</code> will package your project and ask your PGP passphrase to sign the files with your PGP key.
+It will then upload the files to Sonatype using your account credentials. When the task is finished, you can
+check the artifacts in the <a href="https://oss.sonatype.org">Nexus Repository Manager</a> (under “Staging Repositories” in the side menu − if you do not see it, make sure you are logged in).</p>
+
+<p>Finally, perform the release with the <code class="language-plaintext highlighter-rouge">sonatypeRelease</code> sbt task:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sbt sonatypeRelease
+</code></pre></div></div>
+
+<h2 id="setup-continuous-publication">Setup Continuous Publication</h2>
+
+<p>The release process described above has some drawbacks:</p>
+<ul>
+  <li>it requires running three commands,</li>
+  <li>it does not guarantee that the library is in a stable state when it is published (ie, some tests may be failing),</li>
+  <li>in case you work in a team, each contributor has to setup its own PGP key pair and have to have Sonatype
+credentials with access to the project’s <code class="language-plaintext highlighter-rouge">groupId</code>.</li>
+</ul>
+
+<p>Continuous publication addresses these issues by delegating the publication process to the CI server. It works as
+follows: any contributor with write access to the repository can cut a release by pushing a Git tag, the CI server
+first checks that the tests pass and then runs the publication commands.</p>
+
+<p>The remaining sections show how to setup GitHub Actions for continuous publication on Sonatype. You can find instructions
+for Travis CI in the <a href="https://github.com/olafurpg/sbt-ci-release">sbt-ci-release</a> plugin documentation.</p>
+
+<h3 id="setup-the-ci-server">Setup the CI Server</h3>
+
+<p>You have to give your Sonatype account credentials to the CI server, as well as your PGP key pair. Fortunately,
+it is possible to securely give this information by using the secret management system of the CI server.</p>
+
+<h4 id="export-your-sonatype-account-credentials">Export Your Sonatype Account Credentials</h4>
+
+<p>Create two <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">GitHub Encrypted secrets</a>
+for your Sonatype account credentials: <code class="language-plaintext highlighter-rouge">SONATYPE_USERNAME</code> and <code class="language-plaintext highlighter-rouge">SONATYPE_PASSWORD</code>.
+To do so, go to the <em>Settings</em> tab of the repository and select <em>Secrets</em> on the left panel.
+You can then use the button <em>New repository secret</em> to open the secret creation menu where you will enter
+the name of the secret and its content.</p>
+
+<p>Repository Secrets allow us to safely store confidential information and to expose
+it to Actions workflows without the risk of committing them to git history.</p>
+
+<h4 id="export-your-pgp-key-pair">Export Your PGP Key Pair</h4>
+
+<p>To export your PGP key pair, you first need to know its identifier. Use the following command to list
+your PGP keys:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gpg <span class="nt">--list-secret-keys</span>
+/home/julien/.gnupg/secring.gpg
+<span class="nt">-------------------------------</span>
+sec   2048R/BE614499 2016-08-12
+uid                  Julien Richard-Foy &lt;julien.richard-foy@epfl.ch&gt;
+</code></pre></div></div>
+
+<p>In my case, I have one key pair, whose ID is <code class="language-plaintext highlighter-rouge">BE614499</code>.</p>
+
+<p>Then:</p>
+
+<ol>
+  <li>Create a new Secret containing the passphrase of your PGP key named <code class="language-plaintext highlighter-rouge">PGP_PASSPHRASE</code>.</li>
+  <li>Create a new Secret containing the base64 encoded secret of your private key, which you can obtain
+ by running:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># macOS
+gpg --armor --export-secret-keys $LONG_ID | base64
+# Ubuntu (assuming GNU base64)
+gpg --armor --export-secret-keys $LONG_ID | base64 -w0
+# Arch
+gpg --armor --export-secret-keys $LONG_ID | base64 | sed -z 's;\n;;g'
+# FreeBSD (assuming BSD base64)
+gpg --armor --export-secret-keys $LONG_ID | base64
+# Windows
+gpg --armor --export-secret-keys %LONG_ID% | openssl base64
+</code></pre></div>    </div>
+  </li>
+  <li>Publish your public key signature to a public server, for example <a href="http://keyserver.ubuntu.com:11371/">http://keyserver.ubuntu.com:11371</a>.
+ You can obtain the signature by running:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># macOS and linux
+gpg --armor --export $LONG_ID
+# Windows
+gpg --armor --export %LONG_ID%
+</code></pre></div>    </div>
+    <p>(Replace <code class="language-plaintext highlighter-rouge">(key ID)</code> with <strong>your</strong> key ID)</p>
+  </li>
+</ol>
+
+<h4 id="publish-from-the-ci-server">Publish From the CI Server</h4>
+
+<p>On GitHub Actions, you can define a workflow to publish the library when a tag is pushed:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/publish.yml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Continuous publication</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">**'</span><span class="pi">]</span>
+    <span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">v*</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">release</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+<span class="err">	</span>  <span class="na">fetch-depth</span><span class="pi">:</span> <span class="m">0</span> <span class="c1"># fetch all tags, required for sbt-dynver</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">olafurpg/setup-scala@v12</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">sbt ci-release</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">PGP_PASSPHRASE</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">PGP_SECRET</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">SONATYPE_PASSWORD</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">SONATYPE_USERNAME</span><span class="pi">:</span> <span class="s">$</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">env</code> statement exposes the secrets you defined earlier to the publication process through
+environment variables.</p>
+
+<h3 id="cut-a-release-1">Cut a Release</h3>
+
+<p>Just push a Git tag:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag v0.2.0
+<span class="nv">$ </span>git push origin v0.2.0
+</code></pre></div></div>
+
+<h2 id="cross-publish">Cross-Publish</h2>
+
+<p>If you have written a library, you probably want it to be usable from several Scala major versions (e.g., 2.11.x,
+2.12.x, 2.13.x, etc.).</p>
+
+<p>Define the versions you want to support in the <code class="language-plaintext highlighter-rouge">crossScalaVersions</code> setting, in your <code class="language-plaintext highlighter-rouge">build.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">crossScalaVersions</span> <span class="o">:=</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">"2.13.6"</span><span class="o">,</span> <span class="s">"2.12.14"</span><span class="o">)</span>
+<span class="n">scalaVersion</span> <span class="o">:=</span> <span class="nv">crossScalaVersions</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">head</span>
+</code></pre></div></div>
+
+<p>The second line makes sbt use by default the first Scala version of the <code class="language-plaintext highlighter-rouge">crossScalaVersions</code>.
+The CI job will use all the Scala versions of your build definition.</p>
+
+<h2 id="publish-online-documentation">Publish Online Documentation</h2>
+
+<p>An important property of documentation is that the code examples should compile and behave as they
+are presented. There are various ways to ensure that this property holds. One way, supported by
+<a href="https://github.com/scalameta/mdoc">mdoc</a>, is to actually
+evaluate code examples and write the result of their evaluation in the produced documentation.
+Another way consists in embedding snippets of source code coming from a real module or example.</p>
+
+<p>The <a href="https://github.com/sbt/sbt-site">sbt-site</a> plugin can help you organize, build and preview your
+documentation. It is well integrated with other sbt plugins for generating the documentation content
+or for publishing the resulting documentation to a web server.</p>
+
+<p>Finally, a simple solution for publishing the documentation online consists in using the
+<a href="https://pages.github.com/">GitHub Pages</a> service, which is automatically available for each GitHub
+repository. The <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a> plugin can automatically upload
+an sbt-site to GitHub Pages.</p>
+
+<h3 id="create-the-documentation-site">Create the Documentation Site</h3>
+
+<p>In this example we choose to use <a href="https://developer.lightbend.com/docs/paradox/current/index.html">Paradox</a>
+because it runs on the JVM and thus doesn’t require setting up another VM on your system (in contrast with
+most other documentation generators, which are based on Ruby, Node.js or Python).</p>
+
+<p>To install Paradox and sbt-site, add the following lines to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.typesafe.sbt"</span> <span class="o">%</span> <span class="s">"sbt-site"</span> <span class="o">%</span> <span class="s">"1.4.1"</span><span class="o">)</span>
+<span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.lightbend.paradox"</span> <span class="o">%</span> <span class="s">"sbt-paradox"</span> <span class="o">%</span> <span class="s">"0.9.2"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And then add the following configuration to your <code class="language-plaintext highlighter-rouge">build.sbt</code> file:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nf">enablePlugins</span><span class="o">(</span><span class="nc">ParadoxPlugin</span><span class="o">,</span> <span class="nc">ParadoxSitePlugin</span><span class="o">)</span>
+<span class="nc">Paradox</span> <span class="o">/</span> <span class="n">sourceDirectory</span> <span class="o">:=</span> <span class="nv">sourceDirectory</span><span class="o">.</span><span class="py">value</span> <span class="o">/</span> <span class="s">"documentation"</span></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">ParadoxPlugin</code> is responsible of generating the website, and the <code class="language-plaintext highlighter-rouge">ParadoxSitePlugin</code> provides
+integration with <code class="language-plaintext highlighter-rouge">sbt-site</code>.
+The second line is optional, it defines the location of the website source files. In our case, in
+<code class="language-plaintext highlighter-rouge">src/documentation</code>.</p>
+
+<p>Add your documentation entry point in an <code class="language-plaintext highlighter-rouge">src/documentation/index.md</code> file. A typical documentation entry point
+uses the library name as title, shows a short sentence describing the purpose of the library, and a code
+snippet for adding the library to a build definition:</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="gh"># Library Example</span>
+
+A library that does nothing.
+
+<span class="gu">## Setup</span>
+
+Add the following dependency to your <span class="sb">`build.sbt`</span> file:
+
+@@@vars
+<span class="p">~~~</span><span class="nl"> scala
+</span><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"ch.epfl.scala"</span> <span class="o">%%</span> <span class="s">"library-example"</span> <span class="o">%</span> <span class="s">"$project.version$"</span>
+<span class="p">~~~</span>
+@@@
+
+@@@ index
+<span class="p">*</span> <span class="p">[</span><span class="nv">Getting Started</span><span class="p">](</span><span class="sx">getting-started.md</span><span class="p">)</span>
+<span class="p">*</span> <span class="p">[</span><span class="nv">Reference</span><span class="p">](</span><span class="sx">reference.md</span><span class="p">)</span>
+@@@</code></pre></figure>
+
+<p>Note that in our case we rely on a variable substitution mechanism to inject the correct version number
+in the documentation so that we don’t have to always update that part of the docs each time we publish a
+new release.</p>
+
+<p>Our example also includes an <code class="language-plaintext highlighter-rouge">@@@index</code> directive, defining how the content of the documentation is organized.
+In our case, the documentation contains two pages, the first one provides a quick tutorial for getting
+familiar with the library, and the second one provides more detailed information.</p>
+
+<p>The sbt-site plugin provides a convenient <code class="language-plaintext highlighter-rouge">previewAuto</code> task that serves the resulting documentation locally,
+so that you can see how it looks like, and re-generate the documentation when you edit it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:library-example&gt; previewAuto
+Embedded server listening at
+  https://127.0.0.1:4000
+Press any key to stop.
+</code></pre></div></div>
+
+<p>Browse the <a href="https://localhost:4000">https://localhost:4000</a> URL to see the result:</p>
+
+<p><img src="/resources/images/documentation-preview.png" alt="" /></p>
+
+<h3 id="include-code-examples">Include Code Examples</h3>
+
+<p>This section shows two ways to make sure that code examples included in the documentation do compile
+and behave as they are presented.</p>
+
+<h4 id="using-a-markdown-preprocessor">Using a Markdown Preprocessor</h4>
+
+<p>One approach consists in using a Markdown preprocessor such as
+<a href="https://github.com/scalameta/mdoc">mdoc</a>. These tools read your Markdown source files, search for code fences,
+evaluate them (throwing an error if they don’t compile), and produce a copy of your Markdown files where
+code fences have been updated to also include the result of evaluating the Scala expressions.</p>
+
+<h4 id="embedding-snippets">Embedding Snippets</h4>
+
+<p>Another approach consists in embedding fragments of Scala source files that are part of a module which
+is compiled by your build. For instance, given the following test in file <code class="language-plaintext highlighter-rouge">src/test/ch/epfl/scala/Usage.scala</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">ch.epfl.scala</span>
+
+<span class="k">import</span> <span class="nn">scalaprops.</span><span class="o">{</span><span class="nc">Property</span><span class="o">,</span> <span class="nc">Scalaprops</span><span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Usage</span> <span class="k">extends</span> <span class="nc">Scalaprops</span> <span class="o">{</span>
+
+  <span class="k">val</span> <span class="nv">testDoNothing</span> <span class="k">=</span>
+<span class="c1">// #do-nothing</span>
+    <span class="nv">Property</span><span class="o">.</span><span class="py">forAll</span> <span class="o">{</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span>
+      <span class="nv">Example</span><span class="o">.</span><span class="py">doNothing</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">==</span> <span class="n">x</span>
+    <span class="o">}</span>
+<span class="c1">// #do-nothing</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>You can embed the fragment surrounded by the <code class="language-plaintext highlighter-rouge">#do-nothing</code> identifiers with the <code class="language-plaintext highlighter-rouge">@@snip</code> Paradox directive,
+as shown in the <code class="language-plaintext highlighter-rouge">src/documentation/reference.md</code> file:</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="gh"># Reference</span>
+
+The <span class="sb">`doNothing`</span> function takes anything as parameter and returns it unchanged:
+
+@@snip <span class="p">[</span><span class="nv">Usage.scala</span><span class="p">](</span><span class="sx">$root$/src/test/scala/ch/epfl/scala/Usage.scala</span><span class="p">)</span> { #do-nothing }</code></pre></figure>
+
+<p>The resulting documentation looks like the following:</p>
+
+<p><img src="/resources/images/documentation-snippet.png" alt="" /></p>
+
+<h3 id="include-api-documentation">Include API Documentation</h3>
+
+<p>It can also be useful to have links to the API documentation (Scaladoc) from your documentation website.</p>
+
+<p>This can be achieved by adding the following lines to your <code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nf">enablePlugins</span><span class="o">(</span><span class="nc">SiteScaladocPlugin</span><span class="o">)</span>
+<span class="nc">SiteScaladoc</span> <span class="o">/</span> <span class="n">siteSubdirName</span> <span class="o">:=</span> <span class="s">"api"</span>
+<span class="n">paradoxProperties</span> <span class="o">+=</span> <span class="o">(</span><span class="s">"scaladoc.base_url"</span> <span class="o">-&gt;</span> <span class="s">"api"</span><span class="o">)</span></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">SiteScaladocPlugin</code> is provided by <code class="language-plaintext highlighter-rouge">sbt-site</code> and includes the API documentation to the generated
+website. The second line defines that the API documentation should be published at the <code class="language-plaintext highlighter-rouge">/api</code> base URL,
+and the third line makes this information available to Paradox.</p>
+
+<p>You can then use the <code class="language-plaintext highlighter-rouge">@scaladoc</code> Paradox directive to include a link to the API documentation of a
+particular symbol of your library:</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown">Browse the @scaladoc<span class="p">[</span><span class="nv">API documentation</span><span class="p">](</span><span class="sx">ch.epfl.scala.Example$</span><span class="p">)</span> for more information.</code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">@scaladoc</code> directive will produce a link to the <code class="language-plaintext highlighter-rouge">/api/ch/epfl/scala/Example$.html</code> page.</p>
+
+<h3 id="publish-documentation">Publish Documentation</h3>
+
+<p>Add the <code class="language-plaintext highlighter-rouge">sbt-ghpages</code> plugin to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.typesafe.sbt"</span> <span class="o">%</span> <span class="s">"sbt-ghpages"</span> <span class="o">%</span> <span class="s">"0.6.3"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And add the following configuration to your <code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
+
+<figure class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="nf">enablePlugins</span><span class="o">(</span><span class="nc">GhpagesPlugin</span><span class="o">)</span>
+<span class="nv">git</span><span class="o">.</span><span class="py">remoteRepo</span> <span class="o">:=</span> <span class="nv">sonatypeProjectHosting</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">get</span><span class="o">.</span><span class="py">scmUrl</span></code></pre></figure>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">gh-pages</code> branch in your project repository as explained in the
+<a href="https://github.com/sbt/sbt-ghpages#initializing-the-gh-pages-branch">sbt-ghpages documentation</a>.</p>
+
+<p>Finally, publish your site by running the <code class="language-plaintext highlighter-rouge">ghpagesPushSite</code> sbt task:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:library-example&gt; ghpagesPushSite
+[info] Cloning into '.'...
+[info] [gh-pages 2e7f426] updated site
+[info]  83 files changed, 8059 insertions(+)
+[info]  create mode 100644 .nojekyll
+[info]  create mode 100644 api/ch/epfl/index.html
+…
+[info] To git@github.com:scalacenter/library-example.git
+[info]    2d62539..2e7f426  gh-pages -&gt; gh-pages
+[success] Total time: 9 s, completed Jan 22, 2019 10:55:15 AM
+</code></pre></div></div>
+
+<p>Your site should be online at <code class="language-plaintext highlighter-rouge">https://(organization).github.io/(project)</code>. In our case, you
+can browse it at <a href="https://scalacenter.github.io/library-example/">https://scalacenter.github.io/library-example/</a>.</p>
+
+<h3 id="continuous-publication">Continuous Publication</h3>
+
+<p>You can extend <code class="language-plaintext highlighter-rouge">.github/workflows/publish.yml</code> to automatically publish documentation to GitHub pages.
+To do so, add another job:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/publish.yml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Continuous publication</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">release</span><span class="pi">:</span> <span class="c1"># The release job is not changed, you can find it above</span>
+  <span class="na">publishSite</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">olafurpg/setup-scala@v12</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate site</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">sbt makeSite</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">JamesIves/github-pages-deploy-action@4.1.3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
+          <span class="na">folder</span><span class="pi">:</span> <span class="s">target/site</span>
+
+</code></pre></div></div>
+
+<p>As usual, cut a release by pushing a Git tag. The CI server will run the tests, publish the binaries and update the
+online documentation.</p>
+
+<h2 id="welcome-contributors">Welcome Contributors</h2>
+
+<p>This section gives you advice on how to make it easier to get people contributing to your project.</p>
+
+<h3 id="contributingmd"><code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code></h3>
+
+<p>Add a <code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code> file to your repository, answering the following questions: how to build the project?
+What are the coding practices to follow? Where are the tests and how to run them?</p>
+
+<p>For reference, you can read our minimal example of
+<a href="https://github.com/scalacenter/library-example/blob/master/CONTRIBUTING.md"><code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code> file</a>.</p>
+
+<h3 id="issue-labels">Issue Labels</h3>
+
+<p>We recommend you to label your project issues so that potential contributors can quickly see the scope of
+an issue (e.g., “documentation”, “core”, …), it’s level of difficulty (e.g., “good first issue”, “advanced”, …),
+or its priority (e.g., “blocker”, “nice to have”, …).</p>
+
+<h3 id="code-formatting">Code Formatting</h3>
+
+<p>Reviewing a pull requests where the substantial changes are diluted in code style changes can be a frustrating
+experience. You can avoid that problem by using a code formatter forcing all the contributors to follow a
+specific code style.</p>
+
+<p>For instance, to use <a href="https://scalameta.org/scalafmt/">scalafmt</a>, add the following line to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code>
+file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"org.scalameta"</span> <span class="o">%</span> <span class="s">"sbt-scalafmt"</span> <span class="o">%</span> <span class="s">"2.4.2"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code> file, mention that you use that code formatter and encourage users to use the “format
+on save” feature of their editor.</p>
+
+<p>In your <code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code> file, add a step checking that the code has been properly formatted:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/ci.yml</span>
+<span class="c1"># The three periods `...` indicate the parts of file that do not change</span>
+<span class="c1"># from the snippets above and they are omitted for brevity</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">ci</span><span class="pi">:</span>
+    <span class="c1"># ...</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># ...</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Code style</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">sbt scalafmtCheck</span>
+</code></pre></div></div>
+
+<h2 id="evolve">Evolve</h2>
+
+<p>From the user point of view, upgrading to a new version of a library should be a smooth process. Possibly,
+it should even be a “non-event”.</p>
+
+<p>Breaking changes and migration steps should be thoroughly documented, and a we recommend following the
+<a href="/overviews/core/binary-compatibility-for-library-authors.html#versioning-scheme---communicating-compatibility-breakages">semantic versioning</a>
+policy.</p>
+
+<p>The <a href="https://github.com/lightbend/migration-manager">MiMa</a> tool can help you checking that you don’t
+break this versioning policy. Add the <code class="language-plaintext highlighter-rouge">sbt-mima-plugin</code> to your build with the following, in your
+<code class="language-plaintext highlighter-rouge">project/plugins.sbt</code> file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.typesafe"</span> <span class="o">%</span> <span class="s">"sbt-mima-plugin"</span> <span class="o">%</span> <span class="s">"0.9.2"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Configure it as follow, in <code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mimaPreviousArtifacts</span> <span class="o">:=</span> <span class="nv">previousStableVersion</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">organization</span><span class="o">.</span><span class="py">value</span> <span class="o">%%</span> <span class="nv">name</span><span class="o">.</span><span class="py">value</span> <span class="o">%</span> <span class="k">_</span><span class="o">).</span><span class="py">toSet</span>
+</code></pre></div></div>
+
+<p>Last, add the following step to the job <code class="language-plaintext highlighter-rouge">ci</code> of the <code class="language-plaintext highlighter-rouge">Continuous integration</code> workflow, in the <code class="language-plaintext highlighter-rouge">.github/workflows/ci.yml</code> file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .github/workflows/ci.yml</span>
+<span class="c1"># The three periods `...` indicate the parts of file that do not change</span>
+<span class="c1"># from the snippets above and they are omitted for brevity</span>
+
+<span class="c1"># ...</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">ci</span><span class="pi">:</span>
+    <span class="c1"># ...</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># ...</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Binary compatibility</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">sbt mimaReportBinaryIssues</span>
+</code></pre></div></div>
+
+<p>This will check that pull requests don’t make changes that are binary incompatible with the
+previous stable version.</p>
+
+<p>We suggest working with the following Git workflow: the <code class="language-plaintext highlighter-rouge">main</code> branch always receives pull requests
+for the next major version (so, binary compatibility checks are disabled, by setting the <code class="language-plaintext highlighter-rouge">mimaPreviousArtifacts</code>
+value to <code class="language-plaintext highlighter-rouge">Set.empty</code>), and each major version <code class="language-plaintext highlighter-rouge">N</code> has a corresponding <code class="language-plaintext highlighter-rouge">N.x</code> branch (e.g., <code class="language-plaintext highlighter-rouge">1.x</code>, <code class="language-plaintext highlighter-rouge">2.x</code>, etc.) branch
+where the binary compatibility checks are enabled.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/contributors/index.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

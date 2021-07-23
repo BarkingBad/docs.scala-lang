@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Последовательности. Трейт Seq, IndexedSeq и LinearSeq | 
+      Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ru/overviews/collections-2.13/seqs.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Последовательности. Трейт Seq, IndexedSeq и LinearSeq"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Последовательности. Трейт Seq, IndexedSeq и LinearSeq"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/ru">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ru/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ru/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ru/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Collections</div>
+          
+          <h1>Последовательности. Трейт Seq, IndexedSeq и LinearSeq</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Трейт <a href="https://www.scala-lang.org/api/current/scala/collection/Seq.html">Seq</a> представляет из себя последовательность. Последовательность - это своего рода итерируемая сущность, у которой есть длина (<code class="language-plaintext highlighter-rouge">length</code>) и элементы с фиксированным индексом, начинающийся от <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<p>Операции с последовательностями, подразделяются на следующие категории, которые кратко изложенные в таблице ниже:</p>
+
+<ul>
+  <li><strong>Размера и индексации</strong> операции <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">isDefinedAt</code>, <code class="language-plaintext highlighter-rouge">length</code>, <code class="language-plaintext highlighter-rouge">indices</code>, и <code class="language-plaintext highlighter-rouge">lengthCompare</code>. Для <code class="language-plaintext highlighter-rouge">Seq</code>, операция <code class="language-plaintext highlighter-rouge">apply</code> означает запрос по индексу; Так как последовательность типа <code class="language-plaintext highlighter-rouge">Seq[T]</code> частично определённая функция, которая принимает в качестве аргумента <code class="language-plaintext highlighter-rouge">Int</code> (как индекс) и в результате выдает элемент последовательности типа <code class="language-plaintext highlighter-rouge">T</code>. Другими словами <code class="language-plaintext highlighter-rouge">Seq[T]</code> расширяет <code class="language-plaintext highlighter-rouge">PartialFunction[Int, T]</code>. Элементы последовательности индексируются от нуля до <code class="language-plaintext highlighter-rouge">length</code>(длинна последовательности) минус еденицу. Метод <code class="language-plaintext highlighter-rouge">length</code> на последовательностях является ссылкой на метод <code class="language-plaintext highlighter-rouge">size</code> общий коллекциях. Метод <code class="language-plaintext highlighter-rouge">lengthCompare</code> позволяет сравнивать длины последовательностей с <code class="language-plaintext highlighter-rouge">Int</code>, даже если длина последовательностей бесконечна.</li>
+  <li><strong>Операции поиска индекса</strong> <code class="language-plaintext highlighter-rouge">indexOf</code>, <code class="language-plaintext highlighter-rouge">lastIndexOf</code>, <code class="language-plaintext highlighter-rouge">indexOfSlice</code>, <code class="language-plaintext highlighter-rouge">lastIndexOfSlice</code>, <code class="language-plaintext highlighter-rouge">indexWhere</code>, <code class="language-plaintext highlighter-rouge">lastIndexWhere</code>, <code class="language-plaintext highlighter-rouge">segmentLength</code>, которые возвращают индекс элемента, равный заданному значению или совпадающий с каким-либо предикатом.</li>
+  <li><strong>Операции сложения</strong> <code class="language-plaintext highlighter-rouge">prepended</code>, <code class="language-plaintext highlighter-rouge">prependedAll</code>, <code class="language-plaintext highlighter-rouge">appended</code>, <code class="language-plaintext highlighter-rouge">appendedAll</code>, <code class="language-plaintext highlighter-rouge">padTo</code>, которые возвращают новые последовательности, полученные добавлением элементов в начале или в конце последовательности.</li>
+  <li><strong>Операции обновления</strong> <code class="language-plaintext highlighter-rouge">updated</code>, <code class="language-plaintext highlighter-rouge">patch</code>, которые возвращают новую последовательность полученную заменой некоторых элементов исходной последовательности</li>
+  <li><strong>Операции сортировки</strong> <code class="language-plaintext highlighter-rouge">sorted</code>, <code class="language-plaintext highlighter-rouge">sortWith</code>, <code class="language-plaintext highlighter-rouge">sortBy</code>, которые сортируют последовательность элементов в соответствии с различными критериями</li>
+  <li><strong>Операции разворота</strong> <code class="language-plaintext highlighter-rouge">reverse</code>, <code class="language-plaintext highlighter-rouge">reverseIterator</code>, которые выдают или обрабатывают элементы последовательности в обратном порядке.</li>
+  <li><strong>Сравнения</strong> <code class="language-plaintext highlighter-rouge">startsWith</code>, <code class="language-plaintext highlighter-rouge">endsWith</code>, <code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">containsSlice</code>, <code class="language-plaintext highlighter-rouge">corresponds</code>, <code class="language-plaintext highlighter-rouge">search</code>, которые сопоставляют две последовательности или осуществляют поиск элементов в последовательности.</li>
+  <li><strong>Операции с множествами</strong> <code class="language-plaintext highlighter-rouge">intersect</code>, <code class="language-plaintext highlighter-rouge">diff</code>, <code class="language-plaintext highlighter-rouge">distinct</code>, <code class="language-plaintext highlighter-rouge">distinctBy</code>, которые выполняют операции <em>как у множеств</em> с элементами двух последовательностей либо удаляют дубликаты.</li>
+</ul>
+
+<p>Если последовательность изменяемая (мутабельная), то у нее есть операция <code class="language-plaintext highlighter-rouge">update</code> (обновления), которая обновляет элементы последовательности используя побочные эффекты. Как всегда в Scala синтаксис типа <code class="language-plaintext highlighter-rouge">seq(idx) = elem</code> - это просто сокращение от <code class="language-plaintext highlighter-rouge">seq.update(idx, elem)</code>, поэтому <code class="language-plaintext highlighter-rouge">update</code> - это просто более удобный вариант синтаксиса. Обратите внимание на разницу между <code class="language-plaintext highlighter-rouge">update</code> (обновить) и <code class="language-plaintext highlighter-rouge">updated</code> (обновленный). <code class="language-plaintext highlighter-rouge">updated</code> доступен для всех последовательностей и всегда возвращает новую последовательность вместо того, чтобы модифицировать исходную.</p>
+
+<h3 id="операции-на-классе-seq">Операции на Классе Seq</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ПРИМЕР</th>
+      <th>ЧТО ДЕЛАЕТ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Размера и индексация:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(i)</code></td>
+      <td>(эквивалентно <code class="language-plaintext highlighter-rouge">xs apply i</code>). Выдает элемент <code class="language-plaintext highlighter-rouge">xs</code> на позиции <code class="language-plaintext highlighter-rouge">i</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs isDefinedAt i</code></td>
+      <td>Проверяет есть ли <code class="language-plaintext highlighter-rouge">i</code> в <code class="language-plaintext highlighter-rouge">xs.indices</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.length</code></td>
+      <td>Длина последовательности (тоже самое что и <code class="language-plaintext highlighter-rouge">size</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lengthCompare n</code></td>
+      <td>Возвращает <code class="language-plaintext highlighter-rouge">-1</code> если <code class="language-plaintext highlighter-rouge">x</code> короче <code class="language-plaintext highlighter-rouge">n</code>, <code class="language-plaintext highlighter-rouge">+1</code> если длиннее, и <code class="language-plaintext highlighter-rouge">0</code> такогоже размера что и <code class="language-plaintext highlighter-rouge">n</code>. Работает даже если последовательность бесконечна, например, <code class="language-plaintext highlighter-rouge">LazyList.from(1) lengthCompare 42</code> возвращает положительное значение.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.indices</code></td>
+      <td>Диапазон индексов <code class="language-plaintext highlighter-rouge">xs</code>, от <code class="language-plaintext highlighter-rouge">0</code> до <code class="language-plaintext highlighter-rouge">xs.length</code> - 1`.</td>
+    </tr>
+    <tr>
+      <td><strong>Поиск по индексу</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexOf x</code></td>
+      <td>Индекс первого элемента в <code class="language-plaintext highlighter-rouge">xs</code> равного <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lastIndexOf x</code></td>
+      <td>Индекс последнего элемента в <code class="language-plaintext highlighter-rouge">xs</code> равного <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexOfSlice ys</code></td>
+      <td>Первый индекс элемента в <code class="language-plaintext highlighter-rouge">xs</code> начиная с которого можно сформировать последовательность эквивалентную <code class="language-plaintext highlighter-rouge">ys</code> (существует несколько вариантов).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs lastIndexOfSlice ys</code></td>
+      <td>Последний индекс элемента в <code class="language-plaintext highlighter-rouge">xs</code> начиная с которого можно сформировать последовательность эквивалентную <code class="language-plaintext highlighter-rouge">ys</code> (существует несколько вариантов).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs indexWhere p</code></td>
+      <td>Первый индекс элемента который удовлетворяет условию <code class="language-plaintext highlighter-rouge">p</code> (существует несколько вариантов).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.segmentLength(p, i)</code></td>
+      <td>Длина самого длинного непрерывного сегмента элементов в <code class="language-plaintext highlighter-rouge">xs</code>, начиная с которого удовлетворяется условие <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Сложения:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.prepended(x)</code><br />либо <code class="language-plaintext highlighter-rouge">x +: xs</code></td>
+      <td>Новая последовательность, состоящая из <code class="language-plaintext highlighter-rouge">x</code> добавленный перед <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.prependedAll(ys)</code><br />либо <code class="language-plaintext highlighter-rouge">ys ++: xs</code></td>
+      <td>Новая последовательность, состоящая из всех элементов <code class="language-plaintext highlighter-rouge">ys</code> добавленных перед <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.appended(x)</code><br />либо <code class="language-plaintext highlighter-rouge">xs :+ x</code></td>
+      <td>Новая последовательность, состоящая из <code class="language-plaintext highlighter-rouge">x</code> добавленных после <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.appendedAll(ys)</code><br />либо <code class="language-plaintext highlighter-rouge">xs :++ ys</code></td>
+      <td>Новая последовательность, состоящая из всех элементов <code class="language-plaintext highlighter-rouge">ys</code> добавленных после <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.padTo(len, x)</code></td>
+      <td>Последовательность, получаемая в результате добавления значения <code class="language-plaintext highlighter-rouge">x</code> к <code class="language-plaintext highlighter-rouge">xs</code> до тех пор пока не будет достигнута длина <code class="language-plaintext highlighter-rouge">len</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Обновления:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.patch(i, ys, r)</code></td>
+      <td>Последовательность, получаемая в результате замены <code class="language-plaintext highlighter-rouge">r</code> элементов <code class="language-plaintext highlighter-rouge">xs</code>, начиная с <code class="language-plaintext highlighter-rouge">i</code> заменяя их на <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.updated(i, x)</code></td>
+      <td>Создает копию <code class="language-plaintext highlighter-rouge">xs</code> в которой элемент с индексом <code class="language-plaintext highlighter-rouge">i</code> заменён на <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs(i) = x</code></td>
+      <td>(эквивалентно <code class="language-plaintext highlighter-rouge">xs.update(i, x)</code>, доступно только у <code class="language-plaintext highlighter-rouge">mutable.Seq</code>). Заменяет элемент <code class="language-plaintext highlighter-rouge">xs</code> с индексом <code class="language-plaintext highlighter-rouge">i</code> на <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Сортировка:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sorted</code></td>
+      <td>Новая последовательность, полученная при сортировке элементов <code class="language-plaintext highlighter-rouge">xs</code> используя стардартную схему упорядочивания элементов типа <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs sortWith lt</code></td>
+      <td>Новая последовательность, полученная при сортировке элементов <code class="language-plaintext highlighter-rouge">xs</code> при помощи операции сравнения <code class="language-plaintext highlighter-rouge">lt</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs sortBy f</code></td>
+      <td>Новая последовательность, полученная при сортировке элементов <code class="language-plaintext highlighter-rouge">xs</code>. Сравнение при сортировке происходит между двумя элементами полученных после выполнения функции <code class="language-plaintext highlighter-rouge">f</code> на исходных элементах.</td>
+    </tr>
+    <tr>
+      <td><strong>Развороты:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.reverse</code></td>
+      <td>Последовательность с элементами <code class="language-plaintext highlighter-rouge">xs</code> в обратном порядке.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.reverseIterator</code></td>
+      <td>Итератор, выдающий все элементы <code class="language-plaintext highlighter-rouge">xs</code> в обратном порядке.</td>
+    </tr>
+    <tr>
+      <td><strong>Сравнения:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs sameElements ys</code></td>
+      <td>Проверка на то, содержат ли <code class="language-plaintext highlighter-rouge">xs</code> и <code class="language-plaintext highlighter-rouge">ys</code> одни и те же элементы в одном и том же порядке.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs startsWith ys</code></td>
+      <td>Проверяет, начинается ли <code class="language-plaintext highlighter-rouge">xs</code> с последовательности <code class="language-plaintext highlighter-rouge">ys</code>. (существует несколько вариантов).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs endsWith ys</code></td>
+      <td>Проверяет, заканчивается ли <code class="language-plaintext highlighter-rouge">xs</code> последовательностью <code class="language-plaintext highlighter-rouge">ys</code>. (существует несколько вариантов).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs contains x</code></td>
+      <td>Проверяет, есть ли в <code class="language-plaintext highlighter-rouge">xs</code> элемент равный <code class="language-plaintext highlighter-rouge">x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs search x</code></td>
+      <td>Проверяет, есть ли в отсортированной последовательности <code class="language-plaintext highlighter-rouge">xs</code> элемент, равный <code class="language-plaintext highlighter-rouge">x</code>, такой поиск может быть более эффективным чем <code class="language-plaintext highlighter-rouge">xs contains x</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs containsSlice ys</code></td>
+      <td>Проверяет, есть ли у <code class="language-plaintext highlighter-rouge">xs</code> непрерывная подпоследовательность, равная <code class="language-plaintext highlighter-rouge">ys</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">(xs corresponds ys)(p)</code></td>
+      <td>Проверяет, удовлетворяют ли соответствующие элементы <code class="language-plaintext highlighter-rouge">xs</code> и <code class="language-plaintext highlighter-rouge">ys</code> бинарному предикату <code class="language-plaintext highlighter-rouge">p</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Операции над множествами:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs intersect ys</code></td>
+      <td>Операция пересечения на множестве между последовательностей <code class="language-plaintext highlighter-rouge">xs</code> и <code class="language-plaintext highlighter-rouge">ys</code>, сохраняющее порядок элементов в <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs diff ys</code></td>
+      <td>Операция расхождения на множестве между последовательностей <code class="language-plaintext highlighter-rouge">xs</code> и <code class="language-plaintext highlighter-rouge">ys</code>, сохраняющее порядок элементов в <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.distinct</code></td>
+      <td>Подпоследовательность <code class="language-plaintext highlighter-rouge">xs</code>, которая не содержит дублирующих друг друга элементов.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs distinctBy f</code></td>
+      <td>Подпоследовательность <code class="language-plaintext highlighter-rouge">xs</code>, которая не содержит дублирующего элемента после применения функции преобразования <code class="language-plaintext highlighter-rouge">f</code>. Например, <code class="language-plaintext highlighter-rouge">List("foo", "bar", "quux").distinctBy(_.length) == List("foo", "quux")</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>У трейта <a href="https://www.scala-lang.org/api/current/scala/collection/Seq.html">Seq</a> есть два дочерних трейта <a href="https://www.scala-lang.org/api/current/scala/collection/LinearSeq.html">LinearSeq</a>, и <a href="https://www.scala-lang.org/api/current/scala/collection/IndexedSeq.html">IndexedSeq</a>. 
+Они не добавляют никаких новых операций, но у каждого из них разные характеристики производительности: у LinearSeq эффективные операции <code class="language-plaintext highlighter-rouge">head</code> и <code class="language-plaintext highlighter-rouge">tail</code>, в то время как у IndexedSeq эффективные операции <code class="language-plaintext highlighter-rouge">apply</code>, <code class="language-plaintext highlighter-rouge">length</code> и (если мутабельная) <code class="language-plaintext highlighter-rouge">update</code>. Часто используемые варианты LinearSeq - это <code class="language-plaintext highlighter-rouge">scala.collection.immutable.List</code> и <code class="language-plaintext highlighter-rouge">scala.collection.immutable.LazyList</code>. А наиболее часто используемые IndexedSeq - это <code class="language-plaintext highlighter-rouge">scala.Array</code> и <code class="language-plaintext highlighter-rouge">scala.collection.mutable.ArrayBuffer</code>. Класс <code class="language-plaintext highlighter-rouge">Vector</code> представляет собой компромисс между IndexedSeq и LinearSeq. У него эффективные, как обращение по индексу, так и последовательный обход элементов. Поэтому вектора хорошая основа для смешанных моделей доступа, где используются как индексированный, так и последовательный доступ. Позже мы расскажем больше о <a href="concrete-immutable-collection-classes.html">векторах</a>.</p>
+
+<p>В мутабельном варианте <code class="language-plaintext highlighter-rouge">IndexedSeq</code> добавляет операции преобразования ее элементов в самой коллекции (в отличие от таких операций как <code class="language-plaintext highlighter-rouge">map</code> и <code class="language-plaintext highlighter-rouge">sort</code>, доступных на базовом трейте <code class="language-plaintext highlighter-rouge">Seq</code>, для которых результат - это новая коллекция).</p>
+
+<h4 id="операции-на-классе-mutableindexedseq">Операции на Классе mutable.IndexedSeq</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>ПРИМЕР</th>
+      <th>ЧТО ДЕЛАЕТ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Преобразования:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.mapInPlace(f)</code></td>
+      <td>Преобразует все элементы <code class="language-plaintext highlighter-rouge">xs</code>, применяя функцию <code class="language-plaintext highlighter-rouge">f</code> к каждому из них.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sortInPlace()</code></td>
+      <td>Сортирует коллекцию <code class="language-plaintext highlighter-rouge">xs</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sortInPlaceWith(c)</code></td>
+      <td>Сортирует коллекцию <code class="language-plaintext highlighter-rouge">xs</code> в соответствии с заданной функцией сравнения <code class="language-plaintext highlighter-rouge">c</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">xs.sortInPlaceBy(f)</code></td>
+      <td>Сортирует коллекцию <code class="language-plaintext highlighter-rouge">xs</code> в соответствии с порядком, определяемым на результате после применения функции <code class="language-plaintext highlighter-rouge">f</code> к каждому элементу.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="буферы">Буферы</h3>
+
+<p>Важной подкатегорией мутабельных последовательностей является <code class="language-plaintext highlighter-rouge">Buffer</code>ы. Они позволяют не только изменять существующие элементы, но и добавлять, вставлять и удалять элементы. Основными новыми методами, поддерживаемыми буфером, являются <code class="language-plaintext highlighter-rouge">append</code> и <code class="language-plaintext highlighter-rouge">appendAll</code> для добавления элементов в конце, <code class="language-plaintext highlighter-rouge">prepend</code> и <code class="language-plaintext highlighter-rouge">prependAll</code> для добавления спереди, <code class="language-plaintext highlighter-rouge">insert</code> и <code class="language-plaintext highlighter-rouge">insertAll</code> для вставок элементов, а также <code class="language-plaintext highlighter-rouge">remove</code>, <code class="language-plaintext highlighter-rouge">subtractOne</code> и <code class="language-plaintext highlighter-rouge">subtractAll</code> для удаления элементов. Краткая информация об этих операциях представлена в таблице ниже.</p>
+
+<p>Два часто используемых варианта реализации буферов - <code class="language-plaintext highlighter-rouge">ListBuffer</code> и <code class="language-plaintext highlighter-rouge">ArrayBuffer</code>. Как следует из названия, <code class="language-plaintext highlighter-rouge">ListBuffer</code> основан на <code class="language-plaintext highlighter-rouge">List</code> и поддерживает эффективное преобразование его элементов в <code class="language-plaintext highlighter-rouge">List</code> (список), тогда как <code class="language-plaintext highlighter-rouge">ArrayBuffer</code> - основан на <code class="language-plaintext highlighter-rouge">Array</code> (массиве), он также может быть быстро преобразован в массив.</p>
+
+<h4 id="операции-на-классе-buffer">Операции на Классе Buffer</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>ПРИМЕР</th>
+      <th>ЧТО ДЕЛАЕТ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Сложения:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf append x</code><br />либо <code class="language-plaintext highlighter-rouge">buf += x</code></td>
+      <td>Добавляет в конец буфера элемент <code class="language-plaintext highlighter-rouge">x</code> возвращая этот самый буфер <code class="language-plaintext highlighter-rouge">buf</code> в качестве результата.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf appendAll xs</code><br />либо<code class="language-plaintext highlighter-rouge">buf ++= xs</code></td>
+      <td>Добавляет все элементы <code class="language-plaintext highlighter-rouge">xs</code> в конец буфер.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf prepend x</code><br />либо <code class="language-plaintext highlighter-rouge">x +=: buf</code></td>
+      <td>Добавляет элемент <code class="language-plaintext highlighter-rouge">x</code> в начало буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf prependAll xs</code><br />либо <code class="language-plaintext highlighter-rouge">xs ++=: buf</code></td>
+      <td>Добавляет все элементы <code class="language-plaintext highlighter-rouge">xs</code> в начало буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.insert(i, x)</code></td>
+      <td>Вставляет элемент <code class="language-plaintext highlighter-rouge">x</code> на позицию <code class="language-plaintext highlighter-rouge">i</code> в буфер.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.insertAll(i, xs)</code></td>
+      <td>Вставляет все элементы в <code class="language-plaintext highlighter-rouge">xs</code> на позицию <code class="language-plaintext highlighter-rouge">i</code> в буфер.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.padToInPlace(n, x)</code></td>
+      <td>Добавляет элемент <code class="language-plaintext highlighter-rouge">x</code> в буфер до тех пор, пока там не будет <code class="language-plaintext highlighter-rouge">n</code> элементов.</td>
+    </tr>
+    <tr>
+      <td><strong>Удаления:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf subtractOne x</code><br />либо <code class="language-plaintext highlighter-rouge">buf -= x</code></td>
+      <td>Удаляет элемент <code class="language-plaintext highlighter-rouge">x</code> из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf subtractAll xs</code><br />либо <code class="language-plaintext highlighter-rouge">buf --= xs</code></td>
+      <td>Удаляет элементы <code class="language-plaintext highlighter-rouge">xs</code> из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf remove i</code></td>
+      <td>Удаляет элемент на позиции <code class="language-plaintext highlighter-rouge">i</code> из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.remove(i, n)</code></td>
+      <td>Удаляет <code class="language-plaintext highlighter-rouge">n</code> элементов начиная с позиции <code class="language-plaintext highlighter-rouge">i</code> из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf trimStart n</code></td>
+      <td>Удаляет первых <code class="language-plaintext highlighter-rouge">n</code> элементов из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf trimEnd n</code></td>
+      <td>Удаляет последние <code class="language-plaintext highlighter-rouge">n</code> элементов из буфера.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.clear()</code></td>
+      <td>Удаляет все элементы из буфера.</td>
+    </tr>
+    <tr>
+      <td><strong>Замена:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.patchInPlace(i, xs, n)</code></td>
+      <td>Заменяет (не более чем) <code class="language-plaintext highlighter-rouge">n</code> элементов буфера элементами из <code class="language-plaintext highlighter-rouge">xs</code>, начиная с позиции <code class="language-plaintext highlighter-rouge">i</code> в буфере.</td>
+    </tr>
+    <tr>
+      <td><strong>Клонирование:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">buf.clone()</code></td>
+      <td>Новый буфер с теми же элементами, что и <code class="language-plaintext highlighter-rouge">buf</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="trait-iterable.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="sets.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/collections-2.13/seqs.html">English</a></li>
+          
+            
+            <li><a href="/ru/overviews/collections-2.13/seqs.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ru/overviews/collections-2.13/seqs.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+
