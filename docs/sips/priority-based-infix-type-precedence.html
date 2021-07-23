@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-33 - Priority-based infix type precedence | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/priority-based-infix-type-precedence.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-33 - Priority-based infix type precedence"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-33 - Priority-based infix type precedence"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-33 - Priority-based infix type precedence</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Oron Port</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feb 7th 2017</td>
+      <td>Initial Draft</td>
+    </tr>
+    <tr>
+      <td>Feb 9th 2017</td>
+      <td>Updates from feedback</td>
+    </tr>
+    <tr>
+      <td>Feb 10th 2017</td>
+      <td>Updates from feedback</td>
+    </tr>
+    <tr>
+      <td>Aug 8th 2017</td>
+      <td>Numbered SIP, improve view, fixed example, and added related issues</td>
+    </tr>
+    <tr>
+      <td>Oct 20th 2017</td>
+      <td>Added implementation link</td>
+    </tr>
+    <tr>
+      <td>Oct 25th 2017</td>
+      <td>Moved prefix types to <a href="https://docs.scala-lang.org/sips/adding-prefix-types.html">another SIP</a>, changed title and PR</td>
+    </tr>
+    <tr>
+      <td>Nov 29th 2017</td>
+      <td>Updated SIP according to feedback in the PR</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Your feedback is welcome! If you’re interested in discussing this proposal, head over to <a href="https://contributors.scala-lang.org/t/sip-nn-make-infix-type-alias-precedence-like-expression-operator-precedence/471">this</a> Scala Contributors thread and let me know what you think.</p>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+<p>Currently scala allows symbol operators (<code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">~~&gt;</code>, etc.) for both type names and definition names.
+Unfortunately, there is a ‘surprise’ element since the two differ in behavior. While infix types are ‘mostly’ left-associative, the expression operation precedence is determined by the operator’s first character (e.g., <code class="language-plaintext highlighter-rouge">/</code> is precedent to <code class="language-plaintext highlighter-rouge">+</code>). Please see <a href="https://scala-lang.org/files/archive/spec/2.12/03-types.html#infix-types">Infix Types</a> and <a href="https://scala-lang.org/files/archive/spec/2.12/06-expressions.html#infix-operations">Infix Operations</a> sections of the Scala specifications for more details.</p>
+
+<p><strong>Infix expression precedence vs. infix type precedence example</strong>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">InfixExpressionPrecedence</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="k">class</span> <span class="nc">Nummy</span><span class="o">(</span><span class="n">expand</span> <span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">+</span> <span class="o">(</span><span class="n">that</span> <span class="k">:</span> <span class="kt">Nummy</span><span class="o">)</span> <span class="k">:</span> <span class="kt">Nummy</span> <span class="o">=</span> <span class="nc">Nummy</span><span class="o">(</span><span class="n">s</span><span class="s">"Plus[$this,$that]"</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">/</span> <span class="o">(</span><span class="n">that</span> <span class="k">:</span> <span class="kt">Nummy</span><span class="o">)</span> <span class="k">:</span> <span class="kt">Nummy</span> <span class="o">=</span> <span class="nc">Nummy</span><span class="o">(</span><span class="n">s</span><span class="s">"Div[$this,$that]"</span><span class="o">)</span>
+  <span class="o">}</span>
+  <span class="k">object</span> <span class="nc">N1</span> <span class="k">extends</span> <span class="nc">Nummy</span><span class="o">(</span><span class="s">"N1"</span><span class="o">)</span>
+  <span class="k">object</span> <span class="nc">N2</span> <span class="k">extends</span> <span class="nc">Nummy</span><span class="o">(</span><span class="s">"N2"</span><span class="o">)</span>
+  <span class="k">object</span> <span class="nc">N3</span> <span class="k">extends</span> <span class="nc">Nummy</span><span class="o">(</span><span class="s">"N3"</span><span class="o">)</span>
+  <span class="k">object</span> <span class="nc">N4</span> <span class="k">extends</span> <span class="nc">Nummy</span><span class="o">(</span><span class="s">"N4"</span><span class="o">)</span>
+  <span class="c1">//Both expand to Plus[Plus[N1,Div[N2,N3]],N4]</span>
+  <span class="nf">assert</span><span class="o">((</span><span class="n">N1</span> <span class="o">+</span> <span class="n">N2</span> <span class="o">/</span> <span class="n">N3</span> <span class="o">+</span> <span class="n">N4</span><span class="o">).</span><span class="py">expand</span> <span class="o">==</span> <span class="o">(</span><span class="n">N1</span> <span class="o">+</span> <span class="o">(</span><span class="n">N2</span> <span class="o">/</span> <span class="n">N3</span><span class="o">)</span> <span class="o">+</span> <span class="n">N4</span><span class="o">).</span><span class="py">expand</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="k">object</span> <span class="nc">InfixTypePrecedence</span> <span class="o">{</span>
+  <span class="k">trait</span> <span class="nc">Plus</span><span class="o">[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+  <span class="nc">trait</span> <span class="nc">Div</span><span class="o">[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+  <span class="k">type</span> <span class="kt">+</span><span class="err">[</span><span class="kt">N1</span><span class="o">,</span> <span class="n">N2</span><span class="err">]</span> <span class="k">=</span> <span class="nc">Plus</span><span class="o">[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+  <span class="k">type</span> <span class="kt">/</span><span class="err">[</span><span class="kt">N1</span><span class="o">,</span> <span class="n">N2</span><span class="err">]</span> <span class="k">=</span> <span class="nc">Div</span><span class="o">[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+  <span class="k">trait</span> <span class="nc">N1</span>
+  <span class="k">trait</span> <span class="nc">N2</span>
+  <span class="k">trait</span> <span class="nc">N3</span>
+  <span class="k">trait</span> <span class="nc">N4</span>
+  <span class="c1">//Error!</span>
+  <span class="c1">//Left  expands to Plus[Div[Plus[N1,N2],N3],N4] (Surprising)</span>
+  <span class="c1">//Right expands to Plus[Plus[N1,Div[N2,N3]],N4]</span>
+  <span class="n">implicitly</span><span class="o">[(</span><span class="kt">N1</span> <span class="kt">+</span> <span class="kt">N2</span> <span class="kt">/</span> <span class="kt">N3</span> <span class="kt">+</span> <span class="kt">N4</span><span class="o">)</span> <span class="kt">=:=</span> <span class="o">(</span><span class="kt">N1</span> <span class="kt">+</span> <span class="o">(</span><span class="kt">N2</span> <span class="kt">/</span> <span class="kt">N3</span><span class="o">)</span> <span class="kt">+</span> <span class="kt">N4</span><span class="o">)]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="motivation">Motivation</h2>
+<p>It is easier to reason about the language when mathematical and logical operations for both terms and types are expressed the same.</p>
+
+<h3 id="motivating-examples">Motivating examples</h3>
+
+<h4 id="dotty-infix-type-similarity">Dotty infix type similarity</h4>
+<p>Dotty infix type associativity and precedence seem to act the same as expressions.
+No documentation available to prove this, but the infix example above works perfectly in dotty.</p>
+
+<p>Dotty has no prefix types, same as Scalac.</p>
+
+<h4 id="singleton-ops-library-example">Singleton-ops library example</h4>
+<p>The <a href="https://github.com/fthomas/singleton-ops">singleton-ops library</a> with <a href="https://github.com/typelevel/scala">Typelevel Scala</a> (which implemented <a href="https://docs.scala-lang.org/sips/pending/42.type.html">SIP-23</a>) enable developers to express literal type operations more intuitively. For example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">singleton.ops._</span>
+
+<span class="k">val</span> <span class="nv">four1</span> <span class="k">:</span> <span class="err">4</span> <span class="o">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="err">2</span> <span class="kt">+</span> <span class="err">2</span><span class="o">]</span>
+<span class="k">val</span> <span class="nv">four2</span> <span class="k">:</span> <span class="err">2</span> <span class="kt">+</span> <span class="err">2</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">val</span> <span class="nv">four3</span> <span class="k">:</span> <span class="err">1</span> <span class="kt">+</span> <span class="err">3</span> <span class="o">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="err">2</span> <span class="kt">+</span> <span class="err">2</span><span class="o">]</span>
+
+<span class="k">class</span> <span class="nc">MyVec</span><span class="o">[</span><span class="kt">L</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">doubleSize</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MyVec</span><span class="o">[</span><span class="err">2</span> <span class="kt">*</span> <span class="kt">L</span><span class="o">]</span>
+  <span class="k">def</span> <span class="nf">nSize</span><span class="o">[</span><span class="kt">N</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MyVec</span><span class="o">[</span><span class="kt">N</span> <span class="kt">*</span> <span class="kt">L</span><span class="o">]</span>
+<span class="o">}</span>
+<span class="k">object</span> <span class="nc">MyVec</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">L</span><span class="o">](</span><span class="k">implicit</span> <span class="n">check</span> <span class="k">:</span> <span class="kt">Require</span><span class="o">[</span><span class="kt">L</span> <span class="kt">&gt;</span> <span class="err">0</span><span class="o">])</span> <span class="k">:</span> <span class="kt">MyVec</span><span class="o">[</span><span class="kt">L</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MyVec</span><span class="o">[</span><span class="kt">L</span><span class="o">]()</span>
+<span class="o">}</span>
+<span class="k">val</span> <span class="nv">myVec</span> <span class="k">:</span> <span class="kt">MyVec</span><span class="o">[</span><span class="err">10</span><span class="o">]</span> <span class="k">=</span> <span class="nc">MyVec</span><span class="o">[</span><span class="err">4</span> <span class="kt">+</span> <span class="err">1</span><span class="o">].</span><span class="py">doubleSize</span>
+<span class="k">val</span> <span class="nv">myBadVec</span> <span class="k">=</span> <span class="nc">MyVec</span><span class="o">[</span><span class="kt">-</span><span class="err">1</span><span class="o">]</span> <span class="c1">//fails compilation, as required</span>
+</code></pre></div></div>
+
+<p>We currently loose some of the intuitive appeal due to the precedence issue:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">works</span> <span class="k">:</span> <span class="err">1</span> <span class="kt">+</span> <span class="o">(</span><span class="err">2</span> <span class="kt">*</span> <span class="err">3</span><span class="o">)</span> <span class="kt">+</span> <span class="err">4</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="k">val</span> <span class="nv">fails</span> <span class="k">:</span> <span class="err">1</span> <span class="kt">+</span> <span class="err">2</span> <span class="kt">*</span> <span class="err">3</span> <span class="kt">+</span> <span class="err">4</span> <span class="o">=</span> <span class="mi">11</span> <span class="c1">//left associative:(((1+2)*3)+4))) = 13</span>
+</code></pre></div></div>
+
+<h4 id="developer-issues-example">Developer issues example</h4>
+<p><a href="https://stackoverflow.com/questions/23333882/scala-infix-type-aliasing-for-2-type-parameters">This</a> Stack Overflow question demonstrate developers are ‘surprised’ by the difference in infix precedence, expecting infix type precedence to act the same as expression operations.</p>
+
+<hr />
+
+<h2 id="proposal">Proposal</h2>
+
+<p>Make infix types conform to the same precedence and associativity traits as term operations.</p>
+
+<hr />
+
+<h2 id="implementation">Implementation</h2>
+
+<p>A PR for this SIP is available at: <a href="https://github.com/scala/scala/pull/6147">https://github.com/scala/scala/pull/6147</a></p>
+
+<hr />
+
+<h3 id="interactions-with-other-language-features">Interactions with other language features</h3>
+
+<h4 id="star--infix-type-interaction-with-repeated-parameters">Star <code class="language-plaintext highlighter-rouge">*</code> infix type interaction with repeated parameters</h4>
+<p>The <a href="https://www.scala-lang.org/files/archive/spec/2.12/04-basic-declarations-and-definitions.html#repeated-parameters">repeated argument symbol <code class="language-plaintext highlighter-rouge">*</code></a> may create confusion with the infix type <code class="language-plaintext highlighter-rouge">*</code>. 
+Please note that this feature interaction already exists within the current specification.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">+</span><span class="o">[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+<span class="nc">trait</span> <span class="o">*[</span><span class="kt">N1</span>, <span class="kt">N2</span><span class="o">]</span>
+<span class="k">trait</span> <span class="nc">N1</span>
+<span class="k">trait</span> <span class="nc">N2</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="n">a</span> <span class="k">:</span> <span class="kt">N1*N1+N2*</span><span class="o">)</span> <span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{}</span> <span class="c1">//repeated parameter of type +[*[N1, N1], N2]</span>
+</code></pre></div></div>
+
+<p>However, it is very unlikely that such interaction would occur.</p>
+
+<p><strong>Related Issues</strong></p>
+
+<ul>
+  <li><a href="https://github.com/lampepfl/dotty/issues/1961">Dotty Issue #1961</a></li>
+</ul>
+
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<p>Changing infix type associativity and precedence affects code that uses type operations and conforms to the current specification.</p>
+
+<p>Note: changing the infix precedence didn’t fail any scalac test.</p>
+
+<hr />
+
+<h3 id="bibliography">Bibliography</h3>
+<p><a href="https://contributors.scala-lang.org/t/sip-nn-make-infix-type-alias-precedence-like-expression-operator-precedence/471">Scala Contributors</a></p>
+
+<p><a href="https://groups.google.com/forum/#!topic/scala-sips/ARVf1RLDw9U">scala-sips</a></p>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #859900">Complete</div>
+           <p class="vote-text" style="color: #859900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2017-02-07-priority-based-infix-type-precedence.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

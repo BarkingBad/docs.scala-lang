@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      The Scala Actors API | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/actors.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="The Scala Actors API"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="The Scala Actors API"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>The Scala Actors API</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Philipp Haller and Stephen Tu</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This guide describes the API of the <code class="language-plaintext highlighter-rouge">scala.actors</code> package of Scala 2.8/2.9. The organization follows groups of types that logically belong together. The trait hierarchy is taken into account to structure the individual sections. The focus is on the run-time behavior of the various methods that these traits define, thereby complementing the existing Scaladoc-based API documentation.</p>
+
+<p>NOTE: In Scala 2.10 the Actors library is deprecated and will be removed in future Scala releases. Users should use <a href="https://akka.io">Akka</a> actors from the package <code class="language-plaintext highlighter-rouge">akka.actor</code>. For migration from Scala actors to Akka refer to the <a href="actors-migration-guide.html">Actors Migration Guide</a>.</p>
+
+<h2 id="the-actor-traits-reactor-replyreactor-and-actor">The actor traits Reactor, ReplyReactor, and Actor</h2>
+
+<h3 id="the-reactor-trait">The Reactor trait</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Reactor</code> is the super trait of all actor traits. Extending this trait allows defining actors with basic capabilities to send and receive messages.</p>
+
+<p>The behavior of a <code class="language-plaintext highlighter-rouge">Reactor</code> is defined by implementing its <code class="language-plaintext highlighter-rouge">act</code> method. The <code class="language-plaintext highlighter-rouge">act</code> method is executed once the <code class="language-plaintext highlighter-rouge">Reactor</code> is started by invoking <code class="language-plaintext highlighter-rouge">start</code>, which also returns the <code class="language-plaintext highlighter-rouge">Reactor</code>. The <code class="language-plaintext highlighter-rouge">start</code> method is <em>idempotent</em> which means that invoking it on an actor that has already been started has no effect.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Reactor</code> trait has a type parameter <code class="language-plaintext highlighter-rouge">Msg</code> which indicates the type of messages that the actor can receive.</p>
+
+<p>Invoking the <code class="language-plaintext highlighter-rouge">Reactor</code>’s <code class="language-plaintext highlighter-rouge">!</code> method sends a message to the receiver. Sending a message using <code class="language-plaintext highlighter-rouge">!</code> is asynchronous which means that the sending actor does not wait until the message is received; its execution continues immediately. For example, <code class="language-plaintext highlighter-rouge">a ! msg</code> sends <code class="language-plaintext highlighter-rouge">msg</code> to <code class="language-plaintext highlighter-rouge">a</code>. All actors have a <em>mailbox</em> which buffers incoming messages until they are processed.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Reactor</code> trait also defines a <code class="language-plaintext highlighter-rouge">forward</code> method. This method is inherited from <code class="language-plaintext highlighter-rouge">OutputChannel</code>. It has the same effect as the <code class="language-plaintext highlighter-rouge">!</code> method. Subtraits of <code class="language-plaintext highlighter-rouge">Reactor</code>, in particular the <code class="language-plaintext highlighter-rouge">ReplyReactor</code> trait, override this method to enable implicit reply destinations (see below).</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">Reactor</code> receives messages using the <code class="language-plaintext highlighter-rouge">react</code> method. <code class="language-plaintext highlighter-rouge">react</code> expects an argument of type <code class="language-plaintext highlighter-rouge">PartialFunction[Msg, Unit]</code> which defines how messages of type <code class="language-plaintext highlighter-rouge">Msg</code> are handled once they arrive in the actor’s mailbox. In the following example, the current actor waits to receive the string “Hello”, and then prints a greeting:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>react {
+  case "Hello" =&gt; println("Hi there")
+}
+</code></pre></div></div>
+
+<p>Invoking <code class="language-plaintext highlighter-rouge">react</code> never returns. Therefore, any code that should run after a message has been received must be contained inside the partial function that is passed to <code class="language-plaintext highlighter-rouge">react</code>. For example, two messages can be received in sequence by nesting two invocations of <code class="language-plaintext highlighter-rouge">react</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>react {
+  case Get(from) =&gt;
+    react {
+      case Put(x) =&gt; from ! x
+    }
+}
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Reactor</code> trait also provides control structures which simplify programming with <code class="language-plaintext highlighter-rouge">react</code>.</p>
+
+<h4 id="termination-and-execution-states">Termination and execution states</h4>
+
+<p>The execution of a <code class="language-plaintext highlighter-rouge">Reactor</code> terminates when the body of its <code class="language-plaintext highlighter-rouge">act</code> method has run to completion. A <code class="language-plaintext highlighter-rouge">Reactor</code> can also terminate itself explicitly using the <code class="language-plaintext highlighter-rouge">exit</code> method. The return type of <code class="language-plaintext highlighter-rouge">exit</code> is <code class="language-plaintext highlighter-rouge">Nothing</code>, because <code class="language-plaintext highlighter-rouge">exit</code> always throws an exception. This exception is only used internally, and should never be caught.</p>
+
+<p>A terminated <code class="language-plaintext highlighter-rouge">Reactor</code> can be restarted by invoking its <code class="language-plaintext highlighter-rouge">restart</code> method. Invoking <code class="language-plaintext highlighter-rouge">restart</code> on a <code class="language-plaintext highlighter-rouge">Reactor</code> that has not terminated, yet, throws an <code class="language-plaintext highlighter-rouge">IllegalStateException</code>. Restarting a terminated actor causes its <code class="language-plaintext highlighter-rouge">act</code> method to be rerun.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Reactor</code> defines a method <code class="language-plaintext highlighter-rouge">getState</code> which returns the actor’s current execution state as a member of the <code class="language-plaintext highlighter-rouge">Actor.State</code> enumeration. An actor that has not been started, yet, is in state <code class="language-plaintext highlighter-rouge">Actor.State.New</code>. An actor that can run without waiting for a message is in state <code class="language-plaintext highlighter-rouge">Actor.State.Runnable</code>. An actor that is suspended, waiting for a message is in state <code class="language-plaintext highlighter-rouge">Actor.State.Suspended</code>. A terminated actor is in state <code class="language-plaintext highlighter-rouge">Actor.State.Terminated</code>.</p>
+
+<h4 id="exception-handling">Exception handling</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">exceptionHandler</code> member allows defining an exception handler that is enabled throughout the entire lifetime of a <code class="language-plaintext highlighter-rouge">Reactor</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def exceptionHandler: PartialFunction[Exception, Unit]
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">exceptionHandler</code> returns a partial function which is used to handle exceptions that are not otherwise handled: whenever an exception propagates out of the body of a <code class="language-plaintext highlighter-rouge">Reactor</code>’s <code class="language-plaintext highlighter-rouge">act</code> method, the partial function is applied to that exception, allowing the actor to run clean-up code before it terminates. Note that the visibility of <code class="language-plaintext highlighter-rouge">exceptionHandler</code> is <code class="language-plaintext highlighter-rouge">protected</code>.</p>
+
+<p>Handling exceptions using <code class="language-plaintext highlighter-rouge">exceptionHandler</code> works well together with the control structures for programming with <code class="language-plaintext highlighter-rouge">react</code>. Whenever an exception has been handled using the partial function returned by <code class="language-plaintext highlighter-rouge">exceptionHandler</code>, execution continues with the current continuation closure. Example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loop {
+  react {
+    case Msg(data) =&gt;
+      if (cond) // process data
+      else throw new Exception("cannot process data")
+  }
+}
+</code></pre></div></div>
+
+<p>Assuming that the <code class="language-plaintext highlighter-rouge">Reactor</code> overrides <code class="language-plaintext highlighter-rouge">exceptionHandler</code>, after an exception thrown inside the body of <code class="language-plaintext highlighter-rouge">react</code> is handled, execution continues with the next loop iteration.</p>
+
+<h3 id="the-replyreactor-trait">The ReplyReactor trait</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">ReplyReactor</code> trait extends <code class="language-plaintext highlighter-rouge">Reactor[Any]</code> and adds or overrides the following methods:</p>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">!</code> method is overridden to obtain a reference to the current
+actor (the sender); together with the actual message, the sender
+reference is transferred to the mailbox of the receiving actor. The
+receiver has access to the sender of a message through its <code class="language-plaintext highlighter-rouge">sender</code>
+method (see below).</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">forward</code> method is overridden to obtain a reference to the
+<code class="language-plaintext highlighter-rouge">sender</code> of the message that is currently being processed. Together
+with the actual message, this reference is transferred as the sender
+of the current message. As a consequence, <code class="language-plaintext highlighter-rouge">forward</code> allows
+forwarding messages on behalf of actors different from the current
+actor.</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">sender</code> method returns the sender of the message that is
+currently being processed. Given the fact that a message might have
+been forwarded, <code class="language-plaintext highlighter-rouge">sender</code> may not return the actor that actually sent
+the message.</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">reply</code> method sends a message back to the sender of the
+last message. <code class="language-plaintext highlighter-rouge">reply</code> is also used to reply to a synchronous message
+send or a message send with future (see below).</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">!?</code> methods provide <em>synchronous message sends</em>. Invoking
+<code class="language-plaintext highlighter-rouge">!?</code> causes the sending actor to wait until a response is received
+which is then returned. There are two overloaded variants. The
+two-parameter variant takes in addition a timeout argument (in
+milliseconds), and its return type is <code class="language-plaintext highlighter-rouge">Option[Any]</code> instead of
+<code class="language-plaintext highlighter-rouge">Any</code>. If the sender does not receive a response within the
+specified timeout period, <code class="language-plaintext highlighter-rouge">!?</code> returns <code class="language-plaintext highlighter-rouge">None</code>, otherwise it returns
+the response wrapped in <code class="language-plaintext highlighter-rouge">Some</code>.</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">!!</code> methods are similar to synchronous message sends in
+that they allow transferring a response from the receiver. However,
+instead of blocking the sending actor until a response is received,
+they return <code class="language-plaintext highlighter-rouge">Future</code> instances. A <code class="language-plaintext highlighter-rouge">Future</code> can be used to retrieve
+the response of the receiver once it is available; it can also be
+used to find out whether the response is already available without
+blocking the sender. There are two overloaded variants. The
+two-parameter variant takes in addition an argument of type
+<code class="language-plaintext highlighter-rouge">PartialFunction[Any, A]</code>. This partial function is used for
+post-processing the receiver’s response. Essentially, <code class="language-plaintext highlighter-rouge">!!</code> returns a
+future which applies the partial function to the response once it is
+received. The result of the future is the result of this
+post-processing.</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">reactWithin</code> method allows receiving messages within a
+given period of time. Compared to <code class="language-plaintext highlighter-rouge">react</code> it takes an additional
+parameter <code class="language-plaintext highlighter-rouge">msec</code> which indicates the time period in milliseconds
+until the special <code class="language-plaintext highlighter-rouge">TIMEOUT</code> pattern matches (<code class="language-plaintext highlighter-rouge">TIMEOUT</code> is a case
+object in package <code class="language-plaintext highlighter-rouge">scala.actors</code>). Example:</p>
+
+    <p>reactWithin(2000) {
+    case Answer(text) =&gt; // process text
+    case TIMEOUT =&gt; println(“no answer within 2 seconds”)
+  }</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">reactWithin</code> method also allows non-blocking access to the
+mailbox. When specifying a time period of 0 milliseconds, the
+mailbox is first scanned to find a matching message. If there is no
+matching message after the first scan, the <code class="language-plaintext highlighter-rouge">TIMEOUT</code> pattern
+matches. For example, this enables receiving certain messages with a
+higher priority than others:</p>
+
+    <p>reactWithin(0) {
+    case HighPriorityMsg =&gt; // …
+    case TIMEOUT =&gt;
+      react {
+        case LowPriorityMsg =&gt; // …
+      }
+  }</p>
+
+    <p>In the above example, the actor first processes the next
+<code class="language-plaintext highlighter-rouge">HighPriorityMsg</code>, even if there is a <code class="language-plaintext highlighter-rouge">LowPriorityMsg</code> that arrived
+earlier in its mailbox. The actor only processes a <code class="language-plaintext highlighter-rouge">LowPriorityMsg</code>
+<em>first</em> if there is no <code class="language-plaintext highlighter-rouge">HighPriorityMsg</code> in its mailbox.</p>
+  </li>
+</ul>
+
+<p>In addition, <code class="language-plaintext highlighter-rouge">ReplyReactor</code> adds the <code class="language-plaintext highlighter-rouge">Actor.State.TimedSuspended</code> execution state. A suspended actor, waiting to receive a message using <code class="language-plaintext highlighter-rouge">reactWithin</code> is in state <code class="language-plaintext highlighter-rouge">Actor.State.TimedSuspended</code>.</p>
+
+<h3 id="the-actor-trait">The Actor trait</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Actor</code> trait extends <code class="language-plaintext highlighter-rouge">ReplyReactor</code> and adds or overrides the following members:</p>
+
+<ul>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">receive</code> method behaves like <code class="language-plaintext highlighter-rouge">react</code> except that it may
+return a result. This is reflected in its type, which is polymorphic
+in its result: <code class="language-plaintext highlighter-rouge">def receive[R](f: PartialFunction[Any, R]): R</code>.
+However, using <code class="language-plaintext highlighter-rouge">receive</code> makes the actor more heavyweight, since
+<code class="language-plaintext highlighter-rouge">receive</code> blocks the underlying thread while the actor is suspended
+waiting for a message. The blocked thread is unavailable to execute
+other actors until the invocation of <code class="language-plaintext highlighter-rouge">receive</code> returns.</p>
+  </li>
+  <li>
+    <p>The added <code class="language-plaintext highlighter-rouge">link</code> and <code class="language-plaintext highlighter-rouge">unlink</code> methods allow an actor to link and unlink
+itself to and from another actor, respectively. Linking can be used
+for monitoring and reacting to the termination of another actor. In
+particular, linking affects the behavior of invoking <code class="language-plaintext highlighter-rouge">exit</code> as
+explained in the API documentation of the <code class="language-plaintext highlighter-rouge">Actor</code> trait.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">trapExit</code> member allows reacting to the termination of linked
+actors independently of the exit reason (that is, it does not matter
+whether the exit reason is <code class="language-plaintext highlighter-rouge">'normal</code> or not). If an actor’s <code class="language-plaintext highlighter-rouge">trapExit</code>
+member is set to <code class="language-plaintext highlighter-rouge">true</code>, this actor will never terminate because of
+linked actors. Instead, whenever one of its linked actors terminates
+it will receive a message of type <code class="language-plaintext highlighter-rouge">Exit</code>. The <code class="language-plaintext highlighter-rouge">Exit</code> case class has two
+members: <code class="language-plaintext highlighter-rouge">from</code> refers to the actor that terminated; <code class="language-plaintext highlighter-rouge">reason</code> refers to
+the exit reason.</p>
+  </li>
+</ul>
+
+<h4 id="termination-and-execution-states-1">Termination and execution states</h4>
+
+<p>When terminating the execution of an actor, the exit reason can be set
+explicitly by invoking the following variant of <code class="language-plaintext highlighter-rouge">exit</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def exit(reason: AnyRef): Nothing
+</code></pre></div></div>
+
+<p>An actor that terminates with an exit reason different from the symbol
+<code class="language-plaintext highlighter-rouge">'normal</code> propagates its exit reason to all actors linked to it. If an
+actor terminates because of an uncaught exception, its exit reason is
+an instance of the <code class="language-plaintext highlighter-rouge">UncaughtException</code> case class.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Actor</code> trait adds two new execution states. An actor waiting to
+receive a message using <code class="language-plaintext highlighter-rouge">receive</code> is in state
+<code class="language-plaintext highlighter-rouge">Actor.State.Blocked</code>. An actor waiting to receive a message using
+<code class="language-plaintext highlighter-rouge">receiveWithin</code> is in state <code class="language-plaintext highlighter-rouge">Actor.State.TimedBlocked</code>.</p>
+
+<h2 id="control-structures">Control structures</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Reactor</code> trait defines control structures that simplify programming
+with the non-returning <code class="language-plaintext highlighter-rouge">react</code> operation. Normally, an invocation of
+<code class="language-plaintext highlighter-rouge">react</code> does not return. If the actor should execute code subsequently,
+then one can either pass the actor’s continuation code explicitly to
+<code class="language-plaintext highlighter-rouge">react</code>, or one can use one of the following control structures which
+hide these continuations.</p>
+
+<p>The most basic control structure is <code class="language-plaintext highlighter-rouge">andThen</code>. It allows registering a
+closure that is executed once the actor has finished executing
+everything else.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actor {
+  {
+    react {
+      case "hello" =&gt; // processing "hello"
+    }: Unit
+  } andThen {
+    println("hi there")
+  }
+}
+</code></pre></div></div>
+
+<p>For example, the above actor prints a greeting after it has processed
+the <code class="language-plaintext highlighter-rouge">"hello"</code> message. Even though the invocation of <code class="language-plaintext highlighter-rouge">react</code> does not
+return, we can use <code class="language-plaintext highlighter-rouge">andThen</code> to register the code which prints the
+greeting as the actor’s continuation.</p>
+
+<p>Note that there is a <em>type ascription</em> that follows the <code class="language-plaintext highlighter-rouge">react</code>
+invocation (<code class="language-plaintext highlighter-rouge">: Unit</code>). Basically, it lets you treat the result of
+<code class="language-plaintext highlighter-rouge">react</code> as having type <code class="language-plaintext highlighter-rouge">Unit</code>, which is legal, since the result of an
+expression can always be dropped. This is necessary to do here, since
+<code class="language-plaintext highlighter-rouge">andThen</code> cannot be a member of type <code class="language-plaintext highlighter-rouge">Nothing</code> which is the result
+type of <code class="language-plaintext highlighter-rouge">react</code>. Treating the result type of <code class="language-plaintext highlighter-rouge">react</code> as <code class="language-plaintext highlighter-rouge">Unit</code> allows
+the application of an implicit conversion which makes the <code class="language-plaintext highlighter-rouge">andThen</code>
+member available.</p>
+
+<p>The API provides a few more control structures:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">loop { ... }</code>. Loops indefinitely, executing the code in braces in
+each iteration. Invoking <code class="language-plaintext highlighter-rouge">react</code> inside the loop body causes the
+actor to react to a message as usual. Subsequently, execution
+continues with the next iteration of the same loop.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">loopWhile (c) { ... }</code>. Executes the code in braces while the
+condition <code class="language-plaintext highlighter-rouge">c</code> returns <code class="language-plaintext highlighter-rouge">true</code>. Invoking <code class="language-plaintext highlighter-rouge">react</code> in the loop body has
+the same effect as in the case of <code class="language-plaintext highlighter-rouge">loop</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">continue</code>. Continues with the execution of the current continuation
+closure. Invoking <code class="language-plaintext highlighter-rouge">continue</code> inside the body of a <code class="language-plaintext highlighter-rouge">loop</code> or
+<code class="language-plaintext highlighter-rouge">loopWhile</code> will cause the actor to finish the current iteration and
+continue with the next iteration. If the current continuation has
+been registered using <code class="language-plaintext highlighter-rouge">andThen</code>, execution continues with the
+closure passed as the second argument to <code class="language-plaintext highlighter-rouge">andThen</code>.</p>
+  </li>
+</ul>
+
+<p>The control structures can be used anywhere in the body of a <code class="language-plaintext highlighter-rouge">Reactor</code>’s
+<code class="language-plaintext highlighter-rouge">act</code> method and in the bodies of methods (transitively) called by
+<code class="language-plaintext highlighter-rouge">act</code>. For actors created using the <code class="language-plaintext highlighter-rouge">actor { ... }</code> shorthand the control
+structures can be imported from the <code class="language-plaintext highlighter-rouge">Actor</code> object.</p>
+
+<h4 id="futures">Futures</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">ReplyReactor</code> and <code class="language-plaintext highlighter-rouge">Actor</code> traits support result-bearing message
+send operations (the <code class="language-plaintext highlighter-rouge">!!</code> methods) that immediately return a
+<em>future</em>. A future, that is, an instance of the <code class="language-plaintext highlighter-rouge">Future</code> trait, is a
+handle that can be used to retrieve the response to such a message
+send-with-future.</p>
+
+<p>The sender of a message send-with-future can wait for the future’s
+response by <em>applying</em> the future. For example, sending a message using
+<code class="language-plaintext highlighter-rouge">val fut = a !! msg</code> allows the sender to wait for the result of the
+future as follows: <code class="language-plaintext highlighter-rouge">val res = fut()</code>.</p>
+
+<p>In addition, a <code class="language-plaintext highlighter-rouge">Future</code> can be queried to find out whether its result
+is available without blocking using the <code class="language-plaintext highlighter-rouge">isSet</code> method.</p>
+
+<p>A message send-with-future is not the only way to obtain a
+future. Futures can also be created from computations directly.
+In the following example, the computation body is started to
+run concurrently, returning a future for its result:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val fut = Future { body }
+// ...
+fut() // wait for future
+</code></pre></div></div>
+
+<p>What makes futures special in the context of actors is the possibility
+to retrieve their result using the standard actor-based receive
+operations, such as <code class="language-plaintext highlighter-rouge">receive</code> etc. Moreover, it is possible to use the
+event-based operations <code class="language-plaintext highlighter-rouge">react</code> and <code class="language-plaintext highlighter-rouge">reactWithin</code>. This enables an actor to
+wait for the result of a future without blocking its underlying
+thread.</p>
+
+<p>The actor-based receive operations are made available through the
+future’s <code class="language-plaintext highlighter-rouge">inputChannel</code>. For a future of type <code class="language-plaintext highlighter-rouge">Future[T]</code>, its type is
+<code class="language-plaintext highlighter-rouge">InputChannel[T]</code>. Example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val fut = a !! msg
+// ...
+fut.inputChannel.react {
+  case Response =&gt; // ...
+}
+</code></pre></div></div>
+
+<h2 id="channels">Channels</h2>
+
+<p>Channels can be used to simplify the handling of messages that have
+different types but that are sent to the same actor. The hierarchy of
+channels is divided into <code class="language-plaintext highlighter-rouge">OutputChannel</code>s and <code class="language-plaintext highlighter-rouge">InputChannel</code>s.</p>
+
+<p><code class="language-plaintext highlighter-rouge">OutputChannel</code>s can be sent messages. An <code class="language-plaintext highlighter-rouge">OutputChannel</code> <code class="language-plaintext highlighter-rouge">out</code>
+supports the following operations.</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">out ! msg</code>. Asynchronously sends <code class="language-plaintext highlighter-rouge">msg</code> to <code class="language-plaintext highlighter-rouge">out</code>. A reference to the
+sending actor is transferred as in the case where <code class="language-plaintext highlighter-rouge">msg</code> is sent
+directly to an actor.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">out forward msg</code>. Asynchronously forwards <code class="language-plaintext highlighter-rouge">msg</code> to <code class="language-plaintext highlighter-rouge">out</code>. The
+sending actor is determined as in the case where <code class="language-plaintext highlighter-rouge">msg</code> is forwarded
+directly to an actor.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">out.receiver</code>. Returns the unique actor that is receiving messages
+sent to the <code class="language-plaintext highlighter-rouge">out</code> channel.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">out.send(msg, from)</code>. Asynchronously sends <code class="language-plaintext highlighter-rouge">msg</code> to <code class="language-plaintext highlighter-rouge">out</code> supplying
+<code class="language-plaintext highlighter-rouge">from</code> as the sender of the message.</p>
+  </li>
+</ul>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">OutputChannel</code> trait has a type parameter that specifies
+the type of messages that can be sent to the channel (using <code class="language-plaintext highlighter-rouge">!</code>,
+<code class="language-plaintext highlighter-rouge">forward</code>, and <code class="language-plaintext highlighter-rouge">send</code>). The type parameter is contravariant:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait OutputChannel[-Msg]
+</code></pre></div></div>
+
+<p>Actors can receive messages from <code class="language-plaintext highlighter-rouge">InputChannel</code>s. Like <code class="language-plaintext highlighter-rouge">OutputChannel</code>,
+the <code class="language-plaintext highlighter-rouge">InputChannel</code> trait has a type parameter that specifies the type of
+messages that can be received from the channel. The type parameter is
+covariant:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait InputChannel[+Msg]
+</code></pre></div></div>
+
+<p>An <code class="language-plaintext highlighter-rouge">InputChannel[Msg]</code> <code class="language-plaintext highlighter-rouge">in</code> supports the following operations.</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">in.receive { case Pat1 =&gt; ... ; case Patn =&gt; ... }</code> (and similarly,
+<code class="language-plaintext highlighter-rouge">in.receiveWithin</code>). Receives a message from <code class="language-plaintext highlighter-rouge">in</code>. Invoking
+<code class="language-plaintext highlighter-rouge">receive</code> on an input channel has the same semantics as the standard
+<code class="language-plaintext highlighter-rouge">receive</code> operation for actors. The only difference is that the
+partial function passed as an argument has type
+<code class="language-plaintext highlighter-rouge">PartialFunction[Msg, R]</code> where <code class="language-plaintext highlighter-rouge">R</code> is the return type of <code class="language-plaintext highlighter-rouge">receive</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">in.react { case Pat1 =&gt; ... ; case Patn =&gt; ... }</code> (and similarly,
+<code class="language-plaintext highlighter-rouge">in.reactWithin</code>). Receives a message from <code class="language-plaintext highlighter-rouge">in</code> using the
+event-based <code class="language-plaintext highlighter-rouge">react</code> operation. Like <code class="language-plaintext highlighter-rouge">react</code> for actors, the return
+type is <code class="language-plaintext highlighter-rouge">Nothing</code>, indicating that invocations of this method never
+return. Like the <code class="language-plaintext highlighter-rouge">receive</code> operation above, the partial function
+passed as an argument has a more specific type:</p>
+
+    <p>PartialFunction[Msg, Unit]</p>
+  </li>
+</ul>
+
+<h3 id="creating-and-sharing-channels">Creating and sharing channels</h3>
+
+<p>Channels are created using the concrete <code class="language-plaintext highlighter-rouge">Channel</code> class. It extends both
+<code class="language-plaintext highlighter-rouge">InputChannel</code> and <code class="language-plaintext highlighter-rouge">OutputChannel</code>. A channel can be shared either by
+making the channel visible in the scopes of multiple actors, or by
+sending it in a message.</p>
+
+<p>The following example demonstrates scope-based sharing.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>actor {
+  var out: OutputChannel[String] = null
+  val child = actor {
+    react {
+      case "go" =&gt; out ! "hello"
+    }
+  }
+  val channel = new Channel[String]
+  out = channel
+  child ! "go"
+  channel.receive {
+    case msg =&gt; println(msg.length)
+  }
+}
+</code></pre></div></div>
+
+<p>Running this example prints the string <code class="language-plaintext highlighter-rouge">"5"</code> to the console. Note that
+the <code class="language-plaintext highlighter-rouge">child</code> actor has only access to <code class="language-plaintext highlighter-rouge">out</code> which is an
+<code class="language-plaintext highlighter-rouge">OutputChannel[String]</code>. The <code class="language-plaintext highlighter-rouge">channel</code> reference, which can also be used
+to receive messages, is hidden. However, care must be taken to ensure
+the output channel is initialized to a concrete channel before the
+<code class="language-plaintext highlighter-rouge">child</code> sends messages to it. This is done using the <code class="language-plaintext highlighter-rouge">"go"</code> message. When
+receiving from <code class="language-plaintext highlighter-rouge">channel</code> using <code class="language-plaintext highlighter-rouge">channel.receive</code> we can make use of the
+fact that <code class="language-plaintext highlighter-rouge">msg</code> is of type <code class="language-plaintext highlighter-rouge">String</code>; therefore, it provides a <code class="language-plaintext highlighter-rouge">length</code>
+member.</p>
+
+<p>An alternative way to share channels is by sending them in
+messages. The following example demonstrates this.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case class ReplyTo(out: OutputChannel[String])
+
+val child = actor {
+  react {
+    case ReplyTo(out) =&gt; out ! "hello"
+  }
+}
+
+actor {
+  val channel = new Channel[String]
+  child ! ReplyTo(channel)
+  channel.receive {
+    case msg =&gt; println(msg.length)
+  }
+}
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">ReplyTo</code> case class is a message type that we use to distribute a
+reference to an <code class="language-plaintext highlighter-rouge">OutputChannel[String]</code>. When the <code class="language-plaintext highlighter-rouge">child</code> actor receives a
+<code class="language-plaintext highlighter-rouge">ReplyTo</code> message it sends a string to its output channel. The second
+actor receives a message on that channel as before.</p>
+
+<h2 id="schedulers">Schedulers</h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">Reactor</code> (or an instance of a subtype) is executed using a
+<em>scheduler</em>. The <code class="language-plaintext highlighter-rouge">Reactor</code> trait introduces the <code class="language-plaintext highlighter-rouge">scheduler</code> member which
+returns the scheduler used to execute its instances:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def scheduler: IScheduler
+</code></pre></div></div>
+
+<p>The run-time system executes actors by submitting tasks to the
+scheduler using one of the <code class="language-plaintext highlighter-rouge">execute</code> methods defined in the <code class="language-plaintext highlighter-rouge">IScheduler</code>
+trait. Most of the trait’s other methods are only relevant when
+implementing a new scheduler from scratch, which is rarely necessary.</p>
+
+<p>The default schedulers used to execute instances of <code class="language-plaintext highlighter-rouge">Reactor</code> and <code class="language-plaintext highlighter-rouge">Actor</code>
+detect the situation when all actors have finished their
+execution. When this happens, the scheduler shuts itself down
+(terminating any threads used by the scheduler). However, some
+schedulers, such as the <code class="language-plaintext highlighter-rouge">SingleThreadedScheduler</code> (in package <code class="language-plaintext highlighter-rouge">scheduler</code>)
+have to be shut down explicitly by invoking their <code class="language-plaintext highlighter-rouge">shutdown</code> method.</p>
+
+<p>The easiest way to create a custom scheduler is by extending
+<code class="language-plaintext highlighter-rouge">SchedulerAdapter</code>, implementing the following abstract member:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def execute(fun: =&gt; Unit): Unit
+</code></pre></div></div>
+
+<p>Typically, a concrete implementation would use a thread pool to
+execute its by-name argument <code class="language-plaintext highlighter-rouge">fun</code>.</p>
+
+<h2 id="remote-actors">Remote Actors</h2>
+
+<p>This section describes the remote actors API. Its main interface is
+the <code class="language-plaintext highlighter-rouge">RemoteActor</code> object in package <code class="language-plaintext highlighter-rouge">scala.actors.remote</code>. This object
+provides methods to create and connect to remote actor instances. In
+the code snippets shown below we assume that all members of
+<code class="language-plaintext highlighter-rouge">RemoteActor</code> have been imported; the full list of imports that we use
+is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.actors._
+import scala.actors.Actor._
+import scala.actors.remote._
+import scala.actors.remote.RemoteActor._
+</code></pre></div></div>
+
+<h3 id="starting-remote-actors">Starting remote actors</h3>
+
+<p>A remote actor is uniquely identified by a <a href="https://www.scala-lang.org/api/current/scala/Symbol.html"><code class="language-plaintext highlighter-rouge">Symbol</code></a>. This symbol is
+unique to the JVM instance on which the remote actor is executed. A
+remote actor identified with name <code class="language-plaintext highlighter-rouge">'myActor</code> can be created as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MyActor extends Actor {
+  def act() {
+    alive(9000)
+    register('myActor, self)
+    // ...
+  }
+}
+</code></pre></div></div>
+
+<p>Note that a name can only be registered with a single (alive) actor at
+a time. For example, to register an actor <em>A</em> as <code class="language-plaintext highlighter-rouge">'myActor</code>, and then
+register another actor <em>B</em> as <code class="language-plaintext highlighter-rouge">'myActor</code>, one would first have to wait
+until <em>A</em> terminated. This requirement applies across all ports, so
+simply registering <em>B</em> on a different port as <em>A</em> is not sufficient.</p>
+
+<h3 id="connecting-to-remote-actors">Connecting to remote actors</h3>
+
+<p>Connecting to a remote actor is just as simple. To obtain a remote
+reference to a remote actor running on machine <code class="language-plaintext highlighter-rouge">myMachine</code>, on port
+8000, with name <code class="language-plaintext highlighter-rouge">'anActor</code>, use <code class="language-plaintext highlighter-rouge">select</code> in the following manner:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val myRemoteActor = select(Node("myMachine", 8000), 'anActor)
+</code></pre></div></div>
+
+<p>The actor returned from <code class="language-plaintext highlighter-rouge">select</code> has type <code class="language-plaintext highlighter-rouge">AbstractActor</code> which provides
+essentially the same interface as a regular actor, and thus supports
+the usual message send operations:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myRemoteActor ! "Hello!"
+receive {
+  case response =&gt; println("Response: " + response)
+}
+myRemoteActor !? "What is the meaning of life?" match {
+  case 42   =&gt; println("Success")
+  case oops =&gt; println("Failed: " + oops)
+}
+val future = myRemoteActor !! "What is the last digit of PI?"
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">select</code> is lazy; it does not actually initiate any network
+connections. It simply creates a new <code class="language-plaintext highlighter-rouge">AbstractActor</code> instance which is
+ready to initiate a new network connection when needed (for instance,
+when <code class="language-plaintext highlighter-rouge">!</code> is invoked).</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/actors.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/core/actors.html" class="lang">中文 (简体)</a></li>
+          
+            
+            
+      			
+      			<li><a href="/es/overviews/core/actors.html" class="lang">Español</a></li>
+          
+      </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/actors.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP Meeting Minutes - 24th September 2018 | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/minutes/2018-09-24-sip-minutes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP Meeting Minutes - 24th September 2018"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP Meeting Minutes - 24th September 2018"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP Meeting Minutes - 24th September 2018</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary sips">
+			<div class="inner-box toc-context">
+				<h1 id="minutes">Minutes</h1>
+
+<p>The following agenda was distributed to attendees:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Reviewers</th>
+      <th>Accepted/Rejected</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Summary of the Contributors thread <a href="https://contributors.scala-lang.org/t/proposal-to-remove-xml-literals-from-the-language/2146">“Proposal to remove XML literals from the language”</a></td>
+      <td>Sébastien Doeraene</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <td>Summary of the Contributors thread <a href="https://contributors.scala-lang.org/t/proposal-to-remove-procedure-syntax/2143">“Proposal to remove the procedure Syntax”</a></td>
+      <td>Josh Suereth</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <td><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Proposal to add Intersection Types to the Language</a></td>
+      <td>Martin Odersky</td>
+      <td>Discussion opened until the 25th October 2018, comments welcomed <a href="https://contributors.scala-lang.org/t/proposal-to-add-intersection-types-to-the-language/2351">here</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">Proposal to Add Union Types to the Language</a></td>
+      <td>Martin Odersky</td>
+      <td>Discussion opened until the 25th October 2018, comments welcomed <a href="https://contributors.scala-lang.org/t/proposal-to-add-union-types-to-the-language/2352">here</a></td>
+    </tr>
+    <tr>
+      <td>Proposal to add Implicit Function Types to the Language</td>
+      <td>Martin Odersky</td>
+      <td>Discussion opened until the 25th October 2018, comments welcomed <a href="https://contributors.scala-lang.org/t/proposal-to-add-implicit-function-types-to-the-language/2353">here</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">Proposal to add Dependent Function Types to the Language</a></td>
+      <td>Martin Odersky</td>
+      <td>Discussion opened until the 25th October 2018, comments welcomed <a href="https://contributors.scala-lang.org/t/proposal-to-add-dependent-function-types-to-the-language/2354/1">here</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">Proposal to add Trait Parameters to the Language</a></td>
+      <td>Martin Odersky</td>
+      <td>Discussion opened until the 25th October 2018, comments welcomed <a href="https://contributors.scala-lang.org/t/proposal-to-add-trait-parameters-to-the-language/2356">here</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Jorge Vicente Cantero was the Process Lead and Darja Jovanovic was the secretary.</p>
+
+<h2 id="date-and-location">Date and Location</h2>
+<p>The meeting took place on the 24th September 2018 at 5 PM CEST via Google Hangouts at EPFL in Lausanne, Switzerland as well as other locations.</p>
+
+<p><a href="https://youtu.be/tEb4UF6RJrM">Watch on Scala Center YouTube channel</a></p>
+
+<p>Minutes were taken by Darja Jovanovic and Jorge Vicente Cantero.</p>
+
+<h2 id="attendees">Attendees</h2>
+
+<ul>
+  <li>Martin Odersky (<a href="https://github.com/odersky">@odersky</a>), EPFL</li>
+  <li>Jorge Vicente Cantero (<a href="https://github.com/jvican">@jvican</a>), Process Lead</li>
+  <li>Seth Tisue (<a href="https://github.com/SethTisue">@SethTisue</a>), Lightbend</li>
+  <li>Iulian Dragos (<a href="https://github.com/dragos">@dragos</a>), Triplequote</li>
+  <li>Eugene Burmako (<a href="https://github.com/xeno-by">@xeno-by</a>), Twitter</li>
+  <li>Josh Suereth (<a href="https://github.com/jsuereth">@jsuereth</a>), Independent</li>
+  <li>Sébastien Doeraene (<a href="https://github.com/sjrd">@sjrd</a>), Scala Center</li>
+  <li>Adriaan Moors (<a href="https://github.com/adriaanm">@adriaanm</a>), Lightbend</li>
+  <li>Darja Jovanovic (<a href="https://github.com/darjutak">@darjutak</a>), Scala Center</li>
+</ul>
+
+<h2 id="not-present">Not present</h2>
+<ul>
+  <li>Miles Sabin (<a href="https://github.com/milessabin">@milessabin</a>), Independent</li>
+  <li>Heather Miller (<a href="https://github.com/heathermiller">@heathermiller</a>), CMU</li>
+</ul>
+
+<h2 id="proceedings">Proceedings</h2>
+<h3 id="opening-remarks">Opening Remarks</h3>
+
+<p>Jorge opens the meeting, explains SIP dynamics:
+Finalising discussion about the 1st batch, action points
+Introducing batch two
+Decision / voting / postponing the discussion</p>
+
+<h3 id="discussion-of-the-first-scala-3-batch">Discussion of the first Scala 3 batch</h3>
+
+<h4 id="proposal-to-remove-xml-literals-from-the-language"><a href="https://contributors.scala-lang.org/t/proposal-to-remove-xml-literals-from-the-language/2146">“Proposal to remove XML literals from the language”</a></h4>
+<p>(<a href="https://youtu.be/gnlL4PlstFY?t=891">YouTube time 3’ - 16’50’’</a>)</p>
+
+<p><strong>Sébastien</strong> suggests to postpone the removal of XML and Procedure syntax, because when
+the removal takes place it will be a code breaking change, not a binary or
+tasty one. Adds it would be better to focus on changes that have an impact on
+tasty and binary format and deal with these later.</p>
+
+<p><strong>Seth</strong> (<a href="https://youtu.be/tEb4UF6RJrM?t=294">YouTube time:4’54</a>) suggests to have a warning
+notes that it will eventually be removed.</p>
+
+<p><strong>Eugene</strong> asks what would be the positive effect of that change? And that we
+need to vote on it first.</p>
+
+<p><strong>Iulian</strong> asks what are the promises with regards to binary-compatible and
+source-compatible releases in Scala 3. To him it looks weird that we could
+break the source between 3.0 and 3.1.</p>
+
+<p><strong>Josh</strong> notes that by enforcing binary compatibility across Scala 2 and Scala
+3 we are sacrificing source compatibility. He asks for this decision to be
+more thought over as it is a big decision with lots of impact for Scala
+tooling. He agrees we can make source-breaking releases nicer to use in
+source-based build tools like Pants or Bazel, but trading off binary
+compatibility by source compatibility is not a decision to take lightly <a href="https://youtu.be/tEb4UF6RJrM?t=612">more</a>.</p>
+
+<p><strong>Martin</strong> thinks that no matter what trade-offs we do with regards to
+compatibility, he’d like to be able to remove XML literals in the first
+release of Scala 3.0 because having the XML spec inside the Scala spec gives
+a bad impression of complexity of the language, where he believes Scala is
+instead a more lightweight language than its competitors. There is no way he
+can make this argument if the XML spec continues to be in the relatively
+simple Scala language specification <a href="https://youtu.be/tEb4UF6RJrM?t=916">more</a>.</p>
+
+<p>(The discussion with regards to binary compatibility and source compatibility trade-offs is postponed.)</p>
+
+<h4 id="proposal-to-remove-the-procedure-syntax"><a href="https://contributors.scala-lang.org/t/proposal-to-remove-procedure-syntax/2143">“Proposal to remove the procedure Syntax”</a></h4>
+
+<p>(<a href="https://youtu.be/tEb4UF6RJrM?t=1010">YouTube time: 16’50’’ - 19.28’’</a>)</p>
+
+<p><strong>Jorge</strong> reminds that in the last meeting we agreed that before moving forward with the change we needed:</p>
+<ol>
+  <li>A better motivation</li>
+  <li>A good explanation of why this change promotes the use of types (making it safer)</li>
+  <li>A removal of the examples that were misleading</li>
+  <li>A link to a Scalafix rewrite that could make a migration.</li>
+</ol>
+
+<p><strong>Jorge</strong> then points out that the changes need to be done in order to move
+forward, but is asking a Committee to voice their opinion about removing this
+feature in Scala 3. 
+<strong>Josh</strong> underlines that there were 2 parts in the debate
+1) Are procedures different than a method, do we want them visually
+distinctive? 
+2) Other issues listed by <strong>Jorge</strong> above. In particular, the fact that we want people to explicitly annotate the unit in their methods because it makes code more readable.</p>
+
+<p>A decision will be taken into the future when all those items are acted on.</p>
+
+<h3 id="discussion-of-the-second-scala-3-batch">Discussion of the second Scala 3 batch</h3>
+
+<p>An overview of the second batch can be found <a href="https://contributors.scala-lang.org/t/second-batch-of-scala-3-sips-additions-to-scalas-type-system/2376">in this Scala Contributors thread</a>. The batches under discussion are:</p>
+
+<ol>
+  <li>https://contributors.scala-lang.org/t/proposal-to-add-trait-parameters-to-the-language/2356</li>
+  <li>https://contributors.scala-lang.org/t/proposal-to-add-intersection-types-to-the-language/2351</li>
+  <li>https://contributors.scala-lang.org/t/proposal-to-add-union-types-to-the-language/2352</li>
+  <li>https://contributors.scala-lang.org/t/proposal-to-add-dependent-function-types-to-the-language/2354</li>
+  <li>https://contributors.scala-lang.org/t/proposal-to-add-implicit-function-types-to-the-language/2353</li>
+</ol>
+
+<p>Feedback on these proposals is open until the 25th October 2018, as describe
+in the linked Scala Contributors thread.</p>
+
+<h4 id="proposal-to-add-intersection-types-and-union-types-to-the-language"><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Proposal to add Intersection Types</a> and <a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">Union Types</a> to the language</h4>
+
+<p>(<a href="https://youtu.be/tEb4UF6RJrM?t=1250">YouTube time: 20’49’’ - 24’01</a>)</p>
+
+<p><strong>Martin</strong> presents the intersection types as per doc. He does a basic
+description of the feature and points out that intersection types are the
+duals of union types. He points out that union types have helped replace most
+of the lubbing mechanism and early precocious lubbing that happened in Scala
+2 (which happens in less degree in the current implementation of Scala 3 but
+could be improved in future releases). <strong>Martin</strong> also thinks that union
+types are useful for null safety, where any type coming from Java could be
+annotated as <code class="language-plaintext highlighter-rouge">T | Null</code>. He then goes on describing further implementation
+details and trade-offs that Scala 3 does in this space. <strong>Adriaan</strong> asks what
+are the trade-offs between the encoding of union types that we have in Scala
+and the one they use in other languages like Typescript. <strong>Martin</strong> points
+out that performance-wise Scala union types would be more performant because
+<code class="language-plaintext highlighter-rouge">T | Null</code> wouldn’t box if <code class="language-plaintext highlighter-rouge">T</code> is a primitive type.</p>
+
+<p><strong>Sebastien</strong> (<a href="https://youtu.be/tEb4UF6RJrM?t=1803">YouTube time: 30’03’’</a>)
+gives his input based on the fact that Scala.js already has Union Types in
+Scala 2. He states that they are very limited; they were introduced for
+modeling because some libraries “desperately needed” them but turned out they
+were overused for no apparent reason. He advises to document the Union Types
+proper usage well and not get discouraged by the possible “overusage”.</p>
+
+<p>There is some back-and-forth between <strong>Sebastien</strong> and <strong>Josh</strong> with
+regards to performance of union types and their boxing (especially in the
+presence of specialization). <a href="https://youtu.be/tEb4UF6RJrM?t=1913">More</a></p>
+
+<h4 id="proposal-to-add-implicit-function-types-to-the-language">Proposal to add Implicit Function Types to the Language</h4>
+
+<p>URL: https://dotty.epfl.ch/docs/reference/instances/implicit-function-types.html</p>
+
+<p>(<a href="https://youtu.be/tEb4UF6RJrM?t=2341">YouTube time: 39’01’’ - 43’11’’</a>)</p>
+
+<p><strong>Martin</strong> explains what implicit function types are about and points out it’s
+a pretty “hot” feature that was published in POPL 2018.
+He underlines the advantages of implicit function types (like further
+abstraction of code that depends on a notion/representation of a context,
+like Scala 3’s compiler) and points out that implicit function types can
+replace the reader monad, even though it’s about 10x faster than the reader monad
+is. A comprehensive explanation of what implicit function types can do can be
+found in <a href="https://slideslive.com/38908156/applications-of-implicit-function-types">Olivier’s Blainvillain talk at
+ScalaDays, Berlin 2018</a>.
+<strong>Martin</strong> thinks that implicit function types should be seen as the
+canonical way of doing scope injection, which gives you a lot of
+expressivity, to which <strong>Sebastien</strong> adds that what Martin means by canonical
+scope injection doesn’t necessarily correspond with the way people do normal
+scope injection, because in normal scope injection you can’t refer to
+identifier or parent scopes. <strong>Martin</strong> clarifies that for him comonadic
+abstraction are the classical way of scope injection in which we inject
+things into an environment, hence the use of canonical scope injection when
+referring to implicit function types which allow you to do the same. His
+definition of scope injection comes more from a typing rules perspective
+rather than the lexical point of view. <strong>Martin</strong> agrees that if there is a
+name clash with implicit function types there is a problem indeed.</p>
+
+<h4 id="proposal-to-add-dependent-function-types-to-the-language"><a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">Proposal to add Dependent Function Types to the Language</a></h4>
+<p>(<a href="https://youtu.be/tEb4UF6RJrM?t=2591">YouTube time: 43’11’’ - 44’40’’</a>)</p>
+
+<p><strong>Martin</strong> mentions that dependent function types is the last big addition to Scala’s type checker. The reason why they are added is because Scala has dependent methods and there is a need for dependent functions (the same rationale has been doing with regards to implicit methods and implicit function types). It’s an obvious win because dependent function types allow us to abstract over the idea of implicit methods in functions, so the more we can do the better. Initially he was afraid of the feature because he thought it violated this Scala principle that in the end anything is an instance of a class in some way and it turned out that a new encoding of dependent function types made this initial argument moot. Dependent function types are now encoded as implicit function types with type refinements, so this way it doesn’t violate that principle.
+<strong>Adriaan</strong> mentions that the last missing bit is polymorphic function types
+and Martin agrees and says that they are looking into that, but maybe not for
+Scala 3.0 (Guillaume Martres is pushing for polymorphic function types).</p>
+
+<h4 id="proposal-to-add-trait-parameters-to-the-language"><a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">Proposal to add Trait Parameters to the Language</a></h4>
+
+<p>(<a href="https://youtu.be/tEb4UF6RJrM?t=2682">YouTube time: 44’42’’ - end </a>)</p>
+
+<p><strong>Martin</strong> describes trait parameters and says that they subsume a large number of use
+cases of early initializers. They were not added to Scala from the start because of
+uncertainty in the way they would work with regards to linearization and
+initialization of parameters. The way they solved this problem is by
+enforcing the rule that only the class extending a trait with parameters can
+pass the parameters. The motivation to add trait parameters is to regularize
+the language and get rid of early initializers which are an ad-hoc feature
+and are much harder to understand how to use correctly. Afterward, the
+Committee discusses some of the limitations of trait parameters.
+<strong>Josh</strong> (<a href="https://youtu.be/tEb4UF6RJrM?t=2920">YouTube time: 48’40’’</a>
+suggests he will find one of his libraries that uses a lot of early
+initializers and see if trait parameters allow him to replace them. He’s
+curious about how clean would the code look after the change.</p>
+
+<p><strong>Jorge</strong> then wraps up the meeting, points out how feedback on these
+proposals would work (check the following link
+<em>https://contributors.scala-lang.org/t/second-batch-of-scala-3-sips-additions-to-scalas-type-system/2376</em>)
+and finalizes the discussion.</p>
+
+<p><strong>Conclusion</strong> Next meeting will be dedicated to the Second Batch disscusion.</p>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+        <h5 class="contents" style="line-height: 1.1; margin-bottom: 18px;">Scala Improvement Proposals (SIPs)</h5>
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="/sips/all.html" class="button">View all SIPs</a>
+          </div>
+        <h5 class="contents" style="margin-bottom: 0;">SIP/SPP Meetings</h5>
+        <div id="sip-meetings">
+          <div id="upcoming-meeting">
+            <h6>Next meeting:</h6>
+            <div id="meeting-title">&nbsp;&nbsp;<span class="tag" style="background-color: #dc322f; top: 0px; margin-bottom: 6px;">Live</span></div>
+            <div id="meeting-time"></div>
+            <div id="live-on-youtube">
+              Tune in and join us, live! Ask the SIP committee questions, weigh in, or just follow along.
+              <br><a id="watch-meeting">Watch →</a>
+            </div>
+          </div>
+          <div id="meeting-minutes">
+            <ul>
+              <li><a href="/sips/minutes-list.html">Meeting Minutes</a></li>
+              <li><a href="https://www.youtube.com/channel/UCn_8OeZlf5S6sqCqntAvaIw/videos?view=2&sort=dd&shelf_id=1&live_view=502">Meeting Video Registrations (YouTube)</a></li>
+            </ul>
+          </div>
+        </div>
+        <h5 class="contents" style="margin-bottom: 0;">Writing a SIP</h5>
+        <ul>
+          <li><a href="/sips/sip-submission.html">Submitting a SIP</a></li>
+          <li><a href="/sips/sip-tutorial.html">Tutorial: Writing a SIP</a></li>
+        </ul>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/minutes/2018-09-24-sip-minutes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+// Get next SIP meeting date/time
+$(document).ready(function() {
+  var listVidsQuery = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn_8OeZlf5S6sqCqntAvaIw&eventType=upcoming&type=video&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94";
+  var vidQuery = "https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&key=AIzaSyCzVD5wYXjeee7no32Jipju7WAhsvR4D94&id=";
+  $.getJSON(listVidsQuery, function(data) {
+
+    // if there indeed are upcoming meetings, display the next one
+    if (data.items.length > 0) {
+        // YouTube video ID for the next upcoming SIP/SPP meeting
+        var videoId = data.items[0].id.videoId;
+
+        $.getJSON(vidQuery + videoId, function(vidData) {
+          if (vidData.items.length > 0) {
+            var result = vidData.items[0].liveStreamingDetails.scheduledStartTime;
+            var startTime = moment(result).format("dddd, MMMM Do YYYY, ha");
+
+            var sipOrSpp = "SIP";
+            if (data.items[0].snippet.title.indexOf("SPP") !== -1) sipOrSpp = "SPP";
+
+            var meetingTitle = moment(result).format("MMMM YYYY") + " " + sipOrSpp + " Meeting";
+            var href = "https://www.youtube.com/watch?v=" + videoId;
+            var a = document.createElement('a');
+            $(a).attr('href', href).text(meetingTitle);
+
+            $("#meeting-title").prepend(a);
+            $("#watch-meeting").attr('href', href);
+            $("#meeting-time").text(startTime);
+          }
+        });
+
+    } else {
+      // if there are no upcoming meetings scheduled, hide the upcoming meeting section
+      $("#upcoming-meeting").hide();
+    }
+
+  });
+});
+</script>
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

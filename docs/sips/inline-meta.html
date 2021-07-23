@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-28 and SIP-29 - Inline meta | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/inline-meta.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-28 and SIP-29 - Inline meta"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-28 and SIP-29 - Inline meta"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-28 and SIP-29 - Inline meta</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Eugene Burmako, Sébastien Doeraene, Vojin Jovanovic, Martin Odersky, Dmitry Petrashko, Denys Shabalin</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aug 22nd 2016</td>
+      <td>Initial Pre-SIP</td>
+    </tr>
+    <tr>
+      <td>Sep 9th 2016</td>
+      <td>Initial SIP</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="preface">Preface</h2>
+
+<p>This document represents the culmination of a design process that spans several years.
+We did our best to extensively evaluate the design space and comprehensively document our findings.</p>
+
+<p>As a result, this is going to be a very long read. If you’re just interested in getting a quick idea
+of the proposal, you can read just the <a href="#intuition">“Intuition”</a> section.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Def macros and macro annotations have become an integral
+part of the Scala ecosystem. They marry metaprogramming with types
+and work in synergy with other language features, enabling <a href="https://scalamacros.org/paperstalks/2014-02-04-WhatAreMacrosGoodFor.pdf">practically important use cases</a>.</p>
+
+<p>However, in addition to having the reputation of an indispensable tool, Scala macros have also gained notoriety
+as an arcane and brittle technology. The most common criticisms of Scala macros concern their
+subpar tool support and overcomplicated metaprogramming API powered by scala.reflect.</p>
+
+<p>While trying to fix these problems via evolutionary changes to the current macro system,
+we have realized that they are all caused by the decision to use compiler internals as the underlying metaprogramming API.
+Extensive use of desugarings and existence of multiple independent program representations may have worked well
+for compiler development, but they turned out to be inadequate for a public API.</p>
+
+<p>The realization that we cannot make meaningful progress while staying within the confines of scala.reflect
+meant that our macro system needs a redesign. We took the best part of the current macros - their smooth integration
+into the language - and discarded the rest, replacing scala.reflect with a better metaprogramming API
+and coming up with a lightweight declaration syntax. In this document, we present the current version of the design.</p>
+
+<h2 id="table-of-contents">Table of contents</h2>
+
+<ul>
+  <li><a href="#intuition">Intuition</a>
+    <ul>
+      <li><a href="#def-macros">Def macros</a></li>
+      <li><a href="#discussion">Discussion</a></li>
+      <li><a href="#inlinemeta">Inline/meta</a></li>
+    </ul>
+  </li>
+  <li><a href="#language-features">Language features</a>
+    <ul>
+      <li><a href="#inline-definitions">Inline definitions</a></li>
+      <li><a href="#inline-reduction">Inline reduction</a></li>
+      <li><a href="#meta-expressions">Meta expressions</a></li>
+      <li><a href="#meta-expansion">Meta expansion</a></li>
+      <li><a href="#meta-apis">Meta APIs</a></li>
+    </ul>
+  </li>
+  <li><a href="#design-considerations">Design considerations</a>
+    <ul>
+      <li><a href="#scalameta">Scala.meta</a></li>
+      <li><a href="#tool-support">Tool support</a></li>
+      <li><a href="#losing-whiteboxity">Losing whiteboxity</a></li>
+      <li><a href="#losing-compiler-internals">Losing compiler internals</a></li>
+      <li><a href="#macro-annotations">Macro annotations</a></li>
+      <li><a href="#why-inline">Why inline</a></li>
+      <li><a href="#out-of-scope">Out of scope</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#credits">Credits</a></li>
+</ul>
+
+<h2 id="intuition">Intuition</h2>
+
+<p>In this section, we will walk through writing and using compile-time metaprograms that implement a subset of functionality
+expected of language-integrated queries. Without going into much detail,
+we will obtain high-level intuition behind the underlying mechanisms</p>
+
+<p><a href="https://dl.acm.org/citation.cfm?id=1142552">Language-integrated query</a> is a technique that achieves smooth integration of database queries with programming languages.
+A common approach to LINQ, popularized by .NET Framework 3.5, consists in representing datasources
+by collection-like library types and then allowing users to write queries as series of calls to these types
+using familiar higher-order methods like <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code> and others.</p>
+
+<p>We will now develop a sketch of a database access library built in the spirit of LINQ.
+In this sketch, we will intentionally forgo the practicalities of building a LINQ library
+(e.g. mapping from classes to datasources, design of internal ASTs, error reporting, etc.)
+in order to clearly illustrate the role played by compile-time metaprogramming.</p>
+
+<p>Below we define a trait <code class="language-plaintext highlighter-rouge">Query[T]</code> that encapsulates a query returning a collection
+of objects of type <code class="language-plaintext highlighter-rouge">T</code>. Next to it, we define its children <code class="language-plaintext highlighter-rouge">Table</code> and <code class="language-plaintext highlighter-rouge">Map</code> that represent
+particular types of queries. <code class="language-plaintext highlighter-rouge">Table</code> stands for a datasource that knows about the underlying type
+(in this sketch, we use an imaginary typeclass <code class="language-plaintext highlighter-rouge">TypeInfo</code> for that purpose).
+<code class="language-plaintext highlighter-rouge">Map</code> models a restricted subset of SQL SELECT statements via a simple <code class="language-plaintext highlighter-rouge">Node</code> AST.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Query[T]
+case class Table[T: TypeInfo]() extends Query[T]
+case class Select[T, U](q: Query[T], fn: Node[U]) extends Query[U]
+
+trait Node[T]
+case class Ref[T](name: String) extends Node[T]
+
+object Database {
+  def execute[T](q: Query[T]): List[T] = { ... }
+}
+</code></pre></div></div>
+
+<p>In this model, a SQL query string <code class="language-plaintext highlighter-rouge">"SELECT name FROM users"</code> is represented as <code class="language-plaintext highlighter-rouge">Select(Table[User](), Ref[String]("name"))</code>.
+Queries like the one just mentioned can be run via <code class="language-plaintext highlighter-rouge">Database.execute</code> that translates them into SQL, sends the SQL to the database,
+receives the response and finally translates it to data objects. For the sake of simplicity, we will assume such implementation as a given.</p>
+
+<p>The key aspect of a LINQ facility is a convenient notation for queries.
+Arguably, none of the aforementioned ways to write queries can be called convenient.
+SQL, as any string-based representation, is prone to syntax errors, type errors and injections.
+Explicit instantiation of <code class="language-plaintext highlighter-rouge">Query</code> objects is very verbose, and still doesn’t solve all type errors.</p>
+
+<p>In this sketch, we define a LINQ API in the form of methods that mirror the collection API
+from the standard library. We would like our users to be able to encode queries in intuitively looking,
+statically typed calls to this API, e.g. <code class="language-plaintext highlighter-rouge">users.map(u =&gt; u.name)</code>, and then have our library translate these
+calls into calls to <code class="language-plaintext highlighter-rouge">Query</code> constructors.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Query {
+  implicit class QueryApi[T](q: Query[T]) {
+    def map[U](fn: T =&gt; U): Query[U] = { ... }
+  }
+}
+
+case class User(name: String)
+val users = Table[User]()
+users.map(u =&gt; u.name)
+// translated to: Select(users, Ref[String]("name"))
+</code></pre></div></div>
+
+<p>Among other ways, the desired effect can be achieved with compile-time metaprogramming.
+A metaprogram that runs at compile time can detect all calls to <code class="language-plaintext highlighter-rouge">Query.map</code> and rewrite them
+to invocations of <code class="language-plaintext highlighter-rouge">Select</code> with parameters of <code class="language-plaintext highlighter-rouge">map</code> transformed to corresponding instances of <code class="language-plaintext highlighter-rouge">Node</code>.</p>
+
+<h3 id="def-macros">Def macros</h3>
+
+<p>Before looking into the design of the new macro system, let’s see how the problem at hand
+can be solved using the currently available macro system.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.language.experimental.macros
+
+object Query {
+  implicit class QueryApi[T](q: Query[T]) {
+    def map[U](fn: T =&gt; U): Query[U] = macro QueryMacros.map
+  }
+}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">QueryApi.map</code> is called a macro def. Since macros are experimental,
+in order to define a macro def, it is required to either have <code class="language-plaintext highlighter-rouge">import scala.language.experimental.macros</code>
+in the lexical scope of the definition or to enable the corresponding setting in compiler flags.
+This is only necessary to define a macro def, not to use it.</p>
+
+<p>Macro defs look like normal methods in the sense that
+they can have term parameters, type parameters and return types.
+Just like regular methods, macro defs can be declared either inside or outside of classes,
+can be monomorphic or polymorphic, and can participate in type inference and implicit search.
+Refer to <a href="https://gist.github.com/xeno-by/e26a904051a171e4bc8b9096630220a7">Appendix A</a> for a detailed account of differences
+between macro defs and regular defs.</p>
+
+<p>Bodies of macro defs have an unusual syntax. The body of a macro def starts with the conditional keyword <code class="language-plaintext highlighter-rouge">macro</code> and
+is followed by a possibly qualified identifier that refers to a macro impl,
+an associated metaprogram run by the compiler when it encounters corresponding macro applications.
+Macro impls are defined as shown below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.macros.blackbox.Context
+
+object QueryMacros {
+  def map(c: Context)(fn: c.Tree): c.Tree = {
+    import c.universe._
+    ...
+  }
+}
+</code></pre></div></div>
+
+<p>Macro impls take a compiler context that represents the entry point into the macro API.
+The macro API consists of a general-purpose metaprogramming toolkit provided by scala.reflect
+and several specialized facilities exclusive to macro expansion.
+A typical first line of a macro impl is <code class="language-plaintext highlighter-rouge">import c.universe._</code> that makes the entire scala.reflect API available to the metaprogrammer.</p>
+
+<p>In addition to the compiler context, for every term parameter of a macro def, its macro impl
+takes a term parameter that carries a representation of the corresponding argument of the macro application.
+Macro impls can also get ahold of representation of type arguments, but this functionality is unnecessary for this example.</p>
+
+<p>A macro impl returns an abstract syntax tree, and this AST replaces the original macro application in the compilation pipeline.
+This is how we’re going to perform the LINQ translation of calls to <code class="language-plaintext highlighter-rouge">Query.map</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.macros.blackbox.Context
+
+object QueryMacros {
+  def map(c: Context)(fn: c.Tree): c.Tree = {
+    import c.universe._
+
+    // c.prefix looks like:
+    // Query.QueryApi[&lt;T&gt;](&lt;prefix&gt;)
+    val q"$_.$_[$_]($prefix)" = c.prefix
+
+    val node: Tree = fn match {
+      case q"($param) =&gt; $body" =&gt;
+        val sym = param.symbol
+        body match {
+          case q"$qual.$_" if qual.symbol == sym =&gt;
+            q"Ref[${body.tpe}](${sym.name.decodedName.toString})"
+        }
+    }
+
+    q"Select($prefix, $node)"
+  }
+}
+</code></pre></div></div>
+
+<p>In the listing above, we handle several challenges of macro writing.
+First, we get ahold of the prefix of the application, i.e. the <code class="language-plaintext highlighter-rouge">users</code> part of <code class="language-plaintext highlighter-rouge">users.map(u =&gt; u.name)</code>.
+Unlike macro arguments, prefixes aren’t mapped onto parameters of macro impls,
+so we need to use the dedicated <code class="language-plaintext highlighter-rouge">c.prefix</code> API.</p>
+
+<p>The next challenge is to extract the prefix from the macro application.
+Since <code class="language-plaintext highlighter-rouge">Query.map</code> is an extension method, the actual prefix is going to be <code class="language-plaintext highlighter-rouge">QueryApi(users)</code>, not <code class="language-plaintext highlighter-rouge">users</code>,
+therefore we need to apply some non-trivial effort.</p>
+
+<p>One way of getting to the query is to access the corresponding field of the implicit class,
+doing something like <code class="language-plaintext highlighter-rouge">QueryApi(users).q</code>. Unfortunately, this is out of the question, because <code class="language-plaintext highlighter-rouge">q</code> is private,
+and we cannot make it public without adding an extension method called <code class="language-plaintext highlighter-rouge">q</code> to <code class="language-plaintext highlighter-rouge">Query</code>.</p>
+
+<p>Another way of achieving the desired result is to take apart the abstract syntax tree representing <code class="language-plaintext highlighter-rouge">QueryApi(users)</code>,
+extracting <code class="language-plaintext highlighter-rouge">users</code> as the argument of the application.
+It looks like quasiquotes,
+which are supposed to provide a convenient WYSIWYG interface to deconstructing Scala code,
+are going to be a perfect fit.</p>
+
+<p>Unfortunately for macro writers, the Scala compiler heavily desugars code during compilation,
+so even the modest <code class="language-plaintext highlighter-rouge">QueryApi(users)</code>
+will get to the macro impl in the form of <code class="language-plaintext highlighter-rouge">Query.QueryApi[User](users)</code>.
+Therefore the naive <code class="language-plaintext highlighter-rouge">q"$_($query)"</code> quasiquote is not going to work,
+and we need to apply additional effort. With a bit of knowledge about compiler internals,
+we take care of this.</p>
+
+<p>The final challenge is code generation.
+The pattern match in listing above transforms the user-provided lambda expression into an equivalent <code class="language-plaintext highlighter-rouge">Node</code>.
+Since our sketch only supports <code class="language-plaintext highlighter-rouge">Ref</code>, we only support simple lambdas that select a field from a parameter.
+Finally, we produce the macro expansion that has the desired shape.</p>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>Note how the ability of def macros to access types dramatically improves user experience in comparison with purely syntactic translation.
+First, even before <code class="language-plaintext highlighter-rouge">Query.map</code> gets to expand, the compiler typechecks its argument, making sure that
+queries are well-typed. Secondly, we have a way to reliably check the shape of the supported lambda.
+The symbol comparison in the nested pattern match makes sure that
+the qualifier of field selection refers precisely to the parameter of the lambda
+and not to something else accidentally having the same name. Finally, we use information about the type of the body
+in order to figure our the mandatory type parameter of <code class="language-plaintext highlighter-rouge">Ref</code>.</p>
+
+<p>Also note another piece of knowledge about compiler internals that was essential to robust operation of the macro.
+When generating a <code class="language-plaintext highlighter-rouge">Ref</code>, we can’t simply call <code class="language-plaintext highlighter-rouge">sym.name.toString</code>, because the Scala compiler internally mangles non-alphanumeric names.
+If the parameter of the lambda has such a name, a simple <code class="language-plaintext highlighter-rouge">toString</code> will produce unsatisfying results,
+which is why we have to call <code class="language-plaintext highlighter-rouge">Name.decodedName</code> first.</p>
+
+<p>Before we conclude, let’s highlight a very common metaprogramming mistake that we’ve just made in <code class="language-plaintext highlighter-rouge">QueryMacros.map</code>.
+Def macros are unhygienic, which means that they don’t prevent inadvertent name capture, i.e. scenarios like the following.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val Select = "hijacked!"
+users.map(u =&gt; u.name)
+
+// error: too many arguments for
+// method apply: (index: Int)Char in class StringOps
+//    users.map(u =&gt; u.name)
+//             ^
+</code></pre></div></div>
+
+<p>If the macro user accidentally defines a term called <code class="language-plaintext highlighter-rouge">Select</code> or <code class="language-plaintext highlighter-rouge">Ref</code>, our macro is going to stop working
+with what looks like a nonsensical error message. Because principled tool support wasn’t among the design goals of
+our macro system, a macro user getting this error is mostly helpless apart from trying to use internal compiler options
+that print all macro expansions and then going through the resulting wall of text.</p>
+
+<p>One reliable approach to prevent hygiene errors is to use fully-qualified names for external references and
+to generate unique names for local variables. A somewhat more concise, but potentially much more laborious approach is to explicitly
+assign symbols to references and definitions emitted in macro expansions.
+This approach often requires extensive knowledge of compiler internals, so it is less frequent in the wild.
+Common to both of these approaches is that they require explicit attention from metaprogrammers and
+failures to apply them typically go unnoticed.</p>
+
+<p>To sum it up, even in this simple macro we encountered situations where knowledge of compiler internals
+(the desugaring of the <code class="language-plaintext highlighter-rouge">QueryApi</code> application, the fact that non-alphanumeric names are encoded) was essential.
+We also ran into problems with tool support and hygiene, which demonstrates how important they are to a macro system.
+These are all common criticisms of def macros.</p>
+
+<h3 id="inlinemeta">Inline/meta</h3>
+
+<p>User interface of def macros is a seamless extension to the existing language interface.
+Thanks to macro defs looking like regular methods and macro applications looking like regular method applications,
+macro users are likely to not even realize that they are using macros.</p>
+
+<p>Unfortunately, metaprogrammer interface leaves much to be desired. First, in the current macro system,
+metaprograms have to be defined separately from their signatures, typically involving helper objects and
+duplication of parameters. Secondly, the underlying metaprogramming API requires
+knowing bits and pieces of compiler internals. For example, in the case of <code class="language-plaintext highlighter-rouge">Query.map</code>,
+the metaprogrammer had to know the internal representation of the <code class="language-plaintext highlighter-rouge">QueryApi</code> application
+and internal details of how names are represented.</p>
+
+<p>New-style macros provide the same user interface, and at the same time significantly improve metaprogrammer
+interface by enabling lightweight macro declaration syntax and using a better metaprogramming API.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Query {
+  implicit class QueryApi[T](q: Query[T]) {
+    inline def map[U](fn: T =&gt; U): Query[U] = meta {
+      import scala.meta._
+
+      val q"$_($prefix)" = this
+
+      val node: Tree = fn match {
+        case q"($name: $_) =&gt; $body" =&gt;
+          body match {
+            case q"$qual.$_" if qual =:= name =&gt;
+              q"Ref[${body.tpe}](${name.toString})"
+          }
+      }
+
+      q"Select($prefix, $node)"
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>At a glance, new-style macros simply forgo a noticeable amount of ceremony,
+merging the previously disparate macro defs and macro impls as well as swapping around a few keywords in the process.
+The underlying metaprogram doesn’t seem to have changed much,
+still using quasiquotes and key APIs like <code class="language-plaintext highlighter-rouge">Tree.tpe</code> and <code class="language-plaintext highlighter-rouge">Name.toString</code>.</p>
+
+<p>First impression notwithstanding, the new design revamps a lot of underlying mechanisms.
+Below we provide a high-level overview of our new approach to compile-time metaprogramming,
+and refer curious readers to <a href="#language-features">“Language features”</a> for information concerning the new expansion mechanism
+and to <a href="#scalameta">“Scala.meta”</a> for details about the new metaprogramming API.</p>
+
+<p><strong>Expansion mechanism</strong>. The new design takes the notions of inlining and compile-time execution
+from the current macro system and turns them into separate language features.</p>
+
+<p>The goal of the <code class="language-plaintext highlighter-rouge">inline</code> modifier on <code class="language-plaintext highlighter-rouge">Query.map</code> is to signify that applications of this method are inlined,
+i.e. replaced with the method body, in which references to enclosing <code class="language-plaintext highlighter-rouge">this</code>, self, and formal parameters are rewritten accordingly
+(see <a href="#inline-reduction">“Inline reduction”</a> for details).</p>
+
+<p>The goal of the <code class="language-plaintext highlighter-rouge">meta</code> keyword is to demarcate code that executes at compile time and to provide
+that code with <a href="#meta-apis">scala.meta capabilities</a>.
+The metaprogram written inside the meta scope has access to multiple implicit capabilities
+and can get ahold of representations of certain values and types from lexical scope.
+The compiler runs this metaprogram, interprets its result as an abstract syntax tree
+and replaces the meta expression with that tree (see <a href="#meta-expansion">“Meta expansion”</a> for details).</p>
+
+<p>When the compiler encounters a call to <code class="language-plaintext highlighter-rouge">Query.map</code>,
+it simply inlines the body of <code class="language-plaintext highlighter-rouge">map</code> into the callsite without performing any compile-time function execution.
+For the running example of <code class="language-plaintext highlighter-rouge">users.map(u =&gt; u.name)</code>,
+this inlining produces the result illustrated in the listing below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  val prefix$1: QueryApi = QueryApi(users)
+  val fn$1: User =&gt; String = u =&gt; u.name
+  meta {
+    import scala.meta._
+
+    val q"$_($prefix)" = q"QueryApi(users)"
+
+    val node: Tree = q"u =&gt; u.name" match {
+      case q"($name: $_) =&gt; $body" =&gt;
+        body match {
+          case q"$qual.$_" if qual =:= name =&gt;
+            q"Ref[${body.tpe}](${name.toString})"
+        }
+    }
+
+    q"Select($prefix, $node)"
+  }
+}
+</code></pre></div></div>
+
+<p>Before inlining a method application, the compiler first hoists the prefix and by-value arguments of the application
+into temporary variables. This is done in order to guarantee that applications of inline methods
+are semantically equivalent to applications of regular methods.</p>
+
+<p>Afterwards, the compiler replaces the application with a block that consists of hoisted values and the transformed method body.
+In the method body, all regular references to <code class="language-plaintext highlighter-rouge">this</code> and self as well as
+by-value parameters are rewritten to references to the corresponding temporary variables.
+If such references are part of a meta scope, they are replaced with scala.meta-based representations of
+the prefix and the corresponding arguments, without going into temporary variables.</p>
+
+<p>When the compiler comes across a meta expression that isn’t part of an inline method,
+it executes the code inside the expression and replaces the expression with the result of execution.
+For our running example, this produces the desired expansion that invokes query constructors corresponding
+to the LINQ notation.</p>
+
+<p><strong>New metaprogramming API</strong>. Scala.meta noticeably improves on scala.reflect in the convenience of the API
+and no longer requires metaprogrammers to understand compiler internals in order to write macros.</p>
+
+<p>In particular, we don’t need to know that construction of the implicit class involves
+expanding the reference to <code class="language-plaintext highlighter-rouge">QueryApi</code> into a fully-qualified name and inferring the missing type argument.
+The particular implementation of the scala.meta API that runs the meta expression may or may not
+do these desugarings, and scala.meta shields us from this fact.
+We can use the WYSIWYG pattern <code class="language-plaintext highlighter-rouge">q"$_($prefix)"</code> in order to unwrap the original prefix of the call.</p>
+
+<p>Moreover, we don’t have to worry about the compiler internally mangling non-alphanumeric names.
+Again, even if the underlying macro engine internally does name mangling, scala.meta abstracts away such implementation details.</p>
+
+<p>Finally, we are able to improve on scala.reflect thanks to more precise quasiquotes.
+If in the current macro system, we used <code class="language-plaintext highlighter-rouge">q"($name: $_) =&gt; ..."</code> to match the <code class="language-plaintext highlighter-rouge">fn</code> argument,
+<code class="language-plaintext highlighter-rouge">name</code> would capture a scala.reflect <code class="language-plaintext highlighter-rouge">Name</code> that doesn’t carry any semantic information.
+In scala.meta, names are full-fledged trees, so we can use <code class="language-plaintext highlighter-rouge">Tree.=:=</code> to semantically compare the name
+with the qualifier of the field selection.</p>
+
+<p>In order to use semantic APIs, scala.meta metaprograms need the <a href="#scalameta">mirror capability</a>,
+so it is implicitly provided inside meta scopes. As a result, meta expressions can use the full spectrum
+of APIs available in scala.meta.</p>
+
+<p><strong>To put it in a nutshell</strong>, the new-style macro system combines two language features:
+<a href="#inline-definitions">inline definitions</a> and <a href="#meta-expressions">meta expressions</a>
+in order to provide a more lightweight syntax for the current def macros. Moreover, this macro system
+does a switchover from scala.reflect to scala.meta, featuring a new API that is more convenient and
+doesn’t require compiler knowledge to be utilized effectively.</p>
+
+<h2 id="language-features">Language features</h2>
+
+<h3 id="inline-definitions">Inline definitions</h3>
+
+<p>We introduce a new reserved word: <code class="language-plaintext highlighter-rouge">inline</code>, which can be used as a modifier for
+concrete vals, concrete methods and parameters of inline methods, as illustrated in the listing below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline val x = 4
+
+inline def square(x: Double) = x * x
+
+inline def pow(b: Double, inline n: Int): Double = {
+  if (n == 0) 1
+  else b * pow(b, n - 1)
+}
+</code></pre></div></div>
+
+<p>Inline vals are guaranteed to be compile-time constants, superseding the existing approach
+of declaring such constants with <code class="language-plaintext highlighter-rouge">final val</code>. Inline parameters get the same treatment, adding a previously
+non-existent functionality of guaranteeing that an argument of a method is a compile-time constant.</p>
+
+<p>A value is considered to be a compile-time constant if it is a Scala literal,
+or it is equivalent to one by the means of inline/meta expansion and constant folding.
+Future work may extend this notion to custom classes, but this discussion lies outside the scope of this proposal.</p>
+
+<p>Inline defs are guaranteed to be inlined at compile time, superseding the existing approach of
+annotating methods with the <code class="language-plaintext highlighter-rouge">@inline</code> annotation. After introducing <code class="language-plaintext highlighter-rouge">inline</code>, we expect to deprecate and phase out <code class="language-plaintext highlighter-rouge">@inline</code>.</p>
+
+<p>The problem with <code class="language-plaintext highlighter-rouge">@inline</code> is that it doesn’t provide guarantees.
+As specified in documentation,
+<code class="language-plaintext highlighter-rouge">@inline</code> tells the compiler to “try especially hard to inline the annotated method”.
+However, different backends interpret this request differently.
+The JVM backend ignores this annotation if optimizations are disabled and sometimes skips inlining even when optimizations are enabled.
+Both Scala.js and Scala Native always inline methods that are marked with this annotation.
+In contrast, <code class="language-plaintext highlighter-rouge">inline</code> achieves guaranteed inlining, regardless of the backend.</p>
+
+<p>Inline defs are very similar to macro defs in the sense that they look like regular defs and that they expand at compile time.
+As a result, the rules in <a href="https://gist.github.com/xeno-by/e26a904051a171e4bc8b9096630220a7">Appendix A</a> also apply to inline defs with three exceptions.</p>
+
+<ol>
+  <li>
+    <p>Inline defs are effectively final; they cannot be overridden. Inline members also never override other members.
+The idea of allowing macro defs to override regular defs didn’t find compelling use cases, so we prohibit this for inline defs.</p>
+  </li>
+  <li>
+    <p>Inline defs can have default parameters. Not supporting default parameters for macro defs was an oversight
+of the initial design, so now we fix this oversight in the new macro system.</p>
+  </li>
+  <li>
+    <p>Inline defs have regular bodies, just like regular defs. When an inline def is typechecked, its body
+is typechecked according to the usual rules, which means that inline defs are eligible for return type inference. If an inline def
+doesn’t explicitly specify its result type, the result type gets inferred from the type of its body.</p>
+  </li>
+</ol>
+
+<h3 id="inline-reduction">Inline reduction</h3>
+
+<p>When the compiler encounters certain patterns of code that involve references to inline vals and applications of inline defs,
+it will perform the rewritings provided below, if and only if these patterns appear outside the bodies of inline vals and defs.</p>
+
+<ol>
+  <li>
+    <p>If <code class="language-plaintext highlighter-rouge">prefix.v</code> refers to an inline value, replace the expression with the body of <code class="language-plaintext highlighter-rouge">v</code>.</p>
+  </li>
+  <li>
+    <p>If <code class="language-plaintext highlighter-rouge">prefix.f[Ts](args1)...(argsN)</code> refers to a fully applied inline method, hoist the prefix and the arguments
+into temporary variables with fresh names and then replace the expression with the method body. In the body, replace parameter references
+with references to temporary variables created for the corresponding arguments. Also, replace enclosing <code class="language-plaintext highlighter-rouge">this</code>
+and self references with references to the temporary variable created for the prefix.</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
+{
+  val prefix$1 = prefix
+  val param1$1 = arg1
+  ...
+  val paramN$1 = argN
+  &lt;transformed body of f&gt;
+}
+```
+
+The hoisting is intended to preserve the semantics of method applications under inlining.
+A method call should have the same semantics with respect to side effects independently
+on whether the method was made inline or not.
+If an inline method has by-name parameters, then corresponding arguments are not hoisted.
+
+The rewriting is done in accordance with hygiene. Any references from the method body to its lexical scope
+will be kept in the rewritten code. If the result of the rewriting references private or protected definitions
+in the class that defines the inline method, these references will be changed to use accessors generated automatically by the compiler.
+To ensure that the rewriting works in the separate compilation setting,
+it is critical for the compiler to generate the accessors in advance.
+Most of these accessors can be pregenerated by analyzing the bodies of inline methods,
+except for members that are referred to inside meta scopes.
+Such references are disallowed, because it is impossible to generate them in advance.
+</code></pre></div></div>
+
+<ol>
+  <li>If <code class="language-plaintext highlighter-rouge">prefix.f[Ts](args1)...(argsN)</code> refers to a partially applied inline method, an error is raised.
+Eta expansion of inline methods is prohibited.</li>
+</ol>
+
+<p>The rules of inline reduction are similar to the rules of feature interaction for macro applications (<a href="https://gist.github.com/xeno-by/e26a904051a171e4bc8b9096630220a7">Appendix A</a>)
+as well as relevant parts of the rules of def macro expansion (<a href="https://gist.github.com/xeno-by/5dde62aedcc23afc85ecf4d795ac67c2">Appendix B</a>) with four exceptions.</p>
+
+<ol>
+  <li>
+    <p>Inline reductions in their current form preclude whitebox expansion.
+Since bodies of inline vals and defs are typechecked when their definitions are typechecked,
+potential meta expansions that may happen afterwards won’t be able to change their types.
+Implications of this are discussed in <a href="#losing-whiteboxity">“Losing whiteboxity”</a>.</p>
+  </li>
+  <li>
+    <p>By-value and by-name arguments behave differently. By-value arguments are hoisted in temporary variables,
+while by-name arguments remain as they were. This doesn’t affect meta expansions,
+but it does make a semantic difference for parts of inline definitions that are not inside meta scopes.
+Note that <code class="language-plaintext highlighter-rouge">this</code> and self references always follow the by-value scheme,
+because there is no syntax in Scala that allows to define them as by-name.</p>
+  </li>
+  <li>
+    <p>Named and default arguments are fully supported. Again, not including them in the initial release of def macros
+was an oversight, which is now fixed.</p>
+  </li>
+  <li>
+    <p>The rules of rewriting mandate the “outside in” style, i.e. calls to inline methods are expanded before possible calls
+to inline methods in their prefixes and arguments. This is different from how the “inside out” style of def macros,
+where prefixes and arguments are expanded first. Previously, it was very challenging to
+take a look at unexpanded trees, but now the metaprogrammer can switch between unexpanded and expanded views using scala.meta.</p>
+  </li>
+</ol>
+
+<p>From the discussion above, we can see that inline reduction closely resembles the inlining aspect of the current macro system.
+The only significant difference is lack of support for whitebox expansion, which will be discussed in <a href="#losing-whiteboxity">“Losing whiteboxity”</a>.</p>
+
+<h3 id="meta-expressions">Meta expressions</h3>
+
+<p>A meta expression is an expression of the form <code class="language-plaintext highlighter-rouge">meta { ... }</code>, where <code class="language-plaintext highlighter-rouge">{ ... }</code> is some block of Scala code, called meta scope.
+(In fact, <code class="language-plaintext highlighter-rouge">meta</code> may prefix arbitrary expressions, but blocks are expected to be used most commonly).</p>
+
+<p>Meta expressions can appear both
+in the bodies of inline methods (then their expansion is going to be deferred until the enclosing method expands)
+and in normal code (in that case, their expansion will take place immediately at the place where the meta expression is written).</p>
+
+<p>Meta scopes can contain arbitrary code, but they must return values that are either of type <code class="language-plaintext highlighter-rouge">scala.meta.Term</code> or are convertible
+to it via the <code class="language-plaintext highlighter-rouge">scala.meta.Lift</code> typeclass. There are standard instances of the typeclass that lift simple values to literals
+as well as ones that support frequently used collections of liftable values. Metaprogrammers may define and use their own instances
+as long as they are available in corresponding meta scopes.</p>
+
+<p>Inside meta scopes, metaprogrammers can use a combination of general-purpose and expansion-specific metaprogramming facilities.
+Refer to <a href="#meta-apis">“Meta APIs”</a> for more information.</p>
+
+<p>Since meta scopes must return scala.meta trees, and scala.meta trees are by design statically untyped,
+the type of meta expressions can’t be computed from the inside
+and has to come from the outside. Therefore, meta expressions can only be used in contexts that specify an expected type.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// allowed, expected type provided by the return type
+inline def map[U](fn: T =&gt; U): Query[U] = meta { ... }
+
+// not allowed, no explicit return type
+val x = meta { ... }
+
+// allowed, expected type of a condition is Boolean
+if (meta(T.isPrimitive)) { ... }
+</code></pre></div></div>
+
+<p>Meta scopes can reference names in their lexical scope outside the enclosing meta expression.
+While crossing the <code class="language-plaintext highlighter-rouge">meta</code> boundary, references change their meaning.
+Concretely, here’s how the transformation works for different references:</p>
+
+<p><strong>Inline vals and inline parameters</strong>. These are guaranteed to be compile-time constants,
+so an inline value of type <code class="language-plaintext highlighter-rouge">T</code> is available inside a meta scope as a regular value of type <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p><strong>Inline defs</strong>. When viewed from within a meta scope, inline defs become tree transformers.
+Types of their inline parameters are unchanged, their non-inline parameters and return type become typed as <code class="language-plaintext highlighter-rouge">scala.meta.Term</code>.
+For example, <code class="language-plaintext highlighter-rouge">inline def pow(b: Double, inline n: Int): Double</code> transforms into
+<code class="language-plaintext highlighter-rouge">def pow(b: scala.meta.Term, n: Int): scala.meta.Term</code>.</p>
+
+<p><strong>Term parameters of an inline method</strong>. References to statically known term parameters,
+enclosing <code class="language-plaintext highlighter-rouge">this</code> or self become values of type <code class="language-plaintext highlighter-rouge">scala.meta.Term</code>. This is similar to <code class="language-plaintext highlighter-rouge">c.Expr</code>/<code class="language-plaintext highlighter-rouge">c.Tree</code>
+parameters of macro impls, but more lightweight, because there’s no need
+to declare these parameters explicitly.</p>
+
+<p><strong>Type parameters of an inline method</strong>. References to statically known type parameters become values
+of type <code class="language-plaintext highlighter-rouge">scala.meta.Type</code>. This is similar to <code class="language-plaintext highlighter-rouge">c.WeakTypeTag</code> parameters of macro impls,
+but more lightweight, because metaprogrammers don’t need to explicitly manifest their interest in given type parameters
+in order to get access to their representations.</p>
+
+<p>This rule can create clashes between term and type namespaces.
+If such a clash happens, i.e. if a reference to a type parameter is ambiguous with an eponymous term,
+the compiler emits an error. This is regrettable, but Scala naming conventions make this situation unlikely,
+and there is always a workaround of renaming the type parameter.</p>
+
+<p><strong>Global definitions</strong>. Statically available types and terms, e.g. <code class="language-plaintext highlighter-rouge">List</code> or <code class="language-plaintext highlighter-rouge">Int</code>,
+are usable inside meta scopes as themselves. This means that meta expressions, just like macro impls,
+can use the standard library and arbitrary third-party libraries.</p>
+
+<p><strong>Other definitions</strong>. Macro scopes cannot reference definitions that don’t fall into one of the categories mentioned above.
+This outlaws usages of local definitions - both terms and types. Such definitions may refer to state that only
+exists at runtime, so we prohibit them altogether. This has no analogues in the current macro system, because macro impls
+must be defined in static methods, which means that by definition their scope cannot contain local definitions.</p>
+
+<p>In other words, definitions that are statically available outside meta scopes remain available in meta scopes,
+term and type arguments of inline methods become available as their representations,
+while signatures of inline methods are recursively transformed according to the rules above.</p>
+
+<p>From the discussion above, we can see that meta expressions provide an analogue of the compile-time execution part
+of the current macro system. In addition to achieving feature parity, meta expressions also improve on the corresponding part of def macros
+by allowing metaprograms to easily obtain representations of their term and type parameters and
+making it possible to run anonymous snippets of metaprogramming code without wrapping them in a dedicated macro.</p>
+
+<h3 id="meta-expansion">Meta expansion</h3>
+
+<p>When the compiler encounters a meta expression that appears outside the bodies of inline vals and defs,
+it expands that expression as described below.</p>
+
+<p>A meta expression is expanded by evaluating its body and replacing the original meta expression with an expression
+that represents the result of the evaluation. The compiler is responsible for providing <a href="#meta-apis">the capabilities</a>
+necessary for meta scopes to evaluate and for converting between its internal representation for language model elements
+and representations defined in scala.meta, such as <code class="language-plaintext highlighter-rouge">scala.meta.Term</code> and <code class="language-plaintext highlighter-rouge">scala.meta.Type</code>.</p>
+
+<p>Meta expansion works very similarly to the relevant part of the def macro expansion pipeline (<a href="https://gist.github.com/xeno-by/5dde62aedcc23afc85ecf4d795ac67c2">Appendix B</a>).
+Code in the meta scope is precompiled and then reflectively invoked by the compiler, sharing the class loader with other
+metaprograms run inside the compiler. Expansion can return normally or can be interrupted with an exception. Expansion results
+are typechecked against the expected type of the meta expression. Typecheck results are upcast to the expected type in blackbox style,
+as discussed in <a href="#losing-whiteboxity">“Losing whiteboxity”</a>.</p>
+
+<p>Another practicality of meta expansion is the protocol of communication between <code class="language-plaintext highlighter-rouge">inline</code> and <code class="language-plaintext highlighter-rouge">meta</code>.
+On the one hand, a reasonable default for inlining that doesn’t involve meta expressions is to hoist prefixes and by-value arguments
+as described in <a href="#inline-reduction">“Inline reduction”</a>. On the other hand, macro writers default to having unfettered access to
+abstract syntax trees without needing to write additional boilerplate.
+These two design preferences are at odds with each other.</p>
+
+<p>Therefore, in our design <code class="language-plaintext highlighter-rouge">inline</code> both hoists eligible components of inline applications and passes their original
+representations into meta expressions. This way, both defaults are satisfied and, additionally, if meta expressions need
+to hoist something, they can use the new <code class="language-plaintext highlighter-rouge">hoist</code> API.</p>
+
+<p>In the case when an inline method consists in a single meta expression, the new macro engine removes temporary variables
+that are produced by hoisting and aren’t claimed by <code class="language-plaintext highlighter-rouge">hoist</code>. In the case when an inline method doesn’t contain
+meta expressions, all temporary variables are retained, because they are necessary to express method application semantics.
+Finally, in the case of a hybrid inline method, meta expressions can look into representations of hoisted expressions,
+but they cannot use them in their expansions without calling <code class="language-plaintext highlighter-rouge">hoist</code> first in order to avoid reordering or duplicating side effects.</p>
+
+<p>In a nutshell, meta expansion closely resembles the compile-time execution aspect of the current macro system.
+The only nuance is the interaction with hoisting performed by the mechanism of inline reduction.</p>
+
+<h3 id="meta-apis">Meta APIs</h3>
+
+<p>In scala.meta, all APIs are available out of the box after doing <code class="language-plaintext highlighter-rouge">import scala.meta._</code>.
+However, in order to use most of them, metaprogrammers must have access to certain capabilities
+(see <a href="#scalameta">“Scala.meta”</a> for details).</p>
+
+<p>Meta scopes provide two different capabilities. First, there are general-purpose metaprogramming facilities,
+enabled by a <code class="language-plaintext highlighter-rouge">Mirror</code>. Secondly, there are expansion-specific facilities enabled via a newly introduced <code class="language-plaintext highlighter-rouge">Expansion</code>.</p>
+
+<p>Mirrors are explained in <a href="#scalameta">“Scala.meta”</a>, and in this section
+we will cover the functionality enabled by expansions. We will also compare this functionality
+with macro APIs from the current macro system.</p>
+
+<p>First, <code class="language-plaintext highlighter-rouge">Context.prefix</code> is no longer necessary,
+because meta expressions can refer to prefixes of enclosing inline definitions via <code class="language-plaintext highlighter-rouge">this</code>.
+<code class="language-plaintext highlighter-rouge">Context.macroApplication</code> is unnecessary as well, because meta expressions may be written outside inline vals and defs,
+which means that they won’t have a corresponding application at all. In the rare cases when it is useful to know
+the position that spans the entire inline application, it can be obtained by traversing prefixes or arguments via <code class="language-plaintext highlighter-rouge">Tree.parent</code>.</p>
+
+<p>Secondly, much like their counterparts in the current macro system, meta APIs support diagnostic messages.
+Since the only prevalent macro APIs in this group is <code class="language-plaintext highlighter-rouge">Context.abort</code>, with <code class="language-plaintext highlighter-rouge">Context.error</code>, <code class="language-plaintext highlighter-rouge">Context.warning</code>
+and others seeing rare use, we only expose <code class="language-plaintext highlighter-rouge">abort</code> that works similarly to its predecessor.</p>
+
+<p>Thirdly, we no longer expose APIs that tightly integrate with compiler internals. Most of these APIs take care
+of the limitations of the scala.reflect language model, so in the new metaprogramming framework based on scala.meta
+they are simply unnecessary. Others feature advanced functionality that accesses or manipulates internal compiler state,
+and this exactly the kind of thing that we would like to avoid in the macro system. We discuss the implications in
+<a href="#losing-compiler-internals">“Losing compiler internals”</a>.</p>
+
+<p>Finally, we also support <code class="language-plaintext highlighter-rouge">hoist</code>, which takes a <code class="language-plaintext highlighter-rouge">scala.meta.Term</code>, precomputes it in a temporary variable
+outside the meta expansion and returns a reference to it.
+Apart from <code class="language-plaintext highlighter-rouge">inline</code>-compatible precomputation of prefixes and arguments,
+this functionality seems relevant to solving the problem of sharing expansions of <a href="https://docs.scala-lang.org/overviews/macros/implicits.html">implicit materializers</a>,
+so we are confident that it’s a useful addition to the macro API.</p>
+
+<h2 id="design-considerations">Design considerations</h2>
+
+<h3 id="scalameta">Scala.meta</h3>
+
+<p>Scala.meta is a clean-room implementation of a metaprogramming toolkit for Scala,
+designed to be simple, robust and portable. We are striving for scala.meta to become a successor of scala.reflect,
+the current de facto standard in the Scala ecosystem.</p>
+
+<p>We have recently released Scala.meta 1.0.0 that features support for syntactic APIs, such as parsing, tokenization,
+quasiquotes and prettyprinting. We are currently working on Scala.meta v2 that will enable semantic APIs, such as
+typechecking, name resolution and others.</p>
+
+<p>In <a href="https://gist.github.com/xeno-by/9741ce7532cb30368b3753521bbfce4e">Appendix C</a>, we provide a high-level overview of the architecture of scala.meta
+along with several practical examples that illustrate its functionality.</p>
+
+<h3 id="tool-support">Tool support</h3>
+
+<p>The key innovation of the new macro system is the fact that it’s based on scala.meta, which finally makes it feasible to
+provide third-party implementations of mirrors.</p>
+
+<p>There now exists a prototype implementation of an IntelliJ mirror, and, in further effort of Mikhail Mutcianko from the IntelliJ team,
+this mirror has become the foundation for <a href="https://www.youtube.com/watch?v=IPnd_SZJ1nM&amp;feature=youtu.be&amp;t=1360">an interactive expander of new-style macro annotations</a>.
+This recent advancement strongly suggests that it was the right choice to bet on scala.meta to fix
+code compehension and error reporting issues with the current macro system.</p>
+
+<p>This takes some pressure off whitebox macros. In the current macro system, there is a preference towards blackbox macros,
+because they are much friendlier to IntelliJ. Once we have a fully-working mirror for IntelliJ, user experience of blackbox
+and whitebox macros should be equivalent. For additional discussion of whiteboxity from a language design and compiler development
+perspective, refer to <a href="#losing-whiteboxity">“Losing whiteboxity”</a>.</p>
+
+<p>Improvements in support for incremental compilation, testing and debugging also hinge on a capability of scala.meta
+to enable custom mirror implementations.
+However, they also require significant new functionality to be developed in the corresponding tools
+(<a href="https://github.com/sbt/sbt/issues/1729">additional dependency tracking mechanisms for the incremental compiler</a> and changes to the vanilla debugger in IDEs).</p>
+
+<h3 id="losing-whiteboxity">Losing whiteboxity</h3>
+
+<p>It is desirable for the new design to provide reasonable feature parity with the
+current macro system. So far, the biggest digression from this course is giving up whitebox expansion.
+In this section, we discuss what it will cost us to follow this through, identify the aspects of the new design that
+prevent whiteboxity and propose alternatives.</p>
+
+<p>The main motivation for getting rid of whitebox expansion is simplification - both of the macro expansion pipeline
+and the typechecker. Currently, they are inseparably intertwined, complicating both compiler evolution and tool support.
+Therefore, the new design tries to disentangle these systems.</p>
+
+<p>Let’s recapitulate the limitations that def macro expansion applies to applications of blackbox macros,
+outlining the most important use cases that blackboxity cannot express. This won’t give us the full picture,
+because there are many macros in the wild that we haven’t classified, but nonetheless it will provide an understanding
+of the significant chunk of the Scala macros ecosystem.</p>
+
+<ol>
+  <li>
+    <p>When an application of a blackbox macro expands into a tree <code class="language-plaintext highlighter-rouge">x</code>, the expansion is wrapped into a type ascription <code class="language-plaintext highlighter-rouge">(x: T)</code>,
+where <code class="language-plaintext highlighter-rouge">T</code> is the declared return type of the blackbox macro def with type arguments and path dependencies applied in consistency
+with the particular macro application being expanded.
+This invalidates blackbox macros as an implementation vehicle for <a href="https://docs.scala-lang.org/overviews/macros/typeproviders.html#anonymous-type-providers">anonymous type providers</a>.</p>
+  </li>
+  <li>
+    <p>When an application of a blackbox macro is used as an implicit candidate, no expansion is performed until the macro
+is selected as the result of the implicit search.
+This makes it impossible to dynamically calculate availability of implicit macros,
+precluding some advanced aspects of <a href="https://docs.scala-lang.org/overviews/macros/implicits.html">materialization</a>.</p>
+  </li>
+  <li>
+    <p>When an application of a blackbox macro still has undetermined type parameters after the Scala type inference algorithm has finished
+working, these type parameters are inferred forcibly, in exactly the same manner as type inference happens for normal methods.
+This makes it impossible for blackbox macros to influence type inference, prohibiting <a href="https://docs.scala-lang.org/overviews/macros/implicits.html">fundep materialization</a>.</p>
+  </li>
+  <li>
+    <p>When an application of a blackbox macro is used as an extractor in a pattern match,
+it triggers an unconditional compiler error, preventing <a href="https://docs.scala-lang.org/overviews/macros/extractors.html">customizations of pattern matching implemented with macros</a>.
+This precludes blackbox macros from providing precise types to values extracted from patterns written in external DSLs,
+preventing a library-based implementation of quasiquotes.</p>
+  </li>
+</ol>
+
+<p>As we can see, whitebox expansion plays an important role in several use cases, the most practically significant
+of them being fundep materialization and quasiquote patterns. Fundep materialization is paramount to the design of Shapeless.
+Quasiquote patterns are an integral part of writing any kinds of macros - both blackbox and whitebox - which is the main
+reason to use scala.reflect.</p>
+
+<p>It is now clear that our desire for simplification is at odds with the ways how the Scala community uses macros.
+In order to resolve the apparent conflict, we outline several solutions, whose evaluation we leave for later.</p>
+
+<p><strong>Give up on simplification</strong>. This is probably the most obvious approach, in which we admit
+that tight coupling with the typechecker is intrinsic to the essence of Scala macros and change the new design
+to enable whitebox expansion.</p>
+
+<p>Concretely, accommodating whiteboxity in the new macro system requires changing the aspects of the new design
+specified in <a href="#inline-reduction">“Inline reduction”</a> and <a href="#meta-expansion">“Meta expansion”</a> according to the
+plan provided below.</p>
+
+<ul>
+  <li>Force inline reductions and meta expansions inside the typechecker. Currently, both the rules of inline reduction
+and the rules of meta expansion are intentionally vague about the exact point in the compilation pipeline that does expansions,
+but whiteboxity will leave us no room for that.</li>
+  <li>Delay typechecking of the bodies of inline vals and defs until their expansion. Meta expressions inside inline definitions
+are not expanded, which means that eager typechecking of these definitions precludes whitebox expansion.</li>
+  <li>Allow using meta expressions without expected type. This captures the main idea of whitebox expansion, in which compile-time
+metaprogramming has the final say about the type of transformed snippets of code.</li>
+</ul>
+
+<p><strong>Assimilate the most popular use cases</strong>. Instead of supporting the general notion of whiteboxity,
+we can introduce dedicated compiler support for the most popular uses cases including the <code class="language-plaintext highlighter-rouge">Generic</code>
+mechanism in Shapeless  and quasiquote patterns in scala.reflect.</p>
+
+<p>This is an attempt at a compromise. On the one hand, this approach allows us to follow through with simplification.
+On the other hand, it significantly minimizes the impact on the existing users of whitebox macros.</p>
+
+<p>The downside of this solution is that it requires an extensive design process (because it involves adding new language features to Scala)
+and assumes that the internalized techniques have reached their final form. If a new version of Shapeless
+or a new version of scala.reflect (read: scala.meta) decide to adapt their designs after these designs have been assimilated,
+they will have a very hard time doing that.</p>
+
+<p><strong>Dedicated support for type-level computations</strong>. Manifestations of whiteboxity are quite diverse,
+but a lot of them are reducible to type-level computations.</p>
+
+<p>For example, let’s take a macro <code class="language-plaintext highlighter-rouge">join</code> that takes two objects and outputs an object that
+has fields of both. Since Scala doesn’t have row polymorphism, it is impossible to write a type signature
+for this macro, so we have to declare it as whitebox.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def join(x: Any, y: Any): Any = macro ...
+defined term macro join: (x: Any, y: Any)Any
+
+scala&gt; join(new { val x = 2 }, new { val y = 3 })
+res0: AnyRef{val x: Int; val y: Int} = $anon$1@64af328d
+</code></pre></div></div>
+
+<p>Here we can see how the whitebox macro encapsulates a type-level computation that takes
+the types of both arguments (<code class="language-plaintext highlighter-rouge">AnyRef{ val x: Int }</code> and <code class="language-plaintext highlighter-rouge">AnyRef{ val y: Int }</code>)
+and merges them into the result type. Since this computation doesn’t involve the abstract syntax trees
+of the arguments, the whitebox part of the macro can be extracted into a helper, making the macro itself
+blackbox.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; :paste
+// Entering paste mode (ctrl-D to finish)
+
+trait Join[T, U, V]
+object Join {
+  implicit def materialize[T, U, V]: Join[T, U, V] = macro ...
+}
+
+// Exiting paste mode, now interpreting.
+
+defined trait Join
+defined object Join
+
+scala&gt;  def join[T, U, V](x: T, y: U)
+     | (implicit ev: Join[T, U, V]): V = macro ...
+defined term macro join: [T, U, V](x: T, y: U)...
+</code></pre></div></div>
+
+<p>This approach can express some macros that refine their return type, all fundep materialization macros,
+and even some macros that dynamically compute availability of implicits (such macros can be modified to take
+an additional implicit parameter whose failure to materialize can be used to control availability of the enclosing implicit) -
+that is, all macros whose whiteboxity depends only on types of their prefix and arguments.</p>
+
+<p>Now, after eligible whitebox macros are rewritten this way, we can replace the whitebox materializers
+that compute types, e.g. <code class="language-plaintext highlighter-rouge">Join.materialize</code>, with a dedicated language feature that natively expresses them.
+The listing below provides a sketch of an imaginary syntax that assumes inline types and type-generating meta expressions.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline type Join[T, U] = meta {
+  import scala.meta._
+  val jointVals = union(T, U)
+  t"{ ..$jointVals }"
+}
+
+inline def join[T, U](x: T, y: U): Join[T, U] = meta { ... }
+</code></pre></div></div>
+
+<p>From the discussion above, we can see that whiteboxity is an important feature of the current macro system
+and is used in multiple highly popular open-source libraries. As a result, giving up whiteboxity
+may lead to undesired practical consequences.</p>
+
+<p>More work is needed to reconcile the design of the new macro system
+and existing use cases, and in this section we provided several approaches to addressing this need. In the opinion of the author,
+the approach that involves dedicated support to type-level computations is the most promising, because it both simplifies
+the macro system and provides support for the most important use cases of whiteboxity.</p>
+
+<h3 id="losing-compiler-internals">Losing compiler internals</h3>
+
+<p>One of the main goals of this proposal is to stop exposing overcomplicated and brittle compiler internal APIs
+in order to make macros more accessible and more robust.</p>
+
+<p>However, some of the compiler APIs may actually capture useful idioms that we may be able to expose in a principled fashion.
+<code class="language-plaintext highlighter-rouge">c.internal.enclosingOwner</code> immediately comes to mind here.</p>
+
+<p>More work in collaboration with macro authors is needed to make sure that we don’t unnecessarily break existing macros
+in the name of elusive conceptual purity.</p>
+
+<h3 id="macro-annotations">Macro annotations</h3>
+
+<p>Much like the current macro system can get extended to support macro annotations,
+the new macro system can get extended to support new-style macro annotations that provide similar functionality.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.annotation.StaticAnnotation
+
+class h2db(url: String) extends StaticAnnotation {
+  inline def apply(defns: Any): Any = meta {
+    ...
+  }
+}
+
+object Test {
+  def main(args: Array[String]): Unit = {
+    @h2db("coffees") object Db
+    val brazilian = Db.Coffees.insert("Brazilian", 99.0)
+    Db.Coffees.update(brazilian.copy(price = 100.0))
+    println(Db.Coffees.all)
+  }
+}
+</code></pre></div></div>
+
+<p>In the current macro system, a macro annotation is a subclass of <code class="language-plaintext highlighter-rouge">StaticAnnotation</code> that define
+a macro def called <code class="language-plaintext highlighter-rouge">macroTransform</code>.</p>
+
+<p>Analogously, in the new design, a macro annotation is a subclass of <code class="language-plaintext highlighter-rouge">StaticAnnotation</code>
+that defines an inline def called <code class="language-plaintext highlighter-rouge">apply</code>. We decided to change the magic name, because the old one no longer applies.
+We also simplified the signature to take a block wrapping the definitions being expanded and returns a block wrapping expansion results,
+i.e. <code class="language-plaintext highlighter-rouge">Any =&gt; Any</code>, as opposed to having <code class="language-plaintext highlighter-rouge">Any* =&gt; Any</code> in the current system.</p>
+
+<p>Expansion of new-style macro annotations is very similar to expansion of vanilla macro annotations.
+The only difference is that we only provide syntactic APIs, informed about <a href="https://github.com/scalamacros/paradise/issues/75">the limitations</a>
+brought by exposing semantic APIs in macros that generate top-level definitions.
+Concretely, meta scopes in macro annotations expose a <code class="language-plaintext highlighter-rouge">Dialect</code> capability instead of a <code class="language-plaintext highlighter-rouge">Mirror</code>.
+As a result, we can afford to expand on enter without any limitations to the shape of expansion.</p>
+
+<h3 id="why-inline">Why inline</h3>
+
+<p>The main motivation behind inline is to provide a templating system that can express simple use cases
+of compile-time metaprogramming in an lightweight declarative style that minimizes explicit introspection.</p>
+
+<p>For example, in one of the code snippets that illustrates inline defs and inline parameters, we can use the newly
+introduced mechanism to express partial evaluation. Thanks to constant folding facilities built into the compiler,
+usages of the <code class="language-plaintext highlighter-rouge">pow</code> method provided below will expand into a sequence of multiplications - all that without
+a single line of macro code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline def pow(b: Double, inline n: Int): Double = {
+  if (n == 0) 1
+  else b * pow(b, n - 1)
+}
+</code></pre></div></div>
+
+<h3 id="out-of-scope">Out of scope</h3>
+
+<p>This proposal addresses a lot of pain points of the current macro system, but it doesn’t talk about two very common
+problems: lack of hygiene and presence of the separate compilation restriction.</p>
+
+<p>These two problems have a lot in common: we have experimented with both of them, our initial results are promising but insufficient,
+both of them can be developed independently of inline/meta.</p>
+
+<p>Given that both hygiene and joint compilation still require significant research to materialize,
+we decided not to include them in this proposal. We think that even without these features, inline/meta represents a significant
+improvement over the state of the art, so we leave them for future work that may be submitted in follow-up SIPs when it’s done.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Pioneered by def macros and macro annotations,
+the area of language-integrated compile-time metaprogramming in Scala has shown significant practical value.</p>
+
+<p>During the last several years, we have been utilizing and maintaining the current macro system in industrial projects.
+Learning from this experience, we have created a new design based on <code class="language-plaintext highlighter-rouge">inline</code> and <code class="language-plaintext highlighter-rouge">meta</code> that provides
+comparable functionality and avoids the most common pitfalls of existing macros.</p>
+
+<p>The user interface of the new system is a conservative evolution of def macros.
+<a href="#inline-definitions">Inline defs</a> work similarly to macro defs, and
+<a href="#meta-expressions">meta expressions</a> play the compile-time execution role of macro impls.
+These new language features are designed to be used together,
+and in this capacity their look and feel can hardly be distinguished from that of def macros.</p>
+
+<p>The metaprogrammer interface of the new system is a drastic redesign. We have merged macro defs and macro impls,
+and, more importantly, we have switched the underlying metaprogramming API from scala.reflect to <a href="#scalameta">scala.meta</a>.
+This has allowed us to make significant improvements in robustness and tool support.</p>
+
+<p>The main open question of the new design is <a href="#losing-whiteboxity">whether whiteboxity will stay or will be removed</a> from the new macro system.
+We also need to figure out <a href="#losing-compiler-internals">which internal compiler APIs we may want to approximate</a> in the new macro system.
+Future work outside the scope of this proposal includes
+hygiene and lifting the separate compilation restriction.</p>
+
+<p>At the time of writing, <code class="language-plaintext highlighter-rouge">inline</code> and <code class="language-plaintext highlighter-rouge">meta</code> are partially implemented in <a href="https://github.com/scalameta/paradise">a prototype compiler plugin for Scala 2.11</a>
+and <a href="https://www.youtube.com/watch?v=IPnd_SZJ1nM&amp;feature=youtu.be&amp;t=1360">an accompanying experimental branch of IntelliJ</a>.
+We are excited with our initial results and are planning to develop the new design further.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>This design was created by Eugene Burmako, Denys Shabalin and Martin Odersky
+and was further elaborated together with other members of the inline working group at EPFL:
+Sébastien Doeraene, Vojin Jovanovic and Dmitry Petrashko.</p>
+
+<p>Over time, the ideas behind the design were refined based on experiments carried out by:
+Uladzimir Abramchuk, Igor Bogomolov, Mathieu Demarne, Martin Duhem, Adrien Ghosn, Zhivka Gucevska,
+Mikhail Mutcianko, Dmitry Naydanov, Artem Nikiforov, Vladimir Nikolaev, Jatin Puri and Valentin Rutz.</p>
+
+<p>The prototype of scalac integration was developed by Eugene Burmako with open-source contributions from
+Tamer Mohammed Abdul-Radi, David Dudson, Takeshi D. Itoh, Oleksandr Olgashko and Hiroshi Yamaguchi.</p>
+
+<p>The prototype of IntelliJ integration was developed by Mikhail Mutcianko.</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://github.com/scalameta/paradise">Prototype of scalac integration</a></li>
+  <li><a href="https://www.youtube.com/watch?v=IPnd_SZJ1nM&amp;feature=youtu.be&amp;t=1360">Prototype of IntelliJ integration</a></li>
+  <li><a href="https://gist.github.com/xeno-by/e26a904051a171e4bc8b9096630220a7">(Appendix A) Def macros: feature interaction</a></li>
+  <li><a href="https://gist.github.com/xeno-by/5dde62aedcc23afc85ecf4d795ac67c2">(Appendix B) Def macros: macro expansion</a></li>
+  <li><a href="https://gist.github.com/xeno-by/9741ce7532cb30368b3753521bbfce4e">(Appendix C) Scala.meta: high-level overview</a></li>
+</ol>
+
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #839496">Dormant</div>
+           <p class="vote-text" style="color: #839496">
+             This proposal needs an owner.
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2016-09-09-inline-meta.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

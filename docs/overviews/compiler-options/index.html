@@ -1,0 +1,4857 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Scala Compiler Options | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/compiler-options/index.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Scala Compiler Options"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Scala Compiler Options"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Scala Compiler Options</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<style type="text/css">
+.definition-list dd { 
+    margin-left: 2em;
+}
+.definition-list .deprecated { 
+    padding: 0.25em 0.5em; 
+    background-color: #fff3f3;
+    border-radius: 4px;
+}
+.definition-list .note { 
+    padding: 0.25em 0.25em; 
+    background-color: #f3f3ff;
+    border-radius: 4px;
+}
+.definition-list dd {
+    margin-bottom:18px;    
+}
+</style>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Scala compiler <code class="language-plaintext highlighter-rouge">scalac</code> offers various <strong>compiler options</strong>, also referred to as <strong>compiler flags</strong>, to change how to compile your program.</p>
+
+<p>Nowadays, most people are not running <code class="language-plaintext highlighter-rouge">scalac</code> from the command line.
+Instead, they use sbt, an IDE, and other tools as their interface to the compiler.
+Therefore they may not even have <code class="language-plaintext highlighter-rouge">scalac</code> installed, and won’t think to do <code class="language-plaintext highlighter-rouge">man scalac</code>.</p>
+
+<p>This page comes to the rescue for the people to find…</p>
+
+<ul>
+  <li>What compiler options <code class="language-plaintext highlighter-rouge">scalac</code> offers</li>
+  <li>How to use compiler options</li>
+</ul>
+
+<h2 id="how-to-use-compiler-options">How to use compiler options</h2>
+
+<h3 id="use-compiler-options-with-scalac">Use compiler options with scalac</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scalac <span class="o">[</span> &lt;options&gt; <span class="o">]</span> &lt;<span class="nb">source </span>files&gt;
+</code></pre></div></div>
+
+<p>E.g. <code class="language-plaintext highlighter-rouge">scalac -encoding utf8 -Xfatal-warnings Hello.scala</code></p>
+
+<p>Default paths can be listed by running a command line tool:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala scala.tools.util.PathResolver [ &lt;options&gt; ]
+</code></pre></div></div>
+
+<h3 id="use-compiler-options-with-sbt">Use compiler options with sbt</h3>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scalacOptions</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="s">"-encoding"</span><span class="o">,</span> <span class="s">"utf8"</span><span class="o">,</span> <span class="c1">// Option and arguments on same line</span>
+  <span class="s">"-Xfatal-warnings"</span><span class="o">,</span>  <span class="c1">// New lines for each options</span>
+  <span class="s">"-deprecation"</span><span class="o">,</span>
+  <span class="s">"-unchecked"</span><span class="o">,</span>
+  <span class="s">"-language:implicitConversions"</span><span class="o">,</span>
+  <span class="s">"-language:higherKinds"</span><span class="o">,</span>
+  <span class="s">"-language:existentials"</span><span class="o">,</span>
+  <span class="s">"-language:postfixOps"</span>
+<span class="o">)</span>
+</code></pre></div></div>
+
+<h2>Standard Settings</h2>
+<p>A set of standard options that are supported on the current development environment and will be supported in future releases.</p>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Dproperty=value</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Pass -Dproperty=value directly to the runtime system.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-J&lt;flag&gt;</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Pass flag directly to the runtime system.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-P PLUGIN:OPT1,PLUGIN:OPT2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Pass an option to a plugin</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-V</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of verbose options.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-W</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of warning options.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Werror</code>
+        
+        
+         or <code>-Xfatal-warnings</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Fail the compilation if there are any warnings.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-X</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of advanced options.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Y</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of private options.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-bootclasspath PATH</code>
+        
+        
+         or <code>--boot-class-path PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Override location of bootstrap class files.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-classpath PATH</code>
+        
+        
+         or <code>-cp PATH</code>
+        
+         or <code>--class-path PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify where to find user class files.</p>
+
+        Default: <code>.</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-d DIRECTORY|JAR</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>destination for generated classfiles.</p>
+
+        Default: <code>.</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-dependencyfile FILE</code>
+        
+        
+         or <code>--dependency-file FILE</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Set dependency tracking file.</p>
+
+        Default: <code>.scala_dependencies</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-deprecation</code>
+        
+        
+         or <code>--deprecation</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Emit warning and location for usages of deprecated APIs.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-encoding ENCODING</code>
+        
+        
+         or <code>--encoding ENCODING</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify character encoding used by source files.</p>
+
+        Default: <code>UTF-8</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-explaintypes</code>
+        
+        
+         or <code>--explain-types</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Explain type errors in more detail.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-extdirs PATH</code>
+        
+        
+         or <code>--extension-directories PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Override location of installed extensions.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-feature</code>
+        
+        
+         or <code>--feature</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Emit warning and location for usages of features that should be imported explicitly.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-g:LEVEL</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Set level of generated debugging info. (none,source,line,[vars],notailcalls)</p>
+
+        Default: <code>vars</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-g:none</code></dt>
+            
+            
+            
+          
+            <dt><code>-g:source</code></dt>
+            
+            
+            
+          
+            <dt><code>-g:line</code></dt>
+            
+            
+            
+          
+            <dt><code>-g:vars</code></dt>
+            
+            
+            
+          
+            <dt><code>-g:notailcalls</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-help</code>
+        
+        
+         or <code>--help</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of standard options</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-javabootclasspath PATH</code>
+        
+        
+         or <code>--java-boot-class-path PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Override java boot classpath.</p>
+
+        Default: <code></code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-javaextdirs PATH</code>
+        
+        
+         or <code>--java-extension-directories PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Override java extdirs classpath.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-language:FEATURE1,FEATURE2</code>
+        
+        
+         or <code>--language:FEATURE1,FEATURE2</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable or disable language features</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-language:dynamics</code></dt>
+            
+            <dd class="description"><p>Allow direct or indirect subclasses of scala.Dynamic</p>
+</dd>
+            
+          
+            <dt><code>-language:existentials</code></dt>
+            
+            <dd class="description"><p>Existential types (besides wildcard types) can be written and inferred</p>
+</dd>
+            
+          
+            <dt><code>-language:higherKinds</code></dt>
+            
+            <dd class="description"><p>Allow higher-kinded types</p>
+</dd>
+            
+          
+            <dt><code>-language:implicitConversions</code></dt>
+            
+            <dd class="description"><p>Allow definition of implicit functions called views</p>
+</dd>
+            
+          
+            <dt><code>-language:postfixOps</code></dt>
+            
+            <dd class="description"><p>Allow postfix operator notation, such as <code class="language-plaintext highlighter-rouge">1 to 10 toList</code> (not recommended)</p>
+</dd>
+            
+          
+            <dt><code>-language:reflectiveCalls</code></dt>
+            
+            <dd class="description"><p>Allow reflective access to members of structural types</p>
+</dd>
+            
+          
+            <dt><code>-language:experimental.macros</code></dt>
+            
+            <dd class="description"><p>Allow macro definition (besides implementation and application)</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-no-specialization</code>
+        
+        
+         or <code>--no-specialization</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Ignore @specialize annotations.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-nobootcp</code>
+        
+        
+         or <code>--no-boot-class-path</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Do not use the boot classpath for the scala jars.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-nowarn</code>
+        
+        
+         or <code>--no-warnings</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate no warnings.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-opt:OPTIMIZATION1,OPTIMIZATION2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable optimizations</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-opt:unreachable-code</code></dt>
+            
+            <dd class="description"><p>Eliminate unreachable code, exception handlers guarding no instructions, redundant metadata (debug information, line numbers).</p>
+</dd>
+            
+          
+            <dt><code>-opt:simplify-jumps</code></dt>
+            
+            <dd class="description"><p>Simplify branching instructions, eliminate unnecessary ones.</p>
+</dd>
+            
+          
+            <dt><code>-opt:compact-locals</code></dt>
+            
+            <dd class="description"><p>Eliminate empty slots in the sequence of local variables.</p>
+</dd>
+            
+          
+            <dt><code>-opt:copy-propagation</code></dt>
+            
+            <dd class="description"><p>Eliminate redundant local variables and unused values (including closures). Enables unreachable-code.</p>
+</dd>
+            
+          
+            <dt><code>-opt:redundant-casts</code></dt>
+            
+            <dd class="description"><p>Eliminate redundant casts using a type propagation analysis.</p>
+</dd>
+            
+          
+            <dt><code>-opt:box-unbox</code></dt>
+            
+            <dd class="description"><p>Eliminate box-unbox pairs within the same method (also tuples, xRefs, value class instances). Enables unreachable-code.</p>
+</dd>
+            
+          
+            <dt><code>-opt:nullness-tracking</code></dt>
+            
+            <dd class="description"><p>Track nullness / non-nullness of local variables and apply optimizations.</p>
+</dd>
+            
+          
+            <dt><code>-opt:closure-invocations</code></dt>
+            
+            <dd class="description"><p>Rewrite closure invocations to the implementation method.</p>
+</dd>
+            
+          
+            <dt><code>-opt:allow-skip-core-module-init</code></dt>
+            
+            <dd class="description"><p>Allow eliminating unused module loads for core modules of the standard library (e.g., Predef, ClassTag).</p>
+</dd>
+            
+          
+            <dt><code>-opt:assume-modules-non-null</code></dt>
+            
+            <dd class="description"><p>Assume loading a module never results in null (happens if the module is accessed in its super constructor).</p>
+</dd>
+            
+          
+            <dt><code>-opt:allow-skip-class-loading</code></dt>
+            
+            <dd class="description"><p>Allow optimizations that can skip or delay class loading.</p>
+</dd>
+            
+          
+            <dt><code>-opt:inline</code></dt>
+            
+            <dd class="description"><p>Inline method invocations according to -Yopt-inline-heuristics and -opt-inline-from.</p>
+</dd>
+            
+          
+            <dt><code>-opt:l:none</code></dt>
+            
+            <dd class="description"><p>Disable optimizations. Takes precedence: <code class="language-plaintext highlighter-rouge">-opt:l:none,+box-unbox</code> / <code class="language-plaintext highlighter-rouge">-opt:l:none -opt:box-unbox</code> don`t enable box-unbox.</p>
+</dd>
+            
+          
+            <dt><code>-opt:l:default</code></dt>
+            
+            <dd class="description"><p>Enable default optimizations: unreachable-code.</p>
+</dd>
+            
+          
+            <dt><code>-opt:l:method</code></dt>
+            
+            <dd class="description"><p>Enable intra-method optimizations: unreachable-code,simplify-jumps,compact-locals,copy-propagation,redundant-casts,box-unbox,nullness-tracking,closure-invocations,allow-skip-core-module-init,assume-modules-non-null,allow-skip-class-loading.</p>
+</dd>
+            
+          
+            <dt><code>-opt:l:inline</code></dt>
+            
+            <dd class="description"><p>Enable cross-method optimizations (note: inlining requires -opt-inline-from): l:method,inline.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-opt-inline-from PATTERNS1,PATTERNS2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Patterns for classfile names from which to allow inlining, <code class="language-plaintext highlighter-rouge">help</code> for details.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-opt-warnings:WARNING1,WARNING2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable optimizer warnings</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-opt-warnings:none</code></dt>
+            
+            <dd class="description"><p>No optimizer warnings.</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:at-inline-failed-summary</code></dt>
+            
+            <dd class="description"><p>One-line summary if there were @inline method calls that could not be inlined.</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:at-inline-failed</code></dt>
+            
+            <dd class="description"><p>A detailed warning for each @inline method call that could not be inlined.</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:any-inline-failed</code></dt>
+            
+            <dd class="description"><p>A detailed warning for every callsite that was chosen for inlining by the heuristics, but could not be inlined.</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:no-inline-mixed</code></dt>
+            
+            <dd class="description"><p>In mixed compilation, warn at callsites methods defined in java sources (the inlining decision cannot be made without bytecode).</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:no-inline-missing-bytecode</code></dt>
+            
+            <dd class="description"><p>Warn if an inlining decision cannot be made because a the bytecode of a class or member cannot be found on the compilation classpath.</p>
+</dd>
+            
+          
+            <dt><code>-opt-warnings:no-inline-missing-attribute</code></dt>
+            
+            <dd class="description"><p>Warn if an inlining decision cannot be made because a Scala classfile does not have a ScalaInlineInfo attribute.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-optimize</code>
+        
+        
+         or <code>-optimise</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enables optimizations.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-print</code>
+        
+        
+         or <code>--print</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print program with Scala-specific features removed.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-release RELEASE</code>
+        
+        
+         or <code>--release RELEASE</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Compile for a specific version of the Java platform. Supported targets: 6, 7, 8, 9</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-sourcepath PATH</code>
+        
+        
+         or <code>--source-path PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify location(s) of source files.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-target:TARGET</code>
+        
+        
+         or <code>--target:TARGET</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Target platform for object files. ([8],9,10,11,12)</p>
+
+        Default: <code>8</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-target:8</code></dt>
+            
+            
+            
+          
+            <dt><code>-target:9</code></dt>
+            
+            
+            
+          
+            <dt><code>-target:10</code></dt>
+            
+            
+            
+          
+            <dt><code>-target:11</code></dt>
+            
+            
+            
+          
+            <dt><code>-target:12</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-toolcp PATH</code>
+        
+        
+         or <code>--tool-class-path PATH</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Add to the runner classpath.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-unchecked</code>
+        
+        
+         or <code>--unchecked</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable additional warnings where generated code depends on assumptions.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-uniqid</code>
+        
+        
+         or <code>--unique-id</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Uniquely tag all identifiers in debugging output.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-usejavacp</code>
+        
+        
+         or <code>--use-java-class-path</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Utilize the java.class.path in classpath resolution.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-usemanifestcp</code>
+        
+        
+         or <code>--use-manifest-class-path</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Utilize the manifest in classpath resolution.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-verbose</code>
+        
+        
+         or <code>--verbose</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Output messages about what the compiler is doing.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-version</code>
+        
+        
+         or <code>--version</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print product version and exit.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>@&lt;file&gt;</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>A text file containing compiler arguments (options and source files)</p>
+
+        
+        
+                
+    </dd>
+                
+    
+  
+</dl>
+
+<h2>Advanced Settings</h2>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Xcheckinit</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Wrap field accessors to throw an exception on uninitialized access.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xdev</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Indicates user is a developer - issue warnings about anything which seems amiss</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xdisable-assertions</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate no assertions or assumptions.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xelide-below ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Calls to @elidable methods are omitted if method priority is lower than argument</p>
+
+        Default: <code>-2147483648</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xexperimental</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Former graveyard for language-forking extensions.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xfuture</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Replaced by -Xsource.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xgenerate-phase-graph FILE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate the phase graphs (outputs .dot files) to fileX.dot.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xlint:WARNING1,WARNING2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable recommended warnings</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Xlint:adapted-args</code></dt>
+            
+            <dd class="description"><p>Warn if an argument list is modified to match the receiver.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nullary-unit</code></dt>
+            
+            <dd class="description"><p>Warn when nullary methods return Unit.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:inaccessible</code></dt>
+            
+            <dd class="description"><p>Warn about inaccessible types in method signatures.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nullary-override</code></dt>
+            
+            <dd class="description"><p>Warn when non-nullary <code class="language-plaintext highlighter-rouge">def f()</code> overrides nullary <code class="language-plaintext highlighter-rouge">def f</code>.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:infer-any</code></dt>
+            
+            <dd class="description"><p>Warn when a type argument is inferred to be <code class="language-plaintext highlighter-rouge">Any</code>.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:missing-interpolator</code></dt>
+            
+            <dd class="description"><p>A string literal appears to be missing an interpolator id.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:doc-detached</code></dt>
+            
+            <dd class="description"><p>A Scaladoc comment appears to be detached from its element.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:private-shadow</code></dt>
+            
+            <dd class="description"><p>A private field (or class parameter) shadows a superclass field.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:type-parameter-shadow</code></dt>
+            
+            <dd class="description"><p>A local type parameter shadows a type already in scope.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:poly-implicit-overload</code></dt>
+            
+            <dd class="description"><p>Parameterized overloaded implicit methods are not visible as view bounds.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:option-implicit</code></dt>
+            
+            <dd class="description"><p>Option.apply used implicit view.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:delayedinit-select</code></dt>
+            
+            <dd class="description"><p>Selecting member of DelayedInit.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:package-object-classes</code></dt>
+            
+            <dd class="description"><p>Class or object defined in package object.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:stars-align</code></dt>
+            
+            <dd class="description"><p>Pattern sequence wildcard must align with sequence component.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:constant</code></dt>
+            
+            <dd class="description"><p>Evaluation of a constant arithmetic expression results in an error.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:unused</code></dt>
+            
+            <dd class="description"><p>Enable -Wunused:imports,privates,locals,implicits.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nonlocal-return</code></dt>
+            
+            <dd class="description"><p>A return statement used an exception for flow control.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:implicit-not-found</code></dt>
+            
+            <dd class="description"><p>Check @implicitNotFound and @implicitAmbiguous messages.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:serial</code></dt>
+            
+            <dd class="description"><p>@SerialVersionUID on traits and non-serializable classes.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:valpattern</code></dt>
+            
+            <dd class="description"><p>Enable pattern checks in val definitions.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:eta-zero</code></dt>
+            
+            <dd class="description"><p>Warn on eta-expansion (rather than auto-application) of zero-ary method.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:eta-sam</code></dt>
+            
+            <dd class="description"><p>Warn on eta-expansion to meet a Java-defined functional interface that is not explicitly annotated with @FunctionalInterface.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:deprecation</code></dt>
+            
+            <dd class="description"><p>Enable linted deprecations.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmacro-settings OPTION1,OPTION2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Custom settings for macros.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmain-class PATH</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Class for manifest’s Main-Class entry (only useful with -d jar)</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmaxerrs ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Maximum errors to print</p>
+
+        Default: <code>100</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmaxwarns ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Maximum warnings to print</p>
+
+        Default: <code>100</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmigration VERSION</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn about constructs whose behavior may have changed since version.</p>
+
+        Default: <code>none</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xmixin-force-forwarders:MODE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate forwarder methods in classes inhering concrete methods from traits. Default: <code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">help</code> to list choices.</p>
+
+        Default: <code>true</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Xmixin-force-forwarders:true</code></dt>
+            
+            <dd class="description"><p>Always generate mixin forwarders.</p>
+</dd>
+            
+          
+            <dt><code>-Xmixin-force-forwarders:junit</code></dt>
+            
+            <dd class="description"><p>Generate mixin forwarders for JUnit-annotated methods (JUnit 4 does not support default methods).</p>
+</dd>
+            
+          
+            <dt><code>-Xmixin-force-forwarders:false</code></dt>
+            
+            <dd class="description"><p>Only generate mixin forwarders required for program correctness.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xno-forwarders</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Do not generate static forwarders in mirror classes.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xno-patmat-analysis</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Don’t perform exhaustivity/unreachability analysis. Also, ignore @switch annotation.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xno-uescape</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Disable handling of \u unicode escapes.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xnojline</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Do not use JLine for editing.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xplugin PATHS1,PATHS2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Load a plugin from each classpath.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xplugin-disable PLUGIN1,PLUGIN2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Disable plugins by name.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xplugin-list</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of loaded plugins.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xplugin-require PLUGIN1,PLUGIN2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Abort if a named plugin is not loaded.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xpluginsdir PATH</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Path to search for plugin archives.</p>
+
+        Default: <code></code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xprompt</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Display a prompt after each error (debugging option).</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xreporter CLASSNAME</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify a custom reporter for compiler messages.</p>
+
+        Default: <code>scala.tools.nsc.reporters.ConsoleReporter</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xresident</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Compiler stays resident: read source filenames from standard input.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xscript OBJECT</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Treat the source file as a script and wrap it in a main method.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xsource VERSION</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Treat compiler input as Scala source for the specified version, see scala/bug#8126.</p>
+
+        Default: <code>2.13.0</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xsource-reader CLASSNAME</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify a custom method for reading source files.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xverify</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Verify generic signatures in generated bytecode.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xxml:PROPERTY1,PROPERTY2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Configure XML parsing.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Xxml:coalescing</code></dt>
+            
+            <dd class="description"><p>Convert PCData to Text and coalesce sibling nodes</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+  
+</dl>
+
+<h2>Verbose Settings</h2>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Vbrowse ARG</code>
+        
+        
+         or <code>-Ybrowse ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Browse the abstract syntax tree after phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vclasspath</code>
+        
+        
+         or <code>-Ylog-classpath</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Output information about what classpath is being applied.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vdebug</code>
+        
+        
+         or <code>-Ydebug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Increase the quantity of debugging output.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vdoc</code>
+        
+        
+         or <code>-Ydoc-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace scaladoc activity.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vfree-terms</code>
+        
+        
+         or <code>-Xlog-free-terms</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a message when reification creates a free term.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vfree-types</code>
+        
+        
+         or <code>-Xlog-free-types</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a message when reification resorts to generating a free type.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vhot-statistics</code>
+        
+        
+         or <code>-Yhot-statistics</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable <code class="language-plaintext highlighter-rouge">-Vstatistics</code> to also print hot statistics.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vide</code>
+        
+        
+         or <code>-Yide-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate, validate and output trees using the interactive compiler.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vimplicit-conversions</code>
+        
+        
+         or <code>-Xlog-implicit-conversions</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a message whenever an implicit conversion is inserted.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vimplicits</code>
+        
+        
+         or <code>-Xlog-implicits</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print dependent missing implicits.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vimplicits-verbose-tree</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Display all intermediate implicits in a chain.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vimplicits-max-refined ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>max chars for printing refined types, abbreviate to <code class="language-plaintext highlighter-rouge">F {...}</code></p>
+
+        Default: <code>0</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vtype-diffs</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print found/required error messages as colored diffs.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vinline PACKAGE/CLASS.METHOD</code>
+        
+        
+         or <code>-Yopt-log-inline PACKAGE/CLASS.METHOD</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a summary of inliner activity; <code class="language-plaintext highlighter-rouge">_</code> to print all, prefix match to select.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vissue</code>
+        
+        
+         or <code>-Yissue-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print stack traces when a context issues an error.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vlog ARG</code>
+        
+        
+         or <code>-Ylog ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Log operations during phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vmacro</code>
+        
+        
+         or <code>-Ymacro-debug-verbose</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace macro activities: compilation, generation of synthetics, classloading, expansion, exceptions.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vmacro-lite</code>
+        
+        
+         or <code>-Ymacro-debug-lite</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace macro activities with less output.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vopt PACKAGE/CLASS.METHOD</code>
+        
+        
+         or <code>-Yopt-trace PACKAGE/CLASS.METHOD</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace the optimizer progress for methods; <code class="language-plaintext highlighter-rouge">_</code> to print all, prefix match to select.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vpatmat</code>
+        
+        
+         or <code>-Ypatmat-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace pattern matching translation.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vphases</code>
+        
+        
+         or <code>-Xshow-phases</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a synopsis of compiler phases.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vpos</code>
+        
+        
+         or <code>-Ypos-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace position validation.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vprint ARG</code>
+        
+        
+         or <code>-Xprint ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print out program after phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vprint-args FILE</code>
+        
+        
+         or <code>-Xprint-args FILE</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print all compiler arguments to the specified location. Use - to echo to the reporter.</p>
+
+        Default: <code>-</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vprint-pos</code>
+        
+        
+         or <code>-Xprint-pos</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print tree positions, as offsets.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vprint-types</code>
+        
+        
+         or <code>-Xprint-types</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print tree types (debugging option).</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vquasiquote</code>
+        
+        
+         or <code>-Yquasiquote-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace quasiquotations.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vreflective-calls</code>
+        
+        
+         or <code>-Xlog-reflective-calls</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print a message when a reflective method call is generated</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vreify</code>
+        
+        
+         or <code>-Yreify-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace reification.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow ARG</code>
+        
+        
+         or <code>-Yshow ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>(Requires -Xshow-class or -Xshow-object) Show after phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow-class CLASS</code>
+        
+        
+         or <code>-Xshow-class CLASS</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Show internal representation of class.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow-member-pos OUTPUT STYLE</code>
+        
+        
+         or <code>-Yshow-member-pos OUTPUT STYLE</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Show start and end positions of members (implies -Yrangepos)</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow-object OBJECT</code>
+        
+        
+         or <code>-Xshow-object OBJECT</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Show internal representation of object.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow-symkinds</code>
+        
+        
+         or <code>-Yshow-symkinds</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print abbreviated symbol kinds next to symbol names.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vshow-symowners</code>
+        
+        
+         or <code>-Yshow-symowners</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print owner identifiers next to symbol names.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vstatistics ARG</code>
+        
+        
+         or <code>-Ystatistics ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print compiler statistics for specific phases phases (default: parser,typer,patmat,erasure,cleanup,jvm)</p>
+
+        Default: <code>parser,typer,patmat,erasure,cleanup,jvm</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vsymbols</code>
+        
+        
+         or <code>-Yshow-syms</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print the AST symbol hierarchy after each phase.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Vtyper</code>
+        
+        
+         or <code>-Ytyper-debug</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Trace type assignments.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+  
+</dl>
+
+<h2>Private Settings</h2>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Ybackend-parallelism ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>maximum worker threads for backend</p>
+
+        Default: <code>1</code><br />
+        Min: <code>1</code><br />
+        Max: <code>16</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ybackend-worker-queue ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>backend threads worker queue size</p>
+
+        Default: <code>0</code><br />
+        Min: <code>0</code><br />
+        Max: <code>1000</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ybreak-cycles</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Attempt to break cycles encountered during typing</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ycache-macro-class-loader:POLICY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Policy for caching class loaders for macros that are dynamically loaded. Default: <code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">help</code> to list choices.</p>
+
+        Default: <code>none</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Ycache-macro-class-loader:none</code></dt>
+            
+            <dd class="description"><p>Don’t cache class loader</p>
+</dd>
+            
+          
+            <dt><code>-Ycache-macro-class-loader:last-modified</code></dt>
+            
+            <dd class="description"><p>Cache class loader, using file last-modified time to invalidate</p>
+</dd>
+            
+          
+            <dt><code>-Ycache-macro-class-loader:always</code></dt>
+            
+            <dd class="description"><p>Cache class loader with no invalidation</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ycache-plugin-class-loader:POLICY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Policy for caching class loaders for compiler plugins that are dynamically loaded. Default: <code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">help</code> to list choices.</p>
+
+        Default: <code>none</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Ycache-plugin-class-loader:none</code></dt>
+            
+            <dd class="description"><p>Don’t cache class loader</p>
+</dd>
+            
+          
+            <dt><code>-Ycache-plugin-class-loader:last-modified</code></dt>
+            
+            <dd class="description"><p>Cache class loader, using file last-modified time to invalidate</p>
+</dd>
+            
+          
+            <dt><code>-Ycache-plugin-class-loader:always</code></dt>
+            
+            <dd class="description"><p>Cache class loader with no invalidation</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ycheck ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Check the tree at the end of phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ycompact-trees</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Use compact tree printer when displaying trees.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ydelambdafy:STRATEGY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Strategy used for translating lambdas into JVM code. (inline,[method])</p>
+
+        Default: <code>method</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Ydelambdafy:inline</code></dt>
+            
+            
+            
+          
+            <dt><code>-Ydelambdafy:method</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ydump-classes DIR</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Dump the generated bytecode to .class files (useful for reflective compilation that utilizes in-memory classloaders).</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ygen-asmp DIR</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Generate a parallel output directory of .asmp files (ie ASM Textifier output).</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yimports IMPORT1,IMPORT2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Custom root imports, default is <code class="language-plaintext highlighter-rouge">java.lang,scala,scala.Predef</code>.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yjar-compression-level ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>compression level to use when writing jar files</p>
+
+        Default: <code>-1</code><br />
+        Min: <code>-1</code><br />
+        Max: <code>9</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ymacro-annotations</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable support for macro annotations, formerly in macro paradise.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ymacro-classpath PATH</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>The classpath used to reflectively load macro implementations, default is the compilation classpath.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ymacro-expand:POLICY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Control expansion of macros, useful for scaladoc and presentation compiler. ([normal],none,discard)</p>
+
+        Default: <code>normal</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Ymacro-expand:normal</code></dt>
+            
+            
+            
+          
+            <dt><code>-Ymacro-expand:none</code></dt>
+            
+            
+            
+          
+            <dt><code>-Ymacro-expand:discard</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ymacro-global-fresh-names</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Should fresh names in macros be unique across all compilation units</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yno-completion</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Disable tab-completion in the REPL.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yno-flat-classpath-cache</code>
+        
+        
+         or <code>-YdisableFlatCpCaching</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Do not cache flat classpath representation of classpath elements from jars across compiler instances.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yno-generic-signatures</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Suppress generation of generic signatures for Java.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yno-imports</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Compile without importing scala.<em>, java.lang.</em>, or Predef.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yno-predef</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Compile without importing Predef.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yopt-inline-heuristics:STRATEGY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Set the heuristics for inlining decisions. (at-inline-annotated,everything,[default])</p>
+
+        Default: <code>default</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Yopt-inline-heuristics:at-inline-annotated</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yopt-inline-heuristics:everything</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yopt-inline-heuristics:default</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypatmat-exhaust-depth ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>off</p>
+
+        Default: <code>20</code><br />
+        Min: <code>10</code><br />
+        Max: <code>2147483647</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprint-trees:STYLE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>How to print trees when -Vprint is enabled. ([text],compact,format,text+format)</p>
+
+        Default: <code>text</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Yprint-trees:text</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yprint-trees:compact</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yprint-trees:format</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yprint-trees:text+format</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprofile-destination FILE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Profiling output - specify a file or <code class="language-plaintext highlighter-rouge">-</code> for console.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprofile-enabled</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable profiling.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprofile-external-tool ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable profiling for a phase using an external tool hook. Generally only useful for a single phase phases (default: typer)</p>
+
+        Default: <code>typer</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprofile-run-gc ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Run a GC between phases - this allows heap size to be accurate at the expense of more time. Specify a list of phases, or all phases (default: _)</p>
+
+        Default: <code>_</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yprofile-trace FILE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Capture trace of compilation in Chrome Trace format</p>
+
+        Default: <code>profile.trace</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yrangepos</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Use range positions for syntax trees.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yrecursion ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Set recursion depth used when locking symbols.</p>
+
+        Default: <code>0</code><br />
+        Min: <code>0</code><br />
+        Max: <code>2147483647</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yreify-copypaste</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Dump the reified trees in copypasteable representation.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yrepl-class-based</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Use classes to wrap REPL snippets instead of objects</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yrepl-outdir PATH</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Write repl-generated classfiles to given output directory (use “” to generate a temporary dir)</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yresolve-term-conflict:STRATEGY</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Resolve term conflicts. (package,object,[error])</p>
+
+        Default: <code>error</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Yresolve-term-conflict:package</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yresolve-term-conflict:object</code></dt>
+            
+            
+            
+          
+            <dt><code>-Yresolve-term-conflict:error</code></dt>
+            
+            
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yscriptrunner CLASSNAME</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Specify a scala.tools.nsc.ScriptRunner (default, resident, shutdown, or a class name).</p>
+
+        Default: <code>default</code><br />
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yskip ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Skip phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ystop-after ARG</code>
+        
+        
+         or <code>-stop ARG</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Stop after phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ystop-before ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Stop before phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Yvalidate-pos ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Validate positions after the given phases (implies -Yrangepos) phases</p>
+
+        
+        
+                
+    </dd>
+                
+    
+  
+</dl>
+
+<h2>Warning Settings</h2>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Wdead-code</code>
+        
+        
+         or <code>-Ywarn-dead-code</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn when dead code is identified.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wextra-implicit</code>
+        
+        
+         or <code>-Ywarn-extra-implicit</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn when more than one implicit parameter section is defined.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wmacros:MODE</code>
+        
+        
+         or <code>-Ywarn-macros:MODE</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable lint warnings on macro expansions. Default: <code class="language-plaintext highlighter-rouge">before</code>, <code class="language-plaintext highlighter-rouge">help</code> to list choices.</p>
+
+        Default: <code>before</code><br />
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Wmacros:none</code></dt>
+            
+            <dd class="description"><p>Do not inspect expansions or their original trees when generating unused symbol warnings.</p>
+</dd>
+            
+          
+            <dt><code>-Wmacros:before</code></dt>
+            
+            <dd class="description"><p>Only inspect unexpanded user-written code for unused symbols.</p>
+</dd>
+            
+          
+            <dt><code>-Wmacros:after</code></dt>
+            
+            <dd class="description"><p>Only inspect expanded trees when generating unused symbol warnings.</p>
+</dd>
+            
+          
+            <dt><code>-Wmacros:both</code></dt>
+            
+            <dd class="description"><p>Inspect both user-written code and expanded trees when generating unused symbol warnings.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wnumeric-widen</code>
+        
+        
+         or <code>-Ywarn-numeric-widen</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn when numerics are widened.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Woctal-literal</code>
+        
+        
+         or <code>-Ywarn-octal-literal</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn on obsolete octal syntax.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wself-implicit</code>
+        
+        
+         or <code>-Ywarn-self-implicit</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn when an implicit resolves to an enclosing self-definition.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wunused:WARNING1,WARNING2</code>
+        
+        
+         or <code>-Ywarn-unused:WARNING1,WARNING2</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable or disable specific <code class="language-plaintext highlighter-rouge">unused</code> warnings</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Wunused:imports</code></dt>
+            
+            <dd class="description"><p>Warn if an import selector is not referenced.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:patvars</code></dt>
+            
+            <dd class="description"><p>Warn if a variable bound in a pattern is unused.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:privates</code></dt>
+            
+            <dd class="description"><p>Warn if a private member is unused.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:locals</code></dt>
+            
+            <dd class="description"><p>Warn if a local definition is unused.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:explicits</code></dt>
+            
+            <dd class="description"><p>Warn if an explicit parameter is unused.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:implicits</code></dt>
+            
+            <dd class="description"><p>Warn if an implicit parameter is unused.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:params</code></dt>
+            
+            <dd class="description"><p>Enable -Wunused:explicits,implicits.</p>
+</dd>
+            
+          
+            <dt><code>-Wunused:linted</code></dt>
+            
+            <dd class="description"><p>-Xlint:unused.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+
+    
+    
+    
+    <dt>
+        <code>-Wvalue-discard</code>
+        
+        
+         or <code>-Ywarn-value-discard</code>
+          
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Warn when non-Unit expression results are unused.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Xlint:WARNING1,WARNING2</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable recommended warnings</p>
+
+        
+        
+                
+    </dd>
+                
+    
+    <dd class="choices">
+        <dl class="choices">
+          <!-- TODO: deprecated for choice -->          
+          
+            <dt><code>-Xlint:adapted-args</code></dt>
+            
+            <dd class="description"><p>Warn if an argument list is modified to match the receiver.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nullary-unit</code></dt>
+            
+            <dd class="description"><p>Warn when nullary methods return Unit.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:inaccessible</code></dt>
+            
+            <dd class="description"><p>Warn about inaccessible types in method signatures.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nullary-override</code></dt>
+            
+            <dd class="description"><p>Warn when non-nullary <code class="language-plaintext highlighter-rouge">def f()</code> overrides nullary <code class="language-plaintext highlighter-rouge">def f</code>.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:infer-any</code></dt>
+            
+            <dd class="description"><p>Warn when a type argument is inferred to be <code class="language-plaintext highlighter-rouge">Any</code>.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:missing-interpolator</code></dt>
+            
+            <dd class="description"><p>A string literal appears to be missing an interpolator id.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:doc-detached</code></dt>
+            
+            <dd class="description"><p>A Scaladoc comment appears to be detached from its element.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:private-shadow</code></dt>
+            
+            <dd class="description"><p>A private field (or class parameter) shadows a superclass field.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:type-parameter-shadow</code></dt>
+            
+            <dd class="description"><p>A local type parameter shadows a type already in scope.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:poly-implicit-overload</code></dt>
+            
+            <dd class="description"><p>Parameterized overloaded implicit methods are not visible as view bounds.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:option-implicit</code></dt>
+            
+            <dd class="description"><p>Option.apply used implicit view.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:delayedinit-select</code></dt>
+            
+            <dd class="description"><p>Selecting member of DelayedInit.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:package-object-classes</code></dt>
+            
+            <dd class="description"><p>Class or object defined in package object.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:stars-align</code></dt>
+            
+            <dd class="description"><p>Pattern sequence wildcard must align with sequence component.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:constant</code></dt>
+            
+            <dd class="description"><p>Evaluation of a constant arithmetic expression results in an error.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:unused</code></dt>
+            
+            <dd class="description"><p>Enable -Wunused:imports,privates,locals,implicits.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:nonlocal-return</code></dt>
+            
+            <dd class="description"><p>A return statement used an exception for flow control.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:implicit-not-found</code></dt>
+            
+            <dd class="description"><p>Check @implicitNotFound and @implicitAmbiguous messages.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:serial</code></dt>
+            
+            <dd class="description"><p>@SerialVersionUID on traits and non-serializable classes.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:valpattern</code></dt>
+            
+            <dd class="description"><p>Enable pattern checks in val definitions.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:eta-zero</code></dt>
+            
+            <dd class="description"><p>Warn on eta-expansion (rather than auto-application) of zero-ary method.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:eta-sam</code></dt>
+            
+            <dd class="description"><p>Warn on eta-expansion to meet a Java-defined functional interface that is not explicitly annotated with @FunctionalInterface.</p>
+</dd>
+            
+          
+            <dt><code>-Xlint:deprecation</code></dt>
+            
+            <dd class="description"><p>Enable linted deprecations.</p>
+</dd>
+            
+            
+        </dl>
+    </dd>
+    
+  
+</dl>
+
+<h2>IDE-specific Settings</h2>
+
+<dl class="definition-list">
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-any-thread</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Allow use of the presentation compiler from any thread</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-debug</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Enable debugging output for the presentation compiler.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-delay ARG</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Wait number of ms after typing before starting typechecking</p>
+
+        Default: <code>0</code><br />
+        Min: <code>0</code><br />
+        Max: <code>999</code><br />        
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-log FILE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Log presentation compiler events into file</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-replay FILE</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Replay presentation compiler events from file</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-strict</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Do not report type errors in sources with syntax errors.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+
+    
+    
+    
+    <dt>
+        <code>-Ypresentation-verbose</code>
+        
+    </dt>
+                
+    <dd class="description">
+        <p>Print information about presentation compiler tasks.</p>
+
+        
+        
+                
+    </dd>
+                
+    
+  
+</dl>
+
+<h2 id="additional-resources">Additional resources</h2>
+
+<h3 id="compilation-phases">Compilation Phases</h3>
+
+<dl class="definition-list">
+<!--
+  Generated with GNU sed: 
+    scalac -Vphases | tail -n+3 | sed -rn 's|^\s*([a-z]+)\s+[0-9]+\s+([a-z@].+)$|<dt>\1</dt>\n<dd>\2</dd>\n|p'
+-->
+<dt>parser</dt>
+<dd>parse source into ASTs, perform simple desugaring</dd>
+
+<dt>namer</dt>
+<dd>resolve names, attach symbols to named trees</dd>
+
+<dt>packageobjects</dt>
+<dd>load package objects</dd>
+
+<dt>typer</dt>
+<dd>the meat and potatoes: type the trees</dd>
+
+<dt>superaccessors</dt>
+<dd>add super accessors in traits and nested classes</dd>
+
+<dt>extmethods</dt>
+<dd>add extension methods for inline classes</dd>
+
+<dt>pickler</dt>
+<dd>serialize symbol tables</dd>
+
+<dt>refchecks</dt>
+<dd>reference/override checking, translate nested objects</dd>
+
+<dt>patmat</dt>
+<dd>translate match expressions</dd>
+
+<dt>uncurry</dt>
+<dd>uncurry, translate function values to anonymous classes</dd>
+
+<dt>fields</dt>
+<dd>synthesize accessors and fields, add bitmaps for lazy vals</dd>
+
+<dt>tailcalls</dt>
+<dd>replace tail calls by jumps</dd>
+
+<dt>specialize</dt>
+<dd>@specialized-driven class and method specialization</dd>
+
+<dt>explicitouter</dt>
+<dd>this refs to outer pointers</dd>
+
+<dt>erasure</dt>
+<dd>erase types, add interfaces for traits</dd>
+
+<dt>posterasure</dt>
+<dd>clean up erased inline classes</dd>
+
+<dt>lambdalift</dt>
+<dd>move nested functions to top level</dd>
+
+<dt>constructors</dt>
+<dd>move field definitions into constructors</dd>
+
+<dt>flatten</dt>
+<dd>eliminate inner classes</dd>
+
+<dt>mixin</dt>
+<dd>mixin composition</dd>
+
+<dt>cleanup</dt>
+<dd>platform-specific cleanups, generate reflective calls</dd>
+
+<dt>delambdafy</dt>
+<dd>remove lambdas</dd>
+
+<dt>jvm</dt>
+<dd>generate JVM bytecode</dd>
+
+<dt>terminal</dt>
+<dd>the last phase during a compilation run</dd>
+</dl>
+
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/compiler-options/index.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Creating Custom Parallel Collections | 
+      Parallel Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/parallel-collections/custom-parallel-collections.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Creating Custom Parallel Collections"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Creating Custom Parallel Collections"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Parallel Collections</div>
+          
+          <h1>Creating Custom Parallel Collections</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<h2 id="parallel-collections-without-combiners">Parallel collections without combiners</h2>
+
+<p>Just as it is possible to define custom sequential collections without
+defining their builders, it is possible to define parallel collections without
+defining their combiners. The consequence of not having a combiner is that
+transformer methods (e.g. <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">filter</code>, …) will by
+default return a standard collection type which is nearest in the hierarchy.
+For example, ranges do not have builders, so mapping elements of a range
+creates a vector.</p>
+
+<p>In the following example we define a parallel string collection. Since strings
+are logically immutable sequences, we have parallel strings inherit
+<code class="language-plaintext highlighter-rouge">immutable.ParSeq[Char]</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ParString(val str: String)
+extends immutable.ParSeq[Char] {
+</code></pre></div></div>
+
+<p>Next, we define methods found in every immutable sequence:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def apply(i: Int) = str.charAt(i)
+
+  def length = str.length
+</code></pre></div></div>
+
+<p>We have to also define the sequential counterpart of this parallel collection.
+In this case, we return the <code class="language-plaintext highlighter-rouge">WrappedString</code> class:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def seq = new collection.immutable.WrappedString(str)
+</code></pre></div></div>
+
+<p>Finally, we have to define a splitter for our parallel string collection. We
+name the splitter <code class="language-plaintext highlighter-rouge">ParStringSplitter</code> and have it inherit a sequence splitter,
+that is, <code class="language-plaintext highlighter-rouge">SeqSplitter[Char]</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def splitter = new ParStringSplitter(str, 0, str.length)
+
+  class ParStringSplitter(private var s: String, private var i: Int, private val ntl: Int)
+  extends SeqSplitter[Char] {
+
+    final def hasNext = i &lt; ntl
+
+    final def next = {
+      val r = s.charAt(i)
+      i += 1
+      r
+    }
+</code></pre></div></div>
+
+<p>Above, <code class="language-plaintext highlighter-rouge">ntl</code> represents the total length of the string, <code class="language-plaintext highlighter-rouge">i</code> is the current
+position and <code class="language-plaintext highlighter-rouge">s</code> is the string itself.</p>
+
+<p>Parallel collection iterators or splitters require a few more methods in
+addition to <code class="language-plaintext highlighter-rouge">next</code> and <code class="language-plaintext highlighter-rouge">hasNext</code> found in sequential collection iterators.
+First of all, they have a method called <code class="language-plaintext highlighter-rouge">remaining</code> which returns the number
+of elements this splitter has yet to traverse. Next, they have a method called
+<code class="language-plaintext highlighter-rouge">dup</code> which duplicates the current splitter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def remaining = ntl - i
+
+    def dup = new ParStringSplitter(s, i, ntl)
+</code></pre></div></div>
+
+<p>Finally, methods <code class="language-plaintext highlighter-rouge">split</code> and <code class="language-plaintext highlighter-rouge">psplit</code> are used to create splitters which
+traverse subsets of the elements of the current splitter. Method <code class="language-plaintext highlighter-rouge">split</code> has
+the contract that it returns a sequence of splitters which traverse disjoint,
+non-overlapping subsets of elements that the current splitter traverses, none
+of which is empty. If the current splitter has 1 or less elements, then
+<code class="language-plaintext highlighter-rouge">split</code> just returns a sequence of this splitter. Method <code class="language-plaintext highlighter-rouge">psplit</code> has to
+return a sequence of splitters which traverse exactly as many elements as
+specified by the <code class="language-plaintext highlighter-rouge">sizes</code> parameter. If the <code class="language-plaintext highlighter-rouge">sizes</code> parameter specifies less
+elements than the current splitter, then an additional splitter with the rest
+of the elements is appended at the end. If the <code class="language-plaintext highlighter-rouge">sizes</code> parameter requires more
+elements than there are remaining in the current splitter, it will append an
+empty splitter for each size. Finally, calling either <code class="language-plaintext highlighter-rouge">split</code> or <code class="language-plaintext highlighter-rouge">psplit</code>
+invalidates the current splitter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   def split = {
+      val rem = remaining
+      if (rem &gt;= 2) psplit(rem / 2, rem - rem / 2)
+      else Seq(this)
+    }
+
+    def psplit(sizes: Int*): Seq[ParStringSplitter] = {
+      val splitted = new ArrayBuffer[ParStringSplitter]
+      for (sz &lt;- sizes) {
+        val next = (i + sz) min ntl
+        splitted += new ParStringSplitter(s, i, next)
+        i = next
+      }
+      if (remaining &gt; 0) splitted += new ParStringSplitter(s, i, ntl)
+      splitted
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>Above, <code class="language-plaintext highlighter-rouge">split</code> is implemented in terms of <code class="language-plaintext highlighter-rouge">psplit</code>, which is often the case
+with parallel sequences. Implementing a splitter for parallel maps, sets or
+iterables is often easier, since it does not require <code class="language-plaintext highlighter-rouge">psplit</code>.</p>
+
+<p>Thus, we obtain a parallel string class. The only downside is that calling transformer methods
+such as <code class="language-plaintext highlighter-rouge">filter</code> will not produce a parallel string, but a parallel vector instead, which
+may be suboptimal - producing a string again from the vector after filtering may be costly.</p>
+
+<h2 id="parallel-collections-with-combiners">Parallel collections with combiners</h2>
+
+<p>Lets say we want to <code class="language-plaintext highlighter-rouge">filter</code> the characters of the parallel string, to get rid
+of commas for example. As noted above, calling <code class="language-plaintext highlighter-rouge">filter</code> produces a parallel
+vector and we want to obtain a parallel string (since some interface in the
+API might require a sequential string).</p>
+
+<p>To avoid this, we have to write a combiner for the parallel string collection.
+We will also inherit the <code class="language-plaintext highlighter-rouge">ParSeqLike</code> trait this time to ensure that return
+type of <code class="language-plaintext highlighter-rouge">filter</code> is more specific - a <code class="language-plaintext highlighter-rouge">ParString</code> instead of a <code class="language-plaintext highlighter-rouge">ParSeq[Char]</code>.
+The <code class="language-plaintext highlighter-rouge">ParSeqLike</code> has a third type parameter which specifies the type of the
+sequential counterpart of the parallel collection (unlike sequential <code class="language-plaintext highlighter-rouge">*Like</code>
+traits which have only two type parameters).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ParString(val str: String)
+extends immutable.ParSeq[Char]
+   with ParSeqLike[Char, ParString, collection.immutable.WrappedString]
+</code></pre></div></div>
+
+<p>All the methods remain the same as before, but we add an additional protected method <code class="language-plaintext highlighter-rouge">newCombiner</code> which
+is internally used by <code class="language-plaintext highlighter-rouge">filter</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  protected[this] override def newCombiner: Combiner[Char, ParString] = new ParStringCombiner
+</code></pre></div></div>
+
+<p>Next we define the <code class="language-plaintext highlighter-rouge">ParStringCombiner</code> class. Combiners are subtypes of
+builders and they introduce an additional method called <code class="language-plaintext highlighter-rouge">combine</code>, which takes
+another combiner as an argument and returns a new combiner which contains the
+elements of both the current and the argument combiner. The current and the
+argument combiner are invalidated after calling <code class="language-plaintext highlighter-rouge">combine</code>. If the argument is
+the same object as the current combiner, then <code class="language-plaintext highlighter-rouge">combine</code> just returns the
+current combiner. This method is expected to be efficient, having logarithmic
+running time with respect to the number of elements in the worst case, since
+it is called multiple times during a parallel computation.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">ParStringCombiner</code> will internally maintain a sequence of string
+builders. It will implement <code class="language-plaintext highlighter-rouge">+=</code> by adding an element to the last string
+builder in the sequence, and <code class="language-plaintext highlighter-rouge">combine</code> by concatenating the lists of string
+builders of the current and the argument combiner. The <code class="language-plaintext highlighter-rouge">result</code> method, which
+is called at the end of the parallel computation, will produce a parallel
+string by appending all the string builders together. This way, elements are
+copied only once at the end instead of being copied every time <code class="language-plaintext highlighter-rouge">combine</code> is
+called. Ideally, we would like to parallelize this process and copy them in
+parallel (this is being done for parallel arrays), but without tapping into
+the internal representation of strings this is the best we can do– we have to
+live with this sequential bottleneck.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private class ParStringCombiner extends Combiner[Char, ParString] {
+  var sz = 0
+  val chunks = new ArrayBuffer[StringBuilder] += new StringBuilder
+  var lastc = chunks.last
+
+  def size: Int = sz
+
+  def +=(elem: Char): this.type = {
+    lastc += elem
+    sz += 1
+    this
+  }
+
+  def clear = {
+    chunks.clear
+    chunks += new StringBuilder
+    lastc = chunks.last
+    sz = 0
+  }
+
+  def result: ParString = {
+    val rsb = new StringBuilder
+    for (sb &lt;- chunks) rsb.append(sb)
+    new ParString(rsb.toString)
+  }
+
+  def combine[U &lt;: Char, NewTo &gt;: ParString](other: Combiner[U, NewTo]) = if (other eq this) this else {
+    val that = other.asInstanceOf[ParStringCombiner]
+    sz += that.sz
+    chunks ++= that.chunks
+    lastc = chunks.last
+    this
+  }
+}
+</code></pre></div></div>
+
+<h2 id="how-do-i-implement-my-combiner-in-general">How do I implement my combiner in general?</h2>
+
+<p>There are no predefined recipes– it depends on the data-structure at
+hand, and usually requires a bit of ingenuity on the implementer’s
+part. However there are a few approaches usually taken:</p>
+
+<ol>
+  <li>
+    <p>Concatenation and merge. Some data-structures have efficient
+implementations (usually logarithmic) of these operations.
+If the collection at hand is backed by such a data-structure,
+its combiner can be the collection itself. Finger trees,
+ropes and various heaps are particularly suitable for such an approach.</p>
+  </li>
+  <li>
+    <p>Two-phase evaluation. An approach taken in parallel arrays and
+parallel hash tables, it assumes the elements can be efficiently
+partially sorted into concatenable buckets from which the final
+data-structure can be constructed in parallel. In the first phase
+different processors populate these buckets independently and
+concatenate the buckets together. In the second phase, the data
+structure is allocated and different processors populate different
+parts of the data structure in parallel using elements from disjoint
+buckets.
+Care must be taken that different processors never modify the same
+part of the data structure, otherwise subtle concurrency errors may occur.
+This approach is easily applicable to random access sequences, as we
+have shown in the previous section.</p>
+  </li>
+  <li>
+    <p>A concurrent data-structure. While the last two approaches actually
+do not require any synchronization primitives in the data-structure
+itself, they assume that it can be constructed concurrently in a way
+such that two different processors never modify the same memory
+location. There exists a large number of concurrent data-structures
+that can be modified safely by multiple processors– concurrent skip lists,
+concurrent hash tables, split-ordered lists, concurrent avl trees, to
+name a few.
+An important consideration in this case is that the concurrent
+data-structure has a horizontally scalable insertion method.
+For concurrent parallel collections the combiner can be the collection
+itself, and a single combiner instance is shared between all the
+processors performing a parallel operation.</p>
+  </li>
+</ol>
+
+<h2 id="integration-with-the-collections-framework">Integration with the collections framework</h2>
+
+<p>Our <code class="language-plaintext highlighter-rouge">ParString</code> class is not complete yet. Although we have implemented a
+custom combiner which will be used by methods such as <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">partition</code>,
+<code class="language-plaintext highlighter-rouge">takeWhile</code> or <code class="language-plaintext highlighter-rouge">span</code>, most transformer methods require an implicit
+<code class="language-plaintext highlighter-rouge">CanBuildFrom</code> evidence (see Scala collections guide for a full explanation).
+To make it available and completely integrate <code class="language-plaintext highlighter-rouge">ParString</code> with the collections
+framework, we have to mix an additional trait called <code class="language-plaintext highlighter-rouge">GenericParTemplate</code> and
+define the companion object of <code class="language-plaintext highlighter-rouge">ParString</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ParString(val str: String)
+extends immutable.ParSeq[Char]
+   with GenericParTemplate[Char, ParString]
+   with ParSeqLike[Char, ParString, collection.immutable.WrappedString] {
+
+  def companion = ParString
+</code></pre></div></div>
+
+<p>Inside the companion object we provide an implicit evidence for the <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> parameter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object ParString {
+  implicit def canBuildFrom: CanCombineFrom[ParString, Char, ParString] =
+    new CanCombinerFrom[ParString, Char, ParString] {
+      def apply(from: ParString) = newCombiner
+      def apply() = newCombiner
+    }
+
+  def newBuilder: Combiner[Char, ParString] = newCombiner
+
+  def newCombiner: Combiner[Char, ParString] = new ParStringCombiner
+
+  def apply(elems: Char*): ParString = {
+	val cb = newCombiner
+	cb ++= elems
+	cb.result
+  }
+}
+</code></pre></div></div>
+
+<h2 id="further-customizations-concurrent-and-other-collections">Further customizations– concurrent and other collections</h2>
+
+<p>Implementing a concurrent collection (unlike parallel collections, concurrent
+collections are ones that can be concurrently modified, like
+<code class="language-plaintext highlighter-rouge">collection.concurrent.TrieMap</code>) is not always straightforward. Combiners in
+particular often require a lot of thought. In most <em>parallel</em> collections
+described so far, combiners use a two-step evaluation. In the first step the
+elements are added to the combiners by different processors and the combiners
+are merged together. In the second step, after all the elements are available,
+the resulting collection is constructed.</p>
+
+<p>Another approach to combiners is to construct the resulting collection as the
+elements. This requires the collection to be thread-safe– a combiner must
+allow <em>concurrent</em> element insertion. In this case one combiner is shared by
+all the processors.</p>
+
+<p>To parallelize a concurrent collection, its combiners must override the method
+<code class="language-plaintext highlighter-rouge">canBeShared</code> to return <code class="language-plaintext highlighter-rouge">true</code>. This will ensure that only one combiner is
+created when a parallel operation is invoked. Next, the <code class="language-plaintext highlighter-rouge">+=</code> method must be
+thread-safe. Finally, method <code class="language-plaintext highlighter-rouge">combine</code> still returns the current combiner if
+the current combiner and the argument combiner are the same, and is free to
+throw an exception otherwise.</p>
+
+<p>Splitters are divided into smaller splitters to achieve better load balancing.
+By default, information returned by the <code class="language-plaintext highlighter-rouge">remaining</code> method is used to decide
+when to stop dividing the splitter. For some collections, calling the
+<code class="language-plaintext highlighter-rouge">remaining</code> method may be costly and some other means should be used to decide
+when to divide the splitter. In this case, one should override the
+<code class="language-plaintext highlighter-rouge">shouldSplitFurther</code> method in the splitter.</p>
+
+<p>The default implementation divides the splitter if the number of remaining
+elements is greater than the collection size divided by eight times the
+parallelism level.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def shouldSplitFurther[S](coll: ParIterable[S], parallelismLevel: Int) =
+    remaining &gt; thresholdFromSize(coll.size, parallelismLevel)
+</code></pre></div></div>
+
+<p>Equivalently, a splitter can hold a counter on how many times it was split and
+implement <code class="language-plaintext highlighter-rouge">shouldSplitFurther</code> by returning <code class="language-plaintext highlighter-rouge">true</code> if the split count is
+greater than <code class="language-plaintext highlighter-rouge">3 + log(parallelismLevel)</code>. This avoids having to call
+<code class="language-plaintext highlighter-rouge">remaining</code>.</p>
+
+<p>Furthermore, if calling <code class="language-plaintext highlighter-rouge">remaining</code> is not a cheap operation for a particular
+collection (i.e. it requires evaluating the number of elements in the
+collection), then the method <code class="language-plaintext highlighter-rouge">isRemainingCheap</code> in splitters should be
+overridden to return <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>Finally, if the <code class="language-plaintext highlighter-rouge">remaining</code> method in splitters is extremely cumbersome to
+implement, you can override the method <code class="language-plaintext highlighter-rouge">isStrictSplitterCollection</code> in its
+collection to return <code class="language-plaintext highlighter-rouge">false</code>. Such collections will fail to execute some
+methods which rely on splitters being strict, i.e. returning a correct value
+in the <code class="language-plaintext highlighter-rouge">remaining</code> method. Importantly, this does not effect methods used in
+for-comprehensions.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/concrete-parallel-collections.html">Concrete Parallel Collection Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/configuration.html">Configuring Parallel Collections</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/conversions.html">Parallel Collection Conversions</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/ctries.html">Concurrent Tries</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/architecture.html">Architecture of the Parallel Collections Library</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/parallel-collections/custom-parallel-collections.html">Creating Custom Parallel Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/performance.html">Measuring Performance</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/parallel-collections/custom-parallel-collections.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/parallel-collections/custom-parallel-collections.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/parallel-collections/custom-parallel-collections.html" class="lang">中文 (简体)</a></li>
+          
+            
+            
+      			
+      			<li><a href="/es/overviews/parallel-collections/custom-parallel-collections.html" class="lang">Español</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ru/overviews/parallel-collections/custom-parallel-collections.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/parallel-collections/custom-parallel-collections.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

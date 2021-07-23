@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      The Architecture of Scala Collections | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/architecture-of-scala-collections.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="The Architecture of Scala Collections"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="The Architecture of Scala Collections"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>The Architecture of Scala Collections</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Martin Odersky and Lex Spoon</strong></p>
+
+<p>These pages describe the architecture of the Scala collections
+framework in detail. Compared to
+<a href="/overviews/collections/introduction.html">the Scala 2.8 Collections API</a> you
+will find out more about the internal workings of the framework. You
+will also learn how this architecture helps you define your own
+collections in a few lines of code, while reusing the overwhelming
+part of collection functionality from the framework.</p>
+
+<p><a href="/overviews/collections/introduction.html">The Scala 2.8 Collections API</a>
+contains a large number of collection
+operations, which exist uniformly on many different collection
+implementations. Implementing every collection operation anew for
+every collection type would lead to an enormous amount of code, most
+of which would be copied from somewhere else. Such code duplication
+could lead to inconsistencies over time, when an operation is added or
+modified in one part of the collection library but not in others. The
+principal design objective of the new collections framework was to
+avoid any duplication, defining every operation in as few places as
+possible. (Ideally, everything should be defined in one place only,
+but there are a few exceptions where things needed to be redefined.)
+The design approach was to implement most operations in collection
+“templates” that can be flexibly inherited from individual base
+classes and implementations. The following pages explain these
+templates and other classes and traits that constitute the “building
+blocks” of the framework, as well as the construction principles they
+support.</p>
+
+<h2 id="builders">Builders</h2>
+
+<p>An outline of the <code class="language-plaintext highlighter-rouge">Builder</code> trait:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package scala.collection.mutable
+
+trait Builder[-Elem, +To] {
+  def +=(elem: Elem): this.type
+  def result(): To
+  def clear(): Unit
+  def mapResult[NewTo](f: To =&gt; NewTo): Builder[Elem, NewTo] = ...
+}
+</code></pre></div></div>
+
+<p>Almost all collection operations are implemented in terms of
+<em>traversals</em> and <em>builders</em>. Traversals are handled by <code class="language-plaintext highlighter-rouge">Traversable</code>’s
+<code class="language-plaintext highlighter-rouge">foreach</code> method, and building new collections is handled by instances
+of class <code class="language-plaintext highlighter-rouge">Builder</code>. The listing above presents a slightly abbreviated
+outline of this trait.</p>
+
+<p>You can add an element <code class="language-plaintext highlighter-rouge">x</code> to a builder <code class="language-plaintext highlighter-rouge">b</code> with <code class="language-plaintext highlighter-rouge">b += x</code>. There’s also
+syntax to add more than one element at once, for instance <code class="language-plaintext highlighter-rouge">b += (x, y)</code>.
+Adding another collection with <code class="language-plaintext highlighter-rouge">b ++= xs</code> works as for buffers (in fact,
+buffers are an enriched
+version of builders). The <code class="language-plaintext highlighter-rouge">result()</code> method returns a collection from a
+builder. The state of the builder is undefined after taking its
+result, but it can be reset into a new empty state using
+<code class="language-plaintext highlighter-rouge">clear()</code>. Builders are generic in both the element type, <code class="language-plaintext highlighter-rouge">Elem</code>, and in
+the type, <code class="language-plaintext highlighter-rouge">To</code>, of collections they return.</p>
+
+<p>Often, a builder can refer to some other builder for assembling the
+elements of a collection, but then would like to transform the result
+of the other builder, for example to give it a different type. This
+task is simplified by method <code class="language-plaintext highlighter-rouge">mapResult</code> in class <code class="language-plaintext highlighter-rouge">Builder</code>. Suppose for
+instance you have an array buffer <code class="language-plaintext highlighter-rouge">buf</code>. Array buffers are builders for
+themselves, so taking the <code class="language-plaintext highlighter-rouge">result()</code> of an array buffer will return the
+same buffer. If you want to use this buffer to produce a builder that
+builds arrays, you can use <code class="language-plaintext highlighter-rouge">mapResult</code> like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val buf = new ArrayBuffer[Int]
+buf: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
+
+scala&gt; val bldr = buf mapResult (_.toArray)
+bldr: scala.collection.mutable.Builder[Int,Array[Int]]
+  = ArrayBuffer()
+</code></pre></div></div>
+
+<p>The result value, <code class="language-plaintext highlighter-rouge">bldr</code>, is a builder that uses the array buffer, <code class="language-plaintext highlighter-rouge">buf</code>,
+to collect elements. When a result is demanded from <code class="language-plaintext highlighter-rouge">bldr</code>, the result
+of <code class="language-plaintext highlighter-rouge">buf</code> is computed, which yields the array buffer <code class="language-plaintext highlighter-rouge">buf</code> itself. This
+array buffer is then mapped with <code class="language-plaintext highlighter-rouge">_.toArray</code> to an array. So the end
+result is that <code class="language-plaintext highlighter-rouge">bldr</code> is a builder for arrays.</p>
+
+<h2 id="factoring-out-common-operations">Factoring out common operations</h2>
+
+<h3 id="outline-of-trait-traversablelike">Outline of trait TraversableLike</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package scala.collection
+
+trait TraversableLike[+Elem, +Repr] {
+  def newBuilder: Builder[Elem, Repr] // deferred
+  def foreach[U](f: Elem =&gt; U): Unit  // deferred
+          ...
+  def filter(p: Elem =&gt; Boolean): Repr = {
+    val b = newBuilder
+    foreach { elem =&gt; if (p(elem)) b += elem }
+    b.result
+  }
+}
+</code></pre></div></div>
+
+<p>The main design objectives of the collection library redesign were to
+have, at the same time, natural types and maximal sharing of
+implementation code. In particular, Scala’s collections follow the
+“same-result-type” principle: wherever possible, a transformation
+method on a collection will yield a collection of the same type. For
+instance, the <code class="language-plaintext highlighter-rouge">filter</code> operation should yield, on every collection type,
+an instance of the same collection type. Applying <code class="language-plaintext highlighter-rouge">filter</code> on a <code class="language-plaintext highlighter-rouge">List</code>
+should give a <code class="language-plaintext highlighter-rouge">List</code>; applying it on a <code class="language-plaintext highlighter-rouge">Map</code> should give a <code class="language-plaintext highlighter-rouge">Map</code>, and so
+on. In the rest of this section, you will find out how this is
+achieved.</p>
+
+<p>The Scala collection library avoids code duplication and achieves the
+“same-result-type” principle by using generic builders and traversals
+over collections in so-called <em>implementation traits</em>. These traits are
+named with a <code class="language-plaintext highlighter-rouge">Like</code> suffix; for instance, <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code> is the
+implementation trait for <code class="language-plaintext highlighter-rouge">IndexedSeq</code>, and similarly, <code class="language-plaintext highlighter-rouge">TraversableLike</code> is
+the implementation trait for <code class="language-plaintext highlighter-rouge">Traversable</code>. Collection traits such as
+<code class="language-plaintext highlighter-rouge">Traversable</code> or <code class="language-plaintext highlighter-rouge">IndexedSeq</code> inherit all their concrete method
+implementations from these traits. Implementation traits have two type
+parameters instead of one for normal collections. They parameterize
+not only over the collection’s element type, but also over the
+collection’s <em>representation type</em>, i.e., the type of the underlying
+collection, such as <code class="language-plaintext highlighter-rouge">Seq[T]</code> or <code class="language-plaintext highlighter-rouge">List[T]</code>. For instance, here is the
+header of trait <code class="language-plaintext highlighter-rouge">TraversableLike</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait TraversableLike[+Elem, +Repr] { ... }
+</code></pre></div></div>
+
+<p>The type parameter, <code class="language-plaintext highlighter-rouge">Elem</code>, stands for the element type of the
+traversable whereas the type parameter <code class="language-plaintext highlighter-rouge">Repr</code> stands for its
+representation. There are no constraints on <code class="language-plaintext highlighter-rouge">Repr</code>. In particular <code class="language-plaintext highlighter-rouge">Repr</code>
+might be instantiated to a type that is itself not a subtype of
+<code class="language-plaintext highlighter-rouge">Traversable</code>. That way, classes outside the collections hierarchy such
+as <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Array</code> can still make use of all operations defined in a
+collection implementation trait.</p>
+
+<p>Taking <code class="language-plaintext highlighter-rouge">filter</code> as an example, this operation is defined once for all
+collection classes in the trait <code class="language-plaintext highlighter-rouge">TraversableLike</code>. An outline of the
+relevant code is shown in the above <a href="#outline-of-trait-traversablelike">outline of trait
+<code class="language-plaintext highlighter-rouge">TraversableLike</code></a>. The trait declares
+two abstract methods, <code class="language-plaintext highlighter-rouge">newBuilder</code>
+and <code class="language-plaintext highlighter-rouge">foreach</code>, which are implemented in concrete collection classes. The
+<code class="language-plaintext highlighter-rouge">filter</code> operation is implemented in the same way for all collections
+using these methods. It first constructs a new builder for the
+representation type <code class="language-plaintext highlighter-rouge">Repr</code>, using <code class="language-plaintext highlighter-rouge">newBuilder</code>. It then traverses all
+elements of the current collection, using <code class="language-plaintext highlighter-rouge">foreach</code>. If an element <code class="language-plaintext highlighter-rouge">x</code>
+satisfies the given predicate <code class="language-plaintext highlighter-rouge">p</code> (i.e., <code class="language-plaintext highlighter-rouge">p(x)</code> is <code class="language-plaintext highlighter-rouge">true</code>), it is added to
+the builder. Finally, the elements collected in the builder are
+returned as an instance of the <code class="language-plaintext highlighter-rouge">Repr</code> collection type by calling the
+builder’s <code class="language-plaintext highlighter-rouge">result</code> method.</p>
+
+<p>A bit more complicated is the <code class="language-plaintext highlighter-rouge">map</code> operation on collections. For
+instance, if <code class="language-plaintext highlighter-rouge">f</code> is a function from <code class="language-plaintext highlighter-rouge">String</code> to <code class="language-plaintext highlighter-rouge">Int</code>, and <code class="language-plaintext highlighter-rouge">xs</code> is a
+<code class="language-plaintext highlighter-rouge">List[String]</code>, then <code class="language-plaintext highlighter-rouge">xs map f</code> should give a <code class="language-plaintext highlighter-rouge">List[Int]</code>. Likewise,
+if <code class="language-plaintext highlighter-rouge">ys</code> is an <code class="language-plaintext highlighter-rouge">Array[String]</code>, then <code class="language-plaintext highlighter-rouge">ys map f</code> should give an
+<code class="language-plaintext highlighter-rouge">Array[Int]</code>. The question is how do we achieve that without duplicating
+the definition of the <code class="language-plaintext highlighter-rouge">map</code> method in lists and arrays. The
+<code class="language-plaintext highlighter-rouge">newBuilder</code>/<code class="language-plaintext highlighter-rouge">foreach</code> framework shown in
+<a href="#outline-of-trait-traversablelike">trait <code class="language-plaintext highlighter-rouge">TraversableLike</code></a> is
+not sufficient for this because it only allows creation of new
+instances of the same collection <em>type</em> whereas <code class="language-plaintext highlighter-rouge">map</code> needs an
+instance of the same collection <em>type constructor</em>, but possibly with
+a different element type.</p>
+
+<p>What’s more, even the result type constructor of a function like <code class="language-plaintext highlighter-rouge">map</code>
+might depend in non-trivial ways on the other argument types. Here is
+an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import collection.immutable.BitSet
+import collection.immutable.BitSet
+
+scala&gt; val bits = BitSet(1, 2, 3)
+bits: scala.collection.immutable.BitSet = BitSet(1, 2, 3)
+
+scala&gt; bits map (_ * 2)
+res13: scala.collection.immutable.BitSet = BitSet(2, 4, 6)
+
+scala&gt; bits map (_.toFloat)
+res14: scala.collection.immutable.Set[Float]
+  = Set(1.0, 2.0, 3.0)
+</code></pre></div></div>
+
+<p>If you <code class="language-plaintext highlighter-rouge">map</code> the doubling function <code class="language-plaintext highlighter-rouge">_ * 2</code> over a bit set you obtain
+another bit set. However, if you map the function <code class="language-plaintext highlighter-rouge">(_.toFloat)</code> over the
+same bit set, the result is a general <code class="language-plaintext highlighter-rouge">Set[Float]</code>. Of course, it can’t
+be a bit set because bit sets contain <code class="language-plaintext highlighter-rouge">Int</code>s, not <code class="language-plaintext highlighter-rouge">Float</code>s.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">map</code>’s result type depends on the type of function that’s
+passed to it. If the result type of that function argument is again an
+<code class="language-plaintext highlighter-rouge">Int</code>, the result of <code class="language-plaintext highlighter-rouge">map</code> is a <code class="language-plaintext highlighter-rouge">BitSet</code>, but if the result type of the
+function argument is something else, the result of <code class="language-plaintext highlighter-rouge">map</code> is just a
+<code class="language-plaintext highlighter-rouge">Set</code>. You’ll find out soon how this type-flexibility is achieved in
+Scala.</p>
+
+<p>The problem with <code class="language-plaintext highlighter-rouge">BitSet</code> is not an isolated case. Here are two more
+interactions with the interpreter that both map a function over a <code class="language-plaintext highlighter-rouge">Map</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; Map("a" -&gt; 1, "b" -&gt; 2) map { case (x, y) =&gt; (y, x) }
+res3: scala.collection.immutable.Map[Int,java.lang.String]
+  = Map(1 -&gt; a, 2 -&gt; b)
+
+scala&gt; Map("a" -&gt; 1, "b" -&gt; 2) map { case (x, y) =&gt; y }
+res4: scala.collection.immutable.Iterable[Int]
+  = List(1, 2)
+</code></pre></div></div>
+
+<p>The first function swaps two arguments of a key/value pair. The result
+of mapping this function is again a map, but now going in the other
+direction. In fact, the first expression yields the inverse of the
+original map, provided it is invertible. The second function, however,
+maps the key/value pair to an integer, namely its value component. In
+that case, we cannot form a <code class="language-plaintext highlighter-rouge">Map</code> from the results, but we can still
+form an <code class="language-plaintext highlighter-rouge">Iterable</code>, a supertrait of <code class="language-plaintext highlighter-rouge">Map</code>.</p>
+
+<p>You might ask, why not restrict <code class="language-plaintext highlighter-rouge">map</code> so that it can always return the
+same kind of collection? For instance, on bit sets <code class="language-plaintext highlighter-rouge">map</code> could accept
+only <code class="language-plaintext highlighter-rouge">Int</code>-to-<code class="language-plaintext highlighter-rouge">Int</code> functions and on <code class="language-plaintext highlighter-rouge">Map</code>s it could only accept
+pair-to-pair functions. Not only are such restrictions undesirable
+from an object-oriented modelling point of view, they are illegal
+because they would violate the Liskov substitution principle: A <code class="language-plaintext highlighter-rouge">Map</code> <em>is</em>
+an <code class="language-plaintext highlighter-rouge">Iterable</code>. So every operation that’s legal on an <code class="language-plaintext highlighter-rouge">Iterable</code> must also
+be legal on a <code class="language-plaintext highlighter-rouge">Map</code>.</p>
+
+<p>Scala solves this problem instead with overloading: not the simple
+form of overloading inherited by Java (that would not be flexible
+enough), but the more systematic form of overloading that’s provided
+by implicit parameters.</p>
+
+<p>Implementation of <code class="language-plaintext highlighter-rouge">map</code> in <code class="language-plaintext highlighter-rouge">TraversableLike</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def map[B, That](f: Elem =&gt; B)
+    (implicit bf: CanBuildFrom[Repr, B, That]): That = {
+  val b = bf(this)
+  this.foreach(x =&gt; b += f(x))
+  b.result
+}
+</code></pre></div></div>
+
+<p>The listing above shows trait <code class="language-plaintext highlighter-rouge">TraversableLike</code>’s implementation of
+<code class="language-plaintext highlighter-rouge">map</code>. It’s quite similar to the implementation of <code class="language-plaintext highlighter-rouge">filter</code> shown in <a href="#outline-of-trait-traversablelike">trait
+<code class="language-plaintext highlighter-rouge">TraversableLike</code></a>.
+The principal difference is that where <code class="language-plaintext highlighter-rouge">filter</code> used
+the <code class="language-plaintext highlighter-rouge">newBuilder</code> method, which is abstract in <code class="language-plaintext highlighter-rouge">TraversableLike</code>, <code class="language-plaintext highlighter-rouge">map</code>
+uses a <em>builder factory</em> that’s passed as an additional implicit
+parameter of type <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> trait:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package scala.collection.generic
+
+trait CanBuildFrom[-From, -Elem, +To] {
+  // Creates a new builder
+  def apply(from: From): Builder[Elem, To]
+}
+</code></pre></div></div>
+
+<p>The listing above shows the definition of the trait <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>,
+which represents builder factories. It has three type parameters: <code class="language-plaintext highlighter-rouge">From</code> indicates
+the type for which this builder factory applies, <code class="language-plaintext highlighter-rouge">Elem</code> indicates the element
+type of the collection to be built, and <code class="language-plaintext highlighter-rouge">To</code> indicates the type of
+collection to build. By defining the right implicit
+definitions of builder factories, you can tailor the right typing
+behavior as needed. Take class <code class="language-plaintext highlighter-rouge">BitSet</code> as an example. Its companion
+object would contain a builder factory of type <code class="language-plaintext highlighter-rouge">CanBuildFrom[BitSet, Int, BitSet]</code>.
+This means that when operating on a <code class="language-plaintext highlighter-rouge">BitSet</code> you can
+construct another <code class="language-plaintext highlighter-rouge">BitSet</code> provided the element type of the collection to build
+is <code class="language-plaintext highlighter-rouge">Int</code>. If this is not the case, the compiler will check the superclasses, and
+fall back to the implicit builder factory defined in
+<code class="language-plaintext highlighter-rouge">mutable.Set</code>’s companion object. The type of this more general builder
+factory, where <code class="language-plaintext highlighter-rouge">A</code> is a generic type parameter, is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CanBuildFrom[Set[_], A, Set[A]]
+</code></pre></div></div>
+
+<p>This means that when operating on an arbitrary <code class="language-plaintext highlighter-rouge">Set</code> (expressed by the
+existential type <code class="language-plaintext highlighter-rouge">Set[_]</code>) you can build a <code class="language-plaintext highlighter-rouge">Set</code> again, no matter what the
+element type <code class="language-plaintext highlighter-rouge">A</code> is. Given these two implicit instances of <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>,
+you can then rely on Scala’s rules for implicit resolution to pick the
+one that’s appropriate and maximally specific.</p>
+
+<p>So implicit resolution provides the correct static types for tricky
+collection operations such as <code class="language-plaintext highlighter-rouge">map</code>. But what about the dynamic types?
+Specifically, say you map some function over a <code class="language-plaintext highlighter-rouge">List</code> value that has
+<code class="language-plaintext highlighter-rouge">Iterable</code> as its static type:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val xs: Iterable[Int] = List(1, 2, 3)
+xs: Iterable[Int] = List(1, 2, 3)
+
+scala&gt; val ys = xs map (x =&gt; x * x)
+ys: Iterable[Int] = List(1, 4, 9)
+</code></pre></div></div>
+
+<p>The static type of <code class="language-plaintext highlighter-rouge">ys</code> above is <code class="language-plaintext highlighter-rouge">Iterable</code>, as expected. But its dynamic
+type is (and should still be) <code class="language-plaintext highlighter-rouge">List</code>! This behavior is achieved by one
+more indirection. The <code class="language-plaintext highlighter-rouge">apply</code> method in <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> is passed the
+source collection as argument. Most builder factories for generic
+traversables (in fact all except builder factories for leaf classes)
+forward the call to a method <code class="language-plaintext highlighter-rouge">genericBuilder</code> of a collection. The
+<code class="language-plaintext highlighter-rouge">genericBuilder</code> method in turn calls the builder that belongs to the
+collection in which it is defined. So Scala uses static implicit
+resolution to resolve constraints on the types of <code class="language-plaintext highlighter-rouge">map</code>, and virtual
+dispatch to pick the best dynamic type that corresponds to these
+constraints.</p>
+
+<p>In the current example, the static implicit resolution will pick the
+<code class="language-plaintext highlighter-rouge">Iterable</code>’s <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, which calls <code class="language-plaintext highlighter-rouge">genericBuilder</code> on the value it
+received as argument. But at runtime, because of virtual dispatch, it is
+<code class="language-plaintext highlighter-rouge">List.genericBuilder</code> that gets called rather than <code class="language-plaintext highlighter-rouge">Iterable.genericBuilder</code>,
+and so map builds a <code class="language-plaintext highlighter-rouge">List</code>.</p>
+
+<h2 id="integrating-a-new-collection-rna-sequences">Integrating a new collection: RNA sequences</h2>
+
+<p>What needs to be done if you want to integrate a new collection class,
+so that it can profit from all predefined operations with the right
+types? In the next few sections you’ll be walked through two examples
+that do this, namely sequences of RNA bases and prefix maps implemented
+with Patricia tries.</p>
+
+<p>To start with the first example, we define the four RNA Bases:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abstract class Base
+case object A extends Base
+case object U extends Base
+case object G extends Base
+case object C extends Base
+
+object Base {
+  val fromInt: Int =&gt; Base = Array(A, U, G, C)
+  val toInt: Base =&gt; Int = Map(A -&gt; 0, U -&gt; 1, G -&gt; 2, C -&gt; 3)
+}
+</code></pre></div></div>
+
+<p>Say you want to create a new sequence type for RNA strands, which are
+sequences of bases A (adenine), U (uracil), G (guanine), and C
+(cytosine). The definitions for bases are easily set up as shown in the
+listing of RNA bases above.</p>
+
+<p>Every base is defined as a case object that inherits from a common
+abstract class <code class="language-plaintext highlighter-rouge">Base</code>. The <code class="language-plaintext highlighter-rouge">Base</code> class has a companion object that
+defines two functions that map between bases and the integers 0 to</p>
+<ol>
+  <li>You can see in the examples two different ways to use collections
+to implement these functions. The <code class="language-plaintext highlighter-rouge">toInt</code> function is implemented as a
+<code class="language-plaintext highlighter-rouge">Map</code> from <code class="language-plaintext highlighter-rouge">Base</code> values to integers. The reverse function, <code class="language-plaintext highlighter-rouge">fromInt</code>, is
+implemented as an array. This makes use of the fact that both maps and
+arrays <em>are</em> functions because they inherit from the <code class="language-plaintext highlighter-rouge">Function1</code> trait.</li>
+</ol>
+
+<p>The next task is to define a class for strands of RNA. Conceptually, a
+strand of RNA is simply a <code class="language-plaintext highlighter-rouge">Seq[Base]</code>. However, RNA strands can get
+quite long, so it makes sense to invest some work in a compact
+representation. Because there are only four bases, a base can be
+identified with two bits, and you can therefore store sixteen bases as
+two-bit values in an integer. The idea, then, is to construct a
+specialized subclass of <code class="language-plaintext highlighter-rouge">Seq[Base]</code>, which uses this packed
+representation.</p>
+
+<h3 id="first-version-of-rna-strands-class">First version of RNA strands class</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection.IndexedSeqLike
+import collection.mutable.{Builder, ArrayBuffer}
+import collection.generic.CanBuildFrom
+
+final class RNA1 private (val groups: Array[Int],
+    val length: Int) extends IndexedSeq[Base] {
+
+  import RNA1._
+
+  def apply(idx: Int): Base = {
+    if (idx &lt; 0 || length &lt;= idx)
+      throw new IndexOutOfBoundsException
+    Base.fromInt(groups(idx / N) &gt;&gt; (idx % N * S) &amp; M)
+  }
+}
+
+object RNA1 {
+
+  // Number of bits necessary to represent group
+  private val S = 2            
+
+  // Number of groups that fit in an Int
+  private val N = 32 / S       
+
+  // Bitmask to isolate a group
+  private val M = (1 &lt;&lt; S) - 1
+
+  def fromSeq(buf: Seq[Base]): RNA1 = {
+    val groups = new Array[Int]((buf.length + N - 1) / N)
+    for (i &lt;- 0 until buf.length)
+      groups(i / N) |= Base.toInt(buf(i)) &lt;&lt; (i % N * S)
+    new RNA1(groups, buf.length)
+  }
+
+  def apply(bases: Base*) = fromSeq(bases)
+}
+</code></pre></div></div>
+
+<p>The <a href="#first-version-of-rna-strands-class">RNA strands class listing</a> above
+presents the first version of this
+class. It will be refined later. The class <code class="language-plaintext highlighter-rouge">RNA1</code> has a constructor that
+takes an array of <code class="language-plaintext highlighter-rouge">Int</code>s as its first argument. This array contains the
+packed RNA data, with sixteen bases in each element, except for the
+last array element, which might be partially filled. The second
+argument, <code class="language-plaintext highlighter-rouge">length</code>, specifies the total number of bases on the array
+(and in the sequence). Class <code class="language-plaintext highlighter-rouge">RNA1</code> extends <code class="language-plaintext highlighter-rouge">IndexedSeq[Base]</code>. Trait
+<code class="language-plaintext highlighter-rouge">IndexedSeq</code>, which comes from package <code class="language-plaintext highlighter-rouge">scala.collection.immutable</code>,
+defines two abstract methods, <code class="language-plaintext highlighter-rouge">length</code> and <code class="language-plaintext highlighter-rouge">apply</code>. These need to be
+implemented in concrete subclasses. Class <code class="language-plaintext highlighter-rouge">RNA1</code> implements <code class="language-plaintext highlighter-rouge">length</code>
+automatically by defining a parametric field of the same name. It
+implements the indexing method <code class="language-plaintext highlighter-rouge">apply</code> with the code given in <a href="#first-version-of-rna-strands-class">class
+<code class="language-plaintext highlighter-rouge">RNA1</code></a>. Essentially, <code class="language-plaintext highlighter-rouge">apply</code> first
+extracts an integer value from the
+<code class="language-plaintext highlighter-rouge">groups</code> array, then extracts the correct two-bit number from that
+integer using right shift (<code class="language-plaintext highlighter-rouge">&gt;&gt;</code>) and mask (<code class="language-plaintext highlighter-rouge">&amp;</code>). The private constants <code class="language-plaintext highlighter-rouge">S</code>,
+<code class="language-plaintext highlighter-rouge">N</code>, and <code class="language-plaintext highlighter-rouge">M</code> come from the <code class="language-plaintext highlighter-rouge">RNA1</code> companion object. <code class="language-plaintext highlighter-rouge">S</code> specifies the size of
+each packet (i.e., two); <code class="language-plaintext highlighter-rouge">N</code> specifies the number of two-bit packets per
+integer; and <code class="language-plaintext highlighter-rouge">M</code> is a bit mask that isolates the lowest <code class="language-plaintext highlighter-rouge">S</code> bits in a
+word.</p>
+
+<p>Note that the constructor of class <code class="language-plaintext highlighter-rouge">RNA1</code> is <code class="language-plaintext highlighter-rouge">private</code>. This means that
+clients cannot create <code class="language-plaintext highlighter-rouge">RNA1</code> sequences by calling <code class="language-plaintext highlighter-rouge">new</code>, which makes
+sense, because it hides the representation of <code class="language-plaintext highlighter-rouge">RNA1</code> sequences in terms
+of packed arrays from the user. If clients cannot see what the
+representation details of RNA sequences are, it becomes possible to
+change these representation details at any point in the future without
+affecting client code. In other words, this design achieves a good
+decoupling of the interface of RNA sequences and its
+implementation. However, if constructing an RNA sequence with <code class="language-plaintext highlighter-rouge">new</code> is
+impossible, there must be some other way to create new RNA sequences,
+else the whole class would be rather useless. In fact there are two
+alternatives for RNA sequence creation, both provided by the <code class="language-plaintext highlighter-rouge">RNA1</code>
+companion object. The first way is method <code class="language-plaintext highlighter-rouge">fromSeq</code>, which converts a
+given sequence of bases (i.e., a value of type <code class="language-plaintext highlighter-rouge">Seq[Base]</code>) into an
+instance of class <code class="language-plaintext highlighter-rouge">RNA1</code>. The <code class="language-plaintext highlighter-rouge">fromSeq</code> method does this by packing all
+the bases contained in its argument sequence into an array, then
+calling <code class="language-plaintext highlighter-rouge">RNA1</code>’s private constructor with that array and the length of
+the original sequence as arguments. This makes use of the fact that a
+private constructor of a class is visible in the class’s companion
+object.</p>
+
+<p>The second way to create an <code class="language-plaintext highlighter-rouge">RNA1</code> value is provided by the <code class="language-plaintext highlighter-rouge">apply</code> method
+in the <code class="language-plaintext highlighter-rouge">RNA1</code> object. It takes a variable number of <code class="language-plaintext highlighter-rouge">Base</code> arguments and
+simply forwards them as a sequence to <code class="language-plaintext highlighter-rouge">fromSeq</code>. Here are the two
+creation schemes in action:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val xs = List(A, G, U, A)
+xs: List[Product with Serializable with Base] = List(A, G, U, A)
+
+scala&gt; RNA1.fromSeq(xs)
+res1: RNA1 = RNA1(A, G, U, A)
+
+scala&gt; val rna1 = RNA1(A, U, G, G, C)
+rna1: RNA1 = RNA1(A, U, G, G, C)
+</code></pre></div></div>
+
+<h3 id="adapting-the-result-type-of-rna-methods">Adapting the result type of RNA methods</h3>
+
+<p>Here are some more interactions with the <code class="language-plaintext highlighter-rouge">RNA1</code> abstraction:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; rna1.length
+res2: Int = 5
+
+scala&gt; rna1.last
+res3: Base = C
+
+scala&gt; rna1.take(3)
+res4: IndexedSeq[Base] = Vector(A, U, G)
+</code></pre></div></div>
+
+<p>The first two results are as expected, but the last result of taking
+the first three elements of <code class="language-plaintext highlighter-rouge">rna1</code> might not be. In fact, you see a
+<code class="language-plaintext highlighter-rouge">IndexedSeq[Base]</code> as static result type and a <code class="language-plaintext highlighter-rouge">Vector</code> as the dynamic
+type of the result value. You might have expected to see an <code class="language-plaintext highlighter-rouge">RNA1</code> value
+instead. But this is not possible because all that was done in <a href="#first-version-of-rna-strands-class">class
+<code class="language-plaintext highlighter-rouge">RNA1</code></a> was making <code class="language-plaintext highlighter-rouge">RNA1</code> extend
+<code class="language-plaintext highlighter-rouge">IndexedSeq</code>. Class <code class="language-plaintext highlighter-rouge">IndexedSeq</code>, on the other
+hand, has a <code class="language-plaintext highlighter-rouge">take</code> method that returns an <code class="language-plaintext highlighter-rouge">IndexedSeq</code>, and that’s
+implemented in terms of <code class="language-plaintext highlighter-rouge">IndexedSeq</code>’s default implementation,
+<code class="language-plaintext highlighter-rouge">Vector</code>. So that’s what you were seeing on the last line of the
+previous interaction.</p>
+
+<p>Now that you understand why things are the way they are, the next
+question should be what needs to be done to change them? One way to do
+this would be to override the <code class="language-plaintext highlighter-rouge">take</code> method in class <code class="language-plaintext highlighter-rouge">RNA1</code>, maybe like
+this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def take(count: Int): RNA1 = RNA1.fromSeq(super.take(count))
+</code></pre></div></div>
+
+<p>This would do the job for <code class="language-plaintext highlighter-rouge">take</code>. But what about <code class="language-plaintext highlighter-rouge">drop</code>, or <code class="language-plaintext highlighter-rouge">filter</code>, or
+<code class="language-plaintext highlighter-rouge">init</code>? In fact there are over fifty methods on sequences that return
+again a sequence. For consistency, all of these would have to be
+overridden. This looks less and less like an attractive
+option. Fortunately, there is a much easier way to achieve the same
+effect, as shown in the next section.</p>
+
+<h3 id="second-version-of-rna-strands-class">Second version of RNA strands class</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class RNA2 private (
+  val groups: Array[Int],
+  val length: Int
+) extends IndexedSeq[Base] with IndexedSeqLike[Base, RNA2] {
+
+  import RNA2._
+
+  override def newBuilder: Builder[Base, RNA2] =
+    new ArrayBuffer[Base] mapResult fromSeq
+
+  def apply(idx: Int): Base = // as before
+}
+</code></pre></div></div>
+
+<p>The RNA class needs to inherit not only from <code class="language-plaintext highlighter-rouge">IndexedSeq</code>, but
+also from its implementation trait <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code>. This is shown in
+the above listing of class <code class="language-plaintext highlighter-rouge">RNA2</code>. The new implementation differs from
+the previous one in only two aspects. First, class <code class="language-plaintext highlighter-rouge">RNA2</code> now also
+extends <code class="language-plaintext highlighter-rouge">IndexedSeqLike[Base, RNA2]</code>. Second, it provides a builder for
+RNA strands. The <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code> trait
+implements all concrete methods of <code class="language-plaintext highlighter-rouge">IndexedSeq</code> in an extensible
+way. For instance, the return type of methods like <code class="language-plaintext highlighter-rouge">take</code>, <code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">filter</code>,
+or <code class="language-plaintext highlighter-rouge">init</code> is the second type parameter passed to class <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code>,
+i.e., in class <code class="language-plaintext highlighter-rouge">RNA2</code> it is <code class="language-plaintext highlighter-rouge">RNA2</code> itself.</p>
+
+<p>To be able to do this, <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code> bases itself on the <code class="language-plaintext highlighter-rouge">newBuilder</code>
+abstraction, which creates a builder of the right kind. Subclasses of
+trait <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code> have to override <code class="language-plaintext highlighter-rouge">newBuilder</code> to return collections
+of their own kind. In class <code class="language-plaintext highlighter-rouge">RNA2</code>, the <code class="language-plaintext highlighter-rouge">newBuilder</code> method returns a
+builder of type <code class="language-plaintext highlighter-rouge">Builder[Base, RNA2]</code>.</p>
+
+<p>To construct this builder, it first creates an <code class="language-plaintext highlighter-rouge">ArrayBuffer</code>, which
+itself is a <code class="language-plaintext highlighter-rouge">Builder[Base, ArrayBuffer]</code>. It then transforms the
+<code class="language-plaintext highlighter-rouge">ArrayBuffer</code> builder by calling its <code class="language-plaintext highlighter-rouge">mapResult</code> method to an <code class="language-plaintext highlighter-rouge">RNA2</code>
+builder. The <code class="language-plaintext highlighter-rouge">mapResult</code> method expects a transformation function from
+<code class="language-plaintext highlighter-rouge">ArrayBuffer</code> to <code class="language-plaintext highlighter-rouge">RNA2</code> as its parameter. The function given is simply
+<code class="language-plaintext highlighter-rouge">RNA2.fromSeq</code>, which converts an arbitrary base sequence to an <code class="language-plaintext highlighter-rouge">RNA2</code>
+value (recall that an array buffer is a kind of sequence, so
+<code class="language-plaintext highlighter-rouge">RNA2.fromSeq</code> can be applied to it).</p>
+
+<p>If you had left out the <code class="language-plaintext highlighter-rouge">newBuilder</code> definition, you would have gotten
+an error message like the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RNA2.scala:5: error: overriding method newBuilder in trait
+TraversableLike of type =&gt; scala.collection.mutable.Builder[Base,RNA2];
+ method newBuilder in trait GenericTraversableTemplate of type
+ =&gt; scala.collection.mutable.Builder[Base,IndexedSeq[Base]] has
+ incompatible type
+class RNA2 private (val groups: Array[Int], val length: Int)
+      ^
+one error found
+</code></pre></div></div>
+
+<p>The error message is quite long and complicated, which reflects the
+intricate way the collection libraries are put together. It’s best to
+ignore the information about where the methods come from, because in
+this case it detracts more than it helps. What remains is that a
+method <code class="language-plaintext highlighter-rouge">newBuilder</code> with result type <code class="language-plaintext highlighter-rouge">Builder[Base, RNA2]</code> needed to be
+defined, but a method <code class="language-plaintext highlighter-rouge">newBuilder</code> with result type
+<code class="language-plaintext highlighter-rouge">Builder[Base,IndexedSeq[Base]]</code> was found. The latter does not override
+the former. The first method, whose result type is <code class="language-plaintext highlighter-rouge">Builder[Base, RNA2]</code>,
+is an abstract method that got instantiated at this type in
+<a href="#second-version-of-rna-strands-class">class <code class="language-plaintext highlighter-rouge">RNA2</code></a> by passing the
+<code class="language-plaintext highlighter-rouge">RNA2</code> type parameter to <code class="language-plaintext highlighter-rouge">IndexedSeqLike</code>. The
+second method, of result type <code class="language-plaintext highlighter-rouge">Builder[Base,IndexedSeq[Base]]</code>, is
+what’s provided by the inherited <code class="language-plaintext highlighter-rouge">IndexedSeq</code> class. In other words, the
+<code class="language-plaintext highlighter-rouge">RNA2</code> class is invalid without a definition of <code class="language-plaintext highlighter-rouge">newBuilder</code> with the
+first result type.</p>
+
+<p>With the refined implementation of the <a href="#second-version-of-rna-strands-class"><code class="language-plaintext highlighter-rouge">RNA2</code> class</a>,
+methods like <code class="language-plaintext highlighter-rouge">take</code>,
+<code class="language-plaintext highlighter-rouge">drop</code>, or <code class="language-plaintext highlighter-rouge">filter</code> work now as expected:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val rna2 = RNA2(A, U, G, G, C)
+rna2: RNA2 = RNA2(A, U, G, G, C)
+
+scala&gt; rna2 take 3
+res5: RNA2 = RNA2(A, U, G)
+
+scala&gt; rna2 filter (U !=)
+res6: RNA2 = RNA2(A, G, G, C)
+</code></pre></div></div>
+
+<h3 id="dealing-with-map-and-friends">Dealing with map and friends</h3>
+
+<p>However, there is another class of methods in collections that are not
+dealt with yet. These methods do not always return the collection type
+exactly. They might return the same kind of collection, but with a
+different element type. The classical example of this is the <code class="language-plaintext highlighter-rouge">map</code>
+method. If <code class="language-plaintext highlighter-rouge">s</code> is a <code class="language-plaintext highlighter-rouge">Seq[Int]</code>, and <code class="language-plaintext highlighter-rouge">f</code> is a function from <code class="language-plaintext highlighter-rouge">Int</code> to <code class="language-plaintext highlighter-rouge">String</code>,
+then <code class="language-plaintext highlighter-rouge">s.map(f)</code> would return a <code class="language-plaintext highlighter-rouge">Seq[String]</code>. So the element type changes
+between the receiver and the result, but the kind of collection stays
+the same.</p>
+
+<p>There are a number of other methods that behave like <code class="language-plaintext highlighter-rouge">map</code>. For some of
+them you would expect this (e.g., <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>), but for others
+you might not. For instance, the append method, <code class="language-plaintext highlighter-rouge">++</code>, also might return
+a result of different type as its arguments–appending a list of
+<code class="language-plaintext highlighter-rouge">String</code> to a list of <code class="language-plaintext highlighter-rouge">Int</code> would give a list of <code class="language-plaintext highlighter-rouge">Any</code>. How should these
+methods be adapted to RNA strands? The desired behavior would be to get
+back an RNA strand when mapping bases to bases or appending two RNA strands
+with <code class="language-plaintext highlighter-rouge">++</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val rna = RNA(A, U, G, G, C)
+rna: RNA = RNA(A, U, G, G, C)
+
+scala&gt; rna map { case A =&gt; U case b =&gt; b }
+res7: RNA = RNA(U, U, G, G, C)
+
+scala&gt; rna ++ rna
+res8: RNA = RNA(A, U, G, G, C, A, U, G, G, C)
+</code></pre></div></div>
+
+<p>On the other hand, mapping bases to some other type over an RNA strand
+cannot yield another RNA strand because the new elements have the
+wrong type. It has to yield a sequence instead. In the same vein
+appending elements that are not of type <code class="language-plaintext highlighter-rouge">Base</code> to an RNA strand can
+yield a general sequence, but it cannot yield another RNA strand.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; rna map Base.toInt
+res2: IndexedSeq[Int] = Vector(0, 1, 2, 2, 3)
+
+scala&gt; rna ++ List("missing", "data")
+res3: IndexedSeq[java.lang.Object] =
+  Vector(A, U, G, G, C, missing, data)
+</code></pre></div></div>
+
+<p>This is what you’d expect in the ideal case. But this is not what the
+<a href="#second-version-of-rna-strands-class"><code class="language-plaintext highlighter-rouge">RNA2</code> class</a> provides. In fact, all
+examples will return instances of <code class="language-plaintext highlighter-rouge">Vector</code>, not just the last two. If you run
+the first three commands above with instances of this class you obtain:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val rna2 = RNA2(A, U, G, G, C)
+rna2: RNA2 = RNA2(A, U, G, G, C)
+
+scala&gt; rna2 map { case A =&gt; U case b =&gt; b }
+res0: IndexedSeq[Base] = Vector(U, U, G, G, C)
+
+scala&gt; rna2 ++ rna2
+res1: IndexedSeq[Base] = Vector(A, U, G, G, C, A, U, G, G, C)
+</code></pre></div></div>
+
+<p>So the result of <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">++</code> is never an RNA strand, even if the
+element type of the generated collection is <code class="language-plaintext highlighter-rouge">Base</code>. To see how to do
+better, it pays to have a close look at the signature of the <code class="language-plaintext highlighter-rouge">map</code>
+method (or of <code class="language-plaintext highlighter-rouge">++</code>, which has a similar signature). The <code class="language-plaintext highlighter-rouge">map</code> method is
+originally defined in class <code class="language-plaintext highlighter-rouge">scala.collection.TraversableLike</code> with the
+following signature:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def map[B, That](f: A =&gt; B)
+  (implicit cbf: CanBuildFrom[Repr, B, That]): That
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">A</code> is the type of elements of the collection, and <code class="language-plaintext highlighter-rouge">Repr</code> is the type
+of the collection itself, that is, the second type parameter that gets
+passed to implementation classes such as <code class="language-plaintext highlighter-rouge">TraversableLike</code> and
+<code class="language-plaintext highlighter-rouge">IndexedSeqLike</code>. The <code class="language-plaintext highlighter-rouge">map</code> method takes two more type parameters, <code class="language-plaintext highlighter-rouge">B</code> and
+<code class="language-plaintext highlighter-rouge">That</code>. The <code class="language-plaintext highlighter-rouge">B</code> parameter stands for the result type of the mapping
+function, which is also the element type of the new collection. The
+<code class="language-plaintext highlighter-rouge">That</code> appears as the result type of <code class="language-plaintext highlighter-rouge">map</code>, so it represents the type of
+the new collection that gets created.</p>
+
+<p>How is the <code class="language-plaintext highlighter-rouge">That</code> type determined? In fact it is linked to the other
+types by an implicit parameter <code class="language-plaintext highlighter-rouge">cbf</code>, of type <code class="language-plaintext highlighter-rouge">CanBuildFrom[Repr, B, That]</code>.
+These <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> implicits are defined by the individual
+collection classes. Recall that an implicit value of type
+<code class="language-plaintext highlighter-rouge">CanBuildFrom[Repr, B, That]</code> says: “Here is a way, given a collection
+of type <code class="language-plaintext highlighter-rouge">Repr</code> and new elements of type <code class="language-plaintext highlighter-rouge">B</code>, to build a collection of type
+<code class="language-plaintext highlighter-rouge">That</code> containing those elements”.</p>
+
+<p>Now the behavior of <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">++</code> on <code class="language-plaintext highlighter-rouge">RNA2</code> sequences becomes
+clearer. There is no <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instance that creates <code class="language-plaintext highlighter-rouge">RNA2</code>
+sequences, so the next best available <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> was found in the
+companion object of the inherited trait <code class="language-plaintext highlighter-rouge">IndexedSeq</code>. That implicit
+creates <code class="language-plaintext highlighter-rouge">Vector</code>s (recall that <code class="language-plaintext highlighter-rouge">Vector</code> is the default implementation
+of <code class="language-plaintext highlighter-rouge">IndexedSeq</code>), and that’s what you saw when applying <code class="language-plaintext highlighter-rouge">map</code> to
+<code class="language-plaintext highlighter-rouge">rna2</code>.</p>
+
+<h3 id="final-version-of-rna-strands-class">Final version of RNA strands class</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final class RNA private (val groups: Array[Int], val length: Int)
+  extends IndexedSeq[Base] with IndexedSeqLike[Base, RNA] {
+
+  import RNA._
+
+  // Mandatory re-implementation of `newBuilder` in `IndexedSeq`
+  override protected[this] def newBuilder: Builder[Base, RNA] =
+    RNA.newBuilder
+
+  // Mandatory implementation of `apply` in `IndexedSeq`
+  def apply(idx: Int): Base = {
+    if (idx &lt; 0 || length &lt;= idx)
+      throw new IndexOutOfBoundsException
+    Base.fromInt(groups(idx / N) &gt;&gt; (idx % N * S) &amp; M)
+  }
+
+  // Optional re-implementation of foreach,
+  // to make it more efficient.
+  override def foreach[U](f: Base =&gt; U): Unit = {
+    var i = 0
+    var b = 0
+    while (i &lt; length) {
+      b = if (i % N == 0) groups(i / N) else b &gt;&gt;&gt; S
+      f(Base.fromInt(b &amp; M))
+      i += 1
+    }
+  }
+}
+</code></pre></div></div>
+
+<h3 id="final-version-of-rna-companion-object">Final version of RNA companion object</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object RNA {
+
+  private val S = 2            // number of bits in group
+  private val M = (1 &lt;&lt; S) - 1 // bitmask to isolate a group
+  private val N = 32 / S       // number of groups in an Int
+
+  def fromSeq(buf: Seq[Base]): RNA = {
+    val groups = new Array[Int]((buf.length + N - 1) / N)
+    for (i &lt;- 0 until buf.length)
+      groups(i / N) |= Base.toInt(buf(i)) &lt;&lt; (i % N * S)
+    new RNA(groups, buf.length)
+  }
+
+  def apply(bases: Base*) = fromSeq(bases)
+
+  def newBuilder: Builder[Base, RNA] =
+    new ArrayBuffer mapResult fromSeq
+
+  implicit def canBuildFrom: CanBuildFrom[RNA, Base, RNA] =
+    new CanBuildFrom[RNA, Base, RNA] {
+      def apply(): Builder[Base, RNA] = newBuilder
+      def apply(from: RNA): Builder[Base, RNA] = newBuilder
+    }
+}
+</code></pre></div></div>
+
+<p>To address this shortcoming, you need to define an implicit instance
+of <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> in the companion object of the RNA class. That
+instance should have type <code class="language-plaintext highlighter-rouge">CanBuildFrom[RNA, Base, RNA]</code>. Hence, this
+instance states that, given an RNA strand and a new element type <code class="language-plaintext highlighter-rouge">Base</code>,
+you can build another collection which is again an RNA strand. The two
+listings above of <a href="#final-version-of-rna-strands-class">class <code class="language-plaintext highlighter-rouge">RNA</code></a> and
+<a href="#final-version-of-rna-companion-object">its companion object</a> show the
+details. Compared to <a href="#second-version-of-rna-strands-class">class <code class="language-plaintext highlighter-rouge">RNA2</code></a>
+there are two important
+differences. First, the <code class="language-plaintext highlighter-rouge">newBuilder</code> implementation has moved from the
+RNA class to its companion object. The <code class="language-plaintext highlighter-rouge">newBuilder</code> method in class <code class="language-plaintext highlighter-rouge">RNA</code>
+simply forwards to this definition. Second, there is now an implicit
+<code class="language-plaintext highlighter-rouge">CanBuildFrom</code> value in object <code class="language-plaintext highlighter-rouge">RNA</code>. To create this value you need to
+define two <code class="language-plaintext highlighter-rouge">apply</code> methods in the <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> trait. Both create a new
+builder for an <code class="language-plaintext highlighter-rouge">RNA</code> collection, but they differ in their argument
+list. The <code class="language-plaintext highlighter-rouge">apply()</code> method simply creates a new builder of the right
+type. By contrast, the <code class="language-plaintext highlighter-rouge">apply(from)</code> method takes the original
+collection as argument. This can be useful to adapt the dynamic type
+of builder’s return type to be the same as the dynamic type of the
+receiver. In the case of <code class="language-plaintext highlighter-rouge">RNA</code> this does not come into play because <code class="language-plaintext highlighter-rouge">RNA</code>
+is a final class, so any receiver of static type <code class="language-plaintext highlighter-rouge">RNA</code> also has <code class="language-plaintext highlighter-rouge">RNA</code> as
+its dynamic type. That’s why <code class="language-plaintext highlighter-rouge">apply(from)</code> also simply calls <code class="language-plaintext highlighter-rouge">newBuilder</code>,
+ignoring its argument.</p>
+
+<p>That is it. The final <a href="#final-version-of-rna-strands-class"><code class="language-plaintext highlighter-rouge">RNA</code> class</a>
+implements all collection methods at
+their expected types. Its implementation requires a little bit of
+protocol. In essence, you need to know where to put the <code class="language-plaintext highlighter-rouge">newBuilder</code>
+factories and the <code class="language-plaintext highlighter-rouge">canBuildFrom</code> implicits. On the plus side, with
+relatively little code you get a large number of methods automatically
+defined. Also, if you don’t intend to do bulk operations like <code class="language-plaintext highlighter-rouge">take</code>,
+<code class="language-plaintext highlighter-rouge">drop</code>, <code class="language-plaintext highlighter-rouge">map</code>, or <code class="language-plaintext highlighter-rouge">++</code> on your collection you can choose to not go the extra
+length and stop at the implementation shown in for <a href="#first-version-of-rna-strands-class">class <code class="language-plaintext highlighter-rouge">RNA1</code></a>.</p>
+
+<p>The discussion so far centered on the minimal amount of definitions
+needed to define new sequences with methods that obey certain
+types. But in practice you might also want to add new functionality to
+your sequences or to override existing methods for better
+efficiency. An example of this is the overridden <code class="language-plaintext highlighter-rouge">foreach</code> method in
+class <code class="language-plaintext highlighter-rouge">RNA</code>.  <code class="language-plaintext highlighter-rouge">foreach</code> is an important method in its own right because it
+implements loops over collections. Furthermore, many other collection
+methods are implemented in terms of <code class="language-plaintext highlighter-rouge">foreach</code>. So it makes sense to
+invest some effort optimizing the method’s implementation. The
+standard implementation of <code class="language-plaintext highlighter-rouge">foreach</code> in <code class="language-plaintext highlighter-rouge">IndexedSeq</code> will simply select
+every <code class="language-plaintext highlighter-rouge">i</code>‘th element of the collection using <code class="language-plaintext highlighter-rouge">apply</code>, where <code class="language-plaintext highlighter-rouge">i</code> ranges from
+0 to the collection’s length minus one. So this standard
+implementation selects an array element and unpacks a base from it
+once for every element in an RNA strand. The overriding <code class="language-plaintext highlighter-rouge">foreach</code> in
+class <code class="language-plaintext highlighter-rouge">RNA</code> is smarter than that. For every selected array element it
+immediately applies the given function to all bases contained in
+it. So the effort for array selection and bit unpacking is much
+reduced.</p>
+
+<h2 id="integrating-a-new-prefix-map">Integrating a new prefix map</h2>
+
+<p>As a second example you’ll learn how to integrate a new kind of map
+into the collection framework. The idea is to implement a mutable map
+with <code class="language-plaintext highlighter-rouge">String</code> as the type of keys by a “Patricia trie”. The term
+<em>Patricia</em> is in fact an abbreviation for “Practical Algorithm to
+Retrieve Information Coded in Alphanumeric” and <em>trie</em> comes from
+re<em>trie</em>val (a trie is also called a radix tree or prefix tree).
+The idea is to store a set or a map as a tree where subsequent
+characters in a search key
+uniquely determine a path through the tree. For instance a Patricia trie
+storing the strings “abc”, “abd”, “al”, “all” and “xy” would look
+like this:</p>
+
+<p>A sample patricia trie:
+<img src="/resources/images/patricia.png" width="550" /></p>
+
+<p>To find the node corresponding to the string “abc” in this trie,
+simply follow the subtree labeled “a”, proceed from there to the
+subtree labelled “b”, to finally reach its subtree labelled “c”. If
+the Patricia trie is used as a map, the value that’s associated with a
+key is stored in the nodes that can be reached by the key. If it is a
+set, you simply store a marker saying that the node is present in the
+set.</p>
+
+<p>Patricia tries support very efficient lookups and updates. Another
+nice feature is that they support selecting a subcollection by giving
+a prefix. For instance, in the patricia tree above you can obtain the
+sub-collection of all keys that start with an “a” simply by following
+the “a” link from the root of the tree.</p>
+
+<p>Based on these ideas we will now walk you through the implementation
+of a map that’s implemented as a Patricia trie. We call the map a
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>, which means that it provides a method <code class="language-plaintext highlighter-rouge">withPrefix</code> that
+selects a submap of all keys starting with a given prefix. We’ll first
+define a prefix map with the keys shown in the running example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val m = PrefixMap("abc" -&gt; 0, "abd" -&gt; 1, "al" -&gt; 2,
+  "all" -&gt; 3, "xy" -&gt; 4)
+m: PrefixMap[Int] = Map((abc,0), (abd,1), (al,2), (all,3), (xy,4))
+</code></pre></div></div>
+
+<p>Then calling <code class="language-plaintext highlighter-rouge">withPrefix</code> on <code class="language-plaintext highlighter-rouge">m</code> will yield another prefix map:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; m withPrefix "a"
+res14: PrefixMap[Int] = Map((bc,0), (bd,1), (l,2), (ll,3))
+</code></pre></div></div>
+
+<h3 id="patricia-trie-implementation">Patricia trie implementation</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection._
+
+class PrefixMap[T]
+extends mutable.Map[String, T]
+   with mutable.MapLike[String, T, PrefixMap[T]] {
+
+  var suffixes: immutable.Map[Char, PrefixMap[T]] = Map.empty
+  var value: Option[T] = None
+
+  def get(s: String): Option[T] =
+    if (s.isEmpty) value
+    else suffixes get (s(0)) flatMap (_.get(s substring 1))
+
+  def withPrefix(s: String): PrefixMap[T] =
+    if (s.isEmpty) this
+    else {
+      val leading = s(0)
+      suffixes get leading match {
+        case None =&gt;
+          suffixes = suffixes + (leading -&gt; empty)
+        case _ =&gt;
+      }
+      suffixes(leading) withPrefix (s substring 1)
+    }
+
+  override def update(s: String, elem: T) =
+    withPrefix(s).value = Some(elem)
+
+  override def remove(s: String): Option[T] =
+    if (s.isEmpty) { val prev = value; value = None; prev }
+    else suffixes get (s(0)) flatMap (_.remove(s substring 1))
+
+  def iterator: Iterator[(String, T)] =
+    (for (v &lt;- value.iterator) yield ("", v)) ++
+    (for ((chr, m) &lt;- suffixes.iterator;
+          (s, v) &lt;- m.iterator) yield (chr +: s, v))
+
+  def += (kv: (String, T)): this.type = { update(kv._1, kv._2); this }
+
+  def -= (s: String): this.type  = { remove(s); this }
+
+  override def empty = new PrefixMap[T]
+}
+</code></pre></div></div>
+
+<p>The previous listing shows the definition of <code class="language-plaintext highlighter-rouge">PrefixMap</code>. The map has
+keys of type <code class="language-plaintext highlighter-rouge">String</code> and the values are of parametric type <code class="language-plaintext highlighter-rouge">T</code>. It extends
+<code class="language-plaintext highlighter-rouge">mutable.Map[String, T]</code> and <code class="language-plaintext highlighter-rouge">mutable.MapLike[String, T, PrefixMap[T]]</code>.
+You have seen this pattern already for sequences in the
+RNA strand example; then as now inheriting an implementation class
+such as <code class="language-plaintext highlighter-rouge">MapLike</code> serves to get the right result type for
+transformations such as <code class="language-plaintext highlighter-rouge">filter</code>.</p>
+
+<p>A prefix map node has two mutable fields: <code class="language-plaintext highlighter-rouge">suffixes</code> and <code class="language-plaintext highlighter-rouge">value</code>. The
+<code class="language-plaintext highlighter-rouge">value</code> field contains an optional value that’s associated with the
+node. It is initialized to <code class="language-plaintext highlighter-rouge">None</code>. The <code class="language-plaintext highlighter-rouge">suffixes</code> field contains a map
+from characters to <code class="language-plaintext highlighter-rouge">PrefixMap</code> values. It is initialized to the empty
+map.</p>
+
+<p>You might ask why we picked an immutable map as the implementation
+type for <code class="language-plaintext highlighter-rouge">suffixes</code>? Would not a mutable map have been more standard,
+since <code class="language-plaintext highlighter-rouge">PrefixMap</code> as a whole is also mutable? The answer is that
+immutable maps that contain only a few elements are very efficient in
+both space and execution time. For instance, maps that contain fewer
+than 5 elements are represented as a single object. By contrast, the
+standard mutable map is a <code class="language-plaintext highlighter-rouge">HashMap</code>, which typically occupies around 80
+bytes, even if it is empty. So if small collections are common, it’s
+better to pick immutable over mutable. In the case of Patricia tries,
+we’d expect that most nodes except the ones at the very top of the
+tree would contain only a few successors. So storing these successors
+in an immutable map is likely to be more efficient.</p>
+
+<p>Now have a look at the first method that needs to be implemented for a
+map: <code class="language-plaintext highlighter-rouge">get</code>. The algorithm is as follows: To get the value associated
+with the empty string in a prefix map, simply select the optional
+<code class="language-plaintext highlighter-rouge">value</code> stored in the root of the tree (the current map).
+Otherwise, if the key string is
+not empty, try to select the submap corresponding to the first
+character of the string. If that yields a map, follow up by looking up
+the remainder of the key string after its first character in that
+map. If the selection fails, the key is not stored in the map, so
+return with <code class="language-plaintext highlighter-rouge">None</code>. The combined selection over an option value <code class="language-plaintext highlighter-rouge">opt</code> is
+elegantly expressed using <code class="language-plaintext highlighter-rouge">opt.flatMap(x =&gt; f(x))</code>. When applied to an
+optional value that is <code class="language-plaintext highlighter-rouge">None</code>, it returns <code class="language-plaintext highlighter-rouge">None</code>. Otherwise <code class="language-plaintext highlighter-rouge">opt</code> is
+<code class="language-plaintext highlighter-rouge">Some(x)</code> and the function <code class="language-plaintext highlighter-rouge">f</code> is applied to the encapsulated value <code class="language-plaintext highlighter-rouge">x</code>,
+yielding a new option, which is returned by the flatMap.</p>
+
+<p>The next two methods to implement for a mutable map are <code class="language-plaintext highlighter-rouge">+=</code> and <code class="language-plaintext highlighter-rouge">-=</code>. In
+the implementation of <code class="language-plaintext highlighter-rouge">PrefixMap</code>, these are defined in terms of two
+other methods: <code class="language-plaintext highlighter-rouge">update</code> and <code class="language-plaintext highlighter-rouge">remove</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">remove</code> method is very similar to <code class="language-plaintext highlighter-rouge">get</code>, except that before returning
+any associated value, the field containing that value is set to
+<code class="language-plaintext highlighter-rouge">None</code>. The <code class="language-plaintext highlighter-rouge">update</code> method first calls <code class="language-plaintext highlighter-rouge">withPrefix</code> to navigate to the tree
+node that needs to be updated, then sets the <code class="language-plaintext highlighter-rouge">value</code> field of that node
+to the given value. The <code class="language-plaintext highlighter-rouge">withPrefix</code> method navigates through the tree,
+creating sub-maps as necessary if some prefix of characters is not yet
+contained as a path in the tree.</p>
+
+<p>The last abstract method to implement for a mutable map is
+<code class="language-plaintext highlighter-rouge">iterator</code>. This method needs to produce an iterator that yields all
+key/value pairs stored in the map. For any given prefix map this
+iterator is composed of the following parts: First, if the map
+contains a defined value, <code class="language-plaintext highlighter-rouge">Some(x)</code>, in the <code class="language-plaintext highlighter-rouge">value</code> field at its root,
+then <code class="language-plaintext highlighter-rouge">("", x)</code> is the first element returned from the
+iterator. Furthermore, the iterator needs to traverse the iterators of
+all submaps stored in the <code class="language-plaintext highlighter-rouge">suffixes</code> field, but it needs to add a
+character in front of every key string returned by those
+iterators. More precisely, if <code class="language-plaintext highlighter-rouge">m</code> is the submap reached from the root
+through a character <code class="language-plaintext highlighter-rouge">chr</code>, and <code class="language-plaintext highlighter-rouge">(s, v)</code> is an element returned from
+<code class="language-plaintext highlighter-rouge">m.iterator</code>, then the root’s iterator will return <code class="language-plaintext highlighter-rouge">(chr +: s, v)</code>
+instead. This logic is implemented quite concisely as a concatenation
+of two <code class="language-plaintext highlighter-rouge">for</code> expressions in the implementation of the <code class="language-plaintext highlighter-rouge">iterator</code> method in
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>. The first <code class="language-plaintext highlighter-rouge">for</code> expression iterates over <code class="language-plaintext highlighter-rouge">value.iterator</code>. This
+makes use of the fact that <code class="language-plaintext highlighter-rouge">Option</code> values define an iterator method
+that returns either no element, if the option value is <code class="language-plaintext highlighter-rouge">None</code>, or
+exactly one element <code class="language-plaintext highlighter-rouge">x</code>, if the option value is <code class="language-plaintext highlighter-rouge">Some(x)</code>.</p>
+
+<p>Note that there is no <code class="language-plaintext highlighter-rouge">newBuilder</code> method defined in <code class="language-plaintext highlighter-rouge">PrefixMap</code>. There is
+no need to, because maps and sets come with default builders, which
+are instances of class <code class="language-plaintext highlighter-rouge">MapBuilder</code>. For a mutable map the default
+builder starts with an empty map and then adds successive elements
+using the map’s <code class="language-plaintext highlighter-rouge">+=</code> method. For immutable maps, the non-destructive
+element addition method <code class="language-plaintext highlighter-rouge">+</code> is used instead of method <code class="language-plaintext highlighter-rouge">+=</code>. Sets work
+in the same way.</p>
+
+<p>However, in all these cases, to build the right kind of collection
+you need to start with an empty collection of that kind. This is
+provided by the <code class="language-plaintext highlighter-rouge">empty</code> method, which is the last method defined in
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>. This method simply returns a fresh <code class="language-plaintext highlighter-rouge">PrefixMap</code>.</p>
+
+<h3 id="the-companion-object-for-prefix-maps">The companion object for prefix maps</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.collection.mutable.{Builder, MapBuilder}
+import scala.collection.generic.CanBuildFrom
+
+object PrefixMap extends {
+  def empty[T] = new PrefixMap[T]
+
+  def apply[T](kvs: (String, T)*): PrefixMap[T] = {
+    val m: PrefixMap[T] = empty
+    for (kv &lt;- kvs) m += kv
+    m
+  }
+
+  def newBuilder[T]: Builder[(String, T), PrefixMap[T]] =
+    new MapBuilder[String, T, PrefixMap[T]](empty)
+
+  implicit def canBuildFrom[T]
+    : CanBuildFrom[PrefixMap[_], (String, T), PrefixMap[T]] =
+      new CanBuildFrom[PrefixMap[_], (String, T), PrefixMap[T]] {
+        def apply(from: PrefixMap[_]) = newBuilder[T]
+        def apply() = newBuilder[T]
+      }
+}
+</code></pre></div></div>
+
+<p>We’ll now turn to the companion object <code class="language-plaintext highlighter-rouge">PrefixMap</code>. In fact it is not
+strictly necessary to define this companion object, as class <code class="language-plaintext highlighter-rouge">PrefixMap</code>
+can stand well on its own. The main purpose of object <code class="language-plaintext highlighter-rouge">PrefixMap</code> is to
+define some convenience factory methods. It also defines a
+<code class="language-plaintext highlighter-rouge">CanBuildFrom</code> implicit to make typing work out better.</p>
+
+<p>The two convenience methods are <code class="language-plaintext highlighter-rouge">empty</code> and <code class="language-plaintext highlighter-rouge">apply</code>. The same methods are
+present for all other collections in Scala’s collection framework so
+it makes sense to define them here, too. With the two methods, you can
+write <code class="language-plaintext highlighter-rouge">PrefixMap</code> literals like you do for any other collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; PrefixMap("hello" -&gt; 5, "hi" -&gt; 2)
+res0: PrefixMap[Int] = Map(hello -&gt; 5, hi -&gt; 2)
+
+scala&gt; PrefixMap.empty[String]
+res2: PrefixMap[String] = Map()
+</code></pre></div></div>
+
+<p>The other member in object <code class="language-plaintext highlighter-rouge">PrefixMap</code> is an implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>
+instance. It has the same purpose as the <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> definition in
+the <a href="#final-version-of-rna-companion-object"><code class="language-plaintext highlighter-rouge">RNA</code> companion object</a>
+from the last section: to make methods like <code class="language-plaintext highlighter-rouge">map</code> return the best possible
+type. For instance, consider mapping a function over the key/value
+pairs of a <code class="language-plaintext highlighter-rouge">PrefixMap</code>. As long as that function produces pairs of
+strings and some second type, the result collection will again be a
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>. Here’s an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; res0 map { case (k, v) =&gt; (k + "!", "x" * v) }
+res8: PrefixMap[String] = Map(hello! -&gt; xxxxx, hi! -&gt; xx)
+</code></pre></div></div>
+
+<p>The given function argument takes the key/value bindings of the prefix
+map <code class="language-plaintext highlighter-rouge">res0</code> and produces pairs of strings. The result of the <code class="language-plaintext highlighter-rouge">map</code> is a
+<code class="language-plaintext highlighter-rouge">PrefixMap</code>, this time with value type <code class="language-plaintext highlighter-rouge">String</code> instead of <code class="language-plaintext highlighter-rouge">Int</code>. Without
+the <code class="language-plaintext highlighter-rouge">canBuildFrom</code> implicit in <code class="language-plaintext highlighter-rouge">PrefixMap</code> the result would just have been
+a general mutable map, not a prefix map. For convenience, the <code class="language-plaintext highlighter-rouge">PrefixMap</code>
+object defines a <code class="language-plaintext highlighter-rouge">newBuilder</code> method, but it still just uses the
+default <code class="language-plaintext highlighter-rouge">MapBuilder</code>.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>To summarize, if you want to fully integrate a new collection class
+into the framework you need to pay attention to the following points:</p>
+
+<ol>
+  <li>Decide whether the collection should be mutable or immutable.</li>
+  <li>Pick the right base traits for the collection.</li>
+  <li>Inherit from the right implementation trait to implement most
+collection operations.</li>
+  <li>If you want <code class="language-plaintext highlighter-rouge">map</code> and similar operations to return instances of your
+collection type, provide an implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> in your class’s
+companion object.</li>
+</ol>
+
+<p>You have now seen how Scala’s collections are built and how you can
+add new kinds of collections. Because of Scala’s rich support for
+abstraction, each new collection type has a large number of
+methods without having to reimplement them all over again.</p>
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>These pages contain material adapted from the 2nd edition of
+<a href="https://www.artima.com/shop/programming_in_scala">Programming in Scala</a> by
+Odersky, Spoon and Venners. We thank Artima for graciously agreeing to its
+publication.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/architecture-of-scala-collections.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/core/architecture-of-scala-collections.html" class="lang">中文 (简体)</a></li>
+          
+      </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/architecture-of-scala-collections.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

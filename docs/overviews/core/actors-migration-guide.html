@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      The Scala Actors Migration Guide | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/core/actors-migration-guide.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="The Scala Actors Migration Guide"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="The Scala Actors Migration Guide"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>The Scala Actors Migration Guide</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Vojin Jovanovic and Philipp Haller</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Starting with Scala 2.11.0, the Scala
+<a href="actors.html">Actors</a>
+library is deprecated. Already in Scala 2.10.0 the default actor library is
+<a href="https://akka.io">Akka</a>.</p>
+
+<p>To ease the migration from Scala Actors to Akka we are providing the
+Actor Migration Kit (AMK). The AMK consists of an extension to Scala
+Actors which is enabled by including the <code class="language-plaintext highlighter-rouge">scala-actors-migration.jar</code>
+on a project’s classpath. In addition, Akka 2.1 includes features,
+such as the <code class="language-plaintext highlighter-rouge">ActorDSL</code> singleton, which enable a simpler conversion of
+code using Scala Actors to Akka. The purpose of this document is to
+guide users through the migration process and explain how to use the
+AMK.</p>
+
+<p>This guide has the following structure. In Section “Limitations of the
+Migration Kit” we outline the main limitations of the migration
+kit. In Section “Migration Overview” we describe the migration process
+and talk about changes in the <a href="https://www.scala-lang.org/downloads">Scala
+distribution</a> that make the
+migration possible. Finally, in Section “Step by Step Guide for
+Migrating to Akka” we show individual steps, with working examples,
+that are recommended when migrating from Scala Actors to Akka’s
+actors.</p>
+
+<p>A disclaimer: concurrent code is notorious for bugs that are hard to
+debug and fix.  Due to differences between the two actor
+implementations it is possible that errors appear. It is recommended
+to thoroughly test the code after each step of the migration process.</p>
+
+<h2 id="limitations-of-the-migration-kit">Limitations of the Migration Kit</h2>
+
+<p>Due to differences in Akka and Scala actor models the complete functionality can not be migrated smoothly. The following list explains parts of the behavior that are hard to migrate:</p>
+
+<ol>
+  <li>
+    <p>Relying on termination reason and bidirectional behavior with <code class="language-plaintext highlighter-rouge">link</code> method - Scala and Akka actors have different fault-handling and actor monitoring models.
+In Scala linked actors terminate if one of the linked parties terminates abnormally. If termination is tracked explicitly (by <code class="language-plaintext highlighter-rouge">self.trapExit</code>) the actor receives
+the termination reason from the failed actor. This functionality can not be migrated to Akka with the AMK. The AMK allows migration only for the
+<a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html#What_Lifecycle_Monitoring_Means">Akka monitoring</a>
+mechanism. Monitoring is different than linking because it is unidirectional and the termination reason is now known. If monitoring support is not enough, the migration
+of <code class="language-plaintext highlighter-rouge">link</code> must be postponed until the last possible moment (Step 5 of migration).
+Then, when moving to Akka, users must create an <a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html">supervision hierarchy</a> that will handle faults.</p>
+  </li>
+  <li>
+    <p>Usage of the <code class="language-plaintext highlighter-rouge">restart</code> method - Akka does not provide explicit restart of actors so we can not provide the smooth migration for this use-case.
+The user must change the system so there are no usages of the <code class="language-plaintext highlighter-rouge">restart</code> method.</p>
+  </li>
+  <li>
+    <p>Usage of method <code class="language-plaintext highlighter-rouge">getState</code> - Akka actors do not have explicit state so this functionality can not be migrated. The user code must not
+have <code class="language-plaintext highlighter-rouge">getState</code> invocations.</p>
+  </li>
+  <li>
+    <p>Not starting actors right after instantiation - Akka actors are automatically started when instantiated. Users will have to
+reshape their system so it starts all the actors right after their instantiation.</p>
+  </li>
+  <li>
+    <p>Method <code class="language-plaintext highlighter-rouge">mailboxSize</code> does not exist in Akka and therefore can not be migrated. This method is seldom used and can easily be removed.</p>
+  </li>
+</ol>
+
+<h2 id="migration-overview">Migration Overview</h2>
+
+<h3 id="migration-kit">Migration Kit</h3>
+<p>In Scala 2.10.0 actors reside inside the <a href="https://www.scala-lang.org/downloads">Scala distribution</a> as a separate jar ( <em>scala-actors.jar</em> ), and
+the their interface is deprecated. The distribution also includes Akka actors in the <em>akka-actor.jar</em>.
+The AMK resides both in the Scala actors and in the <em>akka-actor.jar</em>. Future major releases of Scala will not contain Scala actors and the AMK.</p>
+
+<p>To start the migration user needs to add the <em>scala-actors.jar</em> and the <em>scala-actors-migration.jar</em> to the build of their projects.
+Addition of <em>scala-actors.jar</em> and <em>scala-actors-migration.jar</em> enables the usage of the AMK described below.</p>
+
+<h3 id="step-by-step-migration">Step by Step Migration</h3>
+<p>Actor Migration Kit should be used in 5 steps. Each step is designed to introduce minimal changes
+to the code base and allows users to run all system tests after it. In the first four steps of the migration
+the code will use the Scala actors implementation. However, the methods and class signatures will be transformed to closely resemble Akka.
+The migration kit on the Scala side introduces a new actor type (<code class="language-plaintext highlighter-rouge">ActWithStash</code>) and enforces access to actors through the <code class="language-plaintext highlighter-rouge">ActorRef</code> interface.</p>
+
+<p>It also enforces creation of actors through special methods on the <code class="language-plaintext highlighter-rouge">ActorDSL</code> object. In these steps it will be possible to migrate one
+actor at a time. This reduces the possibility of complex errors that are caused by several bugs introduced at the same time.</p>
+
+<p>After the migration on the Scala side is complete the user should change import statements and change
+the library used to Akka. On the Akka side, the <code class="language-plaintext highlighter-rouge">ActorDSL</code> and the <code class="language-plaintext highlighter-rouge">ActWithStash</code> allow
+ modeling the <code class="language-plaintext highlighter-rouge">react</code> construct of Scala Actors and their life cycle. This step migrates all actors to the Akka back-end and could introduce bugs in the system. Once code is migrated to Akka, users will be able to use all the features of Akka.</p>
+
+<h2 id="step-by-step-guide-for-migrating-to-akka">Step by Step Guide for Migrating to Akka</h2>
+
+<p>In this chapter we will go through 5 steps of the actor migration. After each step the code can be tested for possible errors. In the first 4
+ steps one can migrate one actor at a time and test the functionality. However, the last step migrates all actors to Akka and it can be tested
+only as a whole. After this step the system should have the same functionality as before, however it will use the Akka actor library.</p>
+
+<h3 id="step-1---everything-as-an-actor">Step 1 - Everything as an Actor</h3>
+<p>The Scala actors library provides public access to multiple types of actors. They are organized in the class hierarchy and each subclass
+provides slightly richer functionality. To make further steps of the migration easier we will first change each actor in the system to be of type <code class="language-plaintext highlighter-rouge">Actor</code>.
+This migration step is straightforward since the <code class="language-plaintext highlighter-rouge">Actor</code> class is located at the bottom of the hierarchy and provides the broadest functionality.</p>
+
+<p>The Actors from the Scala library should be migrated according to the following rules:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">class MyServ extends Reactor[T]</code> -&gt; <code class="language-plaintext highlighter-rouge">class MyServ extends Actor</code></p>
+
+    <p>Note that <code class="language-plaintext highlighter-rouge">Reactor</code> provides an additional type parameter which represents the type of the messages received. If user code uses
+that information then one needs to: <em>i)</em> apply pattern matching with explicit type, or <em>ii)</em> do the downcast of a message from
+<code class="language-plaintext highlighter-rouge">Any</code> to the type <code class="language-plaintext highlighter-rouge">T</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">class MyServ extends ReplyReactor</code> -&gt; <code class="language-plaintext highlighter-rouge">class MyServ extends Actor</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">class MyServ extends DaemonActor</code> -&gt; <code class="language-plaintext highlighter-rouge">class MyServ extends Actor</code></p>
+
+    <p>To pair the functionality of the <code class="language-plaintext highlighter-rouge">DaemonActor</code> add the following line to the class definition.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> override def scheduler: IScheduler = DaemonScheduler
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="step-2---instantiations">Step 2 - Instantiations</h3>
+
+<p>In Akka, actors can be accessed only through the narrow interface called <code class="language-plaintext highlighter-rouge">ActorRef</code>. Instances of <code class="language-plaintext highlighter-rouge">ActorRef</code> can be acquired either
+by invoking an <code class="language-plaintext highlighter-rouge">actor</code> method on the <code class="language-plaintext highlighter-rouge">ActorDSL</code> object or through the <code class="language-plaintext highlighter-rouge">actorOf</code> method on an instance of an <code class="language-plaintext highlighter-rouge">ActorRefFactory</code>.
+In the Scala side of AMK we provide a subset of the Akka <code class="language-plaintext highlighter-rouge">ActorRef</code> and the <code class="language-plaintext highlighter-rouge">ActorDSL</code> which is the actual singleton object in the Akka library.</p>
+
+<p>This step of the migration makes all accesses to actors through <code class="language-plaintext highlighter-rouge">ActorRef</code>s. First, we show how to migrate common patterns for instantiating
+Scala <code class="language-plaintext highlighter-rouge">Actor</code>s. Then we show how to overcome issues with the different interfaces of <code class="language-plaintext highlighter-rouge">ActorRef</code> and <code class="language-plaintext highlighter-rouge">Actor</code>, respectively.</p>
+
+<h4 id="actor-instantiation">Actor Instantiation</h4>
+
+<p>The translation rules for actor instantiation (the following rules require importing <code class="language-plaintext highlighter-rouge">scala.actors.migration._</code>):</p>
+
+<ol>
+  <li>
+    <p>Constructor Call Instantiation</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> val myActor = new MyActor(arg1, arg2)
+ myActor.start()
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ActorDSL.actor(new MyActor(arg1, arg2))
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>DSL for Creating Actors</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> val myActor = actor {
+   // actor definition
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> val myActor = ActorDSL.actor(new Actor {
+    def act() {
+      // actor definition
+    }
+ })
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Object Extended from the <code class="language-plaintext highlighter-rouge">Actor</code> Trait</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> object MyActor extends Actor {
+   // MyActor definition
+ }
+ MyActor.start()
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> class MyActor extends Actor {
+   // MyActor definition
+ }
+
+ object MyActor {
+   val ref = ActorDSL.actor(new MyActor)
+ }
+</code></pre></div>    </div>
+
+    <p>All accesses to the object <code class="language-plaintext highlighter-rouge">MyActor</code> should be replaced with accesses to <code class="language-plaintext highlighter-rouge">MyActor.ref</code>.</p>
+  </li>
+</ol>
+
+<p>Note that Akka actors are always started on instantiation. In case actors in the migrated
+ system are created and started at different locations, and changing this can affect the behavior of the system,
+users need to change the code so actors are started right after instantiation.</p>
+
+<p>Remote actors also need to be fetched as <code class="language-plaintext highlighter-rouge">ActorRef</code>s. To get an <code class="language-plaintext highlighter-rouge">ActorRef</code> of an remote actor use the method <code class="language-plaintext highlighter-rouge">selectActorRef</code>.</p>
+
+<h4 id="different-method-signatures">Different Method Signatures</h4>
+
+<p>At this point we have changed all the actor instantiations to return <code class="language-plaintext highlighter-rouge">ActorRef</code>s, however, we are not done yet.
+There are differences in the interface of <code class="language-plaintext highlighter-rouge">ActorRef</code>s and <code class="language-plaintext highlighter-rouge">Actor</code>s so we need to change the methods invoked on each migrated instance.
+Unfortunately, some of the methods that Scala <code class="language-plaintext highlighter-rouge">Actor</code>s provide can not be migrated. For the following methods users need to find a workaround:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getState()</code> - actors in Akka are managed by their supervising actors and are restarted by default.
+In that scenario state of an actor is not relevant.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">restart()</code> - explicitly restarts a Scala actor. There is no corresponding functionality in Akka.</p>
+  </li>
+</ol>
+
+<p>All other <code class="language-plaintext highlighter-rouge">Actor</code> methods need to be translated to two methods that exist on the ActorRef. The translation is achieved by the rules described below.
+Note that all the rules require the following imports:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.concurrent.duration._
+import scala.actors.migration.pattern.ask
+import scala.actors.migration._
+import scala.concurrent._
+</code></pre></div></div>
+
+<p>Additionally rules 1-3 require an implicit <code class="language-plaintext highlighter-rouge">Timeout</code> with infinite duration defined in the scope. However, since Akka does not allow for infinite timeouts, we will use
+100 years. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit val timeout = Timeout(36500 days)
+</code></pre></div></div>
+
+<p>Rules:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">!!(msg: Any): Future[Any]</code> gets replaced with <code class="language-plaintext highlighter-rouge">?</code>. This rule will change a return type to the <code class="language-plaintext highlighter-rouge">scala.concurrent.Future</code> which might not type check.
+Since <code class="language-plaintext highlighter-rouge">scala.concurrent.Future</code> has broader functionality than the previously returned one, this type error can be easily fixed with local changes:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> actor !! message -&gt; respActor ? message
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">!![A] (msg: Any, handler: PartialFunction[Any, A]): Future[A]</code> gets replaced with <code class="language-plaintext highlighter-rouge">?</code>. The handler can be extracted as a separate
+function and then applied to the generated future result. The result of a handle should yield another future like
+in the following example:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> val handler: PartialFunction[Any, T] =  ... // handler
+ actor !! (message, handler) -&gt; (respActor ? message) map handler
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">!? (msg: Any): Any</code> gets replaced with <code class="language-plaintext highlighter-rouge">?</code> and explicit blocking on the returned future:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> actor !? message -&gt;
+   Await.result(respActor ? message, Duration.Inf)
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">!? (msec: Long, msg: Any): Option[Any]</code> gets replaced with <code class="language-plaintext highlighter-rouge">?</code> and explicit blocking on the future:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> actor !? (dur, message) -&gt;
+   val res = respActor.?(message)(Timeout(dur milliseconds))
+   val optFut = res map (Some(_)) recover { case _ =&gt; None }
+   Await.result(optFut, Duration.Inf)
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Public methods that are not mentioned here are declared public for purposes of the actors DSL. They can be used only
+inside the actor definition so their migration is not relevant in this step.</p>
+
+<h3 id="step-3---actors-become-actwithstashs">Step 3 - <code class="language-plaintext highlighter-rouge">Actor</code>s become <code class="language-plaintext highlighter-rouge">ActWithStash</code>s</h3>
+
+<p>At this point all actors inherit the <code class="language-plaintext highlighter-rouge">Actor</code> trait, we instantiate actors through special factory methods,
+and all actors are accessed through the <code class="language-plaintext highlighter-rouge">ActorRef</code> interface.
+Now we need to change all actors to the <code class="language-plaintext highlighter-rouge">ActWithStash</code> class from the AMK. This class behaves exactly the same like Scala <code class="language-plaintext highlighter-rouge">Actor</code>
+but, additionally, provides methods that correspond to methods in Akka’s <code class="language-plaintext highlighter-rouge">Actor</code> trait. This allows easy, step by step, migration to the Akka behavior.</p>
+
+<p>To achieve this all classes that extend <code class="language-plaintext highlighter-rouge">Actor</code> should extend the <code class="language-plaintext highlighter-rouge">ActWithStash</code>. Apply the
+following rule:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MyActor extends Actor -&gt; class MyActor extends ActWithStash
+</code></pre></div></div>
+
+<p>After this change code might not compile. The <code class="language-plaintext highlighter-rouge">receive</code> method exists in <code class="language-plaintext highlighter-rouge">ActWithStash</code> and can not be used in the body of the <code class="language-plaintext highlighter-rouge">act</code> as is. To redirect the compiler to the previous method
+add the type parameter to all <code class="language-plaintext highlighter-rouge">receive</code> calls in your system. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>receive { case x: Int =&gt; "Number" } -&gt;
+  receive[String] { case x: Int =&gt; "Number" }
+</code></pre></div></div>
+
+<p>Additionally, to make the code compile, users must add the <code class="language-plaintext highlighter-rouge">override</code> keyword before the <code class="language-plaintext highlighter-rouge">act</code> method, and to create
+the empty <code class="language-plaintext highlighter-rouge">receive</code> method in the code. Method <code class="language-plaintext highlighter-rouge">act</code> needs to be overridden since its implementation in <code class="language-plaintext highlighter-rouge">ActWithStash</code>
+mimics the message processing loop of Akka. The changes are shown in the following example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MyActor extends ActWithStash {
+
+   // dummy receive method (not used for now)
+   def receive = {case _ =&gt; }
+
+   override def act() {
+     // old code with methods receive changed to react.
+   }
+}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ActWithStash</code> instances have variable <code class="language-plaintext highlighter-rouge">trapExit</code> set to <code class="language-plaintext highlighter-rouge">true</code> by default. If that is not desired set it to <code class="language-plaintext highlighter-rouge">false</code> in the initializer of the class.</p>
+
+<p>The remote actors will not work with <code class="language-plaintext highlighter-rouge">ActWithStash</code> out of the box. The method <code class="language-plaintext highlighter-rouge">register('name, this)</code> needs to be replaced with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>registerActorRef('name, self)
+</code></pre></div></div>
+
+<p>In later steps of the migration, calls to <code class="language-plaintext highlighter-rouge">registerActorRef</code> and <code class="language-plaintext highlighter-rouge">alive</code> should be treated like any other calls.</p>
+
+<p>After this point user can run the test suite and the whole system should behave as before. The <code class="language-plaintext highlighter-rouge">ActWithStash</code> and <code class="language-plaintext highlighter-rouge">Actor</code> use the same infrastructure so the system
+should behave exactly the same.</p>
+
+<h3 id="step-4---removing-the-act-method">Step 4 - Removing the <code class="language-plaintext highlighter-rouge">act</code> Method</h3>
+
+<p>In this section we describe how to remove the <code class="language-plaintext highlighter-rouge">act</code> method from <code class="language-plaintext highlighter-rouge">ActWithStash</code>s and how to
+change the methods used in the <code class="language-plaintext highlighter-rouge">ActWithStash</code> to resemble Akka. Since this step can be complex, it is recommended
+to do changes one actor at a time. In Scala, an actor’s behavior is defined by implementing the <code class="language-plaintext highlighter-rouge">act</code> method. Logically, an actor is a concurrent process
+which executes the body of its <code class="language-plaintext highlighter-rouge">act</code> method, and then terminates. In Akka, the behavior is defined by using a global message
+handler which processes the messages in the actor’s mailbox one by one. The message handler is a partial function, returned by the <code class="language-plaintext highlighter-rouge">receive</code> method,
+which gets applied to each message.</p>
+
+<p>Since the behavior of Akka methods in the <code class="language-plaintext highlighter-rouge">ActWithStash</code> depends on the removal of the <code class="language-plaintext highlighter-rouge">act</code> method we have to do that first. Then we will give the translation
+rules for translating individual methods of the <code class="language-plaintext highlighter-rouge">scala.actors.Actor</code> trait.</p>
+
+<h4 id="removal-of-act">Removal of <code class="language-plaintext highlighter-rouge">act</code></h4>
+
+<p>In the following list we present the translation rules for common message processing patterns. This list is not
+exhaustive and it covers only some common patterns. However, users can migrate more complex <code class="language-plaintext highlighter-rouge">act</code> methods to Akka by looking
+ at existing translation rules and extending them for more complex situations.</p>
+
+<p>A note about nested <code class="language-plaintext highlighter-rouge">react</code>/<code class="language-plaintext highlighter-rouge">reactWithin</code> calls: the message handling
+partial function needs to be expanded with additional constructs that
+bring it closer to the Akka model. Although these changes can be
+complicated, migration is possible for an arbitrary level of
+nesting. See below for examples.</p>
+
+<p>A note about using <code class="language-plaintext highlighter-rouge">receive</code>/<code class="language-plaintext highlighter-rouge">receiveWithin</code> with complex control
+flow: migration can be complicated since it requires refactoring the
+<code class="language-plaintext highlighter-rouge">act</code> method. A <code class="language-plaintext highlighter-rouge">receive</code> call can be modeled using <code class="language-plaintext highlighter-rouge">react</code> and
+<code class="language-plaintext highlighter-rouge">andThen</code> on the message processing partial function. Again, simple
+examples are shown below.</p>
+
+<ol>
+  <li>
+    <p>If there is any code in the <code class="language-plaintext highlighter-rouge">act</code> method that is being executed before the first <code class="language-plaintext highlighter-rouge">loop</code> with <code class="language-plaintext highlighter-rouge">react</code> that code
+should be moved to the <code class="language-plaintext highlighter-rouge">preStart</code> method.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def act() {
+   // initialization code here
+   loop {
+     react { ... }
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> override def preStart() {
+   // initialization code here
+ }
+
+ def act() {
+   loop {
+     react{ ... }
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>This rule should be used in other patterns as well if there is code before the first react.</p>
+  </li>
+  <li>
+    <p>When <code class="language-plaintext highlighter-rouge">act</code> is in the form of a simple <code class="language-plaintext highlighter-rouge">loop</code> with a nested <code class="language-plaintext highlighter-rouge">react</code> use the following pattern.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def act() = {
+   loop {
+     react {
+       // body
+     }
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def receive = {
+   // body
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>When <code class="language-plaintext highlighter-rouge">act</code> contains a <code class="language-plaintext highlighter-rouge">loopWhile</code> construct use the following translation.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def act() = {
+   loopWhile(c) {
+     react {
+       case x: Int =&gt;
+         // do task
+         if (x == 42) {
+           c = false
+         }
+     }
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def receive = {
+   case x: Int =&gt;
+     // do task
+     if (x == 42) {
+       context.stop(self)
+     }
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>When <code class="language-plaintext highlighter-rouge">act</code> contains nested <code class="language-plaintext highlighter-rouge">react</code>s use the following rule:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def act() = {
+   var c = true
+   loopWhile(c) {
+   react {
+     case x: Int =&gt;
+       // do task
+       if (x == 42) {
+         c = false
+       } else {
+         react {
+           case y: String =&gt;
+             // do nested task
+         }
+       }
+     }
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def receive = {
+   case x: Int =&gt;
+     // do task
+     if (x == 42) {
+       context.stop(self)
+     } else {
+       context.become(({
+         case y: String =&gt;
+         // do nested task
+       }: Receive).andThen(x =&gt; {
+         unstashAll()
+         context.unbecome()
+      }).orElse { case x =&gt; stash(x) })
+     }
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>For <code class="language-plaintext highlighter-rouge">reactWithin</code> method use the following translation rule:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> loop {
+   reactWithin(t) {
+     case TIMEOUT =&gt; // timeout processing code
+     case msg =&gt; // message processing code
+   }
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> import scala.concurrent.duration._
+
+ context.setReceiveTimeout(t millisecond)
+ def receive = {
+   case ReceiveTimeout =&gt; // timeout processing code
+   case msg =&gt; // message processing code
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Exception handling is done in a different way in Akka. To mimic Scala actors behavior apply the following rule</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def act() = {
+   loop {
+     react {
+       case msg =&gt;
+       // work that can fail
+     }
+   }
+ }
+
+ override def exceptionHandler = {
+   case x: Exception =&gt; println("got exception")
+ }
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> def receive = PFCatch({
+   case msg =&gt;
+     // work that can fail
+ }, { case x: Exception =&gt; println("got exception") })
+</code></pre></div>    </div>
+
+    <p>where <code class="language-plaintext highlighter-rouge">PFCatch</code> is defined as</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> class PFCatch(f: PartialFunction[Any, Unit],
+   handler: PartialFunction[Exception, Unit])
+   extends PartialFunction[Any, Unit] {
+
+   def apply(x: Any) = {
+     try {
+       f(x)
+     } catch {
+       case e: Exception if handler.isDefinedAt(e) =&gt;
+         handler(e)
+     }
+   }
+
+   def isDefinedAt(x: Any) = f.isDefinedAt(x)
+ }
+
+ object PFCatch {
+   def apply(f: PartialFunction[Any, Unit],
+     handler: PartialFunction[Exception, Unit]) =
+       new PFCatch(f, handler)
+ }
+</code></pre></div>    </div>
+
+    <p><code class="language-plaintext highlighter-rouge">PFCatch</code> is not included in the AMK as it can stay as the permanent feature in the migrated code
+and the AMK will be removed with the next major release. Once the whole migration is complete fault-handling
+ can also be converted to the Akka <a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html#What_Supervision_Means">supervision</a>.</p>
+  </li>
+</ol>
+
+<h4 id="changing-actor-methods">Changing <code class="language-plaintext highlighter-rouge">Actor</code> Methods</h4>
+
+<p>After we have removed the <code class="language-plaintext highlighter-rouge">act</code> method we should rename the methods that do not exist in Akka but have similar functionality. In the following list we present
+the list of differences and their translation:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">exit()</code>/<code class="language-plaintext highlighter-rouge">exit(reason)</code> - should be replaced with <code class="language-plaintext highlighter-rouge">context.stop(self)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">receiver</code> - should be replaced with <code class="language-plaintext highlighter-rouge">self</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">reply(msg)</code> - should be replaced with <code class="language-plaintext highlighter-rouge">sender ! msg</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">link(actor)</code> - In Akka, linking of actors is done partially by <a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html#What_Supervision_Means">supervision</a>
+and partially by <a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html#What_Lifecycle_Monitoring_Means">actor monitoring</a>. In the AMK we support
+only the monitoring method so the complete Scala functionality can not be migrated.</p>
+
+    <p>The difference between linking and watching is that watching actors always receive the termination notification.
+However, instead of matching on the Scala <code class="language-plaintext highlighter-rouge">Exit</code> message that contains the reason of termination the Akka watching
+returns the <code class="language-plaintext highlighter-rouge">Terminated(a: ActorRef)</code> message that contains only the <code class="language-plaintext highlighter-rouge">ActorRef</code>. The functionality of getting the reason
+ for termination is not supported by the migration. It can be done in Akka, after the Step 4, by organizing the actors in a <a href="https://doc.akka.io/docs/akka/2.1.0/general/supervision.html">supervision hierarchy</a>.</p>
+
+    <p>If the actor that is watching does not match the <code class="language-plaintext highlighter-rouge">Terminated</code> message, and this message arrives, it will be terminated with the <code class="language-plaintext highlighter-rouge">DeathPactException</code>.
+Note that this will happen even when the watched actor terminated normally. In Scala linked actors terminate, with the same termination reason, only if
+one of the actors terminates abnormally.</p>
+
+    <p>If the system can not be migrated solely with <code class="language-plaintext highlighter-rouge">watch</code> the user should leave invocations to <code class="language-plaintext highlighter-rouge">link</code> and <code class="language-plaintext highlighter-rouge">exit(reason)</code> as is. However since <code class="language-plaintext highlighter-rouge">act()</code> overrides the <code class="language-plaintext highlighter-rouge">Exit</code> message the following transformation
+needs to be applied:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> case Exit(actor, reason) =&gt;
+   println("sorry about your " + reason)
+   ...
+</code></pre></div>    </div>
+
+    <p>should be replaced with</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> case t @ Terminated(actorRef) =&gt;
+   println("sorry about your " + t.reason)
+   ...
+</code></pre></div>    </div>
+
+    <p>NOTE: There is another subtle difference between Scala and Akka actors. In Scala, <code class="language-plaintext highlighter-rouge">link</code>/<code class="language-plaintext highlighter-rouge">watch</code> to the already dead actor will not have affect.
+In Akka, watching the already dead actor will result in sending the <code class="language-plaintext highlighter-rouge">Terminated</code> message. This can give unexpected behavior in the Step 5 of the migration guide.</p>
+  </li>
+</ol>
+
+<h3 id="step-5---moving-to-the-akka-back-end">Step 5 - Moving to the Akka Back-end</h3>
+
+<p>At this point user code is ready to operate on Akka actors. Now we can switch the actors library from Scala to
+Akka actors. To do this configure the build to exclude the <code class="language-plaintext highlighter-rouge">scala-actors.jar</code> and the <code class="language-plaintext highlighter-rouge">scala-actors-migration.jar</code>,
+ and to include <em>akka-actor.jar</em> and <em>typesafe-config.jar</em>. The AMK is built to work only with Akka actors version 2.1 which are included in the <a href="https://www.scala-lang.org/downloads">Scala distribution</a>
+  and can be configured by these <a href="https://doc.akka.io/docs/akka/2.1.0/intro/getting-started.html#Using_a_build_tool">instructions</a>.</p>
+
+<p>After this change the compilation will fail due to different package names and slight differences in the API. We will have to change each imported actor
+from scala to Akka. Following is the non-exhaustive list of package names that need to be changed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala.actors._ -&gt; akka.actor._
+scala.actors.migration.ActWithStash -&gt; akka.actor.ActorDSL._
+scala.actors.migration.pattern.ask -&gt; akka.pattern.ask
+scala.actors.migration.Timeout -&gt; akka.util.Timeout
+</code></pre></div></div>
+
+<p>Also, method declarations <code class="language-plaintext highlighter-rouge">def receive =</code> in <code class="language-plaintext highlighter-rouge">ActWithStash</code> should be prepended with <code class="language-plaintext highlighter-rouge">override</code>.</p>
+
+<p>In Scala actors the <code class="language-plaintext highlighter-rouge">stash</code> method needs a message as a parameter. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def receive = {
+  ...
+  case x =&gt; stash(x)
+}
+</code></pre></div></div>
+
+<p>In Akka only the currently processed message can be stashed. Therefore replace the above example with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def receive = {
+  ...
+  case x =&gt; stash()
+}
+</code></pre></div></div>
+
+<h4 id="adding-actor-systems">Adding Actor Systems</h4>
+
+<p>The Akka actors are organized in <a href="https://doc.akka.io/docs/akka/2.1.0/general/actor-systems.html">Actor systems</a>.
+ Each actor that is instantiated must belong to one <code class="language-plaintext highlighter-rouge">ActorSystem</code>. To achieve this add an <code class="language-plaintext highlighter-rouge">ActorSystem</code> instance to each actor instantiation call as a first argument. The following example shows the transformation.</p>
+
+<p>To achieve this transformation you need to have an actor system instantiated. The actor system is usually instantiated in Scala objects or configuration classes that are global to your system. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val system = ActorSystem("migration-system")
+</code></pre></div></div>
+
+<p>Then apply the following transformation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ActorDSL.actor(...) -&gt; ActorDSL.actor(system)(...)
+</code></pre></div></div>
+
+<p>If many calls to <code class="language-plaintext highlighter-rouge">actor</code> use the same <code class="language-plaintext highlighter-rouge">ActorSystem</code> it can be passed as an implicit parameter. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ActorDSL.actor(...) -&gt;
+  import project.implicitActorSystem
+  ActorDSL.actor(...)
+</code></pre></div></div>
+
+<p>Finally, Scala programs are terminating when all the non-daemon threads and actors finish. With Akka the program ends when all the non-daemon threads finish and all actor systems are shut down.
+ Actor systems need to be explicitly terminated before the program can exit. This is achieved by invoking the <code class="language-plaintext highlighter-rouge">shutdown</code> method on an Actor system.</p>
+
+<h4 id="remote-actors">Remote Actors</h4>
+
+<p>Once the code base is moved to Akka remoting will not work any more. The methods <code class="language-plaintext highlighter-rouge">registerActorFor</code> and <code class="language-plaintext highlighter-rouge">alive</code> need to be removed. In Akka, remoting is done solely by configuration and
+for further details refer to the <a href="https://doc.akka.io/docs/akka/2.1.0/scala/remoting.html">Akka remoting documentation</a>.</p>
+
+<h4 id="examples-and-issues">Examples and Issues</h4>
+<p>All of the code snippets presented in this document can be found in the <a href="https://github.com/scala/actors-migration/tree/master/src/test/">Actors Migration test suite</a> as test files with the prefix <code class="language-plaintext highlighter-rouge">actmig</code>.</p>
+
+<p>This document and the Actor Migration Kit were designed and implemented by: <a href="https://people.epfl.ch/vojin.jovanovic">Vojin Jovanovic</a> and <a href="https://lampwww.epfl.ch/~phaller/">Philipp Haller</a></p>
+
+<p>If you find any issues or rough edges please report them at the <a href="https://github.com/scala/actors-migration/issues">Scala Bugtracker</a>.</p>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/actors-migration-guide.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/core/actors-migration-guide.html" class="lang">中文 (简体)</a></li>
+          
+      </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/core/actors-migration-guide.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Value Classes and Universal Traits | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/zh-cn/overviews/core/value-classes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Value Classes and Universal Traits"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Value Classes and Universal Traits"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/zh-cn">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/zh-cn/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/zh-cn/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/zh-cn/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Value Classes and Universal Traits</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Mark Harrah 著</strong></p>
+
+<h2 id="引言">引言</h2>
+
+<p>Value classes是在<a href="https://docs.scala-lang.org/sips/pending/value-classes.html">SIP-15</a>中提出的一种通过继承AnyVal类来避免运行时对象分配的新机制。以下是一个最简的value class。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Wrapper(val underlying: Int) extends AnyVal
+</code></pre></div></div>
+
+<p>它仅有一个被用作运行时底层表示的公有val参数。在编译期，其类型为Wrapper，但在运行时，它被表示为一个Int。Value class可以带有def定义，但不能再定义额外的val、var，以及内嵌的trait、class或object：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Wrapper(val underlying: Int) extends AnyVal {
+  def foo: Wrapper = new Wrapper(underlying * 19)
+}
+</code></pre></div></div>
+
+<p>Value class只能继承universal traits，但其自身不能再被继承。所谓universal trait就是继承自Any的、只有def成员，且不作任何初始化工作的trait。继承自某个universal trait的value class同时继承了该trait的方法，但是（调用这些方法）会带来一定的对象分配开销。例如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Printable extends Any {
+  def print(): Unit = println(this)
+}
+class Wrapper(val underlying: Int) extends AnyVal with Printable
+
+val w = new Wrapper(3)
+w.print() // 这里实际上会生成一个Wrapper类的实例
+</code></pre></div></div>
+
+<p>本文后续篇幅将介绍相关用例和与对象分配时机相关的细节，并给出一些有关value class自身限制的具体实例。</p>
+
+<h2 id="扩展方法">扩展方法</h2>
+
+<p>关于value类的一个用例，是将它们和隐含类联合（<a href="https://docs.scala-lang.org/sips/pending/implicit-classes.html">SIP-13</a>）以获得免分配扩展方法。使用隐含类可以提供便捷的语法来定义扩展方法，同时 value 类移除运行时开销。一个好的例子是在标准库里的RichInt类。RichInt 继承自Int类型并附带一些方法。由于它是一个 value类，使用RichInt 方法时不需要创建一个RichInt 的实例。</p>
+
+<p>下面有关RichInt的代码片段示范了RichInt是如何继承Int来允许3.toHexString的表达式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit class RichInt(val self: Int) extends AnyVal {
+  def toHexString: String = java.lang.Integer.toHexString(self)
+}
+</code></pre></div></div>
+
+<p>在运行时，表达式3.toHexString 被优化并等价于静态对象的方法调用 （RichInt$.MODULE$.extension$toHexString(3)），而不是创建一个新实例对象，再调用其方法。</p>
+
+<h2 id="正确性">正确性</h2>
+
+<p>关于value类的另一个用例是：不增加运行时开销的同时，获得数据类型的类型安全。例如，一个数据类型片断代表一个距离 ，如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Meter(val value: Double) extends AnyVal {
+  def +(m: Meter): Meter = new Meter(value + m.value)
+}
+</code></pre></div></div>
+
+<p>代码：对两个距离进行相加，例如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val x = new Meter(3.4)
+val y = new Meter(4.3)
+val z = x + y
+</code></pre></div></div>
+
+<p>实际上不会分配任何Meter实例，而是在运行时仅使用原始双精浮点数（double） 。</p>
+
+<p>注意：在实践中，可以使用条件类（case）and/or 扩展方法来让语句更清晰。</p>
+
+<h2 id="必须进行分配的情况">必须进行分配的情况</h2>
+
+<p>由于JVM不支持value类，Scala 有时需要真正实例化value类。详细细节见[SIP-15]。</p>
+
+<h3 id="分配概要">分配概要</h3>
+
+<p>value类在以下情况下，需要真正实例化：</p>
+
+<ol>
+  <li>value类作为另一种类型使用时。</li>
+  <li>value类被赋值给数组。</li>
+  <li>执行运行时类型测试，例如模式匹配。</li>
+</ol>
+
+<h3 id="分配细节">分配细节</h3>
+
+<p>无论何时，将value类作为另一种类型进行处理时（包括universal trait），此value类实例必须被实例化。例如，value类Meter ：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait Distance extends Any
+case class Meter(val value: Double) extends AnyVal with Distance
+</code></pre></div></div>
+
+<p>接收Distance类型值的方法需要一个正真的Meter实例。下面的例子中，Meter类真正被实例化。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def add(a: Distance, b: Distance): Distance = ...
+add(Meter(3.4), Meter(4.3))
+</code></pre></div></div>
+
+<p>如果替换add方法的签名：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def add(a: Meter, b: Meter): Meter = ...
+</code></pre></div></div>
+
+<p>那么就不必进行分配了。此规则的另一个例子是value类作为类型参数使用。例如：即使是调用identity方法，也必须创建真正的Meter实例。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def identity[T](t: T): T = t
+identity(Meter(5.0))
+</code></pre></div></div>
+
+<p>必须进行分配的另一种情况是：将它赋值给数组。即使这个数组就是value类数组，例如：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val m = Meter(5.0)
+val array = Array[Meter](m)
+</code></pre></div></div>
+
+<p>数组中包含了真正的Meter 实例，并不只是底层基本类型double。</p>
+
+<p>最后是类型测试。例如，模式匹配中的处理以及asInstanceOf方法都要求一个真正的value类实例：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case class P(val i: Int) extends AnyVal
+
+val p = new P(3)
+p match { // 在这里，新的P实例被创建
+  case P(3) =&gt; println("Matched 3")
+  case P(x) =&gt; println("Not 3")
+}
+</code></pre></div></div>
+
+<h2 id="限制">限制</h2>
+
+<p>目前Value类有一些限制，部分原因是JVM不提供value类概念的原生支持。value类的完整实现细节及其限制见[SIP-15]。</p>
+
+<h3 id="限制概要">限制概要</h3>
+
+<p>一个value类 …</p>
+
+<ol>
+  <li>… 必须只有一个主构造器。该构造器有且仅有一个public修饰的不可变（val）参数，且参数的类型不是用户自定义的value类。</li>
+  <li>… 不能有特殊的类型参数。</li>
+  <li>… 不能有嵌套或局部的类、特质或对象。</li>
+  <li>… 不能定义equals或hashCode方法。</li>
+  <li>… 必须是一个顶级类，或静态访问对象的一个成员。</li>
+  <li>… 仅能有def为成员。尤其是，成员不能有惰性val、val或者var。</li>
+  <li>… 不能被其它类继承。</li>
+</ol>
+
+<h3 id="限制示例">限制示例</h3>
+
+<p>本章节列出了许多限制下具体影响， 而在“必要分配”章节已提及的部分则不再敖述。</p>
+
+<p>构造函数不允许有多个参数：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Complex(val real: Double, val imag: Double) extends AnyVal
+</code></pre></div></div>
+
+<p>则Scala编译器将生成以下的错误信息：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Complex.scala:1: error: value class needs to have exactly one public val parameter
+（Complex.scala:1: 错误：value类只能有一个public的val参数。）
+（译者注：鉴于实际中编译器输出的可能是英文信息，在此提供双语。）
+class Complex(val real: Double, val imag: Double) extends AnyVal
+      ^
+</code></pre></div></div>
+
+<p>由于构造函数参数必须是val，而不能是一个按名（by-name）参数：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NoByName.scala:1: error: `val' parameters may not be call-by-name
+（NoByName.scala:1: 错误: `val' 不能为 call-by-name）
+class NoByName(val x: =&gt; Int) extends AnyVal
+                      ^
+</code></pre></div></div>
+
+<p>Scala不允许惰性val作为构造函数参数， 所以value类也不允许。并且不允许多个构造函数。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Secondary(val x: Int) extends AnyVal {
+  def this(y: Double) = this(y.toInt)
+}
+
+Secondary.scala:2: error: value class may not have secondary constructors
+（Secondary.scala:2: 错误：value类不能有第二个构造函数。）
+  def this(y: Double) = this(y.toInt)
+      ^
+</code></pre></div></div>
+
+<p>value class不能将惰性val或val作为成员，也不能有嵌套类、trait或对象。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class NoLazyMember(val evaluate: () =&gt; Double) extends AnyVal {
+  val member: Int = 3
+  lazy val x: Double = evaluate()
+  object NestedObject
+  class NestedClass
+}
+
+Invalid.scala:2: error: this statement is not allowed in value class: private[this] val member: Int = 3
+（Invalid.scala:2: 错误: value类中不允许此表达式：private [this] val member: Int = 3）
+  val member: Int = 3
+      ^
+Invalid.scala:3: error: this statement is not allowed in value class: lazy private[this] var x: Double = NoLazyMember.this.evaluate.apply()
+（Invalid.scala:3: 错误：value类中不允许此表达式： lazy private[this] var x: Double = NoLazyMember.this.evaluate.apply()）
+  lazy val x: Double = evaluate()
+           ^
+Invalid.scala:4: error: value class may not have nested module definitions
+（Invalid.scala:4: 错误: value类中不能定义嵌套模块）
+  object NestedObject
+         ^
+Invalid.scala:5: error: value class may not have nested class definitions
+（Invalid.scala:5: 错误：value类中不能定义嵌套类）
+  class NestedClass
+        ^
+</code></pre></div></div>
+
+<p>注意：value类中也不允许出现本地类、trait或对象，如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class NoLocalTemplates(val x: Int) extends AnyVal {
+  def aMethod = {
+    class Local
+    ...
+  }
+}
+</code></pre></div></div>
+
+<p>在目前value类实现的限制下，value类不能嵌套：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Outer(val inner: Inner) extends AnyVal
+class Inner(val value: Int) extends AnyVal
+
+Nested.scala:1: error: value class may not wrap another user-defined value class
+（Nested.scala:1:错误：vlaue类不能包含另一个用户定义的value类）
+class Outer(val inner: Inner) extends AnyVal
+                ^
+</code></pre></div></div>
+
+<p>此外，结构类型不能使用value类作为方法的参数或返回值类型。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Value(val x: Int) extends AnyVal
+object Usage {
+  def anyValue(v: { def value: Value }): Value =
+    v.value
+}
+
+Struct.scala:3: error: Result type in structural refinement may not refer to a user-defined value class
+（Struct.scala:3: 错误: 结构细化中的结果类型不适用于用户定义的value类）
+  def anyValue(v: { def value: Value }): Value =
+                               ^
+</code></pre></div></div>
+
+<p>value类不能继承non-universal trait，并且其本身不能被继承：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait NotUniversal
+class Value(val x: Int) extends AnyVal with NotUniversal
+class Extend(x: Int) extends Value(x)
+
+Extend.scala:2: error: illegal inheritance; superclass AnyVal
+ is not a subclass of the superclass Object
+ of the mixin trait NotUniversal
+（Extend.scala:2: 错误：非法继承：父类AnyVal不是一个父类对象（混入trait NotUniversal）的子类）
+class Value(val x: Int) extends AnyVal with NotUniversal
+                                            ^
+Extend.scala:3: error: illegal inheritance from final class Value
+（Extend.scala:3: 错误: 从Value类（final类）非法继承）
+class Extend(x: Int) extends Value(x)
+                             ^
+</code></pre></div></div>
+
+<p>第二条错误信息显示：虽然value类没有显式地用final关键字修饰，但依然认为value类是final类。</p>
+
+<p>另一个限制是：一个类仅支持单个参数的话，则value类必须是顶级类，或静态访问对象的成员。这是由于嵌套value类需要第二个参数来引用封闭类。所以不允许下述代码：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Outer {
+  class Inner(val x: Int) extends AnyVal
+}
+
+Outer.scala:2: error: value class may not be a member of another class
+（Outer.scala:2: 错误：value类不能作为其它类的成员）
+class Inner(val x: Int) extends AnyVal
+      ^
+</code></pre></div></div>
+
+<p>但允许下述代码，因为封闭对象是顶级类：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Outer {
+  class Inner(val x: Int) extends AnyVal
+}
+</code></pre></div></div>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/core/value-classes.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/core/value-classes.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-cn/overviews/core/value-classes.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_zh-cn/overviews/core/value-classes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

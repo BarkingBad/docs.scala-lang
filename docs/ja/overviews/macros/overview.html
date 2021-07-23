@@ -1,0 +1,3634 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      def マクロ | 
+      Macros | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ja/overviews/macros/overview.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="def マクロ"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="def マクロ"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ja/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Macros</div>
+          
+          <h1>def マクロ</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><span class="tag" style="float: right;">EXPERIMENTAL</span></p>
+
+<p><strong>Eugene Burmako 著</strong><br />
+<strong>Eugene Yokota 訳</strong></p>
+
+<p>def マクロは Scala のバージョン 2.10.0 より追加された実験的機能だ。
+def マクロ機能の一部が、徹底した仕様が書かれることを条件に将来の Scala のいつかに安定化することが仮予定されている。</p>
+
+<p><span class="label success">追記</span> このガイドは Scala 2.10.0 向けに書かれたもので、現在は Scala 2.11.x 系リリースサイクルのまっただ中なので当然本稿の内容が古くなっている。
+しかしながら、このガイドが廃れたかと言うとそうとも言えなくて、ここで書かれていることの全ては Scala 2.10.x と Scala 2.11.x
+の両方で動作するため目を通す価値はあるはずだ。
+これを読んだ後で、<a href="/overviews/quasiquotes/intro.html">準クォート</a>と
+<a href="/ja/overviews/macros/bundles.html">マクロバンドル</a>のガイドからマクロ定義を簡略化する最新情報を仕入れてほしい。
+さらに詳しい具体例を調べるには <a href="https://github.com/scalamacros/macrology201">macro workshop</a>
+も参考にしてほしい。</p>
+
+<h2 id="直観">直観</h2>
+
+<p>以下がマクロ定義のプロトタイプだ:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def m(x: T): R = macro implRef
+</code></pre></div></div>
+
+<p>一見するとマクロ定義は普通の関数定義と変わらないが、違いが 1つあってそれは本文が条件付きキーワード <code class="language-plaintext highlighter-rouge">macro</code> で始まり、次に静的なマクロ実装メソッドの識別子が続くことだ。この識別子は qualify されていてもいい (つまり、<code class="language-plaintext highlighter-rouge">.</code> で区切ってスコープ外の識別子を参照してもいいということ)。</p>
+
+<p>もし、型検査時にコンパイラがマクロ適用 <code class="language-plaintext highlighter-rouge">m(args)</code> を見つけると、コンパイラはそのマクロに対応するマクロ実装メソッドに <code class="language-plaintext highlighter-rouge">args</code> の抽象構文木を引数として渡して呼び出すことによってマクロ適用を展開する。マクロ実装の戻り値もまた抽象構文木で、コールサイトにおいてそれはインライン化され、それが再び型検査される。</p>
+
+<p>以下のコードはマクロ実装 <code class="language-plaintext highlighter-rouge">Asserts.assertImpl</code> を参照するマクロ定義 <code class="language-plaintext highlighter-rouge">assert</code> を宣言する (<code class="language-plaintext highlighter-rouge">assertImpl</code> の定義も後でみる):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def assert(cond: Boolean, msg: Any) = macro Asserts.assertImpl
+</code></pre></div></div>
+
+<p>そのため、<code class="language-plaintext highlighter-rouge">assert(x &lt; 10, "limit exceeded")</code> の呼び出しはコンパイル時における以下の呼び出しにつながる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assertImpl(c)(&lt;[ x &lt; 10 ]&gt;, &lt;[ “limit exceeded” ]&gt;)
+</code></pre></div></div>
+
+<p>ただし、<code class="language-plaintext highlighter-rouge">c</code> はコールサイトにおいてコンパイラが収集した情報を格納したコンテキスト引数で、残りの 2つの引数は、2つの式 <code class="language-plaintext highlighter-rouge">x &lt; 10</code> と <code class="language-plaintext highlighter-rouge">"limit exceeded"</code> を表す抽象構文木。</p>
+
+<p>本稿においては、式 <code class="language-plaintext highlighter-rouge">expr</code> を表す抽象構文木を <code class="language-plaintext highlighter-rouge">&lt;[ expr ]&gt;</code> と表記する。今回提唱された Scala 言語の拡張にはこの表記法に対応するものは含まれていない。実際には、構文木は <code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees</code> トレイト内の型から構築され、上記の 2つの式は以下のようになる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Literal(Constant("limit exceeded"))
+
+Apply(
+  Select(Ident(TermName("x")), TermName("$less"),
+  List(Literal(Constant(10)))))
+</code></pre></div></div>
+
+<p>ここに <code class="language-plaintext highlighter-rouge">assert</code> マクロの実装の一例を載せる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.macros.Context
+import scala.language.experimental.macros
+
+object Asserts {
+  def raise(msg: Any) = throw new AssertionError(msg)
+  def assertImpl(c: Context)
+    (cond: c.Expr[Boolean], msg: c.Expr[Any]) : c.Expr[Unit] =
+   if (assertionsEnabled)
+      &lt;[ if (!cond) raise(msg) ]&gt;
+      else
+      &lt;[ () ]&gt;
+}
+</code></pre></div></div>
+
+<p>この例が示すとおり、マクロ実装はいくつかのパラメータリストを持つ。まず <code class="language-plaintext highlighter-rouge">scala.reflect.macros.Context</code> 型の パラメータを 1つ受け取るリスト。次に、マクロ定義のパラメータと同じ名前を持つパラメータを列挙したリスト。しかし、もとのマクロのパラメータの型 <code class="language-plaintext highlighter-rouge">T</code> の代わりにマクロ実装のパラメータは <code class="language-plaintext highlighter-rouge">c.Expr[T]</code> 型を持つ。<code class="language-plaintext highlighter-rouge">Expr[T]</code> は <code class="language-plaintext highlighter-rouge">Context</code> に定義され <code class="language-plaintext highlighter-rouge">T</code> 型の抽象構文木をラッピングする。マクロ実装 <code class="language-plaintext highlighter-rouge">assertImpl</code> の戻り型もまたラッピングされた構文木で、<code class="language-plaintext highlighter-rouge">c.Expr[Unit]</code> 型を持つ。</p>
+
+<p>また、マクロは実験的で、高度な機能だと考えられているため、マクロを定義するにはその機能を明示的に有効化する必要があることに注意してほしい。
+これは、ファイルごとに <code class="language-plaintext highlighter-rouge">import scala.language.experimental.macros</code> と書くか、コンパイルごとに (コンパイラスイッチとして) <code class="language-plaintext highlighter-rouge">-language:experimental.macros</code> を用いることで行われる。
+しかし、ユーザ側は特にコンパイラスイッチや追加の設定などで有効化しなくても普通のメソッド同様に見えるし、普通のメソッド同様に使うことができる。</p>
+
+<h3 id="多相的なマクロ">多相的なマクロ</h3>
+
+<p>マクロ定義とマクロ実装の両方ともジェネリックにすることができる。もしマクロ実装に型パラメータがあれば、マクロ定義の本文において実際の型引数が明示的に渡される必要がある。実装内での型パラメータは context bounds の <code class="language-plaintext highlighter-rouge">WeakTypeTag</code>　と共に宣言することができる。その場合、適用サイトでの実際の型引数を記述した型タグがマクロの展開時に一緒に渡される。</p>
+
+<p>以下のコードはマクロ実装 <code class="language-plaintext highlighter-rouge">QImpl.map</code> を参照するマクロ定義 <code class="language-plaintext highlighter-rouge">Queryable.map</code> を宣言する:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Queryable[T] {
+  def map[U](p: T =&gt; U): Queryable[U] = macro QImpl.map[T, U]
+}
+
+object QImpl {
+  def map[T: c.WeakTypeTag, U: c.WeakTypeTag]
+         (c: Context)
+         (p: c.Expr[T =&gt; U]): c.Expr[Queryable[U]] = ...
+}
+</code></pre></div></div>
+
+<p>ここで、型が <code class="language-plaintext highlighter-rouge">Queryable[String]</code> である値 <code class="language-plaintext highlighter-rouge">q</code> があるとして、そのマクロ呼び出し</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q.map[Int](s =&gt; s.length)
+</code></pre></div></div>
+
+<p>を考える。この呼び出しは以下の reflective なマクロ呼び出しに展開される。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QImpl.map(c)(&lt;[ s =&gt; s.length ]&gt;)
+   (implicitly[WeakTypeTag[String]], implicitly[WeakTypeTag[Int]])
+</code></pre></div></div>
+
+<h2 id="完全な具体例">完全な具体例</h2>
+
+<p>この節ではコンパイル時に文字列を検査して形式を適用する <code class="language-plaintext highlighter-rouge">printf</code> マクロを具体例として、最初から最後までの実装をみていく。
+説明を簡略化するために、ここではコンソールの Scala コンパイラを用いるが、後に説明があるとおりマクロは Maven や sbt からも使える。</p>
+
+<p>マクロを書くには、まずマクロの窓口となるマクロ定義から始める。
+マクロ定義はシグネチャに思いつくまま好きなものを書ける普通の関数だ。
+しかし、その本文は実装への参照のみを含む。
+前述のとおり、マクロを定義するは <code class="language-plaintext highlighter-rouge">scala.language.experimental.macros</code> をインポートするか、特殊なコンパイラスイッチ <code class="language-plaintext highlighter-rouge">-language:experimental.macros</code> を用いて有効化する必要がある。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.language.experimental.macros
+def printf(format: String, params: Any*): Unit = macro printf_impl
+</code></pre></div></div>
+
+<p>マクロ実装はそれを使うマクロ定義に対応する必要がある (通常は 1つだが、複数のマクロ定義を宣言することもできる)。簡単に言うと、マクロ定義のシグネチャ内の全ての型 <code class="language-plaintext highlighter-rouge">T</code> のパラメータはマクロ実装のシグネチャ内では <code class="language-plaintext highlighter-rouge">c.Expr[T]</code> となる必要がある。このルールの完全なリストはかなり込み入ったものだが、これは問題とならない。もしコンパイラが気に入らなければ、エラーメッセージに期待されるシグネチャを表示するからだ。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.macros.Context
+def printf_impl(c: Context)(format: c.Expr[String], params: c.Expr[Any]*): c.Expr[Unit] = ...
+</code></pre></div></div>
+
+<p>コンパイラ API は <code class="language-plaintext highlighter-rouge">scala.reflect.macros.Context</code> から使うことができる。そのうち最も重要な部分であるリフレクション API は <code class="language-plaintext highlighter-rouge">c.universe</code> から使える。
+よく使われる多くの関数や型を含むため、<code class="language-plaintext highlighter-rouge">c.universe._</code> をインポートするのが慣例となっている:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import c.universe._
+</code></pre></div></div>
+
+<p>まずマクロは渡された書式文字列をパースする必要がある。
+マクロはコンパイル時に実行されるため、値ではなく構文木に対してはたらく。
+そのため、<code class="language-plaintext highlighter-rouge">printf</code> マクロの書式文字列のパラメータは <code class="language-plaintext highlighter-rouge">java.lang.String</code> 型のオブジェクトではなくコンパイル時リテラルとなる。
+また、<code class="language-plaintext highlighter-rouge">printf(get_format(), ...)</code>　だと <code class="language-plaintext highlighter-rouge">format</code> は文字列リテラルではなく関数の適用を表す AST であるため、以下のコードでは動作しない。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val Literal(Constant(s_format: String)) = format.tree
+</code></pre></div></div>
+
+<p>典型的なマクロは Scala のコードを表す AST (抽象構文木) を作成する必要がある。(このマクロも例に漏れない)
+Scala コードの生成については<a href="https://docs.scala-lang.org/ja/overviews/reflection/overview.html">リフレクションの概要</a>を参照してほしい。AST の作成の他に以下のコードは型の操作も行う。
+<code class="language-plaintext highlighter-rouge">Int</code> と <code class="language-plaintext highlighter-rouge">String</code> に対応する Scala 型をどうやって取得しているのかに注目してほしい。
+リンクしたリフレクションの概要で型の操作の詳細を説明する。
+コード生成の最終ステップでは、全ての生成されたコードを <code class="language-plaintext highlighter-rouge">Block</code> へと組み合わせる。
+<code class="language-plaintext highlighter-rouge">reify</code> は AST を簡単に作成する方法を提供する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val evals = ListBuffer[ValDef]()
+def precompute(value: Tree, tpe: Type): Ident = {
+  val freshName = TermName(c.fresh("eval$"))
+  evals += ValDef(Modifiers(), freshName, TypeTree(tpe), value)
+  Ident(freshName)
+}
+
+val paramsStack = Stack[Tree]((params map (_.tree)): _*)
+val refs = s_format.split("(?&lt;=%[\\w%])|(?=%[\\w%])") map {
+  case "%d" =&gt; precompute(paramsStack.pop, typeOf[Int])
+  case "%s" =&gt; precompute(paramsStack.pop, typeOf[String])
+  case "%%" =&gt; Literal(Constant("%"))
+  case part =&gt; Literal(Constant(part))
+}
+
+val stats = evals ++ refs.map(ref =&gt; reify(print(c.Expr[Any](ref).splice)).tree)
+c.Expr[Unit](Block(stats.toList, Literal(Constant(()))))
+</code></pre></div></div>
+
+<p>以下のコードは <code class="language-plaintext highlighter-rouge">printf</code> マクロの完全な定義を表す。
+追随するには、空のディレクトリを作り、コードを <code class="language-plaintext highlighter-rouge">Macros.scala</code> という名前の新しいファイルにコピーする。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.macros.Context
+import scala.collection.mutable.{ListBuffer, Stack}
+
+object Macros {
+  def printf(format: String, params: Any*): Unit = macro printf_impl
+
+  def printf_impl(c: Context)(format: c.Expr[String], params: c.Expr[Any]*): c.Expr[Unit] = {
+    import c.universe._
+    val Literal(Constant(s_format: String)) = format.tree
+
+    val evals = ListBuffer[ValDef]()
+    def precompute(value: Tree, tpe: Type): Ident = {
+      val freshName = TermName(c.fresh("eval$"))
+      evals += ValDef(Modifiers(), freshName, TypeTree(tpe), value)
+      Ident(freshName)
+    }
+
+    val paramsStack = Stack[Tree]((params map (_.tree)): _*)
+    val refs = s_format.split("(?&lt;=%[\\w%])|(?=%[\\w%])") map {
+      case "%d" =&gt; precompute(paramsStack.pop, typeOf[Int])
+      case "%s" =&gt; precompute(paramsStack.pop, typeOf[String])
+      case "%%" =&gt; Literal(Constant("%"))
+      case part =&gt; Literal(Constant(part))
+    }
+
+    val stats = evals ++ refs.map(ref =&gt; reify(print(c.Expr[Any](ref).splice)).tree)
+    c.Expr[Unit](Block(stats.toList, Literal(Constant(()))))
+  }
+}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">printf</code> マクロを使うには、同じディレクトリ内に別のファイル <code class="language-plaintext highlighter-rouge">Test.scala</code> を作って以下のコードをコピーする。
+マクロを使用するのは関数を呼び出すのと同じぐらいシンプルであることに注目してほしい。<code class="language-plaintext highlighter-rouge">scala.language.experimental.macros</code> をインポートする必要も無い。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Test extends App {
+  import Macros._
+  printf("hello %s!", "world")
+}
+</code></pre></div></div>
+
+<p>マクロ機構の重要な一面は別コンパイルだ。マクロ展開を実行するためには、コンパイラはマクロ実装を実行可能な形式で必要とする。そのため、マクロ実装はメインのコンパイルを行う前にコンパイルされている必要がある。
+これをしないと、以下のようなエラーをみることになる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/Projects/Kepler/sandbox$ scalac -language:experimental.macros Macros.scala Test.scala
+Test.scala:3: error: macro implementation not found: printf (the most common reason for that is that
+you cannot use macro implementations in the same compilation run that defines them)
+pointing to the output of the first phase
+  printf("hello %s!", "world")
+        ^
+one error found
+
+~/Projects/Kepler/sandbox$ scalac Macros.scala &amp;&amp; scalac Test.scala &amp;&amp; scala Test
+hello world!
+</code></pre></div></div>
+
+<h2 id="コツとトリック">コツとトリック</h2>
+
+<h3 id="コマンドライン-scala-コンパイラを用いてマクロを使う">コマンドライン Scala コンパイラを用いてマクロを使う</h3>
+
+<p>このシナリオは前節で説明したとおりだ。つまり、マクロとそれを使用するコードを別に呼び出した <code class="language-plaintext highlighter-rouge">scalac</code> によってコンパイルすることで、全てうまくいくはずだ。REPL をつかっているなら、さらに都合がいい。なぜなら REPL はそれぞれの行を独立したコンパイルとして扱うため、マクロを定義してすぐに使うことができる。</p>
+
+<p><a name="using_macros_with_maven_or_sbt"> </a></p>
+<h3 id="maven-か-sbt-を用いてマクロを使う">Maven か sbt を用いてマクロを使う</h3>
+
+<p>本稿での具体例では最もシンプルなコマンドラインのコンパイルを使っているが、マクロは Maven や sbt などのビルドツールからも使うことができる。完結した具体例としては <a href="https://github.com/scalamacros/sbt-example">https://github.com/scalamacros/sbt-example</a> か <a href="https://github.com/scalamacros/maven-example">https://github.com/scalamacros/maven-example</a> を見てほしいが、要点は以下の 2点だ:</p>
+
+<ul>
+<li>マクロは、scala-reflect.jar をライブラリ依存性として必要とする。</li>
+<li>別コンパイル制約により、マクロは別のプロジェクト内で定義する必要がある。</li>
+</ul>
+
+<h3 id="scala-ide-か-intellij-idea-を用いてマクロを使う">Scala IDE か Intellij IDEA を用いてマクロを使う</h3>
+
+<p>別プロジェクトに分かれている限り、Scala IDE と Intellij IDEA の両方において、マクロは正しく動作することが分かっている。</p>
+
+<h3 id="マクロのデバッグ">マクロのデバッグ</h3>
+
+<p>マクロのデバッグ、すなわちマクロ展開を駆動している論理のデバッグは比較的容易だ。マクロはコンパイラ内で展開されるため、デバッガ内でコンパイラを実行するだけでいい。そのためには、以下を実行する必要がある:</p>
+
+<ol>
+<li>デバッグ設定のクラスパスに Scala home の lib ディレクトリ内の全て (!) のライブラリを追加する。(これは、<code>scala-library.jar</code>、<code>scala-reflect.jar</code>、そして <code>scala-compiler.jar</code> の jar ファイルを含む。</li>
+<li><code>scala.tools.nsc.Main</code> をエントリーポイントに設定する。</li>
+<li>JVM のシステムプロパティに <code>-Dscala.usejavacp=true</code> を渡す (とても重要!)</li>
+<li>コンパイラのコマンドラインの引数を <code>-cp &lt;マクロのクラスへのパス&gt; Test.scala</code></li> に設定する。ただし、<code>Test.scala</code> は展開されるマクロの呼び出しを含むテストファイルとする。
+</ol>
+
+<p>上の手順をふめば、マクロ実装内にブレークポイントを置いてデバッガを起動できるはずだ。</p>
+
+<p>ツールによる特殊なサポートが本当に必要なのはマクロ展開の結果 (つまり、マクロによって生成されたコード) のデバッグだ。このコードは手動で書かれていないため、ブレークポイントを設置することはできず、ステップ実行することもできない。Scala IDE と Intellij IDEA のチームはいずれそれぞれのデバッガにこのサポートを追加することになると思うが、それまでは展開されたマクロをデバッグする唯一の方法は <code class="language-plaintext highlighter-rouge">-Ymacro-debug-lite</code> という print を使った診断だけだ。これは、マクロによって生成されたコードを表示して、また生成されたコードの実行を追跡して println する。</p>
+
+<h3 id="生成されたコードの検査">生成されたコードの検査</h3>
+
+<p><code class="language-plaintext highlighter-rouge">-Ymacro-debug-lite</code> を用いることで展開されたコードを準 Scala 形式と生の AST 形式の両方でみることができる。それぞれに利点があり、前者は表層的な解析に便利で、後者はより詳細なデバッグに不可欠だ。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/Projects/Kepler/sandbox$ scalac -Ymacro-debug-lite Test.scala
+typechecking macro expansion Macros.printf("hello %s!", "world") at
+source-C:/Projects/Kepler/sandbox\Test.scala,line-3,offset=52
+{
+  val eval$1: String = "world";
+  scala.this.Predef.print("hello ");
+  scala.this.Predef.print(eval$1);
+  scala.this.Predef.print("!");
+  ()
+}
+Block(List(
+ValDef(Modifiers(), TermName("eval$1"), TypeTree().setType(String), Literal(Constant("world"))),
+Apply(
+  Select(Select(This(TypeName("scala")), TermName("Predef")), TermName("print")),
+  List(Literal(Constant("hello")))),
+Apply(
+  Select(Select(This(TypeName("scala")), TermName("Predef")), TermName("print")),
+  List(Ident(TermName("eval$1")))),
+Apply(
+  Select(Select(This(TypeName("scala")), TermName("Predef")), TermName("print")),
+  List(Literal(Constant("!"))))),
+Literal(Constant(())))
+</code></pre></div></div>
+
+<h3 id="捕獲されない例外を投げるマクロ">捕獲されない例外を投げるマクロ</h3>
+
+<p>マクロが捕獲されない例外を投げるとどうなるだろうか？例えば、<code class="language-plaintext highlighter-rouge">printf</code> に妥当ではない入力を渡してクラッシュさせてみよう。
+プリントアウトが示すとおり、特に劇的なことは起きない。コンパイラは自身を行儀の悪いマクロから守る仕組みになっているため、スタックトレースのうち関係のある部分を表示してエラーを報告するだけだ。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/Projects/Kepler/sandbox$ scala
+Welcome to Scala version 2.10.0-20120428-232041-e6d5d22d28 (Java HotSpot(TM) 64-Bit Server VM, Java 1.6.0_25).
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala&gt; import Macros._
+import Macros._
+
+scala&gt; printf("hello %s!")
+&lt;console&gt;:11: error: exception during macro expansion:
+java.util.NoSuchElementException: head of empty list
+        at scala.collection.immutable.Nil$.head(List.scala:318)
+        at scala.collection.immutable.Nil$.head(List.scala:315)
+        at scala.collection.mutable.Stack.pop(Stack.scala:140)
+        at Macros$$anonfun$1.apply(Macros.scala:49)
+        at Macros$$anonfun$1.apply(Macros.scala:47)
+        at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:237)
+        at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:237)
+        at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:34)
+        at scala.collection.mutable.ArrayOps.foreach(ArrayOps.scala:39)
+        at scala.collection.TraversableLike$class.map(TraversableLike.scala:237)
+        at scala.collection.mutable.ArrayOps.map(ArrayOps.scala:39)
+        at Macros$.printf_impl(Macros.scala:47)
+
+              printf("hello %s!")
+                    ^
+</code></pre></div></div>
+
+<h3 id="警告とエラーの報告">警告とエラーの報告</h3>
+
+<p>ユーザと対話するための正式な方法は <code class="language-plaintext highlighter-rouge">scala.reflect.macros.FrontEnds</code> のメソッドを使うことだ。
+<code class="language-plaintext highlighter-rouge">c.error</code> はコンパイルエラーを報告し、<code class="language-plaintext highlighter-rouge">c.warning</code> は警告を発令し、<code class="language-plaintext highlighter-rouge">c.abort</code> はエラーを報告しマクロの実行を停止する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def impl(c: Context) =
+  c.abort(c.enclosingPosition, "macro has reported an error")
+impl: (c: scala.reflect.macros.Context)Nothing
+
+scala&gt; def test = macro impl
+defined term macro test: Any
+
+scala&gt; test
+&lt;console&gt;:32: error: macro has reported an error
+              test
+              ^
+</code></pre></div></div>
+
+<p><a href="https://issues.scala-lang.org/browse/SI-6910">SI-6910</a> に記述されているとおり、現時点ではある位置から複数の警告やエラーの報告はサポートされていないことに注意してほしい。そのため、ある位置で最初のエラーか警告だけが報告され他は失くなってしまう。(ただし、同じ位置で後から報告されてもエラーは警告よりも優先される)</p>
+
+<p><a name="writing_bigger_macros"> </a></p>
+<h3 id="より大きなマクロを書く">より大きなマクロを書く</h3>
+
+<p>マクロ実装が実装メソッドの本文におさまりきらなくなって、モジュール化の必要性が出てくると、コンテキストパラメータを渡して回る必要があることに気付くだろう。マクロを定義するのに必要なもののほとんどがこのコンテキストにパス依存しているからだ。</p>
+
+<p>1つの方法としては <code class="language-plaintext highlighter-rouge">Context</code> 型のパラメータを受け取るクラスを書いて、マクロ実装をそのクラス内のメソッドに分けるという方法がある。これは一見自然でシンプルにみえるが、実は正しく書くのは難しい。以下に典型的なコンパイルエラーを示す。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; class Helper(val c: Context) {
+     | def generate: c.Tree = ???
+     | }
+defined class Helper
+
+scala&gt; def impl(c: Context): c.Expr[Unit] = {
+     | val helper = new Helper(c)
+     | c.Expr(helper.generate)
+     | }
+&lt;console&gt;:32: error: type mismatch;
+ found   : helper.c.Tree
+    (which expands to)  helper.c.universe.Tree
+ required: c.Tree
+    (which expands to)  c.universe.Tree
+       c.Expr(helper.generate)
+                     ^
+</code></pre></div></div>
+
+<p>このコードの問題はパス依存型のミスマッチだ。同じ <code class="language-plaintext highlighter-rouge">c</code> を使って helper を構築したにもかかわらず、Scala コンパイラは <code class="language-plaintext highlighter-rouge">impl</code> の <code class="language-plaintext highlighter-rouge">c</code> が <code class="language-plaintext highlighter-rouge">Helper</code> の <code class="language-plaintext highlighter-rouge">c</code> と同じものであることが分からない。</p>
+
+<p>幸いなことに、少し助けてやるだけでコンパイラは何が起こっているのか気付くことができる。様々ある解法の1つは細別型 (refinement type) を使うことだ。以下の例はそのアイディアの最も簡単な例だ。例えば、<code class="language-plaintext highlighter-rouge">Context</code> から <code class="language-plaintext highlighter-rouge">Helper</code> への暗黙の変換を書いてやることで明示的なインスタンス化を回避して呼び出しを単純化することができる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; abstract class Helper {
+     | val c: Context
+     | def generate: c.Tree = ???
+     | }
+defined class Helper
+
+scala&gt; def impl(c1: Context): c1.Expr[Unit] = {
+     | val helper = new { val c: c1.type = c1 } with Helper
+     | c1.Expr(helper.generate)
+     | }
+impl: (c1: scala.reflect.macros.Context)c1.Expr[Unit]
+</code></pre></div></div>
+
+<p>もう1つの方法はコンテキストのアイデンティティを明示的な型パラメータとして渡す方法だ。<code class="language-plaintext highlighter-rouge">Helper</code> のコンストラクタが <code class="language-plaintext highlighter-rouge">c.type</code> を用いて <code class="language-plaintext highlighter-rouge">Helper.c</code> と元の <code class="language-plaintext highlighter-rouge">c</code> が同じであることを表していることに注目してほしい。Scala の型推論は単独ではこれを解くことができないため、手伝ってあげているわけだ。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; class Helper[C &lt;: Context](val c: C) {
+     | def generate: c.Tree = ???
+     | }
+defined class Helper
+
+scala&gt; def impl(c: Context): c.Expr[Unit] = {
+     | val helper = new Helper[c.type](c)
+     | c.Expr(helper.generate)
+     | }
+impl: (c: scala.reflect.macros.Context)c.Expr[Unit]
+</code></pre></div></div>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/macros/overview.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/macros/overview.html" class="lang">日本語</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ja/overviews/macros/overview.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

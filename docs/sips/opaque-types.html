@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-35 - Opaque types | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/opaque-types.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-35 - Opaque types"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-35 - Opaque types"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-35 - Opaque types</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>Authors: Erik Osheim and Jorge Vicente Cantero</strong></p>
+
+<p><strong>Supervisor and advisor: Sébastien Doeraene</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sep 20th 2017</td>
+      <td>Initial Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is a proposal to introduce syntax for type aliases that only
+exist at compile time and emulate wrapper types.</p>
+
+<p>The goal is that operations on these wrapper types must not create any
+extra overhead at runtime while still providing a type safe use at compile
+time.</p>
+
+<p>Some use cases for opaque types are:</p>
+
+<ul>
+  <li>
+    <p>Implementing type members while retaining parametricity. Currently,
+concrete <code class="language-plaintext highlighter-rouge">type</code> definitions are treated as type aliases, i.e. they
+are expanded in-place.</p>
+  </li>
+  <li>
+    <p>New numeric classes, such as unsigned integers. There would no
+longer need to be a boxing overhead for such classes. This is
+similar to value types in .NET and <code class="language-plaintext highlighter-rouge">newtype</code> in Haskell. Many APIs
+currently use signed integers (to avoid overhead) but document that
+the values will be treated as unsigned.</p>
+  </li>
+  <li>
+    <p>Classes representing units of measure. Again, no boxing overhead
+would be incurred for these classes.</p>
+  </li>
+  <li>
+    <p>Classes representing different entities with the same underlying type,
+such as <code class="language-plaintext highlighter-rouge">Id</code> and <code class="language-plaintext highlighter-rouge">Password</code> being defined in terms of <code class="language-plaintext highlighter-rouge">String</code>.</p>
+  </li>
+</ul>
+
+<p>We expand on all these points in our motivation section.</p>
+
+<p>For a definition of boxing and previous state-of-the-art, we recommend reading <a href="https://docs.scala-lang.org/sips/value-classes.html">SIP-15</a>.</p>
+
+<h3 id="implementation-note">Implementation note</h3>
+
+<p>The proposal is currently in an early stage.
+<a href="https://github.com/scalacenter/scala/tree/opaque-type">It’s being implemented</a>,
+but the proposed implementation strategy is not detailed enough to be able
+to predict with certainty that it will work as specified. Consequently,
+details of the proposal might change driven by implementation concerns.</p>
+
+<h2 id="opaque-types">Opaque types</h2>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>Authors often introduce type aliases to differentiate many values that
+share a very common type (e.g. <code class="language-plaintext highlighter-rouge">String</code>, <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Double</code>, <code class="language-plaintext highlighter-rouge">Boolean</code>,
+etc.). In some cases, these authors may believe that using type
+aliases such as <code class="language-plaintext highlighter-rouge">Id</code> and <code class="language-plaintext highlighter-rouge">Password</code> means that if they later mix these
+values up, the compiler will catch their error. However, since type
+aliases are replaced by their underlying type (e.g. <code class="language-plaintext highlighter-rouge">String</code>), these
+values are considered interchangeable (i.e. type aliases are not
+appropriate for differentiating various <code class="language-plaintext highlighter-rouge">String</code> values).</p>
+
+<p>One appropriate solution to the above problem is to create case
+classes which wrap <code class="language-plaintext highlighter-rouge">String</code>. This works, but incurs a runtime overhead
+(for every <code class="language-plaintext highlighter-rouge">String</code> in the previous system we also allocate a wrapper,
+or a “box”). In many cases this is fine but in some it is not.</p>
+
+<p>Value classes, a Scala feature proposed in <a href="https://docs.scala-lang.org/sips/value-classes.html">SIP-15</a>, were introduced
+to the language to offer classes that could be inlined in some
+scenarios, thereby removing runtime overhead. These scenarios, while
+certainly common, do not cover the majority of scenarios that library
+authors have to deal with. In reality, experimentation shows that they
+are insufficient, and hence performance-sensitive code suffers (see
+<a href="https://failex.blogspot.ch/2017/04/the-high-cost-of-anyval-subclasses.html">Appendix A</a>).</p>
+
+<p>In the following example, we show the current limitations of value classes and
+motivate the need of compile-time wrapper types.</p>
+
+<h4 id="an-example">An example</h4>
+
+<p>Imagine we are working with floating-point data that are
+logarithmically-scaled (e.g. sensor data). We might have gigabytes of
+data which would be convenient to represent in terms of arrays of
+primitive doubles (rather than boxing each value).</p>
+
+<p>We might choose to use value classes as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">valueclass</span> <span class="o">{</span>
+  <span class="k">class</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="k">val</span> <span class="nv">exponent</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">toDouble</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">exp</span><span class="o">(</span><span class="n">exponent</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">+</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Logarithm</span><span class="o">)</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="n">toDouble</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">toDouble</span><span class="o">)</span>
+    <span class="k">def</span> <span class="nf">*</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Logarithm</span><span class="o">)</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="n">exponent</span> <span class="o">+</span> <span class="nv">that</span><span class="o">.</span><span class="py">exponent</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">object</span> <span class="nc">Logarithm</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">package</span> <span class="nn">object</span> <span class="n">usesites</span> <span class="o">{</span>
+  <span class="c1">// 1e7 is approximately (e ** 16.11809565095832),</span>
+  <span class="c1">// so x is encoded as 16.11809565095832.</span>
+  <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mi">1</span><span class="n">e7</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Users of this library can use <code class="language-plaintext highlighter-rouge">new Logarithm(...)</code> to wrap <code class="language-plaintext highlighter-rouge">Double</code>
+values (and access alternate implementations of <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">*</code>) without
+allocating <code class="language-plaintext highlighter-rouge">Logarithm</code> values. This is confirmed when users have a
+look at the generated bytecode for <code class="language-plaintext highlighter-rouge">Logarithm</code> and notice that the
+signature of <code class="language-plaintext highlighter-rouge">apply</code> is redefined as <code class="language-plaintext highlighter-rouge">def apply(x: Double): Double</code>
+and that <code class="language-plaintext highlighter-rouge">val x: Logarithm = Logarithm(1e7)</code> is instead <code class="language-plaintext highlighter-rouge">val x: Double
+= Logarithm.apply(1e7)</code>.</p>
+
+<p>Value classes can rewrite many instances of <code class="language-plaintext highlighter-rouge">Logarithm</code> in terms of
+<code class="language-plaintext highlighter-rouge">Double</code>, including local variables, method parameters, return types,
+and most fields. SIP-15 lays out the exact circumstances when these
+rules occur, and extension methods ensure that boxing and unboxing
+occurs transparently.</p>
+
+<p>Unfortunately, this transparent boxing is relatively easy to
+trigger. Some very common situations where <code class="language-plaintext highlighter-rouge">Logarithm</code> instances will
+be allocated at runtime include:</p>
+
+<ul>
+  <li>use in arrays (e.g. <code class="language-plaintext highlighter-rouge">Array[Logarithm]</code>)</li>
+  <li>use in generic collections (e.g. <code class="language-plaintext highlighter-rouge">List[Logarithm]</code>)</li>
+  <li>parameters or return values of anonymous functions</li>
+  <li>calling <code class="language-plaintext highlighter-rouge">equals</code> or <code class="language-plaintext highlighter-rouge">hashCode</code> on a <code class="language-plaintext highlighter-rouge">Logarithm</code></li>
+</ul>
+
+<p>Concretely, consider:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mi">1</span><span class="n">e5</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">xs</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">Logarithm</span><span class="o">(</span><span class="mf">12345.0</span><span class="o">),</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mf">67890.0</span><span class="o">)).</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>When looking at the bytecode, the author will notice that the the
+emitted code boxes <code class="language-plaintext highlighter-rouge">Double</code> values into allocated <code class="language-plaintext highlighter-rouge">Logarithm</code> values,
+stores those in the list, then produces a
+<code class="language-plaintext highlighter-rouge">Function1[Logarithm, Logarithm]</code> which unboxes each logarithm and
+allocates a new result. Users who expect use of value classes to be
+allocation-free (and equivalent to working with the underlying values)
+will be sorely-disappointed in these cases.</p>
+
+<p><a href="https://failex.blogspot.ch/2017/04/the-high-cost-of-anyval-subclasses.html">Appendix A</a> illustrates more cases where this unintended
+boxing/unboxing happens, hurting the performance of the code.</p>
+
+<p>Boxing/unboxing of value classes happens anywhere in the program where
+the type signatures are generic and require the runtime to pass a
+<code class="language-plaintext highlighter-rouge">java.lang.Object</code>.</p>
+
+<p>Given the frequency of these scenarios in real-world code, we would
+like to introduce the notion of compile-time wrapper
+types. Compile-time wrapper types do not depend on the runtime and its
+capabilities, and are always erased at runtime. The previous code
+snippet can be implemented using opaque types and will produce code
+that never boxes/unboxes.</p>
+
+<p>In exchange, opaque types disallow the redefinition of <code class="language-plaintext highlighter-rouge">equals</code> and
+<code class="language-plaintext highlighter-rouge">hashCode</code>, which in our experience is often unnecessary.</p>
+
+<h3 id="definition">Definition</h3>
+
+<p>Let’s continue with the example in our motivation section, and define <code class="language-plaintext highlighter-rouge">Logarithm</code>
+with an opaque type:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">opaquetypes</span> <span class="o">{</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Double</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The opaque type definition is akin to the one of type aliases, except that it
+is prefixed by a new <code class="language-plaintext highlighter-rouge">opaque</code> keyword.</p>
+
+<p>Opaque types are always accompanied by type companions. Type companions
+define the public API of an opaque type, and they are defined in the same way
+that class companions are. It is possible to define an opaque type without a type
+companion, but then the opaque type is useless.</p>
+
+<p>Let’s define a type companion for our previous opaque type <code class="language-plaintext highlighter-rouge">Logarithm</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">opaquetypes</span> <span class="o">{</span>
+  <span class="c1">// The previous opaque type definition</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Double</span>
+
+  <span class="k">object</span> <span class="nc">Logarithm</span> <span class="o">{</span>
+    <span class="c1">// These are the ways to lift to the logarithm type</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">d</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">d</span><span class="o">)</span>
+
+    <span class="k">def</span> <span class="nf">safe</span><span class="o">(</span><span class="n">d</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Logarithm</span><span class="o">]</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="nv">math</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">d</span><span class="o">))</span> <span class="k">else</span> <span class="nc">None</span>
+
+    <span class="c1">// This is the first way to unlift the logarithm type</span>
+    <span class="k">def</span> <span class="nf">exponent</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">Logarithm</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">l</span>
+
+    <span class="c1">// Extension methods define opaque types' public APIs</span>
+    <span class="k">implicit</span> <span class="k">class</span> <span class="nc">LogarithmOps</span><span class="o">(</span><span class="k">val</span> <span class="nv">`</span><span class="k">this</span><span class="n">`: Logarithm) extends AnyVal {
+      // This is the second way to unlift the logarithm type
+      def toDouble: Double = math.exp(`</span><span class="k">this</span><span class="n">`)
+      def +(that: Logarithm): Logarithm = Logarithm(math.exp(`</span><span class="k">this</span><span class="n">`) + math.exp(that))
+      def *(that: Logarithm): Logarithm = Logarithm(`</span><span class="k">this</span><span class="o">`</span> <span class="o">+</span> <span class="n">that</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The above <code class="language-plaintext highlighter-rouge">Logarithm</code> type companion contains the following definitions:</p>
+
+<ul>
+  <li>Methods to lift the type from <code class="language-plaintext highlighter-rouge">Double</code> to <code class="language-plaintext highlighter-rouge">Logarithm</code>  (i.e. <code class="language-plaintext highlighter-rouge">apply</code> and <code class="language-plaintext highlighter-rouge">safe</code>)</li>
+  <li>Methods to lower the type from <code class="language-plaintext highlighter-rouge">Logarithm</code> to <code class="language-plaintext highlighter-rouge">Double</code> (i.e. <code class="language-plaintext highlighter-rouge">exponent</code>)</li>
+  <li>Extension methods to unlift the type from <code class="language-plaintext highlighter-rouge">Logarithm</code> to <code class="language-plaintext highlighter-rouge">Double</code> (i.e. <code class="language-plaintext highlighter-rouge">toDouble</code>)</li>
+  <li>Extension methods to define more operations on the type (i.e. like <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">*</code>)</li>
+</ul>
+
+<p>The key peculiarity of opaque types is that they behave like normal
+<a href="https://www.scala-lang.org/files/archive/spec/2.12/04-basic-declarations-and-definitions.html#type-declarations-and-type-aliases">type alias</a>es inside their type companion; that is, users can convert from
+the type alias and its equivalent definition interchangeably without the use of
+explicit lift and unlift methods. We can say that opaque types are “transparent”
+inside their type companion.</p>
+
+<p>However, the story changes for users of this API. Outside of their type companions,
+opaque types are not transparent and, therefore, the Scala compiler fails
+to compile code that pretends they are. A common example is:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">l</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="mf">1.0</span>
+</code></pre></div></div>
+
+<p>which fails to compile with a type mismatch error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;console&gt;:11: error: type mismatch;
+ found   : Double
+ required: Logarithm
+       val l: Logarithm = 1.0
+                          ^
+</code></pre></div></div>
+
+<p>The same happens for <code class="language-plaintext highlighter-rouge">val d: Double = l</code> where <code class="language-plaintext highlighter-rouge">l</code> is an instance of <code class="language-plaintext highlighter-rouge">Logarithm</code>.</p>
+
+<p>The idea, then, is to let library authors create wrapper types and their API in a
+concrete, isolated part of their code and force users to use this API to lift to
+and unlift from the opaque type.</p>
+
+<p>By design, downstream users can define more operations on these opaque types via
+their own extension methods, but they cannot create a new API to lift/unlift them,
+e.g. users need to use the library-provided <code class="language-plaintext highlighter-rouge">toDouble</code>, <code class="language-plaintext highlighter-rouge">Logarithm.safe</code> and
+<code class="language-plaintext highlighter-rouge">Logarithm.apply</code>.</p>
+
+<p>The following code showcases legit uses of the <code class="language-plaintext highlighter-rouge">Logarithm</code> opaque type:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">usesites</span> <span class="o">{</span>
+  <span class="k">import</span> <span class="nn">opaquetypes._</span>
+  <span class="k">val</span> <span class="nv">l</span> <span class="k">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mf">1.0</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">l2</span> <span class="k">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mf">2.0</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">l3</span> <span class="k">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">l2</span>
+  <span class="k">val</span> <span class="nv">d</span> <span class="k">=</span> <span class="nv">l3</span><span class="o">.</span><span class="py">toDouble</span>
+  <span class="k">val</span> <span class="nv">l3</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="o">(</span><span class="mf">1.0</span><span class="o">).</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">Logarithm</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>While the following fails to typecheck:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">usesites</span> <span class="o">{</span>
+  <span class="k">import</span> <span class="nn">opaquetypes._</span>
+  <span class="k">val</span> <span class="nv">l</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="mf">1.0</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">d</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">l</span> <span class="c1">// fails to typecheck</span>
+  <span class="k">val</span> <span class="nv">l2</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1">// fails to typecheck</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>For the sake of completeness, this is how you extend these opaque types with more operations:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">usesites</span> <span class="o">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">UserOps</span><span class="o">(</span><span class="n">`this`</span><span class="k">:</span> <span class="kt">Logarithm</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">**</span><span class="o">(</span><span class="n">that</span><span class="k">:</span> <span class="kt">Logarithm</span><span class="o">)</span><span class="k">:</span> <span class="kt">Logarithm</span> <span class="o">=</span> <span class="nc">Logarithm</span><span class="o">(</span><span class="n">`this`</span> <span class="o">*</span> <span class="n">that</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that the rationale for this encoding is to allow users to convert from the opaque type
+and the underlying type in constant time. Users have to be able to tag complex type structures
+without having to reallocate, iterate over or inspect it.</p>
+
+<h2 id="formal-definition">Formal definition</h2>
+
+<p>The Scala Language doesn’t have a concept of either opaque types or type companions. In the
+following section, we formalize our previous definitions and specify the required changes to
+the Scala Language Specification.</p>
+
+<h3 id="opaque-type-definition">Opaque type definition</h3>
+
+<p>An opaque type follows the same structure as an alias type but it requires the use of a new
+<code class="language-plaintext highlighter-rouge">opaque</code> modifier.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">LocalModifier     ::=  ‘abstract’</span>
+                    <span class="s">|  ‘final’</span>
+                    <span class="s">|  ‘sealed’</span>
+                    <span class="s">|  ‘implicit’</span>
+                    <span class="s">|  ‘lazy’</span>
+                    <span class="s">|  ‘opaque’</span>
+</code></pre></div></div>
+
+<p>This new modifier is then used to qualify the type alias definition:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">Def        ::= [‘opaque‘] ‘type’ {nl} TypeDef</span>
+<span class="s">TypeDef    ::=  id [TypeParamClause] ‘=’ Type</span>
+</code></pre></div></div>
+
+<p>Opaque modifiers are only valid for type definitions.
+Note that contrary to type alias definitions, opaque type definitions cannot be overridden.</p>
+
+<p>Here’s a formal definition of opaque types:</p>
+
+<blockquote>
+  <p>An opaque <code class="language-plaintext highlighter-rouge">type t = T</code> defines <code class="language-plaintext highlighter-rouge">t</code> to be an alias name for the <code class="language-plaintext highlighter-rouge">type T</code> only in the scope of the opaque
+type companion <code class="language-plaintext highlighter-rouge">t</code>. The left hand side of an opaque type may have a type parameter clause, e.g.
+<code class="language-plaintext highlighter-rouge">type t[tps] = T</code>. The scope of a type parameter extends over the right hand side <code class="language-plaintext highlighter-rouge">T</code> and the type
+parameter clause <code class="language-plaintext highlighter-rouge">tps</code> itself.</p>
+</blockquote>
+
+<p>As per this definition, opaque types modify the type equivalence relationship explained in the
+<a href="https://www.scala-lang.org/files/archive/spec/2.12/03-types.html#equivalence">3.5.1. Equivalence</a> section of the Scala Language Specification. In particular, the next item
+qualifies the type equivalence for opaque types:</p>
+
+<blockquote>
+  <p>If <code class="language-plaintext highlighter-rouge">t</code> is defined by an opaque type <code class="language-plaintext highlighter-rouge">opaque type t = T</code>, then <code class="language-plaintext highlighter-rouge">t</code> is not equivalent to <code class="language-plaintext highlighter-rouge">T</code> unless
+<code class="language-plaintext highlighter-rouge">t</code> occurs in the template of the opaque type companion.</p>
+</blockquote>
+
+<p>In the Implementation notes, we explain how this can be achieved in the
+implementation.</p>
+
+<h3 id="opaque-type-companion">Opaque type companion</h3>
+
+<p>We define a type companion in a similar way companion classes are described in the Scala Language
+Specification in <a href="https://www.scala-lang.org/files/archive/spec/2.12/05-classes-and-objects.html#object-definitions">5.5. Object Definitions</a>:</p>
+
+<blockquote>
+  <p>Generally, a companion module of an opaque type is an object which has the same name as the opaque
+type and is defined in the same scope and compilation unit. Conversely to companion classes, the
+companion class of the module does not have a notion of companion type.</p>
+</blockquote>
+
+<h4 id="opaque-type-companions-and-implicit-search">Opaque type companions and implicit search</h4>
+
+<p>These opaque type companions are also part of the implicit search scope of the opaque type <code class="language-plaintext highlighter-rouge">t</code>.
+Therefore, uses of extension methods defined in the opaque type companion do not require users
+to import the opaque type companion explicitly.</p>
+
+<h3 id="technical-discussions">Technical discussions</h3>
+
+<p>In our current proposal, we make several trade-offs. Next, we defend these trade-offs and propose
+alternative ways to achieve the same (if any).</p>
+
+<h4 id="opaque-as-a-modifier"><code class="language-plaintext highlighter-rouge">opaque</code> as a modifier</h4>
+
+<p><code class="language-plaintext highlighter-rouge">opaque</code> has been added as a modifier to a type def for simplicity. We believe that a new keyword
+for this feature is worthwhile.</p>
+
+<p>Note that adding <code class="language-plaintext highlighter-rouge">opaque</code> as a modifier prevents the use of <code class="language-plaintext highlighter-rouge">opaque</code> anywhere in the users’
+program, which could possibly break someone’s code. To fix this scenario, we could create a
+Scalafix rule that will rewrite any place where <code class="language-plaintext highlighter-rouge">opaque</code> is an identifier.</p>
+
+<p>For those SIP Committee members wary of adding a new keyword to the language, we propose an
+alternative approach. Instead of defining opaque types with the <code class="language-plaintext highlighter-rouge">opaque</code> modifier, opaque types
+may also be defined by combining the existing <code class="language-plaintext highlighter-rouge">new</code> and <code class="language-plaintext highlighter-rouge">type</code> keywords, e.g.
+<code class="language-plaintext highlighter-rouge">new type Logarithm = Double</code>. This option would be akin to the syntax used in Haskell for wrapper
+types, e.g. <code class="language-plaintext highlighter-rouge">newtype</code>.</p>
+
+<h4 id="type-companions">Type companions</h4>
+
+<p>This proposal only adds the notion of type companions for opaque types. After discussing with
+members of the SIP Committee and Scala compiler hackers, we believe that a notion of type companions
+extended to type aliases would not work because the typechecker aggressively dealiases**, and it is
+not possible to link to the type companion symbol once type aliases have been dealiased.</p>
+
+<p>** Note that dealiasing means <a href="https://en.wikipedia.org/wiki/Beta_normal_form">beta reducing</a> a type alias.</p>
+
+<h4 id="static-extension-methods">Static extension methods</h4>
+
+<p>The extension methods synthesized for implicit value classes are not static. We have not measured
+if the current encoding has an impact in performance, but if so, we can consider changing the
+encoding of extension methods either in this proposal or in a future one.</p>
+
+<h2 id="more-examples">More examples</h2>
+
+<h3 id="type-tagging">Type tagging</h3>
+
+<p>This example focuses on using type parameters to opaque types (one of
+which is a phantom type). The goal here is to be able to mark concrete
+types (<code class="language-plaintext highlighter-rouge">S</code>) with arbitrary <em>tags</em> (<code class="language-plaintext highlighter-rouge">T</code>) which can be used to
+distinguish them at compile-time.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">tagging</span> <span class="o">{</span>
+
+  <span class="c1">// Tagged[S, T] means that S is tagged with T</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">S</span>
+
+  <span class="k">object</span> <span class="nc">Tagged</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">tag</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">s</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span><span class="k">:</span> <span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">s</span>
+    <span class="k">def</span> <span class="nf">untag</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">st</span><span class="k">:</span> <span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">S</span> <span class="o">=</span> <span class="n">st</span>
+
+    <span class="k">def</span> <span class="nf">tags</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">fs</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span><span class="o">])</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]]</span> <span class="k">=</span> <span class="n">fs</span>
+    <span class="k">def</span> <span class="nf">untags</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">fst</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]])</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span><span class="o">]</span> <span class="k">=</span> <span class="n">fst</span>
+
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">taggedClassTag</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="k">implicit</span> <span class="n">ct</span><span class="k">:</span> <span class="kt">ClassTag</span><span class="o">[</span><span class="kt">S</span><span class="o">])</span><span class="k">:</span> <span class="kt">ClassTag</span><span class="o">[</span><span class="kt">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="n">ct</span>
+  <span class="o">}</span>
+
+  <span class="k">type</span> <span class="kt">@@</span><span class="err">[</span><span class="kt">S</span><span class="o">,</span> <span class="n">T</span><span class="err">]</span> <span class="k">=</span> <span class="nc">Tagged</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">]</span>
+
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">UntagOps</span><span class="o">[</span><span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">st</span><span class="k">:</span> <span class="kt">S</span> <span class="kt">@@</span> <span class="kt">T</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">untag</span><span class="k">:</span> <span class="kt">S</span> <span class="o">=</span> <span class="nv">Tagged</span><span class="o">.</span><span class="py">untag</span><span class="o">(</span><span class="n">st</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">UntagsOps</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">S</span>, <span class="kt">T</span><span class="o">](</span><span class="n">fs</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span> <span class="kt">@@</span> <span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">untags</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Tagged</span><span class="o">.</span><span class="py">untags</span><span class="o">(</span><span class="n">fs</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">TagOps</span><span class="o">[</span><span class="kt">S</span><span class="o">](</span><span class="n">s</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">tag</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span> <span class="kt">S</span> <span class="kt">@@</span> <span class="kt">T</span> <span class="o">=</span> <span class="nv">Tagged</span><span class="o">.</span><span class="py">tag</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">TagsOps</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">S</span><span class="o">](</span><span class="n">fs</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">tags</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">S</span> <span class="kt">@@</span> <span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Tagged</span><span class="o">.</span><span class="py">tags</span><span class="o">(</span><span class="n">fs</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">trait</span> <span class="nc">Meter</span>
+  <span class="k">trait</span> <span class="nc">Foot</span>
+  <span class="k">trait</span> <span class="nc">Fathom</span>
+
+  <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Double</span> <span class="kt">@@</span> <span class="kt">Meter</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="n">e7</span><span class="o">).</span><span class="py">tag</span><span class="o">[</span><span class="kt">Meter</span><span class="o">]</span>
+  <span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Double</span> <span class="kt">@@</span> <span class="kt">Foot</span> <span class="o">=</span> <span class="o">(</span><span class="mf">123.0</span><span class="o">).</span><span class="py">tag</span><span class="o">[</span><span class="kt">Foot</span><span class="o">]</span>
+  <span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Double</span> <span class="kt">@@</span> <span class="kt">Meter</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="mf">1.0</span><span class="o">,</span> <span class="mf">2.0</span><span class="o">,</span> <span class="mf">3.0</span><span class="o">).</span><span class="py">tags</span><span class="o">[</span><span class="kt">Meter</span><span class="o">]</span>
+
+  <span class="k">val</span> <span class="nv">o</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="n">implicitly</span>
+  <span class="k">val</span> <span class="nv">om</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">Double</span> <span class="kt">@@</span> <span class="kt">Meter</span><span class="o">]</span> <span class="k">=</span> <span class="nv">o</span><span class="o">.</span><span class="py">tags</span><span class="o">[</span><span class="kt">Meter</span><span class="o">]</span>
+  <span class="nv">om</span><span class="o">.</span><span class="py">compare</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="c1">// 0</span>
+  <span class="nv">om</span><span class="o">.</span><span class="py">compare</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="c1">// does not compile</span>
+  <span class="nv">xs</span><span class="o">.</span><span class="py">min</span><span class="o">(</span><span class="n">om</span><span class="o">)</span> <span class="c1">// 1.0</span>
+  <span class="nv">xs</span><span class="o">.</span><span class="py">min</span><span class="o">(</span><span class="n">o</span><span class="o">)</span> <span class="c1">// does not compile</span>
+
+  <span class="c1">// uses ClassTag[Double] via 'Tagged.taggedClassTag'.</span>
+  <span class="k">val</span> <span class="nv">ys</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">Double</span> <span class="kt">@@</span> <span class="kt">Foot</span><span class="o">](</span><span class="mi">20</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>There are a few interesting things to note here.</p>
+
+<p>First, as above we expect that tagging and untagging will not cause
+any boxing of these values at runtime, even though <code class="language-plaintext highlighter-rouge">Tagged</code> is
+generic. We also expect that the <code class="language-plaintext highlighter-rouge">Array[Double @@ Meter]</code> will be
+represented by <code class="language-plaintext highlighter-rouge">Array[Double]</code> at runtime.</p>
+
+<p>Second, notice that <code class="language-plaintext highlighter-rouge">Ordering[Double]</code> and <code class="language-plaintext highlighter-rouge">ClassTag[Double]</code> are not
+automatically in scope for <code class="language-plaintext highlighter-rouge">Tagged[Double, Meter]</code>. Opaque types
+currently need to “re-export” (or otherwise provide) their own
+implicit values.</p>
+
+<p>It would be possible to automatically provide <code class="language-plaintext highlighter-rouge">ClassTag</code> instances,
+using an <code class="language-plaintext highlighter-rouge">implicit val</code> in the case of opaque types wrapping concrete
+types (e.g.<code class="language-plaintext highlighter-rouge">opaque type X = Double</code>) and <code class="language-plaintext highlighter-rouge">implicit def</code> in cases such
+as above.</p>
+
+<h3 id="fix-point-type">Fix-point type</h3>
+
+<p>Here’s an interesting little example which defines the recursive
+opaque type <code class="language-plaintext highlighter-rouge">Fix</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">fixed</span> <span class="o">{</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]]</span> <span class="k">=</span> <span class="n">F</span><span class="o">[</span><span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">]]</span>
+
+  <span class="k">object</span> <span class="nc">Fix</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">fix</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]](</span><span class="n">unfixed</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">]])</span><span class="k">:</span> <span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">]</span> <span class="k">=</span> <span class="n">unfixed</span>
+    <span class="k">def</span> <span class="nf">unfix</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]](</span><span class="n">fixed</span><span class="k">:</span> <span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">])</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Fix</span><span class="o">[</span><span class="kt">F</span><span class="o">]]</span> <span class="k">=</span> <span class="n">fixed</span>
+  <span class="o">}</span>
+
+  <span class="k">sealed</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">TreeU</span><span class="o">[</span><span class="kt">R</span><span class="o">]</span>
+
+  <span class="nc">type</span> <span class="nc">Tree</span> <span class="k">=</span> <span class="nc">Fix</span><span class="o">[</span><span class="kt">TreeU</span><span class="o">]</span>
+
+  <span class="k">object</span> <span class="nc">TreeU</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">cata</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">t</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">)(</span><span class="n">f</span><span class="k">:</span> <span class="kt">TreeU</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="n">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span>
+      <span class="nf">f</span><span class="o">(</span><span class="nv">Fix</span><span class="o">.</span><span class="py">unfix</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nc">Branch</span><span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Branch</span><span class="o">(</span><span class="nf">cata</span><span class="o">(</span><span class="n">l</span><span class="o">)(</span><span class="n">f</span><span class="o">),</span> <span class="nf">cata</span><span class="o">(</span><span class="n">r</span><span class="o">)(</span><span class="n">f</span><span class="o">))</span>
+        <span class="k">case</span> <span class="nc">Leaf</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Leaf</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+      <span class="o">})</span>
+
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Branch</span><span class="o">[</span><span class="kt">R</span><span class="o">](</span><span class="n">left</span><span class="k">:</span> <span class="kt">R</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">TreeU</span><span class="o">[</span><span class="kt">R</span><span class="o">]</span>
+    <span class="k">case</span> <span class="k">class</span> <span class="nc">Leaf</span><span class="o">[</span><span class="kt">R</span><span class="o">](</span><span class="n">label</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">TreeU</span><span class="o">[</span><span class="kt">R</span><span class="o">]</span>
+  <span class="o">}</span>
+
+  <span class="k">def</span> <span class="nf">leaf</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Tree</span> <span class="o">=</span> <span class="nv">Fix</span><span class="o">.</span><span class="py">fix</span><span class="o">(</span><span class="nc">Leaf</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+  <span class="k">def</span> <span class="nf">branch</span><span class="o">(</span><span class="n">lhs</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">,</span> <span class="n">rhs</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">)</span><span class="k">:</span> <span class="kt">Tree</span> <span class="o">=</span> <span class="nv">Fix</span><span class="o">.</span><span class="py">fix</span><span class="o">(</span><span class="nc">Branch</span><span class="o">(</span><span class="n">lhs</span><span class="o">,</span> <span class="n">rhs</span><span class="o">))</span>
+
+  <span class="k">val</span> <span class="nv">tree</span><span class="k">:</span> <span class="kt">Tree</span> <span class="o">=</span> <span class="nf">branch</span><span class="o">(</span><span class="nf">branch</span><span class="o">(</span><span class="nf">leaf</span><span class="o">(</span><span class="s">"a"</span><span class="o">),</span> <span class="nf">leaf</span><span class="o">(</span><span class="s">"b"</span><span class="o">)),</span> <span class="nf">leaf</span><span class="o">(</span><span class="s">"c"</span><span class="o">))</span>
+
+  <span class="nf">println</span><span class="o">(</span><span class="n">tree</span><span class="o">)</span>
+  <span class="c1">// Branch(Branch(Leaf(a), Leaf(b)), Leaf(c))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is an interesting example which is intended to show that opaque
+types (unlike type aliases) have an independent existence, even within
+the companion. This means that unlike type aliases, <code class="language-plaintext highlighter-rouge">Fix[F]</code> should not
+result in an infinite expansion in the above code.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Fix</code> type is useful to implementing recursion schemes, or just
+for creating recursive structures which are parameterized on their
+recursive type.</p>
+
+<h3 id="explicit-nullable-types">Explicit nullable types</h3>
+
+<p>There have previously been proposals to provide a “zero-cost Option”
+using value classes. Opaque types make this very straight-forward by
+bounding the underlying type (<code class="language-plaintext highlighter-rouge">A</code>) with <code class="language-plaintext highlighter-rouge">AnyRef</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">nullable</span> <span class="o">{</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">A</span> <span class="k">&lt;:</span> <span class="kt">AnyRef</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+
+  <span class="k">object</span> <span class="nc">Nullable</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">A</span> <span class="k">&lt;:</span> <span class="kt">AnyRef</span><span class="o">](</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">a</span>
+
+    <span class="k">implicit</span> <span class="k">class</span> <span class="nc">NullableOps</span><span class="o">[</span><span class="kt">A</span> <span class="k">&lt;:</span> <span class="kt">AnyRef</span><span class="o">](</span><span class="n">na</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">exists</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+        <span class="n">na</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nf">p</span><span class="o">(</span><span class="n">na</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">filter</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">na</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nf">p</span><span class="o">(</span><span class="n">na</span><span class="o">))</span> <span class="n">na</span> <span class="k">else</span> <span class="kc">null</span>
+      <span class="k">def</span> <span class="nf">flatMap</span><span class="o">[</span><span class="kt">B</span> <span class="k">&lt;:</span> <span class="kt">AnyRef</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Nullable</span><span class="o">[</span><span class="kt">B</span><span class="o">])</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">na</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="kc">null</span> <span class="k">else</span> <span class="nf">f</span><span class="o">(</span><span class="n">na</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">forall</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span>
+        <span class="n">na</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="nf">p</span><span class="o">(</span><span class="n">na</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">getOrElse</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="n">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">na</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="n">a</span> <span class="k">else</span> <span class="n">na</span>
+      <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span> <span class="k">&lt;:</span> <span class="kt">AnyRef</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">na</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="kc">null</span> <span class="k">else</span> <span class="nf">f</span><span class="o">(</span><span class="n">na</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">orElse</span><span class="o">(</span><span class="n">na2</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Nullable</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Nullable</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+        <span class="nf">if</span> <span class="o">(</span><span class="n">na</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="n">na2</span> <span class="k">else</span> <span class="n">na</span>
+      <span class="k">def</span> <span class="nf">toOption</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+        <span class="nc">Option</span><span class="o">(</span><span class="n">na</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This example provides most of the benefits of using <code class="language-plaintext highlighter-rouge">Option</code> at API
+boundaries with libraries that use <code class="language-plaintext highlighter-rouge">null</code> (such as many Java
+libraries). Unlike a value class, we can guarantee that there will
+never be a wrapper around the raw values (or raw nulls).</p>
+
+<p>Notice that <code class="language-plaintext highlighter-rouge">Nullable[Nullable[B]]</code> is not a valid type, because
+<code class="language-plaintext highlighter-rouge">Nullable[B]</code> is not known to be <code class="language-plaintext highlighter-rouge">&lt;: AnyRef</code>. This is a key difference
+between a type like <code class="language-plaintext highlighter-rouge">Option</code> (which is parametric and can easily wrap
+itself) and a type like <code class="language-plaintext highlighter-rouge">Nullable</code> (which only has one <code class="language-plaintext highlighter-rouge">null</code> value to
+use).</p>
+
+<h3 id="custom-instances">Custom instances</h3>
+
+<p>Currently, many libraries (including Scalding and Algebird) define
+wrapper types which change the kind of aggregation used for that
+type. This is useful in frameworks like MapReduce, Spark, Flink,
+Storm, etc. where users describe computation in terms of mapping and
+aggregation.</p>
+
+<p>The following example shows how opaque types can make using these
+wrappers a bit more elegant:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">groups</span> <span class="o">{</span>
+  <span class="k">trait</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span>
+  <span class="o">}</span>
+
+  <span class="k">object</span> <span class="nc">Semigroup</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">instance</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="o">(</span><span class="kt">A</span><span class="o">,</span> <span class="kt">A</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+      <span class="k">new</span> <span class="nc">Semigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+        <span class="k">def</span> <span class="nf">combine</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="k">type</span> <span class="kt">Id</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+
+  <span class="k">trait</span> <span class="nc">Wrapping</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+    <span class="k">def</span> <span class="nf">unwraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+  <span class="o">}</span>
+
+  <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]]</span> <span class="o">{</span> <span class="n">self</span> <span class="k">=&gt;</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+    <span class="k">def</span> <span class="nf">unwraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+
+    <span class="k">final</span> <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">wraps</span><span class="o">[</span><span class="kt">Id</span>, <span class="kt">A</span><span class="o">](</span><span class="n">a</span><span class="o">)</span>
+
+    <span class="k">implicit</span> <span class="k">object</span> <span class="nc">WrapperWrapping</span> <span class="k">extends</span> <span class="nc">Wrapping</span><span class="o">[</span><span class="kt">F</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">wraps</span><span class="o">(</span><span class="n">ga</span><span class="o">)</span>
+      <span class="k">def</span> <span class="nf">unwraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">self</span><span class="o">.</span><span class="py">unwraps</span><span class="o">(</span><span class="n">ga</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">First</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">First</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">First</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">First</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">First</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">firstSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">First</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Last</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Last</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Last</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Last</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Last</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">lastSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Last</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Min</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Min</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Min</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Min</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Min</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">minSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">implicit</span> <span class="n">o</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Min</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nv">o</span><span class="o">.</span><span class="py">min</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Max</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Max</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Max</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Max</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Max</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">maxSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">implicit</span> <span class="n">o</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Max</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nv">o</span><span class="o">.</span><span class="py">max</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Plus</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Plus</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Plus</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Plus</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Plus</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">plusSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">implicit</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Numeric</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Plus</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nv">n</span><span class="o">.</span><span class="py">plus</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Times</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Times</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Times</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Times</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Times</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">timesSemigroup</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">implicit</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Numeric</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Semigroup</span><span class="o">[</span><span class="kt">Times</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Semigroup</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nv">n</span><span class="o">.</span><span class="py">times</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Reversed</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Reversed</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Reversed</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Reversed</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Reversed</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">reversedOrdering</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">implicit</span> <span class="n">o</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">Reversed</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">o</span><span class="o">.</span><span class="py">reverse</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Unordered</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">A</span>
+  <span class="k">object</span> <span class="nc">Unordered</span> <span class="k">extends</span> <span class="nc">Wrapper</span><span class="o">[</span><span class="kt">Unordered</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">wraps</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">ga</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Unordered</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span> <span class="n">ga</span>
+    <span class="k">def</span> <span class="nf">unwrap</span><span class="o">[</span><span class="kt">G</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">A</span><span class="o">](</span><span class="n">gfa</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">Unordered</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span><span class="k">:</span> <span class="kt">G</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">gfa</span>
+    <span class="k">implicit</span> <span class="k">def</span> <span class="nf">unorderedOrdering</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">Unordered</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">=</span>
+      <span class="nv">Ordering</span><span class="o">.</span><span class="py">by</span><span class="o">(</span><span class="k">_</span> <span class="k">=&gt;</span> <span class="o">())</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The example demonstrates using an abstract class (<code class="language-plaintext highlighter-rouge">Wrapper</code>) to share
+code between opaque type companion objects. Like the tagging example,
+we can use two methods (<code class="language-plaintext highlighter-rouge">wraps</code> and <code class="language-plaintext highlighter-rouge">unwraps</code>) to wrap and unwrap <code class="language-plaintext highlighter-rouge">A</code>
+types, even if nested in an arbitrary context (<code class="language-plaintext highlighter-rouge">G[_]</code>). These methods
+cannot be implemented in <code class="language-plaintext highlighter-rouge">Wrapper</code> because each opaque type companion
+contains the only scope where its particular methods can be
+implemented.</p>
+
+<p>Similarly to the tagging example, these types are zero-cost wrappers
+which can be used to tag how to aggregate the underlying type (for
+example <code class="language-plaintext highlighter-rouge">Int</code>).</p>
+
+<h3 id="probability-interval">Probability interval</h3>
+
+<p>Here’s an example that demonstrates how opaque types can limit the
+underlying type’s range of values in a way that minimizes the required
+error-checking:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">prob</span> <span class="o">{</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="nc">Double</span>
+
+  <span class="k">object</span> <span class="nc">Probability</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Probability</span><span class="o">]</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+
+    <span class="k">def</span> <span class="nf">unsafe</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="o">{</span>
+      <span class="nf">require</span><span class="o">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">p</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="o">,</span> <span class="n">s</span><span class="s">"probabilities lie in [0, 1] (got $p)"</span><span class="o">)</span>
+      <span class="n">p</span>
+    <span class="o">}</span>
+
+    <span class="k">def</span> <span class="nf">asDouble</span><span class="o">(</span><span class="n">p</span><span class="k">:</span> <span class="kt">Probability</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="k">val</span> <span class="nv">Never</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">val</span> <span class="nv">CoinToss</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">val</span> <span class="nv">Certain</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">implicit</span> <span class="k">val</span> <span class="nv">ordering</span><span class="k">:</span> <span class="kt">Ordering</span><span class="o">[</span><span class="kt">Probability</span><span class="o">]</span> <span class="k">=</span>
+      <span class="n">implicitly</span><span class="o">[</span><span class="kt">Ordering</span><span class="o">[</span><span class="kt">Double</span><span class="o">]]</span>
+
+    <span class="k">implicit</span> <span class="k">class</span> <span class="nc">ProbabilityOps</span><span class="o">(</span><span class="n">p1</span><span class="k">:</span> <span class="kt">Probability</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">unary_~</span> <span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="nc">Certain</span> <span class="o">-</span> <span class="n">p1</span>
+      <span class="k">def</span> <span class="nf">&amp;</span><span class="o">(</span><span class="n">p2</span><span class="k">:</span> <span class="kt">Probability</span><span class="o">)</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p2</span>
+      <span class="k">def</span> <span class="nf">|</span><span class="o">(</span><span class="n">p2</span><span class="k">:</span> <span class="kt">Probability</span><span class="o">)</span><span class="k">:</span> <span class="kt">Probability</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span> <span class="o">-</span> <span class="o">(</span><span class="n">p1</span> <span class="o">*</span> <span class="n">p2</span><span class="o">)</span>
+
+      <span class="k">def</span> <span class="nf">isImpossible</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">==</span> <span class="nc">Never</span>
+      <span class="k">def</span> <span class="nf">isCertain</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">==</span> <span class="nc">Certain</span>
+
+      <span class="k">import</span> <span class="nn">scala.util.Random</span>
+
+      <span class="k">def</span> <span class="nf">sample</span><span class="o">(</span><span class="n">r</span><span class="k">:</span> <span class="kt">Random</span> <span class="o">=</span> <span class="nc">Random</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="nv">r</span><span class="o">.</span><span class="py">nextDouble</span> <span class="o">&lt;=</span> <span class="n">p1</span>
+      <span class="k">def</span> <span class="nf">toDouble</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">p1</span>
+    <span class="o">}</span>
+
+    <span class="k">val</span> <span class="nv">caughtTrain</span> <span class="k">=</span> <span class="nv">Probability</span><span class="o">.</span><span class="py">unsafe</span><span class="o">(</span><span class="mf">0.3</span><span class="o">)</span>
+    <span class="k">val</span> <span class="nv">missedTrain</span> <span class="k">=</span> <span class="o">~</span><span class="n">caughtTrain</span>
+    <span class="k">val</span> <span class="nv">caughtCab</span> <span class="k">=</span> <span class="nv">Probability</span><span class="o">.</span><span class="py">CoinToss</span>
+    <span class="k">val</span> <span class="nv">arrived</span> <span class="k">=</span> <span class="n">caughtTrain</span> <span class="o">|</span> <span class="o">(</span><span class="n">missedTrain</span> <span class="o">&amp;</span> <span class="n">caughtCab</span><span class="o">)</span>
+
+    <span class="nf">println</span><span class="o">((</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="k">_</span> <span class="k">=&gt;</span> <span class="nv">arrived</span><span class="o">.</span><span class="py">sample</span><span class="o">()).</span><span class="py">toList</span><span class="o">)</span>
+    <span class="c1">// List(true, true, false, true, false)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Outside of the <code class="language-plaintext highlighter-rouge">Probability</code> companion, we can be sure that the
+underlying <code class="language-plaintext highlighter-rouge">Double</code> values fall in the interval <em>[0, 1]</em>, which means
+we don’t need to include error-checking code when working with
+<code class="language-plaintext highlighter-rouge">Probability</code> values. We can be sure that adding this kind of
+compile-time safety to a program doesn’t add any additional cost
+(except for the error-checking that we explicitly want).</p>
+
+<p>This example is somewhat similar to <code class="language-plaintext highlighter-rouge">Logarithm</code> above. Other
+properties we might want to verify at compile-time: <code class="language-plaintext highlighter-rouge">NonNegative</code>,
+<code class="language-plaintext highlighter-rouge">Positive</code>, <code class="language-plaintext highlighter-rouge">Finite</code>, <code class="language-plaintext highlighter-rouge">Unsigned</code> and so on.</p>
+
+<h3 id="immutable-ie-write-once-arrays">Immutable (i.e. write-once) arrays</h3>
+
+<p>Often performance sensitive code will use arrays via the following
+pattern:</p>
+
+<ol>
+  <li>Allocate an array of a fixed, known size.</li>
+  <li>Initialize the array via code which mutates it.</li>
+  <li>Return the array, which is now treated as immutable.</li>
+</ol>
+
+<p>In this pattern, the vast majority of time is spent in the third step,
+where the array’s compactness and speed of iteration/access provide
+major wins over other data types.</p>
+
+<p>This pattern is currently only enforced by convention. However, opaque
+types create an opportunity to provide more safety without incurring
+any overhead:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">ia</span> <span class="o">{</span>
+
+  <span class="k">import</span> <span class="nn">java.util.Arrays</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+
+  <span class="k">object</span> <span class="nc">IArray</span> <span class="o">{</span>
+    <span class="nd">@inline</span> <span class="k">final</span> <span class="k">def</span> <span class="nf">initialize</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">body</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">Array</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">body</span>
+
+    <span class="nd">@inline</span> <span class="k">final</span> <span class="k">def</span> <span class="nf">size</span><span class="o">(</span><span class="n">ia</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">ia</span><span class="o">.</span><span class="py">length</span>
+    <span class="nd">@inline</span> <span class="k">final</span> <span class="k">def</span> <span class="nf">get</span><span class="o">(</span><span class="n">ia</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="nf">ia</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+
+    <span class="c1">// return a sorted copy of the array</span>
+    <span class="k">def</span> <span class="nf">sorted</span><span class="o">(</span><span class="n">ia</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">arr</span> <span class="k">=</span> <span class="nv">Arrays</span><span class="o">.</span><span class="py">copyOf</span><span class="o">(</span><span class="n">ia</span><span class="o">,</span> <span class="nv">ia</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+      <span class="nv">scala</span><span class="o">.</span><span class="py">util</span><span class="o">.</span><span class="py">Sorting</span><span class="o">.</span><span class="py">quickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">)</span>
+      <span class="n">arr</span>
+    <span class="o">}</span>
+
+    <span class="c1">// use a standard java method to search a sorted IArray.</span>
+    <span class="c1">// (note that this doesn't mutate the array).</span>
+    <span class="k">def</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="n">ia</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">Long</span><span class="o">],</span> <span class="n">elem</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+      <span class="nv">Arrays</span><span class="o">.</span><span class="py">binarySearch</span><span class="o">(</span><span class="n">ia</span><span class="o">,</span> <span class="n">elem</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="c1">// same as IArray.binarySearch but implemented by-hand.</span>
+  <span class="c1">//</span>
+  <span class="c1">// given a sorted IArray, returns index of `elem`,</span>
+  <span class="c1">// or a negative value if not found.</span>
+  <span class="k">def</span> <span class="nf">binaryIndexOf</span><span class="o">(</span><span class="n">ia</span><span class="k">:</span> <span class="kt">IArray</span><span class="o">[</span><span class="kt">Long</span><span class="o">],</span> <span class="n">elem</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">var</span> <span class="n">lower</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">var</span> <span class="n">upper</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">IArray</span><span class="o">.</span><span class="py">size</span><span class="o">(</span><span class="n">ia</span><span class="o">)</span>
+    <span class="nf">while</span> <span class="o">(</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">val</span> <span class="nv">middle</span> <span class="k">=</span> <span class="o">(</span><span class="n">lower</span> <span class="o">+</span> <span class="n">upper</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span>
+      <span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="nv">IArray</span><span class="o">.</span><span class="py">get</span><span class="o">(</span><span class="n">ia</span><span class="o">,</span> <span class="n">middle</span><span class="o">)</span>
+
+      <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">elem</span><span class="o">)</span> <span class="k">return</span> <span class="n">middle</span>
+      <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">elem</span><span class="o">)</span> <span class="n">first</span> <span class="k">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="k">else</span> <span class="n">last</span> <span class="k">=</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="o">}</span>
+    <span class="o">-</span><span class="n">lower</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This example is a bit different from others: there’s no attempt to
+enrich the <code class="language-plaintext highlighter-rouge">IArray</code> type with syntactic conveniences. Rather, the goal
+is to show that traditional, “low-level” code with <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Int</code>,
+etc. can be written with opaque types without sacrificing any
+performance.</p>
+
+<p>Our other examples enrich existing data types with new
+functionality. This example serves to constrain the operations used
+with a type (but without introducing any overhead/indirection, which a
+traditional wrapper would).</p>
+
+<h2 id="differences-with-value-classes">Differences with value classes</h2>
+
+<p>Most of the above examples can also be implemented using value
+classes. This section will highlight some differences between these
+hypothetical encodings.</p>
+
+<h3 id="used-as-a-type-parameter">Used as a type parameter</h3>
+
+<p>In many cases an author would introduce opaque types or value classes
+to add extra type safety to a “stringly-typed” API, by replacing
+instances of the <code class="language-plaintext highlighter-rouge">String</code> type with a more specific type.</p>
+
+<p>For example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">pkg</span> <span class="o">{</span>
+
+  <span class="k">import</span> <span class="nn">Character.</span><span class="o">{</span><span class="n">isAlphabetic</span><span class="o">,</span> <span class="n">isDigit</span><span class="o">}</span>
+
+  <span class="k">class</span> <span class="nc">Alphabetic</span> <span class="k">private</span><span class="o">[</span><span class="kt">pkg</span><span class="o">]</span> <span class="o">(</span><span class="k">val</span> <span class="nv">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span>
+
+  <span class="k">object</span> <span class="nc">Alphabetic</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">fromString</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Alphabetic</span><span class="o">]</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="nv">s</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="nf">isAlphabetic</span><span class="o">(</span><span class="k">_</span><span class="o">)))</span> <span class="nc">Some</span><span class="o">(</span><span class="k">new</span> <span class="nc">Alphabetic</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+      <span class="k">else</span> <span class="nc">None</span>
+  <span class="o">}</span>
+
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Digits</span> <span class="o">=</span> <span class="nc">String</span>
+
+  <span class="k">object</span> <span class="nc">Digits</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">fromString</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Digits</span><span class="o">]</span> <span class="k">=</span>
+      <span class="nf">if</span> <span class="o">(</span><span class="nv">s</span><span class="o">.</span><span class="py">forall</span><span class="o">(</span><span class="nf">isDigit</span><span class="o">(</span><span class="k">_</span><span class="o">)))</span> <span class="nc">Some</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+      <span class="k">else</span> <span class="nc">None</span>
+
+    <span class="k">def</span> <span class="nf">asString</span><span class="o">(</span><span class="n">d</span><span class="k">:</span> <span class="kt">Digits</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">d</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The code here is relatively comparable. However, when changing
+<code class="language-plaintext highlighter-rouge">String</code> to <code class="language-plaintext highlighter-rouge">Alphabetic</code> in code, the following types would be changed
+(i.e. boxed):</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Array[Alphabetic]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Option[Alphabetic]</code> (e.g. the result of <code class="language-plaintext highlighter-rouge">Alphabetic.fromString</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">Vector[Alphabetic]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Alphabetic =&gt; Boolean</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Map[Alphabetic, Int]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Ordering[Alphabetic]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">(Alphabetic, String)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Monoid[Alphabetic]</code></li>
+</ul>
+
+<p>In many cases users won’t mind the fact that this code will box, but
+there will certainly be an impact on the bytecode produced (and
+possibly the runtime performance).</p>
+
+<p>By contrast, replacing <code class="language-plaintext highlighter-rouge">String</code> with <code class="language-plaintext highlighter-rouge">Digits</code> is guaranteed to have no
+impact (all occurrences of <code class="language-plaintext highlighter-rouge">Digits</code> are guaranteed to be erased to
+<code class="language-plaintext highlighter-rouge">String</code>). Aside from the ergonomics of calling the <code class="language-plaintext highlighter-rouge">fromString</code> and
+<code class="language-plaintext highlighter-rouge">asString</code> methods, there’s no runtime impact versus using the
+underlying type.</p>
+
+<p>One wrinkle to the above is that built-in primitive types will
+naturally box in some situations (but not others). For example
+<code class="language-plaintext highlighter-rouge">List[Double]</code> will be represented as a <code class="language-plaintext highlighter-rouge">List[java.lang.Double]</code>,
+<code class="language-plaintext highlighter-rouge">(Double, Double)</code> will be represented as a <code class="language-plaintext highlighter-rouge">scala.Tuple2$mcDD$sp</code>,
+and so on. In these cases, an opaque type will exhibit the same
+behavior.</p>
+
+<h3 id="default-visibility">Default visibility</h3>
+
+<p>By default, a value class’ constructor and accessor are public. It
+<em>is</em> possible to restrict access, using a <code class="language-plaintext highlighter-rouge">private</code> constructor and
+<code class="language-plaintext highlighter-rouge">private</code> accessor, but this makes the comparison between opaque types
+and value classes less attractive:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="nn">object</span> <span class="n">pkg</span> <span class="o">{</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">XCoord</span> <span class="o">=</span> <span class="nc">Int</span>
+
+  <span class="k">case</span> <span class="k">class</span> <span class="nc">private</span><span class="o">[</span><span class="kt">pkg</span><span class="o">]</span> <span class="nc">YCoord</span> <span class="o">(</span><span class="k">private</span><span class="o">[</span><span class="kt">pkg</span><span class="o">]</span> <span class="k">val</span> <span class="nv">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span>
+
+  <span class="c1">// in both cases, we'd need public factory constructors</span>
+  <span class="c1">// to allow users to produce values of these types.</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Opaque types’ default behavior is more appropriate for
+information-hiding when defining wrapper types.</p>
+
+<h3 id="lub-differences">LUB differences</h3>
+
+<p>Value classes extend <code class="language-plaintext highlighter-rouge">AnyVal</code> by virtue of the syntax used to define
+them. One reason this is necessary is that value classes cannot be
+<code class="language-plaintext highlighter-rouge">null</code> (otherwise this could create ambiguities between their boxed
+and unboxed representations when wrapping <code class="language-plaintext highlighter-rouge">AnyRef</code> values).</p>
+
+<p>By contrast, when seen from the “outside” opaque types extend
+<code class="language-plaintext highlighter-rouge">Any</code>. Their bounds are the same as those of a type parameter or type
+member without explicit bounds, i.e. <code class="language-plaintext highlighter-rouge">A &lt;: Any &gt;: Nothing</code>.</p>
+
+<p>This is not a major difference (for example, under <code class="language-plaintext highlighter-rouge">-Xlint</code> inferring
+either type will generate a warning) but does it illustrate that an
+opaque type is standing in for an unknown type (i.e. <em>anything</em>)
+whereas a value class introduces its own semantics which remain in the
+type system even if we hope to never see the instances:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Letters</span><span class="o">(</span><span class="k">val</span> <span class="nv">toString</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span>
+<span class="k">class</span> <span class="nc">Digits</span><span class="o">(</span><span class="k">val</span> <span class="nv">toInt</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span>
+
+<span class="c1">// inferred to List[AnyVal]</span>
+<span class="k">val</span> <span class="nv">ys</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="k">new</span> <span class="nc">Letters</span><span class="o">(</span><span class="s">"abc"</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Digits</span><span class="o">(</span><span class="s">"123"</span><span class="o">))</span>
+
+<span class="c1">// inferred to List[String].</span>
+<span class="nc">List</span><span class="o">[</span><span class="kt">AnyVal</span><span class="o">]</span> <span class="k">val</span> <span class="nv">xs</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="s">"abc"</span><span class="o">,</span> <span class="s">"123"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Through covariance <code class="language-plaintext highlighter-rouge">List[String] &lt;: List[AnyRef]</code> (and <code class="language-plaintext highlighter-rouge">List[Any]</code>)
+but it is <em>not</em> a <code class="language-plaintext highlighter-rouge">List[AnyVal]</code>.</p>
+
+<h3 id="size-of-artifacts-produced">Size of artifacts produced</h3>
+
+<p>Since value classes do have a runtime representation, they do increase
+the size of runtime artifacts produced (whether a JAR file, a
+JavaScript file, or something else). Their methods are also compiled
+to multiple representations (i.e. they support both the boxed and
+unboxed forms via extensions methods). Again, this comes at a cost.</p>
+
+<p>By contrast, opaque types have no inherent runtime footprint. The
+opaque type’s companion <em>is</em> present at runtime, but it usually
+contains validation and data transformation code which would have been
+required even if the author had just stuck to the underlying type, and
+doesn’t add any extra extension methods.</p>
+
+<h2 id="implementation-notes">Implementation notes</h2>
+
+<p>To implement opaque types, we need to modify three compiler phases: parser, namer and typer. At the
+time of this writing, it is unclear if later phases like erasure must be changed as well, but we
+think this should not be necessary.</p>
+
+<p>There are several key ideas in the current, work-in-progress implementation:</p>
+
+<ul>
+  <li>
+    <p>To meet the type equivalence relationship for opaque types, we synthesize two implicit conversions
+inside the opaque type companion, if they do not already exist. If <code class="language-plaintext highlighter-rouge">opaque type t = T</code>, then
+two implicit conversions are synthesized, one from <code class="language-plaintext highlighter-rouge">t</code> to <code class="language-plaintext highlighter-rouge">T</code> is synthesized and another for the
+other way around. The body of these methods will use <code class="language-plaintext highlighter-rouge">t.asInstanceOf[T]</code> and vice versa **.</p>
+  </li>
+  <li>
+    <p>Phases after typer always dealias opaque types. This way, erasure and codegen can unwrap opaque
+types out of the box and, at the bytecode level, their underlying representation is used instead.</p>
+  </li>
+</ul>
+
+<p>All these ideas are open to refinements by the SIP Committee.</p>
+
+<h3 id="on-removing-asinstanceof-at-compile-time">On removing <code class="language-plaintext highlighter-rouge">asInstanceOf</code> at compile-time</h3>
+
+<p>** Note that these <code class="language-plaintext highlighter-rouge">asInstanceOf</code> can be removed at compile-time, but there is no precedent of
+doing so in the Scalac compiler. However, it is not clear whether leaving these casts will have
+an impact on performance – the underlying virtual machine may remove the operation based on type
+analysis due to the fact that the cast is from <code class="language-plaintext highlighter-rouge">Double =&gt; Double</code> via Class Hierarchy Analysis.
+Despite not having a precedence, the authors of the proposal incline to remove these checks at
+compile-time. This will also require a modification to the spec.</p>
+
+<p>We’re also assuming that implicit enrichment via value types is a
+sufficient way to provide zero-cost extension methods. We’ll need to
+benchmark opaque types + value class enrichment to ensure that there
+aren’t hidden performance problems.</p>
+
+<h1 id="cross-platform">Cross-platform</h1>
+
+<p>We believe that by implementing opaque types early in the pipeline, <a href="https://www.scala-js.org/">Scala.js</a> and <a href="https://github.com/scala-native/scala-native">Scala Native</a>
+can compile them out-of-the-box. Thus, we do not expect opaque types to have problems for different
+backends, since erasure will always see the dealiased types.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We believe that opaque types fit in the language nicely. The combination of type aliases and value
+classes (for the zero runtime overhead of extension methods) result in compile-time wrapper types
+that address the performance issues of value classes.</p>
+
+<p>As a summary, opaque types are:</p>
+
+<ul>
+  <li>A subset of type aliases that are transparent only within the type companion.</li>
+  <li>Extensible (users can define their own extension methods).</li>
+  <li>Fit for performance-sensitive code (no boxing/unboxing by design).</li>
+  <li>A lightweight way to add extra type-safety to strings, numbers, etc.</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://failex.blogspot.ch/2017/04/the-high-cost-of-anyval-subclasses.html">(Appendix A) The High Cost of AnyVal classes</a></li>
+</ol>
+
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #859900">Accepted</div>
+           <p class="vote-text" style="color: #859900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2017-09-20-opaque-types.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

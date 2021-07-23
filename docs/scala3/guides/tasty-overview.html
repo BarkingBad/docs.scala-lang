@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      An Overview of TASTy | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/guides/tasty-overview.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="An Overview of TASTy"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="An Overview of TASTy"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>An Overview of TASTy</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>If you create a Scala 3 source code file named <em>Hello.scala</em>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">hello</span> <span class="k">=</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Hello, world"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>and then compile that file with <code class="language-plaintext highlighter-rouge">scalac</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scalac Hello.scala
+</code></pre></div></div>
+
+<p>you’ll notice that amongst other resulting files, <code class="language-plaintext highlighter-rouge">scalac</code> creates files with the <em>.tasty</em> extension:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-1</span>
+Hello<span class="nv">$package$.</span>class
+Hello<span class="nv">$package</span>.class
+Hello<span class="nv">$package</span>.tasty
+Hello.scala
+hello.class
+hello.tasty
+</code></pre></div></div>
+
+<p>This leads to the natural question, “What is tasty?”</p>
+
+<h2 id="what-is-tasty">What is TASTy?</h2>
+
+<p>TASTy is an acronym that comes from the term, <em>Typed Abstract Syntax Trees</em>.
+It’s a high-level interchange format for Scala 3, and in this document we’ll refer to it as <em>Tasty</em>.</p>
+
+<p>A first important thing to know is that Tasty files are generated by the <code class="language-plaintext highlighter-rouge">scalac</code> compiler, and contain <em>all</em> of the information about your source code, including the syntactic structure of your program, and <em>complete</em> information about types, positions, and even documentation. Tasty files contain much more information than <em>.class</em> files, which are generated to run on the JVM. (More on this shortly.)</p>
+
+<p>In Scala 3, the compilation process looks like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         +-------------+    +-------------+    +-------------+
+$ scalac | Hello.scala | -&gt; | Hello.tasty | -&gt; | Hello.class |
+         +-------------+    +-------------+    +-------------+
+                ^                  ^                  ^
+                |                  |                  |
+           Your source        TASTy file         Class file
+               code           for scalac        for the JVM
+                              (contains         (incomplete
+                               complete         information)
+                             information)
+</code></pre></div></div>
+
+<h3 id="the-issue-with-class-files">The issue with <em>.class</em> files</h3>
+
+<p>Because of issues such as <a href="https://www.scala-lang.org/files/archive/spec/2.13/03-types.html#type-erasure">type erasure</a>, <em>.class</em> files are actually an incomplete representation of your code.
+A simple way to demonstrate this is with a <code class="language-plaintext highlighter-rouge">List</code> example.</p>
+
+<p><em>Type erasure</em> means that when you write Scala code like this that’s supposed to run on the JVM:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>that code is compiled to a <em>.class</em> file that needs to be compatible with the JVM. As a result of that compatibility requirement, the code inside that class file — which you can see with a <code class="language-plaintext highlighter-rouge">javap</code> command — ends up looking like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">scala</span><span class="o">.</span><span class="na">collection</span><span class="o">.</span><span class="na">immutable</span><span class="o">.</span><span class="na">List</span><span class="o">&lt;</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span><span class="o">&gt;</span> <span class="nf">xs</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>That <code class="language-plaintext highlighter-rouge">javap</code> command output shows a Java representation of what’s contained in the class file. Notice in this output that <code class="language-plaintext highlighter-rouge">xs</code> <em>is not</em> defined as a <code class="language-plaintext highlighter-rouge">List[Int]</code> any more; it’s essentially represented as a <code class="language-plaintext highlighter-rouge">List[java.lang.Object]</code>. For your Scala code to work with the JVM, the <code class="language-plaintext highlighter-rouge">Int</code> type has been erased.</p>
+
+<p>Later, when you access an element of your <code class="language-plaintext highlighter-rouge">List[Int]</code> in your Scala code, like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="nf">xs</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>the resulting class file will have a casting operation for this line of code, which you can think of being like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int x = (Int) xs.get(0)               // Java-ish
+val x = xs.get(0).asInstanceOf[Int]   // more Scala-like
+</code></pre></div></div>
+
+<p>Again, this is done for compatibility, so your Scala code can run on the JVM. However, the information that we already had a list of integers is lost in the class files.
+This poses problems when trying to compile a Scala program against an already compiled library. For this, we need more information than usually available in class files.</p>
+
+<p>And this discussion only covers the topic of type erasure. There are similar issues for every other Scala construct that the JVM isn’t aware of, including constructs like unions, intersections, traits with parameters, and many more Scala 3 features.</p>
+
+<h3 id="tasty-to-the-rescue">TASTy to the Rescue</h3>
+<p>So, instead of having no information about the original types in <em>.class</em> files, or only the public API (as with the Scala 2.13 “Pickle” format), the TASTy format stores the complete abstract syntax tree (AST), after type checking. Storing the whole AST has a lot of advantages: it enables separate compilation, recompilation for a different JVM version, static analysis of programs, and many more.</p>
+
+<h3 id="key-points">Key points</h3>
+
+<p>So that’s the first takeaway from this section: The types you specify in your Scala code aren’t represented completely accurately in <em>.class</em> files.</p>
+
+<p>A second key point is to understand that there are differences between the information that’s available at <em>compile time</em> and <em>run time</em>:</p>
+
+<ul>
+  <li>At <strong>compile time</strong>, as <code class="language-plaintext highlighter-rouge">scalac</code> reads and analyzes your code, it knows that <code class="language-plaintext highlighter-rouge">xs</code> is a <code class="language-plaintext highlighter-rouge">List[Int]</code></li>
+  <li>When the compiler writes your code to a class file, it writes that <code class="language-plaintext highlighter-rouge">xs</code> is a <code class="language-plaintext highlighter-rouge">List[Object]</code>, and it adds casting information everywhere else <code class="language-plaintext highlighter-rouge">xs</code> is accessed</li>
+  <li>Then at <strong>run time</strong> — with your code running inside the JVM — the JVM doesn’t know that your list is a <code class="language-plaintext highlighter-rouge">List[Int]</code></li>
+</ul>
+
+<p>With Scala 3 and Tasty, here’s another important note about compile time:</p>
+
+<ul>
+  <li>When you write Scala 3 code that uses other Scala 3 libraries, <code class="language-plaintext highlighter-rouge">scalac</code> doesn’t have to read their <em>.class</em> files any more; it can read their <em>.tasty</em> files, which, as mentioned, are an <em>exact</em> representation of your code. This is important to enable separate compilation and compatiblity between Scala 2.13 and Scala 3.</li>
+</ul>
+
+<h2 id="tasty-benefits">Tasty benefits</h2>
+
+<p>As you can imagine, having a complete representation of your code has <a href="https://www.scala-lang.org/blog/2018/04/30/in-a-nutshell.html">many benefits</a>:</p>
+
+<ul>
+  <li>The compiler uses it to support separate compilation.</li>
+  <li>The Scala <em>Language Server Protocol</em>-based language server uses it to support hyperlinking, command completion, documentation, and also for global operations such as find-references and renaming.</li>
+  <li>Tasty makes an excellent foundation for a new generation of <a href="/scala3/reference/metaprogramming/macros.html">reflection-based macros</a>.</li>
+  <li>Optimizers and analyzers can use it for deep code analysis and advanced code generation.</li>
+</ul>
+
+<p>In a related note, Scala 2.13.6 has a TASTy reader, and the Scala 3 compiler can also read the 2.13 “Pickle” format. The <a href="/scala3/guides/migration/compatibility-classpath.html">Classpath Compatibility Page</a> in the Scala 3 Migration Guide explains the benefits of this cross-compiling capability.</p>
+
+<h2 id="more-information">More information</h2>
+
+<p>In summary, Tasty is a high-level interchange format for Scala 3, and <em>.tasty</em> files contain a complete representation of your source code, leading to the benefits outlined in the previous section.</p>
+
+<p>For more details, see these resources:</p>
+
+<ul>
+  <li>In this <a href="https://www.youtube.com/watch?v=YQmVrUdx8TU">this video</a>, Jamie Thompson of the Scala Center provides a thorough discussion of how Tasty works, and its benefits</li>
+  <li><a href="/overviews/core/binary-compatibility-for-library-authors.html">Binary Compatibility for library authors</a> discusses binary compatibility, source compatibility, and the JVM execution model</li>
+  <li><a href="https://www.scala-lang.org/blog/2020/11/19/scala-3-forward-compat.html">Forward Compatibility for the Scala 3 Transition</a> demonstrates techniques for using Scala 2.13 and Scala 3 in the same project</li>
+</ul>
+
+<p>These articles provide more information about Scala 3 macros:</p>
+
+<ul>
+  <li><a href="https://scalacenter.github.io/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li>
+  <li><a href="https://www.scala-lang.org/blog/2018/04/30/in-a-nutshell.html">Macros: The Plan for Scala 3</a></li>
+  <li><a href="/scala3/reference/metaprogramming/reflection.html">The reference documentation on Quotes Reflect</a></li>
+  <li><a href="macros">The reference documentation on macros</a></li>
+</ul>
+
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/scala3/guides/tasty-overview.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

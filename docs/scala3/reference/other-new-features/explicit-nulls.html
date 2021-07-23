@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Explicit Nulls | 
+      Scala 3 Language Reference | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/reference/other-new-features/explicit-nulls.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Explicit Nulls"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Explicit Nulls"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Language Reference</div>
+          
+          <h1>Explicit Nulls</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Explicit nulls is an opt-in feature that modifies the Scala type system, which makes reference types
+(anything that extends <code class="language-plaintext highlighter-rouge">AnyRef</code>) <em>non-nullable</em>.</p>
+
+<p>This means the following code will no longer typecheck:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kc">null</span> <span class="c1">// error: found `Null`, but required `String`</span>
+</code></pre></div></div>
+
+<p>Instead, to mark a type as nullable we use a <a href="../new-types/union-types.html">union type</a></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="kc">null</span> <span class="c1">// ok</span>
+</code></pre></div></div>
+
+<p>A nullable type could have null value during runtime; hence, it is not safe to select a member without checking its nullity.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">x</span><span class="o">.</span><span class="py">trim</span> <span class="c1">// error: trim is not member of String | Null</span>
+</code></pre></div></div>
+
+<p>Explicit nulls are enabled via a <code class="language-plaintext highlighter-rouge">-Yexplicit-nulls</code> flag.</p>
+
+<p>Read on for details.</p>
+
+<h2 id="new-type-hierarchy">New Type Hierarchy</h2>
+
+<p>When explicit nulls are enabled, the type hierarchy changes so that <code class="language-plaintext highlighter-rouge">Null</code> is only a subtype of
+<code class="language-plaintext highlighter-rouge">Any</code>, as opposed to every reference type, which means <code class="language-plaintext highlighter-rouge">null</code> is no longer a value of <code class="language-plaintext highlighter-rouge">AnyRef</code> and its subtypes.</p>
+
+<p>This is the new type hierarchy:</p>
+
+<p><img src="/resources/images/scala3/explicit-nulls/explicit-nulls-type-hierarchy.png" alt="&quot;Type Hierarchy for Explicit Nulls&quot;" /></p>
+
+<p>After erasure, <code class="language-plaintext highlighter-rouge">Null</code> remains a subtype of all reference types (as forced by the JVM).</p>
+
+<h2 id="working-with-null">Working with <code class="language-plaintext highlighter-rouge">Null</code></h2>
+
+<p>To make working with nullable values easier, we propose adding a few utilities to the standard library.
+So far, we have found the following useful:</p>
+
+<ul>
+  <li>
+    <p>An extension method <code class="language-plaintext highlighter-rouge">.nn</code> to “cast away” nullability</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">extension</span> <span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span>
+   <span class="n">inline</span> <span class="k">def</span> <span class="nf">nn</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span>
+     <span class="nf">assert</span><span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+     <span class="nv">x</span><span class="o">.</span><span class="py">asInstanceOf</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+</code></pre></div>    </div>
+
+    <p>This means that given <code class="language-plaintext highlighter-rouge">x: String | Null</code>, <code class="language-plaintext highlighter-rouge">x.nn</code> has type <code class="language-plaintext highlighter-rouge">String</code>, so we can call all the
+usual methods on it. Of course, <code class="language-plaintext highlighter-rouge">x.nn</code> will throw a NPE if <code class="language-plaintext highlighter-rouge">x</code> is <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+    <p>Don’t use <code class="language-plaintext highlighter-rouge">.nn</code> on mutable variables directly, because it may introduce an unknown type into the type of the variable.</p>
+  </li>
+  <li>
+    <p>An <code class="language-plaintext highlighter-rouge">unsafeNulls</code> language feature.</p>
+
+    <p>When imported, <code class="language-plaintext highlighter-rouge">T | Null</code> can be used as <code class="language-plaintext highlighter-rouge">T</code>, similar to regular Scala (without explicit nulls).</p>
+
+    <p>See <a href="#unsafenulls">UnsafeNulls</a> section for more details.</p>
+  </li>
+</ul>
+
+<h2 id="unsoundness">Unsoundness</h2>
+
+<p>The new type system is unsound with respect to <code class="language-plaintext highlighter-rouge">null</code>. This means there are still instances where an expression has a non-nullable type like <code class="language-plaintext highlighter-rouge">String</code>, but its value is actually <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+<p>The unsoundness happens because uninitialized fields in a class start out as <code class="language-plaintext highlighter-rouge">null</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="k">:</span>
+  <span class="kt">val</span> <span class="kt">f:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">foo</span><span class="o">(</span><span class="n">f</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">foo</span><span class="o">(</span><span class="n">f2</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">f2</span>
+
+<span class="k">val</span> <span class="nv">c</span> <span class="k">=</span> <span class="k">new</span> <span class="nf">C</span><span class="o">()</span>
+<span class="c1">// c.f == "field is null"</span>
+</code></pre></div></div>
+
+<p>The unsoundness above can be caught by the compiler with the option <code class="language-plaintext highlighter-rouge">-Ysafe-init</code>.
+More details can be found in <a href="./safe-initialization.html">safe initialization</a>.</p>
+
+<h2 id="equality">Equality</h2>
+
+<p>We don’t allow the double-equal (<code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code>) and reference (<code class="language-plaintext highlighter-rouge">eq</code> and <code class="language-plaintext highlighter-rouge">ne</code>) comparison between
+<code class="language-plaintext highlighter-rouge">AnyRef</code> and <code class="language-plaintext highlighter-rouge">Null</code> anymore, since a variable with a non-nullable type cannot have <code class="language-plaintext highlighter-rouge">null</code> as value.
+<code class="language-plaintext highlighter-rouge">null</code> can only be compared with <code class="language-plaintext highlighter-rouge">Null</code>, nullable union (<code class="language-plaintext highlighter-rouge">T | Null</code>), or <code class="language-plaintext highlighter-rouge">Any</code> type.</p>
+
+<p>For some reason, if we really want to compare <code class="language-plaintext highlighter-rouge">null</code> with non-null values, we have to provide a type hint (e.g. <code class="language-plaintext highlighter-rouge">: Any</code>).</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+
+<span class="n">x</span> <span class="o">==</span> <span class="kc">null</span>       <span class="c1">// error: Values of types String and Null cannot be compared with == or !=</span>
+<span class="n">x</span> <span class="n">eq</span> <span class="kc">null</span>       <span class="c1">// error</span>
+<span class="s">"hello"</span> <span class="o">==</span> <span class="kc">null</span> <span class="c1">// error</span>
+
+<span class="n">y</span> <span class="o">==</span> <span class="kc">null</span>       <span class="c1">// ok</span>
+<span class="n">y</span> <span class="o">==</span> <span class="n">x</span>          <span class="c1">// ok</span>
+
+<span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span>  <span class="c1">// ok</span>
+<span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span>            <span class="c1">// ok</span>
+</code></pre></div></div>
+
+<h2 id="java-interoperability">Java Interoperability</h2>
+
+<p>The Scala compiler can load Java classes in two ways: from source or from bytecode. In either case,
+when a Java class is loaded, we “patch” the type of its members to reflect that Java types
+remain implicitly nullable.</p>
+
+<p>Specifically, we patch</p>
+
+<ul>
+  <li>
+    <p>the type of fields</p>
+  </li>
+  <li>
+    <p>the argument type and return type of methods</p>
+  </li>
+</ul>
+
+<p>We illustrate the rules with following examples:</p>
+
+<ul>
+  <li>
+    <p>The first two rules are easy: we nullify reference types but not value types.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">C</span> <span class="o">{</span>
+  <span class="nc">String</span> <span class="n">s</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="k">:</span>
+  <span class="kt">val</span> <span class="kt">s:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span>
+  <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We nullify type parameters because in Java a type parameter is always nullable, so the following code compiles.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">C</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span> <span class="no">T</span> <span class="nf">foo</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">foo</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>Notice this is rule is sometimes too conservative, as witnessed by</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">InScala</span><span class="k">:</span>
+  <span class="kt">val</span> <span class="kt">c:</span> <span class="kt">C</span><span class="o">[</span><span class="kt">Bool</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>  <span class="c1">// C as above</span>
+  <span class="k">val</span> <span class="nv">b</span><span class="k">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="nv">c</span><span class="o">.</span><span class="py">foo</span><span class="o">()</span> <span class="c1">// no longer typechecks, since foo now returns Bool | Null</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We can reduce the number of redundant nullable types we need to add. Consider</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span> <span class="no">T</span> <span class="nf">get</span><span class="o">();</span> <span class="o">}</span>
+<span class="kd">class</span> <span class="nc">BoxFactory</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">makeBox</span><span class="o">();</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Box</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">get</span><span class="o">()</span><span class="k">:</span> <span class="kt">T</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">}</span>
+<span class="k">class</span> <span class="nc">BoxFactory</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">makeBox</span><span class="o">()</span><span class="k">:</span> <span class="kt">Box</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">|</span> <span class="nc">Null</span> <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>Suppose we have a <code class="language-plaintext highlighter-rouge">BoxFactory[String]</code>. Notice that calling <code class="language-plaintext highlighter-rouge">makeBox()</code> on it returns a
+<code class="language-plaintext highlighter-rouge">Box[String] | Null</code>, not a <code class="language-plaintext highlighter-rouge">Box[String | Null] | Null</code>. This seems at first
+glance unsound (“What if the box itself has <code class="language-plaintext highlighter-rouge">null</code> inside?”), but is sound because calling
+<code class="language-plaintext highlighter-rouge">get()</code> on a <code class="language-plaintext highlighter-rouge">Box[String]</code> returns a <code class="language-plaintext highlighter-rouge">String | Null</code>.</p>
+
+    <p>Notice that we need to patch <em>all</em> Java-defined classes that transitively appear in the
+argument or return type of a field or method accessible from the Scala code being compiled.
+Absent crazy reflection magic, we think that all such Java classes <em>must</em> be visible to
+the Typer in the first place, so they will be patched.</p>
+  </li>
+  <li>
+    <p>We will append <code class="language-plaintext highlighter-rouge">Null</code> to the type arguments if the generic class is defined in Scala.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">BoxFactory</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="nc">Box</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">makeBox</span><span class="o">();</span> <span class="c1">// Box is Scala-defined</span>
+  <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Box</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;&gt;&gt;</span> <span class="nf">makeCrazyBoxes</span><span class="o">();</span> <span class="c1">// List is Java-defined</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BoxFactory</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span><span class="nc">:</span>
+  <span class="k">def</span> <span class="nf">makeBox</span><span class="o">()</span><span class="k">:</span> <span class="kt">Box</span><span class="o">[</span><span class="kt">T</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">]</span> <span class="o">|</span> <span class="nc">Null</span>
+  <span class="k">def</span> <span class="nf">makeCrazyBoxes</span><span class="o">()</span><span class="k">:</span> <span class="kt">java.util.List</span><span class="o">[</span><span class="kt">Box</span><span class="o">[</span><span class="kt">java.util.List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">]]</span> <span class="o">|</span> <span class="nc">Null</span>
+</code></pre></div>    </div>
+
+    <p>In this case, since <code class="language-plaintext highlighter-rouge">Box</code> is Scala-defined, we will get <code class="language-plaintext highlighter-rouge">Box[T | Null] | Null</code>.
+This is needed because our nullability function is only applied (modularly) to the Java
+classes, but not to the Scala ones, so we need a way to tell <code class="language-plaintext highlighter-rouge">Box</code> that it contains a
+nullable value.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">List</code> is Java-defined, so we don’t append <code class="language-plaintext highlighter-rouge">Null</code> to its type argument. But we
+still need to nullify its inside.</p>
+  </li>
+  <li>
+    <p>We don’t nullify <em>simple</em> literal constant (<code class="language-plaintext highlighter-rouge">final</code>) fields, since they are known to be non-null</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Constants</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME</span> <span class="o">=</span> <span class="s">"name"</span><span class="o">;</span>
+  <span class="kd">final</span> <span class="kt">int</span> <span class="no">AGE</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="kd">final</span> <span class="kt">char</span> <span class="no">CHAR</span> <span class="o">=</span> <span class="sc">'a'</span><span class="o">;</span>
+
+  <span class="kd">final</span> <span class="nc">String</span> <span class="no">NAME_GENERATED</span> <span class="o">=</span> <span class="n">getNewName</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Constants</span><span class="k">:</span>
+  <span class="kt">val</span> <span class="kt">NAME:</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">name</span><span class="err">"</span><span class="o">)</span> <span class="o">=</span> <span class="s">"name"</span>
+  <span class="k">val</span> <span class="nv">AGE</span><span class="k">:</span> <span class="kt">Int</span><span class="o">(</span><span class="err">0</span><span class="o">)</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">val</span> <span class="nv">CHAR</span><span class="k">:</span> <span class="kt">Char</span><span class="o">(</span><span class="kt">'a'</span><span class="o">)</span> <span class="o">=</span> <span class="sc">'a'</span>
+
+  <span class="k">val</span> <span class="nv">NAME_GENERATED</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="nf">getNewName</span><span class="o">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We don’t append <code class="language-plaintext highlighter-rouge">Null</code> to a field nor to a return type of a method which is annotated with a
+<code class="language-plaintext highlighter-rouge">NotNull</code> annotation.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">C</span> <span class="o">{</span>
+  <span class="nd">@NotNull</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+  <span class="nd">@NotNull</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getNames</span><span class="o">(</span><span class="nc">String</span> <span class="n">prefix</span><span class="o">);</span> <span class="c1">// List is Java-defined</span>
+  <span class="nd">@NotNull</span> <span class="nc">Box</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getBoxedName</span><span class="o">();</span> <span class="c1">// Box is Scala-defined</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>==&gt;</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="k">:</span>
+  <span class="kt">val</span> <span class="kt">name:</span> <span class="kt">String</span>
+  <span class="k">def</span> <span class="nf">getNames</span><span class="o">(</span><span class="n">prefix</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span><span class="k">:</span> <span class="kt">java.util.List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="c1">// we still need to nullify the paramter types</span>
+  <span class="k">def</span> <span class="nf">getBoxedName</span><span class="o">()</span><span class="k">:</span> <span class="kt">Box</span><span class="o">[</span><span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">]</span> <span class="c1">// we don't append `Null` to the outmost level, but we still need to nullify inside</span>
+</code></pre></div>    </div>
+
+    <p>The annotation must be from the list below to be recognized as <code class="language-plaintext highlighter-rouge">NotNull</code> by the compiler.
+Check <code class="language-plaintext highlighter-rouge">Definitions.scala</code> for an updated list.</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// A list of annotations that are commonly used to indicate</span>
+<span class="c1">// that a field/method argument or return type is not null.</span>
+<span class="c1">// These annotations are used by the nullification logic in</span>
+<span class="c1">// JavaNullInterop to improve the precision of type nullification.</span>
+<span class="c1">// We don't require that any of these annotations be present</span>
+<span class="c1">// in the class path, but we want to create Symbols for the</span>
+<span class="c1">// ones that are present, so they can be checked during nullification.</span>
+<span class="nd">@tu</span> <span class="k">lazy</span> <span class="k">val</span> <span class="nv">NotNullAnnots</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">ClassSymbol</span><span class="o">]</span> <span class="k">=</span> <span class="nv">ctx</span><span class="o">.</span><span class="py">getClassesIfDefined</span><span class="o">(</span>
+  <span class="s">"javax.annotation.Nonnull"</span> <span class="o">::</span>
+  <span class="s">"edu.umd.cs.findbugs.annotations.NonNull"</span> <span class="o">::</span>
+  <span class="s">"androidx.annotation.NonNull"</span> <span class="o">::</span>
+  <span class="s">"android.support.annotation.NonNull"</span> <span class="o">::</span>
+  <span class="s">"android.annotation.NonNull"</span> <span class="o">::</span>
+  <span class="s">"com.android.annotations.NonNull"</span> <span class="o">::</span>
+  <span class="s">"org.eclipse.jdt.annotation.NonNull"</span> <span class="o">::</span>
+  <span class="s">"org.checkerframework.checker.nullness.qual.NonNull"</span> <span class="o">::</span>
+  <span class="s">"org.checkerframework.checker.nullness.compatqual.NonNullDecl"</span> <span class="o">::</span>
+  <span class="s">"org.jetbrains.annotations.NotNull"</span> <span class="o">::</span>
+  <span class="s">"lombok.NonNull"</span> <span class="o">::</span>
+  <span class="s">"io.reactivex.annotations.NonNull"</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="n">map</span> <span class="nc">PreNamedString</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="override-check">Override check</h3>
+
+<p>When we check overriding between Scala classes and Java classes, the rules are relaxed for <code class="language-plaintext highlighter-rouge">Null</code> type with this feature, in order to help users to working with Java libraries.</p>
+
+<p>Suppose we have Java method <code class="language-plaintext highlighter-rouge">String f(String x)</code>, we can override this method in Scala in any of the following forms:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+</code></pre></div></div>
+
+<p>Note that some of the definitions could cause unsoundness. For example, the return type is not nullable, but a <code class="language-plaintext highlighter-rouge">null</code> value is actually returned.</p>
+
+<h2 id="flow-typing">Flow Typing</h2>
+
+<p>We added a simple form of flow-sensitive type inference. The idea is that if <code class="language-plaintext highlighter-rouge">p</code> is a
+stable path or a trackable variable, then we can know that <code class="language-plaintext highlighter-rouge">p</code> is non-null if it’s compared
+with <code class="language-plaintext highlighter-rouge">null</code>. This information can then be propagated to the <code class="language-plaintext highlighter-rouge">then</code> and <code class="language-plaintext highlighter-rouge">else</code> branches
+of an if-statement (among other places).</p>
+
+<p>Example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span> <span class="n">then</span>
+  <span class="c1">// s: String</span>
+
+<span class="c1">// s: String | Null</span>
+
+<span class="nf">assert</span><span class="o">(</span><span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+<span class="c1">// s: String</span>
+</code></pre></div></div>
+
+<p>A similar inference can be made for the <code class="language-plaintext highlighter-rouge">else</code> case if the test is <code class="language-plaintext highlighter-rouge">p == null</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="n">then</span>
+  <span class="c1">// s: String | Null</span>
+<span class="k">else</span>
+  <span class="c1">// s: String</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code> is considered a comparison for the purposes of the flow inference.</p>
+
+<h3 id="logical-operators">Logical Operators</h3>
+
+<p>We also support logical operators (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>, <code class="language-plaintext highlighter-rouge">||</code>, and <code class="language-plaintext highlighter-rouge">!</code>):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">s2</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">s2</span> <span class="o">!=</span> <span class="kc">null</span> <span class="n">then</span>
+  <span class="c1">// s: String</span>
+  <span class="c1">// s2: String</span>
+
+<span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s2</span> <span class="o">==</span> <span class="kc">null</span> <span class="n">then</span>
+  <span class="c1">// s: String | Null</span>
+  <span class="c1">// s2: String | Null</span>
+<span class="k">else</span>
+  <span class="c1">// s: String</span>
+  <span class="c1">// s2: String</span>
+</code></pre></div></div>
+
+<h3 id="inside-conditions">Inside Conditions</h3>
+
+<p>We also support type specialization <em>within</em> the condition, taking into account that <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> and <code class="language-plaintext highlighter-rouge">||</code> are short-circuiting:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+
+<span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="c1">// s: String in `s.length &gt; 0`</span>
+  <span class="c1">// s: String</span>
+
+<span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="nv">s</span><span class="o">.</span><span class="py">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="c1">// s: String in `s.length &gt; 0`</span>
+  <span class="c1">// s: String | Null</span>
+<span class="k">else</span>
+  <span class="c1">// s: String</span>
+</code></pre></div></div>
+
+<h3 id="match-case">Match Case</h3>
+
+<p>The non-null cases can be detected in match statements.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+
+<span class="n">s</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="k">_:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="c1">// s: String</span>
+  <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span>
+</code></pre></div></div>
+
+<h3 id="mutable-variable">Mutable Variable</h3>
+
+<p>We are able to detect the nullability of some local mutable variables. A simple example is:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">C</span><span class="o">(</span><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="k">val</span> <span class="nv">next</span><span class="k">:</span> <span class="kt">C</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">)</span>
+
+<span class="k">var</span> <span class="n">xs</span><span class="k">:</span> <span class="kt">C</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="nf">C</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nf">C</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="kc">null</span><span class="o">))</span>
+<span class="c1">// xs is trackable, since all assignments are in the same method</span>
+<span class="k">while</span> <span class="n">xs</span> <span class="o">!=</span> <span class="kc">null</span> <span class="k">do</span>
+  <span class="c1">// xs: C</span>
+  <span class="k">val</span> <span class="nv">xsx</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nv">xs</span><span class="o">.</span><span class="py">x</span>
+  <span class="k">val</span> <span class="nv">xscpy</span><span class="k">:</span> <span class="kt">C</span> <span class="o">=</span> <span class="n">xs</span>
+  <span class="n">xs</span> <span class="k">=</span> <span class="n">xscpy</span> <span class="c1">// since xscpy is non-null, xs still has type C after this line</span>
+  <span class="c1">// xs: C</span>
+  <span class="n">xs</span> <span class="k">=</span> <span class="nv">xs</span><span class="o">.</span><span class="py">next</span> <span class="c1">// after this assignment, xs can be null again</span>
+  <span class="c1">// xs: C | Null</span>
+</code></pre></div></div>
+
+<p>When dealing with local mutable variables, there are two questions:</p>
+
+<ol>
+  <li>
+    <p>Whether to track a local mutable variable during flow typing.
+We track a local mutable variable if the variable is not assigned in a closure.
+For example, in the following code <code class="language-plaintext highlighter-rouge">x</code> is assigned to by the closure <code class="language-plaintext highlighter-rouge">y</code>, so we do not
+do flow typing on <code class="language-plaintext highlighter-rouge">x</code>.</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">def</span> <span class="nf">y</span> <span class="k">=</span>
+  <span class="n">x</span> <span class="k">=</span> <span class="kc">null</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span> <span class="n">then</span>
+   <span class="c1">// y can be called here, which would break the fact</span>
+   <span class="k">val</span> <span class="nv">a</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="c1">// error: x is captured and mutated by the closure, not trackable</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Whether to generate and use flow typing on a specific <em>use</em> of a local mutable variable.
+We only want to do flow typing on a use that belongs to the same method as the definition
+of the local variable.
+For example, in the following code, even <code class="language-plaintext highlighter-rouge">x</code> is not assigned to by a closure, we can only
+use flow typing in one of the occurrences (because the other occurrence happens within a
+nested closure).</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">def</span> <span class="nf">y</span> <span class="k">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span> <span class="n">then</span>
+    <span class="c1">// not safe to use the fact (x != null) here</span>
+    <span class="c1">// since y can be executed at the same time as the outer block</span>
+    <span class="k">val</span> <span class="nv">_:</span> <span class="nc">String</span> <span class="k">=</span> <span class="n">x</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span> <span class="n">then</span>
+  <span class="k">val</span> <span class="nv">a</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">x</span> <span class="c1">// ok to use the fact here</span>
+  <span class="n">x</span> <span class="k">=</span> <span class="kc">null</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>See <a href="https://github.com/lampepfl/dotty/blob/master/tests/explicit-nulls/neg/flow-varref-in-closure.scala">more examples</a>.</p>
+
+<p>Currently, we are unable to track paths with a mutable variable prefix.
+For example, <code class="language-plaintext highlighter-rouge">x.a</code> if <code class="language-plaintext highlighter-rouge">x</code> is mutable.</p>
+
+<h3 id="unsupported-idioms">Unsupported Idioms</h3>
+
+<p>We don’t support:</p>
+
+<ul>
+  <li>flow facts not related to nullability (<code class="language-plaintext highlighter-rouge">if x == 0 then { // x: 0.type not inferred }</code>)</li>
+  <li>
+    <p>tracking aliasing between non-nullable paths</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">s2</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s2</span> <span class="n">then</span>
+  <span class="c1">// s:  String inferred</span>
+  <span class="c1">// s2: String not inferred</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="unsafenulls">UnsafeNulls</h3>
+
+<p>It is difficult to work with many nullable values, we introduce a language feature <code class="language-plaintext highlighter-rouge">unsafeNulls</code>.
+Inside this “unsafe” scope, all <code class="language-plaintext highlighter-rouge">T | Null</code> values can be used as <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p>Users can import <code class="language-plaintext highlighter-rouge">scala.language.unsafeNulls</code> to create such scopes, or use <code class="language-plaintext highlighter-rouge">-language:unsafeNulls</code> to enable this feature globally (for migration purpose only).</p>
+
+<p>Assume <code class="language-plaintext highlighter-rouge">T</code> is a reference type (a subtype of <code class="language-plaintext highlighter-rouge">AnyRef</code>), the following unsafe operation rules are
+applied in this unsafe-nulls scope:</p>
+
+<ol>
+  <li>
+    <p>the members of <code class="language-plaintext highlighter-rouge">T</code> can be found on <code class="language-plaintext highlighter-rouge">T | Null</code></p>
+  </li>
+  <li>
+    <p>a value with type <code class="language-plaintext highlighter-rouge">T</code> can be compared with <code class="language-plaintext highlighter-rouge">T | Null</code> and <code class="language-plaintext highlighter-rouge">Null</code></p>
+  </li>
+  <li>
+    <p>suppose <code class="language-plaintext highlighter-rouge">T1</code> is not a subtype of <code class="language-plaintext highlighter-rouge">T2</code> using explicit-nulls subtyping (where <code class="language-plaintext highlighter-rouge">Null</code> is a direct
+subtype of Any), extension methods and implicit conversions designed for <code class="language-plaintext highlighter-rouge">T2</code> can be used for
+<code class="language-plaintext highlighter-rouge">T1</code> if <code class="language-plaintext highlighter-rouge">T1</code> is a subtype of <code class="language-plaintext highlighter-rouge">T2</code> using regular subtyping rules (where <code class="language-plaintext highlighter-rouge">Null</code> is a subtype of every
+reference type)</p>
+  </li>
+  <li>
+    <p>suppose <code class="language-plaintext highlighter-rouge">T1</code> is not a subtype of <code class="language-plaintext highlighter-rouge">T2</code> using explicit-nulls subtyping, a value with type <code class="language-plaintext highlighter-rouge">T1</code>
+can be used as <code class="language-plaintext highlighter-rouge">T2</code> if <code class="language-plaintext highlighter-rouge">T1</code> is a subtype of <code class="language-plaintext highlighter-rouge">T2</code> using regular subtyping rules</p>
+  </li>
+</ol>
+
+<p>Addtionally, <code class="language-plaintext highlighter-rouge">null</code> can be used as <code class="language-plaintext highlighter-rouge">AnyRef</code> (<code class="language-plaintext highlighter-rouge">Object</code>), which means you can select <code class="language-plaintext highlighter-rouge">.eq</code> or <code class="language-plaintext highlighter-rouge">.toString</code> on it.</p>
+
+<p>The program in <code class="language-plaintext highlighter-rouge">unsafeNulls</code> will have a <strong>similar</strong> semantic as regular Scala, but not <strong>equivalent</strong>.</p>
+
+<p>For example, the following code cannot be compiled even using unsafe nulls. Because of the
+Java interoperation, the type of the get method becomes <code class="language-plaintext highlighter-rouge">T | Null</code>.</p>
+
+<pre><code class="language-Scala">def head[T](xs: java.util.List[T]): T = xs.get(0) // error
+</code></pre>
+
+<p>Since the compiler doesn’t know whether <code class="language-plaintext highlighter-rouge">T</code> is a reference type, it is unable to cast <code class="language-plaintext highlighter-rouge">T | Null</code>
+to <code class="language-plaintext highlighter-rouge">T</code>. A <code class="language-plaintext highlighter-rouge">.nn</code> need to be inserted after <code class="language-plaintext highlighter-rouge">xs.get(0)</code> by user manually to fix the error, which
+strips the <code class="language-plaintext highlighter-rouge">Null</code> from its type.</p>
+
+<p>The intention of this <code class="language-plaintext highlighter-rouge">unsafeNulls</code> is to give users a better migration path for explicit nulls.
+Projects for Scala 2 or regular Scala 3 can try this by adding <code class="language-plaintext highlighter-rouge">-Yexplicit-nulls -language:unsafeNulls</code>
+to the compile options. A small number of manual modifications are expected. To migrate to the full
+explicit nulls feature in the future, <code class="language-plaintext highlighter-rouge">-language:unsafeNulls</code> can be dropped and add
+<code class="language-plaintext highlighter-rouge">import scala.language.unsafeNulls</code> only when needed.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">f</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">def</span> <span class="nf">nullOf</span><span class="o">[</span><span class="kt">T</span> <span class="k">&gt;:</span> <span class="kt">Null</span><span class="o">]</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span> <span class="kc">null</span>
+
+<span class="k">import</span> <span class="nn">scala.language.unsafeNulls</span>
+
+<span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">a</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">s</span> <span class="c1">// unsafely convert String | Null to String</span>
+
+<span class="k">val</span> <span class="nv">b1</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">trim</span> <span class="c1">// call .trim on String | Null unsafely</span>
+<span class="k">val</span> <span class="nv">b2</span> <span class="k">=</span> <span class="nv">b1</span><span class="o">.</span><span class="py">length</span>
+
+<span class="nf">f</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="py">trim</span> <span class="c1">// pass String | Null as an argument of type String unsafely</span>
+
+<span class="k">val</span> <span class="nv">c</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kc">null</span> <span class="c1">// Null to String</span>
+
+<span class="k">val</span> <span class="nv">d1</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">d2</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">]</span> <span class="k">=</span> <span class="n">d1</span> <span class="c1">// unsafely convert Array[String] to Array[String | Null]</span>
+<span class="k">val</span> <span class="nv">d3</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Array</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span> <span class="c1">// unsafe</span>
+
+<span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">T</span> <span class="k">&gt;:</span> <span class="kt">Null</span> <span class="k">&lt;:</span> <span class="kt">String</span><span class="o">]</span> <span class="c1">// define a type bound with unsafe conflict bound</span>
+
+<span class="k">val</span> <span class="nv">n</span> <span class="k">=</span> <span class="n">nullOf</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="c1">// apply a type bound unsafely</span>
+</code></pre></div></div>
+
+<p>Without the <code class="language-plaintext highlighter-rouge">unsafeNulls</code>, all these unsafe operations will not be type-checked.</p>
+
+<p><code class="language-plaintext highlighter-rouge">unsafeNulls</code> also works for extension methods and implicit search.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.language.unsafeNulls</span>
+
+<span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="s">"hello, world!"</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">" "</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+
+<span class="n">given</span> <span class="nc">Conversion</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">]]</span> <span class="k">=</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="o">???</span>
+
+<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">z</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span> <span class="kt">|</span> <span class="kt">Null</span><span class="o">]</span> <span class="k">=</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<h2 id="binary-compatibility">Binary Compatibility</h2>
+
+<p>Our strategy for binary compatibility with Scala binaries that predate explicit nulls
+and new libraries compiled without <code class="language-plaintext highlighter-rouge">-Yexplicit-nulls</code> is to leave the types unchanged
+and be compatible but unsound.</p>
+
+<p><a href="https://dotty.epfl.ch/docs/internals/explicit-nulls.html">More details</a></p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="/scala3/reference/other-new-features/indentation.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="/scala3/reference/other-new-features/safe-initialization.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/new-types.html">New Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/intersection-types.html">Intersection Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/union-types.html">Union Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/type-lambdas.html">Type Lambdas</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/match-types.html">Match Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/dependent-function-types.html">Dependent Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/new-types/polymorphic-function-types.html">Polymorphic Function Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/enums.html">Enums</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/enums.html">Enumerations</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/adts.html">Algebraic Data Types</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/enums/desugarEnums.html">Translation of Enums and ADTs</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/contextual.html">Contextual Abstractions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/givens.html">Given Instances</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/using-clauses.html">Using Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-bounds.html">Context Bounds</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/given-imports.html">Importing Givens</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/extension-methods.html">Extension Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/type-classes.html">Implementing Type classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/derivation.html">Type Class Derivation</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/multiversal-equality.html">Multiversal Equality</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/context-functions.html">Context Functions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/conversions.html">Implicit Conversions</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/by-name-context-parameters.html">By-Name Context Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/contextual/relationship-implicits.html">Relationship with Scala 2 Implicits</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/metaprogramming.html">Metaprogramming</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/inline.html">Inline</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/compiletime-ops.html">Compile-time operations</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/macros.html">Macros</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/staging.html">Runtime Multi-Stage Programming</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/reflection.html">Reflection</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/metaprogramming/tasty-inspect.html">TASTy Inspection</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/other-new-features.html">Other New Features</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/trait-parameters.html">Trait Parameters</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/transparent-traits.html">Transparent Traits</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/creator-applications.html">Universal Apply Methods</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/export.html">Export Clauses</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/opaques.html">Opaque Type Aliases</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/open-classes.html">Open Classes</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/parameter-untupling.html">Parameter Untupling</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/matchable.html">The Matchable Trait</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/threadUnsafe-annotation.html">The @threadUnsafe annotation</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/targetName.html">The @targetName annotation</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/control-syntax.html">New Control Syntax</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/indentation.html">Optional Braces</a></li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/reference/other-new-features/explicit-nulls.html">Explicit Nulls</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/safe-initialization.html">Safe Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/other-new-features/type-test.html">TypeTest</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/changed-features.html">Other Changed Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/numeric-literals.html">Numeric Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/structural-types.html">Programmatic Structural Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/operators.html">Rules for Operators</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/wildcards.html">Wildcard Arguments in Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/imports.html">Imports</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-checking.html">Changes in Type Checking</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/type-inference.html">Changes in Type Inference</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-resolution.html">Changes in Implicit Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/implicit-conversions.html">Implicit Conversions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/overload-resolution.html">Changes in Overload Resolution</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/match-syntax.html">Match Expressions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/vararg-splices.html">Vararg Splices</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-bindings.html">Pattern Bindings</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/pattern-matching.html">Option-less pattern matching</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/eta-expansion.html">Automatic Eta Expansion</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/compiler-plugins.html">Changes in Compiler Plugins</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/lazy-vals-init.html">Lazy Vals Initialization</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/changed-features/main-functions.html">Main Methods</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/dropped-features.html">Dropped Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/delayed-init.html">Dropped: Delayedinit</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/macros.html">Dropped: Scala 2 Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/existential-types.html">Dropped: Existential Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/type-projection.html">Dropped: General Type Projection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/do-while.html">Dropped: Do-While</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/procedure-syntax.html">Dropped: Procedure Syntax</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/package-objects.html">Dropped: Package Objects</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/early-initializers.html">Dropped: Early Initializers</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/class-shadowing.html">Dropped: Class Shadowing</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/limit22.html">Dropped: Limit 22</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/xml.html">Dropped: XML Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/symlits.html">Dropped: Symbol Literals</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/auto-apply.html">Dropped: Auto-Application</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/weak-conformance.html">Dropped: Weak Conformance</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/this-qualifier.html">Dropped: private[this] and protected[this]</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/reference/dropped-features/wildcard-init.html">Dropped: Wildcard Initializer</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/syntax.html">Scala 3 Syntax Summary</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/reference/language-versions.html">Language Versions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_scala3-reference/other-new-features/explicit-nulls.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

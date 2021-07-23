@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Symbols, Trees, and Types | 
+      Reflection | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/reflection/symbols-trees-types.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Symbols, Trees, and Types"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Symbols, Trees, and Types"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Reflection</div>
+          
+          <h1>Symbols, Trees, and Types</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><span class="label important" style="float: right;">EXPERIMENTAL</span></p>
+
+<h2 id="symbols">Symbols</h2>
+
+<p>Symbols are used to establish bindings between a name and the entity it refers
+to, such as a class or a method. Anything you define and can give a name to in
+Scala has an associated symbol.</p>
+
+<p>Symbols contain all available information about the declaration of an entity
+(<code class="language-plaintext highlighter-rouge">class</code>/<code class="language-plaintext highlighter-rouge">object</code>/<code class="language-plaintext highlighter-rouge">trait</code> etc.) or a member (<code class="language-plaintext highlighter-rouge">val</code>s/<code class="language-plaintext highlighter-rouge">var</code>s/<code class="language-plaintext highlighter-rouge">def</code>s etc.), and
+as such are an integral abstraction central to both runtime reflection and
+compile-time reflection (macros).</p>
+
+<p>A symbol can provide a wealth of information ranging from the basic <code class="language-plaintext highlighter-rouge">name</code>
+method available on all symbols to other, more involved, concepts such as
+getting the <code class="language-plaintext highlighter-rouge">baseClasses</code> from <code class="language-plaintext highlighter-rouge">ClassSymbol</code>. Other common use cases of
+symbols include inspecting members’ signatures, getting type parameters of a
+class, getting the parameter type of a method or finding out the type of a
+field.</p>
+
+<h3 id="the-symbol-owner-hierarchy">The Symbol Owner Hierarchy</h3>
+
+<p>Symbols are organized in a hierarchy. For example, a symbol that represents a
+parameter of a method is <em>owned</em> by the corresponding method symbol, a method
+symbol is <em>owned</em> by its enclosing class, trait, or object, a class is <em>owned</em>
+by a containing package and so on.</p>
+
+<p>If a symbol does not have an owner, for example, because it refers to a top-level
+entity, such as a top-level package, then its owner is the special
+<code class="language-plaintext highlighter-rouge">NoSymbol</code> singleton object. Representing a missing symbol, <code class="language-plaintext highlighter-rouge">NoSymbol</code> is
+commonly used in the API to denote an empty or default value. Accessing the
+<code class="language-plaintext highlighter-rouge">owner</code> of <code class="language-plaintext highlighter-rouge">NoSymbol</code> throws an exception. See the API docs for the general
+interface provided by type <code class="language-plaintext highlighter-rouge">Symbol</code></p>
+
+<h3 id="typesymbols"><code class="language-plaintext highlighter-rouge">TypeSymbol</code>s</h3>
+
+<p>A <code class="language-plaintext highlighter-rouge">TypeSymbol</code> represents type, class, and trait declarations, as well as type
+parameters. Interesting members that do not apply to the more specific
+<code class="language-plaintext highlighter-rouge">ClassSymbol</code>s, include <code class="language-plaintext highlighter-rouge">isAbstractType</code>, <code class="language-plaintext highlighter-rouge">isContravariant</code>, and
+<code class="language-plaintext highlighter-rouge">isCovariant</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ClassSymbol</code>: Provides access to all information contained in a class or trait declaration, e.g., <code class="language-plaintext highlighter-rouge">name</code>, modifiers (<code class="language-plaintext highlighter-rouge">isFinal</code>, <code class="language-plaintext highlighter-rouge">isPrivate</code>, <code class="language-plaintext highlighter-rouge">isProtected</code>, <code class="language-plaintext highlighter-rouge">isAbstractClass</code>, etc.), <code class="language-plaintext highlighter-rouge">baseClasses</code>, and <code class="language-plaintext highlighter-rouge">typeParams</code>.</li>
+</ul>
+
+<h3 id="termsymbols"><code class="language-plaintext highlighter-rouge">TermSymbol</code>s</h3>
+
+<p>The type of term symbols representing val, var, def, and object declarations
+as well as packages and value parameters.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MethodSymbol</code>: The type of method symbols representing def declarations (subclass of <code class="language-plaintext highlighter-rouge">TermSymbol</code>). It supports queries like checking whether a method is a (primary) constructor, or whether a method supports variable-length argument lists.</li>
+  <li><code class="language-plaintext highlighter-rouge">ModuleSymbol</code>: The type of module symbols representing object declarations. It allows looking up the class implicitly associated with the object definition via member <code class="language-plaintext highlighter-rouge">moduleClass</code>. The opposite look up is also possible. One can go back from a module class to the associated module symbol by inspecting its <code class="language-plaintext highlighter-rouge">selfType.termSymbol</code>.</li>
+</ul>
+
+<h3 id="symbol-conversions">Symbol Conversions</h3>
+
+<p>There can be situations where one uses a method that returns an instance of
+the general <code class="language-plaintext highlighter-rouge">Symbol</code> type. In cases like these, it’s possible to convert the
+more general <code class="language-plaintext highlighter-rouge">Symbol</code> type obtained to the specific, more specialized symbol
+type needed.</p>
+
+<p>Symbol conversions, such as <code class="language-plaintext highlighter-rouge">asClass</code> or <code class="language-plaintext highlighter-rouge">asMethod</code>, are used to convert to a
+more specific subtype of <code class="language-plaintext highlighter-rouge">Symbol</code> as appropriate (if you want to use the
+<code class="language-plaintext highlighter-rouge">MethodSymbol</code> interface, for example).</p>
+
+<p>For example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; class C[T] { def test[U](x: T)(y: U): Int = ??? }
+defined class C
+
+scala&gt; val testMember = typeOf[C[Int]].member(TermName("test"))
+testMember: scala.reflect.runtime.universe.Symbol = method test
+</code></pre></div></div>
+
+<p>In this case, <code class="language-plaintext highlighter-rouge">member</code> returns an instance of <code class="language-plaintext highlighter-rouge">Symbol</code>, not <code class="language-plaintext highlighter-rouge">MethodSymbol</code> as
+one might expect. Thus, we must use <code class="language-plaintext highlighter-rouge">asMethod</code> to ensure that we obtain a
+<code class="language-plaintext highlighter-rouge">MethodSymbol</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; testMember.asMethod
+res0: scala.reflect.runtime.universe.MethodSymbol = method test
+</code></pre></div></div>
+
+<h3 id="free-symbols">Free symbols</h3>
+
+<p>The two symbol types <code class="language-plaintext highlighter-rouge">FreeTermSymbol</code> and <code class="language-plaintext highlighter-rouge">FreeTypeSymbol</code> have a special
+status, in the sense that they refer to symbols whose available information is
+not complete. These symbols are generated in some cases during reification
+(see the corresponding section about reifying trees for more background).
+Whenever reification cannot locate a symbol (meaning that the symbol is not
+available in the corresponding class file, for example, because the symbol
+refers to a local class), it reifies it as a so-called “free type”, a
+synthetic dummy symbol that remembers the original name and owner and has a
+surrogate type signature that closely follows the original. You can check
+whether a symbol is a free type by calling <code class="language-plaintext highlighter-rouge">sym.isFreeType</code>. You can also get
+a list of all free types referenced by a tree and its children by calling
+<code class="language-plaintext highlighter-rouge">tree.freeTypes</code>. Finally, you can get warnings when reification produces free
+types by using <code class="language-plaintext highlighter-rouge">-Xlog-free-types</code>.</p>
+
+<h2 id="types">Types</h2>
+
+<p>As its name suggests, instances of <code class="language-plaintext highlighter-rouge">Type</code> represent information about the type
+of a corresponding symbol. This includes its members (methods, fields, type
+aliases, abstract types, nested classes, traits, etc.) either declared
+directly or inherited, its base types, its erasure and so on. Types also
+provide operations to test for type conformance or equivalence.</p>
+
+<h3 id="instantiating-types">Instantiating Types</h3>
+
+<p>In general, there are three ways to instantiate a <code class="language-plaintext highlighter-rouge">Type</code>.</p>
+
+<ol>
+  <li>via method <code class="language-plaintext highlighter-rouge">typeOf</code> on <code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags</code>, which is mixed into <code class="language-plaintext highlighter-rouge">Universe</code> (simplest and most common).</li>
+  <li>Standard Types, such as <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Boolean</code>, <code class="language-plaintext highlighter-rouge">Any</code>, or <code class="language-plaintext highlighter-rouge">Unit</code> are accessible through the available universe.</li>
+  <li>Manual instantiation using factory methods such as <code class="language-plaintext highlighter-rouge">typeRef</code> or <code class="language-plaintext highlighter-rouge">polyType</code> on <code class="language-plaintext highlighter-rouge">scala.reflect.api.Types</code>, (not recommended).</li>
+</ol>
+
+<h4 id="instantiating-types-with-typeof">Instantiating Types With <code class="language-plaintext highlighter-rouge">typeOf</code></h4>
+
+<p>To instantiate a type, most of the time, the
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags#typeOf</code> method can be used. It takes a type
+argument and produces a <code class="language-plaintext highlighter-rouge">Type</code> instance which represents that argument. For
+example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; typeOf[List[Int]]
+res0: scala.reflect.runtime.universe.Type = scala.List[Int]
+</code></pre></div></div>
+
+<p>In this example, a
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.Types$TypeRef</code>
+is returned, which corresponds to the type constructor <code class="language-plaintext highlighter-rouge">List</code>, applied to
+the type argument <code class="language-plaintext highlighter-rouge">Int</code>.</p>
+
+<p>Note, however, that this approach requires one to specify by hand the type
+we’re trying to instantiate. What if we’re interested in obtaining an instance
+of <code class="language-plaintext highlighter-rouge">Type</code> that corresponds to some arbitrary instance? One can simply define a
+method with a context bound on the type parameter– this generates a
+specialized <code class="language-plaintext highlighter-rouge">TypeTag</code> for us, which we can use to obtain the type of our
+arbitrary instance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; def getType[T: TypeTag](obj: T) = typeOf[T]
+getType: [T](obj: T)(implicit evidence$1: scala.reflect.runtime.universe.TypeTag[T])scala.reflect.runtime.universe.Type
+
+scala&gt; getType(List(1,2,3))
+res1: scala.reflect.runtime.universe.Type = List[Int]
+
+scala&gt; class Animal; class Cat extends Animal
+defined class Animal
+defined class Cat
+
+scala&gt; val a = new Animal
+a: Animal = Animal@21c17f5a
+
+scala&gt; getType(a)
+res2: scala.reflect.runtime.universe.Type = Animal
+
+scala&gt; val c = new Cat
+c: Cat = Cat@2302d72d
+
+scala&gt; getType(c)
+res3: scala.reflect.runtime.universe.Type = Cat
+</code></pre></div></div>
+
+<p><em>Note:</em> Method <code class="language-plaintext highlighter-rouge">typeOf</code> does not work for types with type parameters, such as
+<code class="language-plaintext highlighter-rouge">typeOf[List[A]]</code> where <code class="language-plaintext highlighter-rouge">A</code> is a type parameter. In this case, one can use
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags#weakTypeOf</code> instead. For more details, see the
+<a href="/overviews/reflection/typetags-manifests.html">TypeTags</a>
+section of this guide.</p>
+
+<h4 id="standard-types">Standard Types</h4>
+
+<p>Standard types, such as <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Boolean</code>, <code class="language-plaintext highlighter-rouge">Any</code>, or <code class="language-plaintext highlighter-rouge">Unit</code>, are accessible through a universe’s <code class="language-plaintext highlighter-rouge">definitions</code> member. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe
+import scala.reflect.runtime.universe
+
+scala&gt; val intTpe = universe.definitions.IntTpe
+intTpe: scala.reflect.runtime.universe.Type = Int
+</code></pre></div></div>
+
+<p>The list of standard types is specified in trait <code class="language-plaintext highlighter-rouge">StandardTypes</code> in
+<a href="https://www.scala-lang.org/api/current/index.html#scala.reflect.api.StandardDefinitions$StandardTypes"><code class="language-plaintext highlighter-rouge">scala.reflect.api.StandardDefinitions</code></a>.</p>
+
+<h3 id="common-operations-on-types">Common Operations on Types</h3>
+
+<p>Types are typically used for type conformance tests or are queried for members.
+The three main classes of operations performed on types are:</p>
+
+<ol>
+  <li>Checking the subtyping relationship between two types.</li>
+  <li>Checking for equality between two types.</li>
+  <li>Querying a given type for certain members or inner types.</li>
+</ol>
+
+<h4 id="subtyping-relationships">Subtyping Relationships</h4>
+
+<p>Given two <code class="language-plaintext highlighter-rouge">Type</code> instances, one can easily test whether one is a subtype of
+the other using <code class="language-plaintext highlighter-rouge">&lt;:&lt;</code> (and in exceptional cases, <code class="language-plaintext highlighter-rouge">weak_&lt;:&lt;</code>, explained below)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; class A; class B extends A
+defined class A
+defined class B
+
+scala&gt; typeOf[A] &lt;:&lt; typeOf[B]
+res0: Boolean = false
+
+scala&gt; typeOf[B] &lt;:&lt; typeOf[A]
+res1: Boolean = true
+</code></pre></div></div>
+
+<p>Note that method <code class="language-plaintext highlighter-rouge">weak_&lt;:&lt;</code> exists to check for <em>weak conformance</em> between two
+types. This is typically important when dealing with numeric types.</p>
+
+<p>Scala’s numeric types abide by the following ordering (section 3.5.3 of the Scala language specification):</p>
+
+<blockquote>
+  <p>In some situations Scala uses a more general conformance relation. A type S weakly conforms to a type T, written S &lt;:w T, if S&lt;:T or both S and T are primitive number types and S precedes T in the following ordering:</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weak Conformance Relations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Byte</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Short</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Short</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Int</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Char</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Int</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Int</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Long</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Long</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Float</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Float</code> <code class="language-plaintext highlighter-rouge">&lt;:w</code> <code class="language-plaintext highlighter-rouge">Double</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For example, weak conformance is used to determine the type of the following if-expression:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; if (true) 1 else 1d
+res2: Double = 1.0
+</code></pre></div></div>
+
+<p>In the if-expression shown above, the result type is defined to be the
+<em>weak least upper bound</em> of the two types (i.e., the least upper bound with
+respect to weak conformance).</p>
+
+<p>Thus, since <code class="language-plaintext highlighter-rouge">Double</code> is defined to be the least upper bound with respect to
+weak conformance between <code class="language-plaintext highlighter-rouge">Int</code> and <code class="language-plaintext highlighter-rouge">Double</code> (according to the spec, shown
+above), <code class="language-plaintext highlighter-rouge">Double</code> is inferred as the type of our example if-expression.</p>
+
+<p>Note that method <code class="language-plaintext highlighter-rouge">weak_&lt;:&lt;</code> checks for <em>weak conformance</em> (as opposed to <code class="language-plaintext highlighter-rouge">&lt;:&lt;</code>
+which checks for conformance without taking into consideration weak
+conformance relations in section 3.5.3 of the spec) and thus returns the
+correct result when inspecting conformance relations between numeric types
+<code class="language-plaintext highlighter-rouge">Int</code> and <code class="language-plaintext highlighter-rouge">Double</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; typeOf[Int] weak_&lt;:&lt; typeOf[Double]
+res3: Boolean = true
+
+scala&gt; typeOf[Double] weak_&lt;:&lt; typeOf[Int]
+res4: Boolean = false
+</code></pre></div></div>
+
+<p>Whereas using <code class="language-plaintext highlighter-rouge">&lt;:&lt;</code> would incorrectly report that <code class="language-plaintext highlighter-rouge">Int</code> and <code class="language-plaintext highlighter-rouge">Double</code> do not
+conform to each other in any way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; typeOf[Int] &lt;:&lt; typeOf[Double]
+res5: Boolean = false
+
+scala&gt; typeOf[Double] &lt;:&lt; typeOf[Int]
+res6: Boolean = false
+</code></pre></div></div>
+
+<h4 id="type-equality">Type Equality</h4>
+
+<p>Similar to type conformance, one can easily check the <em>equality</em> of two types.
+That is, given two arbitrary types, one can use method <code class="language-plaintext highlighter-rouge">=:=</code> to see if both
+denote the exact same compile-time type.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; def getType[T: TypeTag](obj: T) = typeOf[T]
+getType: [T](obj: T)(implicit evidence$1: scala.reflect.runtime.universe.TypeTag[T])scala.reflect.runtime.universe.Type
+
+scala&gt; class A
+defined class A
+
+scala&gt; val a1 = new A; val a2 = new A
+a1: A = A@cddb2e7
+a2: A = A@2f0c624a
+
+scala&gt; getType(a1) =:= getType(a2)
+res0: Boolean = true
+</code></pre></div></div>
+
+<p>Note that the <em>precise type info</em> must be the same for both instances. In the
+following code snippet, for example, we have two instances of <code class="language-plaintext highlighter-rouge">List</code>
+with different type arguments.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; getType(List(1,2,3)) =:= getType(List(1.0, 2.0, 3.0))
+res1: Boolean = false
+
+scala&gt; getType(List(1,2,3)) =:= getType(List(9,8,7))
+res2: Boolean = true
+</code></pre></div></div>
+
+<p>Also important to note is that <code class="language-plaintext highlighter-rouge">=:=</code> should <em>always</em> be used to compare types
+for equality. That is, never use <code class="language-plaintext highlighter-rouge">==</code>, as it can’t check for type equality in
+the presence of type aliases, whereas <code class="language-plaintext highlighter-rouge">=:=</code> can:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; type Histogram = List[Int]
+defined type alias Histogram
+
+scala&gt; typeOf[Histogram] =:= getType(List(4,5,6))
+res3: Boolean = true
+
+scala&gt; typeOf[Histogram] == getType(List(4,5,6))
+res4: Boolean = false
+</code></pre></div></div>
+
+<p>As we can see, <code class="language-plaintext highlighter-rouge">==</code> incorrectly reports that <code class="language-plaintext highlighter-rouge">Histogram</code> and <code class="language-plaintext highlighter-rouge">List[Int]</code> have
+different types.</p>
+
+<h4 id="querying-types-for-members-and-declarations">Querying Types for Members and Declarations</h4>
+
+<p>Given a <code class="language-plaintext highlighter-rouge">Type</code>, one can also <em>query</em> it for specific members or declarations.
+A <code class="language-plaintext highlighter-rouge">Type</code>’s <em>members</em> include all fields, methods, type aliases, abstract
+types, nested classes/objects/traits, etc. A <code class="language-plaintext highlighter-rouge">Type</code>’s <em>declarations</em> are only
+those members that were declared (not inherited) in the class/trait/object
+definition which the given <code class="language-plaintext highlighter-rouge">Type</code> represents.</p>
+
+<p>To obtain a <code class="language-plaintext highlighter-rouge">Symbol</code> for some specific member or declaration, one need only to use methods <code class="language-plaintext highlighter-rouge">members</code> or <code class="language-plaintext highlighter-rouge">decls</code> which provide the list of definitions associated with that type. There also exists singular counterparts for each, methods <code class="language-plaintext highlighter-rouge">member</code> and <code class="language-plaintext highlighter-rouge">decl</code> as well. The signatures of all four are shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** The member with given name, either directly declared or inherited, an
+  * OverloadedSymbol if several exist, NoSymbol if none exist. */
+def member(name: Universe.Name): Universe.Symbol
+
+/** The defined or declared members with name name in this type; an
+  * OverloadedSymbol if several exist, NoSymbol if none exist. */
+def decl(name: Universe.Name): Universe.Symbol
+
+/** A Scope containing all members of this type
+  * (directly declared or inherited). */
+def members: Universe.MemberScope // MemberScope is a type of
+                                  // Traversable, use higher-order
+                                  // functions such as map,
+                                  // filter, foreach to query!
+
+/** A Scope containing the members declared directly on this type. */
+def decls: Universe.MemberScope // MemberScope is a type of
+                                       // Traversable, use higher-order
+                                       // functions such as map,
+                                       // filter, foreach to query!
+</code></pre></div></div>
+
+<p>For example, to look up the <code class="language-plaintext highlighter-rouge">map</code> method of <code class="language-plaintext highlighter-rouge">List</code>, one can do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; typeOf[List[_]].member(TermName("map"))
+res0: scala.reflect.runtime.universe.Symbol = method map
+</code></pre></div></div>
+
+<p>Note that we pass method <code class="language-plaintext highlighter-rouge">member</code> a <code class="language-plaintext highlighter-rouge">TermName</code>, since we’re looking up a
+method. If we were to look up a type member, such as <code class="language-plaintext highlighter-rouge">List</code>’s self type, <code class="language-plaintext highlighter-rouge">Self</code>, we
+would pass a <code class="language-plaintext highlighter-rouge">TypeName</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; typeOf[List[_]].member(TypeName("Self"))
+res1: scala.reflect.runtime.universe.Symbol = type Self
+</code></pre></div></div>
+
+<p>We can also query all members or declarations on a type in interesting ways.
+We can use method <code class="language-plaintext highlighter-rouge">members</code> to obtain a <code class="language-plaintext highlighter-rouge">Traversable</code> (<code class="language-plaintext highlighter-rouge">MemberScopeApi</code>
+extends <code class="language-plaintext highlighter-rouge">Traversable</code>) of <code class="language-plaintext highlighter-rouge">Symbol</code>s representing all inherited or declared
+members on a given type, which means that we can use popular higher-order
+functions on collections like <code class="language-plaintext highlighter-rouge">foreach</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">map</code>, etc., to explore our
+type’s members. For example, to print the members of <code class="language-plaintext highlighter-rouge">List</code> which are private,
+one must simply do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; typeOf[List[Int]].members.filter(_.isPrivate).foreach(println _)
+method super$sameElements
+method occCounts
+class CombinationsItr
+class PermutationsItr
+method sequential
+method iterateUntilEmpty
+</code></pre></div></div>
+
+<h2 id="trees">Trees</h2>
+
+<p>Trees are the basis of Scala’s abstract syntax which is used to represent
+programs. They are also called abstract syntax trees and commonly abbreviated
+as ASTs.</p>
+
+<p>In Scala reflection, APIs that produce or use trees are the following:</p>
+
+<ol>
+  <li>Scala annotations, which use trees to represent their arguments, exposed in <code class="language-plaintext highlighter-rouge">Annotation.scalaArgs</code> (for more, see the <a href="/overviews/reflection/annotations-names-scopes.html">Annotations</a> section of this guide).</li>
+  <li><code class="language-plaintext highlighter-rouge">reify</code>, a special method that takes an expression and returns an AST that represents this expression.</li>
+  <li>Compile-time reflection with macros (outlined in the <a href="/overviews/macros/overview.html">Macros guide</a>) and runtime compilation with toolboxes both use trees as their program representation medium.</li>
+</ol>
+
+<p>It’s important to note that trees are immutable except for three fields–
+<code class="language-plaintext highlighter-rouge">pos</code> (<code class="language-plaintext highlighter-rouge">Position</code>), <code class="language-plaintext highlighter-rouge">symbol</code> (<code class="language-plaintext highlighter-rouge">Symbol</code>), and <code class="language-plaintext highlighter-rouge">tpe</code> (<code class="language-plaintext highlighter-rouge">Type</code>), which are
+assigned when a tree is typechecked.</p>
+
+<h3 id="kinds-of-trees">Kinds of <code class="language-plaintext highlighter-rouge">Tree</code>s</h3>
+
+<p>There are three main categories of trees:</p>
+
+<ol>
+  <li><strong>Subclasses of <code class="language-plaintext highlighter-rouge">TermTree</code></strong> which represent terms, <em>e.g.,</em> method invocations are represented by <code class="language-plaintext highlighter-rouge">Apply</code> nodes, object instantiation is achieved using <code class="language-plaintext highlighter-rouge">New</code> nodes, etc.</li>
+  <li><strong>Subclasses of <code class="language-plaintext highlighter-rouge">TypTree</code></strong> which represent types that are explicitly specified in program source code, <em>e.g.,</em> <code class="language-plaintext highlighter-rouge">List[Int]</code> is parsed as <code class="language-plaintext highlighter-rouge">AppliedTypeTree</code>. <em>Note</em>: <code class="language-plaintext highlighter-rouge">TypTree</code> is not misspelled, nor is it conceptually the same as <code class="language-plaintext highlighter-rouge">TypeTree</code>– <code class="language-plaintext highlighter-rouge">TypeTree</code> is something different. That is, in situations where <code class="language-plaintext highlighter-rouge">Type</code>s are constructed by the compiler (<em>e.g.,</em> during type inference), they can be wrapped in <code class="language-plaintext highlighter-rouge">TypeTree</code> trees and integrated into the AST of the program.</li>
+  <li><strong>Subclasses of <code class="language-plaintext highlighter-rouge">SymTree</code></strong> which introduce or reference definitions. Examples of the introduction of new definitions include <code class="language-plaintext highlighter-rouge">ClassDef</code>s which represent class and trait definitions, or <code class="language-plaintext highlighter-rouge">ValDef</code> which represent field and parameter definitions. Examples of the reference of existing definitions include <code class="language-plaintext highlighter-rouge">Ident</code>s which refer to an existing definition in the current scope such as a local variable or a method.</li>
+</ol>
+
+<p>Any other type of tree that one might encounter are typically syntactic or
+short-lived constructs. For example, <code class="language-plaintext highlighter-rouge">CaseDef</code>, which wraps individual match
+cases; such nodes are neither terms nor types, nor do they carry a symbol.</p>
+
+<h3 id="inspecting-trees">Inspecting Trees</h3>
+
+<p>Scala Reflection provides a handful of ways to visualize trees, all available
+through a universe. Given a tree, one can:</p>
+
+<ul>
+  <li>use methods <code class="language-plaintext highlighter-rouge">show</code> or <code class="language-plaintext highlighter-rouge">toString</code> which print pseudo-Scala code represented by the tree.</li>
+  <li>use method <code class="language-plaintext highlighter-rouge">showRaw</code> to see the raw internal tree that the typechecker operates upon.</li>
+</ul>
+
+<p>For example, given the following tree:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val tree = Apply(Select(Ident(TermName("x")), TermName("$plus")), List(Literal(Constant(2))))
+tree: scala.reflect.runtime.universe.Apply = x.$plus(2)
+</code></pre></div></div>
+
+<p>We can use method <code class="language-plaintext highlighter-rouge">show</code> (or <code class="language-plaintext highlighter-rouge">toString</code>, which is equivalent) to see what that
+tree represents.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; show(tree)
+res0: String = x.$plus(2)
+</code></pre></div></div>
+
+<p>As we can see, <code class="language-plaintext highlighter-rouge">tree</code> simply adds <code class="language-plaintext highlighter-rouge">2</code> to term <code class="language-plaintext highlighter-rouge">x</code>.</p>
+
+<p>We can also go in the other direction. Given some Scala expression, we can
+first obtain a tree, and then use method <code class="language-plaintext highlighter-rouge">showRaw</code> to see the raw internal
+tree that the compiler and typechecker operate on. For example, given the
+expression:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val expr = reify { class Flower { def name = "Rose" } }
+expr: scala.reflect.runtime.universe.Expr[Unit] = ...
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">reify</code> simply takes the Scala expression it was passed, and returns a
+Scala <code class="language-plaintext highlighter-rouge">Expr</code>, which is simply wraps a <code class="language-plaintext highlighter-rouge">Tree</code> and a <code class="language-plaintext highlighter-rouge">TypeTag</code> (see the
+<a href="/overviews/reflection/annotations-names-scopes.html">Expr</a>
+section of this guide for more information about <code class="language-plaintext highlighter-rouge">Expr</code>s). We can obtain
+the tree that <code class="language-plaintext highlighter-rouge">expr</code> contains by:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val tree = expr.tree
+tree: scala.reflect.runtime.universe.Tree =
+{
+  class Flower extends AnyRef {
+    def &lt;init&gt;() = {
+      super.&lt;init&gt;();
+      ()
+    };
+    def name = "Rose"
+  };
+  ()
+}
+</code></pre></div></div>
+
+<p>And we can inspect the raw tree by simply doing:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; showRaw(tree)
+res1: String = Block(List(ClassDef(Modifiers(), TypeName("Flower"), List(), Template(List(Ident(TypeName("AnyRef"))), emptyValDef, List(DefDef(Modifiers(), termNames.CONSTRUCTOR, List(), List(List()), TypeTree(), Block(List(Apply(Select(Super(This(typeNames.EMPTY), typeNames.EMPTY), termNames.CONSTRUCTOR), List())), Literal(Constant(())))), DefDef(Modifiers(), TermName("name"), List(), List(), TypeTree(), Literal(Constant("Rose"))))))), Literal(Constant(())))
+</code></pre></div></div>
+
+<h3 id="traversing-trees">Traversing Trees</h3>
+
+<p>After one understands the structure of a given tree, typically the next step
+is to extract info from it. This is accomplished by <em>traversing</em> the tree, and
+it can be done in one of two ways:</p>
+
+<ul>
+  <li>Traversal via pattern matching.</li>
+  <li>Using a subclass of <code class="language-plaintext highlighter-rouge">Traverser</code></li>
+</ul>
+
+<h4 id="traversal-via-pattern-matching">Traversal via Pattern Matching</h4>
+
+<p>Traversal via pattern matching is the simplest and most common way to traverse
+a tree. Typically, one traverses a tree via pattern matching when they are
+interested in the state of a given tree at a single node. For example, say we
+simply want to obtain the function and the argument of the only <code class="language-plaintext highlighter-rouge">Apply</code> node
+in the following tree:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val tree = Apply(Select(Ident(TermName("x")), TermName("$plus")), List(Literal(Constant(2))))
+tree: scala.reflect.runtime.universe.Apply = x.$plus(2)
+</code></pre></div></div>
+
+<p>We can simply match on our <code class="language-plaintext highlighter-rouge">tree</code>, and in the case that we have an <code class="language-plaintext highlighter-rouge">Apply</code>
+node, just return <code class="language-plaintext highlighter-rouge">Apply</code>’s  function and argument:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val (fun, arg) = tree match {
+     |     case Apply(fn, a :: Nil) =&gt; (fn, a)
+     | }
+fun: scala.reflect.runtime.universe.Tree = x.$plus
+arg: scala.reflect.runtime.universe.Tree = 2
+</code></pre></div></div>
+
+<p>We can achieve exactly the same thing a bit more concisely, by putting the
+pattern match on the left-hand side:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val Apply(fun, arg :: Nil) = tree
+fun: scala.reflect.runtime.universe.Tree = x.$plus
+arg: scala.reflect.runtime.universe.Tree = 2
+</code></pre></div></div>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">Tree</code>s can typically be quite complex, with nodes nested
+arbitrarily deep within other nodes. A simple illustration would be if we were
+to add a second <code class="language-plaintext highlighter-rouge">Apply</code> node to the above tree which serves to add <code class="language-plaintext highlighter-rouge">3</code> to our
+sum:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val tree = Apply(Select(Apply(Select(Ident(TermName("x")), TermName("$plus")), List(Literal(Constant(2)))), TermName("$plus")), List(Literal(Constant(3))))
+tree: scala.reflect.runtime.universe.Apply = x.$plus(2).$plus(3)
+</code></pre></div></div>
+
+<p>If we apply the same pattern match as above, we obtain the outer <code class="language-plaintext highlighter-rouge">Apply</code> node
+which contains as its function the entire tree representing <code class="language-plaintext highlighter-rouge">x.$plus(2)</code> that
+we saw above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val Apply(fun, arg :: Nil) = tree
+fun: scala.reflect.runtime.universe.Tree = x.$plus(2).$plus
+arg: scala.reflect.runtime.universe.Tree = 3
+
+scala&gt; showRaw(fun)
+res3: String = Select(Apply(Select(Ident(TermName("x")), TermName("$plus")), List(Literal(Constant(2)))), TermName("$plus"))
+</code></pre></div></div>
+
+<p>In cases where one must do some richer task, such as traversing an entire
+tree without stopping at a specific node, or collecting and inspecting all
+nodes of a specific type, using <code class="language-plaintext highlighter-rouge">Traverser</code> for traversal might be more
+advantageous.</p>
+
+<h4 id="traversal-via-traverser">Traversal via <code class="language-plaintext highlighter-rouge">Traverser</code></h4>
+
+<p>In situations where it’s necessary to traverse an entire tree from top to
+bottom, using traversal via pattern matching would be infeasible– to do it
+this way, one must individually handle every type of node that we might come
+across in the pattern match. Thus, in these situations, typically class
+<code class="language-plaintext highlighter-rouge">Traverser</code> is used.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Traverser</code> makes sure to visit every node in a given tree, in a depth-first search.</p>
+
+<p>To use a <code class="language-plaintext highlighter-rouge">Traverser</code>, simply subclass <code class="language-plaintext highlighter-rouge">Traverser</code> and override method
+<code class="language-plaintext highlighter-rouge">traverse</code>. In doing so, you can simply provide custom logic to handle only
+the cases you’re interested in. For example, if, given our
+<code class="language-plaintext highlighter-rouge">x.$plus(2).$plus(3)</code> tree from the previous section, we would like to collect
+all <code class="language-plaintext highlighter-rouge">Apply</code> nodes, we could do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val tree = Apply(Select(Apply(Select(Ident(TermName("x")), TermName("$plus")), List(Literal(Constant(2)))), TermName("$plus")), List(Literal(Constant(3))))
+tree: scala.reflect.runtime.universe.Apply = x.$plus(2).$plus(3)
+
+scala&gt; object traverser extends Traverser {
+     |   var applies = List[Apply]()
+     |   override def traverse(tree: Tree): Unit = tree match {
+     |     case app @ Apply(fun, args) =&gt;
+     |       applies = app :: applies
+     |       super.traverse(fun)
+     |       super.traverseTrees(args)
+     |     case _ =&gt; super.traverse(tree)
+     |   }
+     | }
+defined module traverser
+</code></pre></div></div>
+
+<p>In the above, we intend to construct a list of <code class="language-plaintext highlighter-rouge">Apply</code> nodes that we find in
+our given tree.</p>
+
+<p>We achieve this by in effect <em>adding</em> a special case to the already depth-first
+<code class="language-plaintext highlighter-rouge">traverse</code> method defined in superclass <code class="language-plaintext highlighter-rouge">Traverser</code>, via subclass
+<code class="language-plaintext highlighter-rouge">traverser</code>’s overridden <code class="language-plaintext highlighter-rouge">traverse</code> method. Our special case affects only
+nodes that match the pattern <code class="language-plaintext highlighter-rouge">Apply(fun, args)</code>, where <code class="language-plaintext highlighter-rouge">fun</code> is some function
+(represented by a <code class="language-plaintext highlighter-rouge">Tree</code>) and <code class="language-plaintext highlighter-rouge">args</code> is a list of arguments (represented by a
+list of <code class="language-plaintext highlighter-rouge">Tree</code>s).</p>
+
+<p>When a tree matches the pattern (<em>i.e.,</em> when we have an <code class="language-plaintext highlighter-rouge">Apply</code> node), we
+simply add it to our <code class="language-plaintext highlighter-rouge">List[Apply]</code>, <code class="language-plaintext highlighter-rouge">applies</code>, and continue our traversal.</p>
+
+<p>Note that, in our match, we call <code class="language-plaintext highlighter-rouge">super.traverse</code> on the function <code class="language-plaintext highlighter-rouge">fun</code>
+wrapped in our <code class="language-plaintext highlighter-rouge">Apply</code>, and we call <code class="language-plaintext highlighter-rouge">super.traverseTrees</code> on our argument list
+<code class="language-plaintext highlighter-rouge">args</code> (essentially the same as <code class="language-plaintext highlighter-rouge">super.traverse</code>, but for <code class="language-plaintext highlighter-rouge">List[Tree]</code> rather
+than a single <code class="language-plaintext highlighter-rouge">Tree</code>). In both of these calls, our objective is simple– we
+want to make sure that we use the default <code class="language-plaintext highlighter-rouge">traverse</code> method in <code class="language-plaintext highlighter-rouge">Traverser</code>
+because we don’t know whether the <code class="language-plaintext highlighter-rouge">Tree</code> that represents fun contains our
+<code class="language-plaintext highlighter-rouge">Apply</code> pattern– that is, we want to traverse the entire sub-tree. Since the
+<code class="language-plaintext highlighter-rouge">Traverser</code> superclass calls <code class="language-plaintext highlighter-rouge">this.traverse</code>, passing in every nested sub-
+tree, eventually our custom <code class="language-plaintext highlighter-rouge">traverse</code> method is guaranteed to be called for
+each sub-tree that matches our <code class="language-plaintext highlighter-rouge">Apply</code> pattern.</p>
+
+<p>To trigger the <code class="language-plaintext highlighter-rouge">traverse</code> and to see the resulting <code class="language-plaintext highlighter-rouge">List</code> of matching <code class="language-plaintext highlighter-rouge">Apply</code>
+nodes, simply do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; traverser.traverse(tree)
+
+scala&gt; traverser.applies
+res0: List[scala.reflect.runtime.universe.Apply] = List(x.$plus(2), x.$plus(2).$plus(3))
+</code></pre></div></div>
+
+<h3 id="creating-trees">Creating Trees</h3>
+
+<p>When working with runtime reflection, one need not construct trees manually.
+However, runtime compilation with toolboxes and compile-time reflection with
+macros both use trees as their program representation medium. In these cases,
+there are three recommended ways to create trees:</p>
+
+<ol>
+  <li>Via method <code class="language-plaintext highlighter-rouge">reify</code> (should be preferred wherever possible).</li>
+  <li>Via method <code class="language-plaintext highlighter-rouge">parse</code> on <code class="language-plaintext highlighter-rouge">ToolBox</code>es.</li>
+  <li>Manual construction (not recommended).</li>
+</ol>
+
+<h4 id="tree-creation-via-reify">Tree Creation via <code class="language-plaintext highlighter-rouge">reify</code></h4>
+
+<p>Method <code class="language-plaintext highlighter-rouge">reify</code> simply takes a Scala expression as an argument, and produces
+that argument’s typed <code class="language-plaintext highlighter-rouge">Tree</code> representation as a result.</p>
+
+<p>Tree creation via method <code class="language-plaintext highlighter-rouge">reify</code> is the recommended way of creating trees in
+Scala Reflection. To see why, let’s start with a small example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; { val tree = reify(println(2)).tree; showRaw(tree) }
+res0: String = Apply(Select(Select(This(TypeName("scala")), TermName("Predef")), TermName("println")), List(Literal(Constant(2))))
+</code></pre></div></div>
+
+<p>Here, we simply <code class="language-plaintext highlighter-rouge">reify</code> the call to <code class="language-plaintext highlighter-rouge">println(2)</code>– that is, we convert the
+expression <code class="language-plaintext highlighter-rouge">println(2)</code> to its corresponding tree representation. Then we
+output the raw tree. Note that the <code class="language-plaintext highlighter-rouge">println</code> method was transformed to
+<code class="language-plaintext highlighter-rouge">scala.Predef.println</code>. Such transformations ensure that regardless of where
+the result of <code class="language-plaintext highlighter-rouge">reify</code> is used, it will not unexpectedly change its meaning.
+For example, even if this <code class="language-plaintext highlighter-rouge">println(2)</code> snippet is later inserted into a block
+of code that defines its own <code class="language-plaintext highlighter-rouge">println</code>, it wouldn’t affect the behavior of the
+snippet.</p>
+
+<p>This way of creating trees is thus <em>hygenic</em>, in the sense that it preserves
+bindings of identifiers.</p>
+
+<h5 id="splicing-trees">Splicing Trees</h5>
+
+<p>Using <code class="language-plaintext highlighter-rouge">reify</code> also allows one to compose trees from smaller trees. This is
+done using <code class="language-plaintext highlighter-rouge">Expr.splice</code>.</p>
+
+<p><em>Note:</em> <code class="language-plaintext highlighter-rouge">Expr</code> is <code class="language-plaintext highlighter-rouge">reify</code>’s return type. It can be thought of as a simple
+wrapper which contains a <em>typed</em> <code class="language-plaintext highlighter-rouge">Tree</code>, a <code class="language-plaintext highlighter-rouge">TypeTag</code> and a handful of
+reification-relevant methods, such as <code class="language-plaintext highlighter-rouge">splice</code>. For more information about
+<code class="language-plaintext highlighter-rouge">Expr</code>s, see
+<a href="/overviews/reflection/annotations-names-scopes.html">the relevant section of this guide</a>.</p>
+
+<p>For example, let’s try to construct a tree representing <code class="language-plaintext highlighter-rouge">println(2)</code> using
+<code class="language-plaintext highlighter-rouge">splice</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val x = reify(2)
+x: scala.reflect.runtime.universe.Expr[Int(2)] = Expr[Int(2)](2)
+
+scala&gt; reify(println(x.splice))
+res1: scala.reflect.runtime.universe.Expr[Unit] = Expr[Unit](scala.this.Predef.println(2))
+</code></pre></div></div>
+
+<p>Here, we <code class="language-plaintext highlighter-rouge">reify</code> <code class="language-plaintext highlighter-rouge">2</code> and <code class="language-plaintext highlighter-rouge">println</code> separately, and simply <code class="language-plaintext highlighter-rouge">splice</code> one into
+the other.</p>
+
+<p>Note, however, that there is a requirement for the argument of <code class="language-plaintext highlighter-rouge">reify</code> to be
+valid and typeable Scala code. If instead of the argument to <code class="language-plaintext highlighter-rouge">println</code> we
+wanted to abstract over the <code class="language-plaintext highlighter-rouge">println</code> itself, it wouldn’t be possible:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val fn = reify(println)
+fn: scala.reflect.runtime.universe.Expr[Unit] = Expr[Unit](scala.this.Predef.println())
+
+scala&gt; reify(fn.splice(2))
+&lt;console&gt;:12: error: Unit does not take parameters
+            reify(fn.splice(2))
+                            ^
+</code></pre></div></div>
+
+<p>As we can see, the compiler assumes that we wanted to reify a call to
+<code class="language-plaintext highlighter-rouge">println</code> with no arguments, when what we really wanted was to capture the
+name of the function to be called.</p>
+
+<p>These types of use-cases are currently inexpressible when using <code class="language-plaintext highlighter-rouge">reify</code>.</p>
+
+<h4 id="tree-creation-via-parse-on-toolboxes">Tree Creation via <code class="language-plaintext highlighter-rouge">parse</code> on <code class="language-plaintext highlighter-rouge">ToolBox</code>es</h4>
+
+<p><code class="language-plaintext highlighter-rouge">Toolbox</code>es can be used to typecheck, compile, and execute abstract syntax
+trees. A toolbox can also be used to parse a string into an AST.</p>
+
+<p><em>Note:</em> Using toolboxes requires <code class="language-plaintext highlighter-rouge">scala-compiler.jar</code> to be on the classpath.</p>
+
+<p>Let’s see how <code class="language-plaintext highlighter-rouge">parse</code> deals with the <code class="language-plaintext highlighter-rouge">println</code> example from the previous
+section:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; import scala.tools.reflect.ToolBox
+import scala.tools.reflect.ToolBox
+
+scala&gt; val tb = runtimeMirror(getClass.getClassLoader).mkToolBox()
+tb: scala.tools.reflect.ToolBox[scala.reflect.runtime.universe.type] = scala.tools.reflect.ToolBoxFactory$ToolBoxImpl@7bc979dd
+
+scala&gt; showRaw(tb.parse("println(2)"))
+res2: String = Apply(Ident(TermName("println")), List(Literal(Constant(2))))
+</code></pre></div></div>
+
+<p>It’s important to note that, unlike <code class="language-plaintext highlighter-rouge">reify</code>, toolboxes aren’t limited by the
+typeability requirement– although this flexibility is achieved by sacrificing
+robustness. That is, here we can see that <code class="language-plaintext highlighter-rouge">parse</code>, unlike <code class="language-plaintext highlighter-rouge">reify</code>, doesn’t
+reflect the fact that <code class="language-plaintext highlighter-rouge">println</code> should be bound to the standard <code class="language-plaintext highlighter-rouge">println</code>
+method.</p>
+
+<p><em>Note:</em> when using macros, one shouldn’t use <code class="language-plaintext highlighter-rouge">ToolBox.parse</code>. This is because
+there’s already a <code class="language-plaintext highlighter-rouge">parse</code> method built into the macro context. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash$ scala -Yrepl-class-based:false
+
+scala&gt; import scala.language.experimental.macros
+import scala.language.experimental.macros
+
+scala&gt; def impl(c: scala.reflect.macros.whitebox.Context) = c.Expr[Unit](c.parse("println(2)"))
+def impl(c: scala.reflect.macros.whitebox.Context): c.Expr[Unit]
+
+scala&gt; def test: Unit = macro impl
+def test: Unit
+
+scala&gt; test
+2
+</code></pre></div></div>
+
+<p>You can find more about the two <code class="language-plaintext highlighter-rouge">Context</code>s in <a href="/overviews/macros/blackbox-whitebox.html">this Macros article</a>.</p>
+
+<h5 id="typechecking-with-toolboxes">Typechecking with ToolBoxes</h5>
+
+<p>As earlier alluded to, <code class="language-plaintext highlighter-rouge">ToolBox</code>es enable one to do more than just
+constructing trees from strings. They can also be used to typecheck, compile,
+and execute trees.</p>
+
+<p>In addition to outlining the structure of the program, trees also hold
+important information about the semantics of the program encoded in <code class="language-plaintext highlighter-rouge">symbol</code>
+(a symbol assigned to trees that introduce or reference definitions), and
+<code class="language-plaintext highlighter-rouge">tpe</code> (the type of the tree). By default these fields are empty, but
+typechecking fills them in.</p>
+
+<p>When using the runtime reflection framework, typechecking is implemented by
+<code class="language-plaintext highlighter-rouge">ToolBox.typeCheck</code>. When using macros, at compile time one can use the
+<code class="language-plaintext highlighter-rouge">Context.typeCheck</code> method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val tree = reify { "test".length }.tree
+tree: scala.reflect.runtime.universe.Tree = "test".length()
+
+scala&gt; import scala.tools.reflect.ToolBox
+import scala.tools.reflect.ToolBox
+
+scala&gt; val tb = runtimeMirror(getClass.getClassLoader).mkToolBox()
+tb: scala.tools.reflect.ToolBox[scala.reflect.runtime.universe.type] = ...
+
+scala&gt; val ttree = tb.typeCheck(tree)
+ttree: tb.u.Tree = "test".length()
+
+scala&gt; ttree.tpe
+res5: tb.u.Type = Int
+
+scala&gt; ttree.symbol
+res6: tb.u.Symbol = method length
+</code></pre></div></div>
+
+<p>Here, we simply create a tree that represents a call to <code class="language-plaintext highlighter-rouge">"test".length</code>, and
+use <code class="language-plaintext highlighter-rouge">ToolBox</code> <code class="language-plaintext highlighter-rouge">tb</code>’s <code class="language-plaintext highlighter-rouge">typeCheck</code> method to typecheck the tree. As we can see,
+<code class="language-plaintext highlighter-rouge">ttree</code> gets the correct type, <code class="language-plaintext highlighter-rouge">Int</code>, and its <code class="language-plaintext highlighter-rouge">Symbol</code> is correctly set.</p>
+
+<h4 id="tree-creation-via-manual-construction">Tree Creation via Manual Construction</h4>
+
+<p>If all else fails, one can manually construct trees. This is the most low-level
+way to create trees, and it should only be attempted if no other
+approach works. It sometimes offers greater flexibility when compared with
+<code class="language-plaintext highlighter-rouge">parse</code>, though this flexibility is achieved at a cost of excessive verbosity
+and fragility.</p>
+
+<p>Our earlier example involving <code class="language-plaintext highlighter-rouge">println(2)</code> can be manually constructed as
+follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; Apply(Ident(TermName("println")), List(Literal(Constant(2))))
+res0: scala.reflect.runtime.universe.Apply = println(2)
+</code></pre></div></div>
+
+<p>The canonical use case for this technique is when the target tree needs to be
+assembled from dynamically created parts, which don’t make sense in isolation
+from one another. In that case, <code class="language-plaintext highlighter-rouge">reify</code> will most likely be inapplicable,
+because it requires its argument to be typeable. <code class="language-plaintext highlighter-rouge">parse</code> might not work
+either, since quite often, trees are assembled on sub-expression level, with
+individual parts being inexpressible as Scala sources.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/environment-universes-mirrors.html">Environment, Universes, and Mirrors</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/reflection/symbols-trees-types.html">Symbols, Trees, and Types</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/annotations-names-scopes.html">Annotations, Names, Scopes, and More</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/typetags-manifests.html">TypeTags and Manifests</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/thread-safety.html">Thread Safety</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/changelog211.html">Changes in Scala 2.11</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/reflection/symbols-trees-types.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/reflection/symbols-trees-types.html" class="lang">日本語</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/reflection/symbols-trees-types.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

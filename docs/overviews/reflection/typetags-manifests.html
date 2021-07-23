@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      TypeTags and Manifests | 
+      Reflection | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/reflection/typetags-manifests.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="TypeTags and Manifests"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="TypeTags and Manifests"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Reflection</div>
+          
+          <h1>TypeTags and Manifests</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>As with other JVM languages, Scala’s types are erased at run time. This
+means that if you were to inspect the runtime type of some instance, you
+might not have access to all type information that the Scala compiler has
+available at compile time.</p>
+
+<p>Like <code class="language-plaintext highlighter-rouge">scala.reflect.Manifest</code>, <code class="language-plaintext highlighter-rouge">TypeTags</code> can be thought of as objects which
+carry along all type information available at compile time, to runtime. For
+example, <code class="language-plaintext highlighter-rouge">TypeTag[T]</code> encapsulates the runtime type representation of some
+compile-time type <code class="language-plaintext highlighter-rouge">T</code>. Note however, that <code class="language-plaintext highlighter-rouge">TypeTag</code>s should be considered to
+be a richer replacement of the pre-2.10 notion of a <code class="language-plaintext highlighter-rouge">Manifest</code>, that are
+additionally fully integrated with Scala reflection.</p>
+
+<p>There exist three different types of TypeTags:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags#TypeTag</code>.
+A full type descriptor of a Scala type. For example, a <code class="language-plaintext highlighter-rouge">TypeTag[List[String]]</code> contains all type information, in this case, of type <code class="language-plaintext highlighter-rouge">scala.List[String]</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scala.reflect.ClassTag</code>.
+A partial type descriptor of a Scala type. For example, a <code class="language-plaintext highlighter-rouge">ClassTag[List[String]]</code> contains only the erased class type information, in this case, of type <code class="language-plaintext highlighter-rouge">scala.collection.immutable.List</code>. <code class="language-plaintext highlighter-rouge">ClassTag</code>s provide access only to the runtime class of a type. Analogous to <code class="language-plaintext highlighter-rouge">scala.reflect.ClassManifest</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags#WeakTypeTag</code>.
+A type descriptor for abstract types (see corresponding subsection below).</p>
+  </li>
+</ol>
+
+<h2 id="obtaining-a-typetag">Obtaining a <code class="language-plaintext highlighter-rouge">TypeTag</code></h2>
+
+<p>Like <code class="language-plaintext highlighter-rouge">Manifest</code>s, <code class="language-plaintext highlighter-rouge">TypeTag</code>s are always generated by the compiler, and can be obtained in three ways.</p>
+
+<h3 id="via-the-methods-typetag-classtag-or-weaktypetag">via the Methods <code class="language-plaintext highlighter-rouge">typeTag</code>, <code class="language-plaintext highlighter-rouge">classTag</code>, or <code class="language-plaintext highlighter-rouge">weakTypeTag</code></h3>
+
+<p>One can directly obtain a <code class="language-plaintext highlighter-rouge">TypeTag</code> for a specific type by simply using
+method <code class="language-plaintext highlighter-rouge">typeTag</code>, available through <code class="language-plaintext highlighter-rouge">Universe</code>.</p>
+
+<p>For example, to obtain a <code class="language-plaintext highlighter-rouge">TypeTag</code> which represents <code class="language-plaintext highlighter-rouge">Int</code>, we can do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.runtime.universe._
+val tt = typeTag[Int]
+</code></pre></div></div>
+
+<p>Or likewise, to obtain a <code class="language-plaintext highlighter-rouge">ClassTag</code> which represents <code class="language-plaintext highlighter-rouge">String</code>, we can do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect._
+val ct = classTag[String]
+</code></pre></div></div>
+
+<p>Each of these methods constructs a <code class="language-plaintext highlighter-rouge">TypeTag[T]</code> or <code class="language-plaintext highlighter-rouge">ClassTag[T]</code> for the given
+type argument <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<h3 id="using-an-implicit-parameter-of-type-typetagt-classtagt-or-weaktypetagt">Using an Implicit Parameter of Type <code class="language-plaintext highlighter-rouge">TypeTag[T]</code>, <code class="language-plaintext highlighter-rouge">ClassTag[T]</code>, or <code class="language-plaintext highlighter-rouge">WeakTypeTag[T]</code></h3>
+
+<p>As with <code class="language-plaintext highlighter-rouge">Manifest</code>s, one can in effect <em>request</em> that the compiler generate a
+<code class="language-plaintext highlighter-rouge">TypeTag</code>. This is done by simply specifying an implicit <em>evidence</em> parameter
+of type <code class="language-plaintext highlighter-rouge">TypeTag[T]</code>. If the compiler fails to find a matching implicit value
+during implicit search, it will automatically generate a <code class="language-plaintext highlighter-rouge">TypeTag[T]</code>.</p>
+
+<p><em>Note</em>: this is typically achieved by using an implicit parameter on methods
+and classes only.</p>
+
+<p>For example, we can write a method which takes some arbitrary object, and
+using a <code class="language-plaintext highlighter-rouge">TypeTag</code>, prints information about that object’s type arguments:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.runtime.universe._
+
+def paramInfo[T](x: T)(implicit tag: TypeTag[T]): Unit = {
+  val targs = tag.tpe match { case TypeRef(_, _, args) =&gt; args }
+  println(s"type of $x has type arguments $targs")
+}
+</code></pre></div></div>
+
+<p>Here, we write a generic method <code class="language-plaintext highlighter-rouge">paramInfo</code> parameterized on <code class="language-plaintext highlighter-rouge">T</code>, and we
+supply an implicit parameter <code class="language-plaintext highlighter-rouge">(implicit tag: TypeTag[T])</code>. We can then
+directly access the type (of type <code class="language-plaintext highlighter-rouge">Type</code>) that <code class="language-plaintext highlighter-rouge">tag</code> represents using method
+<code class="language-plaintext highlighter-rouge">tpe</code> of <code class="language-plaintext highlighter-rouge">TypeTag</code>.</p>
+
+<p>We can then use our method <code class="language-plaintext highlighter-rouge">paramInfo</code> as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; paramInfo(42)
+type of 42 has type arguments List()
+
+scala&gt; paramInfo(List(1, 2))
+type of List(1, 2) has type arguments List(Int)
+</code></pre></div></div>
+
+<h3 id="using-a-context-bound-of-a-type-parameter">Using a Context bound of a Type Parameter</h3>
+
+<p>A less verbose way to achieve exactly the same as above is by using a context
+bound on a type parameter. Instead of providing a separate implicit parameter,
+one can simply include the <code class="language-plaintext highlighter-rouge">TypeTag</code> in the type parameter list as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def myMethod[T: TypeTag] = ...
+</code></pre></div></div>
+
+<p>Given context bound <code class="language-plaintext highlighter-rouge">[T: TypeTag]</code>, the compiler will simply generate an
+implicit parameter of type <code class="language-plaintext highlighter-rouge">TypeTag[T]</code> and will rewrite the method to look
+like the example with the implicit parameter in the previous section.</p>
+
+<p>The above example rewritten to use context bounds is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.runtime.universe._
+
+def paramInfo[T: TypeTag](x: T): Unit = {
+  val targs = typeOf[T] match { case TypeRef(_, _, args) =&gt; args }
+  println(s"type of $x has type arguments $targs")
+}
+
+scala&gt; paramInfo(42)
+type of 42 has type arguments List()
+
+scala&gt; paramInfo(List(1, 2))
+type of List(1, 2) has type arguments List(Int)
+</code></pre></div></div>
+
+<h2 id="weaktypetags">WeakTypeTags</h2>
+
+<p><code class="language-plaintext highlighter-rouge">WeakTypeTag[T]</code> generalizes <code class="language-plaintext highlighter-rouge">TypeTag[T]</code>. Unlike a regular <code class="language-plaintext highlighter-rouge">TypeTag</code>,
+components of its type representation can be references to type parameters or
+abstract types. However, <code class="language-plaintext highlighter-rouge">WeakTypeTag[T]</code> tries to be as concrete as possible,
+<em>i.e.,</em> if type tags are available for the referenced type arguments or abstract
+types, they are used to embed the concrete types into the <code class="language-plaintext highlighter-rouge">WeakTypeTag[T]</code>.</p>
+
+<p>Continuing the example above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def weakParamInfo[T](x: T)(implicit tag: WeakTypeTag[T]): Unit = {
+  val targs = tag.tpe match { case TypeRef(_, _, args) =&gt; args }
+  println(s"type of $x has type arguments $targs")
+}
+
+scala&gt; def foo[T] = weakParamInfo(List[T]())
+foo: [T]=&gt; Unit
+
+scala&gt; foo[Int]
+type of List() has type arguments List(T)
+</code></pre></div></div>
+
+<h2 id="typetags-and-manifests">TypeTags and Manifests</h2>
+
+<p><code class="language-plaintext highlighter-rouge">TypeTag</code>s correspond loosely to the pre-2.10 notion of
+<code class="language-plaintext highlighter-rouge">scala.reflect.Manifest</code>s. While <code class="language-plaintext highlighter-rouge">scala.reflect.ClassTag</code> corresponds to
+<code class="language-plaintext highlighter-rouge">scala.reflect.ClassManifest</code> and <code class="language-plaintext highlighter-rouge">scala.reflect.api.TypeTags#TypeTag</code> mostly
+corresponds to <code class="language-plaintext highlighter-rouge">scala.reflect.Manifest</code>, other pre-2.10 Manifest types do not
+have a direct correspondence with a 2.10 “<code class="language-plaintext highlighter-rouge">Tag</code>” type.</p>
+
+<ul>
+  <li>
+    <p><strong>scala.reflect.OptManifest is not supported.</strong>
+This is because <code class="language-plaintext highlighter-rouge">Tag</code>s can reify arbitrary types, so they are always available.</p>
+  </li>
+  <li>
+    <p><strong>There is no equivalent for scala.reflect.AnyValManifest.</strong>
+Instead, one can compare their <code class="language-plaintext highlighter-rouge">Tag</code> with one of the base <code class="language-plaintext highlighter-rouge">Tag</code>s (defined in the corresponding companion objects) in order to find out whether or not it represents a primitive value class. Additionally, it’s possible to simply use <code class="language-plaintext highlighter-rouge">&lt;tag&gt;.tpe.typeSymbol.isPrimitiveValueClass</code>.</p>
+  </li>
+  <li>
+    <p><strong>There are no replacement for factory methods defined in the Manifest companion objects.</strong>
+Instead, one could generate corresponding types using the reflection APIs provided by Java (for classes) and Scala (for types).</p>
+  </li>
+  <li>
+    <p><strong>Certain manifest operations(i.e., <code class="language-plaintext highlighter-rouge">&lt;:&lt;</code>, <code class="language-plaintext highlighter-rouge">&gt;:&gt;</code> and <code class="language-plaintext highlighter-rouge">typeArguments</code>) are not supported.</strong>
+Instead, one could use the reflection APIs provided by Java (for classes) and Scala (for types).</p>
+  </li>
+</ul>
+
+<p>In Scala 2.10, <code class="language-plaintext highlighter-rouge">scala.reflect.ClassManifest</code> are deprecated, and it is
+planned to deprecate <code class="language-plaintext highlighter-rouge">scala.reflect.Manifest</code> in favor of <code class="language-plaintext highlighter-rouge">TypeTag</code>s and
+<code class="language-plaintext highlighter-rouge">ClassTag</code>s in an upcoming point release. Thus, it is advisable to migrate any
+<code class="language-plaintext highlighter-rouge">Manifest</code>-based APIs to use <code class="language-plaintext highlighter-rouge">Tag</code>s.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/overview.html">Overview</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/environment-universes-mirrors.html">Environment, Universes, and Mirrors</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/symbols-trees-types.html">Symbols, Trees, and Types</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/annotations-names-scopes.html">Annotations, Names, Scopes, and More</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/reflection/typetags-manifests.html">TypeTags and Manifests</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/thread-safety.html">Thread Safety</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/reflection/changelog211.html">Changes in Scala 2.11</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/reflection/typetags-manifests.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/reflection/typetags-manifests.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/reflection/typetags-manifests.html" class="lang">中文 (简体)</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/reflection/typetags-manifests.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

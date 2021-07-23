@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Overview | 
+      Parallel Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/parallel-collections/overview.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Overview"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Overview"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Parallel Collections</div>
+          
+          <h1>Overview</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><strong>Aleksandar Prokopec, Heather Miller</strong></p>
+
+<p>If you’re using Scala 2.13+ and want to use Scala’s parallel collections, you’ll have to import a separate module, as described <a href="https://github.com/scala/scala-parallel-collections">here</a>.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Amidst the shift in recent years by processor manufacturers from single to
+multi-core architectures, academia and industry alike have conceded that
+<em>Popular Parallel Programming</em> remains a formidable challenge.</p>
+
+<p>Parallel collections were included in the Scala standard library in an effort
+to facilitate parallel programming by sparing users from low-level
+parallelization details, meanwhile providing them with a familiar and simple
+high-level abstraction. The hope was, and still is, that implicit parallelism
+behind a collections abstraction will bring reliable parallel execution one
+step closer to the workflow of mainstream developers.</p>
+
+<p>The idea is simple– collections are a well-understood and frequently-used
+programming abstraction. And given their regularity, they’re able to be
+efficiently parallelized, transparently. By allowing a user to “swap out”
+sequential collections for ones that are operated on in parallel, Scala’s
+parallel collections take a large step forward in enabling parallelism to be
+easily brought into more code.</p>
+
+<p>Take the following, sequential example, where we perform a monadic operation
+on some large collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val list = (1 to 10000).toList
+list.map(_ + 42)
+</code></pre></div></div>
+
+<p>To perform the same operation in parallel, one must simply invoke the <code class="language-plaintext highlighter-rouge">par</code>
+method on the sequential collection, <code class="language-plaintext highlighter-rouge">list</code>. After that, one can use a
+parallel collection in the same way one would normally use a sequential
+collection. The above example can be parallelized by simply doing the
+following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.par.map(_ + 42)
+</code></pre></div></div>
+
+<p>The design of Scala’s parallel collections library is inspired by and deeply
+integrated with Scala’s (sequential) collections library (introduced in 2.8).
+It provides a parallel counterpart to a number of important data structures
+from Scala’s (sequential) collection library, including:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ParArray</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParVector</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.ParHashMap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mutable.ParHashSet</code></li>
+  <li><code class="language-plaintext highlighter-rouge">immutable.ParHashMap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">immutable.ParHashSet</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParRange</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ParTrieMap</code> (<code class="language-plaintext highlighter-rouge">collection.concurrent.TrieMap</code>s are new in 2.10)</li>
+</ul>
+
+<p>In addition to a common architecture, Scala’s parallel collections library
+additionally shares <em>extensibility</em> with the sequential collections library.
+That is, like normal sequential collections, users can integrate their own
+collection types and automatically inherit all of the predefined (parallel)
+operations available on the other parallel collections in the standard
+library.</p>
+
+<h2 id="some-examples">Some Examples</h2>
+
+<p>To attempt to illustrate the generality and utility of parallel collections,
+we provide a handful of simple example usages, all of which are transparently
+executed in parallel.</p>
+
+<p><em>Note:</em> Some of the following examples operate on small collections, which
+isn’t recommended. They’re provided as examples for illustrative purposes
+only. As a general heuristic, speed-ups tend to be noticeable when the size of
+the collection is large, typically several thousand elements. (For more
+information on the relationship between the size of a parallel collection and
+performance, please see the
+<a href="/overviews/parallel-collections/performance.html#how-big-should-a-collection-be-to-go-parallel">appropriate subsection</a> of the <a href="/overviews/parallel-collections/performance.html">performance</a>
+section of this guide.)</p>
+
+<h4 id="map">map</h4>
+
+<p>Using a parallel <code class="language-plaintext highlighter-rouge">map</code> to transform a collection of <code class="language-plaintext highlighter-rouge">String</code> to all-uppercase:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val lastNames = List("Smith","Jones","Frankenstein","Bach","Jackson","Rodin").par
+lastNames: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Frankenstein, Bach, Jackson, Rodin)
+
+scala&gt; lastNames.map(_.toUpperCase)
+res0: scala.collection.parallel.immutable.ParSeq[String] = ParVector(SMITH, JONES, FRANKENSTEIN, BACH, JACKSON, RODIN)
+</code></pre></div></div>
+
+<h4 id="fold">fold</h4>
+
+<p>Summing via <code class="language-plaintext highlighter-rouge">fold</code> on a <code class="language-plaintext highlighter-rouge">ParArray</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val parArray = (1 to 10000).toArray.par
+parArray: scala.collection.parallel.mutable.ParArray[Int] = ParArray(1, 2, 3, ...
+
+scala&gt; parArray.fold(0)(_ + _)
+res0: Int = 50005000
+</code></pre></div></div>
+
+<h4 id="filter">filter</h4>
+
+<p>Using a parallel <code class="language-plaintext highlighter-rouge">filter</code> to select the last names that come alphabetically
+after the letter “I”.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val lastNames = List("Smith","Jones","Frankenstein","Bach","Jackson","Rodin").par
+lastNames: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Frankenstein, Bach, Jackson, Rodin)
+
+scala&gt; lastNames.filter(_.head &gt;= 'J')
+res0: scala.collection.parallel.immutable.ParSeq[String] = ParVector(Smith, Jones, Jackson, Rodin)
+</code></pre></div></div>
+
+<h2 id="creating-a-parallel-collection">Creating a Parallel Collection</h2>
+
+<p>Parallel collections are meant to be used in exactly the same way as
+sequential collections– the only noteworthy difference is how to <em>obtain</em> a
+parallel collection.</p>
+
+<p>Generally, one has two choices for creating a parallel collection:</p>
+
+<p>First, by using the <code class="language-plaintext highlighter-rouge">new</code> keyword and a proper import statement:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.collection.parallel.immutable.ParVector
+val pv = new ParVector[Int]
+</code></pre></div></div>
+
+<p>Second, by <em>converting</em> from a sequential collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val pv = Vector(1,2,3,4,5,6,7,8,9).par
+</code></pre></div></div>
+
+<p>What’s important to expand upon here are these conversion methods– sequential
+collections can be converted to parallel collections by invoking the
+sequential collection’s <code class="language-plaintext highlighter-rouge">par</code> method, and likewise, parallel collections can
+be converted to sequential collections by invoking the parallel collection’s
+<code class="language-plaintext highlighter-rouge">seq</code> method.</p>
+
+<p><em>Of Note:</em> Collections that are inherently sequential (in the sense that the
+elements must be accessed one after the other), like lists, queues, and
+streams, are converted to their parallel counterparts by copying the elements
+into a similar parallel collection. An example is <code class="language-plaintext highlighter-rouge">List</code>– it’s converted into
+a standard immutable parallel sequence, which is a <code class="language-plaintext highlighter-rouge">ParVector</code>. Of course, the
+copying required for these collection types introduces an overhead not
+incurred by any other collection types, like <code class="language-plaintext highlighter-rouge">Array</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, <code class="language-plaintext highlighter-rouge">HashMap</code>, etc.</p>
+
+<p>For more information on conversions on parallel collections, see the
+<a href="/overviews/parallel-collections/conversions.html">conversions</a>
+and <a href="/overviews/parallel-collections/concrete-parallel-collections.html">concrete parallel collection classes</a>
+sections of this guide.</p>
+
+<h2 id="semantics">Semantics</h2>
+
+<p>While the parallel collections abstraction feels very much the same as normal
+sequential collections, it’s important to note that its semantics differs,
+especially with regards to side-effects and non-associative operations.</p>
+
+<p>In order to see how this is the case, first, we visualize <em>how</em> operations are
+performed in parallel. Conceptually, Scala’s parallel collections framework
+parallelizes an operation on a parallel collection by recursively “splitting”
+a given collection, applying an operation on each partition of the collection
+in parallel, and re-“combining” all of the results that were completed in
+parallel.</p>
+
+<p>These concurrent, and “out-of-order” semantics of parallel collections lead to
+the following two implications:</p>
+
+<ol>
+  <li><strong>Side-effecting operations can lead to non-determinism</strong></li>
+  <li><strong>Non-associative operations lead to non-determinism</strong></li>
+</ol>
+
+<h3 id="side-effecting-operations">Side-Effecting Operations</h3>
+
+<p>Given the <em>concurrent</em> execution semantics of the parallel collections
+framework, operations performed on a collection which cause side-effects
+should generally be avoided, in order to maintain determinism. A simple
+example is by using an accessor method, like <code class="language-plaintext highlighter-rouge">foreach</code> to increment a <code class="language-plaintext highlighter-rouge">var</code>
+declared outside of the closure which is passed to <code class="language-plaintext highlighter-rouge">foreach</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; val list = (1 to 1000).toList.par
+list: scala.collection.parallel.immutable.ParSeq[Int] = ParVector(1, 2, 3,…
+
+scala&gt; list.foreach(sum += _); sum
+res01: Int = 467766
+
+scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; list.foreach(sum += _); sum
+res02: Int = 457073
+
+scala&gt; var sum = 0
+sum: Int = 0
+
+scala&gt; list.foreach(sum += _); sum
+res03: Int = 468520
+</code></pre></div></div>
+
+<p>Here, we can see that each time <code class="language-plaintext highlighter-rouge">sum</code> is reinitialized to 0, and <code class="language-plaintext highlighter-rouge">foreach</code> is
+called again on <code class="language-plaintext highlighter-rouge">list</code>, <code class="language-plaintext highlighter-rouge">sum</code> holds a different value. The source of this
+non-determinism is a <em>data race</em>– concurrent reads/writes to the same mutable
+variable.</p>
+
+<p>In the above example, it’s possible for two threads to read the <em>same</em> value
+in <code class="language-plaintext highlighter-rouge">sum</code>, to spend some time doing some operation on that value of <code class="language-plaintext highlighter-rouge">sum</code>, and
+then to attempt to write a new value to <code class="language-plaintext highlighter-rouge">sum</code>, potentially resulting in an
+overwrite (and thus, loss) of a valuable result, as illustrated below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ThreadA: read value in sum, sum = 0                value in sum: 0
+ThreadB: read value in sum, sum = 0                value in sum: 0
+ThreadA: increment sum by 760, write sum = 760     value in sum: 760
+ThreadB: increment sum by 12, write sum = 12       value in sum: 12
+</code></pre></div></div>
+
+<p>The above example illustrates a scenario where two threads read the same
+value, <code class="language-plaintext highlighter-rouge">0</code>, before one or the other can sum <code class="language-plaintext highlighter-rouge">0</code> with an element from their
+partition of the parallel collection. In this case, <code class="language-plaintext highlighter-rouge">ThreadA</code> reads <code class="language-plaintext highlighter-rouge">0</code> and
+sums it with its element, <code class="language-plaintext highlighter-rouge">0+760</code>, and in the case of <code class="language-plaintext highlighter-rouge">ThreadB</code>, sums <code class="language-plaintext highlighter-rouge">0</code> with
+its element, <code class="language-plaintext highlighter-rouge">0+12</code>. After computing their respective sums, they each write
+their computed value in <code class="language-plaintext highlighter-rouge">sum</code>. Since <code class="language-plaintext highlighter-rouge">ThreadA</code> beats <code class="language-plaintext highlighter-rouge">ThreadB</code>, it writes
+first, only for the value in <code class="language-plaintext highlighter-rouge">sum</code> to be overwritten shortly after by
+<code class="language-plaintext highlighter-rouge">ThreadB</code>, in effect completely overwriting (and thus losing) the value <code class="language-plaintext highlighter-rouge">760</code>.</p>
+
+<h3 id="non-associative-operations">Non-Associative Operations</h3>
+
+<p>Given this <em>“out-of-order”</em> semantics,  also must be careful to perform only
+associative operations in order to avoid non-determinism. That is, given a
+parallel collection, <code class="language-plaintext highlighter-rouge">pcoll</code>, one should be sure that when invoking a
+higher-order function on <code class="language-plaintext highlighter-rouge">pcoll</code>, such as <code class="language-plaintext highlighter-rouge">pcoll.reduce(func)</code>, the order in
+which <code class="language-plaintext highlighter-rouge">func</code> is applied to the elements of <code class="language-plaintext highlighter-rouge">pcoll</code> can be arbitrary. A simple,
+but obvious example is a non-associative operation such as subtraction:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val list = (1 to 1000).toList.par
+list: scala.collection.parallel.immutable.ParSeq[Int] = ParVector(1, 2, 3,…
+
+scala&gt; list.reduce(_-_)
+res01: Int = -228888
+
+scala&gt; list.reduce(_-_)
+res02: Int = -61000
+
+scala&gt; list.reduce(_-_)
+res03: Int = -331818
+</code></pre></div></div>
+
+<p>In the above example, we take a <code class="language-plaintext highlighter-rouge">ParVector[Int]</code>, invoke <code class="language-plaintext highlighter-rouge">reduce</code>, and pass to
+it <code class="language-plaintext highlighter-rouge">_-_</code>, which simply takes two unnamed elements, and subtracts the first
+from the second. Due to the fact that the parallel collections framework spawns
+threads which, in effect, independently perform <code class="language-plaintext highlighter-rouge">reduce(_-_)</code> on different
+sections of the collection, the result of two runs of <code class="language-plaintext highlighter-rouge">reduce(_-_)</code> on the
+same collection will not be the same.</p>
+
+<p><em>Note:</em> Often, it is thought that, like non-associative operations,  non-commutative
+operations passed to a higher-order function on a parallel
+collection likewise result in non-deterministic behavior. This is not the
+case, a simple example is string concatenation– an associative, but non-
+commutative operation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val strings = List("abc","def","ghi","jk","lmnop","qrs","tuv","wx","yz").par
+strings: scala.collection.parallel.immutable.ParSeq[java.lang.String] = ParVector(abc, def, ghi, jk, lmnop, qrs, tuv, wx, yz)
+
+scala&gt; val alphabet = strings.reduce(_++_)
+alphabet: java.lang.String = abcdefghijklmnopqrstuvwxyz
+</code></pre></div></div>
+
+<p>The <em>“out of order”</em> semantics of parallel collections only means that
+the operation will be executed out of order (in a <em>temporal</em> sense. That is,
+non-sequentially), it does not mean that the result will be
+re-“<em>combined</em>” out of order (in a <em>spatial</em> sense). On the contrary, results
+will generally always be reassembled <em>in order</em>– that is, a parallel collection
+broken into partitions A, B, C, in that order, will be reassembled once again
+in the order A, B, C. Not some other arbitrary order like B, C, A.</p>
+
+<p>For more on how parallel collections split and combine operations on different
+parallel collection types, see the <a href="/overviews/parallel-collections/architecture.html">Architecture</a> section of this guide.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/parallel-collections/overview.html">Overview</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/concrete-parallel-collections.html">Concrete Parallel Collection Classes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/configuration.html">Configuring Parallel Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/conversions.html">Parallel Collection Conversions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/ctries.html">Concurrent Tries</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/architecture.html">Architecture of the Parallel Collections Library</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/custom-parallel-collections.html">Creating Custom Parallel Collections</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/parallel-collections/performance.html">Measuring Performance</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/parallel-collections/overview.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/overviews/parallel-collections/overview.html" class="lang">日本語</a></li>
+          
+            
+            
+      			
+      			<li><a href="/zh-cn/overviews/parallel-collections/overview.html" class="lang">中文 (简体)</a></li>
+          
+            
+            
+      			
+      			<li><a href="/es/overviews/parallel-collections/overview.html" class="lang">Español</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ru/overviews/parallel-collections/overview.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/parallel-collections/overview.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

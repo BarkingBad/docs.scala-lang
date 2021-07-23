@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Sealed Types | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/sealed-types.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Sealed Types"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Sealed Types"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Sealed Types</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>By: Dale Wijnand and Fengyun Liu</strong></p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>May 18th 2021</td>
+      <td>Submitted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Exhaustivity checking is one of the safety belts for using pattern matching in functional
+programming.  However, if one wants to partition values of an existing type to reason about them in
+separate cases of a match or as separate types this requires wrapping the values in new classes,
+which incurs a boxing cost.</p>
+
+<p>As an alternative, one may define custom extractors and use them as the case patterns. However, there is no
+way in Scala to declare that these extractors are complementary, i.e. the match is exhaustive when
+the complete set of extractors are used together.</p>
+
+<p>Similarly, one can define <code class="language-plaintext highlighter-rouge">TypeTest</code>s for matching abstract types, but there is no way to determine
+if a match on an abstract type exhausts all its subtypes.</p>
+
+<p>This SIP solves these three problems by introducing <em>sealed types</em>.</p>
+
+<h2 id="motivating-examples">Motivating Examples</h2>
+
+<p>We’ve identified several real world use cases that calls for enhancing exhaustivity checking, and
+used them to stress the design proposed here.  You can find them <a href="https://gist.github.com/dwijnand/d33436cf197daa15216b3cd35d03ba1c#file-sealedtypeproblems-scala">here</a>, but we’ll present
+an example below.</p>
+
+<p>Using the opaque types and custom extractors we can work safely with positive integers and negative
+integers:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opaque</span> <span class="k">type</span> <span class="kt">Pos</span> <span class="k">&lt;:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">Int</span>
+<span class="n">opaque</span> <span class="k">type</span> <span class="kt">Neg</span> <span class="k">&lt;:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">Int</span>
+
+<span class="k">object</span> <span class="nc">Pos</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">unapply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Pos</span><span class="o">]</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span> <span class="o">}</span>
+<span class="k">object</span> <span class="nc">Neg</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">unapply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Neg</span><span class="o">]</span> <span class="k">=</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span> <span class="o">}</span>
+
+<span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="mi">0</span>      <span class="k">=&gt;</span>
+  <span class="k">case</span> <span class="nc">Pos</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="k">case</span> <span class="nc">Neg</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span>
+</code></pre></div></div>
+
+<p>With the above, when we get a <code class="language-plaintext highlighter-rouge">Pos</code> value, it’s guaranteed to be a positive number. The same goes
+for <code class="language-plaintext highlighter-rouge">Neg</code>. Sadly the match is reported as not exhaustive because the two extractors and the value
+<code class="language-plaintext highlighter-rouge">0</code> aren’t known to be complementary.</p>
+
+<h2 id="design">Design</h2>
+
+<p>We identify two root causes:</p>
+
+<ol>
+  <li>You can’t define a type, that isn’t a class, as <code class="language-plaintext highlighter-rouge">sealed</code></li>
+  <li>You can’t define a mapping from values to types</li>
+</ol>
+
+<p>The <em>sealed type</em>, proposed by this SIP, allow partitioning of value of a given type into a sealed
+type hierarchy.  <a href="https://gist.github.com/dwijnand/d33436cf197daa15216b3cd35d03ba1c#file-sealedtypesolutions-scala">Here</a> you can find how sealed types address the issues faced by all the
+motivating examples, but we’ll present here how it fixes the number example above.</p>
+
+<p>In order to partition int into positive, zero, and negative numbers we’ll define a new <code class="language-plaintext highlighter-rouge">sealed</code> type
+<code class="language-plaintext highlighter-rouge">Num</code> and how to distinguish its subtypes with match syntax:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="k">type</span> <span class="kt">Num</span> <span class="o">=</span> <span class="nc">Int</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="mi">0</span>          <span class="k">=&gt;</span> <span class="k">val</span> <span class="nv">Zero</span>
+  <span class="k">case</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">=&gt;</span> <span class="k">type</span> <span class="kt">Pos</span>
+  <span class="k">case</span> <span class="k">_</span>          <span class="k">=&gt;</span> <span class="k">type</span> <span class="kt">Neg</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This sealed type definition desugars into the following type and value definitions:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="kt">Num</span> <span class="o">=</span> <span class="nc">Int</span>
+<span class="k">val</span> <span class="nv">Zero</span><span class="k">:</span> <span class="kt">Num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">opaque</span> <span class="k">type</span> <span class="kt">Pos</span> <span class="k">&lt;:</span> <span class="kt">Num</span> <span class="o">=</span> <span class="nc">Num</span>
+<span class="n">opaque</span> <span class="k">type</span> <span class="kt">Neg</span> <span class="k">&lt;:</span> <span class="kt">Num</span> <span class="o">=</span> <span class="nc">Num</span>
+</code></pre></div></div>
+
+<p>The match desugars into an ordinal method, that reuses the logic to associate an ordinal for each
+case:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extension</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Num</span><span class="o">)</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">ordinal:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="mi">0</span>          <span class="k">=&gt;</span> <span class="mi">0</span>
+    <span class="k">case</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">=&gt;</span> <span class="mi">1</span>
+    <span class="k">case</span> <span class="k">_</span>          <span class="k">=&gt;</span> <span class="mi">2</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Finally a series of <code class="language-plaintext highlighter-rouge">TypeTest</code>s are defined, allowing for values of both the underlying type <code class="language-plaintext highlighter-rouge">Int</code>
+and the sealed type <code class="language-plaintext highlighter-rouge">Num</code> to be tested against the subtypes and singleton subtypes <code class="language-plaintext highlighter-rouge">Pos</code>,
+<code class="language-plaintext highlighter-rouge">Zero.type</code>, and <code class="language-plaintext highlighter-rouge">Neg</code>, using the <code class="language-plaintext highlighter-rouge">ordinal</code> method:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Zero.</span><span class="k">type</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">((</span><span class="n">n</span><span class="k">:</span> <span class="kt">Num</span><span class="o">).</span><span class="py">ordinal</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+<span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Pos</span><span class="o">]</span>       <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">((</span><span class="n">n</span><span class="k">:</span> <span class="kt">Num</span><span class="o">).</span><span class="py">ordinal</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+<span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Neg</span><span class="o">]</span>       <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">((</span><span class="n">n</span><span class="k">:</span> <span class="kt">Num</span><span class="o">).</span><span class="py">ordinal</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+<span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Num</span><span class="o">]</span>       <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
+<span class="n">given</span> <span class="o">[</span><span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Num</span><span class="o">](</span><span class="n">using</span> <span class="n">t</span><span class="k">:</span> <span class="kt">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">T</span><span class="o">])</span><span class="k">:</span> <span class="kt">TypeTest</span><span class="o">[</span><span class="kt">Num</span>, <span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Num</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">t</span><span class="o">.</span><span class="py">unapply</span><span class="o">(</span><span class="n">n</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Given the above, one can either change the usage from extractors to types:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="mi">0</span>      <span class="k">=&gt;</span>
+  <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Pos</span> <span class="o">=&gt;</span>
+  <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Neg</span> <span class="o">=&gt;</span>
+</code></pre></div></div>
+
+<p>Or we can keep the usage the same by redefining the extractors (using a value class name-based
+extractors <code class="language-plaintext highlighter-rouge">PosExtractor</code> and <code class="language-plaintext highlighter-rouge">NegExtractor</code> to avoid allocating):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Pos</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">unapply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Pos</span><span class="o">)</span><span class="k">:</span> <span class="kt">PosExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PosExtractor</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">}</span>
+<span class="k">object</span> <span class="nc">Neg</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">unapply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Neg</span><span class="o">)</span><span class="k">:</span> <span class="kt">NegExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NegExtractor</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">PosExtractor</span><span class="o">(</span><span class="k">private</span> <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Pos</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">isEmpty</span><span class="k">:</span> <span class="kt">false</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">;</span> <span class="k">def</span> <span class="nf">get</span> <span class="k">=</span> <span class="n">x</span> <span class="o">}</span>
+<span class="k">class</span> <span class="nc">NegExtractor</span><span class="o">(</span><span class="k">private</span> <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Neg</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">isEmpty</span><span class="k">:</span> <span class="kt">false</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">;</span> <span class="k">def</span> <span class="nf">get</span> <span class="k">=</span> <span class="n">x</span> <span class="o">}</span>
+
+<span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="mi">0</span>      <span class="k">=&gt;</span>
+  <span class="k">case</span> <span class="nc">Pos</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span>
+  <span class="k">case</span> <span class="nc">Neg</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span>
+</code></pre></div></div>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>The existing syntax is enhanced as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TypeDcl ::= `sealed` [`opaque`] `type` id [TypeParamClause]
+TypeDef ::= `sealed` [`opaque`] `type` id [TypeParamClause] [`&gt;:` Type] [`&lt;:` Type] `=` Type `{`
+    `case` Pattern [Guard] `=&gt;` (`type` id [TypeParamClause] | `val` id [`:` Type])
+  `}`
+</code></pre></div></div>
+
+<p>Specifically:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">sealed</code> modifier becomes available for type definitions and declarations</li>
+  <li>on the right-hand side of definitions is the underlying type of the sealed type</li>
+  <li>following the underlying type is a match that operates on a value of the
+underlying type and defines the type or singleton type associated to that case.</li>
+  <li>the type is defined using the <code class="language-plaintext highlighter-rouge">type</code> keyword and singleton types are defined using <code class="language-plaintext highlighter-rouge">val</code></li>
+</ul>
+
+<h2 id="desugaring">Desugaring</h2>
+
+<p>Using the example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sealed [opaque] type T[X..] [bounds] = U {
+  case p1 =&gt; type C[X..]
+  case p2 =&gt; val S
+}
+</code></pre></div></div>
+
+<p>That desugars into:</p>
+<ul>
+  <li>a type alias <code class="language-plaintext highlighter-rouge">type T[X..] [bounds] = U</code>, <code class="language-plaintext highlighter-rouge">opaque</code> if the sealed type is <code class="language-plaintext highlighter-rouge">opaque</code> (see Restrictions)</li>
+  <li>opaque type definitions, <code class="language-plaintext highlighter-rouge">opaque type C[X..] &lt;: T[Y..] = T[Y..]</code>, for each non-singleton type case
+    <ul>
+      <li>any type argument <code class="language-plaintext highlighter-rouge">Y</code> that isn’t defined from <code class="language-plaintext highlighter-rouge">X..</code> will be:
+        <ul>
+          <li>its lower bound, if the type parameter is covariant</li>
+          <li>its upper bound, if the type parameter is contravariant</li>
+          <li>a wildcard type, with the type parameter’s bounds, if the type parameter is invariant</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>val definitions, <code class="language-plaintext highlighter-rouge">val S: T[Y..] = p</code>, for singleton type cases, using the same type argument rules</li>
+  <li>an ordinal method, <code class="language-plaintext highlighter-rouge">extension (t: T): def ordinal: Int = (t: U) match { case p1 =&gt; 0 p2 =&gt; 1 .. }</code>
+    <ul>
+      <li>each of the sealed type’s cases is associated with a unique ordinal</li>
+      <li>ordinals starts from 0 and increase for each case, in the order of their definition</li>
+      <li>the ordinal method adds a <code class="language-plaintext highlighter-rouge">case _ =&gt; -1</code> default case, if the sealed type’s match is inexhaustive</li>
+      <li>such an ordinal method may only be defined by the compiler, to preserve exhaustivity guarantees</li>
+    </ul>
+  </li>
+  <li>a series a <code class="language-plaintext highlighter-rouge">TypeTest</code>s, defined in terms of the ordinal method
+    <ul>
+      <li>a <code class="language-plaintext highlighter-rouge">TypeTest</code> between <code class="language-plaintext highlighter-rouge">U</code> and each case <code class="language-plaintext highlighter-rouge">A</code>, having ordinal <code class="language-plaintext highlighter-rouge">ordA</code>:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">given TypeTest[U, C]      = (u: U) =&gt; if ((u: T).ordinal == $ordA) Some(u) else None</code></li>
+          <li><code class="language-plaintext highlighter-rouge">given TypeTest[U, S.type] = (u: U) =&gt; if ((u: T).ordinal == $ordA) Some(u) else None</code></li>
+        </ul>
+      </li>
+      <li>a type test between the underlying type and the sealed type:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">given TypeTest[U, T] = (u: U) =&gt; if ((u: T).ordinal == -1) None else Some(u)</code></li>
+        </ul>
+      </li>
+      <li>a generic type test between <code class="language-plaintext highlighter-rouge">T</code> and each case <code class="language-plaintext highlighter-rouge">A</code>, defined in terms of the above type tests:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">given [A &lt;: T](using t: TypeTest[U, A]): TypeTest[T, A] = (x: T) =&gt; t.unapply(x)</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="restrictions">Restrictions</h2>
+
+<ol>
+  <li>If the match on the value of the underlying type is not exhaustive, then the sealed type must be
+declared <code class="language-plaintext highlighter-rouge">opaque</code>, in order to preserve the fact that the sealed type represents only a subset of
+the values of the underlying type (e.g. positive integers)</li>
+  <li>No other type may be declared to subtype the opaque type <code class="language-plaintext highlighter-rouge">T</code></li>
+  <li>For singleton types, the pattern <code class="language-plaintext highlighter-rouge">p</code> must be a stable value, e.g. a <code class="language-plaintext highlighter-rouge">val</code>, a <code class="language-plaintext highlighter-rouge">case object</code>, or a literal</li>
+  <li>Each case must define a new type or singleton type</li>
+</ol>
+
+<h2 id="alternative-design">Alternative Design</h2>
+
+<p>An alternative design is to introduce an annotation <code class="language-plaintext highlighter-rouge">@complete</code> to specify that
+a type can be partitioned into a list of subtypes.</p>
+
+<p>For example, given the following definition:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Nat</span> <span class="k">&lt;:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">Int</span>
+  <span class="n">opaque</span> <span class="k">type</span> <span class="kt">Neg</span> <span class="k">&lt;:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nc">Int</span>
+
+  <span class="nd">@complete</span><span class="o">[(</span><span class="kt">Nat</span>, <span class="kt">Neg</span><span class="o">)]</span> <span class="c1">// Num decomposes to `Nat` and `Neg`</span>
+  <span class="k">type</span> <span class="kt">Num</span> <span class="o">=</span> <span class="nc">Int</span>
+
+  <span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Neg</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+  <span class="n">given</span> <span class="nc">TypeTest</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Nat</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nf">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="k">else</span> <span class="nc">None</span>
+</code></pre></div></div>
+
+<p>The user now can write code as follows:</p>
+
+<pre><code class="language-Scala">  def foo(n: Num) =
+    n match
+    case x: Neg =&gt;
+    case x: Nat =&gt;
+</code></pre>
+
+<p>Knowing that the type <code class="language-plaintext highlighter-rouge">Num</code> can be decomposed to <code class="language-plaintext highlighter-rouge">Neg</code> and <code class="language-plaintext highlighter-rouge">Nat</code>, the compiler
+can verify that the pattern match above is exhaustive.</p>
+
+<p>This approach, however, is relatively low-level and the compiler does not
+provide any guarantee that the annotation is actually correct.</p>
+
+<p>You can find more examples <a href="https://gist.github.com/dwijnand/d33436cf197daa15216b3cd35d03ba1c#file-z-complete-scala">here</a></p>
+
+<h2 id="related-work">Related Work</h2>
+
+<p>Haskell has a <code class="language-plaintext highlighter-rouge">COMPLETE</code> pragma which allows patterns and type constructors to be
+defined to be a complete set, relying on the programmer getting it right.</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">Choice</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Choice</span> <span class="kt">Bool</span> <span class="n">a</span>
+
+<span class="n">pattern</span> <span class="kt">LeftChoice</span> <span class="o">::</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Choice</span> <span class="n">a</span>
+<span class="n">pattern</span> <span class="kt">LeftChoice</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Choice</span> <span class="kt">False</span> <span class="n">a</span>
+
+<span class="n">pattern</span> <span class="kt">RightChoice</span> <span class="o">::</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Choice</span> <span class="n">a</span>
+<span class="n">pattern</span> <span class="kt">RightChoice</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Choice</span> <span class="kt">True</span> <span class="n">a</span>
+
+<span class="cp">{-# COMPLETE LeftChoice, RightChoice #-}</span>
+
+<span class="n">foo</span> <span class="o">::</span> <span class="kt">Choice</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">foo</span> <span class="p">(</span><span class="kt">LeftChoice</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">foo</span> <span class="p">(</span><span class="kt">RightChoice</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://docs.scala-lang.org/sips/opaque-types.html">Opaque types</a></li>
+  <li><a href="https://contributors.scala-lang.org/t/trouble-with-2-13-4-exhaustivity-checking-being-too-strict/4817">Forum discussion about Opt[T]</a></li>
+  <li><a href="https://github.com/lampepfl/dotty/issues/10961">Github discussion about enhancing exhaustivity check</a></li>
+  <li><a href="http://okmij.org/ftp/Computation/lightweight-guarantees/lightweight-static-capabilities.pdf"><em>Lightweight static capabilities</em></a>, Oleg Kiselyov, Chung-chieh Shan, 2007</li>
+  <li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/type-test.html">TypeTest documentation</a></li>
+</ol>
+
+<ul>
+  <li>https://github.com/lampepfl/dotty/issues/10961 False “match may not be exhaustive warning”</li>
+  <li>https://github.com/lampepfl/dotty/pull/11186 Implement @covers annotation for partial irrefutable specification</li>
+  <li>https://downloads.haskell.org/~ghc/9.0.1/docs/html/users_guide/exts/pragmas.html#complete-pragma</li>
+  <li>https://downloads.haskell.org/~ghc/9.0.1/docs/html/users_guide/exts/pattern_synonyms.html</li>
+  <li>https://dotty.epfl.ch/docs/reference/other-new-features/opaques.html</li>
+</ul>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #b58900">Pending</div>
+           <p class="vote-text" style="color: #b58900">
+             
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2021-05-18-sealed-types.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

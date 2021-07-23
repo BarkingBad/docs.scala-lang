@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      アノテーション、名前、スコープ、その他 | 
+      Reflection | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ja/overviews/reflection/annotations-names-scopes.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="アノテーション、名前、スコープ、その他"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="アノテーション、名前、スコープ、その他"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ja/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Reflection</div>
+          
+          <h1>アノテーション、名前、スコープ、その他</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><span class="label important" style="float: right;">EXPERIMENTAL</span></p>
+
+<h2 id="アノテーション">アノテーション</h2>
+
+<p>Scala において宣言は <code class="language-plaintext highlighter-rouge">scala.annotation.Annotation</code> のサブタイプを用いて注釈を付けることができる。
+さらに、Scala は <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/annotations.html#_top">Java のアノテーションシステム</a>に統合するため、標準 Java コンパイラによって生成されたアノテーションを取り扱うこともできる。</p>
+
+<p>アノテーションは、それが永続化されていればリフレクションを使ってインスペクトすることができるため、アノテーション付きの宣言を含むクラスファイルから読み込むことができる。カスタムアノテーション型は
+<code class="language-plaintext highlighter-rouge">scala.annotation.StaticAnnotation</code> か
+<code class="language-plaintext highlighter-rouge">scala.annotation.ClassfileAnnotation</code> を継承することで永続化することができる。
+その結果、アノテーション型のインスタンスはクラスファイル内の特別な属性として保存される。
+実行時リフレクションに必要なメタデータを永続化するには
+<code class="language-plaintext highlighter-rouge">scala.annotation.Annotation</code> を継承するだけでは不十分であることに注意してほしい。さらに、
+<code class="language-plaintext highlighter-rouge">scala.annotation.ClassfileAnnotation</code> を継承しても実行時には Java
+アノテーションとしては認識されないことに注意してほしい。そのためには、Java でアノテーションを書く必要がある。</p>
+
+<p>API は 2種類のアノテーションを区別する:</p>
+
+<ul>
+  <li><strong>Java アノテーション</strong>: Java コンパイラによって生成された定義に付加されたアノテーション、つまりプログラムの定義に付けられた <code class="language-plaintext highlighter-rouge">java.lang.annotation.Annotation</code> のサブタイプ。Scala リフレクションによって読み込まれると <code class="language-plaintext highlighter-rouge">scala.annotation.ClassfileAnnotation</code> トレイトが自動的に全ての Java アノテーションに追加される。</li>
+  <li><strong>Scala アノテーション</strong>: Scala コンパイラによって生成された定義や型に付加されたアノテーション。</li>
+</ul>
+
+<p>Java と Scala のアノテーションの違いは
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.Annotations#Annotation</code> に顕著に現れており、これは
+<code class="language-plaintext highlighter-rouge">scalaArgs</code> と <code class="language-plaintext highlighter-rouge">javaArgs</code> 両方を公開する。
+<code class="language-plaintext highlighter-rouge">scala.annotation.ClassfileAnnotation</code> を継承する
+Scala または Java アノテーションに対しては <code class="language-plaintext highlighter-rouge">scalaArgs</code> は空で
+(もしあれば) 引数は <code class="language-plaintext highlighter-rouge">javaArgs</code> に保持される。他の全ての Scala
+アノテーションの場合は、引数は <code class="language-plaintext highlighter-rouge">scalaArgs</code> に保持され、<code class="language-plaintext highlighter-rouge">javaArgs</code> は空となる。</p>
+
+<p><code class="language-plaintext highlighter-rouge">scalaArgs</code> 内の引数は型付けされた構文木として表される。
+これらの構文木はタイプチェッカより後のどのフェーズにおいても変換されないことに注意する必要がある。
+<code class="language-plaintext highlighter-rouge">javaArgs</code> 内の引数は <code class="language-plaintext highlighter-rouge">scala.reflect.api.Names#Name</code> から
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.Annotations#JavaArgument</code> へのマップとして表現される。
+<code class="language-plaintext highlighter-rouge">JavaArgument</code> のインスタンスは Java アノテーションの引数の様々な型を表現する:</p>
+
+<ul>
+<li>リテラル (プリミティブ型と文字列の定数)</li>
+<li>配列</li>
+<li>入れ子になったアノテーション</li>
+</ul>
+
+<h2 id="名前">名前</h2>
+
+<p><strong>名前</strong> (name) は文字列の簡単なラッパーだ。
+<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Names$NameApi.html"><code class="language-plaintext highlighter-rouge">Name</code></a>
+には 2つのサブタイプ <code class="language-plaintext highlighter-rouge">TermName</code> と <code class="language-plaintext highlighter-rouge">TypeName</code> があり (オブジェクトやメンバーのような) 項の名前と
+(クラス、トレイト、型メンバのような) 型の名前を区別する。同じオブジェクト内に同名の項と型が共存することができる。別の言い方をすると、型と項は別の名前空間を持つ。</p>
+
+<p>これらの名前はユニバースに関連付けられている。具体例を使って説明しよう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; val mapName = TermName("map")
+mapName: scala.reflect.runtime.universe.TermName = map
+</code></pre></div></div>
+
+<p>上のコードでは、実行時リフレクション・ユニバースに関連付けられた <code class="language-plaintext highlighter-rouge">Name</code> を作成している。
+(これはパス依存型である <code class="language-plaintext highlighter-rouge">reflect.runtime.universe.TermName</code> が表示されていることからも分かる。)</p>
+
+<p>名前は型のメンバの照会に用いられる。例えば、<code class="language-plaintext highlighter-rouge">List</code> クラス内で宣言されている (項である) <code class="language-plaintext highlighter-rouge">map</code> メソッドを検索するには以下のようにする:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val listTpe = typeOf[List[Int]]
+listTpe: scala.reflect.runtime.universe.Type = scala.List[Int]
+
+scala&gt; listTpe.member(mapName)
+res1: scala.reflect.runtime.universe.Symbol = method map
+</code></pre></div></div>
+
+<p>型メンバを検索するには <code class="language-plaintext highlighter-rouge">TypeName</code> を代わりに使って <code class="language-plaintext highlighter-rouge">member</code> を呼び出す。
+暗黙の変換を使って文字列から項もしくは型の名前に変換することもできる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; listTpe.member("map": TermName)
+res2: scala.reflect.runtime.universe.Symbol = method map
+</code></pre></div></div>
+
+<h3 id="標準名">標準名</h3>
+
+<p>Scala のプログラムにおいて、「<code class="language-plaintext highlighter-rouge">_root_</code>」のような特定の名前は特殊な意味を持つ。
+そのため、それらは Scala の構造物をリフレクションを用いてアクセスするのに欠かすことができない。
+例えば、リフレクションを用いてコンストラクタを呼び出すには<strong>標準名</strong> (standard name)
+<code class="language-plaintext highlighter-rouge">universe.termNames.CONSTRUCTOR</code> を用いる。これは、JVM 上でのコンストラクタ名である項名「<code class="language-plaintext highlighter-rouge">&lt;init&gt;</code>」を指す。</p>
+
+<ul>
+  <li>「<code class="language-plaintext highlighter-rouge">&lt;init&gt;</code>」、「<code class="language-plaintext highlighter-rouge">package</code>」、「<code class="language-plaintext highlighter-rouge">_root_</code>」のような<strong>標準項名</strong> (standard term names) と</li>
+  <li>「<code class="language-plaintext highlighter-rouge">&lt;error&gt;</code>」、「<code class="language-plaintext highlighter-rouge">_</code>」、「<code class="language-plaintext highlighter-rouge">_*</code>」のような<strong>標準型名</strong> (standard type names)</li>
+</ul>
+
+<p>の両方が存在する。</p>
+
+<p>「<code class="language-plaintext highlighter-rouge">package</code>」のようないくつかの名前は型名と項名の両方が存在する。
+標準名は <code class="language-plaintext highlighter-rouge">Universe</code> クラスの <code class="language-plaintext highlighter-rouge">termNames</code> と <code class="language-plaintext highlighter-rouge">typeNames</code> というメンバとして公開されている。
+全ての標準名の仕様は <a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/StandardNames.html">API doc</a> を参照。</p>
+
+<h2 id="スコープ">スコープ</h2>
+
+<p><strong>スコープ</strong> (scope) は一般にある構文スコープ内の名前をシンボルに関連付ける。
+スコープは入れ子にすることもできる。リフレクション API
+で公開されているスコープの基底型は <a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Symbols$Symbol.html">Symbol</a> の iterable という最小限のインターフェイスのみを公開する。</p>
+
+<p>追加機能は
+<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Types$TypeApi.html">scala.reflect.api.Types#TypeApi</a>
+内で定義されている <code class="language-plaintext highlighter-rouge">member</code> と <code class="language-plaintext highlighter-rouge">decls</code>
+が返す<strong>メンバスコープ</strong> (member scope) にて公開される。
+<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Scopes$MemberScope.html">scala.reflect.api.Scopes#MemberScope</a>
+は <code class="language-plaintext highlighter-rouge">sorted</code> メソッドをサポートしており、これはメンバを<strong>宣言順に</strong>ソートする。</p>
+
+<p>以下に <code class="language-plaintext highlighter-rouge">List</code> クラスでオーバーライドされている全てのシンボルのリストを宣言順に返す具体例をみてみよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val overridden = listTpe.decls.sorted.filter(_.isOverride)
+overridden: List[scala.reflect.runtime.universe.Symbol] = List(method companion, method ++, method +:, method toList, method take, method drop, method slice, method takeRight, method splitAt, method takeWhile, method dropWhile, method span, method reverse, method stringPrefix, method toStream, method foreach)
+</code></pre></div></div>
+
+<h2 id="expr">Expr</h2>
+
+<p>構文木の基底型である <code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#Tree</code> の他に、型付けされた構文木は
+<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Exprs$Expr.html"><code class="language-plaintext highlighter-rouge">scala.reflect.api.Exprs#Expr</code></a> 型によっても表すことができる。
+<code class="language-plaintext highlighter-rouge">Expr</code> は構文木と、その構文木の型に対するアクセスを提供するための型タグをラッピングする。
+<code class="language-plaintext highlighter-rouge">Expr</code> は主にマクロのために便宜的に型付けられた構文木を作るために使われる。多くの場合、これは
+<code class="language-plaintext highlighter-rouge">reify</code> と <code class="language-plaintext highlighter-rouge">splice</code> メソッドが関わってくる。
+(詳細は<a href="https://docs.scala-lang.org/ja/overviews/macros/overview.html">マクロ</a>を参照)</p>
+
+<h2 id="フラグとフラグ集合">フラグとフラグ集合</h2>
+
+<p><strong>フラグ</strong> (flag) は
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#Modifiers</code> である <code class="language-plaintext highlighter-rouge">flags</code> を用いて定義を表す構文木に修飾子を与えるのに使われる。
+以下に修飾子を受け付ける構文木を挙げる:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#ClassDef</code>。クラスとトレイト。</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#ModuleDef</code>。オブジェクト。</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#ValDef</code>。<code class="language-plaintext highlighter-rouge">val</code>、<code class="language-plaintext highlighter-rouge">var</code>、パラメータ、自分型注釈。</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#DefDef</code>。メソッドとコンストラクタ。</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#TypeDef</code>。型エイリアス、抽象型メンバ、型パラメータ。</li>
+</ul>
+
+<p>例えば、<code class="language-plaintext highlighter-rouge">C</code> という名前のクラスを作るには以下のように書く:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ClassDef(Modifiers(NoFlags), TypeName("C"), Nil, ...)
+</code></pre></div></div>
+
+<p>ここでフラグ集合は空だ。<code class="language-plaintext highlighter-rouge">C</code> を private にするには、以下のようにする:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ClassDef(Modifiers(PRIVATE), TypeName("C"), Nil, ...)
+</code></pre></div></div>
+
+<p>垂直バー演算子 (<code class="language-plaintext highlighter-rouge">|</code>) を使って組み合わせることができる。例えば、private final
+クラスは以下のように書く:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ClassDef(Modifiers(PRIVATE | FINAL), TypeName("C"), Nil, ...)
+</code></pre></div></div>
+
+<p>全てのフラグのリストは
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.FlagSets#FlagValues</code> にて定義されており、
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.FlagSets#Flag</code> から公開されている。
+(一般的には、これを
+<code class="language-plaintext highlighter-rouge">import scala.reflect.runtime.universe.Flag._</code> のようにワイルドカードインポートする。)</p>
+
+<p>定義の構文木はコンパイル後にはシンボルとなるため、これらの構文木の修飾子のフラグは結果となるシンボルのフラグへと変換される。
+構文木と違ってシンボルはフラグを公開しないが、<code class="language-plaintext highlighter-rouge">isXXX</code>
+というパターンのテストメソッドを提供する
+(例えば <code class="language-plaintext highlighter-rouge">isFinal</code> は final かどうかをテストする)。
+特定のフラグはある種類のシンボルでしか使われないため、場合によってはシンボルを
+<code class="language-plaintext highlighter-rouge">asTerm</code>、<code class="language-plaintext highlighter-rouge">asType</code>、<code class="language-plaintext highlighter-rouge">asClass</code> といったメソッドを使って変換する必要がある。</p>
+
+<p><strong>注意:</strong> リフレクションAPI のこの部分は再設計の候補に挙がっている。リフレクションAPI
+の将来のリリースにおいてフラグ集合が他のものと置き換わる可能性がある。</p>
+
+<h2 id="定数">定数</h2>
+
+<p>Scala の仕様において<strong>定数式</strong> (constant expression) と呼ばれる式は
+Scala コンパイラによってコンパイル時に評価することができる。
+以下に挙げる式の種類はコンパイル時定数だ。
+(<a href="https://scala-lang.org/files/archive/spec/2.11/06-expressions.html#constant-expressions">Scala 言語仕様 の 6.24</a> 参照):</p>
+
+<ol>
+  <li>プリミティブ値クラスのリテラル (<a href="https://www.scala-lang.org/api/current/index.html#scala.Byte">Byte</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Short">Short</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Int">Int</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Long">Long</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Float">Float</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Double">Double</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Char">Char</a>、 <a href="https://www.scala-lang.org/api/current/index.html#scala.Boolean">Boolean</a> および <a href="https://www.scala-lang.org/api/current/index.html#scala.Unit">Unit</a>)。これは直接対応する型で表される。</li>
+  <li>文字列リテラル。これは文字列のインスタンスとして表される。</li>
+  <li>一般に <a href="https://www.scala-lang.org/api/current/index.html#scala.Predef$@classOf[T]:Class[T]">scala.Predef#classOf</a> で構築されるクラスへの参照。<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Types$Type.html">型</a>として表される。</li>
+  <li>Java の列挙要素。<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Symbols$Symbol.html">シンボル</a>として表される。</li>
+</ol>
+
+<p>定数式の用例としては</p>
+
+<ul>
+  <li>構文木内のリテラル (<code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees#Literal</code> 参照)</li>
+  <li>Java のクラスファイルアノテーションへ渡されるリテラル (<code class="language-plaintext highlighter-rouge">scala.reflect.api.Annotations#LiteralArgument</code> 参照)</li>
+</ul>
+
+<p>などがある。具体例をみてみよう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Literal(Constant(5))
+</code></pre></div></div>
+
+<p>上の式は Scala ソース内での整数リテラル <code class="language-plaintext highlighter-rouge">5</code> を表す AST を構築する。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Constant</code> は「仮想ケースクラス」の一例で、普通のクラスなのだが、あたかもケースクラスであるかのうように構築したりパターンマッチしたりすることができる。
+<code class="language-plaintext highlighter-rouge">Literal</code> と <code class="language-plaintext highlighter-rouge">LiteralArgument</code> の両方ともがリテラルのコンパイル時定数を返す
+<code class="language-plaintext highlighter-rouge">value</code> メソッドを公開する。</p>
+
+<p>具体例で説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Constant(true) match {
+  case Constant(s: String)  =&gt; println("A string: " + s)
+  case Constant(b: Boolean) =&gt; println("A Boolean value: " + b)
+  case Constant(x)          =&gt; println("Something else: " + x)
+}
+assert(Constant(true).value == true)
+</code></pre></div></div>
+
+<p>クラス参照は <code class="language-plaintext highlighter-rouge">scala.reflect.api.Types#Type</code> のインスタンスを用いて表される。
+この参照は、<code class="language-plaintext highlighter-rouge">scala.reflect.runtime.currentMirror</code> のような
+<code class="language-plaintext highlighter-rouge">RuntimeMirror</code> の <code class="language-plaintext highlighter-rouge">runtimeClass</code> メソッドを用いてランタイムクラスへと変換することができる。
+(Scala コンパイラがクラス参照の処理を行なっている段階においては、その参照が指すランタイムクラスがまだコンパイルされていない可能性があるため、このように型からランタイムクラスへと変換することが必要となる。)</p>
+
+<p>Java の列挙要素への参照はシンボル (<code class="language-plaintext highlighter-rouge">scala.reflect.api.Symbols#Symbol</code>)
+として表され、対応する列挙要素を JVM 上で返すことができるメソッドを持つ。
+<code class="language-plaintext highlighter-rouge">RuntimeMirror</code> を使って対応する列挙型や列挙値への参照の実行時の値をインスペクトすることができる。</p>
+
+<p>具体例をみてこう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Java ソース:
+enum JavaSimpleEnumeration { FOO, BAR }
+
+import java.lang.annotation.*;
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface JavaSimpleAnnotation {
+  Class&lt;?&gt; classRef();
+  JavaSimpleEnumeration enumRef();
+}
+
+@JavaSimpleAnnotation(
+  classRef = JavaAnnottee.class,
+  enumRef = JavaSimpleEnumeration.BAR
+)
+public class JavaAnnottee {}
+
+// Scala ソース:
+import scala.reflect.runtime.universe._
+import scala.reflect.runtime.{currentMirror =&gt; cm}
+
+object Test extends App {
+  val jann = typeOf[JavaAnnottee].typeSymbol.annotations(0).javaArgs
+
+  def jarg(name: String) = jann(TermName(name)) match {
+    // Constant is always wrapped in a Literal or LiteralArgument tree node
+    case LiteralArgument(ct: Constant) =&gt; value
+    case _ =&gt; sys.error("Not a constant")
+  }
+
+  val classRef = jarg("classRef").value.asInstanceOf[Type]
+  println(showRaw(classRef))         // TypeRef(ThisType(), JavaAnnottee, List())
+  println(cm.runtimeClass(classRef)) // class JavaAnnottee
+
+  val enumRef = jarg("enumRef").value.asInstanceOf[Symbol]
+  println(enumRef)                   // value BAR
+
+  val siblings = enumRef.owner.typeSignature.decls
+  val enumValues = siblings.filter(sym =&gt; sym.isVal &amp;&amp; sym.isPublic)
+  println(enumValues)                // Scope {
+                                     //   final val FOO: JavaSimpleEnumeration;
+                                     //   final val BAR: JavaSimpleEnumeration
+                                     // }
+
+  val enumClass = cm.runtimeClass(enumRef.owner.asClass)
+  val enumValue = enumClass.getDeclaredField(enumRef.name.toString).get(null)
+  println(enumValue)                 // BAR
+}
+</code></pre></div></div>
+
+<h2 id="プリティプリンタ">プリティプリンタ</h2>
+
+<p><a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Trees.html"><code class="language-plaintext highlighter-rouge">Trees</code></a> と
+<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Types.html"><code class="language-plaintext highlighter-rouge">Types</code></a>
+を整形して表示するユーティリティを説明しよう。</p>
+
+<h3 id="構文木の表示">構文木の表示</h3>
+
+<p><code class="language-plaintext highlighter-rouge">show</code> メソッドは、リフレクションオブジェクトを整形して表示する。
+この形式は Scala コードの糖衣構文を展開して Java のようしたものを提供する。具体例をみていこう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; def tree = reify { final class C { def x = 2 } }.tree
+tree: scala.reflect.runtime.universe.Tree
+
+scala&gt; show(tree)
+res0: String =
+{
+  final class C extends AnyRef {
+    def &lt;init&gt;() = {
+      super.&lt;init&gt;();
+      ()
+    };
+    def x = 2
+  };
+  ()
+}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">showRaw</code> メソッドは、Scala の構文木 (AST) のようなリフレクションオブジェクトの内部構造を表示する。
+これは Scala のタイプチェッカが見るものと同じものだ。</p>
+
+<p>ここで注意すべきなのは、この形式どおりに構文木を構築すればマクロの実装でも使えるのじゃないかと思うかもしれないが、うまくいかないことが多いということだ。これはシンボルについての情報などが完全には表示されていないためだ (名前だけが表示される)。
+そのため、妥当な Scala コードがあるときにその AST をインスペクトするのに向いていると言える。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; showRaw(tree)
+res1: String = Block(List(
+  ClassDef(Modifiers(FINAL), TypeName("C"), List(), Template(
+    List(Ident(TypeName("AnyRef"))),
+    emptyValDef,
+    List(
+      DefDef(Modifiers(), termNames.CONSTRUCTOR, List(), List(List()), TypeTree(),
+        Block(List(
+          Apply(Select(Super(This(typeNames.EMPTY), typeNames.EMPTY), termNames.CONSTRUCTOR), List())),
+          Literal(Constant(())))),
+      DefDef(Modifiers(), TermName("x"), List(), List(), TypeTree(),
+        Literal(Constant(2))))))),
+  Literal(Constant(())))
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">showRaw</code> はインスペクトしたものの <code class="language-plaintext highlighter-rouge">scala.reflect.api.Types</code> を併記することができる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.tools.reflect.ToolBox // requires scala-compiler.jar
+import scala.tools.reflect.ToolBox
+
+scala&gt; import scala.reflect.runtime.{currentMirror =&gt; cm}
+import scala.reflect.runtime.{currentMirror=&gt;cm}
+
+scala&gt; showRaw(cm.mkToolBox().typeCheck(tree), printTypes = true)
+res2: String = Block[1](List(
+  ClassDef[2](Modifiers(FINAL), TypeName("C"), List(), Template[3](
+    List(Ident[4](TypeName("AnyRef"))),
+    emptyValDef,
+    List(
+      DefDef[2](Modifiers(), termNames.CONSTRUCTOR, List(), List(List()), TypeTree[3](),
+        Block[1](List(
+          Apply[4](Select[5](Super[6](This[3](TypeName("C")), typeNames.EMPTY), ...))),
+          Literal[1](Constant(())))),
+      DefDef[2](Modifiers(), TermName("x"), List(), List(), TypeTree[7](),
+        Literal[8](Constant(2))))))),
+  Literal[1](Constant(())))
+[1] TypeRef(ThisType(scala), scala.Unit, List())
+[2] NoType
+[3] TypeRef(NoPrefix, TypeName("C"), List())
+[4] TypeRef(ThisType(java.lang), java.lang.Object, List())
+[5] MethodType(List(), TypeRef(ThisType(java.lang), java.lang.Object, List()))
+[6] SuperType(ThisType(TypeName("C")), TypeRef(... java.lang.Object ...))
+[7] TypeRef(ThisType(scala), scala.Int, List())
+[8] ConstantType(Constant(2))
+</code></pre></div></div>
+
+<h3 id="型の表示">型の表示</h3>
+
+<p><code class="language-plaintext highlighter-rouge">show</code> メソッドは型を<strong>可読な</strong>文字列形式で表示することができる:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.universe._
+import scala.reflect.runtime.universe._
+
+scala&gt; def tpe = typeOf[{ def x: Int; val y: List[Int] }]
+tpe: scala.reflect.runtime.universe.Type
+
+scala&gt; show(tpe)
+res0: String = scala.AnyRef{def x: Int; val y: scala.List[Int]}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">scala.reflect.api.Trees</code> のための <code class="language-plaintext highlighter-rouge">showRaw</code> 同様に、
+<code class="language-plaintext highlighter-rouge">scala.reflect.api.Types</code> のための <code class="language-plaintext highlighter-rouge">showRaw</code>
+は Scala タイプチェッカが使う Scala AST を表示する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; showRaw(tpe)
+res1: String = RefinedType(
+  List(TypeRef(ThisType(scala), TypeName("AnyRef"), List())),
+  Scope(
+    TermName("x"),
+    TermName("y")))
+</code></pre></div></div>
+
+<p>この <code class="language-plaintext highlighter-rouge">showRaw</code> メソッドにはデフォルトでは <code class="language-plaintext highlighter-rouge">false</code>
+になっている名前付きパラメータ <code class="language-plaintext highlighter-rouge">printIds</code> と <code class="language-plaintext highlighter-rouge">printKinds</code> を持つ。
+<code class="language-plaintext highlighter-rouge">true</code> を渡すことで <code class="language-plaintext highlighter-rouge">showRaw</code> はシンボルのユニークID
+とシンボルの種類 (パッケージ、型、メソッド、getter その他) を表示することができる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; showRaw(tpe, printIds = true, printKinds = true)
+res2: String = RefinedType(
+  List(TypeRef(ThisType(scala#2043#PK), TypeName("AnyRef")#691#TPE, List())),
+  Scope(
+    TermName("x")#2540#METH,
+    TermName("y")#2541#GET))
+</code></pre></div></div>
+
+<h2 id="位置情報">位置情報</h2>
+
+<p><strong>位置情報</strong> (<a href="https://www.scala-lang.org/api/current/scala-reflect/scala/reflect/api/Position.html"><code class="language-plaintext highlighter-rouge">Position</code></a>)
+はシンボルや構文木のノードの出処を追跡するのに使われる。警告やエラーの表示でよく使われ、プログラムのどこが間違ったのかを正確に表示することができる。位置情報はソースファイルの列と行を表す。
+(ソースファイルの初めからのオフセットは「ポイント」と呼ばれるが、これは便利ではないことがある)
+位置情報はそれが指す行の内容も保持する。全ての構文木やシンボルが位置情報を持つわけではなく、ない場合は
+<code class="language-plaintext highlighter-rouge">NoPosition</code> オブジェクトで表される。</p>
+
+<p>位置情報はソースファイルの 1文字を指すこともできれば、文字の範囲を指すこともできる。
+前者の場合は<strong>オフセット位置情報</strong> (offset position)、後者の場合は<strong>範囲位置情報</strong>
+(range position) が使われる。範囲位置情報は <code class="language-plaintext highlighter-rouge">start</code> と <code class="language-plaintext highlighter-rouge">end</code> オフセットを保持する。
+ <code class="language-plaintext highlighter-rouge">start</code> と <code class="language-plaintext highlighter-rouge">end</code> オフセットは <code class="language-plaintext highlighter-rouge">focusStart</code> と <code class="language-plaintext highlighter-rouge">focusEnd</code>
+メソッドを用いて「フォーカス」することができ、これは位置情報を返す
+(範囲位置情報では無い位置情報に対して呼ばれた場合は <code class="language-plaintext highlighter-rouge">this</code> を返す) 。</p>
+
+<p>位置情報はいくつかのメソッドを使って比較することができる。
+<code class="language-plaintext highlighter-rouge">precedes</code> メソッドは、2つの位置情報が定義済みであり (つまり <code class="language-plaintext highlighter-rouge">NoPosition</code> ではない)、かつ
+<code class="language-plaintext highlighter-rouge">this</code> の位置情報の終点が与えられた位置情報の始点を超えない場合に真を返す。
+他にも、範囲位置情報は (<code class="language-plaintext highlighter-rouge">includes</code> メソッドを用いて) 包含関係を調べたり、
+(<code class="language-plaintext highlighter-rouge">overlaps</code> メソッドを用いて) 交差関係を調べることができる。</p>
+
+<p>範囲位置情報は<strong>透明</strong> (transparent) か<strong>非透明</strong> (opaque) だ。
+範囲位置情報を持つ構文木は以下の不変条件を満たす必要があるため、範囲位置情報が透明か非透明であるかは許可される用法に関わってくる:</p>
+
+<ul>
+  <li>オフセット位置情報を持つ構文木は範囲位置情報を持つ部分木を持ってはいけない。</li>
+  <li>範囲位置情報を持つ構文木が範囲位置情報を持つ部分木を持つ場合、部分木の範囲は親の範囲に包含されなくてはいけない。</li>
+  <li>同じノードの部分木の非透明な範囲位置情報同士は交差してはいけない。 (このため、交差は最大で単一の点となる)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">makeTransparent</code> メソッドを使って非透明な範囲位置情報を透明な他は何も変わらないものに変換することができる。</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/reflection/annotations-names-scopes.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/reflection/annotations-names-scopes.html" class="lang">日本語</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ja/overviews/reflection/annotations-names-scopes.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

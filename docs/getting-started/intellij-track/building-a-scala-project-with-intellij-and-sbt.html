@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Building a Scala Project with IntelliJ and sbt | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Building a Scala Project with IntelliJ and sbt"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Building a Scala Project with IntelliJ and sbt"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>Building a Scala Project with IntelliJ and sbt</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>In this tutorial, we’ll see how to build a Scala project using <a href="https://www.scala-sbt.org/1.x/docs/index.html">sbt</a>. sbt is a popular tool for compiling, running, and testing Scala projects of any
+size. Using a build tool such as sbt (or Maven/Gradle) becomes essential once you create projects with dependencies
+or more than one code file.
+ We assume you’ve completed the
+<a href="getting-started-with-scala-in-intellij.html">first tutorial</a>.</p>
+
+<h2 id="creating-the-project">Creating the project</h2>
+<p>In this section, we’ll show you how to create the project in IntelliJ. However, if you’re
+comfortable with the command line, we recommend you try <a href="/getting-started/sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html">Getting
+Started with Scala and sbt on the Command Line</a> and then come back
+ here to the section “Writing Scala code”.</p>
+
+<ol>
+  <li>If you didn’t create the project from the command line, open up IntelliJ and select “Create New Project”
+    <ul>
+      <li>On the left panel, select Scala and on the right panel, select sbt</li>
+      <li>Click <strong>Next</strong></li>
+      <li>Name the project “SbtExampleProject”</li>
+    </ul>
+  </li>
+  <li>If you already created the project on the command line, open up IntelliJ, select <em>Import Project</em> and open the <code class="language-plaintext highlighter-rouge">build.sbt</code> file for your project</li>
+  <li>Make sure the <strong>JDK version</strong> is 1.8 and the <strong>sbt version</strong> is at least 0.13.13</li>
+  <li>Select <strong>Use auto-import</strong> so dependencies are automatically downloaded when available</li>
+  <li>Select <strong>Finish</strong></li>
+</ol>
+
+<h2 id="understanding-the-directory-structure">Understanding the directory structure</h2>
+<p>sbt creates many directories which can be useful once you start building
+more complex projects. You can ignore most of them for now
+but here’s a glance at what everything is for:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- .idea (IntelliJ files)
+- project (plugins and additional settings for sbt)
+- src (source files)
+    - main (application code)
+        - java (Java source files)
+        - scala (Scala source files) &lt;-- This is all we need for now
+        - scala-2.12 (Scala 2.12 specific files)
+    - test (unit tests)
+- target (generated files)
+- build.sbt (build definition file for sbt)
+</code></pre></div></div>
+
+<h2 id="writing-scala-code">Writing Scala code</h2>
+<ol>
+  <li>On the <strong>Project</strong> panel on the left, expand <code class="language-plaintext highlighter-rouge">SbtExampleProject</code> =&gt; <code class="language-plaintext highlighter-rouge">src</code>
+=&gt; <code class="language-plaintext highlighter-rouge">main</code></li>
+  <li>Right-click <code class="language-plaintext highlighter-rouge">scala</code> and select <strong>New</strong> =&gt; <strong>Package</strong></li>
+  <li>Name the package <code class="language-plaintext highlighter-rouge">example</code> and click <strong>OK</strong> (or just press the Enter or Return key).</li>
+  <li>Right-click the package <code class="language-plaintext highlighter-rouge">example</code> and select <strong>New</strong> =&gt; <strong>Scala class</strong> (if you don’t see this option, right-click the <code class="language-plaintext highlighter-rouge">SbtExampleProject</code>, click <strong>Add Frameworks Support</strong>, select <strong>Scala</strong> and proceed)</li>
+  <li>Name the class <code class="language-plaintext highlighter-rouge">Main</code> and change the <strong>Kind</strong> to <code class="language-plaintext highlighter-rouge">Object</code>.</li>
+  <li>Change the code in the class to the following:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Main extends App {
+  val ages = Seq(42, 75, 29, 64)
+  println(s"The oldest person is ${ages.max}")
+}
+</code></pre></div></div>
+
+<p>Note: IntelliJ has its own implementation of the Scala compiler, and sometimes your
+code is correct even though IntelliJ indicates otherwise. You can always check
+to see if sbt can run your project on the command line.</p>
+
+<h2 id="running-the-project">Running the project</h2>
+<ol>
+  <li>From the <strong>Run</strong> menu, select <strong>Edit configurations</strong></li>
+  <li>Click the <strong>+</strong> button and select <strong>sbt Task</strong>.</li>
+  <li>Name it <code class="language-plaintext highlighter-rouge">Run the program</code>.</li>
+  <li>In the <strong>Tasks</strong> field, type <code class="language-plaintext highlighter-rouge">~run</code>. The <code class="language-plaintext highlighter-rouge">~</code> causes sbt to rebuild and rerun the project
+when you save changes to a file in the project.</li>
+  <li>Click <strong>OK</strong>.</li>
+  <li>On the <strong>Run</strong> menu. Click <strong>Run ‘Run the program’</strong>.</li>
+  <li>In the code, change <code class="language-plaintext highlighter-rouge">75</code> to <code class="language-plaintext highlighter-rouge">61</code>
+and look at the updated output in the console.</li>
+</ol>
+
+<h2 id="adding-a-dependency">Adding a dependency</h2>
+<p>Changing gears a bit, let’s look at how to use published libraries to add
+extra functionality to our apps.</p>
+<ol>
+  <li>Open up <code class="language-plaintext highlighter-rouge">build.sbt</code> and add the following line:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
+</code></pre></div></div>
+<p>Here, <code class="language-plaintext highlighter-rouge">libraryDependencies</code> is a set of dependencies, and by using <code class="language-plaintext highlighter-rouge">+=</code>,
+we’re adding the <a href="https://github.com/scala/scala-parser-combinators">scala-parser-combinators</a> dependency to the set of dependencies that sbt will go
+and fetch when it starts up. Now, in any Scala file, you can import classes,
+objects, etc, from scala-parser-combinators with a regular import.</p>
+
+<p>You can find more published libraries on
+<a href="https://index.scala-lang.org/">Scaladex</a>, the Scala library index, where you
+can also copy the above dependency information for pasting into your <code class="language-plaintext highlighter-rouge">build.sbt</code>
+file.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>Continue to the next tutorial in the <em>getting started with IntelliJ</em> series, and learn about <a href="testing-scala-in-intellij-with-scalatest.html">testing Scala code in IntelliJ with ScalaTest</a>.</p>
+
+<p><strong>or</strong></p>
+
+<ul>
+  <li><a href="/overviews/scala-book/introduction.html">The Scala Book</a>, which provides a set of short lessons introducing Scala’s main features.</li>
+  <li><a href="/tour/tour-of-scala.html">The Tour of Scala</a> for bite-sized introductions to Scala’s features.</li>
+  <li>Continue learning Scala interactively online on
+ <a href="https://www.scala-exercises.org/scala_tutorial">Scala Exercises</a>.</li>
+</ul>
+
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+      <div id="toc"></div>
+      
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html">English</a></li>
+          
+            
+            
+      			
+      			<li><a href="/ja/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html" class="lang">日本語</a></li>
+          
+      </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

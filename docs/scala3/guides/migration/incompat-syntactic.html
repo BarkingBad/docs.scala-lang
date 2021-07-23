@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Syntactic Changes | 
+      Scala 3 Migration Guide | 
+      Scala Documentation
+    </title>
+    
+    <meta name="description" content="This chapter details all the incompatibilities caused by syntactic changes" />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/guides/migration/incompat-syntactic.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Syntactic Changes"/>
+    <meta property="og:description" content="This chapter details all the incompatibilities caused by syntactic changes"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Syntactic Changes"/>
+    <meta name="twitter:description" content="This chapter details all the incompatibilities caused by syntactic changes"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Scala 3 Migration Guide</div>
+          
+          <h1>Syntactic Changes</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Scala 3 introduces the optional-braces syntax and the new control structure syntax.
+It comes at the cost of some minimal restrictions in the preexisting syntax.</p>
+
+<p>Other syntactic changes are intended to make the syntax less surprising and more consistent.</p>
+
+<p>It is worth noting that most of the changes can be automatically handled during the <a href="tooling-migration-mode.html">Scala 3 migration compilation</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Incompatibility</th>
+      <th>Scala 2.13</th>
+      <th>Scala 3 Migration Rewrite</th>
+      <th>Scalafix Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#restricted-keywords">Restricted keywords</a></td>
+      <td> </td>
+      <td>✅</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#procedure-syntax">Procedure syntax</a></td>
+      <td>Deprecation</td>
+      <td>✅</td>
+      <td><a href="https://scalacenter.github.io/scalafix/docs/rules/ProcedureSyntax.html">✅</a></td>
+    </tr>
+    <tr>
+      <td><a href="#parentheses-around-lambda-parameter">Parentheses around lambda parameter</a></td>
+      <td> </td>
+      <td>✅</td>
+      <td><a href="https://github.com/ohze/scala-rewrites/tree/dotty/#fixscala213parensaroundlambda">✅</a></td>
+    </tr>
+    <tr>
+      <td><a href="#open-brace-indentation-for-passing-an-argument">Open brace indentation for passing an argument</a></td>
+      <td> </td>
+      <td>✅</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#wrong-indentation">Wrong indentation</a></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#_-as-a-type-parameter"><code class="language-plaintext highlighter-rouge">_</code> as a type parameter</a></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="#-and---as-type-parameters"><code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> as type parameters</a></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="restricted-keywords">Restricted Keywords</h2>
+
+<p>The list of Scala 3 keywords can be found <a href="https://dotty.epfl.ch/docs/internals/syntax.html#keywords">here</a>.
+<em>Regular</em> keywords cannot be used as identifiers, whereas <em>soft</em> keywords are not restricted.</p>
+
+<p>For the matter of migrating from Scala 2.13 to Scala 3, only the subset of new <em>regular</em> keywords are problematic.
+It is composed of:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">enum</code></li>
+  <li><code class="language-plaintext highlighter-rouge">export</code></li>
+  <li><code class="language-plaintext highlighter-rouge">given</code></li>
+  <li><code class="language-plaintext highlighter-rouge">then</code></li>
+  <li><code class="language-plaintext highlighter-rouge">=&gt;&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">?=&gt;</code></li>
+</ul>
+
+<p>For instance, the following piece of code can be compiled with Scala 2.13 but not wtih Scala 3.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">given</span> <span class="o">{</span> <span class="c1">// Error: given is now a keyword</span>
+  <span class="k">val</span> <span class="nv">enum</span> <span class="k">=</span> <span class="o">???</span> <span class="c1">// Error: enum is now a keyword</span>
+
+  <span class="nf">println</span><span class="o">(</span><span class="n">enum</span><span class="o">)</span> <span class="c1">// Error: enum is now a keyword</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <a href="tooling-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into:</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">-object given {
+</span><span class="gi">+object `given` {
+</span><span class="gd">-  val enum = ???
+</span><span class="gi">+  val `enum` = ???
+</span>
+-  println(enum)
+<span class="gi">+  println(`enum`)
+</span><span class="err">}</span></code></pre></figure>
+
+<h2 id="procedure-syntax">Procedure Syntax</h2>
+
+<p>Procedure syntax has been deprecated for a while and it is dropped in Scala 3.
+The following pieces of code are now illegal:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">Bar</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// Error: Procedure syntax no longer supported; `: Unit =` should be inserted here</span>
+    <span class="nf">println</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <a href="tooling-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into.</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="p">object Bar {
+</span><span class="gd">-  def print() {
+</span><span class="gi">+  def print(): Unit = {
+</span>    println("bar")
+  }
+<span class="err">}</span></code></pre></figure>
+
+<h2 id="parentheses-around-lambda-parameter">Parentheses Around Lambda Parameter</h2>
+
+<p>When followed by its type, the parameter of a lambda is now required to be enclosed in parentheses.
+The following piece of code is invalid.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">f</span> <span class="k">=</span> <span class="o">{</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">}</span> <span class="c1">// Error: parentheses are required around the parameter of a lambda</span>
+</code></pre></div></div>
+
+<p>The <a href="tooling-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into:</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">-val f = { x: Int =&gt; x * x }
+</span><span class="gi">+val f = { (x: Int) =&gt; x * x }</span></code></pre></figure>
+
+<h2 id="open-brace-indentation-for-passing-an-argument">Open Brace Indentation For Passing An Argument</h2>
+
+<p>In Scala 2 it is possible to pass an argument after a new line by enclosing it into braces.
+Although valid, this style of coding is not encouraged by the <a href="https://docs.scala-lang.org/style">Scala style guide</a> and is no longer supported in Scala 3.</p>
+
+<p>This syntax is now invalid:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">test</span><span class="o">(</span><span class="s">"my test"</span><span class="o">)</span>
+<span class="o">{</span> <span class="c1">// Error: This opening brace will start a new statement in Scala 3.</span>
+  <span class="nf">assert</span><span class="o">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <a href="tooling-migration-mode.html">Scala 3 migration compiler</a> indents the first line of the block.</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="p">test("my test")
+</span><span class="gd">-{
+</span><span class="gi">+  {
+</span>  assert(1 == 1)
+<span class="err">}</span></code></pre></figure>
+
+<p>This migration rule applies to other patterns as well, such as refining a type after a new line.</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="p">type Bar = Foo
+</span><span class="gd">- {
+</span><span class="gi">+   {
+</span>  def bar(): Int
+<span class="err">}</span></code></pre></figure>
+
+<p>A preferable solution is to write:</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">-test("my test")
+-{
+</span><span class="gi">+test("my test") {
+</span>  assert(1 == 1)
+<span class="err">}</span></code></pre></figure>
+
+<h2 id="wrong-indentation">Wrong indentation</h2>
+
+<p>The Scala 3 compiler now requires correct indentation.
+The following piece of code, that was compiled in Scala 2.13, does not compile anymore because of the indentation.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">bar</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">foo</span> <span class="k">=</span> <span class="mf">1.0</span>
+  <span class="k">val</span> <span class="nv">bar</span> <span class="k">=</span> <span class="n">foo</span> <span class="c1">// [E050] Type Error: value foo does not take parameters</span>
+    <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">}</span> <span class="c1">// [E007] Type Mismatch Error: Found Unit, Required (Int, Int)</span>
+</code></pre></div></div>
+
+<p>The indentation must be fixed.</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="p">def bar: (Int, Int) = {
+</span>  val foo = 1.0
+  val bar = foo
+<span class="gd">-    (1, 1)
+</span><span class="gi">+  (1, 1)
+</span><span class="err">}</span></code></pre></figure>
+
+<p>These errors can be prevented by using a Scala formatting tool such as <a href="https://scalameta.org/scalafmt/">scalafmt</a> or the <a href="https://www.jetbrains.com/help/idea/reformat-and-rearrange-code.html">IntelliJ Scala formatter</a>.
+Beware that these tools may change the entire code style of your project.</p>
+
+<h2 id="_-as-a-type-parameter"><code class="language-plaintext highlighter-rouge">_</code> As A Type Parameter</h2>
+
+<p>The usage of the <code class="language-plaintext highlighter-rouge">_</code> identifier as a type parameter is permitted in Scala 2.13, even if it has never been mentioned in the Scala 2 specification.
+It is used in the API of <a href="https://index.scala-lang.org/lihaoyi/fastparse">fastparse</a>, in combination with a context bound, to declare an implicit parameter.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span><span class="o">[</span><span class="k">_</span><span class="kt">:</span> <span class="kt">Foo</span><span class="o">]</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">???</span>
+</code></pre></div></div>
+
+<p>Here, the method <code class="language-plaintext highlighter-rouge">foo</code> takes a type parameter <code class="language-plaintext highlighter-rouge">_</code> and an implicit parameter of type <code class="language-plaintext highlighter-rouge">Foo[_]</code> where <code class="language-plaintext highlighter-rouge">_</code> refers to the type parameter, not the wildcard symbol.</p>
+
+<p>Martin Odersky described this pattern as a “clever exploit of a scalac compiler bug” (<a href="https://www.reddit.com/r/scala/comments/fczcvo/mysterious_context_bounds_in_fastparse_2/fjecokn/">source</a>).</p>
+
+<p>The Scala 3 compiler does not permit this pattern anymore:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">-- [E040] Syntax Error: src/main/scala/anonymous-type-param.scala:4:10
+4 |  def foo[_: Foo]: Unit = ()
+  |          ^
+  |          an identifier expected, but '_' found</code></pre></figure>
+
+<p>The solution is to give the parameter a valid identifier name, for instance <code class="language-plaintext highlighter-rouge">T</code>.
+This will not break the binary compatibility.</p>
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">-def foo[_: Foo]: Unit = ???
+</span><span class="gi">+def foo[T: Foo]: Unit = ???</span></code></pre></figure>
+
+<h2 id="-and---as-type-parameters"><code class="language-plaintext highlighter-rouge">+</code> And <code class="language-plaintext highlighter-rouge">-</code> As Type Parameters</h2>
+
+<p><code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> are not valid identifiers for type parameters in Scala 3, since they are reserved for variance annotation.</p>
+
+<p>You cannot write <code class="language-plaintext highlighter-rouge">def foo[+]</code> or <code class="language-plaintext highlighter-rouge">def foo[-]</code> anymore.</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">-- Error: src/main/scala/type-param-identifier.scala:2:10 
+2 |  def foo[+]: +
+  |          ^
+  |          no `+/-` variance annotation allowed here</code></pre></figure>
+
+<p>The solution is to choose another valid identifier, for instance <code class="language-plaintext highlighter-rouge">T</code>.</p>
+
+<p>However, <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> still are valid type identifiers in general.
+You can write <code class="language-plaintext highlighter-rouge">type +</code>.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="incompatibility-table.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="incompat-dropped-features.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/compatibility-intro.html">Compatibility Reference</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/compatibility-source.html">Source Level</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/compatibility-classpath.html">Classpath Level</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/compatibility-runtime.html">Runtime</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/compatibility-metaprogramming.html">Metaprogramming</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/tooling-tour.html">Tour of the Migration Tools</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/tooling-migration-mode.html">Scala 3 Migration Mode</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/tutorial-intro.html">Migration Tutorial</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/tutorial-prerequisites.html">Prerequisites</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/tutorial-sbt.html">Porting an sbt Project</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/tutorial-macro-cross-building.html">Cross-Building a Macro Library</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/tutorial-macro-mixing.html">Mixing Scala 2.13 and Scala 3 Macros</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/tooling-syntax-rewriting.html">Scala 3 Syntax Rewriting</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/incompatibility-table.html">Incompatibility Table</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/guides/migration/incompat-syntactic.html">Syntactic Changes</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/incompat-dropped-features.html">Dropped Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/incompat-contextual-abstractions.html">Contextual Abstractions</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/incompat-other-changes.html">Other Changed Features</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/incompat-type-checker.html">Type Checker</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/incompat-type-inference.html">Type Inference</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/options-intro.html">Compiler Options</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/options-lookup.html">Compiler Options Lookup Table</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/options-new.html">New Compiler Options</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/scaladoc-settings-compatibility.html">Scaladoc settings compatibility between Scala2 and Scala3</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/migration/plugin-intro.html">Compiler Plugins</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/plugin-kind-projector.html">Kind Projector Migration</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/migration/external-resources.html">External Resources</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala3-migration/incompat-syntactic.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

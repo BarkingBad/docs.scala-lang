@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SID-1 Named and Default Arguments | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/named-and-default-arguments.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SID-1 Named and Default Arguments"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SID-1 Named and Default Arguments"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SID-1 Named and Default Arguments</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>Lukas Rytz</strong></p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Methods taking multiple parameters of the same type are a source of mistakes which cannot be detected during compile time: exchanging two arguments of the same type does not yield an error, but can produce unexpected results. This problem can be avoided elegantly by using named arguments. Furthermore, named arguments improve the readability of method calls with a large number of arguments.</p>
+
+<p>The second language feature discussed in this document, default arguments, in general does not depend on having named arguments. But combining the two features actually improves their usefulness, for instance it avoids the requirement of putting the parameters with defaults to the end of the parameter list of a method. For that reason, the two features are introduced together.</p>
+
+<h2 id="named-arguments">Named Arguments</h2>
+
+<p>In Scala 2.8, method arguments can be specified in <em>named style</em> using the same syntax as variable assignments:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f[T](a: Int, b: T)
+f(b = getT(), a = getInt())
+</code></pre></div></div>
+
+<p>The argument expressions are evaluated in call-site order, so in the above example <code class="language-plaintext highlighter-rouge">getT()</code> is executed before <code class="language-plaintext highlighter-rouge">getInt()</code>f. Mixing named and positional arguments is allowed as long as the positional part forms a prefix of the argument list:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(0, b = "1")     // valid
+f(b = "1", a = 0) // valid
+// f(b = "1", 0)  // invalid, a positional after named argument
+// f(0, a = 1)    // invalid, parameter ’a’ specified twice
+</code></pre></div></div>
+
+<p>If an argument expression has the form <code class="language-plaintext highlighter-rouge">"x = expr"</code> and <code class="language-plaintext highlighter-rouge">x</code> is not a parameter name of the method, the argument is treated as an assignment expression to some variable <code class="language-plaintext highlighter-rouge">x</code>, i.e. the argument type is Unit. So the following example will continue to work as expected:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def twice(op: =&gt; Unit) = { op; op }
+var x = 1
+twice(x = x + 1)
+</code></pre></div></div>
+
+<p>It is an error if the expression <code class="language-plaintext highlighter-rouge">”x = expr”</code> can be interpreted as both a named argument (parameter name <code class="language-plaintext highlighter-rouge">x</code>) and an assignment (variable <code class="language-plaintext highlighter-rouge">x</code> in scope). If the expression is surrounded by an additional set of parenthesis or braces, it is never treated as a named argument. Also, if the application argument is a block expression (as in <code class="language-plaintext highlighter-rouge">f{ arg }</code>), <code class="language-plaintext highlighter-rouge">arg</code> is never treated as a named argument.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def twice(op: =&gt; Unit) = { op; op }
+var op = 1
+// twice(op = op + 1) // error: reference to ‘op’ is ambiguous
+twice((op = op + 1))  // assignment, not a named argument
+twice({op = op + 1})  // assignment
+twice{ op = op + 1 }  // assignment
+</code></pre></div></div>
+
+<h3 id="integration-with-other-features">Integration with other features</h3>
+
+<p>The following list shows how named arguments interfere with other language features of Scala:</p>
+
+<p><strong>By-Name Parameters</strong> continue to work as expected when using named arguments. The expression is only (and repeatedly) evaluated when the body of the method accesses the parameter.</p>
+
+<p><strong>Repeated Parameters</strong> When an application uses named arguments, the repeated parameter has to be specified exactly once. Using the same parameter name multiple times is disallowed.</p>
+
+<p><strong>Functional values</strong> A functional value in Scala is an instance of a class which implements a method called apply. One can use the parameter names of that apply method for a named application. For functional values whose static type is scala.FunctionN, the parameter names of that apply method can be used.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val f1 = new { def apply(x: Int) = x + 1 }
+val f2 = (x: Int) =&gt; x + 1 // instance of Function1[Int, Int]
+f1(x = 2)    // OK
+// f2(x = 2) // "error: not found: value x"
+f2(v1 = 2)   // OK, ’v1’ is the parameter name in Function1
+</code></pre></div></div>
+
+<p><strong>Overriding</strong> When a method is overridden (or an abstract method is implemented) in a subclass, the parameter names don’t have to be the same as in the superclass. For type-checking an application which uses named arguments, the static type of the method determines which names have to be used.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait A           { def f(a: Int): Int }
+class B extends A { def f(x: Int) = x }
+val a: A = new B
+a.f(a = 1) // OK
+</code></pre></div></div>
+
+<p><strong>Overloading Resolution</strong> When a method application refers to an overloaded method, first the set of applicable alternatives is determined and then the most specific alternative is chosen (see [1], Chapter 6.26.3).</p>
+
+<p>The presence of named argument influences the set of applicable alternatives, the argument types have to be matched against the corresponding parameter types based on the names. In the following example, the second alternative is applicable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f() // #1
+def f(a: Int, b: String) // #2
+f(b = "someString", a = 1) // using #2
+</code></pre></div></div>
+
+<p>If multiple alternatives are applicable, the most specific one is determined. This process is independent of the argument names used in a specific application and only looks at the method signature (for a detailed description, see [1], Chapter 6.26.3).</p>
+
+<p>In the following example, both alternatives are applicable, but none of them is more specific than the other because the argument types are compared based on their position, not on the argument name:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(a: Int, b: String)   // #1
+def f(b: Object, a: Int)   // #2
+f(a = 1, b = "someString") // "error: ambiguous reference to
+                           // overloaded definition"
+</code></pre></div></div>
+
+<p><strong>Anonymous functions</strong> The placeholder syntax syntax for creating anonymous functions is extended to work with named arguments.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(x: Int, y: String)
+val g1: Int =&gt; Int = f(y = "someString", x = _)
+val g2 = f(y = "someString", x = _: Int)
+</code></pre></div></div>
+
+<h2 id="default-arguments">Default Arguments</h2>
+
+<p>A method parameter with a default argument has the form <code class="language-plaintext highlighter-rouge">”p: T = expr”</code>, where <code class="language-plaintext highlighter-rouge">expr</code> is evaluated every time a method application uses the default argument. To use a default argument, the corresponding parameter has to be omitted in the method application.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(a: Int, b: String = "defaultString", c: Int = 5)
+f(1)
+f(1, "otherString")
+f(1, c = 10) // c needs to be specified as named argument
+</code></pre></div></div>
+
+<p>For every parameter with a default argument, a synthetic method which computes the default expression is generated. When a method application uses default arguments, the missing parameters are added to the argument list as calls to the corresponding synthetic methods.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(a: Int = 1, b: String)
+// generates a method: def f$default$1 = 1
+f(b = "3")
+// transformed to: f(b = "3", a = f$default$1)
+</code></pre></div></div>
+
+<p>A default argument may be an arbitrary expression. Since the scope of a parameter extends over all subsequent parameter lists (and the method body), default expressions can depend on parameters of preceding parameter lists (but not on other parameters in the same parameter list). Note that when using a default value which depends on earlier parameters, the actual arguments are used, not the default arguments.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(a: Int = 0)(b: Int = a + 1) = b // OK
+// def f(a: Int = 0, b: Int = a + 1) // "error: not found: value a"
+f(10)() // returns 11 (not 1)
+</code></pre></div></div>
+
+<p>A special expected type is used for type-checking the default argument <code class="language-plaintext highlighter-rouge">expr</code> of a method parameter <code class="language-plaintext highlighter-rouge">”x: T = expr”</code>: it is obtained by replacing all occurrences of type parameters of the method (type parameters of the class for constructors) with the undefined type. This allows specifying default arguments for polymorphic methods and classes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f[T](a: T = 1) = a
+f()    // returns 1: Int
+f("s") // returns "s": String
+def g[T](a: T = 1, b: T = "2") = b
+g(a = "1")  // OK, returns "2": String
+g(b = 2)    // OK, returns 2: Int
+g()         // OK, returns "2": Any
+// g[Int]() // "error: type mismatch; found: String, required: Int"
+class A[T](a: T = "defaultString")
+new A()  // creates an instance of A[String]
+new A(1) // creates an instance of A[Int]
+</code></pre></div></div>
+
+<h3 id="integration-with-other-features-1">Integration with other features</h3>
+
+<p>The following list shows how default arguments interfere with other language features of Scala:</p>
+
+<p><strong>By-Name Parameters</strong> Default arguments on by-name parameters work as expected. If an application does not specify a by-name parameter with a default argument, the default expression is evaluated every time the method body refers to that parameter.</p>
+
+<p><strong>Repeated Parameters</strong> It is not allowed to specify any default arguments in a parameter section which ends in a repeated parameter.</p>
+
+<p><strong>Overriding</strong> When a method with default arguments is overridden or implemented in a subclass, all defaults are inherited and available in the subclass. The subclass can also override default arguments and add new ones to parameters which don’t have a default in the superclass.</p>
+
+<p>During type-checking, the static type is used to determine whether a parameter has a default value or not. At run-time, since the usage of a default is translated to a method call, the default value is determined by the dynamic type of the receiver object.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait A { def f(a: Int = 1, b: Int): (Int, Int) }
+// B: inherit &amp; add a default
+class B extends A { def f(a: Int,     b: Int = 2) = (a, b) }
+// C: override a default
+class C extends A { def f(a: Int = 3, b: Int    ) = (a, b) }
+val a1: A = new B
+val a2: A = new C
+// a1.f()   // "error: unspecified parameter: value b"
+a2.f(b = 2) // returns (3, 2)
+</code></pre></div></div>
+
+<p><strong>Overloading</strong> If there are multiple overloaded alternatives of a method, at most one is allowed to specify default arguments.</p>
+
+<p><strong>Overloading Resolution</strong> In a method application expression, when multiple overloaded alternatives are applicable, the alternative which use default arguments is never selected.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(a: Object)             // #1
+def f(a: String, b: Int = 1) // #2
+f("str") // both are applicable, #1 is selected
+</code></pre></div></div>
+
+<p><strong>Case Classes</strong> For every case class, a method named <code class="language-plaintext highlighter-rouge">”copy”</code> is now generated which allows to easily create modified copies of the class’s instances. The copy method takes the same type and value parameters as the primary constructor of the case class, and every parameter defaults to the corresponding constructor parameter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case class A[T](a: T, b: Int) {
+// def copy[T’](a’: T’ = a, b’: Int = b): A[T’] =
+// new A[T’](a’, b’)
+}
+val a1: A[Int] = A(1, 2)
+val a2: A[String] = a1.copy(a = "someString")
+</code></pre></div></div>
+
+<p>The copy method is only added to a case class if no member named <code class="language-plaintext highlighter-rouge">”copy”</code> already exists in the class or in one of its parents. This implies that when a case class extends another case class, there will only be one copy method, namely the one from the lowest case class in the hierarchy.</p>
+
+<p><strong>Implicit Parameters</strong> It is allowed to specify default arguments on implicit parameters. These defaults are used in case no implicit value matching the parameter type can be found.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(implicit a: String = "value", y: Int = 0) = a +": "+ y
+implicit val s = "size"
+println(f)              // prints "size: 0"
+</code></pre></div></div>
+
+<h2 id="implementation">Implementation</h2>
+
+<h3 id="named-arguments-1">Named arguments</h3>
+
+<p>When using named arguments, the argument order does not have to match the parameter order of the method definition. To evaluate the argument expressions in call-site order, the method application is transformed to a block in the following way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class A {
+  def f(a: Int, b: Int)(c: Int)
+}
+(new A).f(b = getB(), a = getA())(c = getC())
+// transformed to
+// {
+//   val qual$1 = new A()
+//   val x$1 = getB()
+//   val x$2 = getA()
+//   val x$3 = getC()
+//   qual$1.f(x$2, x$1)(x$3)
+// }
+</code></pre></div></div>
+
+<h3 id="default-arguments-1">Default arguments</h3>
+
+<p>For every default argument expression the compiler generates a method computing that expression. These methods have deterministic names composed of the method name, the string <code class="language-plaintext highlighter-rouge">”$default$”</code> and a number indicating the parameter position. Each method is parametrized by the type parameters of the original method and by the value parameter sections preceding the corresponding parameter:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f[T](a: Int = 1)(b: T = a + 1)(c: T = b)
+// generates:
+// def f$default$1[T]: Int = 1
+// def f$default$2[T](a: Int): Int = a + 1
+// def f$default$3[T](a: Int)(b: T): T = b
+</code></pre></div></div>
+
+<p>For constructor defaults, these methods are added to the companion object of the class (which is created if it does not exist). For other methods, the default methods are generated at the same location as the original method. Method calls which use default arguments are transformed into a block of the same form as described above for named arguments:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f()("str")()
+// transformed to:
+// {
+//   val x$1 = f$default$1
+//   val x$2 = "str"
+//   val x$3 = f$default$3(x$1)(x$2)
+//   f(x$1)(x$2)(x$3)
+// }
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+<ol>
+  <li>Odersky, M. <em>The Scala Language Specification, Version 2.11</em>. Available online at <a href="https://www.scala-lang.org/files/archive/spec/2.11/">https://www.scala-lang.org/files/archive/spec/2.11/</a></li>
+</ol>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #859900">Complete</div>
+           <p class="vote-text" style="color: #859900">
+             This SIP has already been accepted and completed.
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2010-01-22-named-and-default-arguments.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

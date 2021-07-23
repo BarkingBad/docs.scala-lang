@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+
+<html class="scala3">
+
+  <head>
+    <title>
+      Inline | 
+      Macros in Scala 3 | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/scala3/guides/macros/inline.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Inline"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Inline"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header" class="scala3">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  3 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/getting-started.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/guides/migration/compatibility-intro.html" id="migrate" >Migrate</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/scala3/reference/overview.html" id="reference" >Reference</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="https://dotty.epfl.ch/api/index.html" id="api" >API</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/scala3/new-in-scala3.html">New in Scala 3</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/getting-started.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/book/introduction.html">Scala 3 Book</a>
+              </li>
+            
+              <li>
+                <a href="/scala3/guides/macros/index.html">Macro Tutorial</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://dotty.epfl.ch/api/index.html">API</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+          <div class="wip-notice">
+            <h4>Work in Progress</h4>
+            <p>
+              We are still in the process of writing the documentation for Scala 3.
+              You can <a  href="/scala3/contribute-to-docs.html">help us</a> to improve the documentation.
+            </p>
+            <p>Are you searching for the <a href="/">Scala 2 documentation</a>?</p>
+          </div>
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Macros in Scala 3</div>
+          
+          <h1>Inline</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p>Inlining is a common compile-time metaprogramming technique, typically used to achieve performance optimizations. As we will see, in Scala 3, the concept of inlining provides us with an entrypoint to programming with macros.</p>
+
+<ol>
+  <li>It introduces inline as a <a href="/scala3/reference/soft-modifier.html">soft keyword</a>.</li>
+  <li>It guarantees that inlining actually happens instead of being best-effort.</li>
+  <li>It introduces operations that are guaranteed to evaluate at compile-time.</li>
+</ol>
+
+<h2 id="inline-constants">Inline Constants</h2>
+
+<p>The simplest form of inlining is to inline constants in programs:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">val</span> <span class="nv">pi</span> <span class="k">=</span> <span class="mf">3.141592653589793</span>
+<span class="n">inline</span> <span class="k">val</span> <span class="nv">pie</span> <span class="k">=</span> <span class="s">"🥧"</span>
+</code></pre></div></div>
+
+<p>The usage of the keyword <code class="language-plaintext highlighter-rouge">inline</code> in the <em>inline value definitions</em> above <em>guarantees</em> that all references to <code class="language-plaintext highlighter-rouge">pi</code> and <code class="language-plaintext highlighter-rouge">pie</code> are inlined:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">pi2</span> <span class="k">=</span> <span class="n">pi</span> <span class="o">+</span> <span class="n">pi</span> <span class="c1">// val pi2 = 6.283185307179586</span>
+<span class="k">val</span> <span class="nv">pie2</span> <span class="k">=</span> <span class="n">pie</span> <span class="o">+</span> <span class="n">pie</span> <span class="c1">// val pie2 = "🥧🥧"</span>
+</code></pre></div></div>
+
+<p>In the code above, the references <code class="language-plaintext highlighter-rouge">pi</code> and <code class="language-plaintext highlighter-rouge">pie</code> are inlined.
+Then an optimization called “constant folding” is applied by the compiler, which computes the resulting value <code class="language-plaintext highlighter-rouge">pi2</code> and <code class="language-plaintext highlighter-rouge">pie2</code> at <em>compile-time</em>.</p>
+
+<blockquote>
+  <h5 id="inline-scala-3-vs-final-scala-2">Inline (Scala 3) vs. final (Scala 2)</h5>
+  <p>In Scala 2, we would have used the modifier <code class="language-plaintext highlighter-rouge">final</code> in the definition that is without a return type:</p>
+
+  <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="k">val</span> <span class="nv">pi</span> <span class="k">=</span> <span class="mf">3.141592653589793</span>
+<span class="k">final</span> <span class="k">val</span> <span class="nv">pie</span> <span class="k">=</span> <span class="s">"🥧"</span>
+</code></pre></div>  </div>
+
+  <p>The <code class="language-plaintext highlighter-rouge">final</code> modifier will ensure that <code class="language-plaintext highlighter-rouge">pi</code> and <code class="language-plaintext highlighter-rouge">pie</code> will take a <em>literal type</em>.
+Then the constant propagation optimization in the compiler can perform inlining for such definitions.
+However, this form of constant propagation is <em>best-effort</em> and not guaranteed.
+Scala 3.0 also supports <code class="language-plaintext highlighter-rouge">final val</code>-inlining as <em>best-effort</em> inlining for migration purposes.</p>
+</blockquote>
+
+<p>Currently, only constant expressions may appear on the right-hand side of an inline value definition.
+Therefore, the following code is invalid, though the compiler knows that the right-hand side is a compile-time constant value:</p>
+
+<pre><code class="language-Scala">val pi = 3.141592653589793
+inline val pi2 = pi + pi // error
+</code></pre>
+<p>Note that by defining <code class="language-plaintext highlighter-rouge">inline val pi</code>, the addition can be computed at compile time.
+This resolves the above error and <code class="language-plaintext highlighter-rouge">pi2</code> will receive the literal type <code class="language-plaintext highlighter-rouge">6.283185307179586d</code>.</p>
+
+<h2 id="inline-methods">Inline Methods</h2>
+
+<p>We can also use the modifier <code class="language-plaintext highlighter-rouge">inline</code> to define a method that should be inlined at the call-site:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">logged</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">level</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">message</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">)(</span><span class="n">inline</span> <span class="n">op</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">T</span> <span class="o">=</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"[$level]Computing $message"</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">res</span> <span class="k">=</span> <span class="n">op</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"[$level]Result of $message: $res"</span><span class="o">)</span>
+  <span class="n">res</span>
+</code></pre></div></div>
+
+<p>When an inline method like <code class="language-plaintext highlighter-rouge">logged</code> is called, its body will be expanded at the call-site at compile time!
+That is, the call to <code class="language-plaintext highlighter-rouge">logged</code> will be replaced by the body of the method.
+The provided arguments are statically substituted for the parameters of <code class="language-plaintext highlighter-rouge">logged</code>, correspondingly.
+Therefore, the compiler inlines the following call</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">logged</span><span class="o">(</span><span class="n">logLevel</span><span class="o">,</span> <span class="nf">getMessage</span><span class="o">())</span> <span class="o">{</span>
+  <span class="nf">computeSomething</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>and rewrites it to:</p>
+
+<pre><code class="language-Scala">val level   = logLevel
+def message = getMessage()
+
+println(s"[$level]Computing $message")
+val res = computeSomething()
+println(s"[$level]Result of $message: $res")
+res
+</code></pre>
+
+<h3 id="semantics-of-inline-methods">Semantics of Inline Methods</h3>
+<p>Our example method <code class="language-plaintext highlighter-rouge">logged</code> uses three different kinds of parameters, illustrating
+that inlining handles those parameters differently:</p>
+
+<ol>
+  <li>
+    <p><strong>By-value parameters</strong>. The compiler generates a <code class="language-plaintext highlighter-rouge">val</code> binding for <em>by-value</em> parameters. This way, the argument expression is evaluated only once before the method body is reduced.</p>
+
+    <p>This can be seen in the parameter <code class="language-plaintext highlighter-rouge">level</code> from the example.
+ In some cases, when the arguments are pure constant values, the binding is omitted and the value is inlined directly.</p>
+  </li>
+  <li>
+    <p><strong>By-Name parameters</strong>. The compiler generates a <code class="language-plaintext highlighter-rouge">def</code> binding for <em>by-name</em> parameters. This way, the argument expression is evaluated every time it is used, but the code is shared.</p>
+
+    <p>This can be seen in the parameter <code class="language-plaintext highlighter-rouge">message</code> from the example.</p>
+  </li>
+  <li>
+    <p><strong>Inline parameters</strong>. Inline parameters do not create bindings and are simply inlined. This way, their code is duplicated everywhere they are used.</p>
+
+    <p>This can be seen in the parameter <code class="language-plaintext highlighter-rouge">op</code> from the example.</p>
+  </li>
+</ol>
+
+<p>The way the different parameters are translated guarantees that inlining a call <strong>will not change</strong> its semantics.
+This implies that the initial elaboration (overloading resolution, implicit search, …), performed while typing the body of the inline method, will not change when inlined.</p>
+
+<p>For example, consider the following code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Logger</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+
+<span class="k">class</span> <span class="nc">RefinedLogger</span> <span class="k">extends</span> <span class="nc">Logger</span><span class="k">:</span>
+  <span class="kt">override</span> <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nf">println</span><span class="o">(</span><span class="s">"Any: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">def</span> <span class="nf">log</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nf">println</span><span class="o">(</span><span class="s">"String: "</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="n">inline</span> <span class="k">def</span> <span class="nf">logged</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">logger</span><span class="k">:</span> <span class="kt">Logger</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span>
+  <span class="nv">logger</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The separate type checking of <code class="language-plaintext highlighter-rouge">logger.log(x)</code> will resolve the call to the method <code class="language-plaintext highlighter-rouge">Logger.log</code> which takes an argument of the type <code class="language-plaintext highlighter-rouge">Any</code>.
+Now, given the following code:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">logged</span><span class="o">(</span><span class="k">new</span> <span class="nc">RefinedLogger</span><span class="o">,</span> <span class="s">"✔️"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>It expands to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val logger = new RefinedLogger
+val x = "✔️"
+logger.log(x)
+</code></pre></div></div>
+<p>Even though now we know that <code class="language-plaintext highlighter-rouge">x</code> is a <code class="language-plaintext highlighter-rouge">String</code>, the call <code class="language-plaintext highlighter-rouge">logger.log(x)</code> still resolves to the method <code class="language-plaintext highlighter-rouge">Logger.log</code> which takes an argument of the type <code class="language-plaintext highlighter-rouge">Any</code>. Note that because of late-binding, the actual method called at runtime will be the overridden method <code class="language-plaintext highlighter-rouge">RefinedLogger.log</code>.</p>
+
+<blockquote>
+  <h5 id="inlining-preserves-semantics">Inlining preserves semantics</h5>
+  <p>Regardless of whether <code class="language-plaintext highlighter-rouge">logged</code> is defined as a <code class="language-plaintext highlighter-rouge">def</code> or <code class="language-plaintext highlighter-rouge">inline def</code>, it performs the same operations with only some differences in performance.</p>
+</blockquote>
+
+<h3 id="inline-parameters">Inline Parameters</h3>
+
+<p>One important application of inlining is to enable constant folding optimisation across method boundaries.
+Inline parameters do not create bindings and their code is duplicated everywhere they are used.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">perimeter</span><span class="o">(</span><span class="n">inline</span> <span class="n">radius</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="mf">2.0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span>
+</code></pre></div></div>
+<p>In the above example, we expect that if the <code class="language-plaintext highlighter-rouge">radius</code> is statically known then the whole computation can be performed at compile-time.
+The following call</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">perimeter</span><span class="o">(</span><span class="mf">5.0</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>is rewritten to:</p>
+
+<pre><code class="language-Scala">2.0 * pi * 5.0
+</code></pre>
+
+<p>Then <code class="language-plaintext highlighter-rouge">pi</code> is inlined (we assume the <code class="language-plaintext highlighter-rouge">inline val</code> definition from the start):</p>
+
+<pre><code class="language-Scala">2.0 * 3.141592653589793 * 5.0
+</code></pre>
+
+<p>Finally, it is constant folded to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>31.4159265359
+</code></pre></div></div>
+
+<blockquote>
+  <h5 id="inline-parameters-should-be-used-only-once">Inline parameters should be used only once</h5>
+  <p>We need to be careful when using an inline parameter <strong>more than once</strong>.
+Consider the following code:</p>
+
+  <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">printPerimeter</span><span class="o">(</span><span class="n">inline</span> <span class="n">radius</span><span class="k">:</span> <span class="kt">Double</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Perimeter (r = $radius) = ${perimeter(radius)}"</span><span class="o">)</span>
+</code></pre></div>  </div>
+  <p>It works perfectly fine when a constant or reference to a val is passed to it.</p>
+  <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">printPerimeter</span><span class="o">(</span><span class="mf">5.0</span><span class="o">)</span>
+<span class="c1">// inlined as</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Perimeter (r = ${5.0}) = ${31.4159265359}"</span><span class="o">)</span>
+</code></pre></div>  </div>
+
+  <p>But if a larger expression (possibly with side-effects) is passed, we might accidentally duplicate work.</p>
+
+  <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">printPerimeter</span><span class="o">(</span><span class="nf">longComputation</span><span class="o">())</span>
+<span class="c1">// inlined as</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Perimeter (r = ${longComputation()}) = ${6.283185307179586 * longComputation()}"</span><span class="o">)</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>A useful application of inline parameters is to avoid the creation of <em>closures</em>, incurred by the use of by-name parameters.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">assert1</span><span class="o">(</span><span class="n">cond</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span> <span class="n">msg</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">)</span> <span class="k">=</span>
+  <span class="k">if</span> <span class="o">!</span><span class="n">cond</span> <span class="n">then</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="n">msg</span><span class="o">)</span>
+
+<span class="nf">assert1</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="s">"error1"</span><span class="o">)</span>
+<span class="c1">// is inlined as</span>
+<span class="k">val</span> <span class="nv">cond</span> <span class="k">=</span> <span class="n">x</span>
+<span class="k">def</span> <span class="nf">msg</span> <span class="k">=</span> <span class="s">"error1"</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">cond</span> <span class="n">then</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="n">msg</span><span class="o">)</span>
+</code></pre></div></div>
+<p>In the above example, we can see that the use of a by-name parameter leads to a local definition <code class="language-plaintext highlighter-rouge">msg</code>, which allocates a closure before the condition is checked.</p>
+
+<p>If we use an inline parameter instead, we can guarantee that the condition is checked before any of the code that handles the exception is reached.
+In the case of an assertion, this code should never be reached.</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">assert2</span><span class="o">(</span><span class="n">cond</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">,</span> <span class="n">inline</span> <span class="n">msg</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span>
+  <span class="k">if</span> <span class="o">!</span><span class="n">cond</span> <span class="n">then</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="n">msg</span><span class="o">)</span>
+
+<span class="nf">assert2</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="s">"error2"</span><span class="o">)</span>
+<span class="c1">// is inlined as</span>
+<span class="k">val</span> <span class="nv">cond</span> <span class="k">=</span> <span class="n">x</span>
+<span class="k">if</span> <span class="o">!</span><span class="n">cond</span> <span class="n">then</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="s">"error2"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="inline-conditionals">Inline Conditionals</h3>
+<p>If the condition of an <code class="language-plaintext highlighter-rouge">if</code> is a known constant (<code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>), possibly after inlining and constant folding, then the conditional is partially evaluated and only one branch will be kept.</p>
+
+<p>For example, the following power method contains some <code class="language-plaintext highlighter-rouge">if</code> that will potentially unroll the recursion and remove all method calls.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">inline</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mf">1.0</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">x</span> <span class="o">*</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="k">else</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+</code></pre></div></div>
+<p>Calling <code class="language-plaintext highlighter-rouge">power</code> with statically known constants results in the following code:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nf">power</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+  <span class="c1">// first inlines as</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">2</span>
+  <span class="nf">if</span> <span class="o">(</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mf">1.0</span> <span class="c1">// dead branch</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="mi">2</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">x</span> <span class="o">*</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">// dead branch</span>
+  <span class="k">else</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+  <span class="c1">// partially evaluated to</span>
+  <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">2</span>
+  <span class="nf">power</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</code></pre></div></div>
+<details>
+  <summary> See rest of inlining steps</summary>
+
+```scala
+// then inlined as
+val x = 2
+val x2 = x * x
+if (1 == 0) 1.0 // dead branch
+else if (1 % 2 == 1) x2 * power(x2, 1 - 1)
+else power(x2 * x2, 1 / 2) // dead branch
+// partially evaluated to
+val x = 2
+val x2 = x * x
+x2 * power(x2, 0)
+// then inlined as
+val x = 2
+val x2 = x * x
+x2 * {
+  if (0 == 0) 1.0
+  else if (0 % 2 == 1) x * power(x, 0 - 1) // dead branch
+  else power(x * x, 0 / 2) // dead branch
+}
+// partially evaluated to
+val x = 2
+val x2 = x * x
+x2 * 1.0
+```
+</details>
+
+<p>In contrast, let us imagine we do not know the value of <code class="language-plaintext highlighter-rouge">n</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">power</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">unknownNumber</span><span class="o">)</span>
+</code></pre></div></div>
+<p>Driven by the inline annotation on the parameter, the compiler will try to unroll the recursion.
+But without any success, since the parameter is not statically known.</p>
+
+<details>
+  <summary>See inlining steps</summary>
+
+```scala
+// first inlines as
+val x = 2
+if (unknownNumber == 0) 1.0
+else if (unknownNumber % 2 == 1) x * power(x, unknownNumber - 1)
+else power(x * x, unknownNumber / 2)
+// then inlined as
+val x = 2
+if (unknownNumber == 0) 1.0
+else if (unknownNumber % 2 == 1) x * {
+  if (unknownNumber - 1 == 0) 1.0
+  else if ((unknownNumber - 1) % 2 == 1) x2 * power(x2, unknownNumber - 1 - 1)
+  else power(x2 * x2, (unknownNumber - 1) / 2)
+}
+else {
+  val x2 = x * x
+  if (unknownNumber / 2 == 0) 1.0
+  else if ((unknownNumber / 2) % 2 == 1) x2 * power(x2, unknownNumber / 2 - 1)
+  else power(x2 * x2, unknownNumber / 2 / 2)
+}
+// Oops this will never finish compiling
+...
+```
+</details>
+
+<p>To guarantee that the branching can indeed be performed at compile-time, we can use the <code class="language-plaintext highlighter-rouge">inline if</code> variant of <code class="language-plaintext highlighter-rouge">if</code>.
+Annotating a conditional with <code class="language-plaintext highlighter-rouge">inline</code> will guarantee that the conditional can be reduced at compile-time and emits an error if the condition is not a statically known constant.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">inline</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span>
+  <span class="n">inline</span> <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="mf">1.0</span>
+  <span class="k">else</span> <span class="n">inline</span> <span class="nf">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">x</span> <span class="o">*</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="k">else</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">,</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+</code></pre></div></div>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">power</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="c1">// Ok</span>
+<span class="nf">power</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">unknownNumber</span><span class="o">)</span> <span class="c1">// error</span>
+</code></pre></div></div>
+
+<p>We will come back to this example later and see how we can get more control on how code is generated.</p>
+
+<h3 id="inline-method-overriding">Inline Method Overriding</h3>
+
+<p>To ensure the correct behavior of combining the static feature of <code class="language-plaintext highlighter-rouge">inline def</code> with the dynamic feature of interfaces and overriding, some restrictions have to be imposed.</p>
+
+<h4 id="effectively-final">Effectively final</h4>
+<p>Firstly, all inline methods are <em>effectively final</em>.
+This ensures that the overload resolution at compile-time behaves the same as the one at runtime.</p>
+
+<h4 id="signature-preservation">Signature preservation</h4>
+<p>Secondly, overrides must have the <em>exact same signature</em> as the overridden method including the inline parameters.
+This ensures that the call semantics are the same for both methods.</p>
+
+<h4 id="retained-inline-methods">Retained inline methods</h4>
+<p>It is possible to implement or override a normal method with an inline method.</p>
+
+<p>Consider the following example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Logger</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span>
+
+<span class="k">class</span> <span class="nc">PrintLogger</span> <span class="k">extends</span> <span class="nc">Logger</span><span class="k">:</span>
+  <span class="kt">inline</span> <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+<p>However, calling the <code class="language-plaintext highlighter-rouge">log</code> method directly on <code class="language-plaintext highlighter-rouge">PrintLogger</code> will inline the code, while calling it on <code class="language-plaintext highlighter-rouge">Logger</code> will not.
+To also admit the latter, the code of <code class="language-plaintext highlighter-rouge">log</code> must exist at runtime.
+We call this a <em>retained inline</em> method.</p>
+
+<p>For any non-retained inline <code class="language-plaintext highlighter-rouge">def</code> or <code class="language-plaintext highlighter-rouge">val</code> the code can always be fully inlined at all call sites.
+Hence, those methods will not be needed at runtime and can be erased from the bytecode.
+However, retained inline methods must be compatible with the case that they are not inlined.
+In particular, retained inline methods cannot take any inline parameters.
+Furthermore, an <code class="language-plaintext highlighter-rouge">inline if</code> (as in the <code class="language-plaintext highlighter-rouge">power</code> example) will not work, since the <code class="language-plaintext highlighter-rouge">if</code> cannot be constant folded in the retained case.
+Other examples involve metaprogramming constructs that only have meaning when inlined.</p>
+
+<h4 id="abstract-inline-methods">Abstract inline methods</h4>
+<p>It is also possible to create <em>abstract inline definitions</em>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">InlineLogger</span><span class="k">:</span>
+  <span class="kt">inline</span> <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">inline</span> <span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span>
+
+<span class="k">class</span> <span class="nc">PrintLogger</span> <span class="k">extends</span> <span class="nc">InlineLogger</span><span class="k">:</span>
+  <span class="kt">inline</span> <span class="kt">def</span> <span class="kt">log</span><span class="o">(</span><span class="kt">inline</span> <span class="kt">x:</span> <span class="kt">Any</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This forces the implementation of <code class="language-plaintext highlighter-rouge">log</code> to be an inline method and also allows <code class="language-plaintext highlighter-rouge">inline</code> parameters.
+Counterintuitively, the <code class="language-plaintext highlighter-rouge">log</code> on the interface <code class="language-plaintext highlighter-rouge">InlineLogger</code> cannot be directly called. The method implementation is not statically known and we thus do not know what to inline.
+Calling an abstract inline method thus results in an error.
+The usefuleness of abstract inline methods becomes apparent when used in another inline method:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">logged</span><span class="o">(</span><span class="n">logger</span><span class="k">:</span> <span class="kt">InlineLogger</span><span class="o">,</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span>
+  <span class="nv">logger</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+<p>Let us assume a call to <code class="language-plaintext highlighter-rouge">logged</code> on a concrete instance of <code class="language-plaintext highlighter-rouge">PrintLogger</code>:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">logged</span><span class="o">(</span><span class="k">new</span> <span class="nc">PrintLogger</span><span class="o">,</span> <span class="s">"🥧"</span><span class="o">)</span>
+<span class="c1">// inlined as</span>
+<span class="k">val</span> <span class="nv">logger</span><span class="k">:</span> <span class="kt">PrintLogger</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintLogger</span>
+<span class="nv">logger</span><span class="o">.</span><span class="py">log</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div></div>
+<p>After inlining, the call to <code class="language-plaintext highlighter-rouge">log</code> is de-virtualized and known to be on <code class="language-plaintext highlighter-rouge">PrintLogger</code>.
+Therefore also the code of <code class="language-plaintext highlighter-rouge">log</code> can be inlined.</p>
+
+<h4 id="summary-of-inline-methods">Summary of inline methods</h4>
+<ul>
+  <li>All <code class="language-plaintext highlighter-rouge">inline</code> methods are final.</li>
+  <li>Abstract <code class="language-plaintext highlighter-rouge">inline</code> methods can only be implemented by inline methods.</li>
+  <li>If an inline method overrides/implements a normal method then it must be retained and retained methods cannot have inline parameters.</li>
+  <li>Abstract <code class="language-plaintext highlighter-rouge">inline</code> methods cannot be called directly (except in inline code).</li>
+</ul>
+
+<h2 id="transparent-inline-methods">Transparent Inline Methods</h2>
+<p>Transparent inlines are a simple, yet powerful, extension to <code class="language-plaintext highlighter-rouge">inline</code> methods and unlock many metaprogramming usecases.
+Calls to transparents allow for an inline piece of code to refine the return type based on the precise type of the inlined expression.
+In Scala 2 parlance, transparents capture the essence of <em>whitebox macros</em>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transparent</span> <span class="n">inline</span> <span class="k">def</span> <span class="nf">default</span><span class="o">(</span><span class="n">inline</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span>
+  <span class="n">inline</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">"Int"</span> <span class="n">then</span> <span class="mi">0</span>
+  <span class="k">else</span> <span class="n">inline</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">"String"</span> <span class="n">then</span> <span class="s">""</span>
+  <span class="k">else</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">n0</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="nf">default</span><span class="o">(</span><span class="s">"Int"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">s0</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">default</span><span class="o">(</span><span class="s">"String"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Note that even if the return type of <code class="language-plaintext highlighter-rouge">default</code> is <code class="language-plaintext highlighter-rouge">Any</code>, the first call is typed as an <code class="language-plaintext highlighter-rouge">Int</code> and the second as a <code class="language-plaintext highlighter-rouge">String</code>.
+The return type represents the upper bound of the type within the inlined term.
+We could also have been more precise and have written instead</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transparent</span> <span class="n">inline</span> <span class="k">def</span> <span class="nf">default</span><span class="o">(</span><span class="n">inline</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="err">0</span> <span class="kt">|</span> <span class="err">""</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre></div></div>
+<p>While in this example it seems the return type is not necessary, it is important when the inline method is recursive.
+There it should be precise enough for the recursion to type but will get more precise after inlining.</p>
+
+<blockquote>
+  <h5 id="transparents-affect-binary-compatibility">Transparents affect binary compatibility</h5>
+  <p>It is important to note that changing the body of a <code class="language-plaintext highlighter-rouge">transparent inline def</code> will change how the call site is typed.
+This implies that the body plays a part in the binary and source compatibility of this interface.</p>
+</blockquote>
+
+<h2 id="compiletime-operations">Compiletime Operations</h2>
+
+<p>We also provide some operations that evaluate at compiletime.</p>
+
+<h3 id="inline-matches">Inline Matches</h3>
+<p>Like inline <code class="language-plaintext highlighter-rouge">if</code>, inline matches guarantee that the pattern matching can be statically reduced at compile time and only one branch is kept.</p>
+
+<p>In the following example, the scrutinee, <code class="language-plaintext highlighter-rouge">x</code>, is an inline parameter that we can pattern match on at compile time.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">half</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span>
+  <span class="n">inline</span> <span class="n">x</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">case</span> <span class="n">x</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="nv">x</span><span class="o">.</span><span class="py">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="nv">x</span><span class="o">.</span><span class="py">length</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="nf">half</span><span class="o">(</span><span class="mi">6</span><span class="o">)</span>
+<span class="c1">// expands to:</span>
+<span class="c1">// val x = 6</span>
+<span class="c1">// x / 2</span>
+
+<span class="nf">half</span><span class="o">(</span><span class="s">"hello world"</span><span class="o">)</span>
+<span class="c1">// expands to:</span>
+<span class="c1">// val x = "hello world"</span>
+<span class="c1">// x.substring(0, x.length / 2)</span>
+</code></pre></div></div>
+<p>This illustrates that inline matches provide a way to match on the static type of some expression.
+As we match on the <em>static</em> type of an expression, the following code would fail to compile.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">n</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nf">half</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="c1">// error: n is not statically known to be an Int or a Double</span>
+</code></pre></div></div>
+<p>Notably, The value <code class="language-plaintext highlighter-rouge">n</code> is not marked as <code class="language-plaintext highlighter-rouge">inline</code> and in consequence at compile time
+there is not enough information about the scrutinee to decide which branch to take.</p>
+
+<h3 id="scalacompiletime">scala.compiletime</h3>
+<p>The package <code class="language-plaintext highlighter-rouge">scala.compiletime</code> provides useful metaprogramming abstractions that can be used within <code class="language-plaintext highlighter-rouge">inline</code> methods to provide custom semantics.</p>
+
+<h2 id="macros">Macros</h2>
+<p>Inlining is also the core mechanism used to write macros.
+Macros provide a way to control the code generation and analysis after the call is inlined.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inline</span> <span class="k">def</span> <span class="nf">power</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Double</span><span class="o">,</span> <span class="n">inline</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span>
+  <span class="n">$</span><span class="o">{</span> <span class="nf">powerCode</span><span class="o">(</span><span class="ss">'x</span><span class="o">,</span> <span class="ss">'n</span><span class="o">)</span>  <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">powerCode</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Int</span><span class="o">])(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">[</span><span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+</code></pre></div></div>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<a href="index.html">&larr; <strong>previous</strong></a>
+					
+					
+					<a href="compiletime.html"><strong>next</strong> &rarr;</a>
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc book" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/macros/index.html">Tutorial</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a class="active" href="/scala3/guides/macros/inline.html">Inline</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/macros/compiletime.html">Scala Compile-time Operations</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/macros/macros.html">Scala 3 Macros</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/macros/quotes.html">Quoted Code</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-section"><a  href="/scala3/guides/macros/reflection.html">Reflection</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/macros/faq.html">FAQ</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/macros/best-practices.html">Best Practices</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+               <!-- if a type is set in a document, we add it as a class. Used in Scala book to diff between chapter and section -->
+                <li class="type-chapter"><a  href="/scala3/guides/macros/other-resources.html">Other Resources</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/scala3-macros/tutorial/inline.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

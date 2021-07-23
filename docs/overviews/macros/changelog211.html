@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Changes in Scala 2.11 | 
+      Macros | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/overviews/macros/changelog211.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Changes in Scala 2.11"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Changes in Scala 2.11"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Macros</div>
+          
+          <h1>Changes in Scala 2.11</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><span class="tag" style="float: right;">EXPERIMENTAL</span></p>
+
+<p><strong>Eugene Burmako</strong></p>
+
+<p>This document lists all major changes to reflection and macros during the development cycle of Scala 2.11.0. First, we provide summaries of the most important fixes and newly introduced features, and then, later in the document, we explain how these changes are going to affect compatibility with Scala 2.10.x, and how it’s possible to make your reflection-based code work in both 2.10.x and 2.11.0.</p>
+
+<h3 id="quasiquotes">Quasiquotes</h3>
+
+<p>Quasiquotes is the single most impressive upgrade for reflection and macros in Scala 2.11.0. Implemented by Denys Shabalin, they have significantly simplified the life of Scala metaprogrammers around the globe. Visit <a href="/overviews/quasiquotes/intro.html">the dedicated documentation page</a> to learn more about quasiquotes.</p>
+
+<h3 id="new-macro-powers">New macro powers</h3>
+
+<p>1) <strong><a href="implicits.html#fundep-materialization">Fundep materialization</a></strong>. Since Scala 2.10.2, implicit whitebox macros can be used to materialize instances of type classes, however such materialized instances can’t guide type inference. In Scala 2.11.0, materializers can also affect type inference, helping scalac to infer type arguments for enclosing method applications, something that’s used with great success in Shapeless. Even more, with the fix of <a href="https://issues.scala-lang.org/browse/SI-3346">SI-3346</a>, this inference guiding capability can affect both normal methods and implicit conversions alike. Please note, however, that fundep materialization doesn’t let one change how Scala’s type inference works, but merely provides a way to throw more type constraints into the mix, so it’s, for example, impossible to make type inference flow from right to left using fundep materializers.</p>
+
+<p>2) <strong>Extractor macros</strong>. A prominent new feature in Scala 2.11.0 is <a href="https://github.com/scala/scala/pull/2848">name-based extractors</a> implemented by Paul Phillips. And as usual, when there’s a Scala feature, it’s very likely that macros can make use of it. Indeed, with the help of structural types, whitebox macros can be used to write extractors than refine the types of extractees on case-by-case basis. This is the technique that we use internally to implement quasiquotes.</p>
+
+<p>3) <strong><a href="https://github.com/scala/scala/pull/3543">Named and default arguments in macros</a></strong>. This is something that strictly speaking shouldn’t belong to this changelog, because this feature was reverted shortly after being merged into Scala 2.11.0-RC1 due to a tiny mistake that led to a regression, but we’ve got a patch that makes the macro engine understand named/default arguments in macro applications. Even though the code freeze won’t let us bring this change in Scala 2.11.0, we expect to merge it in Scala 2.11.1 at an earliest opportunity.</p>
+
+<p>4) <strong><a href="typemacros.html">Type macros</a> and <a href="annotations.html">macro annotations</a></strong>. Neither type macros, not macro annotations are included of Scala 2.11.0. It is highly unlikely that type macros will ever be included in Scala, but we still deliberate on macro annotations. However, macro annotations are available both for Scala 2.10.x and for Scala 2.11.0 via the <a href="annotations.html">macro paradise plugin</a>.</p>
+
+<p>5) <strong>@compileTimeOnly</strong>. Standard library now features a new <code class="language-plaintext highlighter-rouge">scala.annotations.compileTimeOnly</code> annotation that tells scalac that its annottees should not be referred to after type checking (which includes macro expansion). The main use case for this annotation is marking helper methods that are only supposed be used only together with an enclosing macro call to indicate parts of arguments of that macro call that need special treatment (e.g. <code class="language-plaintext highlighter-rouge">await</code> in scala/async or <code class="language-plaintext highlighter-rouge">value</code> in sbt’s new macro-based DSL). For example, scala/async’s <code class="language-plaintext highlighter-rouge">await</code> marked as <code class="language-plaintext highlighter-rouge">@compileTimeOnly</code> only makes sense inside an <code class="language-plaintext highlighter-rouge">async { ... }</code> block that compiles it away during its transformation, and using it outside of <code class="language-plaintext highlighter-rouge">async</code> is a compile-time error thanks to the new annotation.</p>
+
+<h3 id="changes-to-the-macro-engine">Changes to the macro engine</h3>
+
+<p>6) <strong><a href="blackbox-whitebox.html">Blackbox/whitebox separation</a></strong>. Macros whose macro implementations use <code class="language-plaintext highlighter-rouge">scala.reflect.macros.blackbox.Context</code> (new in Scala 2.11.0) are called blackbox, have reduced power in comparison to macros in 2.10.x, better support in IDEs and better perspectives in becoming part of Scala. Macros whose macro implementations use <code class="language-plaintext highlighter-rouge">scala.reflect.macros.whitebox.Context</code> (new in Scala 2.11.0) or <code class="language-plaintext highlighter-rouge">scala.reflect.macros.Context</code> (the only context in Scala 2.10.x, deprecated in Scala 2.11.0) are called whitebox and have at least the same power as macros in 2.10.x.</p>
+
+<p>7) <strong><a href="bundles.html">Macro bundles</a></strong>. It is well-known that path-dependent nature of the current reflection API (that’s there in both Scala 2.10.x and Scala 2.11.0) makes it difficult to modularize macros. There are <a href="overview.html#writing-bigger-macros">design patterns</a> that help to overcome this difficulty, but that just leads to proliferation of boilerplate. One of the approaches to dealing with this problem is doing away with cakes altogether, and that’s what we’re pursing in Project Palladium, but that was too big of a change to pull off in Scala 2.11.0, so we’ve come up with a workaround that would alleviate the problem until the real solution arrives. Macro bundles are classes that have a single public field of type <code class="language-plaintext highlighter-rouge">Context</code> and any public method inside a bundle can be referred to as a macro implementation. Such macro implementations can then easily call into other methods of the same class or its superclasses without having to carry the context around, because the bundle already carries the context that everyone inside it can see and refer to. This significantly simplifies writing and maintaining complex macros.</p>
+
+<p>8) <strong>Relaxed requirements for signatures of macro implementations</strong>. With the advent of quasiquotes, reify is quickly growing out of favor as being too clunky and inflexible. To recognize that we now allow both arguments and return types of macro implementations to be of type <code class="language-plaintext highlighter-rouge">c.Tree</code> rather than <code class="language-plaintext highlighter-rouge">c.Expr[Something]</code>. There’s no longer a need to write huge type signatures and then spend time and lines of code trying to align your macro implementations with those types. Just take trees in and return trees back - the boilerplate is gone.</p>
+
+<p>9) <strong>Inference of macro def return types is being phased out</strong>. Given the new scheme of things, where macro implementations can return <code class="language-plaintext highlighter-rouge">c.Tree</code> instead of <code class="language-plaintext highlighter-rouge">c.Expr[Something]</code>, it’s no longer possible to robustly infer return types of macro defs from return types of macro impls (if a macro impl returns <code class="language-plaintext highlighter-rouge">c.Tree</code>, what’s going to be the type of that tree then?). Therefore, we’re phasing out this language mechanism. Macro impls that return <code class="language-plaintext highlighter-rouge">c.Expr[T]</code> can still be used to infer return types of their macro defs, but that will produce a deprecation warning, whereas trying to use macro impls that return <code class="language-plaintext highlighter-rouge">c.Tree</code> to infer the return type of a macro def will lead to a compilation error.</p>
+
+<p>10) <strong><a href="https://github.com/scala/scala/pull/3495">Changes to how macro expansions typecheck</a></strong>. In Scala 2.10.x, macro expansions were typechecked twice: first against the return type of the corresponding macro def (so called innerPt) and second against expected type derived from the enclosing program (so called outerPt). This led to certain rare issues, when the return type misguided type inference and macro expansions ended up having imprecise types. In Scala 2.11.0, the typechecking scheme is changed. Blackbox macros are still typechecked against innerPt and then outerPt, but whitebox macros are first typed without any expected type (i.e. against WildcardType), and only then against innerPt and outerPt.</p>
+
+<p>11) <strong>Duplication of everything that comes in and goes out</strong>. Unfortunately, data structures central to the reflection API (trees, symbols, types) are either mutable themselves or are transitively mutable. This makes the APIs brittle as it’s easy to inadvertently change someone’s state in ways that are going to be incompatible with its future clients. We don’t have a complete solution for that yet, but we’ve applied a number of safeguards to our macro engine to somewhat contain the potential for mutation. In particular, we now duplicate all the arguments and return values of macro implementations, as well as all the ins and outs of possibly mutating APIs such as <code class="language-plaintext highlighter-rouge">Context.typeCheck</code>.</p>
+
+<h3 id="changes-to-the-reflection-api">Changes to the reflection API</h3>
+
+<p>12) <strong><a href="https://github.com/xeno-by/scala/commit/114c99691674873393223a11a9aa9168c3f41d77">Introduction of Universe.internal and Context.internal</a></strong>. Feedback from the users of the Scala 2.10.x reflection API has given us two important insights. First, certain functionality that we exposed was too low-level and were very out of place in the public API. Second, certain low-level functionality was very important in getting important macros operational. In order to somewhat resolve the tension created by these two development vectors, we’ve created internal subsections of the public APIs that are: a) clearly demarcated from the blessed parts of the reflection API, b) available to those who know what they are doing and want to implement practically important use cases that we want to support. Follow migration and compatibility notes in the bottom of the document to learn more.</p>
+
+<p>13) <strong><a href="/overviews/reflection/thread-safety.html">Thread safety for runtime reflection</a></strong>. The most pressing problem in reflection for Scala 2.10.x was its thread unsafety. Attempts to use runtime reflection (e.g. type tags) from multiple threads resulted in weird crashes documented above. We believe to have fixed this problem in Scala 2.11.0-RC1 by introducing a number of locks in critical places of our implementation. On the one hand, the strategy we are using at the moment is sub-optimal in the sense that certain frequently used operations (such as <code class="language-plaintext highlighter-rouge">Symbol.typeSignature</code> or <code class="language-plaintext highlighter-rouge">TypeSymbol.typeParams</code>) are hidden behind a global lock, but we plan to optimize that in the future. On the other hand, most of the typical APIs (e.g. <code class="language-plaintext highlighter-rouge">Type.members</code> or <code class="language-plaintext highlighter-rouge">Type.&lt;:&lt;</code>) either use thread-local state or don’t require synchronization at all, so it’s definitely worth a try.</p>
+
+<p>14) <strong><a href="https://github.com/xeno-by/scala/commit/0f4e95574081bd9a945fb5b32d157a32af840cd3">Type.typeArgs</a></strong>. It is now dead simple to obtain type arguments of a given type. What required a pattern match in Scala 2.10.x is now a simple method invocation. The <code class="language-plaintext highlighter-rouge">typeArgs</code> method is also joined by <code class="language-plaintext highlighter-rouge">typeParams</code>, <code class="language-plaintext highlighter-rouge">paramLists</code>, and <code class="language-plaintext highlighter-rouge">resultType</code>, making it very easy to perform common type inspection tasks.</p>
+
+<p>15) <strong><a href="https://issues.scala-lang.org/browse/SI-8194">symbolOf[T]</a></strong>. Scala 2.11.0 introduces a shortcut for a very common <code class="language-plaintext highlighter-rouge">typeOf[T].typeSymbol</code> operation, making it easier to figure out metadata (annotations, flags, visibility, etc) of given classes and objects.</p>
+
+<p>16) <strong><a href="https://issues.scala-lang.org/browse/SI-7046">knownDirectSubclasses is deemed to be officially broken</a></strong>. A lot of users who tried to traverse sealed hierarchies of classes have noticed that <code class="language-plaintext highlighter-rouge">ClassSymbol.knownDirectSubclasses</code> only works if invocations of their macros come after the definitions of those hierarchies in Scala’s compilation order. For instance, if a sealed hierarchy is defined in the bottom of a source file, and a macro application is written in the top of the file, then knownDirectSubclasses will return an empty list. This is an issue that is deeply rooted in Scala’s internal architecture, and we can’t provide a fix for it in the near future.</p>
+
+<p>17) <strong>showCode</strong>. Along with <code class="language-plaintext highlighter-rouge">Tree.toString</code> that prints Scala-ish source code and <code class="language-plaintext highlighter-rouge">showRaw(tree)</code> that prints internal structures of trees, we now have <code class="language-plaintext highlighter-rouge">showCode</code> that prints compilable Scala source code corresponding to the provided tree, courtesy of Vladimir Nikolaev, who’s done an amazing work of bringing this to life. We plan to eventually replace <code class="language-plaintext highlighter-rouge">Tree.toString</code> with <code class="language-plaintext highlighter-rouge">showCode</code>, but in Scala 2.11.0 these are two different methods.</p>
+
+<p>18) <strong><a href="https://issues.scala-lang.org/browse/SI-6814">It is now possible to typecheck in type and pattern modes</a></strong>. A very convenient <code class="language-plaintext highlighter-rouge">Context.typeCheck</code> and <code class="language-plaintext highlighter-rouge">ToolBox.typeCheck</code> functionality of Scala 2.10.x had a significant inconvenience - it only worked for expressions, and typechecking something as a type or as a pattern required building dummy expressions. Now <code class="language-plaintext highlighter-rouge">typeCheck</code> has the mode parameter that take case of that difficulty.</p>
+
+<p>19) <strong><a href="https://github.com/scala/scala/pull/3409">Reflective invocations now support value classes</a></strong>. Runtime reflection now correctly deals with value classes in parameters of methods and constructors and also correctly unboxes and boxes inputs and outputs to reflective invocations such as <code class="language-plaintext highlighter-rouge">FieldMirror.get</code>, <code class="language-plaintext highlighter-rouge">FieldMirror.set</code> and <code class="language-plaintext highlighter-rouge">MethodMirror.apply</code>.</p>
+
+<p>20) <strong><a href="https://github.com/scala/scala/pull/1821">Reflective invocations have become faster</a></strong>. With the help of the newly introduced <code class="language-plaintext highlighter-rouge">FieldMirror.bind</code> and <code class="language-plaintext highlighter-rouge">MethodMirror.bind</code> APIs, it is now possible to quickly create new mirrors from pre-existing ones, avoiding the necessity to undergo costly mirror initialization. In our tests, invocation-heavy scenarios exhibit up to 20x performance boosts thanks to these new APIs.</p>
+
+<p>21) <strong>Context.introduceTopLevel</strong>. The <code class="language-plaintext highlighter-rouge">Context.introduceTopLevel</code> API, which used to be available in early milestone builds of Scala 2.11.0 as a stepping stone towards type macros, was removed from the final release, because type macros were rejected for including in Scala and discontinued in macro paradise.</p>
+
+<h3 id="how-to-make-your-210x-macros-work-in-2110">How to make your 2.10.x macros work in 2.11.0</h3>
+
+<p>22) <strong>Blackbox/whitebox</strong>. All macros in Scala 2.10.x are whitebox and will behave accordingly, being able to refine the advertised return type of their macro defs in their expansions. See the subsequent section of the document for information on how to make macros in Scala 2.10.x behave exactly like blackbox macros in Scala 2.11.0.</p>
+
+<p>23) <strong>Macro bundles</strong>. Scala 2.11.0 now recognizes certain new shapes of references to macro implementations in right-hand sides of macro defs, and in some very rare situations this might change how existing code is compiled. First of all, no runtime behavior is going to be affected in this case - if a Scala 2.10.x macro def compiles in Scala 2.11.0, then it’s going to bind to the same macro impl as before. Secondly, in some cases macro impl references might become ambiguous and fail compilation, but that should be fixable in a backward compatible fashion by simple renaming suggested by the error message.</p>
+
+<p>24) <strong>Inference of macro def return types</strong>. In Scala 2.11.0, macro defs, whose return types are inferred from associated macro impls, will work consistently with Scala 2.10.x. A deprecation warning will be emitted for such macro defs, but no compilation errors or behavior discrepancies are going to happen.</p>
+
+<p>25) <strong>Changes to how macro expansions typecheck</strong>. Scala 2.11.0 changes the sequence of expected types used to typecheck whitebox macro expansions (and since all macros in Scala 2.10.x are whitebox, they all can potentially be affected). In rare situations, when a Scala 2.10.x macro expansion relied on a specific shape of an expected type to get its type arguments inferred, it might stop working. In such cases, specifying such type arguments explicitly will fix the problem in a way compatible with both Scala 2.10.x and Scala 2.11.0: <a href="https://github.com/milessabin/shapeless/commit/7b192b8d89b3654e58d7bac89427ebbcc5d5adf1#diff-c6aebd4b374deb66f0d5cdeff8484338L69">example</a>.</p>
+
+<p>26) <strong>Duplication of everything that comes in and goes out</strong>. In Scala 2.11.0, we consistently duplicate trees that cross boundaries between userland (macro implementation code) and kernel (compiler internals), limiting the scope of mutations of those trees. In extremely rare cases, Scala 2.10.x macros might be relying on such mutations to operate correctly. Such macros will be broken and will have to be rewritten. Don’t worry much about this though, because we haven’t yet encountered such macros in the wild, so it’s most likely that your macros are going to be fine.</p>
+
+<p>27) <strong>Introduction of Universe.internal and Context.internal</strong>. The following 51 APIs available in Scala 2.10.x have been moved into the <code class="language-plaintext highlighter-rouge">internal</code> submodule of the reflection cake. There are two ways of fixing these source incompatibilities. The easy one is writing <code class="language-plaintext highlighter-rouge">import compat._</code> after <code class="language-plaintext highlighter-rouge">import scala.reflect.runtime.universe._</code> or <code class="language-plaintext highlighter-rouge">import c.universe._</code>. The hard one is the easy one + applying all migration suggestions provided by deprecating warnings on methods imported from compat.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>typeTagToManifest</td>
+      <td>Tree.pos_=</td>
+      <td>Symbol.isSkolem</td>
+    </tr>
+    <tr>
+      <td>manifestToTypeTag</td>
+      <td>Tree.setPos</td>
+      <td>Symbol.deSkolemize</td>
+    </tr>
+    <tr>
+      <td>newScopeWith</td>
+      <td>Tree.tpe_=</td>
+      <td>Symbol.attachments</td>
+    </tr>
+    <tr>
+      <td>BuildApi.setTypeSignature</td>
+      <td>Tree.setType</td>
+      <td>Symbol.updateAttachment</td>
+    </tr>
+    <tr>
+      <td>BuildApi.flagsFromBits</td>
+      <td>Tree.defineType</td>
+      <td>Symbol.removeAttachment</td>
+    </tr>
+    <tr>
+      <td>BuildApi.emptyValDef</td>
+      <td>Tree.symbol_=</td>
+      <td>Symbol.setTypeSignature</td>
+    </tr>
+    <tr>
+      <td>BuildApi.This</td>
+      <td>Tree.setSymbol</td>
+      <td>Symbol.setAnnotations</td>
+    </tr>
+    <tr>
+      <td>BuildApi.Select</td>
+      <td>TypeTree.setOriginal</td>
+      <td>Symbol.setName</td>
+    </tr>
+    <tr>
+      <td>BuildApi.Ident</td>
+      <td>Symbol.isFreeTerm</td>
+      <td>Symbol.setPrivateWithin</td>
+    </tr>
+    <tr>
+      <td>BuildApi.TypeTree</td>
+      <td>Symbol.asFreeTerm</td>
+      <td>captureVariable</td>
+    </tr>
+    <tr>
+      <td>Tree.freeTerms</td>
+      <td>Symbol.isFreeType</td>
+      <td>referenceCapturedVariable</td>
+    </tr>
+    <tr>
+      <td>Tree.freeTypes</td>
+      <td>Symbol.asFreeType</td>
+      <td>capturedVariableType</td>
+    </tr>
+    <tr>
+      <td>Tree.substituteSymbols</td>
+      <td>Symbol.newTermSymbol</td>
+      <td>singleType</td>
+    </tr>
+    <tr>
+      <td>Tree.substituteTypes</td>
+      <td>Symbol.newModuleAndClassSymbol</td>
+      <td>refinedType</td>
+    </tr>
+    <tr>
+      <td>Tree.substituteThis</td>
+      <td>Symbol.newMethodSymbol</td>
+      <td>typeRef</td>
+    </tr>
+    <tr>
+      <td>Tree.attachments</td>
+      <td>Symbol.newTypeSymbol</td>
+      <td>intersectionType</td>
+    </tr>
+    <tr>
+      <td>Tree.updateAttachment</td>
+      <td>Symbol.newClassSymbol</td>
+      <td>polyType</td>
+    </tr>
+    <tr>
+      <td>Tree.removeAttachment</td>
+      <td>Symbol.isErroneous</td>
+      <td>existentialAbstraction</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>28) <strong>Official brokenness of knownDirectSubclasses</strong>. There’s nothing that can be done here from your side apart from being aware of limitations of that API. Macros that use <code class="language-plaintext highlighter-rouge">knownDirectSubclasses</code> will continue to work in Scala 2.11.0 exactly like they did in Scala 2.10.x, without any deprecation warnings.</p>
+
+<p>29) <strong>Deprecation of Context.enclosingTree-style APIs</strong>. Existing enclosing tree macro APIs face both technical and philosophical problems, so we’ve made a hard decision to phase them out, deprecating them in Scala 2.11.0 and removing them in Scala 2.12.0. There’s no direct replacement for these APIs, just the newly introduced c.internal.enclosingOwner that only covers a subset of their functionality. Follow the discussion at <a href="https://github.com/scala/scala/pull/3354">https://github.com/scala/scala/pull/3354</a> for more information.</p>
+
+<p>30) <strong>Other deprecations</strong>. Some of you have -Xfatal-warnings turned on in your builds, so any deprecation might fail compilation. This guide has covered all controversial deprecations, and the rest can be fixed by straightforwardly following deprecation messages.</p>
+
+<p>31) <strong>Removal of resetAllAttrs</strong>. resetAllAttrs is a very dangerous API and shouldn’t have been exposed in the first place. That’s why we have removed it without going through a deprecation cycle. There is however a publicly available replacement called <code class="language-plaintext highlighter-rouge">resetLocalAttrs</code> that should be sufficient in almost all cases, and we recommend using it instead. In an exceptional case when <code class="language-plaintext highlighter-rouge">resetLocalAttrs</code> doesn’t cut it, go for <a href="https://github.com/scalamacros/resetallattrs">https://github.com/scalamacros/resetallattrs</a>.</p>
+
+<p>32) <strong>Removal of isLocal</strong>. <code class="language-plaintext highlighter-rouge">Symbol.isLocal</code> wasn’t doing what is was advertising, and there was no way to fix it. Therefore we have removed it without any deprecation warnings and are recommending using <code class="language-plaintext highlighter-rouge">Symbol.isPrivateThis</code> and/or <code class="language-plaintext highlighter-rouge">Symbol.isProtectedThis</code> instead.</p>
+
+<p>33) <strong>Removal of isOverride</strong>. Same story as with <code class="language-plaintext highlighter-rouge">Symbol.isLocal</code>. This method was broken beyond repair, which is why it was removed from the public API. <code class="language-plaintext highlighter-rouge">Symbol.allOverriddenSymbols</code> (or its newly introduced alias <code class="language-plaintext highlighter-rouge">Symbol.overrides</code>) should be used instead.</p>
+
+<h3 id="how-to-make-your-2110-macros-work-in-210x">How to make your 2.11.0 macros work in 2.10.x</h3>
+
+<p>34) <strong>Quasiquotes</strong>. We don’t plan to release quasiquotes as part of the Scala 2.10.x distribution, but they can still be used in Scala 2.10.x by the virtue of the macro paradise plugin. Read <a href="paradise.html">paradise documentation</a> to learn more about what’s required to use the compiler plugin, what are the binary compatibility consequences and what are the support guarantees.</p>
+
+<p>35) <strong>Most of the new functionality doesn’t have equivalents in 2.10.x</strong>. We don’t plan to backport any of the new functionality, e.g. fundep materialization or macro bundles, to Scala 2.10.x (except for maybe thread safety for runtime reflection). Consult <a href="roadmap.html">the roadmap of macro paradise for Scala 2.10.x</a> to see what features are supported in paradise.</p>
+
+<p>36) <strong>Blackbox/whitebox</strong>. If you’re determined to have your macros blackbox, it’s going to require additional effort to have those macros working consistently in both 2.10.x and 2.11.0, because in 2.10.x all macros are whitebox. First of all, make sure that you’re not actually using any of <a href="blackbox-whitebox.html#codifying-the-distinction">whitebox powers</a>, otherwise you’ll have to rewrite your macros first. Secondly, before returning from your macros impls, explicitly upcast the expansions to the type required by their macro defs. (Of course, none of this applies to whitebox macros. If don’t mind your macros being whitebox, then you don’t have to do anything to ensure cross-compatibility).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Macros {
+  def impl(c: Context) = {
+    import c.universe._
+    q"new { val x = 2 }"
+  }
+
+  def foo: Any = macro impl
+}
+
+object Test extends App {
+  // works in Scala 2.10.x and Scala 2.11.0 if foo is whitebox
+  // doesn't work in Scala 2.11.0 if foo is blackbox
+  println(Macros.foo.x)
+}
+
+object Macros {
+  def impl(c: Context) = {
+    import c.universe._
+    q"(new { val x = 2 }): Any" // note the explicit type ascription
+  }
+
+  def foo: Any = macro impl
+}
+
+object Test extends App {
+  // consistently doesn't work in Scala 2.10.x and Scala 2.11.0
+  // regardless of whether foo is whitebox or blackbox
+  println(Macros.foo.x)
+}
+</code></pre></div></div>
+
+<p>37) <strong>@compileTimeOnly</strong>. The <code class="language-plaintext highlighter-rouge">compileTimeOnly</code> annotation is secretly available in <code class="language-plaintext highlighter-rouge">scala-reflect.jar</code> as <code class="language-plaintext highlighter-rouge">scala.reflect.internal.compileTimeOnly</code> since Scala 2.10.1 (To the contrast, in Scala 2.11.0 <code class="language-plaintext highlighter-rouge">compileTimeOnly</code> lives in <code class="language-plaintext highlighter-rouge">scala-library.jar</code> under the name of <code class="language-plaintext highlighter-rouge">scala.annotations.compileTimeOnly</code>). If you don’t mind the users of your API having to transitively depend on <code class="language-plaintext highlighter-rouge">scala-reflect.jar</code>, go ahead and use <code class="language-plaintext highlighter-rouge">compileTimeOnly</code> even in Scala 2.10.x - it will behave in the same fashion as in Scala 2.11.0.</p>
+
+<p>38) <strong>Changes to how macro expansions typecheck</strong>. Scala 2.11.0 changes the sequence of expected types used to typecheck whitebox macro expansions (and since all macros in Scala 2.10.x are whitebox, they all can potentially be affected), which can theoretically cause type inference problems. This is unlikely to become a problem even when migrating from 2.10.x to 2.11.0, but going in reverse direction has almost non-existent chances of causing issues. If you encounter difficulties, then like with any type inference glitch, try providing an explicit type annotation by upcasting macro expansions to the type that you want.</p>
+
+<p>39) <strong>Introduction of Universe.internal and Context.internal</strong>. Even though it’s hard to imagine how this could work, it is possible to have a macro using internal APIs compileable with both Scala 2.10.x and 2.11.0. Big thanks to Jason Zaugg for showing us the way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// scala.reflect.macros.Context is available both in 2.10 and 2.11
+// in Scala 2.11.0 it is deprecated
+// and aliased to scala.reflect.macros.whitebox.Context
+import scala.reflect.macros.Context
+import scala.language.experimental.macros
+
+// provides a source compatibility stub
+// in Scala 2.10.x, it will make `import compat._` compile just fine,
+// even though `c.universe` doesn't have `compat`
+// in Scala 2.11.0, it will be ignored, because `import c.universe._`
+// brings its own `compat` in scope and that one takes precedence
+private object HasCompat { val compat = ??? }; import HasCompat._
+
+object Macros {
+  def impl(c: Context): c.Expr[Int] = {
+    import c.universe._
+    // enables Tree.setType that's been removed in Scala 2.11.0
+    import compat._
+    c.Expr[Int](Literal(Constant(42)) setType definitions.IntTpe)
+  }
+
+  def ultimateAnswer: Int = macro impl
+}
+</code></pre></div></div>
+
+<p>40) <strong>Use macro-compat</strong>. <a href="https://github.com/milessabin/macro-compat">Macro-compat</a> is a small library which allows you to compile macros with Scala 2.10.x which are written to the Scala 2.11/2 macro API.  It brings to Scala 2.10: type aliases for the blackbox and whitebox Context types, support for macro bundles, forwarders for the 2.11 API and support for using Tree in the macro def type signatures.</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/usecases.html">Use Cases</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/blackbox-whitebox.html">Blackbox Vs Whitebox</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/overview.html">Def Macros</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/quasiquotes.html">Quasiquotes</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/bundles.html">Macro Bundles</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/implicits.html">Implicit Macros</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/extractors.html">Extractor Macros</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/typeproviders.html">Type Providers</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/annotations.html">Macro Annotations</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/paradise.html">Macro Paradise</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a  href="/overviews/macros/roadmap.html">Roadmap</a></li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- this must be English, so get the other documents' titles -->
+
+              
+                <li><a class="active" href="/overviews/macros/changelog211.html">Changes in Scala 2.11</a>
+						<div id="toc"></div>
+						</li>
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_overviews/macros/changelog211.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

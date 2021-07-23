@@ -1,0 +1,2522 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      概要 | 
+      Reflection | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/ja/overviews/reflection/overview.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="概要"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="概要"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/ja/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/ja/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Reflection</div>
+          
+          <h1>概要</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<p><span class="label important" style="float: right;">EXPERIMENTAL</span></p>
+
+<p><strong>Heather Miller、Eugene Burmako、Philipp Haller 著</strong><br />
+<strong>Eugene Yokota 訳</strong></p>
+
+<p><strong>リフレクション</strong> (reflection) とは、プログラムが実行時において自身をインスペクトしたり、変更したりできる能力のことだ。それはオブジェクト指向、関数型、論理プログラミングなど様々なプログラミングのパラダイムに渡って長い歴史を持つ。
+それぞれのパラダイムが、時として顕著に異なる方向性に向けて<strong>現在の</strong>リフレクションを進化させてきた。
+LISP/Scheme のような関数型の言語が動的なインタープリタを可能とすることに比重を置いてきたのに対し、Java のようなオブジェクト指向言語は実行時におけるクラスメンバのインスペクションや呼び出しを実現するための実行時リフレクションに主な比重を置いてきた。</p>
+
+<p>複数の言語やパラダイムに渡る主要なリフレクションの用例を以下に 3つ挙げる:</p>
+
+<ol>
+<li><b>実行時リフレクション</b>。実行時にランタイム型 (runtime type) やそのメンバをインスペクトしたり呼び出す能力。</li>
+<li><b>コンパイル時リフレクション</b>。コンパイル時に抽象構文木にアクセスしたり、それを操作する能力。</li>
+<li><b>レイフィケーション</b> (reification)。(1) の場合は実行時に、(2) の場合はコンパイル時に抽象構文木を生成すること。</li>
+</ol>
+
+<p>Scala 2.10 までは Scala は独自のリフレクション機能を持っていなかった。
+代わりに、Java リフレクションを使って (1) の実行時リフレクションのうちの非常に限定的な一部の機能のみを使うことができた。
+しかし、存在型、高カインド型、パス依存型、抽象型など多くの Scala 独自の型の情報はそのままの Java リフレクションのもとでは実行時に復元不可能だった。
+これらの Scala 独自の型に加え、Java リフレクションはコンパイル時にジェネリックである Java 型の実行時型情報も復元できない。
+この制約は Scala のジェネリック型の実行時リフレクションも受け継いでいる。</p>
+
+<p>Scala 2.10 は、Scala 独自型とジェネリック型に対する Java の実行時リフレクションの欠点に対処するためだけではなく、
+汎用リフレクション機能を持ったより強力なツールボックスを追加するために新しいリフレクションのライブラリを導入する。
+Scala 型とジェネリックスに対する完全な実行時リフレクション (1) の他に、
+Scala 2.10 は<a href="/ja/overviews/macros/overview.html">マクロ</a> という形でコンパイル時リフレクション機能 (2) と、
+Scala の式を抽象構文木へと<strong>レイファイ</strong> (reify) する機能 (3) も提供する。</p>
+
+<h2 id="実行時リフレクション">実行時リフレクション</h2>
+
+<p>実行時リフレクション (runtime reflection) とは何だろう？
+<strong>実行時</strong>に何らかの型もしくはオブジェクトが渡されたとき、リフレクションは以下のことができる:</p>
+
+<ul>
+<li>ジェネリック型を含め、そのオブジェクトがどの型かをインスペクトでき、</li>
+<li>新しいオブジェクトを作成することができ、</li>
+<li>そのオブジェクトのメンバにアクセスしたり、呼び出したりできる。</li>
+</ul>
+
+<p>それぞれの能力をいくつかの具体例とともにみていこう。</p>
+
+<h3 id="具体例">具体例</h3>
+
+<p><a name="inspecting_a_runtime_type"> </a></p>
+<h4 id="ランタイム型のインスペクション-実行時におけるジェネリック型も含む">ランタイム型のインスペクション (実行時におけるジェネリック型も含む)</h4>
+
+<p>他の JVM言語同様に、Scala の型はコンパイル時に<strong>消去</strong> (erase) される。
+これは、何らかのインスタンスのランタイム型をインスペクトしてもコンパイル時に
+Scala コンパイラが持つ型情報を全ては入手できない可能性があることを意味する。</p>
+
+<p><strong>型タグ</strong> (<code class="language-plaintext highlighter-rouge">TypeTag</code>) は、コンパイル時に入手可能な全ての型情報を実行時に持ち込むためのオブジェクトだと考えることができる。
+しかし、型タグは常にコンパイラによって生成されなくてはいけないことに注意してほしい。
+この生成は暗黙のパラメータか context bound によって型タグが必要とされた時にトリガーされる。
+そのため、通常は、型タグは暗黙のパラメータか context bound によってのみ取得できる。</p>
+
+<p>例えば、context bound を使ってみよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.{universe =&gt; ru}
+import scala.reflect.runtime.{universe=&gt;ru}
+
+scala&gt; val l = List(1,2,3)
+l: List[Int] = List(1, 2, 3)
+
+scala&gt; def getTypeTag[T: ru.TypeTag](obj: T) = ru.typeTag[T]
+getTypeTag: [T](obj: T)(implicit evidence$1: ru.TypeTag[T])ru.TypeTag[T]
+
+scala&gt; val theType = getTypeTag(l).tpe
+theType: ru.Type = List[Int]
+</code></pre></div></div>
+
+<p>上の例では、まず <code class="language-plaintext highlighter-rouge">scala.reflect.runtime.universe</code> をインポートして
+(型タグを使うためには必ずインポートされる必要がある)、<code class="language-plaintext highlighter-rouge">l</code> という名前の <code class="language-plaintext highlighter-rouge">List[Int]</code> を作る。
+次に、context bound を持った型パラメータ <code class="language-plaintext highlighter-rouge">T</code> を持つ <code class="language-plaintext highlighter-rouge">getTypeTag</code> というメソッドは定義する
+(REPL が示すとおり、これは暗黙の evidence パラメータを定義することに等価であり、コンパイラは <code class="language-plaintext highlighter-rouge">T</code> に対する型タグを生成する)。
+最後に、このメソッドに <code class="language-plaintext highlighter-rouge">l</code> を渡して呼び出し、<code class="language-plaintext highlighter-rouge">TypeTag</code> に格納される型を返す <code class="language-plaintext highlighter-rouge">tpe</code> を呼び出す。
+見ての通り、正しい完全な型 (つまり、<code class="language-plaintext highlighter-rouge">List</code> の具象型引数を含むということ) である <code class="language-plaintext highlighter-rouge">List[Int]</code> が返ってきた。</p>
+
+<p>目的の <code class="language-plaintext highlighter-rouge">Type</code> のインスタンスが得られれば、これをインスペクトすることもできる。以下に具体例で説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val decls = theType.decls.take(10)
+decls: Iterable[ru.Symbol] = List(constructor List, method companion, method isEmpty, method head, method tail, method ::, method :::, method reverse_:::, method mapConserve, method ++)
+</code></pre></div></div>
+
+<h4 id="ランタイム型のインスタンス化">ランタイム型のインスタンス化</h4>
+
+<p>リフレクションによって得られた型は適当な invoker ミラーを使ってコンストラクタを呼び出すことでインスタンス化することができる
+(ミラーに関しては<a href="/ja/overviews/reflection/overview.html">後ほど</a>説明する)。
+以下に REPL を使った具体例を用いて説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; case class Person(name: String)
+defined class Person
+
+scala&gt; val m = ru.runtimeMirror(getClass.getClassLoader)
+m: scala.reflect.runtime.universe.Mirror = JavaMirror with ...
+</code></pre></div></div>
+
+<p>最初のステップとして現在のクラスローダで読み込まれた (<code class="language-plaintext highlighter-rouge">Person</code> クラスを含む)
+全てのクラスや型をアクセス可能とするミラー <code class="language-plaintext highlighter-rouge">m</code> を取得する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val classPerson = ru.typeOf[Person].typeSymbol.asClass
+classPerson: scala.reflect.runtime.universe.ClassSymbol = class Person
+
+scala&gt; val cm = m.reflectClass(classPerson)
+cm: scala.reflect.runtime.universe.ClassMirror = class mirror for Person (bound to null)
+</code></pre></div></div>
+
+<p>次に、<code class="language-plaintext highlighter-rouge">reflectClass</code> メソッドを使って <code class="language-plaintext highlighter-rouge">Person</code> クラスの <code class="language-plaintext highlighter-rouge">ClassMirror</code> を取得する。
+<code class="language-plaintext highlighter-rouge">ClassMirror</code> は <code class="language-plaintext highlighter-rouge">Person</code> クラスのコンストラクタへのアクセスを提供する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val ctor = ru.typeOf[Person].decl(ru.termNames.CONSTRUCTOR).asMethod
+ctor: scala.reflect.runtime.universe.MethodSymbol = constructor Person
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Person</code> のコンストラクタのシンボルは実行時ユニバース <code class="language-plaintext highlighter-rouge">ru</code> を用いて <code class="language-plaintext highlighter-rouge">Person</code> 型の宣言から照会することによってのみ得られる。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val ctorm = cm.reflectConstructor(ctor)
+ctorm: scala.reflect.runtime.universe.MethodMirror = constructor mirror for Person.&lt;init&gt;(name: String): Person (bound to null)
+
+scala&gt; val p = ctorm("Mike")
+p: Any = Person(Mike)
+</code></pre></div></div>
+
+<h4 id="ランタイム型のメンバへのアクセスと呼び出し">ランタイム型のメンバへのアクセスと呼び出し</h4>
+
+<p>一般的に、ランタイム型のメンバは適当な invoker ミラーを使ってコンストラクタを呼び出すことでインスタンス化することができる
+(ミラーに関しては<a href="/ja/overviews/reflection/overview.html">後ほど</a>説明する)。
+以下に REPL を使った具体例を用いて説明しよう:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; case class Purchase(name: String, orderNumber: Int, var shipped: Boolean)
+defined class Purchase
+
+scala&gt; val p = Purchase("Jeff Lebowski", 23819, false)
+p: Purchase = Purchase(Jeff Lebowski,23819,false)
+</code></pre></div></div>
+
+<p>この例では <code class="language-plaintext highlighter-rouge">Purchase</code> <code class="language-plaintext highlighter-rouge">p</code> の <code class="language-plaintext highlighter-rouge">shipped</code> フィールドをリフレクションを使って get/set を行う:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.{universe =&gt; ru}
+import scala.reflect.runtime.{universe=&gt;ru}
+
+scala&gt; val m = ru.runtimeMirror(p.getClass.getClassLoader)
+m: scala.reflect.runtime.universe.Mirror = JavaMirror with ...
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">shipped</code> メンバにアクセスするには、前の例と同じく、<code class="language-plaintext highlighter-rouge">p</code> のクラス (<code class="language-plaintext highlighter-rouge">Purchase</code>) を含むクラスローダが読み込んだ全てのクラスを入手可能とするミラー <code class="language-plaintext highlighter-rouge">m</code>
+を取得することから始める。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val shippingTermSymb = ru.typeOf[Purchase].decl(ru.TermName("shipped")).asTerm
+shippingTermSymb: scala.reflect.runtime.universe.TermSymbol = method shipped
+</code></pre></div></div>
+
+<p>次に、<code class="language-plaintext highlighter-rouge">shipped</code> フィールドの宣言を照会して <code class="language-plaintext highlighter-rouge">TermSymbol</code> (<code class="language-plaintext highlighter-rouge">Symbol</code> 型の 1つ) を得る。
+この <code class="language-plaintext highlighter-rouge">Symbol</code> は後で (何からのオブジェクトの) このフィールドの値にアクセスするのに必要なミラーを得るのに使う。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val im = m.reflect(p)
+im: scala.reflect.runtime.universe.InstanceMirror = instance mirror for Purchase(Jeff Lebowski,23819,false)
+
+scala&gt; val shippingFieldMirror = im.reflectField(shippingTermSymb)
+shippingFieldMirror: scala.reflect.runtime.universe.FieldMirror = field mirror for Purchase.shipped (bound to Purchase(Jeff Lebowski,23819,false))
+</code></pre></div></div>
+
+<p>ある特定のインスタンスの <code class="language-plaintext highlighter-rouge">shipped</code> メンバにアクセスするためには、その特定のインスタンス <code class="language-plaintext highlighter-rouge">p</code>
+のためのミラー <code class="language-plaintext highlighter-rouge">im</code> を必要とする。
+このインスタンスミラーから <code class="language-plaintext highlighter-rouge">p</code> の型のフィールドを表す <code class="language-plaintext highlighter-rouge">TermSymbol</code> に対して <code class="language-plaintext highlighter-rouge">FieldMirror</code> を得ることができる。</p>
+
+<p>特定のフィールドに対して <code class="language-plaintext highlighter-rouge">FieldMirror</code> が得られたところで、<code class="language-plaintext highlighter-rouge">get</code> と <code class="language-plaintext highlighter-rouge">set</code> メソッドを使って特定のインスタンスの
+<code class="language-plaintext highlighter-rouge">shipped</code> メンバを get/set できる。
+<code class="language-plaintext highlighter-rouge">shipped</code> の状態を <code class="language-plaintext highlighter-rouge">true</code> に変更してみよう。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; shippingFieldMirror.get
+res7: Any = false
+
+scala&gt; shippingFieldMirror.set(true)
+
+scala&gt; shippingFieldMirror.get
+res9: Any = true
+</code></pre></div></div>
+
+<h3 id="java-のランタイムクラス-と-scala-のランタイム型の比較">Java のランタイムクラス と Scala のランタイム型の比較</h3>
+
+<p>Java のリフレクションを使って実行時に Java の <strong>Class</strong>
+のインスタンスを取得したことのある読者は、Scala ではランタイム<strong>型</strong>を取得することに気付いただろう。</p>
+
+<p>以下の REPL の実行結果は Scala のクラスに対して Java
+リフレクションを使った場合に予想外もしくは間違った結果が返ってくることがあることを示す。</p>
+
+<p>まず、抽象型メンバ <code class="language-plaintext highlighter-rouge">T</code> を持つ基底クラス <code class="language-plaintext highlighter-rouge">E</code> を定義して、それから 2つの派生クラス基底
+<code class="language-plaintext highlighter-rouge">C</code> と <code class="language-plaintext highlighter-rouge">D</code> を派生する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; class E {
+     |   type T
+     |   val x: Option[T] = None
+     | }
+defined class E
+
+scala&gt; class C extends E
+defined class C
+
+scala&gt; class D extends C
+defined class D
+</code></pre></div></div>
+
+<p>次に具象型メンバ <code class="language-plaintext highlighter-rouge">T</code> (この場合 <code class="language-plaintext highlighter-rouge">String</code>) を使う <code class="language-plaintext highlighter-rouge">C</code> と <code class="language-plaintext highlighter-rouge">D</code> のインスタンスを作成する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; val c = new C { type T = String }
+c: C{type T = String} = $anon$1@7113bc51
+
+scala&gt; val d = new D { type T = String }
+d: D{type T = String} = $anon$1@46364879
+</code></pre></div></div>
+
+<p>ここで Java リフレクションの <code class="language-plaintext highlighter-rouge">getClass</code> と <code class="language-plaintext highlighter-rouge">isAssignableFrom</code> メソッドを使って
+<code class="language-plaintext highlighter-rouge">c</code> と <code class="language-plaintext highlighter-rouge">d</code> のランタイムクラスを表す <code class="language-plaintext highlighter-rouge">java.lang.Class</code> のインスタンスを取得して、
+<code class="language-plaintext highlighter-rouge">d</code> のランタイムクラスが <code class="language-plaintext highlighter-rouge">c</code> のランタイムクラスのサブクラスであるかを検証する。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; c.getClass.isAssignableFrom(d.getClass)
+res6: Boolean = false
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">D</code> が <code class="language-plaintext highlighter-rouge">C</code> を継承することは上のコードにより明らかなので、この結果は意外なものかもしれない。
+この「<code class="language-plaintext highlighter-rouge">d</code> のクラスは <code class="language-plaintext highlighter-rouge">c</code> のクラスのサブクラスであるか？」
+というような簡単な実行時型検査において期待される答は <code class="language-plaintext highlighter-rouge">true</code> だと思う。
+しかし、上の例で気付いたかもしれないが、<code class="language-plaintext highlighter-rouge">c</code> と <code class="language-plaintext highlighter-rouge">d</code> がインスタンス化されるとき
+Scala コンパイラは実はそれぞれに <code class="language-plaintext highlighter-rouge">C</code> と <code class="language-plaintext highlighter-rouge">D</code> の匿名のサブクラスを作成している。
+これは Scala コンパイラが Scala 特定の (つまり、非 Java の) 言語機能を
+JVM 上で実行させるために等価な Java バイトコードに翻訳する必要があるからだ。
+そのため、Scala コンパイラは往々にしてユーザが定義したクラスの代わりに合成クラス (つまり、自動的に生成されたクラス)
+を作成してそれを実行時に使用する。これは Scala
+では日常茶飯事と言ってもいいぐらいで、クロージャ、型メンバ、型の細別、ローカルクラスなど多くの
+Scala 機能に対して Java リフレクションを使う事で観測することができる。</p>
+
+<p>このような状況においては、これらの Scala オブジェクトに対して
+Scala リフレクションを使うことで正確なランタイム型を得ることができる。
+Scala のランタイム型は全てのコンパイル時の型情報を保持することでコンパイル時と実行時の型のミスマッチを回避している。</p>
+
+<p>以下に Scala リフレクションを使って渡された 2つの引数のランタイム型を取得して両者のサブタイプ関係をチェックするメソッドを定義する。
+もしも、第1引数の型が第2引数の型のサブタイプである場合は <code class="language-plaintext highlighter-rouge">true</code> を返す。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; import scala.reflect.runtime.{universe =&gt; ru}
+import scala.reflect.runtime.{universe=&gt;ru}
+
+scala&gt; def m[T: ru.TypeTag, S: ru.TypeTag](x: T, y: S): Boolean = {
+    |   val leftTag = ru.typeTag[T]
+    |   val rightTag = ru.typeTag[S]
+    |   leftTag.tpe &lt;:&lt; rightTag.tpe
+    | }
+m: [T, S](x: T, y: S)(implicit evidence$1: scala.reflect.runtime.universe.TypeTag[T], implicit evidence$2: scala.reflect.runtime.universe.TypeTag[S])Boolean
+
+scala&gt; m(d, c)
+res9: Boolean = true
+</code></pre></div></div>
+
+<p>以上に示した通り、これは期待される結果を返す。<code class="language-plaintext highlighter-rouge">d</code> のランタイム型は確かに <code class="language-plaintext highlighter-rouge">c</code> のランタイム型のサブタイプだ。</p>
+
+<h2 id="コンパイル時リフレクション">コンパイル時リフレクション</h2>
+
+<p>Scala リフレクションは、プログラムがコンパイル時に<strong>自身</strong>を変更するという<strong>メタプログラミング</strong>の一種を可能とする。
+このコンパイル時リフレクションはマクロという形で実現されており、抽象構文木を操作するメソッドをコンパイル時に実行できる能力として提供される。</p>
+
+<p>マクロの特に興味深い側面の1つは <code class="language-plaintext highlighter-rouge">scala.reflect.api</code> で提供される Scala の実行時リフレクションの基となっている
+API に基づいていることだ。これにより、マクロと実行時リフレクションを利用した実装の間で汎用コードを共有することが可能となっている。</p>
+
+<p><a href="/ja/overviews/macros/overview.html">マクロのガイド</a>はマクロ固有のことに焦点を絞っているのに対し、
+本稿ではリフレクション API 全般を取り扱っていることに注意してほしい。
+しかし、<a href="/ja/overviews/reflection/symbols-trees-types.html">シンボル、構文木、型</a>の節で詳しく説明される抽象構文木のように多くの概念は直接マクロにも応用することができる。</p>
+
+<h2 id="環境">環境</h2>
+
+<p>全てのリフレクションを用いたタスクは適切な環境設定を必要とする。
+この環境はリフレクションを用いたタスクが実行時に行われるのかコンパイル時に行われるのかによって異なる。
+実行時とコンパイル時における環境の違いは<strong>ユニバース</strong>と呼ばれているものによってカプセル化されている。
+リフレクション環境におけるもう 1つの重要なものにリフレクションを用いてアクセスが可能な実体の集合がある。
+この実体の集合は<strong>ミラー</strong>と呼ばれているものによって決定される。</p>
+
+<p>ミラーはリフレクションを用いてアクセスすることができる実体の集合を決定するだけではなく、
+それらの実体に対するリフレクションを用いた演算を提供する。
+例えば、実行時リフレクションにおいて <strong>invoker ミラー</strong>を使うことで任意のクラスのメソッドやコンストラクタを呼び出すことができる。</p>
+
+<h3 id="ユニバース">ユニバース</h3>
+
+<p>ユニバース (<code class="language-plaintext highlighter-rouge">Universe</code>) は Scala リフレクションへの入り口だ。
+ユニバースは、型 (<code class="language-plaintext highlighter-rouge">Type</code>)、構文木 (<code class="language-plaintext highlighter-rouge">Tree</code>)、アノテーション (<code class="language-plaintext highlighter-rouge">Annotation</code>)
+といったリフレクションで使われる主要な概念に対するインターフェイスを提供する。
+詳細はこのガイドの<a href="/ja/overviews/reflection/environment-universes-mirrors.html">ユニバース</a>の節か、
+<code class="language-plaintext highlighter-rouge">scala.reflect.api</code> パッケージのユニバースの API doc
+を参考にしてほしい。</p>
+
+<p>このガイドにおける多くの例を含め、Scala リフレクションを利用するには何らかの
+<code class="language-plaintext highlighter-rouge">Universe</code> もしくはその <code class="language-plaintext highlighter-rouge">Universe</code> のメンバをインポートする必要がある。
+典型的には実行時リフレクションを利用するには
+<code class="language-plaintext highlighter-rouge">scala.reflect.runtime.universe</code> の全てのメンバをワイルドカードインポートを用いてインポートする:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import scala.reflect.runtime.universe._
+</code></pre></div></div>
+
+<h3 id="ミラー">ミラー</h3>
+
+<p>ミラー (<code class="language-plaintext highlighter-rouge">Mirror</code>) は Scala リフレクションの中心部を構成する。
+リフレクションによって提供される全ての情報はこのミラーと呼ばれるものを通して公開されている。
+型情報の種類やリフレクションを用いたタスクの種類によって異なるミラーを使う必要がある。</p>
+
+<p>詳細はこのガイドの<a href="/ja/overviews/reflection/environment-universes-mirrors.html">ミラー</a>の節か、
+<code class="language-plaintext highlighter-rouge">scala.reflect.api</code> パッケージのミラーの API doc
+を参考にしてほしい。</p>
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/reflection/overview.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/reflection/overview.html" class="lang">日本語</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_ja/overviews/reflection/overview.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

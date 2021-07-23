@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      SIP-26 - Unsigned Integers | 
+      
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/sips/unsigned-integers.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="SIP-26 - Unsigned Integers"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="SIP-26 - Unsigned Integers"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">&nbsp;</div>
+          
+          <h1>SIP-26 - Unsigned Integers</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box toc-context">
+				<p><strong>Sébastien Doeraene and Denys Shabalin</strong></p>
+
+<p><strong>Summary</strong>: We propose the addition of 4 “primitive” types to represent
+unsigned integers: <code class="language-plaintext highlighter-rouge">UByte</code>, <code class="language-plaintext highlighter-rouge">UShort</code>, <code class="language-plaintext highlighter-rouge">UInt</code> and <code class="language-plaintext highlighter-rouge">ULong</code>.</p>
+
+<p>A prototype implementation of this proposal, with unit tests and benchmarks,
+can be found <a href="https://github.com/scala/scala/compare/2.12.x...sjrd:uints">here</a>.</p>
+
+<h2 id="history">History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nov 9th 2015</td>
+      <td>Initial Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="introduction---motivation---abstract">Introduction - Motivation - Abstract</h2>
+
+<p>Scala was initially designed to target the JVM, and, as such, defines exactly
+9 primitive types corresponding to the 9 primitive types of the JVM (including
+<code class="language-plaintext highlighter-rouge">void</code>):</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Boolean</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Char</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Byte</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Short</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Int</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Long</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Float</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Double</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Unit</code></li>
+</ul>
+
+<p>Compared to other languages, especially those in the tradition of
+compile-to-machine code, this list is missing types for unsigned integer types.</p>
+
+<p>When compiling Scala to other platforms than the JVM, such as JavaScript with
+Scala.js or native code/LLVM with the upcoming ScalaNative, the missing unsigned
+integer types are a liability, especially when it comes to <em>interoperability
+with host language libraries</em>.</p>
+
+<p>For example, if a C library defines a function accepting a <code class="language-plaintext highlighter-rouge">uint32_t</code>, how would
+we type it in a FFI definition? Even in JavaScript, which supposedly has only
+<code class="language-plaintext highlighter-rouge">Double</code>s, there are APIs working with unsigned integers. The most well-known
+one is
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">the TypedArray API</a>.
+Currently, because of the lack of unsigned integers in Scala, the
+<a href="https://github.com/scala-js/scala-js/blob/v0.6.5/library/src/main/scala/scala/scalajs/js/typedarray/Uint8Array.scala">facade types for <code class="language-plaintext highlighter-rouge">Uint8Array</code> in Scala.js</a>
+is forced to use <code class="language-plaintext highlighter-rouge">Short</code> elements instead of a more appropriate <code class="language-plaintext highlighter-rouge">UByte</code>. Worse,
+<a href="https://github.com/scala-js/scala-js/blob/v0.6.5/library/src/main/scala/scala/scalajs/js/typedarray/Uint32Array.scala">the one for <code class="language-plaintext highlighter-rouge">Uint32Array</code></a>
+has to work with <em>Doubles</em>, because there is no signed integer type existing on
+JavaScript that can represent all values of a 32-bit unsigned int.</p>
+
+<p>On the JVM, interoperability is not an issue. However, it is still sometimes
+useful to manipulate unsigned integers. An evidence of this fact is that Java 8
+has added methods in the JDK to <em>manipulate</em> signed integers <em>as if</em> they were
+unsigned. One example is
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html#divideUnsigned-int-int-"><code class="language-plaintext highlighter-rouge">java.lang.Integer.divideUnsigned</code></a>.
+Using signed integer types but interpreting them as unsigned is an obvious lack
+of type safety, however. Java cannot decently add new primitive types for
+compatibility reasons, but Scala has custom-made <code class="language-plaintext highlighter-rouge">AnyVal</code>s and other
+Object-Oriented abstractions on top of primitive types that can allow for
+additional, zero-overhead “primitive” types.</p>
+
+<p>We therefore propose to extend the Scala programming language with 4 new
+primitive data types, representing unsigned integer types:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">scala.UByte</code>, an unsigned 8-bit integer</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.UShort</code>, an unsigned 16-bit integer</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.UInt</code>, an unsigned 32-bit integer</li>
+  <li><code class="language-plaintext highlighter-rouge">scala.ULong</code>, an unsigned 64-bit integer</li>
+</ul>
+
+<p>These data types will support a set of operations similar to their signed
+counterparts, except that they will obviously encode the unsigned behavior.</p>
+
+<p>For example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MaxValue</span><span class="o">.</span><span class="py">toUInt</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">toUInt</span> <span class="c1">// 2147483648</span>
+<span class="nf">assert</span><span class="o">(</span><span class="nv">x</span><span class="o">.</span><span class="py">toString</span> <span class="o">==</span> <span class="s">"2147483648"</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="nv">Int</span><span class="o">.</span><span class="py">MaxValue</span><span class="o">.</span><span class="py">toUInt</span> <span class="o">+</span> <span class="mf">5.</span><span class="n">toUInt</span> <span class="c1">// 2147483652</span>
+<span class="k">val</span> <span class="nv">z</span> <span class="k">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span> <span class="c1">// unsigned division of 2147483652 by 2147483648</span>
+<span class="nf">assert</span><span class="o">(</span><span class="n">z</span> <span class="o">==</span> <span class="mf">1.</span><span class="n">toUInt</span><span class="o">)</span>
+<span class="nf">assert</span><span class="o">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mf">4.</span><span class="n">toUInt</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="motivating-examples">Motivating Examples</h2>
+
+<h3 id="examples">Examples</h3>
+
+<h4 id="interoperability-with-host-language-unsigned-integers">Interoperability with host language unsigned integers</h4>
+
+<p>The most important use case for true unsigned integers specified by the
+language is interoperability with host languages with unsigned data types.</p>
+
+<p>If we try to manipulate an <code class="language-plaintext highlighter-rouge">Uint32Array</code> in Scala.js as currently defined, we
+end up manipulating <code class="language-plaintext highlighter-rouge">Double</code>s, which can become extremely confusing:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">array</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Uint32Array</span><span class="o">(</span><span class="nv">js</span><span class="o">.</span><span class="py">Array</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">98</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="nf">array</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">/</span> <span class="nf">array</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="c1">// 19.6 (!)</span>
+</code></pre></div></div>
+
+<p>This also causes type safety issues, since nothing prevents the developer from
+introducing a non-integer <code class="language-plaintext highlighter-rouge">Double</code> into such an array:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">array</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="k">=</span> <span class="mf">6.4</span>    <span class="c1">// compiles, silent drop of precision</span>
+<span class="nf">println</span><span class="o">(</span><span class="nf">array</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span> <span class="c1">// 6</span>
+</code></pre></div></div>
+
+<p>If we can define <code class="language-plaintext highlighter-rouge">Uint32Array</code> as an array of <code class="language-plaintext highlighter-rouge">UInt</code> instead, our problems are
+solved:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">array</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Uint32Array</span><span class="o">(</span><span class="nv">js</span><span class="o">.</span><span class="py">Array</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">98</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toUInt</span><span class="o">))</span>
+<span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="nf">array</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">/</span> <span class="nf">array</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="nf">println</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="c1">// 19, as expected</span>
+
+<span class="nf">array</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="k">=</span> <span class="mf">6.4</span> <span class="c1">// does not compile, yeah!</span>
+</code></pre></div></div>
+
+<h4 id="implementation-of-algorithms-requiring-unsigned-operations">Implementation of algorithms requiring unsigned operations</h4>
+
+<p>No matter the platform, even on the JVM, we sometimes have to implement
+algorithms that are best defined in terms of unsigned operations. Particularly,
+more often than not, we want to treat bytes in a buffer as unsigned.</p>
+
+<p>For example, here is a (buggy) algorithm to decode text encoded in ISO-8859-1
+(latin1) into Unicode code points. Can you spot the issue?</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decodeISO88591</span><span class="o">(</span><span class="n">buffer</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Byte</span><span class="o">])</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">result</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="nv">buffer</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+  <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="nv">buffer</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+    <span class="nv">result</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="nf">buffer</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="py">toChar</span><span class="o">)</span>
+  <span class="nv">result</span><span class="o">.</span><span class="py">toString</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The problem is that <code class="language-plaintext highlighter-rouge">buffer(i).toChar</code> will first <em>sign-extend</em> the signed
+<code class="language-plaintext highlighter-rouge">Byte</code> to an <code class="language-plaintext highlighter-rouge">Int</code>, then cut off the 16 most significant bits. If the initial
+<code class="language-plaintext highlighter-rouge">Byte</code> was “&gt;= 0x80”, it was actually <em>negative</em>, and therefore the resulting
+<code class="language-plaintext highlighter-rouge">Char</code> will have its 8 most significant bits set to 1, which is a bug.</p>
+
+<p>Fixing the algorithm requires knowledge of 2’s complement properties and how
+the bits are affected by arithmetic operations. The solution is
+<code class="language-plaintext highlighter-rouge">(buffer(i) &amp; 0xff).toChar</code>, which is totally non-obvious.</p>
+
+<p>With unsigned bytes, the problem does not happen by construction, and the
+algorithm is straightforward:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decodeISO88591</span><span class="o">(</span><span class="n">buffer</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">UByte</span><span class="o">])</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">result</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="nv">buffer</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+  <span class="nf">for</span> <span class="o">(</span><span class="n">i</span> <span class="k">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="nv">buffer</span><span class="o">.</span><span class="py">length</span><span class="o">)</span>
+    <span class="nv">result</span><span class="o">.</span><span class="py">append</span><span class="o">(</span><span class="nf">buffer</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="py">toChar</span><span class="o">)</span> <span class="c1">// correct: UByte.toChar does not sign-extend</span>
+  <span class="nv">result</span><span class="o">.</span><span class="py">toString</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="comparison-examples">Comparison Examples</h3>
+
+<p>The blog post
+<a href="https://www.nayuki.io/page/unsigned-int-considered-harmful-for-java">Unsigned int considered harmful for Java</a>
+explains in detail how to correctly manipulate signed integer types to make
+them behave as unsigned.</p>
+
+<p>There are two main problems with this, considering only the JVM target:</p>
+
+<ul>
+  <li>We have to remember what operations need dedicated methods to deal with the
+unsigned case.</li>
+  <li>We cannot express in the type of a value whether it is to be interpreted as
+a signed or unsigned integer. Effectively, we’re back to <em>Assembly</em>-grade
+weak typing.</li>
+</ul>
+
+<p>In addition, those separate manipulations do not allow back-ends to other
+targets to effectively interoperate with host language unsigned data types.</p>
+
+<h3 id="counter-examples">Counter-Examples</h3>
+
+<p>We do not intend to generalize unsigned numbers to Big integers nor to
+floating-point numbers.</p>
+
+<p>Also, it is out of the scope of this proposal to provide literal constant
+notations for unsigned integers. They should be constructed from their
+corresponding signed literals, and reinterpreted using <code class="language-plaintext highlighter-rouge">.toUInt</code> and similar.</p>
+
+<h2 id="drawbacks">Drawbacks</h2>
+
+<h3 id="performance-of-arrays">Performance of arrays</h3>
+
+<p>Unless the implementation of unsigned integer types is very much special-cased
+in the compiler, arrays of unsigned integer types will likely suffer from the
+same performance penalty as arrays of user-defined <code class="language-plaintext highlighter-rouge">AnyVal</code>s, because the
+elements will be boxed.</p>
+
+<p>This might cause unexpected performance issues, as developers will think that
+<code class="language-plaintext highlighter-rouge">Array[UByte]</code> is as fast as <code class="language-plaintext highlighter-rouge">Array[Byte]</code>, when in fact it is not.
+Performance-critical code should still use <code class="language-plaintext highlighter-rouge">Array[Byte]</code>, and reinterpret the
+bytes into unsigned bytes and back using <code class="language-plaintext highlighter-rouge">sb.toUByte</code> and <code class="language-plaintext highlighter-rouge">ub.toByte</code>,
+respectively.</p>
+
+<h2 id="alternatives">Alternatives</h2>
+
+<p>The only other alternative is the status quo, where no unsigned integer types
+exist, and difficult 2’s complement-aware manipulations must be done when we
+need them.</p>
+
+<h2 id="design">Design</h2>
+
+<p>Naively, the design of the API is straightforward. We would define 4 new
+data types <code class="language-plaintext highlighter-rouge">UByte</code>, <code class="language-plaintext highlighter-rouge">UShort</code>, <code class="language-plaintext highlighter-rouge">UInt</code> and <code class="language-plaintext highlighter-rouge">ULong</code>, corresponding to the 4
+signed integer data types. They feature the same set of arithmetic and logic
+operations, as well as comparisons. However, such a naive design causes
+several issues, especially when signed integers and unsigned integers interact
+in operations.</p>
+
+<p>Here, we discuss the set of operations available, and their semantics.</p>
+
+<h3 id="no-arithmeticlogic-operations-between-signed-and-unsigned-integers">No arithmetic/logic operations between signed and unsigned integers</h3>
+
+<p>To prevent typical caveats when mixing signed and unsigned integers in most
+languages, we simply <em>forbid</em> any arithmetic or logic operations with operands
+of different signedness.</p>
+
+<h3 id="universal-equality-and-hash-codes">Universal equality, and hash codes</h3>
+
+<p>The universal equality operators (<code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code>) should behave consistently
+across signed and unsigned types. Since <code class="language-plaintext highlighter-rouge">5.toByte == 5</code> in Scala, we should
+also have <code class="language-plaintext highlighter-rouge">5.toUInt == 5</code>. This requires to modify the <code class="language-plaintext highlighter-rouge">==</code> implementation
+(in <code class="language-plaintext highlighter-rouge">BoxesRunTime</code>) to implement cooperative equality checks between all
+combinations of signed and unsigned values.</p>
+
+<p>Negative values of signed integers are <em>not</em> equal to any unsigned integer
+value. For example, this means that <code class="language-plaintext highlighter-rouge">(-1).toUInt != -1</code>. This is very simply
+explained by the fact that the mathematical value of <code class="language-plaintext highlighter-rouge">(-1).toUInt</code> is
+4294967295.</p>
+
+<p>Because of transitivity of equality, it must be the case that a large value of
+an unsigned integer (whose signed reinterpretation is negative, such as
+<code class="language-plaintext highlighter-rouge">0xffffffff.toUInt</code>) <em>is</em> equal to values of a larger signed integer types
+(such as <code class="language-plaintext highlighter-rouge">0xffffffffL</code>).</p>
+
+<p>Hash codes, as computed by <code class="language-plaintext highlighter-rouge">##</code>, must be made consistent with the generalized
+form of universal equality.</p>
+
+<p>Note that this definition of universal equality is <em>essential</em> for these new
+primitives to be usable for interoperability scenarios in Scala.js. This is
+because, at runtime, “boxed” versions of numeric types loose their type
+information, as they are all stuffed into primitive JavaScript numbers.
+Therefore, <code class="language-plaintext highlighter-rouge">0xffff.toUShort</code> is indistinguishable from <code class="language-plaintext highlighter-rouge">0xffff</code>, and they must
+be equal for this “non-boxing” to be valid.</p>
+
+<h3 id="operations-on-ubyte-and-ushort">Operations on <code class="language-plaintext highlighter-rouge">UByte</code> and <code class="language-plaintext highlighter-rouge">UShort</code></h3>
+
+<p>By analogy to the fact that operations on <code class="language-plaintext highlighter-rouge">Byte</code>s and <code class="language-plaintext highlighter-rouge">Short</code> start by
+converting their operands to <code class="language-plaintext highlighter-rouge">Int</code>s (using sign-extend), operations on <code class="language-plaintext highlighter-rouge">UByte</code>s
+and <code class="language-plaintext highlighter-rouge">UShort</code>s convert their operands to <code class="language-plaintext highlighter-rouge">UInt</code>s (without sign-extend,
+obviously).</p>
+
+<h3 id="arithmetic-operations-on-uints-and-ulongs">Arithmetic operations on <code class="language-plaintext highlighter-rouge">UInt</code>s and <code class="language-plaintext highlighter-rouge">ULong</code>s.</h3>
+
+<p>For two operands of the same unsigned integer type with N bits, <code class="language-plaintext highlighter-rouge">a + b</code>,
+<code class="language-plaintext highlighter-rouge">a - b</code>, <code class="language-plaintext highlighter-rouge">a * b</code>, <code class="language-plaintext highlighter-rouge">a / b</code> and <code class="language-plaintext highlighter-rouge">a % b</code> are computed modulo <code class="language-plaintext highlighter-rouge">2^N</code>.
+For <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">*</code>, this boils down to a primitive (signed) equivalent
+operations, on the JVM. <code class="language-plaintext highlighter-rouge">/</code> and <code class="language-plaintext highlighter-rouge">%</code> correspond to
+<code class="language-plaintext highlighter-rouge">java.lang.{Integer,Long}.divideUnsigned</code> and <code class="language-plaintext highlighter-rouge">remainderUnsigned</code>.</p>
+
+<p>If one of the operand is a <code class="language-plaintext highlighter-rouge">ULong</code> but the other isn’t, the latter is converted
+to a <code class="language-plaintext highlighter-rouge">ULong</code> before performing the operation.</p>
+
+<p>There is no <code class="language-plaintext highlighter-rouge">unary_-</code>, because unsigned integers have no opposite. It could be
+argued that <code class="language-plaintext highlighter-rouge">-x</code> could be useful for low-level bit-twiddling-based algorithms.
+However, in that case, <code class="language-plaintext highlighter-rouge">~x + 1.toUInt</code> can be used instead. A basic peephole
+optimizer can simplify the latter as <code class="language-plaintext highlighter-rouge">-x</code> on platforms where this is relevant.</p>
+
+<h3 id="logic-bitwise-operations-on-uints-and-ulongs">Logic (bitwise) operations on <code class="language-plaintext highlighter-rouge">UInt</code>s and <code class="language-plaintext highlighter-rouge">ULong</code>s</h3>
+
+<p><code class="language-plaintext highlighter-rouge">unary_~</code>, <code class="language-plaintext highlighter-rouge">|</code>, <code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">^</code> behave in the obvious way. If you want a precise
+spec, they always behave as if the operand was reinterpreted into its signed
+equivalent, then the operation performed, then the result reinterpreted back
+into unsigned.</p>
+
+<h3 id="bit-shifting-operations-on-uints-and-ulongs">Bit shifting operations on <code class="language-plaintext highlighter-rouge">UInt</code>s and <code class="language-plaintext highlighter-rouge">ULong</code>s</h3>
+
+<p>Shift left <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> and shift logical right <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code> behave in the obvious way.</p>
+
+<p>The case of shift arithmetic right <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> is debatable. We argue that it should
+<em>not</em> be available on unsigned integers for two reasons.</p>
+
+<p>First, a shift arithmetic right does not appear to have any <em>meaning</em> on
+unsigned integers. The correct <em>arithmetic</em> shift if <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code>. Therefore,
+similarly to <code class="language-plaintext highlighter-rouge">unary_-</code>, it should not be introduced.</p>
+
+<p>Second, existing languages that do have unsigned integer types, such as the C
+family, actually give different semantics to <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> depending on whether it has
+a signed or unsigned operand: a <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> on an unsigned operand does <em>not</em>
+sign-extend. It would be confusing to a C developer for <code class="language-plaintext highlighter-rouge">x &gt;&gt; 3</code> to sign-extend
+in Scala, but it would be equally confusing to a Scala developer that <code class="language-plaintext highlighter-rouge">x &gt;&gt; 3</code>
+<em>not</em> sign-extend. Therefore, we prefer to leave it out completely, and let a
+compiler error be raised.</p>
+
+<p>If a bit-twiddling-based algorithm needs the sign-extending shift right, it is
+always possible to reinterpret as signed, do the operation, and reinterpret
+back as unsigned: <code class="language-plaintext highlighter-rouge">(x.toInt &gt;&gt; 3).toUInt</code>.</p>
+
+<p>Note: the current implementation does provide <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>, until we agree on this
+point.</p>
+
+<h3 id="inequality-operators">Inequality operators</h3>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;=</code> perform unsigned comparisons. On the JVM, they correspond
+to <code class="language-plaintext highlighter-rouge">java.lang.{Integer,Long}.compareUnsigned</code>.</p>
+
+<h3 id="string-representation">String representation</h3>
+
+<p>The string representation is similar to that of signed integers, except that
+all numbers are positive, obviously. On the JVM, they correspond to
+<code class="language-plaintext highlighter-rouge">java.lang.{Integer,Long}.toUnsignedString</code>.</p>
+
+<h3 id="implicit-widening-conversions">Implicit widening conversions</h3>
+
+<p>Unsigned integers can be implicitly widened to “larger” unsigned integer types.
+For example, <code class="language-plaintext highlighter-rouge">UShort</code> can be implicitly converted to <code class="language-plaintext highlighter-rouge">UInt</code> and <code class="language-plaintext highlighter-rouge">ULong</code>.</p>
+
+<p>There are no implicit conversions between signed and unsigned integers. It might
+be tempting to allow unsigned integers to be widened to larger signed integer
+types, since they can always accommodate their mathematical values. However,
+this consequently allows operations between signed and unsigned integers, such
+as <code class="language-plaintext highlighter-rouge">5L + 4.toUInt</code>, because of the conversion from <code class="language-plaintext highlighter-rouge">UInt</code> to <code class="language-plaintext highlighter-rouge">Long</code>. Since we
+want to disallow those to prevent caveats, we do not allow the implicit
+conversions.</p>
+
+<h3 id="explicit-conversions-between-signed-and-unsigned">Explicit conversions between signed and unsigned</h3>
+
+<p>We have already extensively used explicit conversions between signed and
+unsigned integer types <em>of the same size</em> in this document, such as
+<code class="language-plaintext highlighter-rouge">someInt.toUInt</code>. These are specified as reinterpreting the bit pattern into
+the other type, with the common specification that integer types are represented
+in 2’s complement.</p>
+
+<p><em>Narrowing</em> conversions are also allowed in both directions, such as
+<code class="language-plaintext highlighter-rouge">someInt.toUByte</code> or <code class="language-plaintext highlighter-rouge">someUInt.toByte</code>. They are equally well specified as
+either <code class="language-plaintext highlighter-rouge">someInt.toUInt.toUByte</code> or <code class="language-plaintext highlighter-rouge">someInt.toByte.toUByte</code>, with the same
+results, and therefore no ambiguity exists.</p>
+
+<p><em>Widening</em> conversions from unsigned integers to larger signed integers is
+allowed, and is specified by conserving the mathematical value, i.e., the
+widening does <em>not</em> sign-extend.</p>
+
+<p>Finally, widening conversions from signed integers to larger unsigned integers
+is <em>disallowed</em>, because both interpretations are equally valid, and therefore
+half of the developers will have the wrong expectation. For example,
+<code class="language-plaintext highlighter-rouge">someInt.toULong</code> can be equally validly specified as <code class="language-plaintext highlighter-rouge">someInt.toUInt.toULong</code>
+or <code class="language-plaintext highlighter-rouge">someInt.toLong.toULong</code>, but those do not yield the same result (the former
+does not sign-extend while the latter does).</p>
+
+<h3 id="consequences-on-other-parts-of-the-library">Consequences on other parts of the library</h3>
+
+<p><code class="language-plaintext highlighter-rouge">scala.math</code> should receive new overloads of <code class="language-plaintext highlighter-rouge">max</code> and <code class="language-plaintext highlighter-rouge">min</code>, taking unsigned
+integer types as parameters, and performing the comparisons with unsigned
+semantics.</p>
+
+<p>There should be instances of the <code class="language-plaintext highlighter-rouge">Ordering</code> typeclass for unsigned integer
+types.</p>
+
+<p>There should <em>not</em> be instances of the <code class="language-plaintext highlighter-rouge">Numeric</code> and <code class="language-plaintext highlighter-rouge">Integral</code> typeclasses
+for unsigned integer types, since they do not support <code class="language-plaintext highlighter-rouge">unary_-</code>.</p>
+
+<p>It might be tempting to define <code class="language-plaintext highlighter-rouge">Range</code>s over unsigned integers, but we do not
+want to go there.</p>
+
+<h3 id="performance-considerations">Performance considerations</h3>
+
+<p>Since they will inevitably be “branded” as primitive data types, unsigned
+integer types should be as efficient as signed integer types.</p>
+
+<p>Fortunately, the JDK 8 added the necessary methods in the standard JDK to
+trivially implement all the operations on unsigned integers. It is expected
+that these methods be as fast primitive operations, since they can be
+intrinsified easily.</p>
+
+<p>There also exist efficient implementations of these methods in Scala.js. LLVM
+supports the relevant operations by default for ScalaNative, obviously.</p>
+
+<p>The implementations in <code class="language-plaintext highlighter-rouge">BoxesRunTime</code> for universal equality and hash codes
+receives additional cases, which could slow down <code class="language-plaintext highlighter-rouge">==</code> on <code class="language-plaintext highlighter-rouge">Any</code>s and generic
+values. However, if a codebase does not use any unsigned integer, the JVM,
+using global knowledge, can statically determine that the new type tests are
+always <code class="language-plaintext highlighter-rouge">false</code> and therefore remove them. There should be no performance
+penalty on such codebases.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Because of the cooperative equality with primitive signed integers, the
+addition of unsigned integers must necessarily integrate the core library.</p>
+
+<p>Besides that, there are two major strategies for the implementation: mostly
+user-space or mostly in compiler-space.</p>
+
+<h3 id="mostly-user-space-vs-compiler-space">Mostly user-space vs compiler-space</h3>
+
+<p>An existing implementation living mostly in user-space can be found at
+https://github.com/scala/scala/compare/2.12.x…sjrd:uints</p>
+
+<p>In this approach, unsigned integer types are user-defined <code class="language-plaintext highlighter-rouge">AnyVal</code>s, and all
+the new methods are implemented in the library. The compiler needs very little
+adaptations; basically only to dispatch <code class="language-plaintext highlighter-rouge">==</code> of unsigned integers to
+<code class="language-plaintext highlighter-rouge">BoxesRunTime</code> (otherwise, it is “optimized” as directly calling <code class="language-plaintext highlighter-rouge">equals()</code>).</p>
+
+<p>This approach has obvious advantages:</p>
+<ul>
+  <li>Little room for mistakes</li>
+  <li>Very simple implementation</li>
+  <li>Minimal impact on the compiler</li>
+</ul>
+
+<p>However, it also suffers from a couple of limitations, because the new
+“primitive” data types are not really primitive, and do not receive some of the
+semantic treatment of primitives.</p>
+
+<p>First, unboxing from <code class="language-plaintext highlighter-rouge">null</code>: a primitive data type unboxes <code class="language-plaintext highlighter-rouge">null</code> to its zero,
+but user-defined <code class="language-plaintext highlighter-rouge">AnyVal</code>s throw in those situations. One way to fix this would
+be to “fix” the behavior on <code class="language-plaintext highlighter-rouge">AnyVal</code>s in general, which we think would be a good
+idea on its own anyway.</p>
+
+<p>Second, weak conformance: unsigned integers don’t receive the weak conformance
+properties. However, we argue that this is no big deal. The main use case for
+weak conformance is so that <code class="language-plaintext highlighter-rouge">List(1, 5, 3.5)</code> can be inferred as a
+<code class="language-plaintext highlighter-rouge">List[Double]</code> instead of a <code class="language-plaintext highlighter-rouge">List[AnyVal]</code>. The problem initially happens
+because of the way we write literal integers and literal doubles. Since unsigned
+integers have no literal notation, and are not implicitly compatible with
+signed integers nor doubles, this point is moot.</p>
+
+<p>In the short term, these limitations do not appear important, and we could live
+with them.</p>
+
+<p>More importantly, however, this implementation prevents specialization to be
+applied on unsigned integers, and imposes harsh constraints on how back-ends
+can implement unsigned integers.</p>
+
+<p>In Scala.js these constraints are not too hard from the point of view of
+interoperability scenarios, although they could limit the performance we can
+get out of unsigned integers. Since interoperability is paramount, we can again
+live with the constraints for the time being.</p>
+
+<p>For ScalaNative, the consequences of these constraints are, as of yet, unknown,
+but they could affect interoperability scenarios, and will most probably affect
+performance.</p>
+
+<p>In the longer term, we should therefore consider more tightly integrating
+unsigned integer types as true primitives of the compiler.</p>
+
+<p>Such a strategy will however be much riskier, and will take much more time to
+get right.</p>
+
+<h3 id="performance-evaluation">Performance evaluation</h3>
+
+<p>To evaluate performance of our prototype we’ve implemented a simple jmh
+benchmark generator that checks composite performance of evaluation of complex
+arithmetic expressions for all number types (both primitive signed ones and
+user-defined unsigned ones.)</p>
+
+<p>For each type we’ve generated 4 benchmarks that use <code class="language-plaintext highlighter-rouge">+, -, *</code> ops (fastops)
+and 4 benchmarks that use <code class="language-plaintext highlighter-rouge">+, -, *, /, %</code> (allops). Each of the 4 benchmarks uses exactly
+the same arithmetic expressions for all types. Benchmarks on bytes and shorts wrap back
+to corresponding type after each operation.</p>
+
+<p>The split between fastops and allops is important because unsigned division is
+quite a bit slower than signed one on latest release of JDK 8:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Benchmark   Type           Score        Error  Units
+
+division    Int    289644141.092 ±   1544.707  ops/s
+division    UInt   129838344.866 ±  95523.094  ops/s
+division    Long   129839962.558 ±  90581.655  ops/s
+division    ULong  116493219.034 ±  67688.631  ops/s
+
+remainder   Int    289454769.011 ±  94380.057  ops/s
+remainder   UInt   111032938.420 ± 679921.289  ops/s
+remainder   Long   128315753.345 ±  35932.509  ops/s
+remainder   ULong   97470062.788 ± 346773.054  ops/s
+</code></pre></div></div>
+
+<p>And here are the results of composite benchmarks.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Benchmark  Type            Score          Error  Units
+
+allop0     Byte     76612958.318 ±    97814.015  ops/s
+allop0     UByte    26160709.822 ±     2098.556  ops/s
+allop0     Short    76800575.238 ±    75373.970  ops/s
+allop0     UShort   27172978.979 ±     3244.075  ops/s
+allop0     Int      82816920.142 ±    50194.565  ops/s
+allop0     UInt     27232792.726 ±     5116.920  ops/s
+allop0     Long     28648964.226 ±     6115.162  ops/s
+allop0     ULong    29657228.040 ±   159758.363  ops/s
+
+allop1     Byte     73715102.215 ±    17282.291  ops/s
+allop1     UByte    26490808.836 ±    86628.862  ops/s
+allop1     Short    73718029.884 ±    19413.132  ops/s
+allop1     UShort   27041330.181 ±     4533.663  ops/s
+allop1     Int      83239625.538 ±    13575.756  ops/s
+allop1     UInt     28425497.966 ±    10927.728  ops/s
+allop1     Long     29251967.961 ±     8278.100  ops/s
+allop1     ULong    30537156.474 ±    14283.996  ops/s
+
+allop2     Byte     53138040.117 ±     7692.219  ops/s
+allop2     UByte    19912528.484 ±   104896.763  ops/s
+allop2     Short    52989318.748 ±    10075.293  ops/s
+allop2     UShort   19828139.740 ±      217.796  ops/s
+allop2     Int      60104405.263 ±     1888.322  ops/s
+allop2     UInt     20576204.367 ±      446.445  ops/s
+allop2     Long     20752333.428 ±      789.741  ops/s
+allop2     ULong    22949083.651 ±     5766.597  ops/s
+
+allop3     Byte     68147811.661 ±     7349.838  ops/s
+allop3     UByte    28016596.929 ±     4795.992  ops/s
+allop3     Short    68147020.665 ±     8444.864  ops/s
+allop3     UShort   29092855.210 ±    12323.477  ops/s
+allop3     Int      93592095.470 ±     2970.030  ops/s
+allop3     UInt     33298135.046 ±    15681.174  ops/s
+allop3     Long     32276341.887 ±     3748.706  ops/s
+allop3     ULong    53345993.564 ±     5486.483  ops/s
+
+fastop0    Byte    174384841.686 ±    13685.151  ops/s
+fastop0    UByte   172490336.775 ±    42178.142  ops/s
+fastop0    Short   174388762.469 ±    10303.837  ops/s
+fastop0    UShort  172545184.374 ±    37150.012  ops/s
+fastop0    Int     335919041.150 ±   121423.806  ops/s
+fastop0    UInt    335925277.378 ±   120408.170  ops/s
+fastop0    Long    339125057.494 ±    71538.513  ops/s
+fastop0    ULong   339306595.964 ±    70387.619  ops/s
+
+fastop1    Byte    174736448.461 ±     9934.579  ops/s
+fastop1    UByte   173817403.787 ±    20752.221  ops/s
+fastop1    Short   174734415.599 ±     9850.473  ops/s
+fastop1    UShort  173460828.250 ±    18068.154  ops/s
+fastop1    Int     285178506.838 ±   129027.835  ops/s
+fastop1    UInt    285137070.275 ±   145958.174  ops/s
+fastop1    Long    285590926.722 ±   147048.419  ops/s
+fastop1    ULong   274695574.679 ±  4878290.228  ops/s
+
+fastop2    Byte    168971931.233 ±    40481.486  ops/s
+fastop2    UByte   169665745.096 ±    27401.842  ops/s
+fastop2    Short   168979347.127 ±    11033.548  ops/s
+fastop2    UShort  169675543.605 ±    19494.266  ops/s
+fastop2    Int     287563728.176 ±   122987.272  ops/s
+fastop2    UInt    287559086.868 ±   126833.074  ops/s
+fastop2    Long    296129286.397 ±   171488.897  ops/s
+fastop2    ULong   296142819.979 ±   167330.949  ops/s
+
+fastop3    Byte    333536457.973 ±    63928.967  ops/s
+fastop3    UByte   339343014.623 ±   119819.041  ops/s
+fastop3    Short   333535961.005 ±    69587.789  ops/s
+fastop3    UShort  339354474.225 ±   121131.393  ops/s
+fastop3    Int     475167307.642 ±   140060.266  ops/s
+fastop3    UInt    475181473.416 ±   116982.494  ops/s
+fastop3    Long    487109297.325 ±   580807.835  ops/s
+fastop3    ULong   487190439.786 ±   737565.041  ops/s
+</code></pre></div></div>
+
+<p>As you can see, fastops results have statistically insignificant differences
+between signed and unsigned numbers. The same is true for allops for <code class="language-plaintext highlighter-rouge">Long</code> vs
+<code class="language-plaintext highlighter-rouge">ULong</code>.</p>
+
+<p>Allops are 2-3x slower for <code class="language-plaintext highlighter-rouge">Byte</code>s, <code class="language-plaintext highlighter-rouge">Short</code>s and <code class="language-plaintext highlighter-rouge">Int</code>s, due to the fact that
+unsigned division isn’t as well optimised. We can probably make divisions for
+<code class="language-plaintext highlighter-rouge">UByte</code> and <code class="language-plaintext highlighter-rouge">UShort</code> faster by using the regular division at the <code class="language-plaintext highlighter-rouge">Int</code> level,
+but the current implementation does not do that yet.</p>
+
+<h3 id="time-frame">Time frame</h3>
+
+<p>We propose that unsigned integers be integrated in their user-space form as
+early as possible, ideally in Scala 2.12, should this proposal be accepted in
+time. An implementation is already available for Scalac, and it comes with an
+exhaustive unit test suite.</p>
+
+<p>In the longer term, for 2.13 or 2.14, we propose to evaluate whether the
+benefits of a compiler-space implementation outweigh the risks. The existing
+test suite will make sure that the behavior of operations is unchanged. This
+second phase should probably be studied jointly with the developments of
+ScalaNative.</p>
+
+<h2 id="previous-discussions-and-implementations">Previous discussions and implementations</h2>
+
+<p>When
+<a href="https://docs.scala-lang.org/sips/value-classes.html">Value Classes (SIP-15)</a>
+were first introduced, the possibility to have new numeric types such as
+unsigned integers was mentioned as a motivation. Subsequently, several people
+<a href="https://groups.google.com/forum/#!topic/scala-sips/xtmUjsY9gTY">came up with implementations</a>
+of unsigned Ints and Longs. Those implementations were however more hacky
+proofs of concept than a really thought-out proposal.</p>
+
+<p>Our proposal improves on those early attempts in several aspects:</p>
+
+<ul>
+  <li>Comprehensive but curated set of operations that are available on unsigned
+integers, in particular no mixing signed and unsigned integers (avoid common
+pitfalls found in other languages)</li>
+  <li>Precise semantics for all operations (a specification)</li>
+  <li>A meaningful notion of equality, which works well with other primitive types</li>
+  <li>Use JDK 8 methods to implement operations that are specific to unsigned
+integers, such as division</li>
+  <li>Complete implementation with a test and benchmark suites</li>
+</ul>
+
+<h2 id="out-of-scope">Out of scope</h2>
+
+<p>The following related aspects are out of the scope of this proposal:</p>
+
+<h3 id="literal-notation-for-unsigned-integers">Literal notation for unsigned integers</h3>
+
+<p>This proposal does not introduce any literal notation for unsigned integers.
+Instead, we always convert from signed literals, e.g., <code class="language-plaintext highlighter-rouge">5.toUInt</code>.</p>
+
+<p>Providing literal notation should be done in the context of a SIP for
+generalized user-defined literals.</p>
+
+<h3 id="efficient-arrays-of-unsigned-integers">Efficient arrays of unsigned integers</h3>
+
+<p>We do not plan to address the issue of efficient arrays of unsigned integers.
+Solving this should be part of a broader context for efficient arrays of
+user-defined value classes in general, such as the encoding used in Dotty.</p>
+
+<h2 id="unresolved-questions">Unresolved questions</h2>
+
+<ul>
+  <li>Should <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> be available on unsigned integers?</li>
+  <li>Should <code class="language-plaintext highlighter-rouge">null</code> unbox to 0 for unsigned integers even in their user-space
+implementation? This would require some more changes to the compiler.</li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="https://github.com/scala/scala/compare/2.12.x...sjrd:uints">Implementation mostly in user-space for scalac/JVM</a></li>
+</ol>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+    <div class="content-nav">
+    	<div class="inner-box sidebar-toc-wrapper sip-toc" style="">
+      
+        <h5 class="contents">SIP Committee Decision</h5>
+         <div class="tag" style="background-color: #dc322f">Rejected</div>
+           <p class="vote-text" style="color: #dc322f">
+             The committee votes to reject the proposal because of a 6% performance hit on the provided implementation by the authors.
+           </p>
+        
+    		<h5 class="contents">SIP Contents</h5>
+    		<div class="inner-toc" id="sidebar-toc">
+          <div id="toc"></div>
+    		</div>
+    		<hr>
+    		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_sips/sips/2016-07-25-unsigned-integers.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+    	</div>
+    </div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

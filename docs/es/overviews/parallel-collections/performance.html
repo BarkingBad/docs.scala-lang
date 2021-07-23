@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>
+      Midiendo el rendimiento | 
+      Parallel Collections | 
+      Scala Documentation
+    </title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:site_name" content="Scala Documentation"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://0.0.0.0:4000/es/overviews/parallel-collections/performance.html"/>
+    <meta property="og:image" content="http://0.0.0.0:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+    <meta property="og:title" content="Midiendo el rendimiento"/>
+    
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    <meta name="twitter:title" content="Midiendo el rendimiento"/>
+    
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="http://scala-lang.org/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="http://scala-lang.org/feed/blog.xml" />
+
+    <!-- Algolia stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+  </head>
+  <body>
+
+
+
+
+
+<div class="navigation-fade-screen"></div>
+
+
+
+<header id="site-header">
+  <div class="wrap">
+    <nav class="navigation" role="menu">
+      <a href="http://scala-lang.org" class="navigation-bdand">
+        <img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+      </a>
+      <div class="navigation-panel-button">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              <a href="/" class="active">Documentation</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/download/" >Download</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/community/" >Community</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://index.scala-lang.org" >Libraries</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/contribute/" >Contribute</a>
+            </li>
+        
+            <li class="navigation-menu-item">
+              <a href="https://www.scala-lang.org/blog/" >Blog</a>
+            </li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+<header id="doc-header">
+
+  <div class="wrap" style="padding: 0px;">
+    <nav class="doc-navigation" role="menu">
+      
+      <div class="navigation-bdand">
+      <a href="/">
+        <img src="/resources/img/documentation-logo@2x.png" alt="docs">
+      </a>
+      <span class="doc-language-version">
+        — Scala  2 
+      </span>
+      </div>
+      <div class="navigation-ellipsis">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="navigation-menu">
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="api" >API</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="https://www.scala-lang.org/api/current/">Current</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/api/all.html">All Versions</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="learn" >Learn</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/getting-started/index.html">Getting Started</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/es/tour/tour-of-scala.html">Tour of Scala</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/es/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/learn.html">Online Resources</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="#" id="reference" >Reference</a>
+                
+                <ul class="navigation-dropdown">
+                
+                  <li>
+                    
+                    
+                    <a href="/overviews/index.html">Guides & Overviews</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/books.html">Books</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+                  </li>
+                
+                  <li>
+                    
+                    
+                    <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+                  </li>
+                
+                </ul>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/style/index.html" id="style guide" >Style Guide</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/cheatsheets/index.html" id="cheatsheet" >Cheatsheet</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/glossary/index.html" id="glossary" >Glossary</a>
+                
+            </li>
+        
+            <li class="navigation-menu-item">
+              
+              
+              <a href="/sips/index.html" id="sips" >SIPs</a>
+                
+            </li>
+        
+      </ul>
+    </nav>
+    <nav class="doc-navigation-submenus">
+      
+        
+          <ul class="navigation-submenu" id="api" style="display: none;">
+            
+              <li>
+                <a href="https://www.scala-lang.org/api/current/">Current</a>
+              </li>
+            
+              <li>
+                <a href="/api/all.html">All Versions</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="learn" style="display: none;">
+            
+              <li>
+                <a href="/getting-started/index.html">Getting Started</a>
+              </li>
+            
+              <li>
+                <a href="/tour/tour-of-scala.html">Tour of Scala</a>
+              </li>
+            
+              <li>
+                <a href="/overviews/scala-book/introduction.html">Scala Book</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/scala-for-java-programmers.html">Scala for Java Programmers</a>
+              </li>
+            
+              <li>
+                <a href="/learn.html">Online Resources</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+          <ul class="navigation-submenu" id="reference" style="display: none;">
+            
+              <li>
+                <a href="/overviews/index.html">Guides & Overviews</a>
+              </li>
+            
+              <li>
+                <a href="/books.html">Books</a>
+              </li>
+            
+              <li>
+                <a href="/tutorials/FAQ/index.html">Scala FAQ</a>
+              </li>
+            
+              <li>
+                <a href="http://scala-lang.org/files/archive/spec/2.13/">Language Spec</a>
+              </li>
+            
+          </ul>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      <ul class="navigation-submenu ellipsis-menu" style="display: none;">
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="/style/index.html">Style Guide</a></li>
+          
+        
+          
+            <li><a href="/cheatsheets/index.html">Cheatsheet</a></li>
+          
+        
+          
+            <li><a href="/glossary/index.html">Glossary</a></li>
+          
+        
+          
+            <li><a href="/sips/index.html">SIPs</a></li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main id="inner-main">
+  <!-- Title -->
+  <section class="title-page">
+    <div class="wrap">
+      <div class="content-title-documentation">
+        
+
+        <div class="titles">
+          
+            <div class="supertitle">Parallel Collections</div>
+          
+          <h1>Midiendo el rendimiento</h1>
+        </div>
+        <div class="language-dropdown">
+          <div id="dd" class="wrapper-dropdown" tabindex="1">
+            <span>Language</span>
+              <ul class="dropdown"></ul>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="content">
+	<div class="wrap">
+		<div class="content-primary documentation">
+			<div class="inner-box">
+				<div class="toc-context">
+					<h2 id="performance-on-the-jvm">Performance on the JVM</h2>
+
+<p>Algunas veces el modelo de rendimiento de la JVM se complica debido a comentarios
+sobre el mismo, y como resultado de los mismos, se tienen concepciones equívocas del mismo.
+Por diferentes motivos, determinado código podría ofrecer un rendimiento o escalabilidad
+inferior a la esperada. A continuación ofrecemos algunos ejemplos.</p>
+
+<p>Uno de los principales motivos es que el proceso de compilación de una aplicación que se
+ejecuta sobre la JVM no es el mismo que el de un lenguaje compilado de manera estática
+(véase [<a href="https://www.ibm.com/developerworks/library/j-jtp12214/" title="dynamic-compilation">2</a>]). Los compiladores de Java y Scala traducen el código fuente en <em>bytecode</em> y
+el conjunto de optimizaciones que llevan a cabo es muy reducido. En la mayoría de las JVM
+modernas, una vez el bytecode es ejecutado, se convierte en código máquina dependiente de la
+arquitectura de la máquina subyacente. Este proceso es conocido como compilación “just-int-time”.
+Sin embargo, el nivel de optimización del código es muy bajo puesto que dicho proceso deber ser
+lo más rápido posible. Con el objetivo de evitar el proceso de recompilación, el llamado
+compilador HotSpot optimiza únicamente aquellas partes del código que son ejecutadas de manera
+frecuente. Esto supone que los desarrolladores de “benchmarks” deberán ser conscientes que los
+programas podrían presentar rendimientos dispares en diferentes ejecuciones. Múltiples ejecuciones
+de un mismo fragmento de código (por ejemplo un método) podrían ofrecer rendimientos dispares en función de
+si se ha llevado a cabo un proceso de optimización del código entre dichas ejecuciones. Adicionalmente,
+la medición de los tiempos de ejecución de un fragmento de código podría incluir el tiempo en el que
+el propio compilador JIT lleva a cabo el proceso de optimizacion, falseando los resultados.</p>
+
+<p>Otro elemento “oculto” que forma parte de la JVM es la gestión automática de la memoria. De vez en cuando,
+la ejecución de un programa es detenida para que el recolector de basura entre en funcionamiento. Si el
+programa que estamos analizando realiza alguna reserva de memoria (algo que la mayoría de programas hacen),
+el recolector de basura podría entrar en acción, posiblemente distorsionando los resultados. Con el objetivo
+de disminuir los efectos de la recolección de basura, el programa bajo estudio deberá ser ejecutado en
+múltiples ocasiones para disparar numerosas recolecciones de basura.</p>
+
+<p>Una causa muy común que afecta de manera notable al rendimiento son las conversiones implícitas que se
+llevan a cabo cuando se pasa un tipo primitivo a un método que espera un argumento genérico. En tiempo
+de ejecución, los tipos primitivos con convertidos en los objetos que los representan, de manera que puedan
+ser pasados como argumentos en los métodos que presentan parámetros genéricos. Este proceso implica un conjunto
+extra de reservas de memoria y es más lento, ocasionando nueva basura en el heap.</p>
+
+<p>Cuando nos referimos al rendimiento en colecciones paralelas la contención de la memoria es un problema muy
+común, dado que el desarrollador no dispone de un control explícito sobre la asignación de los objetos.
+De hecho, debido a los efectos ocasionados por la recolección de basura, la contención puede producirse en
+un estado posterior del ciclo de vida de la aplicación, una vez los objetos hayan ido circulando por la
+memoria. Estos efectos deberán ser tenidos en cuenta en el momento en que se esté desarrollando un benchmark.</p>
+
+<h2 id="ejemplo-de-microbenchmarking">Ejemplo de microbenchmarking</h2>
+
+<p>Numerosos enfoques permiten evitar los anteriores efectos durante el periodo de medición.
+En primer lugar, el microbenchmark debe ser ejecutado el número de veces necesario que
+permita asegurar que el compilador just-in-time ha compilado a código máquina y que
+ha optimizado el código resultante. Esto es lo que comunmente se conoce como fase de
+calentamiento.</p>
+
+<p>El microbenchmark debe ser ejecutado en una instancia independiente de la máquina virtual
+con el objetivo de reducir la cantidad de ruido proveniente de la recolección de basura
+de los objetos alocados por el propio benchmark o de compilaciones just-in-time que no
+están relacionadas con el proceso que estamos midiendo.</p>
+
+<p>Deberá ser ejecutado utilizando la versión servidora de la máquina virtual, la cual lleva a
+cabo un conjunto de optimizaciones mucho más agresivas.</p>
+
+<p>Finalmente, con el objetivo de reducir la posibilidad de que una recolección de basura ocurra
+durante la ejecución del benchmark, idealmente, debería producirse un ciclo de recolección de basura antes
+de la ejecución del benchmark, retrasando el siguiente ciclo tanto como sea posible.</p>
+
+<p>El trait <code class="language-plaintext highlighter-rouge">scala.testing.Benchmark</code> se predefine en la librería estándar de Scala y ha sido diseñado con
+el punto anterior en mente. A continuación se muestra un ejemplo del benchmarking de un operación map
+sobre un “trie” concurrente:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection.parallel.mutable.ParTrieMap
+import collection.parallel.ForkJoinTaskSupport
+
+object Map extends testing.Benchmark {
+  val length = sys.props("length").toInt
+  val par = sys.props("par").toInt
+  val partrie = ParTrieMap((0 until length) zip (0 until length): _*)
+
+  partrie.tasksupport = new ForkJoinTaskSupport(new scala.concurrent.forkjoin.ForkJoinPool(par))
+
+  def run = {
+    partrie map {
+      kv =&gt; kv
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>El método <code class="language-plaintext highlighter-rouge">run</code> encapsula el código del microbenchmark que será ejecutado de
+manera repetitiva y cuyos tiempos de ejecución serán medidos. El anterior objeto <code class="language-plaintext highlighter-rouge">Map</code> extiende
+el trait <code class="language-plaintext highlighter-rouge">scala.testing.Benchmark</code> y parsea los parámetros <code class="language-plaintext highlighter-rouge">par</code> (nivel de paralelismo) y
+<code class="language-plaintext highlighter-rouge">length</code> (número de elementos en el trie). Ambos parámetros son especificados a través de
+propiedades del sistema.</p>
+
+<p>Tras compilar el programa anterior, podríamos ejecutarlo tal y como se muestra a continuación:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=1 -Dlength=300000 Map 10
+</code></pre></div></div>
+
+<p>El flag <code class="language-plaintext highlighter-rouge">server</code> indica que la máquina virtual debe ser utiliada en modo servidor. <code class="language-plaintext highlighter-rouge">cp</code> especifica
+el classpath e incluye todos los archivos <strong>.class</strong> en el directorio actual así como el jar de
+la librería de Scala. Los argumentos <code class="language-plaintext highlighter-rouge">-Dpar</code> y <code class="language-plaintext highlighter-rouge">-Dlength</code> representan el nivel de paralelismo y
+el número de elementos respectivamente. Por último, <code class="language-plaintext highlighter-rouge">10</code> indica el número de veces que el benchmark
+debería ser ejecutado en una misma máquina virtual.</p>
+
+<p>Los tiempos de ejecución obtenidos estableciendo <code class="language-plaintext highlighter-rouge">par</code> a los valores <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">4</code> y <code class="language-plaintext highlighter-rouge">8</code> sobre un
+procesador quad-core i7 con hyperthreading habilitado son los siguientes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Map$	126	57	56	57	54	54	54	53	53	53
+Map$	90	99	28	28	26	26	26	26	26	26
+Map$	201	17	17	16	15	15	16	14	18	15
+Map$	182	12	13	17	16	14	14	12	12	12
+</code></pre></div></div>
+
+<p>Podemos observar en la tabla anterior que el tiempo de ejecución es mayor durante las
+ejecuciones iniciales, reduciéndose a medida que el código va siendo optimizado. Además,
+podemos ver que el beneficio del hyperthreading no es demasiado alto en este ejemplo
+concreto, puesto que el incremento de <code class="language-plaintext highlighter-rouge">4</code> a <code class="language-plaintext highlighter-rouge">8</code> hilos produce un incremento mínimo en
+el rendimiento.</p>
+
+<h2 id="cómo-de-grande-debe-ser-una-colección-para-utilizar-la-versión-paralela">¿Cómo de grande debe ser una colección para utilizar la versión paralela?</h2>
+
+<p>Esta es pregunta muy común y la respuesta es algo complicada.</p>
+
+<p>El tamaño de la colección a partir de la cual la paralelización merece la pena
+depende de numerosos factores. Algunos de ellos, aunque no todos, son:</p>
+
+<ul>
+  <li>
+    <p>Arquitectura de la máquina. Diferentes tipos de CPU ofrecen diferente características
+de rendimiento y escalabilidad. Por ejemplo, si la máquina es multicore o presenta
+múltiples procesadores comunicados mediante la placa base.</p>
+  </li>
+  <li>
+    <p>Versión y proveedor de la JVM. Diferentes máquinas virtuales llevan a cabo
+diferentes optimizaciones sobre el código en tiempo de ejecución. Implementan
+diferente gestion de memoria y técnicas de sincronización. Algunas de ellas no
+soportan el <code class="language-plaintext highlighter-rouge">ForkJoinPool</code>, volviendo a <code class="language-plaintext highlighter-rouge">ThreadPoolExecutor</code>, lo cual provoca
+una sobrecarga mucho mayor.</p>
+  </li>
+  <li>
+    <p>Carga de trabajo por elemento. Una función o un predicado para una colección
+paralela determina cómo de grande es la carga de trabajo por elemento. Cuanto
+menor sea la carga de trabajo, mayor será el número de elementos requeridos para
+obtener acelaraciones cuando se está ejecutando en paralelo.</p>
+  </li>
+  <li>
+    <p>Uso de colecciones específicas. Por ejemplo, <code class="language-plaintext highlighter-rouge">ParArray</code> y
+<code class="language-plaintext highlighter-rouge">ParTrieMap</code> tienen “splitters” que recorren la colección a diferentes
+velocidades, lo cual implica que existe más trabajo por elemento en el
+propio recorrido.</p>
+  </li>
+  <li>
+    <p>Operación específica. Por ejemplo, <code class="language-plaintext highlighter-rouge">ParVector</code> es mucho más lenta para los métodos
+de transformación (cómo <code class="language-plaintext highlighter-rouge">filter</code>) que para métodos de acceso (como <code class="language-plaintext highlighter-rouge">foreach</code>).</p>
+  </li>
+  <li>
+    <p>Efectos colaterales. Cuando se modifica un area de memoria de manera concurrente o
+se utiliza la sincronización en el cuerpo de un <code class="language-plaintext highlighter-rouge">foreach</code>, <code class="language-plaintext highlighter-rouge">map</code>, etc se puede
+producir contención.</p>
+  </li>
+  <li>
+    <p>Gestión de memoria. Cuando se reserva espacio para muchos objectos es posible
+que se dispare un ciclo de recolección de basura. Dependiendo de cómo se
+distribuyan las referencias de los objetos el ciclo de recolección puede llevar
+más o menos tiempo.</p>
+  </li>
+</ul>
+
+<p>Incluso de manera independiente, no es sencillo razonar sobre el conjunto de situaciones
+anteriores y determinar una respuesta precisa sobre cuál debería ser el tamaño de la
+colección. Para ilustrar de manera aproximada cuál debería ser el valor de dicho tamaño,
+a continuación, se presenta un ejemplo de una sencilla operación de reducción, <strong>sum</strong> en este caso,
+libre de efectos colaterales sobre un vector en un procesador i7 quad-core (hyperthreading
+deshabilitado) sobre JDK7</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection.parallel.immutable.ParVector
+
+object Reduce extends testing.Benchmark {
+  val length = sys.props("length").toInt
+  val par = sys.props("par").toInt
+  val parvector = ParVector((0 until length): _*)
+
+  parvector.tasksupport = new collection.parallel.ForkJoinTaskSupport(new scala.concurrent.forkjoin.ForkJoinPool(par))
+
+  def run = {
+    parvector reduce {
+      (a, b) =&gt; a + b
+    }
+  }
+}
+
+object ReduceSeq extends testing.Benchmark {
+  val length = sys.props("length").toInt
+  val vector = collection.immutable.Vector((0 until length): _*)
+
+  def run = {
+    vector reduce {
+      (a, b) =&gt; a + b
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>La primera ejecución del benchmark utiliza <code class="language-plaintext highlighter-rouge">250000</code> elementos y obtiene los siguientes resultados para <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">2</code> y <code class="language-plaintext highlighter-rouge">4</code> hilos:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=1 -Dlength=250000 Reduce 10 10
+Reduce$    54    24    18    18    18    19    19    18    19    19
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=2 -Dlength=250000 Reduce 10 10
+Reduce$    60    19    17    13    13    13    13    14    12    13
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=4 -Dlength=250000 Reduce 10 10
+Reduce$    62    17    15    14    13    11    11    11    11    9
+</code></pre></div></div>
+
+<p>Posteriormente se decrementa en número de elementos hasta <code class="language-plaintext highlighter-rouge">120000</code> y se utilizan <code class="language-plaintext highlighter-rouge">4</code> hilos para comparar
+el tiempo con la operación de reducción sobre un vector secuencial:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=4 -Dlength=120000 Reduce 10 10
+Reduce$    54    10    8    8    8    7    8    7    6    5
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dlength=120000 ReduceSeq 10 10
+ReduceSeq$    31    7    8    8    7    7    7    8    7    8
+</code></pre></div></div>
+
+<p>En este caso, <code class="language-plaintext highlighter-rouge">120000</code> elementos parece estar en torno al umbral.</p>
+
+<p>En un ejemplo diferente, utilizamos <code class="language-plaintext highlighter-rouge">mutable.ParHashMap</code> y el método <code class="language-plaintext highlighter-rouge">map</code> (un método de transformación)
+y ejecutamos el siguiente benchmark en el mismo entorno:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collection.parallel.mutable.ParHashMap
+
+object Map extends testing.Benchmark {
+  val length = sys.props("length").toInt
+  val par = sys.props("par").toInt
+  val phm = ParHashMap((0 until length) zip (0 until length): _*)
+
+  phm.tasksupport = new collection.parallel.ForkJoinTaskSupport(new scala.concurrent.forkjoin.ForkJoinPool(par))
+
+  def run = {
+    phm map {
+      kv =&gt; kv
+    }
+  }
+}
+
+object MapSeq extends testing.Benchmark {
+  val length = sys.props("length").toInt
+  val hm = collection.mutable.HashMap((0 until length) zip (0 until length): _*)
+
+  def run = {
+    hm map {
+      kv =&gt; kv
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>Para <code class="language-plaintext highlighter-rouge">120000</code> elementos obtenemos los siguientes tiempos cuando el número de hilos oscila de <code class="language-plaintext highlighter-rouge">1</code> a <code class="language-plaintext highlighter-rouge">4</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=1 -Dlength=120000 Map 10 10    
+Map$    187    108    97    96    96    95    95    95    96    95
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=2 -Dlength=120000 Map 10 10
+Map$    138    68    57    56    57    56    56    55    54    55
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=4 -Dlength=120000 Map 10 10
+Map$    124    54    42    40    38    41    40    40    39    39
+</code></pre></div></div>
+
+<p>Ahora, si reducimos el número de elementos a <code class="language-plaintext highlighter-rouge">15000</code> y comparamos con el hashmap secuencial:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=1 -Dlength=15000 Map 10 10
+Map$    41    13    10    10    10    9    9    9    10    9
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dpar=2 -Dlength=15000 Map 10 10
+Map$    48    15    9    8    7    7    6    7    8    6
+java -server -cp .:../../build/pack/lib/scala-library.jar -Dlength=15000 MapSeq 10 10
+MapSeq$    39    9    9    9    8    9    9    9    9    9
+</code></pre></div></div>
+
+<p>Para esta colección y esta operacion tiene sentido utilizar la versión paralela cuando existen más
+de <code class="language-plaintext highlighter-rouge">15000</code> elementos (en general, es factible paralelizar hashmaps y hashsets con menos elementos de
+los que serían requeridos por arrays o vectores).</p>
+
+<h2 id="referencias">Referencias</h2>
+
+<ol>
+  <li><a href="https://www.ibm.com/developerworks/java/library/j-jtp02225/index.html" title="flawed-benchmark">Anatomy of a flawed microbenchmark, Brian Goetz</a></li>
+  <li><a href="https://www.ibm.com/developerworks/library/j-jtp12214/" title="dynamic-compilation">Dynamic compilation and performance measurement, Brian Goetz</a></li>
+</ol>
+
+
+				</div>
+
+				<div class="two-columns">
+					
+					<div></div>
+					
+					
+				</div>
+
+				<div class="content-contributors">
+    <h3>Contributors to this page:</h3>
+    <div id="contributors" class="contributors-container"></div>
+</div>
+
+			</div>
+		</div>
+
+		<!-- TOC -->
+		<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5 class="contents">Contents</h5>
+        
+        
+          <div class="inner-toc" id="sidebar-toc">
+        
+
+      <ul>
+        
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+             <!-- if page is a translation, get the translated title -->
+              
+              
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+					
+
+          
+        
+      </ul>
+
+      
+         
+         
+        <ul id="available-languages" style="display: none;">
+          <li><a href="/overviews/parallel-collections/performance.html">English</a></li>
+          
+            
+            <li><a href="/ja/overviews/parallel-collections/performance.html" class="lang">日本語</a></li>
+          
+            
+            <li><a href="/zh-cn/overviews/parallel-collections/performance.html" class="lang">中文 (简体)</a></li>
+          
+            
+            <li><a href="/es/overviews/parallel-collections/performance.html" class="lang">Español</a></li>
+          
+            
+            <li><a href="/ru/overviews/parallel-collections/performance.html" class="lang">Русский</a></li>
+          
+        </ul>
+      
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/docs.scala-lang/blob/main/_es/overviews/parallel-collections/performance.md"><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              <li><a href="/getting-started.html">Getting Started</a></li>
+            
+              <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+            
+              <li><a href="/overviews">Overviews/Guides</a></li>
+            
+              <li><a href="http://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              <li><a href="http://scala-lang.org/download/">Current Version</a></li>
+            
+              <li><a href="http://scala-lang.org/download/all.html">All versions</a></li>
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              <li><a href="http://scala-lang.org/community/">Community</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#mailing-lists">Mailing Lists</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#chat-rooms">Chat Rooms & More</a></li>
+            
+              <li><a href="http://scala-lang.org/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+            
+              <li><a href="http://scala.epfl.ch/">The Scala Center</a></li>
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              <li><a href="http://scala-lang.org/contribute/">How to help</a></li>
+            
+              <li><a href="http://scala-lang.org/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              <li><a href="http://scala-lang.org/blog/">Blog</a></li>
+            
+              <li><a href="http://scala-lang.org/conduct/">Code of Conduct</a></li>
+            
+              <li><a href="http://scala-lang.org/license/">License</a></li>
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              <li><a href="https://github.com/scala/scala">GitHub</a></li>
+            
+              <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p></p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+    <a class="back-to-top in" href="#" id="scroll-to-top-btn">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</footer>
+
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<script src="/scripts/jquery-3.1.1.min.js"><\/script>');</script>
+<script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript"></script>
+
+
+
+<script src="/scripts/searchbar.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/scripts/my.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
+<!-- moment js -->
+<script src="/resources/js/vendor/moment.min.js" type="text/javascript"></script>
+
+<!-- tweet feed -->
+<script src="/resources/js/tweetMachine-update.js" type="text/javascript"></script>
+
+<!-- prettify js -->
+<script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript"></script>
+
+<!-- unslider js -->
+<script src="/resources/js/vendor/unslider.js" type="text/javascript"></script>
+
+<!-- Highlight -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/scala.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/java.min.js" type="text/javascript"></script>
+
+<!-- CodeMirror -->
+<script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+<script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+<!-- TOC -->
+<script src="/resources/js/vendor/toc.js" type="text/javascript"></script>
+
+<!-- Blog search -->
+<script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+<!-- Custom JavaScript -->
+<script src="/resources/js/functions.js" type="text/javascript"></script>
+
+
+
+<!-- Alogolia search for doc -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+if ($("#doc-search-bar").length) {
+  docsearch({
+    apiKey: 'fbc439670f5d4e3730cdcb715c359391',
+    indexName: 'scala-lang',
+    inputSelector: '#doc-search-bar',
+    algoliaOptions: { 'facetFilters': ["language:en"] },
+    debug: false // Set debug to true if you want to inspect the dropdown
+  });
+}
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,580 @@
+.snippet {
+    padding: 12px 8px 10px 12px;
+    background: var(--code-bg);
+    margin: 1em 0px;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #888;
+}
+.snippet-error {
+border-bottom: 2px dotted red;
+}
+.snippet-warn {
+border-bottom: 2px dotted orange;
+}
+.snippet-info {
+border-bottom: 2px dotted teal;
+}
+.snippet-debug {
+border-bottom: 2px dotted pink;
+}
+
+/* button */
+.search span {
+    background: var(--red500);
+    fill: var(--white);
+    cursor: pointer;
+    border: none;
+    padding: 9px;
+    border-radius: 24px;
+    box-shadow: 0 0 16px var(--code-bg);
+}
+.search span:hover {
+    background: var(--red600);
+}
+
+@media(max-width: 576px) {
+    .search span {
+        background: none;
+        fill: var(--icon-color);
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+        margin-top: 2px;
+    }
+
+    .search span:hover {
+        fill: var(--link-hover-fg);
+    }
+}
+
+#scaladoc-search {
+    margin-top: 16px;
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 5;
+}
+
+#scaladoc-searchbar.hidden {
+    display: none;
+}
+
+#scaladoc-searchbar {
+    position: fixed;
+    top: 50px;
+    left: calc(5% + var(--side-width));
+    z-index: 5;
+    width: calc(90% - var(--side-width));
+    box-shadow: 0 2px 16px 0 rgba(0, 42, 76, 0.15);
+    font-size: 13px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, sans-serif;
+    background-color: var(--leftbar-bg);
+    color: var(--leftbar-fg);
+    box-shadow: 0 0 2px var(--shadow);
+}
+
+#scaladoc-searchbar-input {
+    width: 100%;
+    min-height: 32px;
+    border: none;
+    border-bottom: 1px solid #bbb;
+    padding: 10px;
+    background-color: var(--leftbar-bg);
+    color: var(--leftbar-fg);
+}
+
+#scaladoc-searchbar-input:focus {
+    outline: none;
+}
+
+#scaladoc-searchbar-results {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.scaladoc-searchbar-result {
+    background-color: var(--leftbar-bg);
+    color: var(--leftbar-fg);
+    line-height: 24px;
+    display: flex;
+    padding: 4px 10px 4px 10px;
+}
+
+.scaladoc-searchbar-result .micon {
+    height: 16px;
+    width: 16px;
+    margin: 4px 8px 0px 0px;
+}
+
+.scaladoc-searchbar-result:first-of-type {
+    margin-top: 10px;
+}
+
+.scaladoc-searchbar-result[selected] {
+    background-color: var(--leftbar-hover-bg);
+    color: var(--leftbar-hover-fg);
+}
+
+.scaladoc-searchbar-result a {
+    /* for some reason, with display:block if there's a wrap between the
+     * search result text and the location span, the dead space to the
+     * left of the location span doesn't get treated as part of the block,
+     * which defeats the purpose of making the <a> a block element.
+     * But inline-block with width:100% works as desired.
+     */
+    display: inline-block;
+    width: 100%;
+    text-indent: -20px;
+    padding-left: 20px;
+}
+
+#searchBar {
+    display: inline-flex;
+}
+
+.pull-right {
+    float: right;
+    margin-left: auto;
+}
+
+/* Snippets */
+
+.snippet .snippet-meta {
+    border-top: 2px solid var(--inactive-bg);
+    color: var(--inactive-fg);
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 0.75em;
+}
+
+.snippet-meta .snippet-label {
+    font-weight: bold;
+}
+
+.snippet .buttons {
+    --icon-size: 24px;
+}
+
+.snippet-showhide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    --slider-width: 48px;
+    --slider-height: 20px;
+    --slider-diameter: calc(var(--slider-height) - 4px);
+}
+
+.snippet-showhide p {
+    margin-left: 4px;
+    margin-bottom: 0;
+    color: var(--inactive-fg)
+}
+
+.snippet-showhide-button {
+    display: inline-block;
+    position: relative;
+    width: var(--slider-width);
+    height: var(--slider-height);
+    margin-bottom: 0;
+}
+
+.snippet-showhide-button input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.snippet-showhide-button .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--inactive-bg);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: var(--slider-height);
+}
+
+.snippet-showhide-button .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--slider-diameter);
+    width: var(--slider-diameter);
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--inactive-fg);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.snippet-showhide-button .slider:hover::before {
+    background-color: var(--active-fg);
+}
+
+input:checked + .slider {
+    background-color: var(--active-bg);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--active-bg-shadow);
+}
+
+input:checked + .slider:before {
+    --translation-size: calc(var(--slider-width) - var(--slider-diameter) - 4px);
+    -webkit-transform: translateX(var(--translation-size));
+    -ms-transform: translateX(var(--translation-size));
+    transform: translateX(var(--translation-size));
+}
+
+.snippet .buttons .tooltip::after {
+    top: 32px;
+}
+
+.snippet .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.snippet .buttons button {
+    outline: none;
+    background: none;
+    border: none;
+    font-size: var(--icon-size);
+    color: var(--inactive-fg);
+}
+
+.snippet .buttons button:hover:not(:disabled) {
+    color: var(--inactive-fg-shadow)
+}
+
+.snippet .buttons button:active:not(:disabled) {
+    transform: translateY(2px);
+    color: var(--active-fg)
+}
+
+.snippet .buttons button:disabled {
+    color: var(--inactive-bg)
+}
+
+
+.snippet .buttons>:not(:last-child) {
+    border-left: 2px solid var(--inactive-bg);
+}
+
+.snippet .buttons>* {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.included-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.included-section a {
+    color: var(--inactive-fg) !important;
+    font-size: 0.75em;
+}
+
+.included-section b {
+    font-weight: bold;
+}
+
+.hideable.hidden {
+    display: none;
+}
+
+@media(max-width: 576px) {
+    .snippet-showhide {
+        --slider-width: 32px;
+        --slider-height: 16px;
+    }
+
+    .snippet .buttons {
+        --icon-size: 16px;
+        font-size: 16px;
+    }
+
+}
+
+@media(max-width: 360px) {
+    .snippet-showhide {
+        --slider-width: 32px;
+        --slider-height: 16px;
+    }
+
+    .snippet .buttons {
+        --icon-size: 16px;
+        font-size: 0px;
+    }
+
+}
+
+@media(max-width: 240px) {
+    .snippet-showhide {
+        --slider-width: 24px;
+        --slider-height: 10px;
+    }
+
+    .snippet .buttons {
+        --icon-size: 16px;
+        font-size: 0px;
+    }
+
+}
+
+
+.snippet-showhide-button .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--inactive-bg);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: var(--slider-height);
+}
+
+.snippet-showhide-button .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--slider-diameter);
+    width: var(--slider-diameter);
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--inactive-fg);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.snippet-showhide-button .slider:hover::before {
+    background-color: var(--active-fg);
+}
+
+input:checked + .slider {
+    background-color: var(--active-bg);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--active-bg-shadow);
+}
+
+input:checked + .slider:before {
+    --translation-size: calc(var(--slider-width) - var(--slider-diameter) - 4px);
+    -webkit-transform: translateX(var(--translation-size));
+    -ms-transform: translateX(var(--translation-size));
+    transform: translateX(var(--translation-size));
+}
+  
+.tooltip {
+    position: relative;
+}
+.tooltip:hover:after {
+    content: attr(label);
+    padding: 4px 8px;
+    color: white;
+    background-color:black;
+    position: absolute;
+    left: 0;
+    z-index:10;
+    box-shadow:0 0 3px #444;
+    opacity: 0.8;
+}
+
+.snippet .snippet-meta {
+    border-top: 2px solid var(--inactive-bg);
+    color: var(--inactive-fg);
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 0.75em;
+}
+
+.snippet-meta .snippet-label {
+    font-weight: bold;
+}
+
+.snippet .buttons {
+    --icon-size: 24px;
+}
+
+.snippet-showhide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    --slider-width: 48px;
+    --slider-height: 20px;
+    --slider-diameter: calc(var(--slider-height) - 4px);
+}
+
+.snippet-showhide p {
+    margin-left: 4px;
+    margin-bottom: 0;
+    color: var(--inactive-fg)
+}
+
+.snippet-showhide-button {
+    display: inline-block;
+    position: relative;
+    width: var(--slider-width);
+    height: var(--slider-height);
+    margin-bottom: 0;
+}
+
+.snippet-showhide-button input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+:root {
+    /* White */
+    --white: hsl(193, 24%, 99%);
+  
+    /* Black */
+    --black: hsl(200, 72%, 6%);
+  
+    /* Grey */
+    --grey100: hsl(193, 24%, 97%);
+    --grey200: hsl(193, 20%, 95%);
+    --grey300: hsl(193, 16%, 86%);
+    --grey400: hsl(193, 16%, 74%);
+    --grey500: hsl(193, 16%, 66%);
+    --grey600: hsl(193, 14%, 52%);
+    --grey700: hsl(193, 14%, 42%);
+    --grey800: hsl(193, 12%, 28%);
+    --grey900: hsl(193, 12%, 16%);
+  
+    /* Blue */
+    --blue100: hsl(200, 64%, 92%);
+    --blue200: hsl(200, 66%, 82%);
+    --blue300: hsl(200, 68%, 70%);
+    --blue400: hsl(200, 62%, 58%);
+    --blue500: hsl(200, 72%, 42%);
+    --blue600: hsl(200, 71%, 24%);
+    --blue700: hsl(200, 72%, 18%);
+    --blue800: hsl(200, 72%, 12%);
+    --blue900: hsl(200, 72%, 8%);
+  
+    /* Red */
+    --red500: hsl(1 , 60% , 92%);
+    --red500: hsl(1 , 64% , 84%);
+    --red500: hsl(1 , 66% , 72%);
+    --red500: hsl(1 , 66% , 64%);
+    --red500: hsl(1 , 71% , 52%);
+    --red600: hsl(1 , 71% , 40%);
+    --red700: hsl(1 , 72% , 32%);
+    --red800: hsl(1 , 72% , 24%);
+    --red900: hsl(1 , 75% , 12%);
+  
+    /* Diagram central node aureole */
+  
+    --aureole: hsl(40, 100%, 75%);
+  
+    /* Light Mode */
+    --border-light: var(--grey200);
+    --border-medium: var(--grey300);
+  
+    --body-bg: var(--white);
+    --body-fg: var(--grey900);
+    --title-fg: var(--grey800);
+  
+    --active-bg: var(--blue300);
+    --active-bg-shadow: var(--blue400);
+    --active-fg: var(--grey900);
+  
+    --inactive-bg: var(--grey400);
+    --inactive-bg-shadow: var(--grey700);
+    --inactive-fg: var(--grey700);
+  
+    --code-bg: var(--grey200);
+    --code-fg: var(--grey800);
+    --symbol-fg: var(--grey900);
+    --documentable-bg: var(--grey200);
+  
+    --link-fg: var(--blue500);
+    --link-hover-fg: var(--blue600);
+    --link-sig-fg: var(--blue500);
+  
+    --leftbar-bg: var(--grey100);
+    --leftbar-fg: var(--grey900);
+    --leftbar-current-bg: var(--blue100);
+    --leftbar-current-fg: var(--blue500);
+    --leftbar-hover-bg: var(--blue100);
+    --leftbar-hover-fg: var(--grey900);
+  
+    --footer-bg: var(--white);
+    --footer-fg: var(--grey700);
+  
+    --icon-color: var(--grey400);
+    --selected-fg: var(--blue900);
+    --selected-bg: var(--blue200);
+  
+    --shadow: var(--black);
+  }
+  
+    /* Dark Mode */
+  :root.theme-dark {
+    color-scheme: dark;
+  
+    --border-light: var(--blue800);
+    --border-medium: var(--blue700);
+  
+    --body-bg: var(--blue900);
+    --body-fg: var(--grey300);
+    --title-fg: var(--blue200);
+  
+    --active-bg: var(--blue500);
+    --active-bg-shadow: var(--blue400);
+    --active-fg: var(--grey300);
+  
+    --inactive-bg: var(--grey800);
+    --inactive-bg-shadow: var(--grey600);
+    --inactive-fg: var(--grey600);
+  
+    --code-bg: var(--blue800);
+    --code-fg: var(--grey400);
+    --symbol-fg: var(--grey300);
+    --documentable-bg: var(--blue800);
+  
+    --link-fg: var(--blue400);
+    --link-hover-fg: var(--blue300);
+    --link-sig-fg: var(--blue400);
+  
+    --leftbar-bg: var(--black);
+    --leftbar-fg: var(--grey300);
+    --leftbar-current-bg: var(--blue700);
+    --leftbar-current-fg: var(--white);
+    --leftbar-hover-bg: var(--blue800);
+    --leftbar-hover-fg: var(--grey300);
+  
+    --footer-bg: var(--blue900);
+    --footer-fg: var(--grey400);
+  
+    --icon-color: var(--grey600);
+    --selected-fg: var(--blue800);
+    --selected-bg: var(--blue200);
+  
+    --tab-selected: var(--white);
+    --tab-default: var(--grey300);
+  
+    --shadow: var(--white);
+  }
+  
