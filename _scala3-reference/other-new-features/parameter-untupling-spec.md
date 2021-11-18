@@ -14,27 +14,27 @@ scala3: true
 
 Say you have a list of pairs
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[(Int, Int)]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[(Int, Int)]
 </span></code></pre></div>
 
 and you want to map `xs` to a list of `Int`s so that each pair of numbers is mapped to their sum.
 Previously, the best way to do this was with a pattern-matching decomposition:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
 </span><span id="1" class="" >  case (x, y) =&gt; x + y
 </span><span id="2" class="" >}
 </span></code></pre></div>
 
 While correct, this is inconvenient. Instead, we propose to write it the following way:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
 </span><span id="1" class="" >  (x, y) =&gt; x + y
 </span><span id="2" class="" >}
 </span></code></pre></div>
 
 or, equivalently:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(_ + _)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(_ + _)
 </span></code></pre></div>
 
 Generally, a function value with `n > 1` parameters can be converted to a function with tupled arguments if the expected type is a unary function type of the form `((T_1, ..., T_n)) => U`.
@@ -63,12 +63,12 @@ Parameter untupling composes with eta-expansion. That is, an n-ary function gene
 
 If the function
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(p1, ..., pn) =&gt; e
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(p1, ..., pn) =&gt; e
 </span></code></pre></div>
 
 is feasible for parameter untupling with the expected type `TupleN[T1, ..., Tn] => Te`, then continue to type check the following adapted function
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: TupleN[T1, ..., Tn]) =&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: TupleN[T1, ..., Tn]) =&gt;
 </span><span id="1" class="" >  def p1: T1 = x._1
 </span><span id="2" class="" >  ...
 </span><span id="3" class="" >  def pn: Tn = x._n

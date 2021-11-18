@@ -14,7 +14,7 @@ previous-page: /scala3/reference/new-types/intersection-types
 
 A union type `A | B` has as values all values of type `A` and also all values of type `B`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class UserName(name: String)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class UserName(name: String)
 </span><span id="1" class="" >case class Password(hash: Hash)
 </span><span id="2" class="" >
 </span><span id="3" class="" >def help(id: UserName | Password) =
@@ -30,7 +30,7 @@ Union types are duals of intersection types. `|` is _commutative_:
 The compiler will assign a union type to an expression only if such a
 type is explicitly given. This can be seen in the following [REPL](https://docs.scala-lang.org/overviews/repl/overview.html) transcript:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; val password = Password(123)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; val password = Password(123)
 </span><span id="1" class="" >val password: Password = Password(123)
 </span><span id="2" class="" >
 </span><span id="3" class="" >scala&gt; val name = UserName(&quot;Eve&quot;)

@@ -15,7 +15,7 @@ previous-page: /scala3/reference/contextual
 Given instances (or, simply, "givens") define "canonical" values of certain types
 that serve for synthesizing arguments to [context parameters](./using-clauses.html). Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Ord[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Ord[T]:
 </span><span id="1" class="" >  def compare(x: T, y: T): Int
 </span><span id="2" class="" >  extension (x: T) def &lt; (y: T) = compare(x, y) &lt; 0
 </span><span id="3" class="" >  extension (x: T) def &gt; (y: T) = compare(x, y) &gt; 0
@@ -47,7 +47,7 @@ Such conditions are expanded by the compiler to [context parameters](./using-cla
 The name of a given can be left out. So the definitions
 of the last section can also be expressed like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Ord[Int] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Ord[Int] with
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >given [T](using Ord[T]): Ord[List[T]] with
 </span><span id="3" class="" >  ...
@@ -58,7 +58,7 @@ the implemented type(s).
 
 **Note** The name synthesized by the compiler is chosen to be readable and reasonably concise. For instance, the two instances above would get the names:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given_Ord_Int
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given_Ord_Int
 </span><span id="1" class="" >given_Ord_List_T
 </span></code></pre></div>
 
@@ -72,7 +72,7 @@ use named instances.
 
 An alias can be used to define a given instance that is equal to some expression. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given global: ExecutionContext = ForkJoinPool()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given global: ExecutionContext = ForkJoinPool()
 </span></code></pre></div>
 
 This creates a given `global` of type `ExecutionContext` that resolves to the right
@@ -82,7 +82,7 @@ returned for this and all subsequent accesses to `global`. This operation is thr
 
 Alias givens can be anonymous as well, e.g.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Position = enclosingTree.position
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Position = enclosingTree.position
 </span><span id="1" class="" >given (using config: Config): Factory = MemoizingFactory(config)
 </span></code></pre></div>
 
@@ -94,7 +94,7 @@ but it can only implement a single type.
 Given aliases can have the `inline` and `transparent` modifiers.
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline given mkAnnotations[A, T]: Annotations[A, T] = ${
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline given mkAnnotations[A, T]: Annotations[A, T] = ${
 </span><span id="1" class="" >  // code producing a value of a subtype of Annotations
 </span><span id="2" class="" >}
 </span></code></pre></div>
@@ -105,7 +105,7 @@ Since `mkAnnotations` is `transparent`, the type of an application is the type o
 
 Given instances can also appear in patterns. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >for given Context &lt;- applicationContexts do
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >for given Context &lt;- applicationContexts do
 </span><span id="1" class="" >
 </span><span id="2" class="" >pair match
 </span><span id="3" class="" >  case (ctx @ given Context, y) =&gt; ...
@@ -125,7 +125,7 @@ But the new special type `scala.util.NotGiven` now implements negation directly.
 For any query type `Q`, `NotGiven[Q]` succeeds if and only if the implicit
 search for `Q` fails, for example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.util.NotGiven
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.util.NotGiven
 </span><span id="1" class="" >
 </span><span id="2" class="" >trait Tagged[A]
 </span><span id="3" class="" >

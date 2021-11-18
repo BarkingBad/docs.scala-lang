@@ -21,7 +21,7 @@ The [`scala.compiletime`](https://scala-lang.org/api/3.x/scala/compiletime.html)
 `constValue` is a function that produces the constant value represented by a
 type.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.constValue
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.constValue
 </span><span id="1" class="" >import scala.compiletime.ops.int.S
 </span><span id="2" class="" >
 </span><span id="3" class="" >transparent inline def toIntC[N]: Int =
@@ -46,7 +46,7 @@ given a type `T`, returns optionally the default value of `T`, if it exists.
 We can already express this using rewrite match expressions and a simple
 helper function, `scala.compiletime.erasedValue`, which is defined as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def erasedValue[T]: T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def erasedValue[T]: T
 </span></code></pre></div>
 
 The `erasedValue` function _pretends_ to return a value of its type argument `T`.
@@ -55,7 +55,7 @@ is removed from the code while inlining.
 
 Using `erasedValue`, we can then define `defaultValue` as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.erasedValue
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.erasedValue
 </span><span id="1" class="" >
 </span><span id="2" class="" >transparent inline def defaultValue[T] =
 </span><span id="3" class="" >  inline erasedValue[T] match
@@ -73,7 +73,7 @@ Using `erasedValue`, we can then define `defaultValue` as follows:
 
 Then:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val dInt: Some[Int] = defaultValue[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val dInt: Some[Int] = defaultValue[Int]
 </span><span id="1" class="" >val dDouble: Some[Double] = defaultValue[Double]
 </span><span id="2" class="" >val dBoolean: Some[Boolean] = defaultValue[Boolean]
 </span><span id="3" class="" >val dAny: None.type = defaultValue[Any]
@@ -85,7 +85,7 @@ return the integer _value_ corresponding to it.
 Consider the definitions of numbers as in the _Inline
 Match_ section above. Here is how `toIntT` can be defined:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def toIntT[N &lt;: Nat]: Int =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def toIntT[N &lt;: Nat]: Int =
 </span><span id="1" class="" >  inline scala.compiletime.erasedValue[N] match
 </span><span id="2" class="" >    case _: Zero.type =&gt; 0
 </span><span id="3" class="" >    case _: Succ[n] =&gt; toIntT[n] + 1
@@ -102,13 +102,13 @@ can safely use it to scrutinize its return type (`S[S[Z]]` in this case).
 The `error` method is used to produce user-defined compile errors during inline expansion.
 It has the following signature:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def error(inline msg: String): Nothing
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def error(inline msg: String): Nothing
 </span></code></pre></div>
 
 If an inline expansion results in a call `error(msgStr)` the compiler
 produces an error message containing the given `msgStr`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.{error, code}
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.{error, code}
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def fail() =
 </span><span id="3" class="" >  error(&quot;failed for a reason&quot;)
@@ -118,7 +118,7 @@ produces an error message containing the given `msgStr`.
 
 or
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def fail(p1: =&gt; Any) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def fail(p1: =&gt; Any) =
 </span><span id="1" class="" >  error(code&quot;failed on: $p1&quot;)
 </span><span id="2" class="" >
 </span><span id="3" class="" >fail(identity(&quot;foo&quot;)) // error: failed on: identity(&quot;foo&quot;)
@@ -133,7 +133,7 @@ primitive operations on singleton types. For example,
 `Boolean` types. When all arguments to a type in `scala.compiletime.ops` are
 singleton types, the compiler can evaluate the result of the operation.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.int.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.int.*
 </span><span id="1" class="" >import scala.compiletime.ops.boolean.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >val conjunction: true &amp;&amp; true = true
@@ -145,7 +145,7 @@ Many of these singleton operation types are meant to be used infix (as in [SLS Â
 Since type aliases have the same precedence rules as their term-level
 equivalents, the operations compose with the expected precedence rules:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.int.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.int.*
 </span><span id="1" class="" >val x: 1 + 2 * 3 = 7
 </span></code></pre></div>
 
@@ -155,7 +155,7 @@ addition of two numbers, while `scala.compiletime.ops.string.+` represents strin
 concatenation. To use both and distinguish the two types from each other, a
 match type can dispatch to the correct implementation:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.ops.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >import scala.annotation.infix
 </span><span id="3" class="" >
@@ -177,7 +177,7 @@ written as a logic program itself. Consider for instance the problem of creating
 a `TreeSet[T]` or a `HashSet[T]` depending on whether `T` has an `Ordering` or
 not. We can create a set of implicit definitions like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait SetFor[T, S &lt;: Set[T]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait SetFor[T, S &lt;: Set[T]]
 </span><span id="1" class="" >
 </span><span id="2" class="" >class LowPriority:
 </span><span id="3" class="" >  implicit def hashSetFor[T]: SetFor[T, HashSet[T]] = ...
@@ -205,7 +205,7 @@ By contrast, the new `summonFrom` construct makes implicit search available
 in a functional context. To solve the problem of creating the right set, one
 would use it as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonFrom
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonFrom
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def setFor[T]: Set[T] = summonFrom {
 </span><span id="3" class="" >  case ord: Ordering[T] =&gt; new TreeSet[T]()(using ord)
@@ -220,7 +220,7 @@ Patterns are tried in sequence. The first case with a pattern `x: T` such that a
 
 Alternatively, one can also use a pattern-bound given instance, which avoids the explicit using clause. For instance, `setFor` could also be formulated as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonFrom
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonFrom
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def setFor[T]: Set[T] = summonFrom {
 </span><span id="3" class="" >  case given Ordering[T] =&gt; new TreeSet[T]
@@ -233,7 +233,7 @@ Alternatively, one can also use a pattern-bound given instance, which avoids the
 Consequently, if we summon an `Ordering[String]` the code above will return a
 new instance of `TreeSet[String]`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Ordering[String]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Ordering[String]]
 </span><span id="1" class="" >
 </span><span id="2" class="" >println(setFor[String].getClass) // prints class scala.collection.immutable.TreeSet
 </span></code></pre></div>
@@ -242,7 +242,7 @@ new instance of `TreeSet[String]`.
 code with two givens in scope of type `A`. The pattern match in `f` will raise
 an ambiguity error of `f` is applied.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
 </span><span id="1" class="" >given a1: A = new A
 </span><span id="2" class="" >given a2: A = new A
 </span><span id="3" class="" >
@@ -257,7 +257,7 @@ The shorthand `summonInline` provides a simple way to write a `summon` that is d
 Unlike `summonFrom`, `summonInline` also yields the implicit-not-found error, if a given instance of the summoned
 type is not found.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonInline
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.summonInline
 </span><span id="1" class="" >import scala.annotation.implicitNotFound
 </span><span id="2" class="" >
 </span><span id="3" class="" >@implicitNotFound(&quot;Missing One&quot;)

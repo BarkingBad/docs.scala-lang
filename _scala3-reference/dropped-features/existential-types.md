@@ -32,7 +32,7 @@ Existential types that can be expressed using only wildcards (but not
 `forSome`) are still supported, but are treated as refined types.
 For instance, the type
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Map[_ &lt;: AnyRef, Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Map[_ &lt;: AnyRef, Int]
 </span></code></pre></div>
 
 is treated as the type `Map`, where the first type parameter

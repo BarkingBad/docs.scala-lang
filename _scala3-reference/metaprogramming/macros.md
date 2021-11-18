@@ -22,7 +22,7 @@ Additionally, within a quote or a splice we can quote or splice identifiers dire
 Readers may notice the resemblance of the two aforementioned syntactic
 schemes with the familiar string interpolation syntax.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >println(s&quot;Hello, $name, here is the result of 1 + 1 = ${1 + 1}&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >println(s&quot;Hello, $name, here is the result of 1 + 1 = ${1 + 1}&quot;)
 </span></code></pre></div>
 
 In string interpolation we _quoted_ a string and then we _spliced_ into it, two others. The first, `name`, is a reference to a value of type [`String`](https://scala-lang.org/api/3.x/scala/Predef$.html#String-0), and the second is an arithmetic expression that will be _evaluated_ followed by the splicing of its string representation.
@@ -36,7 +36,7 @@ compilation-unit at the call-site). For example, the code below presents an
 a boolean expression tree as argument. `assertImpl` evaluates the expression and
 prints it again in an error message if it evaluates to `false`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def assert(inline expr: Boolean): Unit =
 </span><span id="3" class="" >  ${ assertImpl(&apos;expr) }
@@ -71,7 +71,7 @@ is treated as a quote `'{x}`. See the Syntax section below for details.
 Quotes and splices are duals of each other.
 For arbitrary expressions `e` we have:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >${&apos;{e}} = e
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >${&apos;{e}} = e
 </span><span id="1" class="" >&apos;{${e}} = e
 </span></code></pre></div>
 
@@ -90,7 +90,7 @@ takes expressions of type `Type[T]` to types `T`.
 
 The two types can be defined in package [`scala.quoted`](https://scala-lang.org/api/3.x/scala/quoted.html) as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.quoted
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.quoted
 </span><span id="1" class="" >
 </span><span id="2" class="" >sealed trait Expr[+T]
 </span><span id="3" class="" >sealed trait Type[T]
@@ -143,7 +143,7 @@ expressiveness.
 It is possible to convert any `Expr[T => R]` into `Expr[T] => Expr[R]` and back.
 These conversions can be implemented as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T: Type, R: Type](f: Expr[T] =&gt; Expr[R])(using Quotes): Expr[T =&gt; R] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T: Type, R: Type](f: Expr[T] =&gt; Expr[R])(using Quotes): Expr[T =&gt; R] =
 </span><span id="1" class="" >  &apos;{ (x: T) =&gt; ${ f(&apos;x) } }
 </span><span id="2" class="" >
 </span><span id="3" class="" >def from[T: Type, R: Type](f: Expr[T =&gt; R])(using Quotes): Expr[T] =&gt; Expr[R] =
@@ -157,7 +157,7 @@ is legal because it is spliced, then quoted.
 
 They can be used as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val f1: Expr[Int =&gt; String] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val f1: Expr[Int =&gt; String] =
 </span><span id="1" class="" >  to((x: Expr[Int]) =&gt; &apos;{ $x.toString }) // &apos;{ (x: Int) =&gt; x.toString }
 </span><span id="2" class="" >
 </span><span id="3" class="" >val f2: Expr[Int] =&gt; Expr[String] =
@@ -169,7 +169,7 @@ One limitation of `from` is that it does not β-reduce when a lambda is called i
 In some cases we want to remove the lambda from the code, for this we provide the method `Expr.betaReduce` that turns a tree
 describing a function into a function mapping trees to trees.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Expr:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Expr:
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >  def betaReduce[...](...)(...): ... = ...
 </span></code></pre></div>
@@ -179,7 +179,7 @@ The definition of `Expr.betaReduce(f)(x)` is assumed to be functionally the same
 result of beta-reducing `f(x)` if `f` is a known lambda expression.
 `Expr.betaReduce` distributes applications of `Expr` over function arrows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Expr.betaReduce(_): Expr[(T1, ..., Tn) =&gt; R] =&gt; ((Expr[T1], ..., Expr[Tn]) =&gt; Expr[R])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Expr.betaReduce(_): Expr[(T1, ..., Tn) =&gt; R] =&gt; ((Expr[T1], ..., Expr[Tn]) =&gt; Expr[R])
 </span></code></pre></div>
 
 ## Lifting Types
@@ -191,7 +191,7 @@ Indeed, the definition of `to` above uses `T` in the next stage, there is a
 quote but no splice between the parameter binding of `T` and its
 usage. But the code can be rewritten by adding an explicit binding of a `Type[T]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T])(using Type[R], Quotes): Expr[T =&gt; R] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T])(using Type[R], Quotes): Expr[T =&gt; R] =
 </span><span id="1" class="" >  &apos;{ (x: t.Underlying) =&gt; ${ f(&apos;x) } }
 </span></code></pre></div>
 
@@ -206,13 +206,13 @@ an alias for that type at the start of the quote.
 
 For instance, the user-level definition of `to`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T], r: Type[R])(using Quotes): Expr[T =&gt; R] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T], r: Type[R])(using Quotes): Expr[T =&gt; R] =
 </span><span id="1" class="" >  &apos;{ (x: T) =&gt; ${ f(&apos;x) } }
 </span></code></pre></div>
 
 would be rewritten to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T], r: Type[R])(using Quotes): Expr[T =&gt; R] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def to[T, R](f: Expr[T] =&gt; Expr[R])(using t: Type[T], r: Type[R])(using Quotes): Expr[T =&gt; R] =
 </span><span id="1" class="" >  &apos;{
 </span><span id="2" class="" >    type T = t.Underlying
 </span><span id="3" class="" >    (x: T) =&gt; ${ f(&apos;x) }
@@ -230,7 +230,7 @@ phase-correct. If that was not the case, the phase inconsistency for
 Consider the following implementation of a staged interpreter that implements
 a compiler through staging.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >enum Exp:
 </span><span id="3" class="" >  case Num(n: Int)
@@ -244,7 +244,7 @@ a compiler through staging.
 The interpreted language consists of numbers `Num`, addition `Plus`, and variables
 `Var` which are bound by `Let`. Here are two sample expressions in the language:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val exp = Plus(Plus(Num(2), Var(&quot;x&quot;)), Num(4))
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val exp = Plus(Plus(Num(2), Var(&quot;x&quot;)), Num(4))
 </span><span id="1" class="" >val letExp = Let(&quot;x&quot;, Num(3), exp)
 </span></code></pre></div>
 
@@ -252,7 +252,7 @@ Here’s a compiler that maps an expression given in the interpreted
 language to quoted Scala code of type `Expr[Int]`.
 The compiler takes an environment that maps variable names to Scala `Expr`s.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >def compile(e: Exp, env: Map[String, Expr[Int]])(using Quotes): Expr[Int] =
 </span><span id="3" class="" >  e match
@@ -268,7 +268,7 @@ The compiler takes an environment that maps variable names to Scala `Expr`s.
 
 Running `compile(letExp, Map())` would yield the following Scala code:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ val y = 3; (2 + y) + 4 }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ val y = 3; (2 + y) + 4 }
 </span></code></pre></div>
 
 The body of the first clause, `case Num(n) => Expr(n)`, looks suspicious. `n`
@@ -279,7 +279,7 @@ correct.
 
 The `Expr.apply` method is defined in package `quoted`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package quoted
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package quoted
 </span><span id="1" class="" >
 </span><span id="2" class="" >object Expr:
 </span><span id="3" class="" >  ...
@@ -300,7 +300,7 @@ in the sense that they could all be defined in a user program without
 knowing anything about the representation of `Expr` trees. For
 instance, here is a possible instance of `ToExpr[Boolean]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ToExpr[Boolean] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ToExpr[Boolean] with
 </span><span id="1" class="" >  def toExpr(b: Boolean) =
 </span><span id="2" class="" >    if b then &apos;{ true } else &apos;{ false }
 </span></code></pre></div>
@@ -309,7 +309,7 @@ Once we can lift bits, we can work our way up. For instance, here is a
 possible implementation of `ToExpr[Int]` that does not use the underlying
 tree machinery:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ToExpr[Int] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ToExpr[Int] with
 </span><span id="1" class="" >  def toExpr(n: Int) = n match
 </span><span id="2" class="" >    case Int.MinValue    =&gt; &apos;{ Int.MinValue }
 </span><span id="3" class="" >    case _ if n &lt; 0      =&gt; &apos;{ - ${ toExpr(-n) } }
@@ -321,7 +321,7 @@ tree machinery:
 Since `ToExpr` is a type class, its instances can be conditional. For example,
 a `List` is liftable if its element type is:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: ToExpr : Type]: ToExpr[List[T]] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: ToExpr : Type]: ToExpr[List[T]] with
 </span><span id="1" class="" >  def toExpr(xs: List[T]) = xs match
 </span><span id="2" class="" >    case head :: tail =&gt; &apos;{ ${ Expr(head) } :: ${ toExpr(tail) } }
 </span><span id="3" class="" >    case Nil          =&gt; &apos;{ Nil: List[T] }
@@ -335,7 +335,7 @@ analogue of lifting.
 
 Using lifting, we can now give the missing definition of `showExpr` in the introductory example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def showExpr[T](expr: Expr[T])(using Quotes): Expr[String] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def showExpr[T](expr: Expr[T])(using Quotes): Expr[String] =
 </span><span id="1" class="" >  val code: String = expr.show
 </span><span id="2" class="" >  Expr(code)
 </span></code></pre></div>
@@ -358,13 +358,13 @@ that are not defined in the current stage? Here, we cannot construct
 the `Type[T]` tree directly, so we need to get it from a recursive
 implicit search. For instance, to implement
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Type[List[T]]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Type[List[T]]]
 </span></code></pre></div>
 
 where `T` is not defined in the current stage, we construct the type constructor
 of `List` applied to the splice of the result of searching for a given instance for `Type[T]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Type.of[ List[ summon[Type[T]].Underlying ] ]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Type.of[ List[ summon[Type[T]].Underlying ] ]
 </span></code></pre></div>
 
 This is exactly the algorithm that Scala 2 uses to search for type tags.
@@ -381,7 +381,7 @@ system. The idea is that macro elaboration can be understood as a combination of
 a macro library and a quoted program. For instance, here’s the `assert` macro
 again together with a program that calls `assert`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Macros:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Macros:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  inline def assert(inline expr: Boolean): Unit =
 </span><span id="3" class="" >    ${ assertImpl(&apos;expr) }
@@ -397,7 +397,7 @@ again together with a program that calls `assert`.
 
 Inlining the `assert` function would give the following program:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def program =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def program =
 </span><span id="1" class="" >  val x = 1
 </span><span id="2" class="" >  ${ Macros.assertImpl(&apos;{ x != 0}) }
 </span></code></pre></div>
@@ -418,7 +418,7 @@ definitions, reflecting the fact that macros have to be defined and
 compiled before they are used. Hence, conceptually the program part
 should be treated by the compiler as if it was quoted:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def program = &apos;{
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def program = &apos;{
 </span><span id="1" class="" >  val x = 1
 </span><span id="2" class="" >  ${ Macros.assertImpl(&apos;{ x != 0 }) }
 </span><span id="3" class="" >}
@@ -449,7 +449,7 @@ To avoid having incidental val bindings generated by the inlining of the `def`
 it is recommended to use an inline parameter. To illustrate this, consider an
 implementation of the `power` function that makes use of a statically known exponent:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def power(x: Double, inline n: Int) = ${ powerCode(&apos;x, &apos;n) }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def power(x: Double, inline n: Int) = ${ powerCode(&apos;x, &apos;n) }
 </span><span id="1" class="" >
 </span><span id="2" class="" >private def powerCode(x: Expr[Double], n: Expr[Int])(using Quotes): Expr[Double] =
 </span><span id="3" class="" >  n.value match
@@ -470,7 +470,7 @@ additional restriction that needs to be imposed on splices to guarantee
 soundness: code in splices must be free of side effects. The restriction
 prevents code like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: Expr[T] = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: Expr[T] = ...
 </span><span id="1" class="" >&apos;{ (y: T) =&gt; ${ x = &apos;y; 1 } }
 </span></code></pre></div>
 
@@ -488,13 +488,13 @@ verified, to be pure.
 you can expand code at runtime with a method `run`. There is also a problem with
 that invocation of `run` in splices. Consider the following expression:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ (x: Int) =&gt; ${ run(&apos;x); 1 } }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ (x: Int) =&gt; ${ run(&apos;x); 1 } }
 </span></code></pre></div>
 
 This is again phase correct, but will lead us into trouble. Indeed, evaluating
 the splice will reduce the expression `run('x)` to `x`. But then the result
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ (x: Int) =&gt; ${ x; 1 } }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{ (x: Int) =&gt; ${ x; 1 } }
 </span></code></pre></div>
 
 is no longer phase correct. To prevent this soundness hole it seems easiest to
@@ -508,7 +508,7 @@ the code it runs produces one.
 Assume we have two methods, one `map` that takes an `Expr[Array[T]]` and a
 function `f` and one `sum` that performs a sum by delegating to `map`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Macros:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Macros:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def map[T](arr: Expr[Array[T]], f: Expr[T] =&gt; Expr[Unit])
 </span><span id="3" class="" >            (using Type[T], Quotes): Expr[Unit] = &apos;{
@@ -532,13 +532,13 @@ function `f` and one `sum` that performs a sum by delegating to `map`.
 
 A call to `sum_m(Array(1,2,3))` will first inline `sum_m`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
 </span><span id="1" class="" >${_root_.Macros.sum(&apos;arr)}
 </span></code></pre></div>
 
 then it will splice `sum`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
 </span><span id="1" class="" >
 </span><span id="2" class="" >var sum = 0
 </span><span id="3" class="" >${ map(&apos;arr, x =&gt; &apos;{sum += $x}) }
@@ -547,7 +547,7 @@ then it will splice `sum`:
 
 then it will inline `map`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
 </span><span id="1" class="" >
 </span><span id="2" class="" >var sum = 0
 </span><span id="3" class="" >val f = x =&gt; &apos;{sum += $x}
@@ -557,7 +557,7 @@ then it will inline `map`:
 
 then it will expand and splice inside quotes `map`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
 </span><span id="1" class="" >
 </span><span id="2" class="" >var sum = 0
 </span><span id="3" class="" >val f = x =&gt; &apos;{sum += $x}
@@ -571,7 +571,7 @@ then it will expand and splice inside quotes `map`:
 
 Finally cleanups and dead code elimination:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr: Array[Int] = Array.apply(1, [2,3 : Int]:Int*)
 </span><span id="1" class="" >var sum = 0
 </span><span id="2" class="" >var i: Int = 0
 </span><span id="3" class="" >while i &lt; arr.length do
@@ -586,7 +586,7 @@ Finally cleanups and dead code elimination:
 Similarly to the `summonFrom` construct, it is possible to make implicit search available
 in a quote context. For this we simply provide `scala.quoted.Expr.summon`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.collection.immutable.{ TreeSet, HashSet }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.collection.immutable.{ TreeSet, HashSet }
 </span><span id="1" class="" >inline def setFor[T]: Set[T] = ${ setForExpr[T] }
 </span><span id="2" class="" >
 </span><span id="3" class="" >def setForExpr[T: Type](using Quotes): Expr[Set[T]] =
@@ -601,7 +601,7 @@ in a quote context. For this we simply provide `scala.quoted.Expr.summon`:
 inline method that can calculate either a value of type `Int` or a value of type
 `String`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def defaultOf(inline str: String) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def defaultOf(inline str: String) =
 </span><span id="1" class="" >  ${ defaultOfImpl(&apos;str) }
 </span><span id="2" class="" >
 </span><span id="3" class="" >def defaultOfImpl(strExpr: Expr[String])(using Quotes): Expr[Any] =
@@ -638,7 +638,7 @@ It is possible to deconstruct or extract values out of `Expr` using pattern matc
 
 These could be used in the following way to optimize any call to `sum` that has statically known values.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def sum(inline args: Int*): Int = ${ sumExpr(&apos;args) }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def sum(inline args: Int*): Int = ${ sumExpr(&apos;args) }
 </span><span id="1" class="" >private def sumExpr(argsExpr: Expr[Seq[Int]])(using Quotes): Expr[Int] =
 </span><span id="2" class="" >  argsExpr match
 </span><span id="3" class="" >    case Varargs(args @ Exprs(argValues)) =&gt;
@@ -660,10 +660,10 @@ Patterns `'{ ... }` can be placed in any location where Scala expects a pattern.
 
 For example
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >optimize {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >optimize {
 </span><span id="1" class="" >   sum(sum(1, a, 2), 3, b)
 </span><span id="2" class="" >} // should be optimized to 6 + a + b
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def sum(args: Int*): Int = args.sum
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def sum(args: Int*): Int = args.sum
 </span><span id="1" class="" >inline def optimize(inline arg: Int): Int = ${ optimizeExpr(&apos;arg) }
 </span><span id="2" class="" >private def optimizeExpr(body: Expr[Int])(using Quotes): Expr[Int] =
 </span><span id="3" class="" >  body match
@@ -690,7 +690,7 @@ For example
 
 Sometimes it is necessary to get a more precise type for an expression. This can be achieved using the following pattern match.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(expr: Expr[Any])(using Quotes) = expr match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(expr: Expr[Any])(using Quotes) = expr match
 </span><span id="1" class="" >  case &apos;{ $x: t } =&gt;
 </span><span id="2" class="" >    // If the pattern match succeeds, then there is
 </span><span id="3" class="" >    // some type `t` such that
@@ -703,7 +703,7 @@ Sometimes it is necessary to get a more precise type for an expression. This can
 
 This might be used to then perform an implicit search as in:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (inline sc: StringContext)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (inline sc: StringContext)
 </span><span id="1" class="" >  inline def showMe(inline args: Any*): String = ${ showMeExpr(&apos;sc, &apos;args) }
 </span><span id="2" class="" >
 </span><span id="3" class="" >private def showMeExpr(sc: Expr[StringContext], argsExpr: Expr[Seq[Any]])(using Quotes): Expr[String] =
@@ -740,7 +740,7 @@ This might be used to then perform an implicit search as in:
 Quoted pattern matching also provides higher-order patterns to match open terms. If a quoted term contains a definition,
 then the rest of the quote can refer to this definition.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{
 </span><span id="1" class="" >  val x: Int = 4
 </span><span id="2" class="" >  x * x
 </span><span id="3" class="" >}
@@ -748,13 +748,13 @@ then the rest of the quote can refer to this definition.
 
 To match such a term we need to match the definition and the rest of the code, but we need to explicitly state that the rest of the code may refer to this definition.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case &apos;{ val y: Int = $x; $body(y): Int } =&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case &apos;{ val y: Int = $x; $body(y): Int } =&gt;
 </span></code></pre></div>
 
 Here `$x` will match any closed expression while `$body(y)` will match an expression that is closed under `y`. Then
 the subexpression of type `Expr[Int]` is bound to `body` as an `Expr[Int => Int]`. The extra argument represents the references to `y`. Usually this expression is used in combination with `Expr.betaReduce` to replace the extra argument.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def eval(inline e: Int): Int = ${ evalExpr(&apos;e) }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def eval(inline e: Int): Int = ${ evalExpr(&apos;e) }
 </span><span id="1" class="" >
 </span><span id="2" class="" >private def evalExpr(e: Expr[Int])(using Quotes): Expr[Int] = e match
 </span><span id="3" class="" >  case &apos;{ val y: Int = $x; $body(y): Int } =&gt;
@@ -766,7 +766,7 @@ the subexpression of type `Expr[Int]` is bound to `body` as an `Expr[Int => Int]
 </span><span id="9" class="" >      case (Some(a), Some(b)) =&gt; Expr(a * b)
 </span><span id="10" class="" >      case _ =&gt; e
 </span><span id="11" class="" >  case _ =&gt; e
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >eval { // expands to the code: (16: Int)
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >eval { // expands to the code: (16: Int)
 </span><span id="1" class="" >  val x: Int = 4
 </span><span id="2" class="" >  x * x
 </span><span id="3" class="" >}

@@ -14,7 +14,7 @@ previous-page: /scala3/reference/other-new-features/opaques
 
 An `open` modifier on a class signals that the class is planned for extensions. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// File Writer.scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// File Writer.scala
 </span><span id="1" class="" >package p
 </span><span id="2" class="" >
 </span><span id="3" class="" >open class Writer[T]:
@@ -42,7 +42,7 @@ Classes that are not open can still be extended, but only if at least one of two
 
 - The language feature `adhocExtensions` is enabled for the extending class. This is typically enabled by an import clause in the source file of the extension:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.adhocExtensions
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.adhocExtensions
   </span></code></pre></div>
 
   Alternatively, the feature can be enabled by the compiler option `-language:adhocExtensions`.

@@ -27,7 +27,7 @@ Particular criticisms are:
 
 1. Being very powerful, implicits are easily over-used and mis-used. This observation holds in almost all cases when we talk about _implicit conversions_, which, even though conceptually different, share the same syntax with other implicit definitions. For instance, regarding the two definitions
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def i1(implicit x: T): C[T] = ...
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def i1(implicit x: T): C[T] = ...
    </span><span id="1" class="" >implicit def i2(x: T): C[T] = ...
    </span></code></pre></div>
 
@@ -39,7 +39,7 @@ Particular criticisms are:
 
 4. The syntax of implicit parameters also has shortcomings. While implicit _parameters_ are designated specifically, arguments are not. Passing an argument to an implicit parameter looks like a regular application `f(arg)`. This is problematic because it means there can be confusion regarding what parameter gets instantiated in a call. For instance, in
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def currentMap(implicit ctx: Context): Map[String, Int]
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def currentMap(implicit ctx: Context): Map[String, Int]
    </span></code></pre></div>
 
    one cannot write `currentMap("abc")` since the string `"abc"` is taken as explicit argument to the implicit `ctx` parameter. One has to write `currentMap.apply("abc")` instead, which is awkward and irregular. For the same reason, a method definition can only have one implicit parameter section and it must always come last. This restriction not only reduces orthogonality, but also prevents some useful program constructs, such as a method with a regular parameter whose type depends on an implicit value. Finally, it's also a bit annoying that implicit parameters must have a name, even though in many cases that name is never referenced.

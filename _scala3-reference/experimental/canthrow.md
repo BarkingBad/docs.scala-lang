@@ -13,7 +13,7 @@ author: Martin Odersky
 
 This page describes experimental support for exception checking in Scala 3. It is enabled by the language import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.saferExceptions
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.saferExceptions
 </span></code></pre></div>
 
 The reason for publishing this extension now is to get feedback on its usability. We are working on more advanced type systems that build on the general ideas put forward in the extension. Those type systems have application areas beyond checked exceptions. Exception checking is a useful starting point since exceptions are familiar to all Scala programmers and their current treatment leaves room for improvement.
@@ -30,17 +30,17 @@ However, exceptions in current Scala and many other languages are not reflected 
 
 The main problem with Java's checked exception model is its inflexibility, which is due to lack of polymorphism. Consider for instance the `map` function which is declared on `List[A]` like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def map[B](f: A =&gt; B): List[B]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def map[B](f: A =&gt; B): List[B]
 </span></code></pre></div>
 
 In the Java model, function `f` is not allowed to throw a checked exception. So the following call would be invalid:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(x =&gt; if x &lt; limit then x * x else throw LimitExceeded())
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(x =&gt; if x &lt; limit then x * x else throw LimitExceeded())
 </span></code></pre></div>
 
 The only way around this would be to wrap the checked exception `LimitExceeded` in an unchecked `RuntimeException` that is caught at the callsite and unwrapped again. Something like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
 </span><span id="1" class="" >    xs.map(x =&gt; if x &lt; limit then x * x else throw Wrapper(LimitExceeded()))
 </span><span id="2" class="" >  catch case Wrapper(ex) =&gt; throw ex
 </span></code></pre></div>
@@ -58,7 +58,7 @@ However, a programming language is not a framework; it has to cater also for tho
 Why does `map` work so poorly with Java's checked exception model? It's because
 `map`'s signature limits function arguments to not throw checked exceptions. We could try to come up with a more polymorphic formulation of `map`. For instance, it could look like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def map[B, E](f: A =&gt; B throws E): List[B] throws E
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def map[B, E](f: A =&gt; B throws E): List[B] throws E
 </span></code></pre></div>
 
 This assumes a type `A throws E` to indicate computations of type `A` that can throw an exception of type `E`. But in practice the overhead of the additional type parameters makes this approach unappealing as well. Note in particular that we'd have to parameterize _every method_ that takes a function argument that way, so the added overhead of declaring all these exception types looks just like a sort of ceremony we would like to avoid.
@@ -70,7 +70,7 @@ But there is a way to avoid the ceremony. Instead of concentrating on possible _
 In the _effects as capabilities_ model, an effect is expressed as an (implicit) parameter of a certain type. For exceptions we would expect parameters of type
 `CanThrow[E]` where `E` stands for the exception that can be thrown. Here is the definition of `CanThrow`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanThrow[-E &lt;: Exception]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanThrow[-E &lt;: Exception]
 </span></code></pre></div>
 
 This shows another experimental Scala feature: [erased definitions]({% link _scala3-reference/experimental/erased-defs.md %}). Roughly speaking, values of an erased class do not generate runtime code; they are erased before code generation. This means that all `CanThrow` capabilities are compile-time only artifacts; they do not have a runtime footprint.
@@ -82,7 +82,7 @@ How can the capability be produced? There are several possibilities:
 Most often, the capability is produced by having a using clause `(using CanThrow[Exc])` in some enclosing scope. This roughly corresponds to a `throws` clause
 in Java. The analogy is even stronger since alongside `CanThrow` there is also the following type alias defined in the `scala` package:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type $throws[R, +E &lt;: Exception] = CanThrow[E] ?=&gt; R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type $throws[R, +E &lt;: Exception] = CanThrow[E] ?=&gt; R
 </span></code></pre></div>
 
 That is, `R $throws E` is a context function type that takes an implicit `CanThrow[E]` parameter and that returns a value of type `R`. What's more, the compiler
@@ -96,27 +96,27 @@ A throws E₁ | ... | Eᵢ  -->  A $throws E₁ ... $throws Eᵢ
 
 Therefore, a method written like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T)(using CanThrow[E]): U
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T)(using CanThrow[E]): U
 </span></code></pre></div>
 
 can alternatively be expressed like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T): U throws E
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T): U throws E
 </span></code></pre></div>
 
 Multiple `CanThrow` capabilities can be combined in a single throws clause. For instance, the method
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m2(x: T)(using CanThrow[E1], CanThrow[E2]): U
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m2(x: T)(using CanThrow[E1], CanThrow[E2]): U
 </span></code></pre></div>
 
 can alternatively be expressed like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T): U throws E1 | E2
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: T): U throws E1 | E2
 </span></code></pre></div>
 
 The `CanThrow`/`throws` combo essentially propagates the `CanThrow` requirement outwards. But where are these capabilities created in the first place? That's in the `try` expression. Given a `try` like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
 </span><span id="1" class="" >  body
 </span><span id="2" class="" >catch
 </span><span id="3" class="" >  case ex1: Ex1 =&gt; handler1
@@ -126,7 +126,7 @@ The `CanThrow`/`throws` combo essentially propagates the `CanThrow` requirement 
 
 the compiler generates capabilities for `CanThrow[Ex1]`, ..., `CanThrow[ExN]` that are in scope as givens in `body`. It does this by augmenting the `try` roughly as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >try
 </span><span id="1" class="" >  erased given CanThrow[Ex1] = ???
 </span><span id="2" class="" >  ...
 </span><span id="3" class="" >  erased given CanThrow[ExN] = ???
@@ -141,13 +141,13 @@ these givens are erased; they will not be executed at runtime.
 
 That's it. Let's see it in action in an example. First, add an import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.saferExceptions
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.saferExceptions
 </span></code></pre></div>
 
 to enable exception checking. Now, define an exception `LimitExceeded` and
 a function `f` like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val limit = 10e9
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val limit = 10e9
 </span><span id="1" class="" >class LimitExceeded extends Exception
 </span><span id="2" class="" >def f(x: Double): Double =
 </span><span id="3" class="" >  if x &lt; limit then x * x else throw LimitExceeded()
@@ -171,13 +171,13 @@ You'll get this error message:
 
 As the error message implies, you have to declare that `f` needs the capability to throw a `LimitExceeded` exception. The most concise way to do so is to add a `throws` clause:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Double): Double throws LimitExceeded =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Double): Double throws LimitExceeded =
 </span><span id="1" class="" >  if x &lt; limit then x * x else throw LimitExceeded()
 </span></code></pre></div>
 
 Now put a call to `f` in a `try` that catches `LimitExceeded`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def test(xs: Double*) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def test(xs: Double*) =
 </span><span id="1" class="" >  try println(xs.map(f).sum)
 </span><span id="2" class="" >  catch case ex: LimitExceeded =&gt; println(&quot;too large&quot;)
 </span></code></pre></div>
@@ -195,7 +195,7 @@ too large
 
 Everything typechecks and works as expected. But wait - we have called `map` without any ceremony! How did that work? Here's how the compiler expands the `test` function:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// compiler-generated code
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// compiler-generated code
 </span><span id="1" class="" >@main def test(xs: Double*) =
 </span><span id="2" class="" >  try
 </span><span id="3" class="" >    erased given ctl: CanThrow[LimitExceeded] = ???
@@ -215,7 +215,7 @@ also may not refer to `RuntimeException`s.
 **Note 2:** To keep things simple, the compiler will currently only generate capabilities
 for catch clauses of the form
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case ex: Ex =&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case ex: Ex =&gt;
 </span></code></pre></div>
 
 where `ex` is an arbitrary variable name (`_` is also allowed), and `Ex` is an arbitrary
@@ -227,14 +227,14 @@ a checked exception and `saferExceptions` is enabled.
 
 Another advantage is that the model allows a gradual migration from current unchecked exceptions to safer exceptions. Imagine for a moment that `experimental.saferExceptions` is turned on everywhere. There would be lots of code that breaks since functions have not yet been properly annotated with `throws`. But it's easy to create an escape hatch that lets us ignore the breakages for a while: simply add the import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.unsafeExceptions.canThrowAny
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.unsafeExceptions.canThrowAny
 </span></code></pre></div>
 
 This will provide the `CanThrow` capability for any exception, and thereby allow
 all throws and all other calls, no matter what the current state of `throws` declarations is. Here's the
 definition of `canThrowAny`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
 </span><span id="1" class="" >object unsafeExceptions:
 </span><span id="2" class="" >  given canThrowAny: CanThrow[Exception] = ???
 </span></code></pre></div>
@@ -269,14 +269,14 @@ def pureMap(f: A -> B): List[B]
 
 Another area where the lack of purity requirements shows up is when capabilities escape from bounded scopes. Consider the following function
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def escaped(xs: Double*): () =&gt; Int =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def escaped(xs: Double*): () =&gt; Int =
 </span><span id="1" class="" >  try () =&gt; xs.map(f).sum
 </span><span id="2" class="" >  catch case ex: LimitExceeded =&gt; -1
 </span></code></pre></div>
 
 With the system presented here, this function typechecks, with expansion
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// compiler-generated code
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// compiler-generated code
 </span><span id="1" class="" >def escaped(xs: Double*): () =&gt; Int =
 </span><span id="2" class="" >  try
 </span><span id="3" class="" >    given ctl: CanThrow[LimitExceeded] = ???
@@ -286,7 +286,7 @@ With the system presented here, this function typechecks, with expansion
 
 But if you try to call `escaped` like this
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val g = escaped(1, 2, 1000000000)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val g = escaped(1, 2, 1000000000)
 </span><span id="1" class="" >g()
 </span></code></pre></div>
 

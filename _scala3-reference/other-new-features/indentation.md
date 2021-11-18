@@ -29,14 +29,14 @@ The compiler enforces two rules for well-indented programs, flagging violations 
 
    This rule is helpful for finding missing closing braces. It prevents errors like:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if (x &lt; 0) {
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if (x &lt; 0) {
    </span><span id="1" class="" >  println(1)
    </span><span id="2" class="" >  println(2)
    </span><span id="3" class="" >
    </span><span id="4" class="" >println(&quot;done&quot;)  // error: indented too far to the left
    </span></code></pre></div>2. If significant indentation is turned off (i.e. under Scala 2 mode or under `-no-indent`) and we are at the  start of an indented sub-part of an expression, and the indented part ends in a newline, the next statement must start at an indentation width less than the sub-part. This prevents errors where an opening brace was forgotten, as in
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if (x &lt; 0)
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if (x &lt; 0)
    </span><span id="1" class="" >  println(1)
    </span><span id="2" class="" >  println(2)   // error: missing `{`
    </span></code></pre></div>
@@ -112,7 +112,7 @@ There are two rules:
 
 It is an error if the indentation width of the token following an `<outdent>` does not match the indentation of some previous line in the enclosing indentation region. For instance, the following would be rejected.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x &lt; 0 then
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x &lt; 0 then
 </span><span id="1" class="" >    -x
 </span><span id="2" class="" >  else   // error: `else` does not align correctly
 </span><span id="3" class="" >    x
@@ -123,7 +123,7 @@ at the top-level, inside braces `{...}`, but not inside parentheses `(...)`, pat
 
 **Note:** The rules for leading infix operators above are there to make sure that
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >one
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >one
 </span><span id="1" class="" >  + two.match
 </span><span id="2" class="" >      case 1 =&gt; b
 </span><span id="3" class="" >      case 2 =&gt; c
@@ -132,7 +132,7 @@ at the top-level, inside braces `{...}`, but not inside parentheses `(...)`, pat
 
 is parsed as `one + (two.match ...) + three`. Also, that
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x then
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x then
 </span><span id="1" class="" >    a
 </span><span id="2" class="" >  + b
 </span><span id="3" class="" >  + c
@@ -154,7 +154,7 @@ Analogous rules apply for enum bodies and local packages containing nested defin
 
 With these new rules, the following constructs are all valid:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A:
 </span><span id="1" class="" >  def f: Int
 </span><span id="2" class="" >
 </span><span id="3" class="" >class C(x: Int) extends A:
@@ -211,7 +211,7 @@ Indentation can be mixed freely with braces `{...}`, as well as brackets `[...]`
 
 For instance, consider:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{
 </span><span id="1" class="" >  val x = f(x: Int, y =&gt;
 </span><span id="2" class="" >    x * (
 </span><span id="3" class="" >      y + 1
@@ -240,7 +240,7 @@ The indentation rules for `match` expressions and `catch` clauses are refined as
 
 The rules allow to write `match` expressions where cases are not indented themselves, as in the example below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x match
 </span><span id="1" class="" >case 1 =&gt; print(&quot;I&quot;)
 </span><span id="2" class="" >case 2 =&gt; print(&quot;II&quot;)
 </span><span id="3" class="" >case 3 =&gt; print(&quot;III&quot;)
@@ -256,7 +256,7 @@ Indentation-based syntax has many advantages over other conventions. But one pos
 
 To solve this problem, Scala 3 offers an optional `end` marker. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def largeMethod(...) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def largeMethod(...) =
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >  if ... then ...
 </span><span id="3" class="" >  else
@@ -269,7 +269,7 @@ To solve this problem, Scala 3 offers an optional `end` marker. Example:
 An `end` marker consists of the identifier `end` and a follow-on specifier token that together constitute all the tokes of a line. Possible specifier tokens are
 identifiers or one of the following keywords
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if   while    for    match    try    new    this    val   given
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if   while    for    match    try    new    this    val   given
 </span></code></pre></div>
 
 End markers are allowed in statement sequences. The specifier token `s` of an end marker must correspond to the statement that precedes it. This means:
@@ -285,7 +285,7 @@ End markers are allowed in statement sequences. The specifier token `s` of an en
 
 For instance, the following end markers are all legal:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p1.p2:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p1.p2:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  abstract class C():
 </span><span id="3" class="" >
@@ -357,7 +357,7 @@ TopStat           ::=  ... | EndMarker
 
 Here is a (somewhat meta-circular) example of code using indentation. It provides a concrete representation of indentation widths as defined above together with efficient operations for constructing and comparing indentation widths.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum IndentWidth:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum IndentWidth:
 </span><span id="1" class="" >  case Run(ch: Char, n: Int)
 </span><span id="2" class="" >  case Conc(l: IndentWidth, r: Run)
 </span><span id="3" class="" >
@@ -421,19 +421,19 @@ Generally, the possible indentation regions coincide with those regions where br
 
 To allow such arguments to be written without braces, a variant of the indentation scheme is implemented under language import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.fewerBraces
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.fewerBraces
 </span></code></pre></div>
 
 This variant is more contentious and less stable than the rest of the significant indentation scheme. In this variant, a colon `:` at the end of a line is also one of the possible tokens that opens an indentation region. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >times(10):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >times(10):
 </span><span id="1" class="" >  println(&quot;ah&quot;)
 </span><span id="2" class="" >  println(&quot;ha&quot;)
 </span></code></pre></div>
 
 or
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map:
 </span><span id="1" class="" >  x =&gt;
 </span><span id="2" class="" >    val y = x - 1
 </span><span id="3" class="" >    y * y
@@ -442,7 +442,7 @@ or
 The colon is usable not only for lambdas and by-name parameters, but
 also even for ordinary parameters:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >credentials ++ :
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >credentials ++ :
 </span><span id="1" class="" >  val file = Path.userHome / &quot;.credentials&quot;
 </span><span id="2" class="" >  if file.exists
 </span><span id="3" class="" >  then Seq(Credentials(file))

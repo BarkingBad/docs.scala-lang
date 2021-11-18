@@ -21,7 +21,7 @@ affect implicits on the language level.
 must be explicitly declared. Excepted are only values in local blocks
 where the type may still be inferred:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C {
 </span><span id="1" class="" >
 </span><span id="2" class="" >    val ctx: Context = ...        // ok
 </span><span id="3" class="" >
@@ -37,7 +37,7 @@ where the type may still be inferred:
 
 **2.** Nesting is now taken into account for selecting an implicit. Consider for instance the following scenario:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(implicit i: C) = {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(implicit i: C) = {
 </span><span id="1" class="" >    def g(implicit j: C) = {
 </span><span id="2" class="" >      implicitly[C]
 </span><span id="3" class="" >    }
@@ -52,7 +52,7 @@ no longer applies.
 
 **3.** Package prefixes no longer contribute to the implicit search scope of a type. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
 </span><span id="1" class="" >
 </span><span id="2" class="" >  given a: A = A()
 </span><span id="3" class="" >
@@ -100,7 +100,7 @@ Opaque type aliases count as anchors only outside the scope where their alias is
 
 Example: Say you have the following definitions:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
 </span><span id="1" class="" >  class B extends C
 </span><span id="2" class="" >  class C
 </span><span id="3" class="" >  implicit def a1: A
@@ -130,7 +130,7 @@ most (but not all) divergence errors in Scala 2 would terminate the implicit sea
 
 **6.** Scala 2 gives a lower level of priority to implicit conversions with call-by-name parameters relative to implicit conversions with call-by-value parameters. Scala 3 drops this distinction. So the following code snippet would be ambiguous in Scala 3:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def conv1(x: Int): A = new A(x)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def conv1(x: Int): A = new A(x)
 </span><span id="1" class="" >  implicit def conv2(x: =&gt; Int): A = new A(x)
 </span><span id="2" class="" >  def buzz(y: A) = ???
 </span><span id="3" class="" >  buzz(1)   // error: ambiguous
@@ -152,7 +152,7 @@ An alternative A is _more specific_ than an alternative B if
 
 **8.** The previous disambiguation of implicits based on inheritance depth is refined to make it transitive. Transitivity is important to guarantee that search outcomes are compilation-order independent. Here's a scenario where the previous rules violated transitivity:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B
 </span><span id="1" class="" >  object A { given a ... }
 </span><span id="2" class="" >  class B
 </span><span id="3" class="" >  object B extends C { given b ... }

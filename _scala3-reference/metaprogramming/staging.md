@@ -71,7 +71,7 @@ to `T` but only `$` is subject to the PCP, whereas `run` is just a normal method
 `scala.quoted.staging.run` provides a `Quotes` that can be used to show the expression in its scope.
 On the other hand `scala.quoted.staging.withQuotes` provides a `Quotes` without evaluating the expression.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.quoted.staging
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.quoted.staging
 </span><span id="1" class="" >
 </span><span id="2" class="" >def run[T](expr: Quotes ?=&gt; Expr[T])(using Compiler): T = ...
 </span><span id="3" class="" >
@@ -90,7 +90,7 @@ It will create a project with the necessary dependencies and some examples.
 
 In case you prefer to create the project on your own, make sure to define the following dependency in your [`build.sbt` build definition](https://www.scala-sbt.org/1.x/docs/Basic-Def.html)
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >libraryDependencies += &quot;org.scala-lang&quot; %% &quot;scala3-staging&quot; % scalaVersion.value
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >libraryDependencies += &quot;org.scala-lang&quot; %% &quot;scala3-staging&quot; % scalaVersion.value
 </span></code></pre></div>
 
 and in case you use `scalac`/`scala` directly, then use the `-with-compiler` flag for both:
@@ -109,7 +109,7 @@ the value, also at run-time. Note, how we make a future-stage function of type
 expression at runtime. Within the scope of `staging.run` we can also invoke `show` on an expression
 to get a source-like representation of the expression.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >// make available the necessary compiler for runtime code generation
 </span><span id="3" class="" >given staging.Compiler = staging.Compiler.make(getClass.getClassLoader)

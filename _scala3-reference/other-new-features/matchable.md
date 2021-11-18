@@ -19,14 +19,14 @@ A new trait `Matchable` controls the ability to pattern match.
 The Scala 3 standard library has a type `IArray` for immutable
 arrays that is defined like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type IArray[+T] = Array[_ &lt;: T]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type IArray[+T] = Array[_ &lt;: T]
 </span></code></pre></div>
 
 The `IArray` type offers extension methods for `length` and `apply`, but not for `update`; hence it seems values of type `IArray` cannot be updated.
 
 However, there is a potential hole due to pattern matching. Consider:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val imm: IArray[Int] = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val imm: IArray[Int] = ...
 </span><span id="1" class="" >imm match
 </span><span id="2" class="" >  case a: Array[Int] =&gt; a(0) = 1
 </span></code></pre></div>
@@ -36,7 +36,7 @@ The test will succeed at runtime since `IArray`s _are_ represented as
 
 __Aside:__ One could also achieve the same by casting:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >imm.asInstanceOf[Array[Int]](0) = 1
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >imm.asInstanceOf[Array[Int]](0) = 1
 </span></code></pre></div>
 
 But that is not as much of a problem since in Scala `asInstanceOf` is understood to be low-level and unsafe. By contrast, a pattern match that compiles without warning or error should not break abstractions.
@@ -44,7 +44,7 @@ But that is not as much of a problem since in Scala `asInstanceOf` is understood
 Note also that the problem is not tied to opaque types as match selectors. The following slight variant with a value of parametric
 type `T` as match selector leads to the same problem:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T](x: T) = x match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T](x: T) = x match
 </span><span id="1" class="" >  case a: Array[Int] =&gt; a(0) = 0
 </span><span id="2" class="" >f(imm)
 </span></code></pre></div>
@@ -79,7 +79,7 @@ extended by both `AnyVal` and `AnyRef`. Since `Matchable` is a supertype of ever
 
 Here is the hierarchy of top-level classes and traits with their defined methods:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Any:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Any:
 </span><span id="1" class="" >  def getClass
 </span><span id="2" class="" >  def isInstanceOf
 </span><span id="3" class="" >  def asInstanceOf
@@ -105,7 +105,7 @@ Methods that pattern-match on selectors of type `Any` will need a cast once the
 Matchable warning is turned on. The most common such method is the universal
 `equals` method. It will have to be written as in the following example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(val x: String):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(val x: String):
 </span><span id="1" class="" >
 </span><span id="2" class="" >  override def equals(that: Any): Boolean =
 </span><span id="3" class="" >    that.asInstanceOf[Matchable] match
@@ -120,7 +120,7 @@ is guaranteed to succeed at run-time since `Any` and `Matchable` both erase to
 
 For instance, consider the definitions
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type Meter = Double
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type Meter = Double
 </span><span id="1" class="" >def Meter(x: Double) = x
 </span><span id="2" class="" >
 </span><span id="3" class="" >opaque type Second = Double
@@ -129,10 +129,10 @@ For instance, consider the definitions
 
 Here, universal `equals` will return true for
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Meter(10).equals(Second(10))
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Meter(10).equals(Second(10))
 </span></code></pre></div>
 
 even though this is clearly false mathematically. With [multiversal equality](../contextual/multiversal-equality.html) one can mitigate that problem somewhat by turning
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Meter(10) == Second(10)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Meter(10) == Second(10)
 </span></code></pre></div>into a type error.

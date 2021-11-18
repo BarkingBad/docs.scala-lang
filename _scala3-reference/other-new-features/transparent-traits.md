@@ -19,7 +19,7 @@ Traits are used in two roles:
 
 Some traits are used primarily in the first role, and we usually do not want to see them in inferred types. An example is the `Product` trait that the compiler adds as a mixin trait to every case class or case object. In Scala 2, this parent trait sometimes makes inferred types more complicated than they should be. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Kind
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Kind
 </span><span id="1" class="" >case object Var extends Kind
 </span><span id="2" class="" >case object Val extends Kind
 </span><span id="3" class="" >val x = Set(if condition then Val else Var)
@@ -34,7 +34,7 @@ Here, the inferred type of `x` is `Set[Kind & Product & Serializable]` whereas o
 
 Scala 3 allows one to mark a mixin trait as `transparent`, which means that it can be suppressed in type inference. Here's an example that follows the lines of the code above, but now with a new transparent trait `S` instead of `Product`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent trait S
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent trait S
 </span><span id="1" class="" >trait Kind
 </span><span id="2" class="" >object Var extends Kind, S
 </span><span id="3" class="" >object Val extends Kind, S

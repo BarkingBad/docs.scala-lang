@@ -58,7 +58,7 @@ Starting from 1.1.5, `sbt` also supports Scala 3 compiler plugins. Please refer 
 Here is the source code for a simple compiler plugin that reports integer divisions by
 zero as errors.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package dividezero
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package dividezero
 </span><span id="1" class="" >
 </span><span id="2" class="" >import dotty.tools.dotc.ast.Trees.*
 </span><span id="3" class="" >import dotty.tools.dotc.ast.tpd
@@ -111,7 +111,7 @@ We can now transform trees by overriding methods like `transformXXX`.
 
 Here is a template for research plugins.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import dotty.tools.dotc.core.Contexts.Context
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import dotty.tools.dotc.core.Contexts.Context
 </span><span id="1" class="" >import dotty.tools.dotc.core.Phases.Phase
 </span><span id="2" class="" >import dotty.tools.dotc.plugins.ResearchPlugin
 </span><span id="3" class="" >

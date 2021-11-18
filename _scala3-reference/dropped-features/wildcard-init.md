@@ -14,14 +14,14 @@ previous-page: /scala3/reference/dropped-features/this-qualifier
 
 The syntax
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: A = _
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: A = _
 </span></code></pre></div>
 
 that was used to indicate an uninitialized field, has been dropped.
 At its place there is a special value `uninitialized` in the `scala.compiletime` package.
 To get an uninitialized field, you now write
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.uninitialized
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.uninitialized
 </span><span id="1" class="" >
 </span><span id="2" class="" >var x: A = uninitialized
 </span></code></pre></div>To enable cross-compilation, `_` is still supported, but it will be dropped in a future 3.x version.

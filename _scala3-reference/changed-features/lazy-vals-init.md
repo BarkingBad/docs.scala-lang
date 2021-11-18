@@ -26,14 +26,14 @@ summarized in the [SIP-20] document.
 
 Given a lazy field of the form:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Foo {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Foo {
 </span><span id="1" class="" >  lazy val bar = &lt;RHS&gt;
 </span><span id="2" class="" >}
 </span></code></pre></div>
 
 The Scala 3 compiler will generate code equivalent to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Foo {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Foo {
 </span><span id="1" class="" >  import scala.runtime.LazyVals
 </span><span id="2" class="" >  var value_0: Int = _
 </span><span id="3" class="" >  var bitmap: Long = 0L

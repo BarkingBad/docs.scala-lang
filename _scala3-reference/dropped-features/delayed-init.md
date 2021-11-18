@@ -17,7 +17,7 @@ The special handling of the `DelayedInit` trait is no longer supported.
 One consequence is that the `App` class, which used `DelayedInit` is
 now partially broken. You can still use `App` as a simple way to set up a main program. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object HelloWorld extends App {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object HelloWorld extends App {
 </span><span id="1" class="" >  println(&quot;Hello, world!&quot;)
 </span><span id="2" class="" >}
 </span></code></pre></div>
@@ -27,7 +27,7 @@ some JVM's means that it will only be interpreted. So, better not use it
 for benchmarking! Also, if you want to access the command line arguments,
 you need to use an explicit `main` method for that.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Hello:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Hello:
 </span><span id="1" class="" >  def main(args: Array[String]) =
 </span><span id="2" class="" >    println(s&quot;Hello, ${args(0)}&quot;)
 </span></code></pre></div>On the other hand, Scala 3 offers a convenient alternative to such "program" objects

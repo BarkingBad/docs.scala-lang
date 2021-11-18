@@ -22,7 +22,7 @@ To get a feel of how it works, we first show several examples below.
 
 Given the following code snippet:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class AbstractFile:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class AbstractFile:
 </span><span id="1" class="" >  def name: String
 </span><span id="2" class="" >  val extension: String = name.substring(4)
 </span><span id="3" class="" >
@@ -33,7 +33,7 @@ Given the following code snippet:
 
 The checker will report:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/AbstractFile.scala:7:4 ------------------------------
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/AbstractFile.scala:7:4 ------------------------------
 </span><span id="1" class="" >7 |	val localFile: String = s&quot;${url.##}.tmp&quot;  // error: usage of `localFile` before it&apos;s initialized
 </span><span id="2" class="" >  |	    ^
 </span><span id="3" class="" >  |    Access non-initialized field value localFile. Calling trace:
@@ -45,7 +45,7 @@ The checker will report:
 
 Given the code below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Trees:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Trees:
 </span><span id="1" class="" >  class ValDef { counter += 1 }
 </span><span id="2" class="" >  class EmptyValDef extends ValDef
 </span><span id="3" class="" >  val theEmptyValDef = new EmptyValDef
@@ -54,7 +54,7 @@ Given the code below:
 
 The checker will report:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/trees.scala:5:14 ------------------------------------
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/trees.scala:5:14 ------------------------------------
 </span><span id="1" class="" >5 |  private var counter = 0  // error
 </span><span id="2" class="" >  |              ^
 </span><span id="3" class="" >  |             Access non-initialized field variable counter. Calling trace:
@@ -67,7 +67,7 @@ The checker will report:
 
 Given the code below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Parent:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Parent:
 </span><span id="1" class="" >  val f: () =&gt; String = () =&gt; this.message
 </span><span id="2" class="" >  def message: String
 </span><span id="3" class="" >
@@ -79,7 +79,7 @@ Given the code below:
 
 The checker reports:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/features-high-order.scala:7:6 -----------------------
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Warning: tests/init/neg/features-high-order.scala:7:6 -----------------------
 </span><span id="1" class="" >7 |  val b = &quot;hello&quot;           // error
 </span><span id="2" class="" >  |      ^
 </span><span id="3" class="" >  |Access non-initialized field value b. Calling trace:
@@ -116,13 +116,13 @@ class body. Scala enforces this property in syntax by demanding that all fields
 are initialized at the end of the primary constructor, except for the language
 feature below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: T = _
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: T = _
 </span></code></pre></div>
 
 Control effects such as exceptions may break this property, as the
 following example shows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class MyException(val b: B) extends Exception(&quot;&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class MyException(val b: B) extends Exception(&quot;&quot;)
 </span><span id="1" class="" >class A:
 </span><span id="2" class="" >  val b = try { new B } catch { case myEx: MyException =&gt; myEx.b }
 </span><span id="3" class="" >  println(b.a)
@@ -141,7 +141,7 @@ not go backward: initialized fields continue to be initialized, a
 field points to an initialized object may not later point to an
 object under initialization. As an example, the following code will be rejected:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Reporter:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Reporter:
 </span><span id="1" class="" >  def report(msg: String): Unit
 </span><span id="2" class="" >
 </span><span id="3" class="" >class FileReporter(ctx: Context) extends Reporter:

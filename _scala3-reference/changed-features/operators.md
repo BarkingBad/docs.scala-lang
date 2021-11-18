@@ -22,7 +22,7 @@ a syntax change allows infix operators to be written on the left in a multi-line
 
 An `infix` modifier on a method definition allows using the method as an infix operation. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.targetName
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.targetName
 </span><span id="1" class="" >
 </span><span id="2" class="" >trait MultiSet[T]:
 </span><span id="3" class="" >
@@ -64,7 +64,7 @@ Infix operations involving symbolic operators are always allowed, so `infix` is 
 
 The `infix` modifier can also be given to a type:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type or[X, Y]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type or[X, Y]
 </span><span id="1" class="" >val x: String or Int = ...
 </span></code></pre></div>
 
@@ -80,7 +80,7 @@ The purpose of the `infix` modifier is to achieve consistency across a code base
 
 3. `infix` modifiers can be given to method definitions. The first non-receiver parameter list of an `infix` method must define exactly one parameter. Examples:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix def op1(x: S): R             // ok
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix def op1(x: S): R             // ok
    </span><span id="1" class="" >infix def op2[T](x: T)(y: S): R    // ok
    </span><span id="2" class="" >infix def op3[T](x: T, y: S): R    // error: two parameters
    </span><span id="3" class="" >
@@ -89,7 +89,7 @@ The purpose of the `infix` modifier is to achieve consistency across a code base
    </span><span id="6" class="" >  infix def op5(y1: B, y2: B): R  // error: two parameters
    </span></code></pre></div>4. `infix` modifiers can also be given to type, trait or class definitions that have exactly two type parameters. An infix type like
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type op[X, Y]
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >infix type op[X, Y]
    </span></code></pre></div>
 
    can be applied using infix syntax, i.e. `A op B`.
@@ -114,7 +114,7 @@ It is recommended that definitions of symbolic operators carry a [`@targetName` 
 
 Infix operators can now appear at the start of lines in a multi-line expression. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val str = &quot;hello&quot;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val str = &quot;hello&quot;
 </span><span id="1" class="" >  ++ &quot; world&quot;
 </span><span id="2" class="" >  ++ &quot;!&quot;
 </span><span id="3" class="" >
@@ -139,13 +139,13 @@ A _leading infix operator_ is
 
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >freezing
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >freezing
 </span><span id="1" class="" >  | boiling
 </span></code></pre></div>
 
 This is recognized as a single infix operation. Compare with:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >freezing
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >freezing
 </span><span id="1" class="" >  !boiling
 </span></code></pre></div>
 
@@ -154,7 +154,7 @@ is followed by a space.
 
 Another example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >println(&quot;hello&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >println(&quot;hello&quot;)
 </span><span id="1" class="" >  ???
 </span><span id="2" class="" >  ??? match { case 0 =&gt; 1 }
 </span></code></pre></div>This code is recognized as three different statements. `???` is syntactically a symbolic identifier, but

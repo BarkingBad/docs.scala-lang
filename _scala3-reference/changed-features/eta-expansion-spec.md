@@ -20,7 +20,7 @@ These two mechanisms are bridged in Scala by a mechanism called
 
 In this snippet which assigns a method to a `val`, the compiler will perform _automatic eta-expansion_, as shown in the comment:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Int, y: String) = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Int, y: String) = ???
 </span><span id="1" class="" >val f = m // becomes: val f = (x: Int, y: String) =&gt; m(x, y)
 </span></code></pre></div>
 
@@ -33,14 +33,14 @@ For methods with one or more parameters like in the example above, this restrict
 In the following example `m` can be partially applied to the first two parameters.
 Assigning `m` to `f1` will automatically eta-expand.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Boolean, y: String)(z: Int): List[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Boolean, y: String)(z: Int): List[Int]
 </span><span id="1" class="" >val f1 = m
 </span><span id="2" class="" >val f2 = m(true, &quot;abc&quot;)
 </span></code></pre></div>
 
 This creates two function values:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f1: (Boolean, String) =&gt; Int =&gt; List[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f1: (Boolean, String) =&gt; Int =&gt; List[Int]
 </span><span id="1" class="" >f2: Int =&gt; List[Int]
 </span></code></pre></div>
 
@@ -48,7 +48,7 @@ This creates two function values:
 
 Methods with implicit parameter lists will always get applied to implicit arguments.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def foo(x: Int)(implicit p: Double): Float = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def foo(x: Int)(implicit p: Double): Float = ???
 </span><span id="1" class="" >implicit val bla: Double = 1.0
 </span><span id="2" class="" >
 </span><span id="3" class="" >val bar = foo // val bar: Int =&gt; Float = ...
@@ -58,7 +58,7 @@ Methods with implicit parameter lists will always get applied to implicit argume
 
 A method with context parameters can be expanded to a value of a context type by writing the expected context type explicitly.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def foo(x: Int)(using p: Double): Float = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def foo(x: Int)(using p: Double): Float = ???
 </span><span id="1" class="" >val bar: Double ?=&gt; Float = foo(3)
 </span></code></pre></div>
 

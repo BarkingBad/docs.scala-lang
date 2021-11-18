@@ -32,7 +32,7 @@ is omitted if
 
 This can cause problems if a program tries to access the missing private field via reflection. The recommended fix is to declare the field instead to be qualified private with the enclosing class as qualifier. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(x: Int):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(x: Int):
 </span><span id="1" class="" >    private[C] val field = x + 1
 </span><span id="2" class="" >      // [C] needed if `field` is to be accessed through reflection
 </span><span id="3" class="" >    val retained = field * field

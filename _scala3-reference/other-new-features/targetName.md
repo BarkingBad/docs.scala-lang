@@ -14,7 +14,7 @@ previous-page: /scala3/reference/other-new-features/threadUnsafe-annotation
 
 A `@targetName` annotation on a definition defines an alternate name for the implementation of that definition. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.targetName
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.targetName
 </span><span id="1" class="" >
 </span><span id="2" class="" >object VecOps:
 </span><span id="3" class="" >  extension [T](xs: Vec[T])
@@ -57,14 +57,14 @@ The `@targetName` annotation has no bearing on Scala usages. Any application of 
 
 This means that `@targetName` annotations can be used to disambiguate two method definitions that would otherwise clash. For instance.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: =&gt; String): Int = x.length
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: =&gt; String): Int = x.length
 </span><span id="1" class="" >def f(x: =&gt; Int): Int = x + 1  // error: double definition
 </span></code></pre></div>
 
 The two definitions above clash since their erased parameter types are both `Function0`, which is the type of the translation of a by-name-parameter. Hence
 they have the same names and signatures. But we can avoid the clash by adding a `@targetName` annotation to either method or to both of them. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@targetName(&quot;f_string&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@targetName(&quot;f_string&quot;)
 </span><span id="1" class="" >def f(x: =&gt; String): Int = x.length
 </span><span id="2" class="" >def f(x: =&gt; Int): Int = x + 1  // OK
 </span></code></pre></div>
@@ -74,7 +74,7 @@ This will produce methods `f_string` and `f` in the generated code.
 However, `@targetName` annotations are not allowed to break overriding relationships
 between two definitions that have otherwise the same names and types. So the following would be in error:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import annotation.targetName
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import annotation.targetName
 </span><span id="1" class="" >class A:
 </span><span id="2" class="" >  def f(): Int = 1
 </span><span id="3" class="" >class B extends A:
@@ -101,7 +101,7 @@ The relevant overriding rules can be summarized as follows:
 As usual, any overriding relationship in the generated code must also
 be present in the original code. So the following example would also be in error:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import annotation.targetName
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import annotation.targetName
 </span><span id="1" class="" >class A:
 </span><span id="2" class="" >  def f(): Int = 1
 </span><span id="3" class="" >class B extends A:

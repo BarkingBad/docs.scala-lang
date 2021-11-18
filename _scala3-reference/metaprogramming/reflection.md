@@ -31,7 +31,7 @@ To provide reflection capabilities in macros we need to add an implicit paramete
 of type `scala.quoted.Quotes` and import `quotes.reflect.*` from it in the scope
 where it is used.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def natConst(inline x: Int): Int = ${natConstImpl(&apos;{x})}
 </span><span id="3" class="" >
@@ -45,7 +45,7 @@ where it is used.
 `import quotes.reflect.*` will provide all extractors and methods on `quotes.reflect.Tree`s.
 For example the `Literal(_)` extractor used below.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def natConstImpl(x: Expr[Int])(using Quotes): Expr[Int] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def natConstImpl(x: Expr[Int])(using Quotes): Expr[Int] =
 </span><span id="1" class="" >  import quotes.reflect.*
 </span><span id="2" class="" >  val tree: Term = x.asTerm
 </span><span id="3" class="" >  tree match
@@ -64,7 +64,7 @@ We can easily know which extractors are needed using `Printer.TreeStructure.show
 which returns the string representation the structure of the tree. Other printers
 can also be found in the `Printer` module.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >tree.show(using Printer.TreeStructure)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >tree.show(using Printer.TreeStructure)
 </span><span id="1" class="" >// or
 </span><span id="2" class="" >Printer.TreeStructure.show(tree)
 </span></code></pre></div>
@@ -82,7 +82,7 @@ about that expansion site. The example below shows how we can obtain position
 information such as the start line, the end line or even the source code at the
 expansion point.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def macroImpl()(quotes: Quotes): Expr[Unit] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def macroImpl()(quotes: Quotes): Expr[Unit] =
 </span><span id="1" class="" >  import quotes.reflect.*
 </span><span id="2" class="" >  val pos = Position.ofMacroExpansion
 </span><span id="3" class="" >
@@ -107,7 +107,7 @@ we can dive into the `tree` node and start accumulating values of type `X` (e.g.
 of type `List[Symbol]` if we want to collect symbols). The code below, for
 example, collects the `val` definitions in the tree.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def collectPatternVariables(tree: Tree)(using ctx: Context): List[Symbol] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def collectPatternVariables(tree: Tree)(using ctx: Context): List[Symbol] =
 </span><span id="1" class="" >  val acc = new TreeAccumulator[List[Symbol]]:
 </span><span id="2" class="" >    def foldTree(syms: List[Symbol], tree: Tree)(owner: Symbol): List[Symbol] = tree match
 </span><span id="3" class="" >      case ValDef(_, _, rhs) =&gt;
@@ -127,7 +127,7 @@ but without returning any value. Finally, a `TreeMap` performs a transformation.
 Additionally, `lets` binds the given `terms` to names and allows to use them in the `body`.
 Their type definitions are shown below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def let(rhs: Term)(body: Ident =&gt; Term): Term = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def let(rhs: Term)(body: Ident =&gt; Term): Term = ...
 </span><span id="1" class="" >
 </span><span id="2" class="" >def lets(terms: List[Term])(body: List[Term] =&gt; Term): Term = ...
 </span></code></pre></div>

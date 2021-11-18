@@ -17,13 +17,13 @@ previous-page: /scala3/reference/other-new-features/safe-initialization
 When pattern matching there are two situations where a runtime type test must be performed.
 The first case is an explicit type test using the ascription pattern notation.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: X) match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: X) match
 </span><span id="1" class="" >  case y: Y =&gt;
 </span></code></pre></div>
 
 The second case is when an extractor takes an argument that is not a subtype of the scrutinee type.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: X) match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x: X) match
 </span><span id="1" class="" >  case y @ Y(n) =&gt;
 </span><span id="2" class="" >
 </span><span id="3" class="" >object Y:
@@ -35,7 +35,7 @@ But when the type test is on an abstract type (type parameter or type member), t
 
 A `TypeTest` can be provided to make this test possible.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
 </span><span id="1" class="" >
 </span><span id="2" class="" >trait TypeTest[-S, T]:
 </span><span id="3" class="" >  def unapply(s: S): Option[s.type &amp; T]
@@ -44,7 +44,7 @@ A `TypeTest` can be provided to make this test possible.
 It provides an extractor that returns its argument typed as a `T` if the argument is a `T`.
 It can be used to encode a type test.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[X, Y](x: X)(using tt: TypeTest[X, Y]): Option[Y] = x match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[X, Y](x: X)(using tt: TypeTest[X, Y]): Option[Y] = x match
 </span><span id="1" class="" >  case tt(x @ Y(1)) =&gt; Some(x)
 </span><span id="2" class="" >  case tt(x) =&gt; Some(x)
 </span><span id="3" class="" >  case _ =&gt; None
@@ -54,7 +54,7 @@ To avoid the syntactic overhead the compiler will look for a type test automatic
 This means that `x: Y` is transformed to `tt(x)` and `x @ Y(_)` to `tt(x @ Y(_))` if there is a contextual `TypeTest[X, Y]` in scope.
 The previous code is equivalent to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[X, Y](x: X)(using TypeTest[X, Y]): Option[Y] = x match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[X, Y](x: X)(using TypeTest[X, Y]): Option[Y] = x match
 </span><span id="1" class="" >  case x @ Y(1) =&gt; Some(x)
 </span><span id="2" class="" >  case x: Y =&gt; Some(x)
 </span><span id="3" class="" >  case _ =&gt; None
@@ -62,7 +62,7 @@ The previous code is equivalent to
 
 We could create a type test at call site where the type test can be performed with runtime class tests directly as follows
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val tt: TypeTest[Any, String] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val tt: TypeTest[Any, String] =
 </span><span id="1" class="" >  new TypeTest[Any, String]:
 </span><span id="2" class="" >    def unapply(s: Any): Option[s.type &amp; String] = s match
 </span><span id="3" class="" >      case s: String =&gt; Some(s)
@@ -73,7 +73,7 @@ We could create a type test at call site where the type test can be performed wi
 
 The compiler will synthesize a new instance of a type test if none is found in scope as:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new TypeTest[A, B]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new TypeTest[A, B]:
 </span><span id="1" class="" >  def unapply(s: A): Option[s.type &amp; B] = s match
 </span><span id="2" class="" >    case s: B =&gt; Some(s)
 </span><span id="3" class="" >    case _ =&gt; None
@@ -84,14 +84,14 @@ If the type tests cannot be done there will be an unchecked warning that will be
 The most common `TypeTest` instances are the ones that take any parameters (i.e. `TypeTest[Any, T]`).
 To make it possible to use such instances directly in context bounds we provide the alias
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
 </span><span id="1" class="" >
 </span><span id="2" class="" >type Typeable[T] = TypeTest[Any, T]
 </span></code></pre></div>
 
 This alias can be used as
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T: Typeable]: Boolean =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T: Typeable]: Boolean =
 </span><span id="1" class="" >  &quot;abc&quot; match
 </span><span id="2" class="" >    case x: T =&gt; true
 </span><span id="3" class="" >    case _ =&gt; false
@@ -111,7 +111,7 @@ Using `ClassTag` instances was unsound since classtags can check only the class 
 
 Given the following abstract definition of Peano numbers that provides two given instances of types `TypeTest[Nat, Zero]` and `TypeTest[Nat, Succ]`
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.reflect.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.reflect.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >trait Peano:
 </span><span id="3" class="" >  type Nat
@@ -133,7 +133,7 @@ Given the following abstract definition of Peano numbers that provides two given
 
 together with an implementation of Peano numbers based on type `Int`
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object PeanoInt extends Peano:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object PeanoInt extends Peano:
 </span><span id="1" class="" >  type Nat  = Int
 </span><span id="2" class="" >  type Zero = Int
 </span><span id="3" class="" >  type Succ = Int
@@ -157,7 +157,7 @@ together with an implementation of Peano numbers based on type `Int`
 
 it is possible to write the following program
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def test =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def test =
 </span><span id="1" class="" >  import PeanoInt.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >  def divOpt(m: Nat, n: Nat): Option[(Nat, Nat)] =

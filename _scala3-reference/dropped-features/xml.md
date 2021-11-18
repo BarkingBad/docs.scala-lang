@@ -15,7 +15,7 @@ previous-page: /scala3/reference/dropped-features/limit22
 XML Literals are still supported, but will be dropped in the near future, to
 be replaced with [XML string interpolation](https://github.com/lampepfl/xml-interpolator):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import dotty.xml.interpolator.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import dotty.xml.interpolator.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >case class Person(name: String) { override def toString = name }
 </span><span id="3" class="" >

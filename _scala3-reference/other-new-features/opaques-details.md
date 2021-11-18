@@ -26,7 +26,7 @@ at the top-level. They cannot be defined in local blocks.
 
 The general form of a (monomorphic) opaque type alias is
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type T &gt;: L &lt;: U = R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type T &gt;: L &lt;: U = R
 </span></code></pre></div>
 
 where the lower bound `L` and the upper bound `U` may be missing, in which case they are assumed to be `scala.Nothing` and `scala.Any`, respectively. If bounds are given, it is checked that the right-hand side `R` conforms to them, i.e. `L <: R` and `R <: U`. F-bounds are not supported for opaque type aliases: `T` is not allowed to appear in `L` or `U`.
@@ -34,12 +34,12 @@ where the lower bound `L` and the upper bound `U` may be missing, in which case 
 Inside the scope of the alias definition, the alias is transparent: `T` is treated
 as a normal alias of `R`. Outside its scope, the alias is treated as the abstract type
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: L &lt;: U
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: L &lt;: U
 </span></code></pre></div>
 
 A special case arises if the opaque type alias is defined in an object. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object o:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object o:
 </span><span id="1" class="" >  opaque type T = R
 </span></code></pre></div>
 
@@ -49,7 +49,7 @@ In this case we have inside the object (also for non-opaque types) that `o.T` is
 that `o.this.T` equals `R`. The two equalities compose. That is, inside `o`, it is
 also known that `o.T` is equal to `R`. This means the following code type-checks:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object o:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object o:
 </span><span id="1" class="" >  opaque type T = Int
 </span><span id="2" class="" >  val x: Int = id(2)
 </span><span id="3" class="" >def id(x: o.T): o.T = x
@@ -60,13 +60,13 @@ also known that `o.T` is equal to `R`. This means the following code type-checks
 Opaque type aliases can have a single type parameter list. The following aliases
 are well-formed
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type F[T] = (T, T)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type F[T] = (T, T)
 </span><span id="1" class="" >opaque type G = [T] =&gt;&gt; List[T]
 </span></code></pre></div>
 
 but the following are not:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type BadF[T] = [U] =&gt;&gt; (T, U)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type BadF[T] = [U] =&gt;&gt; (T, U)
 </span><span id="1" class="" >opaque type BadG = [T] =&gt;&gt; [U] =&gt; (T, U)
 </span></code></pre></div>
 
@@ -77,7 +77,7 @@ unless another overloaded `==` or `!=` operator is defined for the type. To avoi
 boxing, the operation is mapped after type checking to the (in-)equality operator
 defined on the underlying type. For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type T = Int
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type T = Int
 </span><span id="1" class="" >
 </span><span id="2" class="" >  ...
 </span><span id="3" class="" >  val x: T
@@ -90,7 +90,7 @@ defined on the underlying type. For instance,
 An opaque type alias on the top-level is transparent in all other top-level definitions in the sourcefile where it appears, but is opaque in nested
 objects and classes and in all other source files. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// in test1.scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// in test1.scala
 </span><span id="1" class="" >opaque type A = String
 </span><span id="2" class="" >val x: A = &quot;abc&quot;
 </span><span id="3" class="" >
@@ -103,7 +103,7 @@ objects and classes and in all other source files. Example:
 
 This behavior becomes clear if one recalls that top-level definitions are placed in their own synthetic object. For instance, the code in `test1.scala` would expand to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object test1$package:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object test1$package:
 </span><span id="1" class="" >  opaque type A = String
 </span><span id="2" class="" >  val x: A = &quot;abc&quot;
 </span><span id="3" class="" >

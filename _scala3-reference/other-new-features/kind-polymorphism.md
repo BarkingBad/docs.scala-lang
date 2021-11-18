@@ -24,12 +24,12 @@ Sometimes we would like to have type parameters that can have more than one kind
 value that works for parameters of any kind. This is now possible through a form of (_subtype_) kind polymorphism.
 Kind polymorphism relies on the special type `scala.AnyKind` that can be used as an upper bound of a type.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T &lt;: AnyKind] = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T &lt;: AnyKind] = ...
 </span></code></pre></div>
 
 The actual type arguments of `f` can then be types of arbitrary kinds. So the following would all be legal:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f[Int]
 </span><span id="1" class="" >f[List]
 </span><span id="2" class="" >f[Map]
 </span><span id="3" class="" >f[[X] =&gt;&gt; String]

@@ -26,7 +26,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 <details>
 <summary>Examples</summary>
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental
 </span><span id="3" class="" >def x = ()
@@ -42,7 +42,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 </span><span id="13" class="" >
 </span><span id="14" class="" >lazy val lv1 = x // error: value x is marked @experimental and therefore ...
 </span><span id="15" class="" >@experimental lazy val lv2 = x
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental
 </span><span id="3" class="" >val x = ()
@@ -69,13 +69,13 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 </span><span id="24" class="" >  X.fx()
 </span><span id="25" class="" >  import X.fx
 </span><span id="26" class="" >  fx()
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental type E
 </span><span id="3" class="" >
 </span><span id="4" class="" >type A = E // error type E is marked @experimental and therefore ...
 </span><span id="5" class="" >@experimental type B = E
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental class A
 </span><span id="3" class="" >@experimental type X
@@ -89,7 +89,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 </span><span id="11" class="" >  val i2: Y = ??? // error: type Y is marked @experimental and therefore ...
 </span><span id="12" class="" >  val i2: Z = ??? // error: type Y is marked @experimental and therefore ...
 </span><span id="13" class="" >  ()
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@experimental
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@experimental
 </span><span id="1" class="" >trait ExpSAM {
 </span><span id="2" class="" >  def foo(x: Int): Int
 </span><span id="3" class="" >}
@@ -107,7 +107,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 <details>
 <summary>Examples</summary>
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental def x = 2
 </span><span id="3" class="" >@experimental class A
@@ -177,7 +177,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 <details>
 <summary>Examples</summary>
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental def x = 2
 </span><span id="3" class="" >
@@ -199,7 +199,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 <details>
 <summary>Examples</summary>
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental def x = 2
 </span><span id="3" class="" >
@@ -231,7 +231,7 @@ Experimental definitions can only be referenced in an experimental scope. Experi
 <details>
 <summary>Examples</summary>
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental class myExperimentalAnnot extends scala.annotation.Annotation
 </span><span id="3" class="" >
@@ -279,7 +279,7 @@ Tests can be defined as experimental. Tests frameworks can execute tests using r
 
 Test that touch experimental APIs can be written as follows
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.experimental
 </span><span id="1" class="" >
 </span><span id="2" class="" >@experimental def x = 2
 </span><span id="3" class="" >

@@ -24,7 +24,7 @@ posts to provide blend-in content.
 
 Scaladoc comments go before the items they pertain to in a special comment block that starts with a /** and ends with a */, like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >/** Start the comment here
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >/** Start the comment here
 </span><span id="1" class="" >  * and use the left star followed by a
 </span><span id="2" class="" >  * white space on every line.
 </span><span id="3" class="" >  *
@@ -88,7 +88,7 @@ These tags are well-suited to larger types or packages, with many members. They 
 
 These tags are not enabled by default! You must pass the -groups flag to Scaladoc in order to turn them on. Typically the sbt for this will look something like:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Compile / doc / scalacOptions ++= Seq(
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Compile / doc / scalacOptions ++= Seq(
 </span><span id="1" class="" >  &quot;-groups&quot;
 </span><span id="2" class="" >)
 </span></code></pre></div>

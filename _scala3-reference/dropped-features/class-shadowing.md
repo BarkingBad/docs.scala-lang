@@ -14,7 +14,7 @@ previous-page: /scala3/reference/dropped-features/early-initializers
 
 Scala 2 so far allowed patterns like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Base {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Base {
 </span><span id="1" class="" >  class Ops { ... }
 </span><span id="2" class="" >}
 </span><span id="3" class="" >
@@ -25,7 +25,7 @@ Scala 2 so far allowed patterns like this:
 
 Scala 3 rejects this with the error message:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >6 |      class Ops {  }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >6 |      class Ops {  }
 </span><span id="1" class="" >  |            ^
 </span><span id="2" class="" >  |class Ops cannot have the same name as class Ops in class Base
 </span><span id="3" class="" >  | -- class definitions cannot be overridden

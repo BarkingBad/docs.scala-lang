@@ -14,7 +14,7 @@ previous-page: /scala3/reference/changed-features/operators
 
 The syntax of wildcard arguments in types has changed from `_` to `?`. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List[?]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List[?]
 </span><span id="1" class="" >Map[? &lt;: AnyRef, ? &gt;: Null]
 </span></code></pre></div>
 

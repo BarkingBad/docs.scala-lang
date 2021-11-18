@@ -42,7 +42,7 @@ configure how fields and methods should be resolved.
 
 Here's an example of a structural type `Person`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Record(elems: (String, Any)*) extends Selectable:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Record(elems: (String, Any)*) extends Selectable:
 </span><span id="1" class="" >    private val fields = elems.toMap
 </span><span id="2" class="" >    def selectDynamic(name: String): Any = fields(name)
 </span><span id="3" class="" >
@@ -52,7 +52,7 @@ Here's an example of a structural type `Person`:
 The type `Person` adds a _refinement_ to its parent type `Record` that defines the two fields `name` and `age`. We say the refinement is _structural_ since  `name` and `age` are not defined in the parent type. But they exist nevertheless as members of class `Person`. For instance, the following
 program would print  "Emma is 42 years old.":
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val person = Record(&quot;name&quot; -&gt; &quot;Emma&quot;, &quot;age&quot; -&gt; 42).asInstanceOf[Person]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val person = Record(&quot;name&quot; -&gt; &quot;Emma&quot;, &quot;age&quot; -&gt; 42).asInstanceOf[Person]
 </span><span id="1" class="" >  println(s&quot;${person.name} is ${person.age} years old.&quot;)
 </span></code></pre></div>
 
@@ -71,20 +71,20 @@ Selecting a structural type member is done by calling this method.
 The `person.name` and `person.age` selections are translated by
 the Scala compiler to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >person.selectDynamic(&quot;name&quot;).asInstanceOf[String]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >person.selectDynamic(&quot;name&quot;).asInstanceOf[String]
 </span><span id="1" class="" >  person.selectDynamic(&quot;age&quot;).asInstanceOf[Int]
 </span></code></pre></div>
 
 Besides `selectDynamic`, a `Selectable` class sometimes also defines a method `applyDynamic`. This can then be used to translate function calls of structural members. So, if `a` is an instance of `Selectable`, a structural call like `a.f(b, c)` would translate to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >a.applyDynamic(&quot;f&quot;)(b, c)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >a.applyDynamic(&quot;f&quot;)(b, c)
 </span></code></pre></div>
 
 ## Using Java Reflection
 
 Structural types can also be accessed using [Java reflection](https://www.oracle.com/technical-resources/articles/java/javareflection.html). Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Closeable = { def close(): Unit }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Closeable = { def close(): Unit }
 </span><span id="1" class="" >
 </span><span id="2" class="" >  class FileInputStream:
 </span><span id="3" class="" >    def close(): Unit
@@ -96,7 +96,7 @@ Structural types can also be accessed using [Java reflection](https://www.oracle
 Here, we define a structural type `Closeable` that defines a `close` method. There are various classes that have `close` methods, we just list `FileInputStream` and `Channel` as two examples. It would be easiest if the two classes shared a common interface that factors out the `close` method. But such factorings are often not possible if different libraries are combined in one application. Yet, we can still have methods that work on
 all classes with a `close` method by using the `Closeable` type. For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.reflect.Selectable.reflectiveSelectable
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.reflect.Selectable.reflectiveSelectable
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def autoClose(f: Closeable)(op: Closeable =&gt; Unit): Unit =
 </span><span id="3" class="" >    try op(f) finally f.close()
@@ -111,7 +111,7 @@ of `reflectiveSelectable` shown above. What happens "under the hood" is then the
 - The compiler then transforms the `close` call on the wrapped `f`
   to an `applyDynamic` call. The end result is:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >reflectiveSelectable(f).applyDynamic(&quot;close&quot;)()
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >reflectiveSelectable(f).applyDynamic(&quot;close&quot;)()
   </span></code></pre></div>- The implementation of `applyDynamic` in `reflectiveSelectable`'s result
   uses Java reflection to find and call a method `close` with zero parameters in the value referenced by `f` at runtime.
 
@@ -134,7 +134,7 @@ the database access example given at the beginning of this document.
 Local and anonymous classes that extend `Selectable` get more refined types
 than other classes. Here is an example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Vehicle extends reflect.Selectable:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Vehicle extends reflect.Selectable:
 </span><span id="1" class="" >  val wheels: Int
 </span><span id="2" class="" >
 </span><span id="3" class="" >val i3 = new Vehicle: // i3: Vehicle { val range: Int }
@@ -151,7 +151,7 @@ defines the necessary `selectDynamic` member.
 
 `Vehicle` could also extend some other subclass of `scala.Selectable` that implements `selectDynamic` and `applyDynamic` differently. But if it does not extend a `Selectable` at all, the code would no longer typecheck:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Vehicle:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Vehicle:
 </span><span id="1" class="" >  val wheels: Int
 </span><span id="2" class="" >
 </span><span id="3" class="" >val i3 = new Vehicle: // i3: Vehicle

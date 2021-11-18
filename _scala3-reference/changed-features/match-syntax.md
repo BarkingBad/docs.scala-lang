@@ -17,7 +17,7 @@ The syntactical precedence of match expressions has been changed.
 
 1. `match` expressions can be chained:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs match {
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs match {
    </span><span id="1" class="" >  case Nil =&gt; &quot;empty&quot;
    </span><span id="2" class="" >  case _   =&gt; &quot;nonempty&quot;
    </span><span id="3" class="" >} match {
@@ -28,7 +28,7 @@ The syntactical precedence of match expressions has been changed.
 
    (or, dropping the optional braces)
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs match
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs match
    </span><span id="1" class="" >  case Nil =&gt; &quot;empty&quot;
    </span><span id="2" class="" >  case _   =&gt; &quot;nonempty&quot;
    </span><span id="3" class="" >match
@@ -36,7 +36,7 @@ The syntactical precedence of match expressions has been changed.
    </span><span id="5" class="" >  case &quot;nonempty&quot; =&gt; 1
    </span></code></pre></div>2. `match` may follow a period:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if xs.match
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if xs.match
    </span><span id="1" class="" >  case Nil =&gt; false
    </span><span id="2" class="" >  case _   =&gt; true
    </span><span id="3" class="" >then &quot;nonempty&quot;

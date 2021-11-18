@@ -29,7 +29,7 @@ Only the upper bound `U` can be F-bounded, i.e. `X` can appear in it.
 
 Assume two type lambdas
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type TL1  =  [X &gt;: L1 &lt;: U1] =&gt;&gt; R1
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type TL1  =  [X &gt;: L1 &lt;: U1] =&gt;&gt; R1
 </span><span id="1" class="" >type TL2  =  [X &gt;: L2 &lt;: U2] =&gt;&gt; R2
 </span></code></pre></div>
 
@@ -48,77 +48,77 @@ its eta expansion. I.e, `List = [X] =>> List[X]`. This allows type constructors 
 
 A parameterized type definition
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] = R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] = R
 </span></code></pre></div>
 
 is regarded as a shorthand for an unparameterized definition with a type lambda as right-hand side:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T = [X] =&gt;&gt; R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T = [X] =&gt;&gt; R
 </span></code></pre></div>
 
 If the type definition carries `+` or `-` variance annotations,
 it is checked that the variance annotations are satisfied by the type lambda.
 For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2[A, +B] = A =&gt; B
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2[A, +B] = A =&gt; B
 </span></code></pre></div>
 
 expands to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2 = [A, B] =&gt;&gt; A =&gt; B
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2 = [A, B] =&gt;&gt; A =&gt; B
 </span></code></pre></div>
 
 and at the same time it is checked that the parameter `B` appears covariantly in `A => B`.
 
 A parameterized abstract type
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] &gt;: L &lt;: U
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] &gt;: L &lt;: U
 </span></code></pre></div>
 
 is regarded as shorthand for an unparameterized abstract type with type lambdas as bounds.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: ([X] =&gt;&gt; L) &lt;: ([X] =&gt;&gt; U)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: ([X] =&gt;&gt; L) &lt;: ([X] =&gt;&gt; U)
 </span></code></pre></div>
 
 However, if `L` is `Nothing` it is not parameterized, since `Nothing` is treated as a bottom type for all kinds. For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] &lt;: X =&gt; X
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T[X] &lt;: X =&gt; X
 </span></code></pre></div>
 
 is expanded to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: Nothing &lt;: ([X] =&gt;&gt; X =&gt; X)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: Nothing &lt;: ([X] =&gt;&gt; X =&gt; X)
 </span></code></pre></div>
 
 instead of
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: ([X] =&gt;&gt; Nothing) &lt;: ([X] =&gt;&gt; X =&gt; X)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type T &gt;: ([X] =&gt;&gt; Nothing) &lt;: ([X] =&gt;&gt; X =&gt; X)
 </span></code></pre></div>
 
 The same expansions apply to type parameters. For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[F[X] &lt;: Coll[X]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[F[X] &lt;: Coll[X]]
 </span></code></pre></div>
 
 is treated as a shorthand for
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[F &gt;: Nothing &lt;: [X] =&gt;&gt; Coll[X]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[F &gt;: Nothing &lt;: [X] =&gt;&gt; Coll[X]]
 </span></code></pre></div>
 
 Abstract types and opaque type aliases remember the variances they were created with. So the type
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2[-A, +B]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type F2[-A, +B]
 </span></code></pre></div>
 
 is known to be contravariant in `A` and covariant in `B` and can be instantiated only
 with types that satisfy these constraints. Likewise
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type O[X] = List[X]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >opaque type O[X] = List[X]
 </span></code></pre></div>
 
 `O` is known to be invariant (and not covariant, as its right-hand side would suggest). On the other hand, a transparent alias
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type O2[X] = List[X]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type O2[X] = List[X]
 </span></code></pre></div>
 
 would be treated as covariant, `X` is used covariantly on its right-hand side.
@@ -131,7 +131,7 @@ would be treated as covariant, `X` is used covariantly on its right-hand side.
 
 The body of a type lambda can again be a type lambda. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type TL = [X] =&gt;&gt; [Y] =&gt;&gt; (X, Y)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type TL = [X] =&gt;&gt; [Y] =&gt;&gt; (X, Y)
 </span></code></pre></div>
 
 Currently, no special provision is made to infer type arguments to such curried type lambdas. This is left for future work.

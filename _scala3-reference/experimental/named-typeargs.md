@@ -14,7 +14,7 @@ scala3: true
 
 Type arguments of methods can now be specified by name as well as by position. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def construct[Elem, Coll[_]](xs: Elem*): Coll[Elem] = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def construct[Elem, Coll[_]](xs: Elem*): Coll[Elem] = ???
 </span><span id="1" class="" >
 </span><span id="2" class="" >val xs1 = construct[Coll = List, Elem = Int](1, 2, 3)
 </span><span id="3" class="" >val xs2 = construct[Coll = List](1, 2, 3)

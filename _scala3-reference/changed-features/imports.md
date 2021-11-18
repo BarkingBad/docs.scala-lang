@@ -18,12 +18,12 @@ The syntax of wildcard and renaming imports (and exports) has changed.
 
 Wildcard imports are now expressed with `*` instead of underscore. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.*  // imports everything in the annotation package
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.*  // imports everything in the annotation package
 </span></code></pre></div>
 
 If you want to import a member named `*` specifically, you can use backticks around it.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object A:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object A:
 </span><span id="1" class="" >  def * = ...
 </span><span id="2" class="" >  def min = ...
 </span><span id="3" class="" >
@@ -38,7 +38,7 @@ If you want to import a member named `*` specifically, you can use backticks aro
 
 To rename or exclude an import, we now use `as` instead of `=>`. A single renaming import no longer needs to be enclosed in braces. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.{min as minimum, `*` as multiply}
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.{min as minimum, `*` as multiply}
 </span><span id="1" class="" >import Predef.{augmentString as _, *}     // imports everything except augmentString
 </span><span id="2" class="" >import scala.annotation as ann
 </span><span id="3" class="" >import java as j

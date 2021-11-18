@@ -15,7 +15,7 @@ previous-page: /scala3/reference/new-types/union-types
 A _type lambda_ lets one express a higher-kinded type directly, without
 a type definition.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[X, Y] =&gt;&gt; Map[Y, X]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[X, Y] =&gt;&gt; Map[Y, X]
 </span></code></pre></div>
 
 For instance, the type above defines a binary type constructor, which maps arguments `X` and `Y` to `Map[Y, X]`.

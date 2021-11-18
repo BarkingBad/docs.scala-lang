@@ -14,7 +14,7 @@ By and large, the possible indentation regions coincide with those regions where
 
 To allow such arguments to be written without braces, a variant of the indentation scheme is implemented under language import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.fewerBraces
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import language.experimental.fewerBraces
 </span></code></pre></div>
 
 Alternatively, it can be enabled with command line option `-language:experimental.fewerBraces`.
@@ -25,14 +25,14 @@ This variant is more contentious and less stable than the rest of the significan
 
 Similar to what is done for classes and objects, a `:` that follows a function reference at the end of a line means braces can be omitted for function arguments. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >times(10):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >times(10):
 </span><span id="1" class="" >  println(&quot;ah&quot;)
 </span><span id="2" class="" >  println(&quot;ha&quot;)
 </span></code></pre></div>
 
 The colon can also follow an infix operator:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >credentials ++ :
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >credentials ++ :
 </span><span id="1" class="" >  val file = Path.userHome / &quot;.credentials&quot;
 </span><span id="2" class="" >  if file.exists
 </span><span id="3" class="" >  then Seq(Credentials(file))
@@ -41,7 +41,7 @@ The colon can also follow an infix operator:
 
 Function calls that take multiple argument lists can also be handled this way:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val firstLine = files.get(fileName).fold:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val firstLine = files.get(fileName).fold:
 </span><span id="1" class="" >    val fileNames = files.values
 </span><span id="2" class="" >    s&quot;&quot;&quot;no file named $fileName found among
 </span><span id="3" class="" >      |${values.mkString(\n)}&quot;&quot;&quot;.stripMargin
@@ -55,7 +55,7 @@ Function calls that take multiple argument lists can also be handled this way:
 
 Braces can also be omitted around multiple line function value arguments:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs = elems.map x =&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs = elems.map x =&gt;
 </span><span id="1" class="" >  val y = x - 1
 </span><span id="2" class="" >  y * y
 </span><span id="3" class="" >xs.foldLeft (x, y) =&gt;
@@ -78,10 +78,10 @@ IndentedArgument ::=  indent (CaseClauses | Block) outdent
 Note that a lambda argument must have the `=>` at the end of a line for braces
 to be optional. For instance, the following would also be incorrect:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map x =&gt; x + 1   // error: braces or parentheses are required
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map x =&gt; x + 1   // error: braces or parentheses are required
 </span></code></pre></div>
 
 The lambda has to be enclosed in braces or parentheses:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(x =&gt; x + 1)  // ok
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(x =&gt; x + 1)  // ok
 </span></code></pre></div>

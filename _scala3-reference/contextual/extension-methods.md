@@ -14,7 +14,7 @@ previous-page: /scala3/reference/contextual/given-imports
 
 Extension methods allow one to add methods to a type after the type is defined. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class Circle(x: Double, y: Double, radius: Double)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class Circle(x: Double, y: Double, radius: Double)
 </span><span id="1" class="" >
 </span><span id="2" class="" >extension (c: Circle)
 </span><span id="3" class="" >  def circumference: Double = c.radius * math.Pi * 2
@@ -22,7 +22,7 @@ Extension methods allow one to add methods to a type after the type is defined. 
 
 Like regular methods, extension methods can be invoked with infix `.`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val circle = Circle(0, 0, 1)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val circle = Circle(0, 0, 1)
 </span><span id="1" class="" >circle.circumference
 </span></code></pre></div>
 
@@ -41,7 +41,7 @@ assert(circle.circumference == circumference(circle))
 
 The extension method syntax can also be used to define operators. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (x: String)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (x: String)
 </span><span id="1" class="" >  def &lt; (y: String): Boolean = ...
 </span><span id="2" class="" >extension (x: Elem)
 </span><span id="3" class="" >  def +: (xs: Seq[Elem]): Seq[Elem] = ...
@@ -72,7 +72,7 @@ two swaps cancel each other out). See [here for details](./right-associative-ext
 
 It is also possible to extend generic types by adding type parameters to an extension. For instance:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])
 </span><span id="1" class="" >  def second = xs.tail.head
 </span><span id="2" class="" >
 </span><span id="3" class="" >extension [T: Numeric](x: T)
@@ -82,29 +82,29 @@ It is also possible to extend generic types by adding type parameters to an exte
 Type parameters on extensions can also be combined with type parameters on the methods
 themselves:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])
 </span><span id="1" class="" >  def sumBy[U: Numeric](f: T =&gt; U): U = ...
 </span></code></pre></div>
 
 Type arguments matching method type parameters are passed as usual:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;).sumBy[Int](_.length)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;).sumBy[Int](_.length)
 </span></code></pre></div>
 
 By contrast, type arguments matching type parameters following `extension` can be passed
 only if the method is referenced as a non-extension method:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sumBy[String](List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;))(_.length)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sumBy[String](List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;))(_.length)
 </span></code></pre></div>
 
 Or, when passing both type arguments:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sumBy[String](List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;))[Int](_.length)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sumBy[String](List(&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;))[Int](_.length)
 </span></code></pre></div>
 
 Extensions can also take using clauses. For instance, the `+` extension above could equivalently be written with a using clause:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](x: T)(using n: Numeric[T])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](x: T)(using n: Numeric[T])
 </span><span id="1" class="" >  def + (y: T): T = n.plus(x, y)
 </span></code></pre></div>
 
@@ -115,7 +115,7 @@ left-hand parameter type. In this case one can "pull out" the common parameters 
 a single extension and enclose all methods in braces or an indented region.
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String])
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def longestStrings: Seq[String] =
 </span><span id="3" class="" >    val maxLength = ss.map(_.length).max
@@ -126,7 +126,7 @@ Example:
 
 The same can be written with braces as follows (note that indented regions can still be used inside braces):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String]) {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String]) {
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def longestStrings: Seq[String] = {
 </span><span id="3" class="" >    val maxLength = ss.map(_.length).max
@@ -143,7 +143,7 @@ assuming the common extended value `ss` as receiver.
 Collective extensions like these are a shorthand for individual extensions
 where each method is defined separately. For instance, the first extension above expands to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (ss: Seq[String])
 </span><span id="1" class="" >  def longestStrings: Seq[String] =
 </span><span id="2" class="" >    val maxLength = ss.map(_.length).max
 </span><span id="3" class="" >    ss.filter(_.length == maxLength)
@@ -154,7 +154,7 @@ where each method is defined separately. For instance, the first extension above
 
 Collective extensions also can take type parameters and have using clauses. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])(using Ordering[T])
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](xs: List[T])(using Ordering[T])
 </span><span id="1" class="" >  def smallest(n: Int): List[T] = xs.sorted.take(n)
 </span><span id="2" class="" >  def smallestIndices(n: Int): List[Int] =
 </span><span id="3" class="" >    val limit = smallest(n).max
@@ -177,7 +177,7 @@ There are four possible ways for an extension method to be applicable:
 
 Here is an example for the first rule:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait IntOps:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait IntOps:
 </span><span id="1" class="" >  extension (i: Int) def isZero: Boolean = i == 0
 </span><span id="2" class="" >
 </span><span id="3" class="" >  extension (i: Int) def safeMod(x: Int): Option[Int] =
@@ -203,14 +203,14 @@ Here is an example for the first rule:
 
 By the second rule, an extension method can be made available by defining a given instance containing it, like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ops1: IntOps()  // brings safeMod into scope
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ops1: IntOps()  // brings safeMod into scope
 </span><span id="1" class="" >
 </span><span id="2" class="" >1.safeMod(2)
 </span></code></pre></div>
 
 By the third and fourth rule, an extension method is available if it is in the implicit scope of the receiver type or in a given instance in that scope. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class List[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class List[T]:
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >object List:
 </span><span id="3" class="" >  ...
@@ -250,14 +250,14 @@ The following two rewritings are tried in order:
 
 An extension method can also be referenced using a simple identifier without a preceding expression. If an identifier `g` appears in the body of an extension method `f` and refers to an extension method `g` that is defined in the same collective extension
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (x: T)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (x: T)
 </span><span id="1" class="" >  def f ... = ... g ...
 </span><span id="2" class="" >  def g ...
 </span></code></pre></div>
 
 the identifier is rewritten to `x.g`. This is also the case if `f` and `g` are the same method. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (s: String)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (s: String)
 </span><span id="1" class="" >  def position(ch: Char, n: Int): Int =
 </span><span id="2" class="" >    if n &lt; s.length &amp;&amp; s(n) != ch then position(ch, n + 1)
 </span><span id="3" class="" >    else n
@@ -265,7 +265,7 @@ the identifier is rewritten to `x.g`. This is also the case if `f` and `g` are t
 
 The recursive call `position(ch, n + 1)` expands to `s.position(ch, n + 1)` in this case. The whole extension method rewrites to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def position(s: String)(ch: Char, n: Int): Int =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def position(s: String)(ch: Char, n: Int): Int =
 </span><span id="1" class="" >  if n &lt; s.length &amp;&amp; s(n) != ch then position(s)(ch, n + 1)
 </span><span id="2" class="" >  else n
 </span></code></pre></div>

@@ -17,7 +17,7 @@ conditions. A type class in this sense is any trait or class with a type paramet
 on. Common examples are `Eq`, `Ordering`, or `Show`. For example, given the following `Tree` algebraic data type
 (ADT),
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Tree[T] derives Eq, Ordering, Show:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Tree[T] derives Eq, Ordering, Show:
 </span><span id="1" class="" >  case Branch(left: Tree[T], right: Tree[T])
 </span><span id="2" class="" >  case Leaf(elem: T)
 </span></code></pre></div>
@@ -25,7 +25,7 @@ on. Common examples are `Eq`, `Ordering`, or `Show`. For example, given the foll
 The `derives` clause generates the following given instances for the `Eq`, `Ordering` and `Show` type classes in the
 companion object of `Tree`,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: Eq]       : Eq[Tree[T]]    = Eq.derived
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: Eq]       : Eq[Tree[T]]    = Eq.derived
 </span><span id="1" class="" >given [T: Ordering] : Ordering[Tree] = Ordering.derived
 </span><span id="2" class="" >given [T: Show]     : Show[Tree]     = Show.derived
 </span></code></pre></div>
@@ -46,7 +46,7 @@ for,
 They also provide minimal term level infrastructure to allow higher level libraries to provide comprehensive
 derivation support.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed trait Mirror:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed trait Mirror:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  /** the type being mirrored */
 </span><span id="3" class="" >  type MirroredType
@@ -88,7 +88,7 @@ types (i.e. sealed class or traits with product children, and enums) have mirror
 
 For the `Tree` ADT from above the following `Mirror` instances will be automatically provided by the compiler,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// Mirror for Tree
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// Mirror for Tree
 </span><span id="1" class="" >new Mirror.Sum:
 </span><span id="2" class="" >  type MirroredType = Tree
 </span><span id="3" class="" >  type MirroredElemTypes[T] = (Branch[T], Leaf[T])
@@ -146,7 +146,7 @@ A trait or class can appear in a `derives` clause if its companion object define
 signature and implementation of a `derived` method for a type class `TC[_]` are arbitrary but it is typically of the
 following form,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
 </span><span id="1" class="" >
 </span><span id="2" class="" >def derived[T](using Mirror.Of[T]): TC[T] = ...
 </span></code></pre></div>
@@ -173,14 +173,14 @@ The low-level method we will use to implement a type class `derived` method in t
 type-level constructs in Scala 3: inline methods, inline matches, and implicit searches via  `summonInline` or `summonFrom`. Given this definition of the
 `Eq` type class,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Eq[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Eq[T]:
 </span><span id="1" class="" >  def eqv(x: T, y: T): Boolean
 </span></code></pre></div>
 
 we need to implement a method `Eq.derived` on the companion object of `Eq` that produces a given instance for `Eq[T]` given
 a `Mirror[T]`. Here is a possible implementation,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline given derived[T](using m: Mirror.Of[T]): Eq[T] =
 </span><span id="3" class="" >  val elemInstances = summonAll[m.MirroredElemTypes]           // (1)
@@ -198,7 +198,7 @@ being derived for. This is either all the branches of a sum type or all the fiel
 implementation of `summonAll` is `inline` and uses Scala 3's `summonInline` construct to collect the instances as a
 `List`,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def summonAll[T &lt;: Tuple]: List[Eq[_]] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def summonAll[T &lt;: Tuple]: List[Eq[_]] =
 </span><span id="1" class="" >  inline erasedValue[T] match
 </span><span id="2" class="" >    case _: EmptyTuple =&gt; Nil
 </span><span id="3" class="" >    case _: (t *: ts) =&gt; summonInline[Eq[t]] :: summonAll[ts]
@@ -213,7 +213,7 @@ In the sum case, `eqSum`, we use the runtime `ordinal` values of the arguments t
 values are of the same subtype of the ADT (3) and then, if they are, to further test for equality based on the `Eq`
 instance for the appropriate ADT subtype using the auxiliary method `check` (4).
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
 </span><span id="1" class="" >
 </span><span id="2" class="" >def eqSum[T](s: Mirror.SumOf[T], elems: List[Eq[_]]): Eq[T] =
 </span><span id="3" class="" >  new Eq[T]:
@@ -225,7 +225,7 @@ instance for the appropriate ADT subtype using the auxiliary method `check` (4).
 In the product case, `eqProduct` we test the runtime values of the arguments to `eqv` for equality as products based
 on the `Eq` instances for the fields of the data type (5),
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.Mirror
 </span><span id="1" class="" >
 </span><span id="2" class="" >def eqProduct[T](p: Mirror.ProductOf[T], elems: List[Eq[_]]): Eq[T] =
 </span><span id="3" class="" >  new Eq[T]:
@@ -237,7 +237,7 @@ on the `Eq` instances for the fields of the data type (5),
 
 Pulling this all together we have the following complete implementation,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.*
 </span><span id="1" class="" >import scala.compiletime.{erasedValue, summonInline}
 </span><span id="2" class="" >
 </span><span id="3" class="" >inline def summonAll[T &lt;: Tuple]: List[Eq[_]] =
@@ -280,7 +280,7 @@ Pulling this all together we have the following complete implementation,
 
 we can test this relative to a simple ADT like so,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Opt[+T] derives Eq:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Opt[+T] derives Eq:
 </span><span id="1" class="" >  case Sm(t: T)
 </span><span id="2" class="" >  case Nn
 </span><span id="3" class="" >
@@ -295,7 +295,7 @@ we can test this relative to a simple ADT like so,
 In this case the code that is generated by the inline expansion for the derived `Eq` instance for `Opt` looks like the
 following, after a little polishing,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived$Eq[T](using eqT: Eq[T]): Eq[Opt[T]] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived$Eq[T](using eqT: Eq[T]): Eq[Opt[T]] =
 </span><span id="1" class="" >  eqSum(
 </span><span id="2" class="" >    summon[Mirror[Opt[T]]],
 </span><span id="3" class="" >    List(
@@ -312,7 +312,7 @@ child instances in the above) and generate code which is indistinguishable from 
 As a third example, using a higher level library such as Shapeless the type class author could define an equivalent
 `derived` method as,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given eqSum[A](using inst: =&gt; K0.CoproductInstances[Eq, A]): Eq[A] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given eqSum[A](using inst: =&gt; K0.CoproductInstances[Eq, A]): Eq[A] with
 </span><span id="1" class="" >  def eqv(x: A, y: A): Boolean = inst.fold2(x, y)(false)(
 </span><span id="2" class="" >    [t] =&gt; (eqt: Eq[t], t0: t, t1: t) =&gt; eqt.eqv(t0, t1)
 </span><span id="3" class="" >  )
@@ -338,7 +338,7 @@ Sometimes one would like to derive a type class instance for an ADT after the AD
 change the code of the ADT itself.  To do this, simply define an instance using the `derived` method of the type class
 as right-hand side. E.g, to implement `Ordering` for `Option` define,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: Ordering]: Ordering[Option[T]] = Ordering.derived
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T: Ordering]: Ordering[Option[T]] = Ordering.derived
 </span></code></pre></div>
 
 Assuming the `Ordering.derived` method has a context parameter of type `Mirror[T]` it will be satisfied by the
@@ -358,12 +358,12 @@ ConstrApps        ::=  ConstrApp {‘with’ ConstrApp}
 **Note:** To align `extends` clauses and `derives` clauses, Scala 3 also allows multiple
 extended types to be separated by commas. So the following is now legal:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B, C { ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B, C { ... }
 </span></code></pre></div>
 
 It is equivalent to the old form
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B with C { ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A extends B with C { ... }
 </span></code></pre></div>
 
 ### Discussion

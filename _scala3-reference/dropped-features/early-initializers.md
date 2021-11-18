@@ -14,7 +14,7 @@ previous-page: /scala3/reference/dropped-features/package-objects
 
 Early initializers of the form
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C extends { ... } with SuperClass ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C extends { ... } with SuperClass ...
 </span></code></pre></div>
 
 have been dropped. They were rarely used, and mostly to compensate for the lack of

@@ -14,7 +14,7 @@ previous-page: /scala3/reference/dropped-features/procedure-syntax
 
 Package objects
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package object p {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package object p {
 </span><span id="1" class="" >  val a = ...
 </span><span id="2" class="" >  def b = ...
 </span><span id="3" class="" >}
@@ -24,7 +24,7 @@ will be dropped. They are still available in Scala 3.0, but will be deprecated a
 
 Package objects are no longer needed since all kinds of definitions can now be written at the top-level. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
 </span><span id="1" class="" >type Labelled[T] = (String, T)
 </span><span id="2" class="" >val a: Labelled[Int] = (&quot;count&quot;, 1)
 </span><span id="3" class="" >def b = a._2

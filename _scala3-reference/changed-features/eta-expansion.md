@@ -14,14 +14,14 @@ previous-page: /scala3/reference/changed-features/pattern-matching
 
 The conversion of _methods_ into _functions_ has been improved and happens automatically for methods with one or more parameters.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Boolean, y: String)(z: Int): List[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def m(x: Boolean, y: String)(z: Int): List[Int]
 </span><span id="1" class="" >val f1 = m
 </span><span id="2" class="" >val f2 = m(true, &quot;abc&quot;)
 </span></code></pre></div>
 
 This creates two function values:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f1: (Boolean, String) =&gt; Int =&gt; List[Int]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f1: (Boolean, String) =&gt; Int =&gt; List[Int]
 </span><span id="1" class="" >f2: Int =&gt; List[Int]
 </span></code></pre></div>
 
@@ -31,7 +31,7 @@ The syntax `m _` is no longer needed and will be deprecated in the future.
 
 Automatic eta expansion does not apply to "nullary" methods that take an empty parameter list.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def next(): T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def next(): T
 </span></code></pre></div>
 
 Given a simple reference to `next` does not auto-convert to a function.

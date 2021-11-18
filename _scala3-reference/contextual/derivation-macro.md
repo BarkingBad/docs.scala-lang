@@ -22,19 +22,19 @@ macros.
 
 As in the original code, the type class definition is the same:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Eq[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Eq[T]:
 </span><span id="1" class="" >  def eqv(x: T, y: T): Boolean
 </span></code></pre></div>
 
 we need to implement a method `Eq.derived` on the companion object of `Eq` that
 produces a quoted instance for `Eq[T]`. Here is a possible signature,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived[T: Type](using Quotes): Expr[Eq[T]]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived[T: Type](using Quotes): Expr[Eq[T]]
 </span></code></pre></div>
 
 and for comparison reasons we give the same signature we had with `inline`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline given derived[T]: (m: Mirror.Of[T]) =&gt; Eq[T] = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline given derived[T]: (m: Mirror.Of[T]) =&gt; Eq[T] = ???
 </span></code></pre></div>
 
 Note, that since a type is used in a subsequent stage it will need to be lifted
@@ -42,7 +42,7 @@ to a `Type` by using the corresponding context bound. Also, not that we can
 summon the quoted `Mirror` inside the body of the `derived` this we can omit it
 from the signature. The body of the `derived` method is shown below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived[T: Type](using Quotes): Expr[Eq[T]] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given derived[T: Type](using Quotes): Expr[Eq[T]] =
 </span><span id="1" class="" >  import quotes.reflect.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >  val ev: Expr[Mirror.Of[T]] = Expr.summon[Mirror.Of[T]].get
@@ -70,7 +70,7 @@ Note, that in the `inline` case we can merely write
 Being inside a macro, our first reaction would be to write the code below. Since
 the path inside the type argument is not stable this cannot be used:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&apos;{
 </span><span id="1" class="" >  summonAll[$m.MirroredElemTypes]
 </span><span id="2" class="" >}
 </span></code></pre></div>
@@ -78,13 +78,13 @@ the path inside the type argument is not stable this cannot be used:
 Instead we extract the tuple-type for element types using pattern matching over
 quotes and more specifically of the refined type:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case &apos;{ $m: Mirror.ProductOf[T] { type MirroredElemTypes = elementTypes }} =&gt; ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case &apos;{ $m: Mirror.ProductOf[T] { type MirroredElemTypes = elementTypes }} =&gt; ...
 </span></code></pre></div>
 
 Shown below is the implementation of `summonAll` as a macro. We assume that
 given instances for our primitive types exist.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def summonAll[T: Type](using Quotes): List[Expr[Eq[_]]] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def summonAll[T: Type](using Quotes): List[Expr[Eq[_]]] =
 </span><span id="1" class="" >   Type.of[T] match
 </span><span id="2" class="" >      case &apos;[String *: tpes] =&gt; &apos;{ summon[Eq[String]] } :: summonAll[tpes]
 </span><span id="3" class="" >      case &apos;[Int *: tpes]    =&gt; &apos;{ summon[Eq[Int]] }    :: summonAll[tpes]
@@ -99,7 +99,7 @@ Assuming that we calculate the equality of two `Person`s defined with a case
 class that holds a name of type [`String`](https://scala-lang.org/api/3.x/scala/Predef$.html#String-0)
 and an age of type `Int`, the equality check we want to generate is the following:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >true
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >true
 </span><span id="1" class="" >   &amp;&amp; Eq[String].eqv(x.productElement(0),y.productElement(0))
 </span><span id="2" class="" >   &amp;&amp; Eq[Int].eqv(x.productElement(1), y.productElement(1))
 </span></code></pre></div>
@@ -111,7 +111,7 @@ One that hosts the top-level splice `eqv` and one that is the implementation.
 Alternatively and what is shown below is that we can call the `eqv` method
 directly. The `eqGen` can trigger the derivation.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](inline x: T)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](inline x: T)
 </span><span id="1" class="" >   inline def === (inline y: T)(using eq: Eq[T]): Boolean = eq.eqv(x, y)
 </span><span id="2" class="" >
 </span><span id="3" class="" >inline given eqGen[T]: Eq[T] = ${ Eq.derived[T] }
@@ -121,7 +121,7 @@ Note, that we use inline method syntax and we can compare instance such as
 `Sm(Person("Test", 23)) === Sm(Person("Test", 24))` for e.g., the following two
 types:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class Person(name: String, age: Int)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class Person(name: String, age: Int)
 </span><span id="1" class="" >
 </span><span id="2" class="" >enum Opt[+T]:
 </span><span id="3" class="" >   case Sm(t: T)
@@ -130,7 +130,7 @@ types:
 
 The full code is shown below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.deriving.*
 </span><span id="1" class="" >import scala.quoted.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >

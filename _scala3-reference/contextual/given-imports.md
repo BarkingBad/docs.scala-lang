@@ -14,7 +14,7 @@ previous-page: /scala3/reference/contextual/context-bounds
 
 A special form of import wildcard selector is used to import given instances. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object A:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object A:
 </span><span id="1" class="" >  class TC
 </span><span id="2" class="" >  given tc: TC = ???
 </span><span id="3" class="" >  def f(using TC) = ???
@@ -29,7 +29,7 @@ In the code above, the `import A.*` clause in object `B` imports all members
 of `A` _except_ the given instance `tc`. Conversely, the second import `import A.given` will import _only_ that given instance.
 The two import clauses can also be merged into one:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object B:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object B:
 </span><span id="1" class="" >  import A.{given, *}
 </span><span id="2" class="" >   ...
 </span></code></pre></div>
@@ -50,19 +50,19 @@ There are two main benefits arising from these rules:
 
 Since givens can be anonymous it is not always practical to import them by their name, and wildcard imports are typically used instead. By-type imports provide a more specific alternative to wildcard imports, which makes it clearer what is imported. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.given TC
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.given TC
 </span></code></pre></div>
 
 This imports any given in `A` that has a type which conforms to `TC`. Importing givens of several types `T1,...,Tn`
 is expressed by multiple `given` selectors.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.{given T1, ..., given Tn}
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import A.{given T1, ..., given Tn}
 </span></code></pre></div>
 
 Importing all given instances of a parameterized type is expressed by wildcard arguments.
 For instance, assuming the object
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Instances:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Instances:
 </span><span id="1" class="" >  given intOrd: Ordering[Int] = ...
 </span><span id="2" class="" >  given listOrd[T: Ordering]: Ordering[List[T]] = ...
 </span><span id="3" class="" >  given ec: ExecutionContext = ...
@@ -71,14 +71,14 @@ For instance, assuming the object
 
 the import clause
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import Instances.{given Ordering[?], given ExecutionContext}
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import Instances.{given Ordering[?], given ExecutionContext}
 </span></code></pre></div>
 
 would import the `intOrd`, `listOrd`, and `ec` instances but leave out the `im` instance, since it fits none of the specified bounds.
 
 By-type imports can be mixed with by-name imports. If both are present in an import clause, by-type imports come last. For instance, the import clause
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import Instances.{im, given Ordering[?]}
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import Instances.{im, given Ordering[?]}
 </span></code></pre></div>
 
 would import `im`, `intOrd`, and `listOrd` but leave out `ec`.

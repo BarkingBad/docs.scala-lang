@@ -46,7 +46,7 @@ assigning a type to a constant expression. The new rule is:
 
 ### Examples
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline val b = 33
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline val b = 33
 </span><span id="1" class="" >def f(): Int = b + 1
 </span><span id="2" class="" >Array(b, 33, 5.5)      : Array[Double] // b is an inline val
 </span><span id="3" class="" >Array(f(), 33, 5.5)    : Array[AnyVal] // f() is not a constant

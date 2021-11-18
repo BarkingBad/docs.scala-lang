@@ -195,7 +195,7 @@ For instance, here is a version of `power` that generates the multiplications
 directly if the exponent is statically known and falls back to the dynamic
 implementation of `power` otherwise.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >inline def power(x: Double, n: Int): Double =
 </span><span id="3" class="" >  ${ powerExpr(&apos;x, &apos;n) }
@@ -226,7 +226,7 @@ With the right extractors, the "AsFunction" conversion
 that maps expressions over functions to functions over expressions can
 be implemented in user code:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given AsFunction1[T, U]: Conversion[Expr[T =&gt; U], Expr[T] =&gt; Expr[U]] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given AsFunction1[T, U]: Conversion[Expr[T =&gt; U], Expr[T] =&gt; Expr[U]] with
 </span><span id="1" class="" >  def apply(f: Expr[T =&gt; U]): Expr[T] =&gt; Expr[U] =
 </span><span id="2" class="" >    (x: Expr[T]) =&gt; f match
 </span><span id="3" class="" >      case Lambda(g) =&gt; g(x)
@@ -235,7 +235,7 @@ be implemented in user code:
 
 This assumes an extractor
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Lambda:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Lambda:
 </span><span id="1" class="" >  def unapply[T, U](x: Expr[T =&gt; U]): Option[Expr[T] =&gt; Expr[U]]
 </span></code></pre></div>
 
@@ -245,7 +245,7 @@ through quotes. Most likely, those constructors would work over `Expr`
 types which lack a known type argument. For instance, an `Apply`
 constructor could be typed as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def Apply(fn: Expr[Any], args: List[Expr[Any]]): Expr[Any]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def Apply(fn: Expr[Any], args: List[Expr[Any]]): Expr[Any]
 </span></code></pre></div>
 
 This would allow constructing applications from lists of arguments

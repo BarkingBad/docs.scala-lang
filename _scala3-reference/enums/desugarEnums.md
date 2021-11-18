@@ -42,7 +42,7 @@ map into `case class`es or `val`s.
 
 1. An `enum` definition
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum E ... { &lt;defs&gt; &lt;cases&gt; }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum E ... { &lt;defs&gt; &lt;cases&gt; }
    </span></code></pre></div>
 
    expands to a `sealed abstract` class that extends the `scala.reflect.Enum` trait and
@@ -50,19 +50,19 @@ map into `case class`es or `val`s.
    to rules (2 - 8). The enum class starts with a compiler-generated import that imports
    the names `<caseIds>` of all cases so that they can be used without prefix in the class.
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed abstract class E ... extends &lt;parents&gt; with scala.reflect.Enum {
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed abstract class E ... extends &lt;parents&gt; with scala.reflect.Enum {
    </span><span id="1" class="" >  import E.{ &lt;caseIds&gt; }
    </span><span id="2" class="" >  &lt;defs&gt;
    </span><span id="3" class="" >}
    </span><span id="4" class="" >object E { &lt;cases&gt; }
    </span></code></pre></div>2. A simple case consisting of a comma-separated list of enum names
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C_1, ..., C_n
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C_1, ..., C_n
    </span></code></pre></div>
 
    expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C_1; ...; case C_n
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C_1; ...; case C_n
    </span></code></pre></div>
 
    Any modifiers or annotations on the original case extend to all expanded
@@ -70,12 +70,12 @@ map into `case class`es or `val`s.
 
 3. A simple case
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C
    </span></code></pre></div>
 
    of an enum `E` that does not take type parameters expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val C = $new(n, &quot;C&quot;)
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val C = $new(n, &quot;C&quot;)
    </span></code></pre></div>
 
    Here, `$new` is a private method that creates an instance of `E` (see
@@ -83,17 +83,17 @@ map into `case class`es or `val`s.
 
 4. If `E` is an enum with type parameters
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >V1 T1 &gt;: L1 &lt;: U1 ,   ... ,    Vn Tn &gt;: Ln &lt;: Un      (n &gt; 0)
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >V1 T1 &gt;: L1 &lt;: U1 ,   ... ,    Vn Tn &gt;: Ln &lt;: Un      (n &gt; 0)
    </span></code></pre></div>
 
    where each of the variances `Vi` is either `'+'` or `'-'`, then a simple case
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C
    </span></code></pre></div>
 
    expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C extends E[B1, ..., Bn]
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C extends E[B1, ..., Bn]
    </span></code></pre></div>
 
    where `Bi` is `Li` if `Vi = '+'` and `Ui` if `Vi = '-'`. This result is then further
@@ -102,36 +102,36 @@ map into `case class`es or `val`s.
 
 5. A class case without an extends clause
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;type-params&gt; &lt;value-params&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;type-params&gt; &lt;value-params&gt;
    </span></code></pre></div>
 
    of an enum `E` that does not take type parameters expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;type-params&gt; &lt;value-params&gt; extends E
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;type-params&gt; &lt;value-params&gt; extends E
    </span></code></pre></div>
 
    This result is then further rewritten with rule (9).
 
 6. If `E` is an enum with type parameters `Ts`, a class case with neither type parameters nor an extends clause
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;value-params&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;value-params&gt;
    </span></code></pre></div>
 
    expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C[Ts] &lt;value-params&gt; extends E[Ts]
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C[Ts] &lt;value-params&gt; extends E[Ts]
    </span></code></pre></div>
 
    This result is then further rewritten with rule (9). For class cases that have type parameters themselves, an extends clause needs to be given explicitly.
 
 7. If `E` is an enum with type parameters `Ts`, a class case without type parameters but with an extends clause
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;value-params&gt; extends &lt;parents&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;value-params&gt; extends &lt;parents&gt;
    </span></code></pre></div>
 
    expands to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C[Ts] &lt;value-params&gt; extends &lt;parents&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C[Ts] &lt;value-params&gt; extends &lt;parents&gt;
    </span></code></pre></div>
 
    provided at least one of the parameters `Ts` is mentioned in a parameter type in
@@ -139,12 +139,12 @@ map into `case class`es or `val`s.
 
 8. A value case
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C extends &lt;parents&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C extends &lt;parents&gt;
    </span></code></pre></div>
 
    expands to a value definition in `E`'s companion object:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val C = new &lt;parents&gt; { &lt;body&gt;; def ordinal = n }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val C = new &lt;parents&gt; { &lt;body&gt;; def ordinal = n }
    </span></code></pre></div>
 
    where `n` is the ordinal number of the case in the companion object,
@@ -156,17 +156,17 @@ map into `case class`es or `val`s.
 
 9. A class case
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;params&gt; extends &lt;parents&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C &lt;params&gt; extends &lt;parents&gt;
    </span></code></pre></div>
 
    expands analogous to a final case class in `E`'s companion object:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final case class C &lt;params&gt; extends &lt;parents&gt;
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final case class C &lt;params&gt; extends &lt;parents&gt;
    </span></code></pre></div>
 
    The enum case defines an `ordinal` method of the form
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def ordinal = n
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def ordinal = n
    </span></code></pre></div>
 
    where `n` is the ordinal number of the case in the companion object,
@@ -178,7 +178,7 @@ map into `case class`es or `val`s.
 
    The compiler-generated `apply` and `copy` methods of an enum case
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C(ps) extends P1, ..., Pn
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case C(ps) extends P1, ..., Pn
    </span></code></pre></div>
 
    are treated specially. A call `C(ts)` of the apply method is ascribed the underlying type
@@ -202,7 +202,7 @@ If `E` contains at least one simple case, its companion object will define in ad
   ordinal number and name. This method can be thought as being defined as
   follows.
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >private def $new(_$ordinal: Int, $name: String) =
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >private def $new(_$ordinal: Int, $name: String) =
   </span><span id="1" class="" >  new E with runtime.EnumValue:
   </span><span id="2" class="" >    def ordinal = _$ordinal
   </span><span id="3" class="" >    override def productPrefix = $name // if not overridden in `E`

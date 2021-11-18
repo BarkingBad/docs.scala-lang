@@ -20,7 +20,7 @@ defined by either:
 
 The standard library defines an abstract class `Conversion`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
 </span><span id="1" class="" >@java.lang.FunctionalInterface
 </span><span id="2" class="" >abstract class Conversion[-T, +U] extends Function1[T, U]:
 </span><span id="3" class="" >  def apply(x: T): U
@@ -58,7 +58,7 @@ over views whose parameters are passed by-name. This is no longer the
 case in Scala 3. A type error reporting the ambiguous conversions will
 be emitted in cases where this rule would be applied in Scala 2:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def conv1(x: Int): String = x.toString
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def conv1(x: Int): String = x.toString
 </span><span id="1" class="" >implicit def conv2(x: =&gt; Int): String = x.toString
 </span><span id="2" class="" >
 </span><span id="3" class="" >val x: String = 0 // Compiles in Scala2 (uses `conv1`),
@@ -69,7 +69,7 @@ In Scala 2, implicit values of a function type would be considered as
 potential views. In Scala 3, these implicit value need to have type
 `Conversion`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// Scala 2:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// Scala 2:
 </span><span id="1" class="" >def foo(x: Int)(implicit conv: Int =&gt; String): String = x
 </span><span id="2" class="" >
 </span><span id="3" class="" >// Becomes with Scala 3:
@@ -94,7 +94,7 @@ in Scala 3 and the decision to restrict implicit values of this type to be
 considered as potential views comes from the desire to remove surprising
 behavior from the language:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit val m: Map[Int, String] = Map(1 -&gt; &quot;abc&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit val m: Map[Int, String] = Map(1 -&gt; &quot;abc&quot;)
 </span><span id="1" class="" >
 </span><span id="2" class="" >val x: String = 1  // Scala 2: assigns &quot;abc&quot; to x
 </span><span id="3" class="" >                   // Scala 3: type error

@@ -106,7 +106,7 @@ A usage of a variadic extractor is irrefutable if one of the following condition
 
 For example:
 
-<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Even:
+<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Even:
 </span><span id="1" class="" >  def unapply(s: String): Boolean = s.size % 2 == 0
 </span><span id="2" class="" >
 </span><span id="3" class="" >&quot;even&quot; match
@@ -124,7 +124,7 @@ For example:
 
 For example:
 
-<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class FirstChars(s: String) extends Product:
+<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class FirstChars(s: String) extends Product:
 </span><span id="1" class="" >  def _1 = s.charAt(0)
 </span><span id="2" class="" >  def _2 = s.charAt(1)
 </span><span id="3" class="" >
@@ -147,7 +147,7 @@ For example:
 
 - If there is exactly `1` pattern, pattern-matching on `1` pattern with type `U`
 
-<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Nat(val x: Int):
+<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Nat(val x: Int):
 </span><span id="1" class="" >  def get: Int = x
 </span><span id="2" class="" >  def isEmpty = x &lt; 0
 </span><span id="3" class="" >
@@ -195,7 +195,7 @@ type X = {
 - Pattern-matching on _exactly_ `N` simple patterns with types `T1, T1, ..., T1`, where `N` is the runtime size of the sequence, or
 - Pattern-matching on `>= N` simple patterns and _a vararg pattern_ (e.g., `xs: _*`) with types `T1, T1, ..., T1, Seq[T1]`, where `N` is the minimum size of the sequence.
 
-<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object CharList:
+<!-- To be kept in sync with tests/new/patmat-spec.scala --><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object CharList:
 </span><span id="1" class="" >  def unapplySeq(s: String): Option[Seq[Char]] = Some(s.toList)
 </span><span id="2" class="" >
 </span><span id="3" class="" >&quot;example&quot; match

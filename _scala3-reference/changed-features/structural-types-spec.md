@@ -24,7 +24,7 @@ RefineStat    ::= ‘val’ VarDcl | ‘def’ DefDcl | ‘type’ {nl} TypeDcl
 The standard library defines a universal marker trait
 [`scala.Selectable`](https://github.com/lampepfl/dotty/blob/master/library/src/scala/Selectable.scala):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Selectable extends Any
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Selectable extends Any
 </span></code></pre></div>
 
 An implementation of `Selectable` that relies on [Java reflection](https://www.oracle.com/technical-resources/articles/java/javareflection.html) is
@@ -38,7 +38,7 @@ the methods `selectDynamic` and `applyDynamic`. The methods could be members of 
 The `selectDynamic` method takes a field name and returns the value associated with that name in the `Selectable`.
 It should have a signature of the form:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def selectDynamic(name: String): T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def selectDynamic(name: String): T
 </span></code></pre></div>
 
 Often, the return type `T` is `Any`.
@@ -50,7 +50,7 @@ Consequently, it is recommended not to define any member called `updateDynamic` 
 The `applyDynamic` method is used for selections that are applied to arguments. It takes a method name and possibly `Class`es representing its parameters types as well as the arguments to pass to the function.
 Its signature should be of one of the two following forms:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def applyDynamic(name: String)(args: Any*): T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def applyDynamic(name: String)(args: Any*): T
 </span><span id="1" class="" >def applyDynamic(name: String, ctags: Class[?]*)(args: Any*): T
 </span></code></pre></div>
 
@@ -63,16 +63,16 @@ and `Rs` are structural refinement declarations, and given `v.a` of type `U`, we
 
 - If `U` is a value type, we map `v.a` to:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.selectDynamic(&quot;a&quot;).asInstanceOf[U]
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.selectDynamic(&quot;a&quot;).asInstanceOf[U]
   </span></code></pre></div>- If `U` is a method type `(T11, ..., T1n)...(TN1, ..., TNn): R` and it is not a dependent method type, we map `v.a(a11, ..., a1n)...(aN1, ..., aNn)` to:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.applyDynamic(&quot;a&quot;)(a11, ..., a1n, ..., aN1, ..., aNn)
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.applyDynamic(&quot;a&quot;)(a11, ..., a1n, ..., aN1, ..., aNn)
   </span><span id="1" class="" >  .asInstanceOf[R]
   </span></code></pre></div>
 
   If this call resolves to an `applyDynamic` method of the second form that takes a `Class[?]*` argument, we further rewrite this call to
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.applyDynamic(&quot;a&quot;, c11, ..., c1n, ..., cN1, ... cNn)(
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >v.applyDynamic(&quot;a&quot;, c11, ..., c1n, ..., cN1, ... cNn)(
   </span><span id="1" class="" >  a11, ..., a1n, ..., aN1, ..., aNn)
   </span><span id="2" class="" >  .asInstanceOf[R]
   </span></code></pre></div>
@@ -98,7 +98,7 @@ conversion that can turn `v` into a `Selectable`, and the selection methods coul
   we want to prove `S <: T { def m(x: A): B }`. Then, as usual, `S` must have a member method `m` that can take an argument of type `A`. Furthermore, if `m` is not a member of `T` (i.e. the refinement is structural), an additional condition applies. In this case, the member _definition_ `m` of `S` will have a parameter
   with type `A'` say. The additional condition is that the erasure of `A'` and `A` is the same. Here is an example:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Sink[A] { def put(x: A): Unit = {} }
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Sink[A] { def put(x: A): Unit = {} }
   </span><span id="1" class="" >val a = Sink[String]()
   </span><span id="2" class="" >val b: { def put(x: String): Unit } = a  // error
   </span><span id="3" class="" >b.put(&quot;abc&quot;) // looks for a method with a `String` parameter
@@ -118,7 +118,7 @@ conversion that can turn `v` into a `Selectable`, and the selection methods coul
 
   One might hope for a "more intelligent" reflexive dispatch algorithm that does not require exact parameter type matching. Unfortunately, this can always run into ambiguities, as long as overloading is a possibility. For instance, continuing the example above, we might introduce a new subclass `Sink1` of `Sink` and change the definition of `a` as follows:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Sink1[A] extends Sink[A] { def put(x: &quot;123&quot;) = ??? }
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Sink1[A] extends Sink[A] { def put(x: &quot;123&quot;) = ??? }
   </span><span id="1" class="" >val a: Sink[String] = Sink1[String]()
   </span></code></pre></div>
 
@@ -128,7 +128,7 @@ conversion that can turn `v` into a `Selectable`, and the selection methods coul
 
   For the cases where we can in fact implement reflection without knowing precise parameter types (for instance if static overloading is replaced by dynamically dispatched multi-methods), there is an escape hatch. For types that extend `scala.Selectable.WithoutPreciseParameterTypes` the signature check is omitted. Example:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait MultiMethodSelectable extends Selectable.WithoutPreciseParameterTypes:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait MultiMethodSelectable extends Selectable.WithoutPreciseParameterTypes:
   </span><span id="1" class="" >  // Assume this version of `applyDynamic` can be implemented without knowing
   </span><span id="2" class="" >  // precise parameter types `paramTypes`:
   </span><span id="3" class="" >  def applyDynamic(name: String, paramTypes: Class[_]*)(args: Any*): Any = ???

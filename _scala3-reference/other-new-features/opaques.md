@@ -14,7 +14,7 @@ previous-page: /scala3/reference/other-new-features/export
 
 Opaque types aliases provide type abstraction without any overhead. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object MyMath:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object MyMath:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  opaque type Logarithm = Double
 </span><span id="3" class="" >
@@ -48,7 +48,7 @@ The public API of `Logarithm` consists of the `apply` and `safe` methods defined
 They convert from `Double`s to `Logarithm` values. Moreover, an operation `toDouble` that converts the other way, and operations `+` and `*` are defined as extension methods on `Logarithm` values.
 The following operations would be valid because they use functionality implemented in the `MyMath` object.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import MyMath.Logarithm
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import MyMath.Logarithm
 </span><span id="1" class="" >
 </span><span id="2" class="" >val l = Logarithm(1.0)
 </span><span id="3" class="" >val l2 = Logarithm(2.0)
@@ -58,7 +58,7 @@ The following operations would be valid because they use functionality implement
 
 But the following operations would lead to type errors:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val d: Double = l       // error: found: Logarithm, required: Double
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val d: Double = l       // error: found: Logarithm, required: Double
 </span><span id="1" class="" >val l2: Logarithm = 1.0 // error: found: Double, required: Logarithm
 </span><span id="2" class="" >l * 2                   // error: found: Int(2), required: Logarithm
 </span><span id="3" class="" >l / l2                  // error: `/` is not a member of Logarithm
@@ -68,7 +68,7 @@ But the following operations would lead to type errors:
 
 Opaque type aliases can also come with bounds. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Access:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Access:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  opaque type Permissions = Int
 </span><span id="3" class="" >  opaque type PermissionChoice = Int
@@ -114,7 +114,7 @@ All three opaque type aliases have the same underlying representation type `Int`
 it known outside the `Access` object that `Permission` is a subtype of the other
 two types.  Hence, the following usage scenario type-checks.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object User:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object User:
 </span><span id="1" class="" >  import Access.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >  case class Item(rights: Permissions)
@@ -143,7 +143,7 @@ While typically, opaque types are used together with objects to hide implementat
 
 For example, we can redefine the above example of Logarithms as a class.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Logarithms:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Logarithms:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  opaque type Logarithm = Double
 </span><span id="3" class="" >
@@ -157,7 +157,7 @@ For example, we can redefine the above example of Logarithms as a class.
 
 Opaque type members of different instances are treated as different:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val l1 = new Logarithms
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val l1 = new Logarithms
 </span><span id="1" class="" >val l2 = new Logarithms
 </span><span id="2" class="" >val x = l1(1.5)
 </span><span id="3" class="" >val y = l1(2.6)

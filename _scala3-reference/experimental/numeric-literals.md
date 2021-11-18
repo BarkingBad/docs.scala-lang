@@ -12,12 +12,12 @@ scala3: true
 
 **Note**: This feature is not yet part of the Scala 3 language definition. It can be made available by a language import:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.experimental.genericNumberLiterals
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.experimental.genericNumberLiterals
 </span></code></pre></div>
 
 In Scala 2, numeric literals were confined to the primitive numeric types `Int`, `Long`, `Float`, and `Double`. Scala 3 allows to write numeric literals also for user-defined types. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: Long = -10_000_000_000
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: Long = -10_000_000_000
 </span><span id="1" class="" >val y: BigInt = 0x123_abc_789_def_345_678_901
 </span><span id="2" class="" >val z: BigDecimal = 110_222_799_799.99
 </span><span id="3" class="" >
@@ -48,12 +48,12 @@ In each of these cases the conversion to a number is exactly as in Scala 2 or in
 
 With these rules, the definition
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: Long = -10_000_000_000
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: Long = -10_000_000_000
 </span></code></pre></div>
 
 is legal by rule (1), since the expected type is `Long`. The definitions
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val y: BigInt = 0x123_abc_789_def_345_678_901
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val y: BigInt = 0x123_abc_789_def_345_678_901
 </span><span id="1" class="" >val z: BigDecimal = 111222333444.55
 </span></code></pre></div>
 
@@ -61,7 +61,7 @@ are legal by rule (2), since both `BigInt` and `BigDecimal` have `FromDigits` in
 (which implement the `FromDigits` subclasses `FromDigits.WithRadix` and `FromDigits.Decimal`, respectively).
 On the other hand,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x = -10_000_000_000
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x = -10_000_000_000
 </span></code></pre></div>
 
 gives a type error, since without an expected type `-10_000_000_000` is treated by rule (3) as an `Int` literal, but it is too large for that type.
@@ -72,7 +72,7 @@ To allow numeric literals, a type simply has to define a `given` instance of the
 `scala.util.FromDigits` type class, or one of its subclasses. `FromDigits` is defined
 as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait FromDigits[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait FromDigits[T]:
 </span><span id="1" class="" >  def fromDigits(digits: String): T
 </span></code></pre></div>
 
@@ -86,7 +86,7 @@ The companion object `FromDigits` also defines subclasses of `FromDigits` for
 whole numbers with a given radix, for numbers with a decimal point, and for
 numbers that can have both a decimal point and an exponent:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object FromDigits:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object FromDigits:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  /** A subclass of `FromDigits` that also allows to convert whole
 </span><span id="3" class="" >   *  number literals with a radix other than 10
@@ -117,7 +117,7 @@ for this type.
 of `FromDigitsException`. `FromDigitsException` is defined with three subclasses in the
 `FromDigits` object as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class FromDigitsException(msg: String) extends NumberFormatException(msg)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class FromDigitsException(msg: String) extends NumberFormatException(msg)
 </span><span id="1" class="" >
 </span><span id="2" class="" >class NumberTooLarge (msg: String = &quot;number too large&quot;)         extends FromDigitsException(msg)
 </span><span id="3" class="" >class NumberTooSmall (msg: String = &quot;number too small&quot;)         extends FromDigitsException(msg)
@@ -128,20 +128,20 @@ of `FromDigitsException`. `FromDigitsException` is defined with three subclasses
 
 As a fully worked out example, here is an implementation of a new numeric class, `BigFloat`, that accepts numeric literals. `BigFloat` is defined in terms of a `BigInt` mantissa and an `Int` exponent:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class BigFloat(mantissa: BigInt, exponent: Int):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class BigFloat(mantissa: BigInt, exponent: Int):
 </span><span id="1" class="" >  override def toString = s&quot;${mantissa}e${exponent}&quot;
 </span></code></pre></div>
 
 `BigFloat` literals can have a decimal point as well as an exponent. E.g. the following expression
 should produce the `BigFloat` number `BigFloat(-123, 997)`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-0.123E+1000: BigFloat
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-0.123E+1000: BigFloat
 </span></code></pre></div>
 
 The companion object of `BigFloat` defines an `apply` constructor method to construct a `BigFloat`
 from a `digits` string. Here is a possible implementation:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object BigFloat:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object BigFloat:
 </span><span id="1" class="" >  import scala.util.FromDigits
 </span><span id="2" class="" >
 </span><span id="3" class="" >  def apply(digits: String): BigFloat =
@@ -167,7 +167,7 @@ from a `digits` string. Here is a possible implementation:
 To accept `BigFloat` literals, all that's needed in addition is a `given` instance of type
 `FromDigits.Floating[BigFloat]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given FromDigits: FromDigits.Floating[BigFloat] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given FromDigits: FromDigits.Floating[BigFloat] with
 </span><span id="1" class="" >    def fromDigits(digits: String) = apply(digits)
 </span><span id="2" class="" >end BigFloat
 </span></code></pre></div>
@@ -181,12 +181,12 @@ literal has the correct format before it gets passed on to a conversion method.
 
 With the setup of the previous section, a literal like
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >1e10_0000_000_000: BigFloat
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >1e10_0000_000_000: BigFloat
 </span></code></pre></div>
 
 would be expanded by the compiler to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >BigFloat.FromDigits.fromDigits(&quot;1e100000000000&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >BigFloat.FromDigits.fromDigits(&quot;1e100000000000&quot;)
 </span></code></pre></div>
 
 Evaluating this expression throws a `NumberTooLarge` exception at run time. We would like it to
@@ -195,7 +195,7 @@ with a small dose of metaprogramming. The idea is to turn the `fromDigits` metho
 into a macro, i.e. make it an inline method with a splice as right-hand side.
 To do this, replace the `FromDigits` instance in the `BigFloat` object by the following two definitions:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object BigFloat:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object BigFloat:
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >
 </span><span id="3" class="" >  class FromDigits extends FromDigits.Floating[BigFloat]:
@@ -213,7 +213,7 @@ no code that can be executed at runtime. That is why we define an intermediary c
 method in the `FromDigits` given instance. That method is defined in terms of a macro
 implementation method `fromDigitsImpl`. Here is its definition:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >private def fromDigitsImpl(digits: Expr[String])(using ctx: Quotes): Expr[BigFloat] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >private def fromDigitsImpl(digits: Expr[String])(using ctx: Quotes): Expr[BigFloat] =
 </span><span id="1" class="" >    digits.value match
 </span><span id="2" class="" >      case Some(ds) =&gt;
 </span><span id="3" class="" >        try
@@ -239,12 +239,12 @@ If the `apply` method throws a `FromDigitsException`, the exception's message is
 
 With this new implementation, a definition like
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: BigFloat = 1234.45e3333333333
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: BigFloat = 1234.45e3333333333
 </span></code></pre></div>
 
 would give a compile time error message:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >3 |  val x: BigFloat = 1234.45e3333333333
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >3 |  val x: BigFloat = 1234.45e3333333333
 </span><span id="1" class="" >  |                    ^^^^^^^^^^^^^^^^^^
 </span><span id="2" class="" >  |                    exponent too large: 3333333333
 </span></code></pre></div>

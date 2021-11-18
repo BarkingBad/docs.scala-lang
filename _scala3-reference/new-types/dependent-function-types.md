@@ -15,7 +15,7 @@ previous-page: /scala3/reference/new-types/match-types
 A dependent function type is a function type whose result depends
 on the function's parameters. For example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Entry { type Key; val key: Key }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Entry { type Key; val key: Key }
 </span><span id="1" class="" >
 </span><span id="2" class="" >def extractKey(e: Entry): e.Key = e.key          // a dependent method
 </span><span id="3" class="" >
@@ -35,7 +35,7 @@ because there was no type that could describe them.
 
 In Scala 3 this is now possible. The type of the `extractor` value above is
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(e: Entry) =&gt; e.Key
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(e: Entry) =&gt; e.Key
 </span></code></pre></div>
 
 This type describes function values that take any argument `e` of type
@@ -47,6 +47,6 @@ instance of the [`Function1` trait](https://scala-lang.org/api/3.x/scala/Functio
 are also represented as instances of these traits, but they get an additional
 refinement. In fact, the dependent function type above is just syntactic sugar for
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Function1[Entry, Entry#Key]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Function1[Entry, Entry#Key]:
 </span><span id="1" class="" >  def apply(e: Entry): e.Key
 </span></code></pre></div>[More details](./dependent-function-types-spec.html)

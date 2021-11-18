@@ -25,7 +25,7 @@ choosing among a set of overloaded alternatives.
 For example, the following code compiles in Scala 3, while it results in an
 ambiguous overload error in Scala 2:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Int)(y: String): Int = 0
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Int)(y: String): Int = 0
 </span><span id="1" class="" >def f(x: Int)(y: Int): Int = 0
 </span><span id="2" class="" >
 </span><span id="3" class="" >f(3)(&quot;&quot;)     // ok
@@ -33,7 +33,7 @@ ambiguous overload error in Scala 2:
 
 The following code compiles as well:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g(x: Int)(y: Int)(z: Int): Int = 0
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g(x: Int)(y: Int)(z: Int): Int = 0
 </span><span id="1" class="" >def g(x: Int)(y: Int)(z: String): Int = 0
 </span><span id="2" class="" >
 </span><span id="3" class="" >g(2)(3)(4)     // ok
@@ -59,7 +59,7 @@ that the remaining parameters suffice for picking a variant of the overloaded fu
 For example, the following code compiles in Scala 3, while it results in a
 missing parameter type error in Scala2:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Int, f2: Int =&gt; Int) = f2(x)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: Int, f2: Int =&gt; Int) = f2(x)
 </span><span id="1" class="" >def f(x: String, f2: String =&gt; String) = f2(x)
 </span><span id="2" class="" >f(&quot;a&quot;, _.toUpperCase)
 </span><span id="3" class="" >f(2, _ * 2)
@@ -84,10 +84,10 @@ with the following paragraph:
 
 A pattern matching closure
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{ case P1 =&gt; B1 ... case P_n =&gt; B_n }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{ case P1 =&gt; B1 ... case P_n =&gt; B_n }
 </span></code></pre></div>
 
 is treated as if it was expanded to the function value
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x =&gt; x match { case P1 =&gt; B1 ... case P_n =&gt; B_n }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x =&gt; x match { case P1 =&gt; B1 ... case P_n =&gt; B_n }
 </span></code></pre></div>and is therefore also approximated with a `? => ?` type.

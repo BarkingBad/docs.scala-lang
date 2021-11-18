@@ -16,7 +16,7 @@ Scala 3 has a new "quiet" syntax for control expressions that does not rely on
 enclosing the condition in parentheses, and also allows to drop parentheses or braces
 around the generators of a `for`-expression. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x &lt; 0 then
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if x &lt; 0 then
 </span><span id="1" class="" >  &quot;negative&quot;
 </span><span id="2" class="" >else if x == 0 then
 </span><span id="3" class="" >  &quot;zero&quot;

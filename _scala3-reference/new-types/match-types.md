@@ -15,7 +15,7 @@ previous-page: /scala3/reference/new-types/type-lambdas
 A match type reduces to one of its right-hand sides, depending on the type of
 its scrutinee. For example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Elem[X] = X match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Elem[X] = X match
 </span><span id="1" class="" >  case String =&gt; Char
 </span><span id="2" class="" >  case Array[t] =&gt; t
 </span><span id="3" class="" >  case Iterable[t] =&gt; t
@@ -23,7 +23,7 @@ its scrutinee. For example:
 
 This defines a type that reduces as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Elem[String]       =:=  Char
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >Elem[String]       =:=  Char
 </span><span id="1" class="" >Elem[Array[Int]]   =:=  Int
 </span><span id="2" class="" >Elem[List[Float]]  =:=  Float
 </span><span id="3" class="" >Elem[Nil.type]     =:=  Nothing
@@ -34,7 +34,7 @@ subtypes of each other.
 
 In general, a match type is of the form
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >S match { P1 =&gt; T1 ... Pn =&gt; Tn }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >S match { P1 =&gt; T1 ... Pn =&gt; Tn }
 </span></code></pre></div>
 
 where `S`, `T1`, ..., `Tn` are types and `P1`, ..., `Pn` are type patterns. Type
@@ -42,7 +42,7 @@ variables in patterns start with a lower case letter, as usual.
 
 Match types can form part of recursive type definitions. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type LeafElem[X] = X match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type LeafElem[X] = X match
 </span><span id="1" class="" >  case String =&gt; Char
 </span><span id="2" class="" >  case Array[t] =&gt; LeafElem[t]
 </span><span id="3" class="" >  case Iterable[t] =&gt; LeafElem[t]
@@ -51,7 +51,7 @@ Match types can form part of recursive type definitions. Example:
 
 Recursive match type definitions can also be given an upper bound, like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Concat[Xs &lt;: Tuple, +Ys &lt;: Tuple] &lt;: Tuple = Xs match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Concat[Xs &lt;: Tuple, +Ys &lt;: Tuple] &lt;: Tuple = Xs match
 </span><span id="1" class="" >  case EmptyTuple =&gt; Ys
 </span><span id="2" class="" >  case x *: xs =&gt; x *: Concat[xs, Ys]
 </span></code></pre></div>
@@ -67,7 +67,7 @@ Match types can be used to define dependently typed methods. For instance, here
 is the value level counterpart to the `LeafElem` type defined above (note the
 use of the match type as the return type):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def leafElem[X](x: X): LeafElem[X] = x match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def leafElem[X](x: X): LeafElem[X] = x match
 </span><span id="1" class="" >  case x: String      =&gt; x.charAt(0)
 </span><span id="2" class="" >  case x: Array[t]    =&gt; leafElem(x(9))
 </span><span id="3" class="" >  case x: Iterable[t] =&gt; leafElem(x.head)
@@ -195,11 +195,11 @@ Since reduction is linked to subtyping, we already have a cycle detection
 mechanism in place. As a result, the following will already give a reasonable
 error message:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type L[X] = X match
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type L[X] = X match
 </span><span id="1" class="" >  case Int =&gt; L[X]
 </span><span id="2" class="" >
 </span><span id="3" class="" >def g[X]: L[X] = ???
-</span></code></pre></div><div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >|  val x: Int = g[Int]
+</span></code></pre></div><div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >|  val x: Int = g[Int]
 </span><span id="1" class="" >   |                ^
 </span><span id="2" class="" >   |Recursion limit exceeded.
 </span><span id="3" class="" >   |Maybe there is an illegal cyclic reference?

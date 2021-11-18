@@ -22,7 +22,7 @@ Universal equality is convenient. But it is also dangerous since it
 undermines type safety. For instance, let's assume one is left after some refactoring
 with an erroneous program where a value `y` has type `S` instead of the correct type `T`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x = ... // of type T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x = ... // of type T
 </span><span id="1" class="" >val y = ... // of type S, but should be T
 </span><span id="2" class="" >x == y      // typechecks, will always yield false
 </span></code></pre></div>
@@ -37,12 +37,12 @@ to indicate that values of two given types can be compared with each other.
 The example above would not typecheck if `S` or `T` was a class
 that derives `CanEqual`, e.g.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class T derives CanEqual
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class T derives CanEqual
 </span></code></pre></div>
 
 Alternatively, one can also provide a `CanEqual` given instance directly, like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given CanEqual[T, T] = CanEqual.derived
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given CanEqual[T, T] = CanEqual.derived
 </span></code></pre></div>
 
 This definition effectively says that values of type `T` can (only) be
@@ -53,7 +53,7 @@ the negation of `equals`. The right-hand side `CanEqual.derived` of the definiti
 is a value that has any `CanEqual` instance as its type. Here is the definition of class
 `CanEqual` and its companion object:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
 </span><span id="1" class="" >import annotation.implicitNotFound
 </span><span id="2" class="" >
 </span><span id="3" class="" >@implicitNotFound(&quot;Values of types ${L} and ${R} cannot be compared with == or !=&quot;)
@@ -67,7 +67,7 @@ One can have several `CanEqual` given instances for a type. For example, the fou
 definitions below make values of type `A` and type `B` comparable with
 each other, but not comparable to anything else:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given CanEqual[A, A] = CanEqual.derived
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given CanEqual[A, A] = CanEqual.derived
 </span><span id="1" class="" >given CanEqual[B, B] = CanEqual.derived
 </span><span id="2" class="" >given CanEqual[A, B] = CanEqual.derived
 </span><span id="3" class="" >given CanEqual[B, A] = CanEqual.derived
@@ -80,7 +80,7 @@ define a rule book for what standard types can be compared (more details below).
 There is also a "fallback" instance named `canEqualAny` that allows comparisons
 over all types that do not themselves have a `CanEqual` given.  `canEqualAny` is defined as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def canEqualAny[L, R]: CanEqual[L, R] = CanEqual.derived
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def canEqualAny[L, R]: CanEqual[L, R] = CanEqual.derived
 </span></code></pre></div>
 
 Even though `canEqualAny` is not declared as `given`, the compiler will still
@@ -93,7 +93,7 @@ If this is of no concern, one can disable `canEqualAny` by enabling the language
 feature `strictEquality`. As for all language features this can be either
 done with an import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.strictEquality
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.strictEquality
 </span></code></pre></div>
 
 or with a command line option `-language:strictEquality`.
@@ -102,19 +102,19 @@ or with a command line option `-language:strictEquality`.
 
 Instead of defining `CanEqual` instances directly, it is often more convenient to derive them. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Box[T](x: T) derives CanEqual
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Box[T](x: T) derives CanEqual
 </span></code></pre></div>
 
 By the usual rules of [type class derivation](./derivation.html),
 this generates the following `CanEqual` instance in the companion object of `Box`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T, U](using CanEqual[T, U]): CanEqual[Box[T], Box[U]] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given [T, U](using CanEqual[T, U]): CanEqual[Box[T], Box[U]] =
 </span><span id="1" class="" >  CanEqual.derived
 </span></code></pre></div>
 
 That is, two boxes are comparable with `==` or `!=` if their elements are. Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new Box(1) == new Box(1L)   // ok since there is an instance for `CanEqual[Int, Long]`
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new Box(1) == new Box(1L)   // ok since there is an instance for `CanEqual[Int, Long]`
 </span><span id="1" class="" >new Box(1) == new Box(&quot;a&quot;)  // error: can&apos;t compare
 </span><span id="2" class="" >new Box(1) == 1             // error: can&apos;t compare
 </span></code></pre></div>
@@ -172,26 +172,26 @@ we are dealing with a refinement of pre-existing, universal equality. It is best
 
 Say you want to come up with a safe version of the `contains` method on `List[T]`. The original definition of `contains` in the standard library was:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class List[+T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class List[+T]:
 </span><span id="1" class="" >  ...
 </span><span id="2" class="" >  def contains(x: Any): Boolean
 </span></code></pre></div>
 
 That uses universal equality in an unsafe way since it permits arguments of any type to be compared with the list's elements. The "obvious" alternative definition
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains(x: T): Boolean
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains(x: T): Boolean
 </span></code></pre></div>
 
 does not work, since it refers to the covariant parameter `T` in a nonvariant context. The only variance-correct way to use the type parameter `T` in `contains` is as a lower bound:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U): Boolean
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U): Boolean
 </span></code></pre></div>
 
 This generic version of `contains` is the one used in the current (Scala 2.13) version of `List`.
 It looks different but it admits exactly the same applications as the `contains(x: Any)` definition we started with.
 However, we can make it more useful (i.e. restrictive) by adding a `CanEqual` parameter:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U)(using CanEqual[T, U]): Boolean // (1)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U)(using CanEqual[T, U]): Boolean // (1)
 </span></code></pre></div>
 
 This version of `contains` is equality-safe! More precisely, given
@@ -200,7 +200,7 @@ This version of `contains` is equality-safe! More precisely, given
 
 Unfortunately, the crucial ability to "lift" equality type checking from simple equality and pattern matching to arbitrary user-defined operations gets lost if we restrict ourselves to an equality class with a single type parameter. Consider the following signature of `contains` with a hypothetical `CanEqual1[T]` type class:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U)(using CanEqual1[U]): Boolean   // (2)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def contains[U &gt;: T](x: U)(using CanEqual1[U]): Boolean   // (2)
 </span></code></pre></div>
 
 This version could be applied just as widely as the original `contains(x: Any)` method,
@@ -221,7 +221,7 @@ For these reasons, it looks like a two-parameter type class is the only way forw
 
 In applications where `-language:strictEquality` is the default one could also introduce a one-parameter type alias such as
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Eq[-T] = CanEqual[T, T]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Eq[-T] = CanEqual[T, T]
 </span></code></pre></div>
 
 Operations needing safe equality could then use this alias instead of the two-parameter `CanEqual` class. But it would only

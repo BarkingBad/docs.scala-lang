@@ -15,13 +15,13 @@ previous-page: /scala3/reference/dropped-features/symlits
 Previously an empty argument list `()` was implicitly inserted when
 calling a nullary method without arguments. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def next(): T = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def next(): T = ...
 </span><span id="1" class="" >next     // is expanded to next()
 </span></code></pre></div>
 
 In Scala 3, this idiom is an error.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >next
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >next
 </span><span id="1" class="" >^
 </span><span id="2" class="" >missing arguments for method next
 </span></code></pre></div>
@@ -32,12 +32,12 @@ or that override methods defined in Java. The reason for being more
 lenient with such methods is that otherwise everyone would have to
 write
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.toString().length()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.toString().length()
 </span></code></pre></div>
 
 instead of
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.toString.length
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.toString.length
 </span></code></pre></div>
 
 The latter is idiomatic Scala because it conforms to the _uniform
@@ -61,7 +61,7 @@ Scala so far, there are quite a few method definitions in Scala 2
 libraries that use `()` in an inconsistent way. For instance, we
 find in `scala.math.Numeric`
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def toInt(): Int
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def toInt(): Int
 </span></code></pre></div>
 
 whereas `toInt` is written without parameters everywhere
@@ -76,7 +76,7 @@ methods.  It is no longer allowed to override a parameterless method
 by a nullary method or _vice versa_. Instead, both methods must agree
 exactly in their parameter lists.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A:
 </span><span id="1" class="" >  def next(): Int
 </span><span id="2" class="" >
 </span><span id="3" class="" >class B extends A:

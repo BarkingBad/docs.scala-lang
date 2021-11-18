@@ -18,7 +18,7 @@ a `lazy val`. When this annotation is used, the initialization of the
 
 ### Example
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.threadUnsafe
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.threadUnsafe
 </span><span id="1" class="" >
 </span><span id="2" class="" >class Hello:
 </span><span id="3" class="" >   @threadUnsafe lazy val x: Int = 1

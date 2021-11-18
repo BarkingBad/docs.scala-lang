@@ -17,7 +17,7 @@ function application, without needing to write `new`.
 
 Scala 3 generalizes this scheme to all concrete classes. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class StringBuilder(s: String):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class StringBuilder(s: String):
 </span><span id="1" class="" >  def this() = this(&quot;&quot;)
 </span><span id="2" class="" >
 </span><span id="3" class="" >StringBuilder(&quot;abc&quot;)  // old: new StringBuilder(&quot;abc&quot;)
@@ -27,7 +27,7 @@ Scala 3 generalizes this scheme to all concrete classes. Example:
 This works since a companion object with two `apply` methods
 is generated together with the class. The object looks like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object StringBuilder:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object StringBuilder:
 </span><span id="1" class="" >  inline def apply(s: String): StringBuilder = new StringBuilder(s)
 </span><span id="2" class="" >  inline def apply(): StringBuilder = new StringBuilder()
 </span></code></pre></div>

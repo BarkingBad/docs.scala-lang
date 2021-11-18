@@ -15,7 +15,7 @@ previous-page: /scala3/reference/new-types/dependent-function-types
 A polymorphic function type is a function type which accepts type parameters.
 For example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// A polymorphic method:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// A polymorphic method:
 </span><span id="1" class="" >def foo[A](xs: List[A]): List[A] = xs.reverse
 </span><span id="2" class="" >
 </span><span id="3" class="" >// A polymorphic function value:
@@ -33,7 +33,7 @@ which can be passed as parameters to other functions, or returned as results.
 
 In Scala 3 this is now possible. The type of the `bar` value above is
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[A] =&gt; List[A] =&gt; List[A]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >[A] =&gt; List[A] =&gt; List[A]
 </span></code></pre></div>
 
 This type describes function values which take a type `A` as a parameter,
@@ -53,7 +53,7 @@ a data type to represent the expressions of a simple language
 (consisting only of variables and function applications)
 in a strongly-typed way:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Expr[A]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Expr[A]:
 </span><span id="1" class="" >  case Var(name: String)
 </span><span id="2" class="" >  case Apply[A, B](fun: Expr[B =&gt; A], arg: Expr[B]) extends Expr[A]
 </span></code></pre></div>
@@ -64,7 +64,7 @@ This requires the given function to be polymorphic,
 since each subexpression may have a different type.
 Here is how to implement this using polymorphic function types:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def mapSubexpressions[A](e: Expr[A])(f: [B] =&gt; Expr[B] =&gt; Expr[B]): Expr[A] =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def mapSubexpressions[A](e: Expr[A])(f: [B] =&gt; Expr[B] =&gt; Expr[B]): Expr[A] =
 </span><span id="1" class="" >  e match
 </span><span id="2" class="" >    case Apply(fun, arg) =&gt; Apply(f(fun), f(arg))
 </span><span id="3" class="" >    case Var(n) =&gt; Var(n)
@@ -74,7 +74,7 @@ And here is how to use this function to _wrap_ each subexpression
 in a given expression with a call to some `wrap` function,
 defined as a variable:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val e0 = Apply(Var(&quot;f&quot;), Var(&quot;a&quot;))
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val e0 = Apply(Var(&quot;f&quot;), Var(&quot;a&quot;))
 </span><span id="1" class="" >val e1 = mapSubexpressions(e0)(
 </span><span id="2" class="" >  [B] =&gt; (se: Expr[B]) =&gt; Apply(Var[B =&gt; B](&quot;wrap&quot;), se))
 </span><span id="3" class="" >println(e1) // Apply(Apply(Var(wrap),Var(f)),Apply(Var(wrap),Var(a)))

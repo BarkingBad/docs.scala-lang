@@ -14,12 +14,12 @@ previous-page: /scala3/reference/dropped-features/do-while
 
 Procedure syntax
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f() { ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f() { ... }
 </span></code></pre></div>
 
 has been dropped. You need to write one of the following instead:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f() = { ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f() = { ... }
 </span><span id="1" class="" >def f(): Unit = { ... }
 </span></code></pre></div>Scala 3 accepts the old syntax under the `-source:3.0-migration` option.
 If the `-migration` option is set, it can even rewrite old syntax to new.

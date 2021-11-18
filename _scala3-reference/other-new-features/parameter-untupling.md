@@ -14,13 +14,13 @@ previous-page: /scala3/reference/other-new-features/open-classes
 
 Say you have a list of pairs
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[(Int, Int)]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[(Int, Int)]
 </span></code></pre></div>
 
 and you want to map `xs` to a list of `Int`s so that each pair of numbers is mapped to
 their sum. Previously, the best way to do this was with a pattern-matching decomposition:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs map {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs map {
 </span><span id="1" class="" >  case (x, y) =&gt; x + y
 </span><span id="2" class="" >}
 </span></code></pre></div>
@@ -28,14 +28,14 @@ their sum. Previously, the best way to do this was with a pattern-matching decom
 While correct, this is also inconvenient and confusing, since the `case`
 suggests that the pattern match could fail. As a shorter and clearer alternative Scala 3 now allows
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map {
 </span><span id="1" class="" >  (x, y) =&gt; x + y
 </span><span id="2" class="" >}
 </span></code></pre></div>
 
 or, equivalently:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(_ + _)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >xs.map(_ + _)
 </span></code></pre></div>
 
 Generally, a function value with `n > 1` parameters is converted to a

@@ -16,7 +16,7 @@ Nonlocal returns are implemented by throwing and catching `scala.runtime.NonLoca
 
 A drop-in library replacement is provided in [`scala.util.control.NonLocalReturns`](https://scala-lang.org/api/3.x/scala/util/control/NonLocalReturns$.html). Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.util.control.NonLocalReturns.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.util.control.NonLocalReturns.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >extension [T](xs: List[T])
 </span><span id="3" class="" >  def has(elem: T): Boolean = returning {

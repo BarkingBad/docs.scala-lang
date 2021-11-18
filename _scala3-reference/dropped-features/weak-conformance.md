@@ -17,7 +17,7 @@ testing type compatibility or computing the least upper bound of a set
 of types.  The principal motivation behind weak conformance was to
 make an expression like this have type `List[Double]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List(1.0, math.sqrt(3.0), 0, -3.3) // : List[Double]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >List(1.0, math.sqrt(3.0), 0, -3.3) // : List[Double]
 </span></code></pre></div>
 
 It's "obvious" that this should be a `List[Double]`. However, without
@@ -28,7 +28,7 @@ expression would be given type `List[AnyVal]`.
 A less obvious example is the following one, which was also typed as a
 `List[Double]`, using the weak conformance relation.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val n: Int = 3
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val n: Int = 3
 </span><span id="1" class="" >val c: Char = &apos;X&apos;
 </span><span id="2" class="" >val d: Double = math.sqrt(3.0)
 </span><span id="3" class="" >List(n, c, d) // used to be: List[Double], now: List[AnyVal]

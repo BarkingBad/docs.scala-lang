@@ -20,19 +20,19 @@ repetitive arguments instead of the programmer having to write them explicitly.
 For example, with the [given instances](./givens.html) defined previously,
 a `max` function that works for any arguments for which an ordering exists can be defined as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(using ord: Ord[T]): T =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(using ord: Ord[T]): T =
 </span><span id="1" class="" >  if ord.compare(x, y) &lt; 0 then y else x
 </span></code></pre></div>
 
 Here, `ord` is a _context parameter_ introduced with a `using` clause.
 The `max` function can be applied as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >max(2, 3)(using intOrd)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >max(2, 3)(using intOrd)
 </span></code></pre></div>
 
 The `(using intOrd)` part passes `intOrd` as an argument for the `ord` parameter. But the point of context parameters is that this argument can also be left out (and it usually is). So the following applications are equally valid:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >max(2, 3)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >max(2, 3)
 </span><span id="1" class="" >max(List(1, 2, 3), Nil)
 </span></code></pre></div>
 
@@ -43,7 +43,7 @@ mentioned explicitly at all, since it is used only in synthesized arguments for
 other context parameters. In that case one can avoid defining a parameter name
 and just provide its type. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def maximum[T](xs: List[T])(using Ord[T]): T =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def maximum[T](xs: List[T])(using Ord[T]): T =
 </span><span id="1" class="" >  xs.reduceLeft(max)
 </span></code></pre></div>
 
@@ -59,7 +59,7 @@ then that member is available as a given instance.
 
 Compare the following examples, where the attempt to supply an explicit `given` member induces an ambiguity:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class GivenIntBox(using val givenInt: Int):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class GivenIntBox(using val givenInt: Int):
 </span><span id="1" class="" >  def n = summon[Int]
 </span><span id="2" class="" >
 </span><span id="3" class="" >class GivenIntBox2(using givenInt: Int):
@@ -69,7 +69,7 @@ Compare the following examples, where the attempt to supply an explicit `given` 
 
 The `given` member is importable as explained in the section on [importing `given`s](./given-imports.html):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val b = GivenIntBox(using 23)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val b = GivenIntBox(using 23)
 </span><span id="1" class="" >import b.given
 </span><span id="2" class="" >summon[Int]  // 23
 </span><span id="3" class="" >
@@ -81,7 +81,7 @@ The `given` member is importable as explained in the section on [importing `give
 
 Here are two other methods that have a context parameter of type `Ord[T]`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def descending[T](using asc: Ord[T]): Ord[T] = new Ord[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def descending[T](using asc: Ord[T]): Ord[T] = new Ord[T]:
 </span><span id="1" class="" >  def compare(x: T, y: T) = asc.compare(y, x)
 </span><span id="2" class="" >
 </span><span id="3" class="" >def minimum[T](xs: List[T])(using Ord[T]) =
@@ -91,7 +91,7 @@ Here are two other methods that have a context parameter of type `Ord[T]`:
 The `minimum` method's right-hand side passes `descending` as an explicit argument to `maximum(xs)`.
 With this setup, the following calls are all well-formed, and they all normalize to the last one:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >minimum(xs)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >minimum(xs)
 </span><span id="1" class="" >maximum(xs)(using descending)
 </span><span id="2" class="" >maximum(xs)(using descending(using listOrd))
 </span><span id="3" class="" >maximum(xs)(using descending(using listOrd(using intOrd)))
@@ -101,12 +101,12 @@ With this setup, the following calls are all well-formed, and they all normalize
 
 There can be several `using` clauses in a definition and `using` clauses can be freely mixed with normal parameter clauses. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(u: Universe)(using ctx: u.Context)(using s: ctx.Symbol, k: ctx.Kind) = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(u: Universe)(using ctx: u.Context)(using s: ctx.Symbol, k: ctx.Kind) = ...
 </span></code></pre></div>
 
 Multiple `using` clauses are matched left-to-right in applications. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object global extends Universe { type Context = ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object global extends Universe { type Context = ... }
 </span><span id="1" class="" >given ctx : global.Context with { type Symbol = ...; type Kind = ... }
 </span><span id="2" class="" >given sym : ctx.Symbol
 </span><span id="3" class="" >given kind: ctx.Kind
@@ -114,7 +114,7 @@ Multiple `using` clauses are matched left-to-right in applications. Example:
 
 Then the following calls are all valid (and normalize to the last one)
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f(global)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >f(global)
 </span><span id="1" class="" >f(global)(using ctx)
 </span><span id="2" class="" >f(global)(using ctx)(using sym, kind)
 </span></code></pre></div>
@@ -126,12 +126,12 @@ But `f(global)(using sym, kind)` would give a type error.
 The method `summon` in `Predef` returns the given of a specific type. For example,
 the given instance for `Ord[List[Int]]` is produced by
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Ord[List[Int]]]  // reduces to listOrd(using intOrd)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >summon[Ord[List[Int]]]  // reduces to listOrd(using intOrd)
 </span></code></pre></div>
 
 The `summon` method is simply defined as the (non-widening) identity function over a context parameter.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def summon[T](using x: T): x.type = x
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def summon[T](using x: T): x.type = x
 </span></code></pre></div>
 
 ## Syntax

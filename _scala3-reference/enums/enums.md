@@ -14,7 +14,7 @@ previous-page: /scala3/reference/enums
 
 An enumeration is used to define a type consisting of a set of named values.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color:
 </span><span id="1" class="" >  case Red, Green, Blue
 </span></code></pre></div>
 
@@ -26,7 +26,7 @@ companion object.
 
 Enums can be parameterized.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color(val rgb: Int):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color(val rgb: Int):
 </span><span id="1" class="" >  case Red   extends Color(0xFF0000)
 </span><span id="2" class="" >  case Green extends Color(0x00FF00)
 </span><span id="3" class="" >  case Blue  extends Color(0x0000FF)
@@ -40,7 +40,7 @@ explicit extends clause.
 The values of an enum correspond to unique integers. The integer
 associated with an enum value is returned by its `ordinal` method:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; val red = Color.Red
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; val red = Color.Red
 </span><span id="1" class="" >val red: Color = Red
 </span><span id="2" class="" >scala&gt; red.ordinal
 </span><span id="3" class="" >val res0: Int = 0
@@ -52,7 +52,7 @@ by its name. The `values` method returns all enum values
 defined in an enumeration in an `Array`. The `fromOrdinal`
 method obtains an enum value from its ordinal (`Int`) value.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Color.valueOf(&quot;Blue&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Color.valueOf(&quot;Blue&quot;)
 </span><span id="1" class="" >val res0: Color = Blue
 </span><span id="2" class="" >scala&gt; Color.values
 </span><span id="3" class="" >val res1: Array[Color] = Array(Red, Green, Blue)
@@ -64,7 +64,7 @@ method obtains an enum value from its ordinal (`Int`) value.
 
 It is possible to add your own definitions to an enum. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Planet(mass: Double, radius: Double):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Planet(mass: Double, radius: Double):
 </span><span id="1" class="" >  private final val G = 6.67300E-11
 </span><span id="2" class="" >  def surfaceGravity = G * mass / (radius * radius)
 </span><span id="3" class="" >  def surfaceWeight(otherMass: Double) = otherMass * surfaceGravity
@@ -82,7 +82,7 @@ It is possible to add your own definitions to an enum. Example:
 
 It is also possible to define an explicit companion object for an enum:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Planet:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Planet:
 </span><span id="1" class="" >  def main(args: Array[String]) =
 </span><span id="2" class="" >    val earthWeight = args(0).toDouble
 </span><span id="3" class="" >    val mass = earthWeight / Earth.surfaceGravity
@@ -120,7 +120,7 @@ We now want to deprecate the `Pluto` case. First we add the `scala.deprecated` a
 
 Outside the lexical scopes of `enum Planet` or `object Planet`, references to `Planet.Pluto` will produce a deprecation warning, but within those scopes we can still reference it to implement introspection over the deprecated cases:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Deprecations[T &lt;: reflect.Enum] {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Deprecations[T &lt;: reflect.Enum] {
 </span><span id="1" class="" >  extension (t: T) def isDeprecatedCase: Boolean
 </span><span id="2" class="" >}
 </span><span id="3" class="" >
@@ -139,7 +139,7 @@ We could imagine that a library may use [type class derivation](../contextual/de
 If you want to use the Scala-defined enums as [Java enums](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html), you can do so by extending
 the class `java.lang.Enum`, which is imported by default, as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color extends Enum[Color] { case Red, Green, Blue }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color extends Enum[Color] { case Red, Green, Blue }
 </span></code></pre></div>
 
 The type parameter comes from the Java enum [definition](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Enum.html) and should be the same as the type of the enum.
@@ -147,7 +147,7 @@ There is no need to provide constructor arguments (as defined in the Java API do
 
 After defining `Color` like that, you can use it like you would a Java enum:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Color.Red.compareTo(Color.Green)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Color.Red.compareTo(Color.Green)
 </span><span id="1" class="" >val res15: Int = -1
 </span></code></pre></div>
 
@@ -158,7 +158,7 @@ For a more in-depth example of using Scala 3 enums from Java, see [this test](ht
 Enums are represented as `sealed` classes that extend the `scala.reflect.Enum` trait.
 This trait defines a single public method, `ordinal`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala.reflect
 </span><span id="1" class="" >
 </span><span id="2" class="" >/** A base trait of all Scala enum definitions */
 </span><span id="3" class="" >transparent trait Enum extends Any, Product, Serializable:
@@ -170,7 +170,7 @@ This trait defines a single public method, `ordinal`:
 Enum values with `extends` clauses get expanded to anonymous class instances.
 For instance, the `Venus` value above would be defined like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val Venus: Planet = new Planet(4.869E24, 6051800.0):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val Venus: Planet = new Planet(4.869E24, 6051800.0):
 </span><span id="1" class="" >  def ordinal: Int = 1
 </span><span id="2" class="" >  override def productPrefix: String = &quot;Venus&quot;
 </span><span id="3" class="" >  override def toString: String = &quot;Venus&quot;
@@ -181,7 +181,7 @@ that can be instantiated using a private method that takes a tag and a name as a
 For instance, the first
 definition of value `Color.Red` above would expand to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val Red: Color = $new(0, &quot;Red&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val Red: Color = $new(0, &quot;Red&quot;)
 </span></code></pre></div>
 
 ### Reference

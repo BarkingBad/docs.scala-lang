@@ -13,7 +13,7 @@ scala3: true
 `erased` is a modifier that expresses that some definition or expression is erased by the compiler instead of being represented in the compiled output. It is not yet part of the Scala language standard. To enable `erased`, turn on the language feature
 `experimental.erasedDefinitions`. This can be done with a language import
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.experimental.erasedDefinitions
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.experimental.erasedDefinitions
 </span></code></pre></div>
 
 or by setting the command line option `-language:experimental.erasedDefinitions`.
@@ -29,7 +29,7 @@ evidence which only exists for `IsOff[Off]`. For example, not allowing calling
 `turnedOn` on in an `On` state as we would require an evidence of type
 `IsOff[On]` that will not be found.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed trait State
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >sealed trait State
 </span><span id="1" class="" >final class On extends State
 </span><span id="2" class="" >final class Off extends State
 </span><span id="3" class="" >
@@ -62,7 +62,7 @@ semantics and they are completely erased.
 Parameters of methods and functions can be declared as erased, placing `erased`
 in front of a parameter list (like `given`).
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def methodWithErasedEv(erased ev: Ev): Int = 42
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def methodWithErasedEv(erased ev: Ev): Int = 42
 </span><span id="1" class="" >
 </span><span id="2" class="" >val lambdaWithErasedEv: erased Ev =&gt; Int =
 </span><span id="3" class="" >  (erased ev: Ev) =&gt; 42
@@ -71,7 +71,7 @@ in front of a parameter list (like `given`).
 `erased` parameters will not be usable for computations, though they can be used
 as arguments to other `erased` parameters.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def methodWithErasedInt1(erased i: Int): Int =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def methodWithErasedInt1(erased i: Int): Int =
 </span><span id="1" class="" >  i + 42 // ERROR: can not use i
 </span><span id="2" class="" >
 </span><span id="3" class="" >def methodWithErasedInt2(erased i: Int): Int =
@@ -82,7 +82,7 @@ Not only parameters can be marked as erased, `val` and `def` can also be marked
 with `erased`. These will also only be usable as arguments to `erased`
 parameters.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased val erasedEvidence: Ev = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased val erasedEvidence: Ev = ...
 </span><span id="1" class="" >methodWithErasedEv(erasedEvidence)
 </span></code></pre></div>
 
@@ -91,7 +91,7 @@ parameters.
 As `erased` are guaranteed not to be used in computations, they can and will be
 erased.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// becomes def methodWithErasedEv(): Int at runtime
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// becomes def methodWithErasedEv(): Int at runtime
 </span><span id="1" class="" >def methodWithErasedEv(erased ev: Ev): Int = ...
 </span><span id="2" class="" >
 </span><span id="3" class="" >def evidence1: Ev = ...
@@ -120,7 +120,7 @@ evidence parameters at runtime, but we would still evaluate the `isOn` and
 used except as `erased` arguments, we can mark them as `erased`, hence removing
 the evaluation of the `isOn` and `isOff` evidences.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.implicitNotFound
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.annotation.implicitNotFound
 </span><span id="1" class="" >
 </span><span id="2" class="" >sealed trait State
 </span><span id="3" class="" >final class On extends State
@@ -166,7 +166,7 @@ Note that in [Inline](../metaprogramming/inline.html) we discussed `erasedValue`
 matches. `erasedValue` is implemented with `erased`, so the state machine above
 can be encoded as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.compiletime.*
 </span><span id="1" class="" >
 </span><span id="2" class="" >sealed trait State
 </span><span id="3" class="" >final class On extends State
@@ -204,7 +204,7 @@ function types with erased classes as arguments turn into erased function types.
 
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanRead
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanRead
 </span><span id="1" class="" >
 </span><span id="2" class="" >val x: CanRead = ...        // `x` is turned into an erased val
 </span><span id="3" class="" >val y: CanRead =&gt; Int = ... // the function is turned into an erased function
@@ -215,7 +215,7 @@ Example:
 
 The code above expands to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanRead
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >erased class CanRead
 </span><span id="1" class="" >
 </span><span id="2" class="" >erased val x: CanRead = ...
 </span><span id="3" class="" >val y: (erased CanRead) =&gt; Int = ...
@@ -226,7 +226,7 @@ The code above expands to
 
 After erasure, it is checked that no references to values of erased classes remain and that no instances of erased classes are created. So the following would be an error:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val err: Any = CanRead() // error: illegal reference to erased class CanRead
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val err: Any = CanRead() // error: illegal reference to erased class CanRead
 </span></code></pre></div>
 
 Here, the type of `err` is `Any`, so `err` is not considered erased. Yet its initializing value is a reference to the erased class `CanRead`.

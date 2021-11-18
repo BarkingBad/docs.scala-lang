@@ -14,7 +14,7 @@ previous-page: /scala3/reference/contextual/conversions
 
 Context parameters can be declared by-name to avoid a divergent inferred expansion. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Codec[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Codec[T]:
 </span><span id="1" class="" >  def write(x: T): Unit
 </span><span id="2" class="" >
 </span><span id="3" class="" >given intCodec: Codec[Int] = ???
@@ -41,7 +41,7 @@ The precise steps for synthesizing an argument for a by-name context parameter o
 
 1. Create a new given of type `T`:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given lv: T = ???
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given lv: T = ???
    </span></code></pre></div>
 
    where `lv` is an arbitrary fresh name.
@@ -50,14 +50,14 @@ The precise steps for synthesizing an argument for a by-name context parameter o
 
 3. If this search succeeds with expression `E`, and `E` contains references to `lv`, replace `E` by
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{ given lv: T = E; lv }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >{ given lv: T = E; lv }
    </span></code></pre></div>
 
    Otherwise, return `E` unchanged.
 
 In the example above, the definition of `s` would be expanded as follows.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s = summon[Test.Codec[Option[Int]]](
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s = summon[Test.Codec[Option[Int]]](
 </span><span id="1" class="" >  optionCodec[Int](using intCodec)
 </span><span id="2" class="" >)
 </span></code></pre></div>

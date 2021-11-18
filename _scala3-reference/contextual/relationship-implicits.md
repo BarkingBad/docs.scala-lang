@@ -22,20 +22,20 @@ Given instances can be mapped to combinations of implicit objects, classes and i
 
 1. Given instances without parameters are mapped to implicit objects. For instance,
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given intOrd: Ord[Int] with { ... }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given intOrd: Ord[Int] with { ... }
    </span></code></pre></div>
 
    maps to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit object intOrd extends Ord[Int] { ... }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit object intOrd extends Ord[Int] { ... }
    </span></code></pre></div>2. Parameterized givens are mapped to combinations of classes and implicit methods. For instance,
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given listOrd[T](using ord: Ord[T]): Ord[List[T]] with { ... }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given listOrd[T](using ord: Ord[T]): Ord[List[T]] with { ... }
    </span></code></pre></div>
 
    maps to
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class listOrd[T](implicit ord: Ord[T]) extends Ord[List[T]] { ... }
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class listOrd[T](implicit ord: Ord[T]) extends Ord[List[T]] { ... }
    </span><span id="1" class="" >final implicit def listOrd[T](implicit ord: Ord[T]): listOrd[T] =
    </span><span id="2" class="" > new listOrd[T]
    </span></code></pre></div>3. Alias givens map to implicit methods or implicit lazy vals. If an alias has neither type nor context parameters,
@@ -44,7 +44,7 @@ Given instances can be mapped to combinations of implicit objects, classes and i
 
 Examples:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given global: ExecutionContext = new ForkJoinContext()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given global: ExecutionContext = new ForkJoinContext()
 </span><span id="1" class="" >
 </span><span id="2" class="" >val ctx: Context
 </span><span id="3" class="" >given Context = ctx
@@ -52,7 +52,7 @@ Examples:
 
 would map to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final implicit lazy val global: ExecutionContext = new ForkJoinContext()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final implicit lazy val global: ExecutionContext = new ForkJoinContext()
 </span><span id="1" class="" >final implicit def given_Context = ctx
 </span></code></pre></div>
 
@@ -60,7 +60,7 @@ would map to
 
 Anonymous given instances get compiler synthesized names, which are generated in a reproducible way from the implemented type(s). For example, if the names of the `IntOrd` and `ListOrd` givens above were left out, the following names would be synthesized instead:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given given_Ord_Int: Ord[Int] with { ... }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given given_Ord_Int: Ord[Int] with { ... }
 </span><span id="1" class="" >given given_Ord_List_T[T](using ord: Ord[T]): Ord[List[T]] with { ... }
 </span></code></pre></div>
 
@@ -77,12 +77,12 @@ Tuples are treated as transparent, i.e. a type `F[(X, Y)]` would get the synthes
 
 Using clauses correspond largely to Scala 2's implicit parameter clauses. E.g.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(using ord: Ord[T]): T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(using ord: Ord[T]): T
 </span></code></pre></div>
 
 would be written
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(implicit ord: Ord[T]): T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def max[T](x: T, y: T)(implicit ord: Ord[T]): T
 </span></code></pre></div>
 
 in Scala 2. The main difference concerns applications of such parameters.
@@ -108,13 +108,13 @@ will map to using clauses instead.
 
 Extension methods have no direct counterpart in Scala 2, but they can be simulated with implicit classes. For instance, the extension method
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (c: Circle)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (c: Circle)
 </span><span id="1" class="" >  def circumference: Double = c.radius * math.Pi * 2
 </span></code></pre></div>
 
 could be simulated to some degree by
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit class CircleDecorator(c: Circle) extends AnyVal {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit class CircleDecorator(c: Circle) extends AnyVal {
 </span><span id="1" class="" >  def circumference: Double = c.radius * math.Pi * 2
 </span><span id="2" class="" >}
 </span></code></pre></div>
@@ -139,18 +139,18 @@ Implicit by-name parameters are not supported in Scala 2, but can be emulated to
 
 Implicit conversion methods in Scala 2 can be expressed as given instances of the `scala.Conversion` class in Scala 3. For instance, instead of
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def stringToToken(str: String): Token = new Keyword(str)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def stringToToken(str: String): Token = new Keyword(str)
 </span></code></pre></div>
 
 one can write
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given stringToToken: Conversion[String, Token] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given stringToToken: Conversion[String, Token] with
 </span><span id="1" class="" >  def apply(str: String): Token = KeyWord(str)
 </span></code></pre></div>
 
 or
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given stringToToken: Conversion[String, Token] = KeyWord(_)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given stringToToken: Conversion[String, Token] = KeyWord(_)
 </span></code></pre></div>
 
 ### Implicit Classes
@@ -162,12 +162,12 @@ Implicit classes in Scala 2 are often used to define extension methods, which ar
 Implicit `val` definitions in Scala 2 can be expressed in Scala 3 using a regular `val` definition and an alias given.
 For instance, Scala 2's
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >lazy implicit val pos: Position = tree.sourcePos
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >lazy implicit val pos: Position = tree.sourcePos
 </span></code></pre></div>
 
 can be expressed in Scala 3 as
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >lazy val pos: Position = tree.sourcePos
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >lazy val pos: Position = tree.sourcePos
 </span><span id="1" class="" >given Position = pos
 </span></code></pre></div>
 
@@ -175,12 +175,12 @@ can be expressed in Scala 3 as
 
 An abstract implicit `val` or `def` in Scala 2 can be expressed in Scala 3 using a regular abstract definition and an alias given. For instance, Scala 2's
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def symDecorator: SymDecorator
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >implicit def symDecorator: SymDecorator
 </span></code></pre></div>
 
 can be expressed in Scala 3 as
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def symDecorator: SymDecorator
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def symDecorator: SymDecorator
 </span><span id="1" class="" >given SymDecorator = symDecorator
 </span></code></pre></div>
 

@@ -15,19 +15,19 @@ previous-page: /scala3/reference/contextual/context-functions
 Implicit conversions are defined by given instances of the `scala.Conversion` class.
 This class is defined in package `scala` as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Conversion[-T, +U] extends (T =&gt; U):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class Conversion[-T, +U] extends (T =&gt; U):
 </span><span id="1" class="" >  def apply (x: T): U
 </span></code></pre></div>
 
 For example, here is an implicit conversion from `String` to `Token`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Conversion[String, Token] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Conversion[String, Token] with
 </span><span id="1" class="" >  def apply(str: String): Token = new KeyWord(str)
 </span></code></pre></div>
 
 Using an alias this can be expressed more concisely as:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Conversion[String, Token] = new KeyWord(_)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Conversion[String, Token] = new KeyWord(_)
 </span></code></pre></div>
 
 An implicit conversion is applied automatically by the compiler in three situations:
@@ -49,11 +49,11 @@ If such an instance `C` is found, the expression `e` is replaced by `C.apply(e)`
    primitive number types to subclasses of `java.lang.Number`. For instance, the
    conversion from `Int` to `java.lang.Integer` can be defined as follows:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given int2Integer: Conversion[Int, java.lang.Integer] =
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given int2Integer: Conversion[Int, java.lang.Integer] =
    </span><span id="1" class="" >  java.lang.Integer.valueOf(_)
    </span></code></pre></div>2. The "magnet" pattern is sometimes used to express many variants of a method. Instead of defining overloaded versions of the method, one can also let the method take one or more arguments of specially defined "magnet" types, into which various argument types can be converted. Example:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Completions:
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Completions:
    </span><span id="1" class="" >
    </span><span id="2" class="" >  // The argument &quot;magnet&quot; type
    </span><span id="3" class="" >  enum CompletionArg:

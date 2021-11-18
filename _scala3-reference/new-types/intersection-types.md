@@ -18,7 +18,7 @@ Used on types, the `&` operator creates an intersection type.
 
 The type `S & T` represents values that are of the type `S` and `T` at the same time.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Resettable:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Resettable:
 </span><span id="1" class="" >  def reset(): Unit
 </span><span id="2" class="" >
 </span><span id="3" class="" >trait Growable[T]:
@@ -41,7 +41,7 @@ has member methods `reset` and `add`.
 If a member appears in both `A` and `B`, its type in `A & B` is the intersection
 of its type in `A` and its type in `B`. For instance, assume the definitions:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A:
 </span><span id="1" class="" >  def children: List[A]
 </span><span id="2" class="" >
 </span><span id="3" class="" >trait B:
@@ -65,6 +65,6 @@ must make sure that all inherited members are correctly defined.
 So if one defines a class `C` that inherits `A` and `B`, one needs
 to give at that point a definition of a `children` method with the required type.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C extends A, B:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C extends A, B:
 </span><span id="1" class="" >  def children: List[A &amp; B] = ???
 </span></code></pre></div>[More details](./intersection-types-spec.html)

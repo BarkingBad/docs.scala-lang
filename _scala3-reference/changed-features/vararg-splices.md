@@ -14,7 +14,7 @@ previous-page: /scala3/reference/changed-features/match-syntax
 
 The syntax of vararg splices in patterns and function arguments has changed. The new syntax uses a postfix `*`,  analogously to how a vararg parameter is declared.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr = Array(0, 1, 2, 3)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val arr = Array(0, 1, 2, 3)
 </span><span id="1" class="" >val lst = List(arr*)                   // vararg splice argument
 </span><span id="2" class="" >lst match
 </span><span id="3" class="" >  case List(0, 1, xs*) =&gt; println(xs)  // binds xs to Seq(2, 3)
@@ -23,7 +23,7 @@ The syntax of vararg splices in patterns and function arguments has changed. The
 
 The old syntax for splice arguments will be phased out.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >/*!*/ val lst = List(arr: _*)      // syntax error
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >/*!*/ val lst = List(arr: _*)      // syntax error
 </span><span id="1" class="" >      lst match
 </span><span id="2" class="" >        case List(0, 1, xs @ _*)  // ok, equivalent to `xs*`
 </span></code></pre></div>

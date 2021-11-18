@@ -30,7 +30,7 @@ methods with context parameters. Specifically, the `N`-ary function type
 `T1, ..., TN ?=> R` is a shorthand for the class type
 `ContextFunctionN[T1, ..., TN, R]`. Such class types are assumed to have the following definitions, for any value of `N >= 1`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package scala
 </span><span id="1" class="" >trait ContextFunctionN[-T1, ..., -TN, +R]:
 </span><span id="2" class="" >  def apply(using x1: T1, ..., xN: TN): R
 </span></code></pre></div>
@@ -53,7 +53,7 @@ the context parameters `xi`.
 
 The context function literal is evaluated as the instance creation expression
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new scala.ContextFunctionN[T1, ..., Tn, T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >new scala.ContextFunctionN[T1, ..., Tn, T]:
 </span><span id="1" class="" >  def apply(using x1: T1, ..., xn: Tn): T = e
 </span></code></pre></div>
 

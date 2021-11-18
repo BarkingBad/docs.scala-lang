@@ -12,7 +12,7 @@ previous-page: /scala3/reference/metaprogramming/reflection
     NOTE THAT ANY CHANGES TO THIS FILE WILL BE OVERRIDEN BY PREPROCESSOR.
 -->
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >libraryDependencies += &quot;org.scala-lang&quot; %% &quot;scala3-tasty-inspector&quot; % scalaVersion.value
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >libraryDependencies += &quot;org.scala-lang&quot; %% &quot;scala3-tasty-inspector&quot; % scalaVersion.value
 </span></code></pre></div>
 
 TASTy files contain the full typed tree of a class including source positions
@@ -25,7 +25,7 @@ through the TASTy reflect API.
 
 To inspect the trees of a TASTy file a consumer can be defined in the following way.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.quoted.*
 </span><span id="1" class="" >import scala.tasty.inspector.*
 </span><span id="2" class="" >
 </span><span id="3" class="" >class MyInspector extends Inspector:
@@ -38,7 +38,7 @@ To inspect the trees of a TASTy file a consumer can be defined in the following 
 
 Then the consumer can be instantiated with the following code to get the tree of the `foo/Bar.tasty` file.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Test:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Test:
 </span><span id="1" class="" >   def main(args: Array[String]): Unit =
 </span><span id="2" class="" >      val tastyFiles = List(&quot;foo/Bar.tasty&quot;)
 </span><span id="3" class="" >      TastyInspector.inspectTastyFiles(tastyFiles)(new MyInspector)

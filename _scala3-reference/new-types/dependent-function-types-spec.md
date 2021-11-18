@@ -31,7 +31,7 @@ methods with a dependent result type. Dependent function types desugar to
 refinement types of `scala.FunctionN`. A dependent function type
 `(x1: K1, ..., xN: KN) => R` of arity `N` translates to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >FunctionN[K1, ..., Kn, R&apos;]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >FunctionN[K1, ..., Kn, R&apos;]:
 </span><span id="1" class="" >  def apply(x1: K1, ..., xN: KN): R
 </span></code></pre></div>
 
@@ -53,7 +53,7 @@ The example below defines a trait `C` and the two dependent function types
 
 [depfuntype.scala]: https://github.com/lampepfl/dotty/blob/master/tests/pos/depfuntype.scala
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C { type M; val m: M }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C { type M; val m: M }
 </span><span id="1" class="" >
 </span><span id="2" class="" >type DF = (x: C) =&gt; x.M
 </span><span id="3" class="" >
@@ -75,7 +75,7 @@ In the following example the depend type `f.Eff` refers to the effect type `CanT
 
 [eff-dependent.scala]: https://github.com/lampepfl/dotty/blob/master/tests/run/eff-dependent.scala
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Effect
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Effect
 </span><span id="1" class="" >
 </span><span id="2" class="" >// Type X =&gt; Y
 </span><span id="3" class="" >abstract class Fun[-X, +Y]:

@@ -15,14 +15,14 @@ previous-page: /scala3/reference/contextual/multiversal-equality
 _Context functions_ are functions with (only) context parameters.
 Their types are _context function types_. Here is an example of a context function type:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Executable[T] = ExecutionContext ?=&gt; T
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type Executable[T] = ExecutionContext ?=&gt; T
 </span></code></pre></div>
 
 Context functions are written using `?=>` as the "arrow" sign.
 They are applied to synthesized arguments, in
 the same way methods with context parameters are applied. For instance:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ec: ExecutionContext = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given ec: ExecutionContext = ...
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def f(x: Int): ExecutionContext ?=&gt; Int = ...
 </span><span id="3" class="" >
@@ -37,7 +37,7 @@ Conversely, if the expected type of an expression `E` is a context function type
 `(T_1, ..., T_n) ?=> U` and `E` is not already an
 context function literal, `E` is converted to a context function literal by rewriting it to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x_1: T1, ..., x_n: Tn) ?=&gt; E
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >(x_1: T1, ..., x_n: Tn) ?=&gt; E
 </span></code></pre></div>
 
 where the names `x_1`, ..., `x_n` are arbitrary. This expansion is performed
@@ -48,7 +48,7 @@ Like their types, context function literals are written using `?=>` as the arrow
 
 For example, continuing with the previous definitions,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g(arg: Executable[Int]) = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g(arg: Executable[Int]) = ...
 </span><span id="1" class="" >
 </span><span id="2" class="" >  g(22)      // is expanded to g((ev: ExecutionContext) ?=&gt; 22)
 </span><span id="3" class="" >
@@ -64,7 +64,7 @@ Context function types have considerable expressive power. For
 instance, here is how they can support the "builder pattern", where
 the aim is to construct tables like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >table {
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >table {
 </span><span id="1" class="" >    row {
 </span><span id="2" class="" >      cell(&quot;top left&quot;)
 </span><span id="3" class="" >      cell(&quot;top right&quot;)
@@ -79,7 +79,7 @@ the aim is to construct tables like this:
 The idea is to define classes for `Table` and `Row` that allow the
 addition of elements via `add`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Table:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Table:
 </span><span id="1" class="" >    val rows = new ArrayBuffer[Row]
 </span><span id="2" class="" >    def add(r: Row): Unit = rows += r
 </span><span id="3" class="" >    override def toString = rows.mkString(&quot;Table(&quot;, &quot;, &quot;, &quot;)&quot;)
@@ -96,7 +96,7 @@ Then, the `table`, `row` and `cell` constructor methods can be defined
 with context function types as parameters to avoid the plumbing boilerplate
 that would otherwise be necessary.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def table(init: Table ?=&gt; Unit) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def table(init: Table ?=&gt; Unit) =
 </span><span id="1" class="" >    given t: Table = Table()
 </span><span id="2" class="" >    init
 </span><span id="3" class="" >    t
@@ -112,7 +112,7 @@ that would otherwise be necessary.
 
 With that setup, the table construction code above compiles and expands to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >table { ($t: Table) ?=&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >table { ($t: Table) ?=&gt;
 </span><span id="1" class="" >
 </span><span id="2" class="" >    row { ($r: Row) ?=&gt;
 </span><span id="3" class="" >      cell(&quot;top left&quot;)(using $r)
@@ -130,7 +130,7 @@ With that setup, the table construction code above compiles and expands to:
 
 As a larger example, here is a way to define constructs for checking arbitrary postconditions using an extension method `ensuring` so that the checked result can be referred to simply by `result`. The example combines opaque type aliases, context function types, and extension methods to provide a zero-overhead abstraction.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object PostConditions:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object PostConditions:
 </span><span id="1" class="" >  opaque type WrappedResult[T] = T
 </span><span id="2" class="" >
 </span><span id="3" class="" >  def result[T](using r: WrappedResult[T]): T = r
@@ -154,7 +154,7 @@ where context parameters are involved). Since `WrappedResult` is an opaque type 
 values need not be boxed, and since `ensuring` is added as an extension method, its argument
 does not need boxing either. Hence, the implementation of `ensuring` is close in efficiency to the best possible code one could write by hand:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s =
 </span><span id="1" class="" >  val result = List(1, 2, 3).sum
 </span><span id="2" class="" >  assert(result == 6)
 </span><span id="3" class="" >  result

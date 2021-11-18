@@ -14,25 +14,25 @@ previous-page: /scala3/reference/dropped-features/type-projection
 
 The syntax construct
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >do &lt;body&gt; while &lt;cond&gt;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >do &lt;body&gt; while &lt;cond&gt;
 </span></code></pre></div>
 
 is no longer supported. Instead, it is recommended to use the equivalent `while` loop
 below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while ({ &lt;body&gt; ; &lt;cond&gt; }) ()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while ({ &lt;body&gt; ; &lt;cond&gt; }) ()
 </span></code></pre></div>
 
 For instance, instead of
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >do
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >do
 </span><span id="1" class="" >  i += 1
 </span><span id="2" class="" >while (f(i) == 0)
 </span></code></pre></div>
 
 one writes
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while
 </span><span id="1" class="" >  i += 1
 </span><span id="2" class="" >  f(i) == 0
 </span><span id="3" class="" >do ()
@@ -41,7 +41,7 @@ one writes
 The idea to use a block as the condition of a while also gives a solution
 to the "loop-and-a-half" problem. Here is another example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >while
 </span><span id="1" class="" >  val x: Int = iterator.next
 </span><span id="2" class="" >  x &gt;= 0
 </span><span id="3" class="" >do print(&quot;.&quot;)

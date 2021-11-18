@@ -19,7 +19,7 @@ The most general form of leading parameters of an extension method is as follows
 This is then followed by `def`, the method name, and possibly further parameters
 `otherParams`. An example is:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (using a: A, b: B)(using c: C)    // &lt;-- leadingUsing
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension (using a: A, b: B)(using c: C)    // &lt;-- leadingUsing
 </span><span id="1" class="" >            (x: X)                            // &lt;-- extensionParam
 </span><span id="2" class="" >            (using d: D)                      // &lt;-- trailingUsing
 </span><span id="3" class="" >    def +:: (y: Y)(using e: E)(z: Z)          // &lt;-- otherParams
@@ -43,7 +43,7 @@ leadingUsing  rightParam  trailingUsing  extensionParam  remaining
 
 For instance, the `+::` method above would become
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&lt;extension&gt; def +:: (using a: A, b: B)(using c: C)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >&lt;extension&gt; def +:: (using a: A, b: B)(using c: C)
 </span><span id="1" class="" >                      (y: Y)
 </span><span id="2" class="" >                      (using d: D)
 </span><span id="3" class="" >                      (x: X)

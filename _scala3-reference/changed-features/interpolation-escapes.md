@@ -14,6 +14,6 @@ In Scala 2 there is no straightforward way to represent a single quote character
 
 In Scala 3, we can use the `$` meta character of interpolations to escape a `"` character. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val inventor = &quot;Thomas Edison&quot;
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val inventor = &quot;Thomas Edison&quot;
 </span><span id="1" class="" >  val interpolation = s&quot;as $inventor said: $&quot;The three great essentials to achieve anything worth while are: Hard work, Stick-to-itiveness, and Common sense.$&quot;&quot;
 </span></code></pre></div>

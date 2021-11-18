@@ -31,7 +31,7 @@ There are two ways to specify a language version.
 - With a `-source` command line setting, e.g. `-source 3.0-migration`.
 - With a `scala.language` import at the top of a source file, e.g:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >package p
 </span><span id="1" class="" >import scala.language.`future-migration`
 </span><span id="2" class="" >
 </span><span id="3" class="" >class C { ... }

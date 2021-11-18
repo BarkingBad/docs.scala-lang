@@ -16,7 +16,7 @@ The [`enum` concept](./enums.html) is general enough to also support algebraic d
 types (ADTs) and their generalized version (GADTs). Here is an example
 how an `Option` type can be represented as an ADT:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
 </span><span id="1" class="" >  case Some(x: T)
 </span><span id="2" class="" >  case None
 </span></code></pre></div>
@@ -30,7 +30,7 @@ is treated as a normal enum value.
 The `extends` clauses that were omitted in the example above can also
 be given explicitly:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
 </span><span id="1" class="" >  case Some(x: T) extends Option[T]
 </span><span id="2" class="" >  case None       extends Option[Nothing]
 </span></code></pre></div>
@@ -45,7 +45,7 @@ As for normal enum values, the cases of an `enum` are all defined in
 the `enum`s companion object. So it's `Option.Some` and `Option.None`
 unless the definitions are "pulled out" with an import:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Option.Some(&quot;hello&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; Option.Some(&quot;hello&quot;)
 </span><span id="1" class="" >val res1: t2.Option[String] = Some(hello)
 </span><span id="2" class="" >
 </span><span id="3" class="" >scala&gt; Option.None
@@ -54,7 +54,7 @@ unless the definitions are "pulled out" with an import:
 
 Note that the type of the expressions above is always `Option`. Generally, the type of a enum case constructor application will be widened to the underlying enum type, unless a more specific type is expected. This is a subtle difference with respect to normal case classes. The classes making up the cases do exist, and can be unveiled, either by constructing them directly with a `new`, or by explicitly providing an expected type.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; new Option.Some(2)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >scala&gt; new Option.Some(2)
 </span><span id="1" class="" >val res3: Option.Some[Int] = Some(2)
 </span><span id="2" class="" >scala&gt; val x: Option.Some[Int] = Option.Some(3)
 </span><span id="3" class="" >val res4: Option.Some[Int] = Some(3)
@@ -63,7 +63,7 @@ Note that the type of the expressions above is always `Option`. Generally, the t
 As all other enums, ADTs can define methods. For instance, here is `Option` again, with an
 `isDefined` method and an `Option(...)` constructor in its companion object.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Option[+T]:
 </span><span id="1" class="" >  case Some(x: T)
 </span><span id="2" class="" >  case None
 </span><span id="3" class="" >
@@ -86,7 +86,7 @@ to construct hybrids. For instance, the code below gives an
 implementation of `Color` either with three enum values or with a
 parameterized case that takes an RGB value.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color(val rgb: Int):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum Color(val rgb: Int):
 </span><span id="1" class="" >  case Red   extends Color(0xFF0000)
 </span><span id="2" class="" >  case Green extends Color(0x00FF00)
 </span><span id="3" class="" >  case Blue  extends Color(0x0000FF)
@@ -102,14 +102,14 @@ below:
 The following `View` enum has a contravariant type parameter `T` and a single case `Refl`, representing a function
 mapping a type `T` to itself:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T]:
 </span><span id="1" class="" >  case Refl(f: T =&gt; T)
 </span></code></pre></div>
 
 The definition of `Refl` is incorrect, as it uses contravariant type `T` in the covariant result position of a
 function type, leading to the following error:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Error: View.scala:2:12 --------
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >-- Error: View.scala:2:12 --------
 </span><span id="1" class="" >2 |   case Refl(f: T =&gt; T)
 </span><span id="2" class="" >  |             ^^^^^^^^^
 </span><span id="3" class="" >  |contravariant type T occurs in covariant position in type T =&gt; T of value f
@@ -118,7 +118,7 @@ function type, leading to the following error:
 
 Because `Refl` does not declare explicit parameters, it looks to the compiler like the following:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T]:
 </span><span id="1" class="" >  case Refl[/*synthetic*/-T1](f: T1 =&gt; T1) extends View[T1]
 </span></code></pre></div>
 
@@ -138,7 +138,7 @@ type `T` in `View`, but any name will do.
 After some further changes, a more complete implementation of `View` can be given as follows and be used
 as the function type `T => U`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T, +U] extends (T =&gt; U):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >enum View[-T, +U] extends (T =&gt; U):
 </span><span id="1" class="" >  case Refl[R](f: R =&gt; R) extends View[R, R]
 </span><span id="2" class="" >
 </span><span id="3" class="" >  final def apply(t: T): U = this match

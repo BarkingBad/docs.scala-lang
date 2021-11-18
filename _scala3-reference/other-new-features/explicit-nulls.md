@@ -17,17 +17,17 @@ Explicit nulls is an opt-in feature that modifies the Scala type system, which m
 
 This means the following code will no longer typecheck:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String = null // error: found `Null`, but required `String`
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String = null // error: found `Null`, but required `String`
 </span></code></pre></div>
 
 Instead, to mark a type as nullable we use a [union type](../new-types/union-types.html)
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String | Null = null // ok
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String | Null = null // ok
 </span></code></pre></div>
 
 A nullable type could have null value during runtime; hence, it is not safe to select a member without checking its nullity.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x.trim // error: trim is not member of String | Null
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >x.trim // error: trim is not member of String | Null
 </span></code></pre></div>
 
 Explicit nulls are enabled via a `-Yexplicit-nulls` flag.
@@ -52,7 +52,7 @@ So far, we have found the following useful:
 
 - An extension method `.nn` to "cast away" nullability
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](x: T | Null)
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >extension [T](x: T | Null)
   </span><span id="1" class="" >   inline def nn: T =
   </span><span id="2" class="" >     assert(x != null)
   </span><span id="3" class="" >     x.asInstanceOf[T]
@@ -75,7 +75,7 @@ The new type system is unsound with respect to `null`. This means there are stil
 
 The unsoundness happens because uninitialized fields in a class start out as `null`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
 </span><span id="1" class="" >  val f: String = foo(f)
 </span><span id="2" class="" >  def foo(f2: String): String = f2
 </span><span id="3" class="" >
@@ -94,7 +94,7 @@ We don't allow the double-equal (`==` and `!=`) and reference (`eq` and `ne`) co
 
 For some reason, if we really want to compare `null` with non-null values, we have to provide a type hint (e.g. `: Any`).
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val x: String = ???
 </span><span id="1" class="" >val y: String | Null = ???
 </span><span id="2" class="" >
 </span><span id="3" class="" >x == null       // error: Values of types String and Null cannot be compared with == or !=
@@ -133,7 +133,7 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
   </span><span id="1" class="" >  val s: String | Null
   </span><span id="2" class="" >  val x: Int
   </span></code></pre></div>- We nullify type parameters because in Java a type parameter is always nullable, so the following code compiles.
@@ -144,12 +144,12 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C[T] { def foo(): T | Null }
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C[T] { def foo(): T | Null }
   </span></code></pre></div>
 
   Notice this is rule is sometimes too conservative, as witnessed by
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class InScala:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class InScala:
   </span><span id="1" class="" >  val c: C[Bool] = ???  // C as above
   </span><span id="2" class="" >  val b: Bool = c.foo() // no longer typechecks, since foo now returns Bool | Null
   </span></code></pre></div>- We can reduce the number of redundant nullable types we need to add. Consider
@@ -161,7 +161,7 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Box[T] { def get(): T | Null }
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Box[T] { def get(): T | Null }
   </span><span id="1" class="" >class BoxFactory[T] { def makeBox(): Box[T] | Null }
   </span></code></pre></div>
 
@@ -186,7 +186,7 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class BoxFactory[T]:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class BoxFactory[T]:
   </span><span id="1" class="" >  def makeBox(): Box[T | Null] | Null
   </span><span id="2" class="" >  def makeCrazyBoxes(): java.util.List[Box[java.util.List[T] | Null]] | Null
   </span></code></pre></div>
@@ -213,7 +213,7 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Constants:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class Constants:
   </span><span id="1" class="" >  val NAME: String(&quot;name&quot;) = &quot;name&quot;
   </span><span id="2" class="" >  val AGE: Int(0) = 0
   </span><span id="3" class="" >  val CHAR: Char(&apos;a&apos;) = &apos;a&apos;
@@ -232,7 +232,7 @@ We illustrate the rules with following examples:
 
   ==>
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C:
   </span><span id="1" class="" >  val name: String
   </span><span id="2" class="" >  def getNames(prefix: String | Null): java.util.List[String] // we still need to nullify the paramter types
   </span><span id="3" class="" >  def getBoxedName(): Box[String | Null] // we don&apos;t append `Null` to the outmost level, but we still need to nullify inside
@@ -241,7 +241,7 @@ We illustrate the rules with following examples:
   The annotation must be from the list below to be recognized as `NotNull` by the compiler.
   Check `Definitions.scala` for an updated list.
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// A list of annotations that are commonly used to indicate
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >// A list of annotations that are commonly used to indicate
   </span><span id="1" class="" >// that a field/method argument or return type is not null.
   </span><span id="2" class="" >// These annotations are used by the nullification logic in
   </span><span id="3" class="" >// JavaNullInterop to improve the precision of type nullification.
@@ -269,7 +269,7 @@ When we check overriding between Scala classes and Java classes, the rules are r
 
 Suppose we have Java method `String f(String x)`, we can override this method in Scala in any of the following forms:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: String | Null): String | Null
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: String | Null): String | Null
 </span><span id="1" class="" >
 </span><span id="2" class="" >def f(x: String): String | Null
 </span><span id="3" class="" >
@@ -289,7 +289,7 @@ of an if-statement (among other places).
 
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
 </span><span id="1" class="" >if s != null then
 </span><span id="2" class="" >  // s: String
 </span><span id="3" class="" >
@@ -301,7 +301,7 @@ Example:
 
 A similar inference can be made for the `else` case if the test is `p == null`
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if s == null then
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >if s == null then
 </span><span id="1" class="" >  // s: String | Null
 </span><span id="2" class="" >else
 </span><span id="3" class="" >  // s: String
@@ -313,7 +313,7 @@ A similar inference can be made for the `else` case if the test is `p == null`
 
 We also support logical operators (`&&`, `||`, and `!`):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
 </span><span id="1" class="" >val s2: String | Null = ???
 </span><span id="2" class="" >if s != null &amp;&amp; s2 != null then
 </span><span id="3" class="" >  // s: String
@@ -331,7 +331,7 @@ We also support logical operators (`&&`, `||`, and `!`):
 
 We also support type specialization _within_ the condition, taking into account that `&&` and `||` are short-circuiting:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
 </span><span id="1" class="" >
 </span><span id="2" class="" >if s != null &amp;&amp; s.length &gt; 0 then // s: String in `s.length &gt; 0`
 </span><span id="3" class="" >  // s: String
@@ -346,7 +346,7 @@ We also support type specialization _within_ the condition, taking into account 
 
 The non-null cases can be detected in match statements.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
 </span><span id="1" class="" >
 </span><span id="2" class="" >s match
 </span><span id="3" class="" >  case _: String =&gt; // s: String
@@ -357,7 +357,7 @@ The non-null cases can be detected in match statements.
 
 We are able to detect the nullability of some local mutable variables. A simple example is:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(val x: Int, val next: C | Null)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C(val x: Int, val next: C | Null)
 </span><span id="1" class="" >
 </span><span id="2" class="" >var xs: C | Null = C(1, C(2, null))
 </span><span id="3" class="" >// xs is trackable, since all assignments are in the same method
@@ -378,7 +378,7 @@ When dealing with local mutable variables, there are two questions:
    For example, in the following code `x` is assigned to by the closure `y`, so we do not
    do flow typing on `x`.
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: String | Null = ???
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: String | Null = ???
    </span><span id="1" class="" >def y =
    </span><span id="2" class="" >  x = null
    </span><span id="3" class="" >
@@ -392,7 +392,7 @@ When dealing with local mutable variables, there are two questions:
    use flow typing in one of the occurrences (because the other occurrence happens within a
    nested closure).
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: String | Null = ???
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var x: String | Null = ???
    </span><span id="1" class="" >def y =
    </span><span id="2" class="" >  if x != null then
    </span><span id="3" class="" >    // not safe to use the fact (x != null) here
@@ -416,7 +416,7 @@ We don't support:
 
 - tracking aliasing between non-nullable paths
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val s: String | Null = ???
   </span><span id="1" class="" >val s2: String | Null = ???
   </span><span id="2" class="" >if s != null &amp;&amp; s == s2 then
   </span><span id="3" class="" >  // s:  String inferred
@@ -466,7 +466,7 @@ to the compile options. A small number of manual modifications are expected. To 
 explicit nulls feature in the future, `-language:unsafeNulls` can be dropped and add
 `import scala.language.unsafeNulls` only when needed.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: String): String = ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f(x: String): String = ???
 </span><span id="1" class="" >def nullOf[T &gt;: Null]: T = null
 </span><span id="2" class="" >
 </span><span id="3" class="" >import scala.language.unsafeNulls
@@ -494,7 +494,7 @@ Without the `unsafeNulls`, all these unsafe operations will not be type-checked.
 
 `unsafeNulls` also works for extension methods and implicit search.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.unsafeNulls
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.unsafeNulls
 </span><span id="1" class="" >
 </span><span id="2" class="" >val x = &quot;hello, world!&quot;.split(&quot; &quot;).map(_.length)
 </span><span id="3" class="" >

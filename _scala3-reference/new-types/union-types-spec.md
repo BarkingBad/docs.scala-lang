@@ -20,17 +20,17 @@ Syntactically, unions follow the same rules as intersections, but have a lower p
 `|` is also used in pattern matching to separate pattern alternatives and has
 lower precedence than `:` as used in typed patterns, this means that:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case _: A | B =&gt; ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case _: A | B =&gt; ...
 </span></code></pre></div>
 
 is still equivalent to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case (_: A) | B =&gt; ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case (_: A) | B =&gt; ...
 </span></code></pre></div>
 
 and not to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case _: (A | B) =&gt; ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case _: (A | B) =&gt; ...
 </span></code></pre></div>
 
 ## Subtyping Rules
@@ -41,11 +41,11 @@ and not to:
 
 - Like `&`, `|` is commutative and associative:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >A | B =:= B | A
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >A | B =:= B | A
   </span><span id="1" class="" >A | (B | C) =:= (A | B) | C
   </span></code></pre></div>- `&` is distributive over `|`:
 
-  <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >A &amp; (B | C) =:= A &amp; B | A &amp; C
+  <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >A &amp; (B | C) =:= A &amp; B | A &amp; C
   </span></code></pre></div>
 
 From these rules it follows that the _least upper bound_ (LUB) of a set of types
@@ -78,7 +78,7 @@ resulting type, this guarantees that the join is always finite.
 
 Given
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C[+T]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C[+T]
 </span><span id="1" class="" >trait D
 </span><span id="2" class="" >trait E
 </span><span id="3" class="" >class A extends C[A] with D
@@ -108,7 +108,7 @@ See [PR #2330](https://github.com/lampepfl/dotty/pull/2330) and
 
 ### Example
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.collection.mutable.ListBuffer
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.collection.mutable.ListBuffer
 </span><span id="1" class="" >val x = ListBuffer(Right(&quot;foo&quot;), Left(0))
 </span><span id="2" class="" >val y: ListBuffer[Either[Int, String]] = x
 </span></code></pre></div>
@@ -128,7 +128,7 @@ The members of a union type are the members of its join.
 The following code does not typecheck, because method `hello` is not a member of
 `AnyRef` which is the join of `A | B`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A { def hello: String }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait A { def hello: String }
 </span><span id="1" class="" >trait B { def hello: String }
 </span><span id="2" class="" >
 </span><span id="3" class="" >def test(x: A | B) = x.hello // error: value `hello` is not a member of A | B
@@ -136,7 +136,7 @@ The following code does not typecheck, because method `hello` is not a member of
 
 On the other hand, the following would be allowed
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C { def hello: String }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait C { def hello: String }
 </span><span id="1" class="" >trait A extends C with D 
 </span><span id="2" class="" >trait B extends C with E
 </span><span id="3" class="" >

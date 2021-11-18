@@ -23,7 +23,7 @@ NamedTypeArg      ::=  id ‘=’ Type
 
 Note in particular that named arguments cannot be passed to type constructors:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C[T]
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C[T]
 </span><span id="1" class="" >
 </span><span id="2" class="" >val x: C[T = Int] = // error
 </span><span id="3" class="" >  new C[T = Int] // error

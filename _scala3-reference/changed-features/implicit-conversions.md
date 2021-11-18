@@ -40,7 +40,7 @@ The first example is taken from `scala.Predef`. Thanks to this
 implicit conversion, it is possible to pass a `scala.Int` to a Java
 method that expects a `java.lang.Integer`
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.implicitConversions
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.implicitConversions
 </span><span id="1" class="" >implicit def int2Integer(x: Int): java.lang.Integer =
 </span><span id="2" class="" >  x.asInstanceOf[java.lang.Integer]
 </span></code></pre></div>
@@ -49,7 +49,7 @@ The second example shows how to use `Conversion` to define an
 `Ordering` for an arbitrary type, given existing `Ordering`s for other
 types:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.implicitConversions
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >import scala.language.implicitConversions
 </span><span id="1" class="" >implicit def ordT[T, S](
 </span><span id="2" class="" >    implicit conv: Conversion[T, S],
 </span><span id="3" class="" >             ordS: Ordering[S]

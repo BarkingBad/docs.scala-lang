@@ -17,7 +17,7 @@ previous-page: /scala3/reference/metaprogramming
 `inline` is a new [soft modifier](../soft-modifier.html) that guarantees that a
 definition will be inlined at the point of use. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Config:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Config:
 </span><span id="1" class="" >  inline val logging = false
 </span><span id="2" class="" >
 </span><span id="3" class="" >object Logger:
@@ -53,7 +53,7 @@ to its `then`- or `else`-part. Consequently, in the `log` method above the
 
 Here's an example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var indentSetting = 2
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >var indentSetting = 2
 </span><span id="1" class="" >
 </span><span id="2" class="" >def factorial(n: BigInt): BigInt =
 </span><span id="3" class="" >  log(s&quot;factorial($n)&quot;, indentSetting) {
@@ -64,7 +64,7 @@ Here's an example:
 
 If `Config.logging == false`, this will be rewritten (simplified) to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def factorial(n: BigInt): BigInt =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def factorial(n: BigInt): BigInt =
 </span><span id="1" class="" >  if n == 0 then 1
 </span><span id="2" class="" >  else n * factorial(n - 1)
 </span></code></pre></div>
@@ -77,7 +77,7 @@ Consequently, the code was inlined directly and the call was beta-reduced.
 
 In the `true` case the code will be rewritten to:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def factorial(n: BigInt): BigInt =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def factorial(n: BigInt): BigInt =
 </span><span id="1" class="" >  val msg = s&quot;factorial($n)&quot;
 </span><span id="2" class="" >  println(s&quot;${&quot;  &quot; * indent}start $msg&quot;)
 </span><span id="3" class="" >  Logger.inline$indent_=(indent.+(indentSetting))
@@ -100,7 +100,7 @@ Inline methods can be recursive. For instance, when called with a constant
 exponent `n`, the following method for `power` will be implemented by
 straight inline code without any loop or recursion.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def power(x: Double, n: Int): Double =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def power(x: Double, n: Int): Double =
 </span><span id="1" class="" >  if n == 0 then 1.0
 </span><span id="2" class="" >  else if n == 1 then x
 </span><span id="3" class="" >  else
@@ -126,7 +126,7 @@ values need to be propagated to allow further optimizations/reductions.
 The following example shows the difference in translation between by-value, by-name and `inline`
 parameters:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def funkyAssertEquals(actual: Double, expected: =&gt;Double, inline delta: Double): Unit =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def funkyAssertEquals(actual: Double, expected: =&gt;Double, inline delta: Double): Unit =
 </span><span id="1" class="" >  if (actual - expected).abs &gt; delta then
 </span><span id="2" class="" >    throw new AssertionError(s&quot;difference between ${expected} and ${actual} was larger than ${delta}&quot;)
 </span><span id="3" class="" >
@@ -145,7 +145,7 @@ Inline methods can override other non-inline methods. The rules are as follows:
 
 1. If an inline method `f` implements or overrides another, non-inline method, the inline method can also be invoked at runtime. For instance, consider the scenario:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class A:
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class A:
    </span><span id="1" class="" >  def f: Int
    </span><span id="2" class="" >  def g: Int = f
    </span><span id="3" class="" >
@@ -169,7 +169,7 @@ Inline methods can override other non-inline methods. The rules are as follows:
 
 3. Inline methods can also be abstract. An abstract inline method can be implemented only by other inline methods. It cannot be invoked directly:
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class A:
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >abstract class A:
    </span><span id="1" class="" >  inline def f: Int
    </span><span id="2" class="" >
    </span><span id="3" class="" >object B extends A:
@@ -216,14 +216,14 @@ numeric computations.
 
 An inline value must have a literal type such as `1` or `true`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline val four = 4
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline val four = 4
 </span><span id="1" class="" >// equivalent to
 </span><span id="2" class="" >inline val four: 4 = 4
 </span></code></pre></div>
 
 It is also possible to have inline vals of types that do not have a syntax, such as `Short(4)`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait InlineConstants:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait InlineConstants:
 </span><span id="1" class="" >  inline val myShort: Short
 </span><span id="2" class="" >
 </span><span id="3" class="" >object Constants extends InlineConstants:
@@ -236,7 +236,7 @@ Inline methods can additionally be declared `transparent`.
 This means that the return type of the inline method can be
 specialized to a more precise type upon expansion. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class A
 </span><span id="1" class="" >class B extends A:
 </span><span id="2" class="" >  def m = true
 </span><span id="3" class="" >
@@ -265,7 +265,7 @@ In the following example, we see how the return type of `zero` is specialized to
 the singleton type `0` permitting the addition to be ascribed with the correct
 type `1`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def zero: Int = 0
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def zero: Int = 0
 </span><span id="1" class="" >
 </span><span id="2" class="" >val one: 1 = zero + 1
 </span></code></pre></div>
@@ -278,7 +278,7 @@ Other inline methods are inlined later after the program is fully typed.
 
 For example, the following two functions will be typed the same way but will be inlined at different times.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def f1: T = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def f1: T = ...
 </span><span id="1" class="" >transparent inline def f2: T = (...): T
 </span></code></pre></div>
 
@@ -297,7 +297,7 @@ simplify.
 
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def update(delta: Int) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >inline def update(delta: Int) =
 </span><span id="1" class="" >  inline if delta &gt;= 0 then increaseBy(delta)
 </span><span id="2" class="" >  else decreaseBy(-delta)
 </span></code></pre></div>
@@ -306,7 +306,7 @@ A call `update(22)` would rewrite to `increaseBy(22)`. But if `update` was calle
 a value that was not a compile-time constant, we would get a compile time error like the one
 below:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >|  inline if delta &gt;= 0 then ???
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >|  inline if delta &gt;= 0 then ???
 </span><span id="1" class="" >  |  ^
 </span><span id="2" class="" >  |  cannot reduce inline if
 </span><span id="3" class="" >  |   its condition
@@ -328,7 +328,7 @@ reports that the match cannot be reduced.
 The example below defines an inline method with a
 single inline match expression that picks a case based on its static type:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def g(x: Any): Any =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >transparent inline def g(x: Any): Any =
 </span><span id="1" class="" >  inline x match
 </span><span id="2" class="" >    case x: String =&gt; (x, x) // Tuple2[String, String](x, x)
 </span><span id="3" class="" >    case x: Double =&gt; x
@@ -343,7 +343,7 @@ scrutinee. The type can have a richer structure like the simple ADT below.
 `toInt` matches the structure of a number in [Church-encoding](https://en.wikipedia.org/wiki/Church_encoding)
 and _computes_ the corresponding integer.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Nat
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Nat
 </span><span id="1" class="" >case object Zero extends Nat
 </span><span id="2" class="" >case class Succ[N &lt;: Nat](n: N) extends Nat
 </span><span id="3" class="" >

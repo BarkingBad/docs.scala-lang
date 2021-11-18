@@ -24,7 +24,7 @@ Here are some examples of common type classes:
 
 Here's the `Monoid` type class definition:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait SemiGroup[T]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait SemiGroup[T]:
 </span><span id="1" class="" >  extension (x: T) def combine (y: T): T
 </span><span id="2" class="" >
 </span><span id="3" class="" >trait Monoid[T] extends SemiGroup[T]:
@@ -33,33 +33,33 @@ Here's the `Monoid` type class definition:
 
 An implementation of this `Monoid` type class for the type `String` can be the following:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Monoid[String] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Monoid[String] with
 </span><span id="1" class="" >  extension (x: String) def combine (y: String): String = x.concat(y)
 </span><span id="2" class="" >  def unit: String = &quot;&quot;
 </span></code></pre></div>
 
 Whereas for the type `Int` one could write the following:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Monoid[Int] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Monoid[Int] with
 </span><span id="1" class="" >  extension (x: Int) def combine (y: Int): Int = x + y
 </span><span id="2" class="" >  def unit: Int = 0
 </span></code></pre></div>
 
 This monoid can now be used as _context bound_ in the following `combineAll` method:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def combineAll[T: Monoid](xs: List[T]): T =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def combineAll[T: Monoid](xs: List[T]): T =
 </span><span id="1" class="" >  xs.foldLeft(summon[Monoid[T]].unit)(_.combine(_))
 </span></code></pre></div>
 
 To get rid of the `summon[...]` we can define a `Monoid` object as follows:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Monoid:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object Monoid:
 </span><span id="1" class="" >  def apply[T](using m: Monoid[T]) = m
 </span></code></pre></div>
 
 Which would allow to re-write the `combineAll` method this way:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def combineAll[T: Monoid](xs: List[T]): T =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def combineAll[T: Monoid](xs: List[T]): T =
 </span><span id="1" class="" >  xs.foldLeft(Monoid[T].unit)(_.combine(_))
 </span></code></pre></div>
 
@@ -70,14 +70,14 @@ We can represent all types that can be "mapped over" with `F`. It's a type const
 Therefore we write it `F[_]`, hinting that the type `F` takes another type as argument.
 The definition of a generic `Functor` would thus be written as:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Functor[F[_]]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Functor[F[_]]:
 </span><span id="1" class="" >  def map[A, B](x: F[A], f: A =&gt; B): F[B]
 </span></code></pre></div>
 
 Which could read as follows: "A `Functor` for the type constructor `F[_]` represents the ability to transform `F[A]` to `F[B]` through the application of function `f` with type `A => B`". We call the `Functor` definition here a _type class_.
 This way, we could define an instance of `Functor` for the `List` type:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Functor[List] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Functor[List] with
 </span><span id="1" class="" >  def map[A, B](x: List[A], f: A =&gt; B): List[B] =
 </span><span id="2" class="" >    x.map(f) // List already has a `map` method
 </span></code></pre></div>
@@ -86,26 +86,26 @@ With this `given` instance in scope, everywhere a `Functor` is expected, the com
 
 For instance, we may write such a testing method:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def assertTransformation[F[_]: Functor, A, B](expected: F[B], original: F[A], mapping: A =&gt; B): Unit =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def assertTransformation[F[_]: Functor, A, B](expected: F[B], original: F[A], mapping: A =&gt; B): Unit =
 </span><span id="1" class="" >  assert(expected == summon[Functor[F]].map(original, mapping))
 </span></code></pre></div>
 
 And use it this way, for example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >assertTransformation(List(&quot;a1&quot;, &quot;b1&quot;), List(&quot;a&quot;, &quot;b&quot;), elt =&gt; s&quot;${elt}1&quot;)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >assertTransformation(List(&quot;a1&quot;, &quot;b1&quot;), List(&quot;a&quot;, &quot;b&quot;), elt =&gt; s&quot;${elt}1&quot;)
 </span></code></pre></div>
 
 That's a first step, but in practice we probably would like the `map` function to be a method directly accessible on the type `F`. So that we can call `map` directly on instances of `F`, and get rid of the `summon[Functor[F]]` part.
 As in the previous example of Monoids, [`extension` methods](extension-methods.html) help achieving that. Let's re-define the `Functor` type class with extension methods.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Functor[F[_]]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Functor[F[_]]:
 </span><span id="1" class="" >  extension [A](x: F[A])
 </span><span id="2" class="" >    def map[B](f: A =&gt; B): F[B]
 </span></code></pre></div>
 
 The instance of `Functor` for `List` now becomes:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Functor[List] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given Functor[List] with
 </span><span id="1" class="" >  extension [A](xs: List[A])
 </span><span id="2" class="" >    def map[B](f: A =&gt; B): List[B] =
 </span><span id="3" class="" >      xs.map(f) // List already has a `map` method
@@ -113,7 +113,7 @@ The instance of `Functor` for `List` now becomes:
 
 It simplifies the `assertTransformation` method:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def assertTransformation[F[_]: Functor, A, B](expected: F[B], original: F[A], mapping: A =&gt; B): Unit =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def assertTransformation[F[_]: Functor, A, B](expected: F[B], original: F[A], mapping: A =&gt; B): Unit =
 </span><span id="1" class="" >  assert(expected == original.map(mapping))
 </span></code></pre></div>
 
@@ -132,7 +132,7 @@ That's where `Monad` comes in. A `Monad` for type `F[_]` is a `Functor[F]` with 
 
 Here is the translation of this definition in Scala 3:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Monad[F[_]] extends Functor[F]:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Monad[F[_]] extends Functor[F]:
 </span><span id="1" class="" >
 </span><span id="2" class="" >  /** The unit value for a monad */
 </span><span id="3" class="" >  def pure[A](x: A): F[A]
@@ -151,7 +151,7 @@ Here is the translation of this definition in Scala 3:
 
 A `List` can be turned into a monad via this `given` instance:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given listMonad: Monad[List] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given listMonad: Monad[List] with
 </span><span id="1" class="" >  def pure[A](x: A): List[A] =
 </span><span id="2" class="" >    List(x)
 </span><span id="3" class="" >  extension [A](xs: List[A])
@@ -167,7 +167,7 @@ it explicitly.
 
 `Option` is an other type having the same kind of behaviour:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given optionMonad: Monad[Option] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given optionMonad: Monad[Option] with
 </span><span id="1" class="" >  def pure[A](x: A): Option[A] =
 </span><span id="2" class="" >    Option(x)
 </span><span id="3" class="" >  extension [A](xo: Option[A])
@@ -184,7 +184,7 @@ that all need the same parameter. For instance multiple functions needing access
 
 Let's define a `Config` type, and two functions using it:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Config
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Config
 </span><span id="1" class="" >// ...
 </span><span id="2" class="" >def compute(i: Int)(config: Config): String = ???
 </span><span id="3" class="" >def show(str: String)(config: Config): Unit = ???
@@ -194,22 +194,22 @@ We may want to combine `compute` and `show` into a single function, accepting a 
 a monad to avoid passing the parameter explicitly multiple times. So postulating
 the right `flatMap` operation, we could write:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def computeAndShow(i: Int): Config =&gt; Unit = compute(i).flatMap(show)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def computeAndShow(i: Int): Config =&gt; Unit = compute(i).flatMap(show)
 </span></code></pre></div>
 
 instead of
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >show(compute(i)(config))(config)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >show(compute(i)(config))(config)
 </span></code></pre></div>
 
 Let's define this m then. First, we are going to define a type named `ConfigDependent` representing a function that when passed a `Config` produces a `Result`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type ConfigDependent[Result] = Config =&gt; Result
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type ConfigDependent[Result] = Config =&gt; Result
 </span></code></pre></div>
 
 The monad instance will look like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given configDependentMonad: Monad[ConfigDependent] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given configDependentMonad: Monad[ConfigDependent] with
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def pure[A](x: A): ConfigDependent[A] =
 </span><span id="3" class="" >    config =&gt; x
@@ -223,12 +223,12 @@ The monad instance will look like this:
 
 The type `ConfigDependent` can be written using [type lambdas](../new-types/type-lambdas.html):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type ConfigDependent = [Result] =&gt;&gt; Config =&gt; Result
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >type ConfigDependent = [Result] =&gt;&gt; Config =&gt; Result
 </span></code></pre></div>
 
 Using this syntax would turn the previous `configDependentMonad` into:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given configDependentMonad: Monad[[Result] =&gt;&gt; Config =&gt; Result] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given configDependentMonad: Monad[[Result] =&gt;&gt; Config =&gt; Result] with
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def pure[A](x: A): Config =&gt; A =
 </span><span id="3" class="" >    config =&gt; x
@@ -242,7 +242,7 @@ Using this syntax would turn the previous `configDependentMonad` into:
 
 It is likely that we would like to use this pattern with other kinds of environments than our `Config` trait. The Reader monad allows us to abstract away `Config` as a type _parameter_, named `Ctx` in the following definition:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given readerMonad[Ctx]: Monad[[X] =&gt;&gt; Ctx =&gt; X] with
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >given readerMonad[Ctx]: Monad[[X] =&gt;&gt; Ctx =&gt; X] with
 </span><span id="1" class="" >
 </span><span id="2" class="" >  def pure[A](x: A): Ctx =&gt; A =
 </span><span id="3" class="" >    ctx =&gt; x

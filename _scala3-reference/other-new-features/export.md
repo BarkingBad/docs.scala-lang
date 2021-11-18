@@ -14,7 +14,7 @@ previous-page: /scala3/reference/other-new-features/creator-applications
 
 An export clause defines aliases for selected members of an object. Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class BitMap
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class BitMap
 </span><span id="1" class="" >class InkJet
 </span><span id="2" class="" >
 </span><span id="3" class="" >class Printer:
@@ -38,20 +38,20 @@ An export clause defines aliases for selected members of an object. Example:
 
 The two `export` clauses define the following _export aliases_ in class `Copier`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final def scan(): BitMap            = scanUnit.scan()
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final def scan(): BitMap            = scanUnit.scan()
 </span><span id="1" class="" >final def print(bits: BitMap): Unit = printUnit.print(bits)
 </span><span id="2" class="" >final type PrinterType              = printUnit.PrinterType
 </span></code></pre></div>
 
 They can be accessed inside `Copier` as well as from outside:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val copier = new Copier
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val copier = new Copier
 </span><span id="1" class="" >copier.print(copier.scan())
 </span></code></pre></div>
 
 An export clause has the same format as an import clause. Its general form is:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >export path . { sel_1, ..., sel_n }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >export path . { sel_1, ..., sel_n }
 </span></code></pre></div>
 
 It consists of a qualifier expression `path`, which must be a stable identifier, followed by
@@ -93,7 +93,7 @@ Export aliases for public value definitions that are accessed without
 referring to private values in the qualifier path
 are marked by the compiler as "stable" and their result types are the singleton types of the aliased definitions. This means that they can be used as parts of stable identifier paths, even though they are technically methods. For instance, the following is OK:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C { type T }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class C { type T }
 </span><span id="1" class="" >object O { val c: C = ... }
 </span><span id="2" class="" >export O.c
 </span><span id="3" class="" >def f: c.T = ...
@@ -107,7 +107,7 @@ are marked by the compiler as "stable" and their result types are the singleton 
 
 3. Simple renaming exports like
 
-   <div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >export status as stat
+   <div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >export status as stat
    </span></code></pre></div>
 
    are not supported yet. They would run afoul of the restriction that the
@@ -151,7 +151,7 @@ ImportSelectors   ::=  NamedSelector [‘,’ ImportSelectors]
 Export clauses raise questions about the order of elaboration during type checking.
 Consider the following example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class B { val c: Int }
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class B { val c: Int }
 </span><span id="1" class="" >object a { val b = new B }
 </span><span id="2" class="" >export a.*
 </span><span id="3" class="" >export b.*

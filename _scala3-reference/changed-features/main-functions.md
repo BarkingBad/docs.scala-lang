@@ -16,7 +16,7 @@ Scala 3 offers a new way to define programs that can be invoked from the command
 A `@main` annotation on a method turns this method into an executable program.
 Example:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def happyBirthday(age: Int, name: String, others: String*) =
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >@main def happyBirthday(age: Int, name: String, others: String*) =
 </span><span id="1" class="" >  val suffix =
 </span><span id="2" class="" >    age % 100 match
 </span><span id="3" class="" >    case 11 | 12 | 13 =&gt; &quot;th&quot;
@@ -68,7 +68,7 @@ The Scala compiler generates a program from a `@main` method `f` as follows:
 
 For instance, the `happyBirthDay` method above would generate additional code equivalent to the following class:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final class happyBirthday:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >final class happyBirthday:
 </span><span id="1" class="" >  import scala.util.CommandLineParser as CLP
 </span><span id="2" class="" >  &lt;static&gt; def main(args: Array[String]): Unit =
 </span><span id="3" class="" >    try
@@ -85,7 +85,7 @@ as a static method of class `happyBirthDay`. It is not available for user progra
 
 `@main` methods are the recommended scheme to generate programs that can be invoked from the command line in Scala 3. They replace the previous scheme to write program as objects with a special `App` parent class. In Scala 2, `happyBirthday` could be written also like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object happyBirthday extends App:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >object happyBirthday extends App:
 </span><span id="1" class="" >  // needs by-hand parsing of arguments vector
 </span><span id="2" class="" >  ...
 </span></code></pre></div>The previous functionality of `App`, which relied on the "magic" [`DelayedInit`]({% link _scala3-reference/dropped-features/delayed-init.md %}) trait, is no longer available. [`App`](https://scala-lang.org/api/3.x/scala/App.html) still exists in limited form for now, but it does not support command line arguments and will be deprecated in the future. If programs need to cross-build

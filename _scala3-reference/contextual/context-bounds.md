@@ -14,22 +14,22 @@ previous-page: /scala3/reference/contextual/using-clauses
 
 A context bound is a shorthand for expressing the common pattern of a context parameter that depends on a type parameter. Using a context bound, the `maximum` function of the last section can be written like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def maximum[T: Ord](xs: List[T]): T = xs.reduceLeft(max)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def maximum[T: Ord](xs: List[T]): T = xs.reduceLeft(max)
 </span></code></pre></div>
 
 A bound like `: Ord` on a type parameter `T` of a method or class indicates a context parameter `using Ord[T]`. The context parameter(s) generated from context bounds come last in the definition of the containing method or class. For instance,
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T: C1 : C2, U: C3](x: T)(using y: U, z: V): R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T: C1 : C2, U: C3](x: T)(using y: U, z: V): R
 </span></code></pre></div>
 
 would expand to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T, U](x: T)(using y: U, z: V)(using C1[T], C2[T], C3[U]): R
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def f[T, U](x: T)(using y: U, z: V)(using C1[T], C2[T], C3[U]): R
 </span></code></pre></div>
 
 Context bounds can be combined with subtype bounds. If both are present, subtype bounds come first, e.g.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g[T &lt;: B : C](x: T): R = ...
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >def g[T &lt;: B : C](x: T): R = ...
 </span></code></pre></div>
 
 ## Migration

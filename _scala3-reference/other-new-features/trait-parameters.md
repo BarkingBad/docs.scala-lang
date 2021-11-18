@@ -14,7 +14,7 @@ previous-page: /scala3/reference/other-new-features
 
 Scala 3 allows traits to have parameters, just like classes have parameters.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Greeting(val name: String):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait Greeting(val name: String):
 </span><span id="1" class="" >  def msg = s&quot;How are you, $name&quot;
 </span><span id="2" class="" >
 </span><span id="3" class="" >class C extends Greeting(&quot;Bob&quot;):
@@ -27,7 +27,7 @@ One potential issue with trait parameters is how to prevent
 ambiguities. For instance, you might try to extend `Greeting` twice,
 with different parameters.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class D extends C, Greeting(&quot;Bill&quot;) // error: parameter passed twice
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class D extends C, Greeting(&quot;Bill&quot;) // error: parameter passed twice
 </span></code></pre></div>
 
 Should this print "Bob" or "Bill"? In fact this program is illegal,
@@ -41,20 +41,20 @@ because it violates the second rule of the following for trait parameters:
 
 Here's a trait extending the parameterized trait `Greeting`.
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait FormalGreeting extends Greeting:
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >trait FormalGreeting extends Greeting:
 </span><span id="1" class="" >  override def msg = s&quot;How do you do, $name&quot;
 </span></code></pre></div>
 
 As is required, no arguments are passed to `Greeting`. However, this poses an issue
 when defining a class that extends `FormalGreeting`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class E extends FormalGreeting // error: missing arguments for `Greeting`.
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class E extends FormalGreeting // error: missing arguments for `Greeting`.
 </span></code></pre></div>
 
 The correct way to write `E` is to extend both `Greeting` and
 `FormalGreeting` (in either order):
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class E extends Greeting(&quot;Bob&quot;), FormalGreeting
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class E extends Greeting(&quot;Bob&quot;), FormalGreeting
 </span></code></pre></div>
 
 ### Traits With Context Parameters
@@ -65,7 +65,7 @@ implicitly inserted as an additional parent with inferred arguments. For instanc
 here's a variant of greetings where the addressee is a context parameter of type
 `ImpliedName`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class ImpliedName(name: String):
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >case class ImpliedName(name: String):
 </span><span id="1" class="" >  override def toString = name
 </span><span id="2" class="" >
 </span><span id="3" class="" >trait ImpliedGreeting(using val iname: ImpliedName):
@@ -79,7 +79,7 @@ here's a variant of greetings where the addressee is a context parameter of type
 
 The definition of `F` in the last line is implicitly expanded to
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class F(using iname: ImpliedName) extends
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >class F(using iname: ImpliedName) extends
 </span><span id="1" class="" >  Object,
 </span><span id="2" class="" >  ImpliedGreeting(using iname),
 </span><span id="3" class="" >  ImpliedFormalGreeting(using iname)

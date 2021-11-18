@@ -19,26 +19,26 @@ From Scala 3.1 on, type checking rules will be tightened so that warnings are re
 
 ## Bindings in Pattern Definitions
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[Any] = List(1, 2, 3)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val xs: List[Any] = List(1, 2, 3)
 </span><span id="1" class="" >val (x: String) :: _ = xs   // error: pattern&apos;s type String is more specialized
 </span><span id="2" class="" >                            // than the right-hand side expression&apos;s type Any
 </span></code></pre></div>
 
 This code gives a compile-time warning in Scala 3.1 (and also in Scala 3.0 under the `-source future` setting) whereas it will fail at runtime with a `ClassCastException` in Scala 2. In Scala 3.1, a pattern binding is only allowed if the pattern is _irrefutable_, that is, if the right-hand side's type conforms to the pattern's type. For instance, the following is OK:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val pair = (1, true)
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val pair = (1, true)
 </span><span id="1" class="" >val (x, y) = pair
 </span></code></pre></div>
 
 Sometimes one wants to decompose data anyway, even though the pattern is refutable. For instance, if at some point one knows that a list `elems` is non-empty one might
 want to decompose it like this:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val first :: rest = elems   // error
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val first :: rest = elems   // error
 </span></code></pre></div>
 
 This works in Scala 2. In fact it is a typical use case for Scala 2's rules. But in Scala 3.1 it will give a warning. One can avoid the warning by marking the right-hand side with an `@unchecked` annotation:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val first :: rest = elems: @unchecked   // OK
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val first :: rest = elems: @unchecked   // OK
 </span></code></pre></div>
 
 This will make the compiler accept the pattern binding. It might give an error at runtime instead, if the underlying assumption that `elems` can never be empty is wrong.
@@ -47,7 +47,7 @@ This will make the compiler accept the pattern binding. It might give an error a
 
 Analogous changes apply to patterns in `for` expressions. For instance:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val elems: List[Any] = List((1, 2), &quot;hello&quot;, (3, 4))
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >val elems: List[Any] = List((1, 2), &quot;hello&quot;, (3, 4))
 </span><span id="1" class="" >for (x, y) &lt;- elems yield (y, x) // error: pattern&apos;s type (Any, Any) is more specialized
 </span><span id="2" class="" >                                 // than the right-hand side expression&apos;s type Any
 </span></code></pre></div>
@@ -56,7 +56,7 @@ This code gives a compile-time warning in Scala 3.1 whereas in Scala 2 the list 
 is filtered to retain only the elements of tuple type that match the pattern `(x, y)`.
 The filtering functionality can be obtained in Scala 3 by prefixing the pattern with `case`:
 
-<div class="snippet" ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >for case (x, y) &lt;- elems yield (y, x)  // returns List((2, 1), (4, 3))
+<div class="snippet" scala-snippet ><div class="buttons"></div><pre><code class="language-scala"><span id="0" class="" >for case (x, y) &lt;- elems yield (y, x)  // returns List((2, 1), (4, 3))
 </span></code></pre></div>
 
 ## Syntax Changes
